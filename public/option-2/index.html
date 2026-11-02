@@ -75,7 +75,6 @@ input[type=range]{accent-color:#B31942}
         <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A35C8" stroke-width="2"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2"></path><circle cx="9" cy="20" r="1.4"></circle><circle cx="17" cy="20" r="1.4"></circle></svg>
         Cart ({{cart}})
       </a>
-      <a href="#schedule" onClick="{{bookCoatings}}" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">Quote List <span style="min-width: 22px; height: 22px; padding: 0 6px; box-sizing: border-box; border-radius: 11px; background: #FFFFFF; color: #B31942; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">{{quoteCount}}</span></a>
     </div>
   </div>
 </header>
@@ -738,7 +737,7 @@ input[type=range]{accent-color:#B31942}
       <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #DDE5FF">Post the demo with your link. Get paid every month.</p>
       <label for="ltc-amb" style="font-size: 13px; font-weight: 700; color: #C9D6FF">{{amb}} caddies a month = <span style="color: #FFFFFF; font-size: 18px">{{ambMonth}}</span> / mo · {{ambYear}} / yr</label>
       <input id="ltc-amb" type="range" min="1" max="150" step="1" value="{{amb}}" onChange="{{onAmb}}" style="width: 100%; height: 40px">
-      <a href="#schedule" onClick="{{applyAmb}}" style="margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">Sign Me Up →</a>
+      <a href="#ambassadors" onClick="{{openAmb}}" style="margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">Sign Me Up →</a>
       <span style="font-size: 12px; color: #C9D6FF">Program terms apply. No Amazon listings or resale.</span>
     </div>
   </div>
@@ -844,16 +843,6 @@ input[type=range]{accent-color:#B31942}
             <span>{{whenText}} · {{buyerLabel}}</span>
             <button type="button" onClick="{{toStep1}}" style="background: transparent; border: 0; color: #0A35C8; font-weight: 700; cursor: pointer; text-decoration: underline; min-height: 24px">Change</button>
           </div>
-          <sc-if value="{{hasQuote}}" hint-placeholder-val="{{false}}">
-            <div style="grid-column: 1 / -1; border: 2px dashed #B31942; border-radius: 4px; padding: 12px 14px">
-              <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #B31942">Your Quote List</div>
-              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px">
-                <sc-for list="{{quoteItems}}" as="qi" hint-placeholder-count="2">
-                  <span style="display: inline-flex; align-items: center; gap: 6px; background: #EEF3FA; color: #0A35C8; border-radius: 20px; padding: 4px 4px 4px 12px; font-size: 14px; font-weight: 600">{{qi.name}}<button type="button" onClick="{{qi.remove}}" aria-label="Remove {{qi.name}}" style="width: 28px; height: 28px; border-radius: 50%; border: 0; background: #FFFFFF; color: #0A35C8; cursor: pointer; font-weight: 700">×</button></span>
-                </sc-for>
-              </div>
-            </div>
-          </sc-if>
           <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Name
             <input type="text" autocomplete="name" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52">
           </label>
@@ -981,10 +970,63 @@ input[type=range]{accent-color:#B31942}
 </div>
 
 <!-- FLOATING AMBASSADOR BUTTON -->
-<a href="#ambassadors" style="position: fixed; right: 16px; bottom: 16px; z-index: 20; display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 16px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 30px; box-shadow: 0 6px 18px #0A35C855; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase">
+<a href="#ambassadors" onClick="{{openAmb}}" style="position: fixed; right: 16px; bottom: 16px; z-index: 20; display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 16px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 30px; box-shadow: 0 6px 18px #0A35C855; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase">
   <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg>
   Ambassador
 </a>
+
+<!-- AMBASSADOR POPUP -->
+<sc-if value="{{amb2.open}}" hint-placeholder-val="{{false}}">
+  <div style="position: fixed; inset: 0; z-index: 61; display: flex; align-items: center; justify-content: center; padding: 20px; animation: ltcFade 200ms ease">
+    <button type="button" onClick="{{amb2.close}}" aria-label="Close" style="position: absolute; inset: 0; background: #071A52C7; border: 0; cursor: pointer"></button>
+    <div role="dialog" aria-modal="true" aria-label="Become a Liberty Ambassador" style="position: relative; width: 100%; max-width: 760px; max-height: 100%; overflow: auto; background: #FFFFFF; border-radius: 8px; box-shadow: 0 24px 60px #071A5266; animation: ltcPop 260ms ease">
+      <div style="height: 8px; background: repeating-linear-gradient(90deg, #B31942 0 40px, #FFFFFF 40px 80px, #0A35C8 80px 120px)"></div>
+      <button type="button" onClick="{{amb2.close}}" aria-label="Close" style="position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #0A35C8; color: #FFFFFF; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+      <div style="background: #0A35C8; color: #FFFFFF; padding: 26px 28px 22px">
+        <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #C9D6FF">Liberty Ambassador Program</div>
+        <h2 style="margin: 6px 60px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: 32px; line-height: 1; text-transform: uppercase">Earn $10 Per Caddy</h2>
+        <p style="margin: 10px 0 0; font-size: 15px; line-height: 1.6; color: #DDE5FF">Tell us about you and your audience. Post real demos with your own link and get paid every month.</p>
+      </div>
+      <sc-if value="{{amb2.form}}" hint-placeholder-val="{{true}}">
+        <form onSubmit="{{amb2.submit}}" style="padding: 24px 28px 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Full Name *<input name="ambname" type="text" required autocomplete="name" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF"></label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Email *<input name="ambemail" type="email" required autocomplete="email" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF"></label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Phone<input name="ambphone" type="tel" autocomplete="tel" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF"></label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">City, State<input name="ambcity" type="text" autocomplete="address-level2" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF"></label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">What Do You Do? *<select name="ambrole" required style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF"><option value="">Choose one</option><sc-for list="{{amb2.roles}}" as="o" hint-placeholder-count="5"><option>{{o}}</option></sc-for></select></label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Years In The Industry *<select name="ambyears" required style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF"><option value="">Choose one</option><sc-for list="{{amb2.years}}" as="o" hint-placeholder-count="5"><option>{{o}}</option></sc-for></select></label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Main Social Handle Or Link *<input name="ambhandle" type="text" required placeholder="@yourhandle or profile link" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF"></label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Total Followers *<select name="ambfollowers" required style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF"><option value="">Choose a range</option><sc-for list="{{amb2.followers}}" as="o" hint-placeholder-count="5"><option>{{o}}</option></sc-for></select></label>
+          <fieldset style="grid-column: 1 / -1; margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 8px">
+            <legend style="padding: 0; margin-bottom: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Where Do You Post?</legend>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{amb2.platforms}}" as="o" hint-placeholder-count="6"><label style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 22px; font-size: 14px; font-weight: 600; color: #071A52; background: #FFFFFF; cursor: pointer; text-transform: none; letter-spacing: 0"><input type="checkbox" name="ambplat" value="{{o}}" style="width: 18px; height: 18px; accent-color: #B31942">{{o}}</label></sc-for></div>
+          </fieldset>
+          <fieldset style="grid-column: 1 / -1; margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 8px">
+            <legend style="padding: 0; margin-bottom: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">What Do You Post?</legend>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{amb2.content}}" as="o" hint-placeholder-count="5"><label style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 22px; font-size: 14px; font-weight: 600; color: #071A52; background: #FFFFFF; cursor: pointer; text-transform: none; letter-spacing: 0"><input type="checkbox" name="ambcontent" value="{{o}}" style="width: 18px; height: 18px; accent-color: #B31942">{{o}}</label></sc-for></div>
+          </fieldset>
+          <fieldset style="grid-column: 1 / -1; margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 8px">
+            <legend style="padding: 0; margin-bottom: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Do You Use The Tape Caddy? *</legend>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{amb2.caddy}}" as="o" hint-placeholder-count="3"><label style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 22px; font-size: 14px; font-weight: 600; color: #071A52; background: #FFFFFF; cursor: pointer; text-transform: none; letter-spacing: 0"><input type="radio" name="ambcaddy" value="{{o}}" required style="width: 18px; height: 18px; accent-color: #B31942">{{o}}</label></sc-for></div>
+          </fieldset>
+          <label style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Why Do You Want To Be An Ambassador?<textarea name="ambwhy" rows="3" placeholder="Tell us about your work and your audience." style="padding: 12px 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; resize: vertical"></textarea></label>
+          <label style="grid-column: 1 / -1; display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: #3B4658; cursor: pointer"><input type="checkbox" name="ambterms" required style="width: 20px; height: 20px; margin-top: 2px; flex: none; accent-color: #B31942">I agree to the Ambassador Terms: real demos only, #ad on paid posts, and no Amazon listings or resale.</label>
+          <button type="submit" style="grid-column: 1 / -1; min-height: 56px; border: 0; border-radius: 10px; background: #B31942; color: #FFFFFF; cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase">Send My Application →</button>
+        </form>
+      </sc-if>
+      <sc-if value="{{amb2.sent}}" hint-placeholder-val="{{false}}">
+        <div role="status" style="padding: 40px 28px 44px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px">
+          <div style="width: 72px; height: 72px; border-radius: 50%; background: #2E7D4F; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3"><path d="M4 12.5l5 5L20 6.5"></path></svg></div>
+          <h3 style="margin: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: 29px; line-height: 1; text-transform: uppercase; color: #0A35C8">Thanks, {{amb2.first}}! You're On The List.</h3>
+          <p style="margin: 0; max-width: 480px; font-size: 16px; line-height: 1.6; color: #3B4658">We got your application and we'll be reaching out soon. Keep an eye on your email and phone for your personal link and next steps.</p>
+          <button type="button" onClick="{{amb2.close}}" style="margin-top: 8px; min-height: 48px; padding: 0 22px; border: 0; border-radius: 10px; background: #0A35C8; color: #FFFFFF; cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase">Back To The Site</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
 
 <!-- POPUP -->
 <sc-if value="{{modalOpen}}" hint-placeholder-val="{{false}}">
@@ -1077,9 +1119,6 @@ input[type=range]{accent-color:#B31942}
             <sc-if value="{{modal.hasPrice}}" hint-placeholder-val="{{false}}"><span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 27px; color: #0A35C8">{{modal.priceText}}</span></sc-if>
             <sc-if value="{{modal.isCart}}" hint-placeholder-val="{{false}}">
               <button type="button" onClick="{{modal.cartAdd}}" style="min-height: 52px; padding: 0 24px; background: #0A35C8; color: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase">{{modal.cartLabel}}</button>
-            </sc-if>
-            <sc-if value="{{modal.canList}}" hint-placeholder-val="{{false}}">
-              <button type="button" onClick="{{modal.toggleList}}" style="min-height: 52px; padding: 0 18px; background: {{modal.listBg}}; color: {{modal.listFg}}; border: 2px solid #0A35C8; border-radius: 10px; cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.03em; text-transform: uppercase">{{modal.listLabel}}</button>
             </sc-if>
             <sc-if value="{{modal.isQuote}}" hint-placeholder-val="{{true}}">
               <a href="#schedule" onClick="{{modal.quote}}" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase">{{modal.quoteLabel}}</a>
@@ -1277,7 +1316,7 @@ class Component extends DCLogic {
     var days = [], d = new Date();
     while (days.length < 6) { d.setDate(d.getDate() + 1); var w = d.getDay(); if (w !== 0 && w !== 6) days.push({ dow: d.toLocaleDateString('en-US', { weekday: 'short' }), md: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }); }
     this.days = days;
-    this.state = { model: 'c4', env: 'all', prodCat: 'all', toolFilter: 'all', cart: 0, added: {}, kit: { lowboy: true, c2: false, c4: true, c6: true }, amb: 20, faq: 0, buyer: 'coatings', note: '', day: 0, slot: -1, step: 1, qi: 0, qa: {}, modal: null, mThumb: 0, hits: {}, lastHit: '', quote: [], ba: 50, sheets: {}, bSf: 2000, bMat: 3.5, bCrew: 3, bDays: 2, bRate: 45, bMark: 35, acad: 'all', wtb: 'CA', wtbSent: false, rev: 0, textOpen: false, salType: 'vet', salDone: false, role: 'Regional Manager', careerSent: false };
+    this.state = { model: 'c4', env: 'all', prodCat: 'all', toolFilter: 'all', cart: 0, added: {}, kit: { lowboy: true, c2: false, c4: true, c6: true }, amb: 20, faq: 0, buyer: 'coatings', note: '', day: 0, slot: -1, step: 1, qi: 0, qa: {}, modal: null, mThumb: 0, hits: {}, lastHit: '', quote: [], ba: 50, sheets: {}, bSf: 2000, bMat: 3.5, bCrew: 3, bDays: 2, bRate: 45, bMark: 35, acad: 'all', wtb: 'CA', wtbSent: false, rev: 0, textOpen: false, salType: 'vet', salDone: false, role: 'Regional Manager', careerSent: false, ambOpen: false, ambSent: false, ambName: '' };
   }
   add(id) { var a = Object.assign({}, this.state.added); a[id] = true; this.setState({ cart: this.state.cart + 1, added: a }); }
   open(kind, id) { this.setState({ modal: { kind: kind, id: id }, mThumb: 0, ba: 50 }); }
@@ -1441,6 +1480,18 @@ class Component extends DCLogic {
         toggle: function () { self.setState({ textOpen: !s.textOpen }); },
         chips: TEXT_CHIPS.map(function (c) { return { label: c, href: 'sms:2397448403?&body=' + encodeURIComponent('Hi Liberty! ' + c) }; })
       },
+      openAmb: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ ambOpen: true, ambSent: false }); },
+      amb2: {
+        open: s.ambOpen, form: !s.ambSent, sent: s.ambSent, first: s.ambName,
+        close: function () { self.setState({ ambOpen: false }); },
+        submit: function (e) { if (e && e.preventDefault) e.preventDefault(); var f = e && e.target; var n = ''; try { n = (f.elements.namedItem('ambname').value || '').trim().split(' ')[0]; } catch (x) {} self.setState({ ambSent: true, ambName: n || 'there' }); },
+        roles: ['Flooring or coating installer', 'Contractor or business owner', 'Supply house or store staff', 'Content creator in the trades', 'Other'],
+        years: ['Less than 1 year', '1\u20133 years', '3\u20135 years', '5\u201310 years', '10+ years'],
+        followers: ['Under 1,000', '1,000\u20135,000', '5,000\u201325,000', '25,000\u2013100,000', '100,000+'],
+        platforms: ['Instagram', 'TikTok', 'YouTube', 'Facebook', 'LinkedIn', 'Other'],
+        content: ['Job-site videos', 'How-tos', 'Before & after', 'Product reviews', 'Business tips'],
+        caddy: ['Yes, on most jobs', 'I\u2019ve tried it', 'Not yet']
+      },
       bookCoatings: bookAs('coatings'), bookRetail: bookAs('retail'), bookEnterprise: bookAs('enterprise'), applyAmb: bookAs('ambassador'),
       prodFilters: [{ id: 'all', label: 'All' }, { id: 'prep', label: 'Prep' }, { id: 'uc', label: 'Urethane Cement' }, { id: 'pa', label: 'Polyaspartic' }, { id: 'top', label: 'Top Coats' }, { id: 'spec', label: 'Cove' }].map(function (f) { return Object.assign({ label: f.label }, sel(f.id === s.prodCat), { pick: function () { self.setState({ prodCat: f.id }); } }); }),
       chem: CHEM.filter(function (p) { return s.prodCat === 'all' || p.cat === s.prodCat; }).map(function (p) { return Object.assign({}, p, { catLabel: CATS[p.cat].label, color: CATS[p.cat].color, open: function () { self.open('product', p.id); } }); }),
@@ -1475,7 +1526,7 @@ class Component extends DCLogic {
       book: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ step: 3 }); },
       resetSched: function () { self.setState({ step: 1, slot: -1 }); },
       whenText: (self.days[s.day] ? self.days[s.day].dow + ', ' + self.days[s.day].md : '') + (s.slot >= 0 ? ' · ' + SLOTS[s.slot] + ' PT' : ''),
-      buyerLabel: buyer.label, prefill: [s.note].concat(s.quote.length ? ['Quote list: ' + s.quote.map(function (q) { return q.name; }).join(', ') + '.'] : []).filter(Boolean).join(' '),
+      buyerLabel: buyer.label, prefill: s.note,
       faqs: FAQS.map(function (q, i) { var open = s.faq === i; return Object.assign({}, q, { isOpen: open, expanded: open ? 'true' : 'false', sign: open ? '−' : '+', signBg: open ? '#B31942' : '#0A35C8', toggle: function () { self.setState({ faq: open ? -1 : i }); } }); }),
       quoteCount: s.quote.length, hasQuote: s.quote.length > 0,
       quoteItems: s.quote.map(function (q) { return { name: q.name, remove: function () { self.toggleQuote(q.key, q.name); } }; }),
