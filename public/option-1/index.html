@@ -12,7 +12,9 @@
 <style>
 body{margin:0;background:#F4F5F7;color:#0B1B33;font-family:Inter,system-ui,sans-serif}
 a{color:#0A3161}a:hover{color:#B31942}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+@keyframes ltcProg{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@supports (animation-timeline: scroll()){.ltc-prog{animation:ltcProg linear both;animation-timeline:scroll(root)}}
 button,input,select,textarea{font:inherit}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #B31942;outline-offset:2px}
 input[type=range]{accent-color:#B31942}
@@ -21,6 +23,7 @@ input[type=range]{accent-color:#B31942}
 @keyframes ltcPop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
 @keyframes ltcFade{from{opacity:0}to{opacity:1}}
 .ltc-wheel{transform-box:fill-box;transform-origin:center;animation:ltcRoll .7s linear infinite}
+@media (max-width: 900px){.ltc-burger{display:flex !important}header>div:not(.ltc-prog){column-gap:12px !important;padding:10px 16px !important}header img{height:46px !important}.ltc-nav{display:none !important;order:3;width:100%;flex-direction:column;align-items:stretch !important;gap:0 !important;padding:6px 0 4px;border-top:1px solid #DCE1E8}header[data-menu="true"] .ltc-nav{display:flex !important}.ltc-nav a{padding:13px 4px;border-bottom:1px solid #EEF1F5;font-size:18px}.ltc-nav a:last-child{border-bottom:0}header[data-menu="true"] .ltc-b2{opacity:0}header[data-menu="true"] .ltc-b1{transform:translateY(5px) rotate(45deg);transform-origin:12px 7px}header[data-menu="true"] .ltc-b3{transform:translateY(-5px) rotate(-45deg);transform-origin:12px 17px}.ltc-b1,.ltc-b2,.ltc-b3{transition:transform .2s,opacity .2s}}
 @media (max-width: 640px){.ltc-tile{font-size:8px !important;border-radius:3px !important}}
 @media (prefers-reduced-motion: reduce){.ltc-anim,.ltc-wheel{animation:none !important}html{scroll-behavior:auto}}
 </style>
@@ -52,12 +55,13 @@ input[type=range]{accent-color:#B31942}
 </div>
 
 <!-- HEADER -->
-<header style="background: #FFFFFF; border-bottom: 1px solid #DCE1E8">
+<header data-menu="{{menuOpen}}" style="position: sticky; top: 0; z-index: 40; background: #FFFFFF; border-bottom: 1px solid #DCE1E8; box-shadow: 0 6px 18px rgba(11,27,51,0.06)">
+  <div aria-hidden="true" class="ltc-prog" style="position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; border-radius: 0 3px 3px 0; background: linear-gradient(90deg, #E8758F, #B31942); box-shadow: 0 0 10px rgba(179,25,66,0.35); transform-origin: left center; transform: scaleX(var(--ltc-p, 0)); pointer-events: none"></div>
   <div style="max-width: 1240px; margin: 0 auto; padding: 12px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px">
     <a href="#top" style="display: flex; align-items: center; text-decoration: none">
       <img src="/assets/logo-blue.png" alt="Liberty Tool Company — LTC Floor Coating Tools, Made in the USA" style="height: 58px; width: auto; display: block">
     </a>
-    <nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase">
+    <nav id="ltc-menu" aria-label="Main" class="ltc-nav" onClick="{{closeMenu}}" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase">
       <a href="#finder" style="color: #0B1B33; text-decoration: none">Floor Finder</a>
       <a href="#systems" style="color: #0B1B33; text-decoration: none">Coatings</a>
       <a href="#products" style="color: #0B1B33; text-decoration: none">Products</a>
@@ -71,6 +75,9 @@ input[type=range]{accent-color:#B31942}
         <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A3161" stroke-width="2"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2"></path><circle cx="9" cy="20" r="1.4"></circle><circle cx="17" cy="20" r="1.4"></circle></svg>
         Cart ({{cart}})
       </a>
+      <button type="button" class="ltc-burger" aria-label="Menu" aria-controls="ltc-menu" aria-expanded="{{menuOpen}}" onClick="{{toggleMenu}}" style="display: none; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; background: #0A3161; border: 0; border-radius: 3px; cursor: pointer">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"><path class="ltc-b1" d="M4 7h16"></path><path class="ltc-b2" d="M4 12h16"></path><path class="ltc-b3" d="M4 17h16"></path></svg>
+      </button>
     </div>
   </div>
 </header>
@@ -1293,7 +1300,7 @@ class Component extends DCLogic {
     var days = [], d = new Date();
     while (days.length < 6) { d.setDate(d.getDate() + 1); var w = d.getDay(); if (w !== 0 && w !== 6) days.push({ dow: d.toLocaleDateString('en-US', { weekday: 'short' }), md: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }); }
     this.days = days;
-    this.state = { model: 'c4', env: 'all', prodCat: 'all', toolFilter: 'all', cart: 0, added: {}, kit: { lowboy: true, c2: false, c4: true, c6: true }, amb: 20, faq: 0, buyer: 'coatings', note: '', day: 0, slot: -1, step: 1, qi: 0, qa: {}, modal: null, mThumb: 0, hits: {}, lastHit: '', quote: [], ba: 50, sheets: {}, bSf: 2000, bMat: 3.5, bCrew: 3, bDays: 2, bRate: 45, bMark: 35, acad: 'all', wtb: 'CA', wtbSent: false, rev: 0, textOpen: false, salType: 'vet', salDone: false, role: 'Regional Manager', careerSent: false, ambOpen: false, ambSent: false, ambName: '' };
+    this.state = { model: 'c4', env: 'all', prodCat: 'all', toolFilter: 'all', cart: 0, added: {}, kit: { lowboy: true, c2: false, c4: true, c6: true }, amb: 20, faq: 0, buyer: 'coatings', note: '', day: 0, slot: -1, step: 1, qi: 0, qa: {}, modal: null, mThumb: 0, hits: {}, lastHit: '', quote: [], ba: 50, sheets: {}, bSf: 2000, bMat: 3.5, bCrew: 3, bDays: 2, bRate: 45, bMark: 35, acad: 'all', wtb: 'CA', wtbSent: false, rev: 0, textOpen: false, salType: 'vet', salDone: false, role: 'Regional Manager', careerSent: false, ambOpen: false, ambSent: false, ambName: '', menuOpen: false };
   }
   add(id) { var a = Object.assign({}, this.state.added); a[id] = true; this.setState({ cart: this.state.cart + 1, added: a }); }
   open(kind, id) { this.setState({ modal: { kind: kind, id: id }, mThumb: 0, ba: 50 }); }
@@ -1457,6 +1464,9 @@ class Component extends DCLogic {
         toggle: function () { self.setState({ textOpen: !s.textOpen }); },
         chips: TEXT_CHIPS.map(function (c) { return { label: c, href: 'sms:2397448403?&body=' + encodeURIComponent('Hi Liberty! ' + c) }; })
       },
+      menuOpen: s.menuOpen ? 'true' : 'false',
+      toggleMenu: function () { self.setState({ menuOpen: !self.state.menuOpen }); },
+      closeMenu: function (e) { if (e && e.target && e.target.closest && e.target.closest('a')) self.setState({ menuOpen: false }); },
       openAmb: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ ambOpen: true, ambSent: false }); },
       amb2: {
         open: s.ambOpen, form: !s.ambSent, sent: s.ambSent, first: s.ambName,
@@ -1513,6 +1523,7 @@ class Component extends DCLogic {
 }
 
 window.__ltcStart(Component);
+(function(){var r=document.documentElement;function u(){var m=r.scrollHeight-window.innerHeight;r.style.setProperty('--ltc-p',m>0?Math.min(1,window.scrollY/m):0);}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();
 </script>
 </body>
 </html>
