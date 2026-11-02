@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LTC Affiliate Portal — Option 1</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/logo-blue.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F4F5F7;color:#0B1B33;font-family:Inter,system-ui,sans-serif}
+*{box-sizing:border-box}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:#0A3161}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #B31942;outline-offset:2px}
+.app{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
+.side{background:#0A3161;color:#FFFFFF;padding:22px 16px;display:flex;flex-direction:column;gap:18px}
+.side .nav{display:flex;flex-direction:column;gap:4px}
+.nv{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;background:transparent;border:0;color:#D6E0F2;padding:11px 12px;border-radius:4px;font-weight:600;font-size:15px}
+.nv:hover{background:rgba(255,255,255,0.08);color:#FFFFFF}
+.nv[aria-current="page"]{background:#FFFFFF;color:#0A3161}
+.badge{min-width:22px;height:22px;padding:0 7px;border-radius:999px;background:#B31942;color:#FFFFFF;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.main{min-width:0;padding:26px 32px 64px}
+.h1{font-family:'Barlow Condensed', sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:0.02em;font-size:38px;line-height:1.05;margin:0}
+.h2{font-family:'Barlow Condensed', sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:0.02em;font-size:26px;line-height:1.1;margin:0}
+.h3{font-family:'Barlow Condensed', sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:0.02em;font-size:19px;line-height:1.15;margin:0}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#B31942}
+.muted{color:#4A5568}
+.card{background:#FFFFFF;border:1px solid #D3D9E2;border-radius:6px;box-shadow:none;padding:20px}
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.kpi .n{font-family:'Barlow Condensed', sans-serif;font-weight:800;font-size:34px;line-height:1;color:#0A3161}
+.kpi .l{margin-top:6px;font-size:13px;font-weight:600;color:#4A5568}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:4px;border:1px solid #0A3161;background:#0A3161;color:#FFFFFF;font-weight:700;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none}
+.btn.red{background:#B31942;border-color:#B31942}
+.btn.ghost{background:#FFFFFF;color:#0A3161}
+.btn.sm{min-height:34px;padding:0 12px;font-size:12px}
+.btn[disabled]{opacity:0.45;cursor:not-allowed}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 13px;border-radius:999px;border:1px solid #D3D9E2;background:#FFFFFF;font-size:13px;font-weight:600;color:#0B1B33}
+.chip[aria-pressed="true"]{background:#0A3161;border-color:#0A3161;color:#FFFFFF}
+.st{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.lbl{display:block;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#4A5568;margin-bottom:6px}
+.inp{width:100%;min-height:44px;padding:0 12px;border:1px solid #B8C1CD;border-radius:4px;background:#FFFFFF;font-size:15px}
+textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
+.tbl{font-size:14px;min-width:var(--minw)}
+.tr{display:grid;grid-template-columns:var(--cols);gap:0 12px;align-items:center;padding:11px 10px;border-bottom:1px solid #D3D9E2}
+.tr.th{padding:8px 10px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4A5568}
+.tr.click{cursor:pointer}
+.tr.click:hover{background:#EEF3FA}
+.scroll{overflow-x:auto}
+.opt{display:flex;flex-direction:column;gap:6px;text-align:left;padding:16px;border-radius:6px;border:1px solid #D3D9E2;background:#FFFFFF;min-height:118px}
+.opt[aria-pressed="true"]{border:2px solid #0A3161;background:#EEF3FA;padding:15px}
+.steps{display:flex;flex-wrap:wrap;gap:8px}
+.stp{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 8px;border-radius:999px;background:#FFFFFF;border:1px solid #D3D9E2;font-weight:600;font-size:14px}
+.stp .d{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#EEF3FA;color:#0A3161;font-weight:800;font-size:13px}
+.stp[aria-current="step"]{border-color:#0A3161}
+.stp[aria-current="step"] .d{background:#0A3161;color:#FFFFFF}
+.qty{display:inline-flex;align-items:center;border:1px solid #B8C1CD;border-radius:4px;overflow:hidden;background:#FFFFFF}
+.qty button{width:36px;height:38px;border:0;background:#EEF3FA;font-weight:800;color:#0A3161}
+.qty input{width:62px;height:38px;border:0;text-align:center;font-weight:700}
+.bub{max-width:560px;padding:12px 14px;border-radius:6px;font-size:15px;line-height:1.5}
+.tl{display:flex;flex-wrap:wrap;gap:0}
+.tl .s{flex:1 1 110px;min-width:110px;padding:10px 8px 0;border-top:4px solid #D3D9E2;font-size:13px}
+.tl .s.done{border-top-color:#2E7D4F}
+.tl .s.now{border-top-color:#0A3161}
+.toast{position:fixed;right:20px;bottom:20px;z-index:40;background:#0B1B33;color:#FFFFFF;padding:14px 18px;border-radius:6px;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,0.25)}
+.thumb{width:52px;height:52px;border-radius:4px;object-fit:contain;background:#EEF3FA;display:block}
+.demo{display:flex;gap:6px;background:rgba(255,255,255,0.1);padding:4px;border-radius:999px}
+.demo button{flex:1;border:0;border-radius:999px;padding:7px 8px;font-size:12px;font-weight:700;background:transparent;color:#D6E0F2}
+.demo button[aria-pressed="true"]{background:#FFFFFF;color:#0A3161}
+@media (max-width: 860px){.app{grid-template-columns:1fr}.side{padding:16px}.side .nav{flex-direction:row;flex-wrap:wrap}.nv{width:auto}.main{padding:20px 16px 56px}}
+
+.bar{height:10px;border-radius:999px;background:#EEF3FA;overflow:hidden}
+.bar>i{display:block;height:100%;background:#B31942;border-radius:999px}
+.code{display:inline-flex;align-items:center;gap:10px;padding:8px 8px 8px 14px;border-radius:4px;border:1.5px dashed #0A3161;background:#EEF3FA;font-weight:800;letter-spacing:0.04em;color:#0A3161;max-width:100%}
+.code span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.vid{position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:linear-gradient(135deg,#0B1B33,#0A3161);display:flex;align-items:center;justify-content:center;color:#FFFFFF}
+.vid img{position:absolute;right:6%;bottom:8%;height:62%;opacity:0.9;filter:drop-shadow(0 10px 20px rgba(0,0,0,0.35))}
+.play{position:relative;width:64px;height:64px;border-radius:50%;border:0;background:#B31942;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+.vt{position:absolute;left:16px;top:14px;right:40%;font-family:'Barlow Condensed', sans-serif;font-weight:800;text-transform:uppercase;font-size:18px;line-height:1.1}
+.vlen{position:absolute;left:16px;bottom:14px;font-size:12px;font-weight:700;background:rgba(0,0,0,0.45);padding:3px 8px;border-radius:999px}
+.prog{position:absolute;left:0;right:0;bottom:0;height:5px;background:rgba(255,255,255,0.2)}
+.prog>i{display:block;height:100%;width:0;background:#B31942;animation:affPlay 8s linear forwards}
+@keyframes affPlay{to{width:100%}}
+.vrow{display:grid;grid-template-columns:132px minmax(0,1fr);gap:12px;align-items:center;text-align:left;width:100%;padding:10px;border-radius:4px;border:1px solid #D3D9E2;background:#FFFFFF}
+.vrow[aria-pressed="true"]{border:2px solid #0A3161;padding:9px;background:#EEF3FA}
+.vrow .vid{border-radius:4px}
+.vrow .vid img{height:70%}
+.tick{width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none;font-size:13px;font-weight:800;border:2px solid #B8C1CD;color:transparent}
+.tick.on{background:#2E7D4F;border-color:#2E7D4F;color:#FFFFFF}
+.news{padding:16px 0;border-bottom:1px solid #D3D9E2}
+.news:last-child{border-bottom:0}
+@media (prefers-reduced-motion: reduce){.prog>i{animation:none;width:100%}}
+</style>
+
+</head>
+<body>
+<div id="ltc-preview-bar" style="position: relative; z-index: 60; background: #0B1424; color: #FFFFFF; font: 500 13px/1.2 Inter, system-ui, sans-serif">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px">
+    <a href="/" style="color: #FFFFFF; text-decoration: none; font-weight: 700; letter-spacing: 0.04em; white-space: nowrap">← LTC Preview Portal</a>
+    <span style="opacity: 0.35">|</span>
+    <nav aria-label="Preview pages" style="display: flex; flex-wrap: wrap; gap: 8px 20px"><a href="/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 1 · Classic</a><a href="/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 2 · Fun</a><a href="/approvals/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Social Posting Calendar</a><a href="/partner-portal/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Partner Portal 1</a><a href="/partner-portal/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Partner Portal 2</a><a href="/affiliate-portal/option-1/" style="color: #FFFFFF; text-decoration: none; font-weight: 700; white-space: nowrap; border-bottom: 2px solid #B31942; padding-bottom: 2px">Affiliate Portal 1</a><a href="/affiliate-portal/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Affiliate Portal 2</a><a href="/admin/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Admin 1</a><a href="/admin/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Admin 2</a></nav>
+  </div>
+</div>
+<script>if(window.self!==window.top){document.getElementById('ltc-preview-bar').style.display='none';}</script>
+<template id="tpl">
+
+<div class="app">
+  <aside class="side">
+    <img src="/assets/logo-white.png" alt="Liberty Tool Company" style="height: 56px; width: auto; align-self: flex-start">
+    <div>
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #AFC0DC">Affiliate Portal</div>
+      <div style="margin-top: 4px; font-weight: 700; font-size: 16px; line-height: 1.3">{{me.name}}</div>
+      <div style="font-size: 13px; color: #C9D6EC">{{me.handle}} · {{me.platform}}</div>
+    </div>
+    <div>
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #AFC0DC; margin-bottom: 6px">Demo: View As</div>
+      <div class="demo" role="group" aria-label="Demo affiliate">
+        <button type="button" aria-pressed="{{isActiveDemo}}" onClick="{{pickActive}}">Active</button>
+        <button type="button" aria-pressed="{{isNewDemo}}" onClick="{{pickNew}}">New Affiliate</button>
+      </div>
+    </div>
+    <nav class="nav" aria-label="Affiliate portal">
+      <sc-for list="{{navs}}" as="n" hint-placeholder-count="7">
+        <button type="button" class="nv" aria-current="{{n.cur}}" onClick="{{n.go}}"><span>{{n.label}}</span><sc-if value="{{n.hasBadge}}" hint-placeholder-val="{{false}}"><span class="badge">{{n.badge}}</span></sc-if></button>
+      </sc-for>
+    </nav>
+    <div style="margin-top: auto; font-size: 12px; line-height: 1.5; color: #AFC0DC">Liberty Ambassador Program · Questions? Text 239-744-8403</div>
+  </aside>
+
+  <main class="main">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 22px">
+      <div>
+        <div class="eyebrow">Liberty Ambassador Program</div>
+        <h1 class="h1" style="margin-top: 6px">{{title}}</h1>
+      </div>
+      <div class="code" title="Your affiliate code"><span>Code: {{me.codeTxt}}</span><button type="button" class="btn sm" onClick="{{copyCode}}">Copy</button></div>
+    </div>
+
+    <!-- ================= HOME ================= -->
+    <sc-if value="{{v.home}}" hint-placeholder-val="{{true}}">
+      <div class="card" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; background: #EEF3FA">
+        <div style="min-width: 0; flex: 1 1 360px">
+          <h2 class="h2">Welcome Back, {{me.first}}.</h2>
+          <div class="muted" style="margin-top: 6px; line-height: 1.5">You earn <b>$10 for every eligible caddy</b> your link sells. Paid monthly. Link straight to thetapecaddy.com, never Amazon.</div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <button type="button" class="btn" onClick="{{goLinks}}">Get My Link</button>
+          <button type="button" class="btn red" onClick="{{goCampaigns}}">See Live Campaigns</button>
+        </div>
+      </div>
+
+      <sc-if value="{{needsOnboard}}" hint-placeholder-val="{{false}}">
+        <div class="card" style="margin-top: 16px; border: 2px solid #B31942">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center">
+            <div><div class="eyebrow">Getting Started</div><h2 class="h2" style="margin-top: 4px">Finish Your Onboarding</h2></div>
+            <div style="min-width: 220px; flex: 0 1 300px"><div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700"><span>{{onPct}}% done</span><span class="muted">{{onLeft}} left</span></div><div class="bar" style="margin-top: 6px"><i style="width: {{onPct}}%"></i></div></div>
+          </div>
+          <div class="grid g3" style="margin-top: 14px; gap: 10px">
+            <sc-for list="{{onSteps}}" as="o" hint-placeholder-count="5">
+              <button type="button" onClick="{{o.go}}" style="display: flex; gap: 10px; align-items: flex-start; text-align: left; padding: 12px; border-radius: 4px; border: 1px solid #D3D9E2; background: #FFFFFF">
+                <span class="tick {{o.cls}}">✓</span><span><b style="display: block">{{o.t}}</b><span class="muted" style="font-size: 13px">{{o.d}}</span></span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <div class="grid g4" style="margin-top: 16px">
+        <sc-for list="{{kpis}}" as="k" hint-placeholder-count="4"><div class="card kpi"><div class="n">{{k.n}}</div><div class="l">{{k.l}}</div></div></sc-for>
+      </div>
+
+      <div class="grid g2" style="margin-top: 16px; align-items: start">
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><h3 class="h3">Live Campaigns</h3><button type="button" class="btn ghost sm" onClick="{{goCampaigns}}">All Campaigns</button></div>
+          <sc-for list="{{liveCamps}}" as="c" hint-placeholder-count="2">
+            <div style="margin-top: 12px; padding: 14px; border-radius: 4px; background: #EEF3FA">
+              <div style="display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap"><b>{{c.title}}</b><span class="st" style="background: #E3F3EA; color: #2E7D4F">Ends {{c.end}}</span></div>
+              <div style="font-size: 14px; margin-top: 6px; color: #B31942; font-weight: 700">{{c.bonus}}</div>
+            </div>
+          </sc-for>
+          <h3 class="h3" style="margin-top: 20px">Current Deals</h3>
+          <sc-for list="{{dealsTop}}" as="d" hint-placeholder-count="2">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #D3D9E2; font-size: 14px"><span><b>{{d.title}}</b><span class="muted"> · ends {{d.ends}}</span></span><button type="button" class="btn ghost sm" onClick="{{d.copy}}">Copy Share Text</button></div>
+          </sc-for>
+        </div>
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><h3 class="h3">News</h3><button type="button" class="btn ghost sm" onClick="{{goNews}}">All News</button></div>
+          <sc-for list="{{newsTop}}" as="n" hint-placeholder-count="3">
+            <div class="news"><div style="font-size: 12px; font-weight: 700" class="muted">{{n.tag}} · {{n.date}}</div><div style="font-weight: 700; margin-top: 4px">{{n.title}}</div><div class="muted" style="font-size: 14px; margin-top: 4px; line-height: 1.5">{{n.body}}</div></div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ================= CAMPAIGNS ================= -->
+    <sc-if value="{{v.campaigns}}" hint-placeholder-val="{{false}}">
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px"><sc-for list="{{campFilters}}" as="f" hint-placeholder-count="3"><button type="button" class="chip" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
+      <div class="grid g2" style="align-items: start">
+        <sc-for list="{{camps}}" as="c" hint-placeholder-count="3">
+          <div class="card" style="display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: center"><span class="st" style="background: {{c.sbg}}; color: {{c.sfg}}">{{c.status}}</span><span class="muted" style="font-size: 13px; font-weight: 600">{{c.start}} – {{c.end}}</span></div>
+            <h2 class="h2">{{c.title}}</h2>
+            <p style="margin: 0; line-height: 1.55">{{c.brief}}</p>
+            <div style="padding: 10px 12px; border-radius: 4px; background: #FDECEF; color: #B31942; font-weight: 700; font-size: 14px">{{c.bonus}}</div>
+            <div><span class="lbl">What To Post</span><sc-for list="{{c.deliverables}}" as="x" hint-placeholder-count="3"><div style="font-size: 14px; padding: 3px 0">• {{x}}</div></sc-for></div>
+            <sc-if value="{{c.hasCaption}}" hint-placeholder-val="{{true}}"><div style="padding: 12px; border-radius: 4px; background: #EEF3FA; font-size: 14px; line-height: 1.5"><span class="lbl">Starter Caption</span>{{c.caption}}</div></sc-if>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px">
+              <button type="button" class="btn {{c.joinCls}}" onClick="{{c.join}}">{{c.joinLabel}}</button>
+              <sc-if value="{{c.hasCaption}}" hint-placeholder-val="{{true}}"><button type="button" class="btn ghost" onClick="{{c.copy}}">Copy Caption + Link</button></sc-if>
+            </div>
+            <div class="muted" style="font-size: 12px">{{c.count}} affiliates joined</div>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{noCamps}}" hint-placeholder-val="{{false}}"><p class="muted">No campaigns here right now.</p></sc-if>
+    </sc-if>
+
+    <!-- ================= DEALS ================= -->
+    <sc-if value="{{v.deals}}" hint-placeholder-val="{{false}}">
+      <div class="grid g3" style="align-items: start">
+        <sc-for list="{{deals}}" as="d" hint-placeholder-count="3">
+          <div class="card" style="display: flex; flex-direction: column; gap: 10px">
+            <div class="h1" style="color: #B31942; font-size: 34px">{{d.off}}</div>
+            <h3 class="h3">{{d.title}}</h3>
+            <p class="muted" style="margin: 0; font-size: 14px; line-height: 1.5">{{d.desc}}</p>
+            <div class="code"><span>{{d.codeTxt}}</span><button type="button" class="btn sm" onClick="{{d.copyCode}}">Copy Code</button></div>
+            <div style="font-size: 13px; font-weight: 700">Ends {{d.ends}}</div>
+            <button type="button" class="btn ghost" onClick="{{d.copy}}">Copy Share Text</button>
+          </div>
+        </sc-for>
+      </div>
+      <p class="muted" style="font-size: 13px; margin: 14px 0 0">Share codes with your link so the sale is credited to you. Deals can't be posted on Amazon or resale sites.</p>
+    </sc-if>
+
+    <!-- ================= NEWS ================= -->
+    <sc-if value="{{v.news}}" hint-placeholder-val="{{false}}">
+      <div class="card" style="max-width: 860px">
+        <sc-for list="{{newsAll}}" as="n" hint-placeholder-count="4">
+          <article class="news">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center"><span class="st" style="background: #EEF3FA; color: #0A3161">{{n.tag}}</span><sc-if value="{{n.pinned}}" hint-placeholder-val="{{false}}"><span class="st" style="background: #FDECEF; color: #B31942">Pinned</span></sc-if><span class="muted" style="font-size: 13px">{{n.date}}</span></div>
+            <h2 class="h2" style="margin-top: 8px">{{n.title}}</h2>
+            <p style="margin: 6px 0 0; line-height: 1.6">{{n.body}}</p>
+          </article>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <!-- ================= VIDEOS ================= -->
+    <sc-if value="{{v.videos}}" hint-placeholder-val="{{false}}">
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px"><sc-for list="{{vcats}}" as="f" hint-placeholder-count="5"><button type="button" class="chip" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: start">
+        <div class="card" style="grid-column: span 2; min-width: 0">
+          <div class="vid">
+            <img src="{{cur.img}}" alt="">
+            <div class="vt">{{cur.title}}</div>
+            <sc-if value="{{notPlaying}}" hint-placeholder-val="{{true}}"><button type="button" class="play" aria-label="Play {{cur.title}}" onClick="{{playCur}}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#FFFFFF"></path></svg></button></sc-if>
+            <sc-if value="{{playing}}" hint-placeholder-val="{{false}}"><div style="position: relative; font-weight: 700; background: rgba(0,0,0,0.45); padding: 8px 14px; border-radius: 999px">Playing · no talking, just the work</div><div class="prog"><i></i></div></sc-if>
+            <div class="vlen">{{cur.len}}</div>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: flex-start; margin-top: 14px">
+            <div style="min-width: 0; flex: 1 1 320px">
+              <div class="eyebrow">{{cur.cat}}<sc-if value="{{cur.req}}" hint-placeholder-val="{{true}}"> · Required</sc-if></div>
+              <h2 class="h2" style="margin-top: 4px">{{cur.title}}</h2>
+              <p class="muted" style="margin: 6px 0 0; line-height: 1.55">{{cur.desc}}</p>
+            </div>
+            <button type="button" class="btn {{cur.doneCls}}" onClick="{{markDone}}">{{cur.doneLabel}}</button>
+          </div>
+          <div style="margin-top: 14px"><span class="lbl">In This Video</span>
+            <sc-for list="{{cur.chapters}}" as="x" hint-placeholder-count="3"><div style="display: flex; gap: 10px; font-size: 14px; padding: 6px 0; border-bottom: 1px solid #D3D9E2"><b style="color: #0A3161">{{x.n}}</b>{{x.t}}</div></sc-for>
+          </div>
+          <div class="muted" style="font-size: 12px; margin-top: 10px">Mockup: final walkthrough videos drop in here once they're recorded.</div>
+        </div>
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700"><span>Required Videos</span><span>{{reqDone}} / {{reqTotal}}</span></div>
+          <div class="bar" style="margin: 6px 0 14px"><i style="width: {{reqPct}}%"></i></div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <sc-for list="{{vids}}" as="x" hint-placeholder-count="6">
+              <button type="button" class="vrow" aria-pressed="{{x.on}}" onClick="{{x.pick}}">
+                <div class="vid"><img src="{{x.img}}" alt=""><div class="vlen" style="left: 6px; bottom: 6px; font-size: 11px">{{x.len}}</div></div>
+                <div style="min-width: 0"><div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase" class="muted">{{x.cat}}</div><div style="font-weight: 700; font-size: 14px; line-height: 1.3; margin-top: 2px">{{x.title}}</div><div style="display: flex; gap: 6px; align-items: center; margin-top: 6px; font-size: 12px; font-weight: 700"><span class="tick {{x.cls}}" style="width: 18px; height: 18px; font-size: 10px">✓</span>{{x.state}}</div></div>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ================= LINKS & EARNINGS ================= -->
+    <sc-if value="{{v.links}}" hint-placeholder-val="{{false}}">
+      <sc-if value="{{noCode}}" hint-placeholder-val="{{false}}"><div class="card" style="background: #FFF3DC; border-color: #F0D59A; margin-bottom: 16px"><b>Your link is being set up.</b> It shows here as soon as LTC approves your account and payouts are connected.</div></sc-if>
+      <div class="grid g2" style="align-items: start">
+        <div class="card">
+          <h2 class="h2">My Links</h2>
+          <p class="muted" style="margin: 6px 0 12px; font-size: 14px">Pick what you're posting about. We'll build the link with your code on it.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{linkProds}}" as="p" hint-placeholder-count="5"><button type="button" class="chip" aria-pressed="{{p.on}}" onClick="{{p.pick}}">{{p.name}}</button></sc-for></div>
+          <div class="code" style="margin-top: 14px; display: flex"><span style="flex: 1">{{linkUrl}}</span><button type="button" class="btn sm" onClick="{{copyLink}}">Copy Link</button></div>
+          <div class="muted" style="font-size: 12px; margin-top: 8px">Links point to thetapecaddy.com for now and switch to libertytoolcompany.com when it goes live. Your credit carries over.</div>
+        </div>
+        <div class="card">
+          <h2 class="h2">How You Earn</h2>
+          <div class="grid g2" style="margin-top: 12px; gap: 10px">
+            <sc-for list="{{rules}}" as="r" hint-placeholder-count="4"><div style="padding: 12px; border-radius: 4px; background: #EEF3FA"><div class="lbl">{{r.k}}</div><div style="font-weight: 700">{{r.v}}</div></div></sc-for>
+          </div>
+        </div>
+      </div>
+      <div class="grid g4" style="margin-top: 16px"><sc-for list="{{kpis}}" as="k" hint-placeholder-count="4"><div class="card kpi"><div class="n">{{k.n}}</div><div class="l">{{k.l}}</div></div></sc-for></div>
+      <div class="card" style="margin-top: 16px">
+        <h3 class="h3">Payout History</h3>
+        <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 1.6fr 1fr 1fr 1fr; --minw: 460px"><div class="tr th"><div>Month</div><div>Eligible Caddies</div><div>Earned</div><div>Status</div></div>
+          <sc-for list="{{months}}" as="m" hint-placeholder-count="3"><div class="tr"><div><b>{{m.m}}</b></div><div>{{m.sold}}</div><div>{{m.earned}}</div><div><span class="st" style="background: {{m.sbg}}; color: {{m.sfg}}">{{m.status}}</span></div></div></sc-for>
+        </div></div>
+        <sc-if value="{{noMonths}}" hint-placeholder-val="{{false}}"><p class="muted">Your first payout shows here after your first sale.</p></sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ================= BRAND KIT ================= -->
+    <sc-if value="{{v.kit}}" hint-placeholder-val="{{false}}">
+      <div class="grid g2" style="align-items: start">
+        <div class="card">
+          <h2 class="h2">Downloads</h2>
+          <sc-for list="{{files}}" as="f" hint-placeholder-count="5"><div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid #D3D9E2"><span><b>{{f.name}}</b><div class="muted" style="font-size: 12px">{{f.kind}}</div></span><button type="button" class="btn ghost sm" onClick="{{f.get}}">Download</button></div></sc-for>
+        </div>
+        <div class="card">
+          <h2 class="h2">The Rules</h2>
+          <div class="grid g2" style="margin-top: 12px; gap: 12px">
+            <div><div class="lbl" style="color: #2E7D4F">Do</div><sc-for list="{{dos}}" as="x" hint-placeholder-count="4"><div style="font-size: 14px; padding: 4px 0">✓ {{x}}</div></sc-for></div>
+            <div><div class="lbl" style="color: #B31942">Don't</div><sc-for list="{{donts}}" as="x" hint-placeholder-count="4"><div style="font-size: 14px; padding: 4px 0">✕ {{x}}</div></sc-for></div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}"><div class="toast" role="status">{{toast}}</div></sc-if>
+  </main>
+</div>
+</template>
+<div id="root"></div>
+<script src="/runtime.js"></script>
+<script>
+
+
+var IMG = ['/assets/crop-lowboy.webp', '/assets/crop-c2.webp', '/assets/crop-c4.webp', '/assets/crop-c6.webp', '/assets/crop-cove.webp', '/assets/crop-four.webp', '/assets/crop-triple.webp', '/assets/crop-ddd.webp'];
+var C = { pri: '#0A3161', acc: '#B31942', soft: '#EEF3FA' };
+var AFF_KEY = 'ltc-affiliate-portal-v1';
+var AFF_RATE = 10;
+var VCATS = ['Signing Up', 'Being An Affiliate', 'Onboarding', 'Content How-To'];
+var ONBOARD = [
+  { id: 'agree', t: 'Sign The Ambassador Agreement', d: 'Read the terms and sign online.' },
+  { id: 'payout', t: 'Set Up Payouts', d: 'Connect your payout account so we can pay you monthly.' },
+  { id: 'videos', t: 'Watch The Onboarding Videos', d: 'Every video marked Required.' },
+  { id: 'link', t: 'Grab Your Link & Code', d: 'Copy it from My Links.' },
+  { id: 'post', t: 'Make Your First Post', d: 'Use a live campaign and tag @thetapecaddy.' }
+];
+function affDaysAgo(n) { var d = new Date(); d.setDate(d.getDate() - n); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+function affDaysOut(n) { var d = new Date(); d.setDate(d.getDate() + n); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
+function affSeed() {
+  return {
+    affiliates: [
+      { id: 'a1', name: 'Marcus Hale', handle: '@halecoatings', platform: 'Instagram · TikTok', followers: '18.4K', role: 'Epoxy installer · 11 yrs', city: 'Tampa, FL', code: 'HALE10', status: 'Active', joined: affDaysAgo(64), clicks: 1284, sold: 37, paid: 260, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
+      { id: 'a2', name: 'Tasha Greene', handle: '@floorsbytasha', platform: 'YouTube · Instagram', followers: '42K', role: 'Flake & metallic floors · 8 yrs', city: 'Phoenix, AZ', code: 'TASHA10', status: 'Active', joined: affDaysAgo(41), clicks: 2210, sold: 52, paid: 410, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v3: true, v4: true, v5: true } },
+      { id: 'a3', name: 'Ray Delgado', handle: '@raysgaragefloors', platform: 'TikTok', followers: '7.9K', role: 'Garage floor crew owner · 6 yrs', city: 'San Antonio, TX', code: 'RAY10', status: 'Active', joined: affDaysAgo(12), clicks: 214, sold: 4, paid: 0, onboard: { agree: true, payout: true, videos: false, link: true, post: false }, watched: { v1: true, v3: true } },
+      { id: 'a4', name: 'Kelly Brandt', handle: '@kbcommercialfloors', platform: 'LinkedIn · Facebook', followers: '3.1K', role: 'Commercial PM · 15 yrs', city: 'Columbus, OH', code: '', status: 'Applied', joined: affDaysAgo(2), clicks: 0, sold: 0, paid: 0, onboard: {}, watched: {} },
+      { id: 'a5', name: 'Jon Pruitt', handle: '@pruittepoxy', platform: 'Instagram', followers: '11.2K', role: 'Residential coatings · 4 yrs', city: 'Nashville, TN', code: '', status: 'Applied', joined: affDaysAgo(1), clicks: 0, sold: 0, paid: 0, onboard: {}, watched: {} }
+    ],
+    campaigns: [
+      { id: 'c1', title: 'Cove Base Week', status: 'Live', start: affDaysAgo(3), end: affDaysOut(5), brief: 'Show a real cove base job start to finish with the 4" + 6" Cove System. Before and after, one clean tape line.', bonus: '+$50 bonus when your link sells 5 Cove Systems this week', deliverables: ['1 Reel or TikTok (30–60 sec)', '3 Stories with your link sticker', 'Tag @thetapecaddy and #ForInstallersByInstallers'], caption: 'Cove base used to eat my whole morning. The Tape Caddy Cove System lays both lines at the same height every time. Link in bio. #ForInstallersByInstallers', joined: ['a1', 'a2'] },
+      { id: 'c2', title: 'Holiday Crew Gift Guide', status: 'Live', start: affDaysAgo(1), end: affDaysOut(30), brief: 'Pitch the 4-Score Complete Kit as the gift for the crew lead who has everything. Keep it jobsite, not studio.', bonus: 'Double payout ($20) on every 4-Score Kit through Dec 31', deliverables: ['1 carousel or short video', 'Pin your link in a comment'], caption: 'Gift idea for the crew lead: the 4-Score Complete Kit. Four Tape Caddy sizes, made in the USA. Saves time, money and your knees.', joined: ['a2'] },
+      { id: 'c3', title: 'New Year, New Rig', status: 'Upcoming', start: affDaysOut(58), end: affDaysOut(75), brief: 'Show your 2027 rig setup and where the Tape Caddy lives on the truck.', bonus: 'Top 3 posts win a free Triple Threat kit', deliverables: ['1 video tour of your rig'], caption: '', joined: [] }
+    ],
+    deals: [
+      { id: 'd1', title: '10% Off Any Tape Caddy', code: 'YOURCODE', off: '10% off', ends: affDaysOut(30), desc: 'Your personal code. Works on every caddy and kit on thetapecaddy.com.', active: true, share: 'Use my code {code} for 10% off any Tape Caddy at thetapecaddy.com' },
+      { id: 'd2', title: 'Free Shipping On Kits', code: 'KITSHIP', off: 'Free shipping', ends: affDaysOut(14), desc: 'Free ground shipping on the Cove System, Double Down Duo, Triple Threat and 4-Score Kit.', active: true, share: 'Free shipping on Tape Caddy kits right now. Code KITSHIP at thetapecaddy.com' },
+      { id: 'd3', title: 'Black Friday: $20 Off 4-Score', code: 'BF4SCORE', off: '$20 off', ends: affDaysOut(27), desc: 'Nov 27 – Dec 1 only. Stack with your link for credit.', active: true, share: '$20 off the 4-Score Complete Kit this Black Friday. Code BF4SCORE at thetapecaddy.com' }
+    ],
+    news: [
+      { id: 'n1', date: affDaysAgo(1), tag: 'Program', title: 'Payouts Are Monthly', body: 'You earn $10 for every eligible caddy your link sells. We pay out once a month for the month before. Your running total is on My Links & Earnings.', pinned: true },
+      { id: 'n2', date: affDaysAgo(4), tag: 'Product', title: 'Cove Trowel Is In Testing', body: 'Our new cove trowel is in field testing with a few crews. Affiliates get first look when it launches.', pinned: false },
+      { id: 'n3', date: affDaysAgo(9), tag: 'Reminder', title: 'No Amazon Listings', body: 'Please don’t list, resell or fulfill Tape Caddy on Amazon. Link straight to thetapecaddy.com so you get credit.', pinned: false },
+      { id: 'n4', date: affDaysAgo(15), tag: 'Shout-Out', title: 'Top Affiliate In October: @floorsbytasha', body: 'Tasha’s metallic floor walkthrough drove 52 caddies. Watch it in Content How-To for ideas.', pinned: false }
+    ],
+    videos: [
+      { id: 'v1', cat: 'Signing Up', title: 'How To Apply And Get Approved', len: '1:45', req: true, desc: 'Filling out the ambassador form, what we look for and how long approval takes.', ch: ['Open the ambassador form', 'Tell us about your work', 'Approval email and next steps'] },
+      { id: 'v2', cat: 'Signing Up', title: 'Signing Your Agreement', len: '1:10', req: true, desc: 'Walk through the ambassador terms and sign online.', ch: ['Open the agreement link', 'Key terms in plain English', 'Sign and submit'] },
+      { id: 'v3', cat: 'Onboarding', title: 'Set Up Payouts', len: '1:30', req: true, desc: 'Connect your payout account so monthly payments land on time.', ch: ['Open your affiliate account', 'Add payout details', 'Confirm your tax form'] },
+      { id: 'v4', cat: 'Onboarding', title: 'Find Your Link And Code', len: '0:55', req: true, desc: 'Where your link lives, how to make product links and how your code works.', ch: ['My Links page', 'Product links', 'Your discount code'] },
+      { id: 'v5', cat: 'Being An Affiliate', title: 'How You Earn: $10 Per Caddy', len: '1:20', req: true, desc: 'What counts as an eligible sale, when it posts and when you get paid.', ch: ['Eligible sales', 'Clicks vs. sales', 'Monthly payouts'] },
+      { id: 'v6', cat: 'Being An Affiliate', title: 'Brand Rules: Do’s And Don’ts', len: '1:35', req: true, desc: 'Using the LTC logo, honest claims and the no-Amazon rule.', ch: ['Logo and colors', 'What you can claim', 'No Amazon or resale'] },
+      { id: 'v7', cat: 'Content How-To', title: 'Film A 30-Second Tape Line', len: '2:00', req: false, desc: 'Phone setup, angles and the money shot: peeling a perfect line.', ch: ['Phone low and steady', 'Show the gauge', 'The reveal'] },
+      { id: 'v8', cat: 'Content How-To', title: 'Before & After That Sells', len: '1:50', req: false, desc: 'Same angle, same light, real job. How top affiliates frame it.', ch: ['Lock your angle', 'Shoot the before', 'Match the after'] }
+    ],
+    files: [
+      { name: 'LTC Logo Pack (PNG + SVG).zip', kind: 'Logos' },
+      { name: 'Tape Caddy Product Photos.zip', kind: 'Photos' },
+      { name: 'Jobsite B-Roll Clips.zip', kind: 'Video' },
+      { name: 'Approved Captions & Hashtags.pdf', kind: 'Copy' },
+      { name: 'Ambassador Terms.pdf', kind: 'Terms' }
+    ],
+    months: [
+      { m: 'October', sold: 21, status: 'Paid' },
+      { m: 'September', sold: 5, status: 'Paid' },
+      { m: 'November (so far)', sold: 11, status: 'Pending' }
+    ]
+  };
+}
+function affLoad() { var d = null; try { d = JSON.parse(localStorage.getItem(AFF_KEY) || 'null'); } catch (e) { d = null; } return d || affSeed(); }
+function affSave(d) { try { localStorage.setItem(AFF_KEY, JSON.stringify(d)); } catch (e) {} }
+function affOnboardPct(a) { var n = 0; ONBOARD.forEach(function (o) { if (a.onboard && a.onboard[o.id]) n++; }); return Math.round(n / ONBOARD.length * 100); }
+function affCopy(t) { try { if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(t); return; } } catch (e) {} var x = document.createElement('textarea'); x.value = t; x.style.position = 'fixed'; x.style.opacity = '0'; document.body.appendChild(x); x.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(x); }
+
+var LINKP = [['All Products', 'collections/all'], ['The Lowboy', 'products/lowboy'], ['4-Inch Caddy', 'products/4-inch-caddy'], ['6-Inch Caddy', 'products/6-inch-caddy'], ['Cove System', 'products/cove-system'], ['4-Score Kit', 'products/4-score-complete-kit']];
+var CSTAT = { Live: ['#E3F3EA', '#2E7D4F'], Upcoming: ['#E7EEFC', '#1F4FB5'], Ended: ['#ECEEF2', '#4A5568'] };
+var MSTAT = { Paid: ['#E3F3EA', '#2E7D4F'], Pending: ['#FFF3DC', '#8A5A00'] };
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { data: affLoad(), me: 'a1', view: 'home', cf: 'Live', vc: '', vid: 'v1', playing: false, lp: 0, toast: '' };
+  }
+  persist(d) { affSave(d); this.setState({ data: d }); }
+  flash(t) { var self = this; this.setState({ toast: t }); setTimeout(function () { if (self.state.toast === t) self.setState({ toast: '' }); }, 2400); }
+  copy(t, msg) { affCopy(t); this.flash(msg || 'Copied'); }
+  go(v) { this.setState({ view: v, playing: false }); try { window.scrollTo(0, 0); } catch (e) {} }
+  renderVals() {
+    var self = this, s = this.state, d = s.data;
+    var me = d.affiliates.find(function (a) { return a.id === s.me; }) || d.affiliates[0];
+    var v = {}; v[s.view] = true;
+    var code = me.code || '';
+    var link = 'thetapecaddy.com/' + LINKP[s.lp][1] + (code ? '?ref=' + code.toLowerCase() : '?ref=pending');
+    var live = d.campaigns.filter(function (c) { return c.status === 'Live'; });
+    var deals = d.deals.filter(function (x) { return x.active; });
+    var news = d.news.slice().sort(function (a, b) { return (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0); });
+    var reqV = d.videos.filter(function (x) { return x.req; });
+    var reqDone = reqV.filter(function (x) { return me.watched[x.id]; }).length;
+    var vids = d.videos.filter(function (x) { return !s.vc || x.cat === s.vc; });
+    var cur = d.videos.find(function (x) { return x.id === s.vid; }) || d.videos[0];
+    var curIdx = d.videos.indexOf(cur);
+    var onPct = affOnboardPct(me);
+    var thisMonth = d.months.filter(function (m) { return m.status === 'Pending'; }).reduce(function (t, m) { return t + m.sold; }, 0);
+    var isNew = me.id === 'a3';
+    var months = isNew ? [{ m: 'November (so far)', sold: me.sold, status: 'Pending' }] : d.months;
+    var ownShare = function (t) { return t.replace('{code}', code || 'YOURCODE'); };
+    var onGo = { agree: 'kit', payout: 'links', videos: 'videos', link: 'links', post: 'campaigns' };
+    var titles = { home: 'Affiliate Home', campaigns: 'Current Campaigns', deals: 'Current Deals', news: 'News', videos: 'Video Walkthroughs', links: 'My Links & Earnings', kit: 'Brand Kit & Rules' };
+    return {
+      v: v, title: titles[s.view],
+      me: { name: me.name, first: me.name.split(' ')[0], handle: me.handle, platform: me.platform, codeTxt: code || 'Pending' },
+      isActiveDemo: isNew ? 'false' : 'true', isNewDemo: isNew ? 'true' : 'false',
+      pickActive: function () { self.setState({ me: 'a1', view: 'home' }); },
+      pickNew: function () { self.setState({ me: 'a3', view: 'home' }); },
+      navs: [['home', 'Home'], ['campaigns', 'Current Campaigns', live.length], ['deals', 'Current Deals', deals.length], ['news', 'News'], ['videos', 'Video Walkthroughs', reqV.length - reqDone], ['links', 'My Links & Earnings'], ['kit', 'Brand Kit & Rules']].map(function (n) { return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: (n[2] || 0) > 0, badge: n[2] || 0, go: function () { self.go(n[0]); } }; }),
+      copyCode: function () { if (!code) return self.flash('Your code is issued after approval'); self.copy(code, 'Code copied'); },
+      goLinks: function () { self.go('links'); }, goCampaigns: function () { self.go('campaigns'); }, goNews: function () { self.go('news'); },
+      needsOnboard: onPct < 100, onPct: onPct, onLeft: ONBOARD.filter(function (o) { return !me.onboard[o.id]; }).length,
+      onSteps: ONBOARD.map(function (o) { var done = !!me.onboard[o.id] || (o.id === 'videos' && reqDone === reqV.length); return { t: o.t, d: o.d, cls: done ? 'on' : '', go: function () { self.go(onGo[o.id]); } }; }),
+      kpis: [
+        { n: me.clicks.toLocaleString(), l: 'Link Clicks' },
+        { n: me.sold, l: 'Eligible Caddies Sold' },
+        { n: '$' + (me.sold * AFF_RATE).toLocaleString(), l: 'Total Earned' },
+        { n: '$' + ((isNew ? me.sold : thisMonth) * AFF_RATE).toLocaleString(), l: 'Pending (Paid Next Month)' }
+      ],
+      liveCamps: live.map(function (c) { return { title: c.title, end: c.end, bonus: c.bonus }; }),
+      dealsTop: deals.slice(0, 3).map(function (x) { return { title: x.title, ends: x.ends, copy: function () { self.copy(ownShare(x.share) + ' ' + link, 'Share text copied'); } }; }),
+      newsTop: news.slice(0, 3),
+      campFilters: ['Live', 'Upcoming', 'Ended'].map(function (f) { return { label: f, on: s.cf === f ? 'true' : 'false', pick: function () { self.setState({ cf: f }); } }; }),
+      camps: d.campaigns.filter(function (c) { return c.status === s.cf; }).map(function (c) {
+        var j = c.joined.indexOf(me.id) >= 0, col = CSTAT[c.status] || CSTAT.Ended, can = c.status !== 'Ended';
+        return Object.assign({}, c, { sbg: col[0], sfg: col[1], hasCaption: !!c.caption, count: c.joined.length, joinLabel: j ? 'Joined ✓' : (c.status === 'Upcoming' ? 'Get Notified' : 'Join Campaign'), joinCls: j ? 'ghost' : 'red',
+          join: function () { var d2 = JSON.parse(JSON.stringify(d)); if (j || !can) return; var cc = d2.campaigns.find(function (x) { return x.id === c.id; }); if (cc.joined.indexOf(me.id) < 0) cc.joined.push(me.id); self.persist(d2); self.flash(c.status === 'Upcoming' ? 'We’ll let you know when it starts' : 'You’re in. Post by ' + c.end + '.'); },
+          copy: function () { self.copy(c.caption + ' ' + link, 'Caption + link copied'); } });
+      }),
+      noCamps: d.campaigns.filter(function (c) { return c.status === s.cf; }).length === 0,
+      deals: deals.map(function (x) { var cd = x.code === 'YOURCODE' ? (code || 'Pending') : x.code; return { off: x.off, title: x.title, desc: x.desc, ends: x.ends, codeTxt: cd, copyCode: function () { if (cd === 'Pending') return self.flash('Your code is issued after approval'); self.copy(cd, 'Code copied'); }, copy: function () { self.copy(ownShare(x.share) + ' ' + link, 'Share text copied'); } }; }),
+      newsAll: news,
+      vcats: [''].concat(VCATS).map(function (c) { return { label: c || 'All Videos', on: s.vc === c ? 'true' : 'false', pick: function () { self.setState({ vc: c }); } }; }),
+      cur: { title: cur.title, cat: cur.cat, req: cur.req, desc: cur.desc, len: cur.len, img: IMG[curIdx % IMG.length], chapters: cur.ch.map(function (t, i) { return { n: '0' + (i + 1), t: t }; }), doneCls: me.watched[cur.id] ? 'ghost' : '', doneLabel: me.watched[cur.id] ? 'Watched ✓' : 'Mark As Watched' },
+      playing: s.playing, notPlaying: !s.playing,
+      playCur: function () { self.setState({ playing: true }); },
+      markDone: function () { var d2 = JSON.parse(JSON.stringify(d)); var m = d2.affiliates.find(function (a) { return a.id === me.id; }); m.watched[cur.id] = !m.watched[cur.id]; var allReq = d2.videos.filter(function (x) { return x.req; }).every(function (x) { return m.watched[x.id]; }); m.onboard.videos = allReq; self.persist(d2); if (m.watched[cur.id]) self.flash('Nice. Marked as watched.'); },
+      reqDone: reqDone, reqTotal: reqV.length, reqPct: reqV.length ? Math.round(reqDone / reqV.length * 100) : 0,
+      vids: vids.map(function (x) { var w = !!me.watched[x.id]; return { title: x.title, cat: x.cat, len: x.len, img: IMG[d.videos.indexOf(x) % IMG.length], on: x.id === cur.id ? 'true' : 'false', cls: w ? 'on' : '', state: w ? 'Watched' : (x.req ? 'Required' : 'Optional'), pick: function () { self.setState({ vid: x.id, playing: false }); } }; }),
+      noCode: !code,
+      linkProds: LINKP.map(function (p, i) { return { name: p[0], on: s.lp === i ? 'true' : 'false', pick: function () { self.setState({ lp: i }); } }; }),
+      linkUrl: link,
+      copyLink: function () { if (!code) return self.flash('Your link is issued after approval'); self.copy('https://' + link, 'Link copied'); },
+      rules: [{ k: 'You Earn', v: '$10 per eligible caddy' }, { k: 'Paid', v: 'Monthly, for the month before' }, { k: 'Tracked By', v: 'Your link + code' }, { k: 'Not Allowed', v: 'Amazon listings or resale' }],
+      months: months.map(function (m) { var col = MSTAT[m.status] || MSTAT.Pending; return { m: m.m, sold: m.sold, earned: '$' + (m.sold * AFF_RATE).toLocaleString(), status: m.status, sbg: col[0], sfg: col[1] }; }),
+      noMonths: months.length === 0,
+      files: d.files.map(function (f) { return { name: f.name, kind: f.kind, get: function () { self.flash('Mockup: ' + f.name + ' downloads here'); } }; }),
+      dos: ['Show real jobs and real results', 'Use your link or code every time', 'Tag @thetapecaddy', 'Say you’re an LTC ambassador'],
+      donts: ['List or resell on Amazon', 'Change the logo or colors', 'Promise results we can’t back up'],
+      hasToast: !!s.toast, toast: s.toast
+    };
+  }
+}
+
+window.__ltcStart(Component);
+(function(){var r=document.documentElement;function u(){var m=r.scrollHeight-window.innerHeight;r.style.setProperty('--ltc-p',m>0?Math.min(1,window.scrollY/m):0);}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();
+</script>
+</body>
+</html>
