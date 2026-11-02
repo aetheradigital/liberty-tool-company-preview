@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LTC — Social Approval Board</title>
+<title>LTC — Social Posting Calendar</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="/assets/logo-blue.png">
 
@@ -24,7 +24,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
   <div style="max-width: 1320px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px">
     <a href="/" style="color: #FFFFFF; text-decoration: none; font-weight: 700; letter-spacing: 0.04em; white-space: nowrap">← LTC Preview Portal</a>
     <span style="opacity: 0.35">|</span>
-    <nav aria-label="Preview pages" style="display: flex; flex-wrap: wrap; gap: 8px 20px"><a href="/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 1 · Classic</a><a href="/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 2 · Fun</a><a href="/approvals/" style="color: #FFFFFF; text-decoration: none; font-weight: 700; white-space: nowrap; border-bottom: 2px solid #B31942; padding-bottom: 2px">Social Approval Board</a><a href="/partner-portal/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Partner Portal 1</a><a href="/partner-portal/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Partner Portal 2</a><a href="/admin/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Admin 1</a><a href="/admin/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Admin 2</a></nav>
+    <nav aria-label="Preview pages" style="display: flex; flex-wrap: wrap; gap: 8px 20px"><a href="/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 1 · Classic</a><a href="/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 2 · Fun</a><a href="/approvals/" style="color: #FFFFFF; text-decoration: none; font-weight: 700; white-space: nowrap; border-bottom: 2px solid #B31942; padding-bottom: 2px">Social Posting Calendar</a><a href="/partner-portal/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Partner Portal 1</a><a href="/partner-portal/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Partner Portal 2</a><a href="/admin/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Admin 1</a><a href="/admin/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Admin 2</a></nav>
   </div>
 </div>
 <script>if(window.self!==window.top){document.getElementById('ltc-preview-bar').style.display='none';}</script>
@@ -40,11 +40,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
       <img src="/assets/logo-white.png" alt="Liberty Tool Company" style="height: 64px; width: auto; display: block">
       <div style="min-width: 0">
         <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.16em; text-transform: uppercase; color: #C3CFE0">The Package · Funnels</div>
-        <h1 style="margin: 2px 0 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(32px, 3.6vw, 46px); line-height: 1; text-transform: uppercase">Go-To-Market Social · Approval Board</h1>
+        <h1 style="margin: 2px 0 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(32px, 3.6vw, 46px); line-height: 1; text-transform: uppercase">Go-To-Market Social · Posting Calendar</h1>
         <div style="margin-top: 6px; font-size: 15px; color: #D4DDEA">Nov 2 – Dec 1, 2026 · {{stats.total}} posts · 8 campaigns</div>
       </div>
     </div>
-    <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #C3CFE0; min-width: 240px">Reviewing As
+    <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #C3CFE0; min-width: 240px">Posted By
       <input type="text" placeholder="Your name" onChange="{{onReviewer}}" autocomplete="name" style="height: 46px; padding: 0 14px; border: 0; border-radius: 4px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #0B1B33; background: #FFFFFF">
     </label>
   </div>
@@ -65,7 +65,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
       <div style="width: {{stats.pApproved}}%; background: #2E7D4F; transition: width 300ms ease"></div>
       <div style="width: {{stats.pChanges}}%; background: #D9822B; transition: width 300ms ease"></div>
     </div>
-    <span style="font-size: 14px; font-weight: 700; color: #0A3161; white-space: nowrap">{{stats.pApproved}}% approved</span>
+    <span style="font-size: 14px; font-weight: 700; color: #0A3161; white-space: nowrap">{{stats.pApproved}}% posted</span>
   </div>
 </section>
 
@@ -80,7 +80,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
       <button type="button" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" style="text-align: left; background: {{c.bg}}; color: {{c.fg}}; border: 2px solid {{c.color}}; border-top: 8px solid {{c.color}}; border-radius: 6px; padding: 14px; cursor: pointer; display: flex; flex-direction: column; gap: 6px; min-height: 150px">
         <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 20px; line-height: 1.05; text-transform: uppercase">{{c.name}}</span>
         <span style="font-size: 13px; line-height: 1.4; opacity: 0.9">{{c.goal}}</span>
-        <span style="margin-top: auto; font-size: 12px; font-weight: 700">{{c.countLabel}} · {{c.done}} approved</span>
+        <span style="margin-top: auto; font-size: 12px; font-weight: 700">{{c.countLabel}} · {{c.done}} posted</span>
       </button>
     </sc-for>
   </div>
@@ -103,7 +103,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
     </div>
     <div style="margin-left: auto; display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
       <span style="font-size: 14px; font-weight: 600; color: #4A5568">Showing {{shownCount}} of {{stats.total}}</span>
-      <button type="button" onClick="{{approveShown}}" style="min-height: 40px; padding: 0 14px; border-radius: 4px; border: 0; background: #2E7D4F; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase">Approve All Shown</button>
+      <button type="button" onClick="{{approveShown}}" style="min-height: 40px; padding: 0 14px; border-radius: 4px; border: 0; background: #2E7D4F; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase">Mark All Shown Posted</button>
       <button type="button" onClick="{{clearFilters}}" style="min-height: 40px; padding: 0 12px; border-radius: 4px; border: 2px solid #0A3161; background: #FFFFFF; color: #0A3161; cursor: pointer; font-size: 13px; font-weight: 700">Clear Filters</button>
     </div>
   </div>
@@ -117,9 +117,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
       <div style="padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px; border-bottom: 1px solid #D3D9E2">
         <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase; color: #0A3161">November 2026</h2>
         <span style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; font-weight: 600; color: #4A5568">
-          <span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #2E7D4F"></span>Approved</span>
-          <span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #D9822B"></span>Changes</span>
-          <span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FFFFFF; border: 2px solid #8A94A3; box-sizing: border-box"></span>Pending</span>
+          <span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #2E7D4F"></span>Posted</span>
+          <span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #D9822B"></span>Needs Edits</span>
+          <span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FFFFFF; border: 2px solid #8A94A3; box-sizing: border-box"></span>To Post</span>
         </span>
       </div>
       <div style="overflow-x: auto">
@@ -274,8 +274,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
         </div>
 
         <div style="display: flex; flex-wrap: wrap; gap: 8px">
-          <button type="button" onClick="{{sel.approve}}" style="flex: 1 1 140px; min-height: 50px; border-radius: 4px; border: 0; background: #2E7D4F; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase">✓ Approve</button>
-          <button type="button" onClick="{{sel.openChanges}}" style="flex: 1 1 140px; min-height: 50px; border-radius: 4px; border: 0; background: #D9822B; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase">Request Changes</button>
+          <button type="button" onClick="{{sel.approve}}" style="flex: 1 1 140px; min-height: 50px; border-radius: 4px; border: 0; background: #2E7D4F; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase">✓ Mark Posted</button>
+          <button type="button" onClick="{{sel.openChanges}}" style="flex: 1 1 140px; min-height: 50px; border-radius: 4px; border: 0; background: #D9822B; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase">Needs Edits</button>
           <button type="button" onClick="{{sel.reset}}" style="min-height: 50px; padding: 0 14px; border-radius: 4px; border: 2px solid #8A94A3; background: #FFFFFF; color: #3B4658; cursor: pointer; font-size: 14px; font-weight: 700">Reset</button>
         </div>
         <sc-if value="{{sel.showChanges}}" hint-placeholder-val="{{false}}">
@@ -283,7 +283,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
             <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #3B4658">What Should Change?
               <textarea name="note" rows="3" placeholder="e.g. Swap the photo for a jobsite shot. Shorten the caption." style="padding: 10px 12px; border: 1.5px solid #B8C1CD; border-radius: 4px; font-size: 15px; text-transform: none; letter-spacing: 0; color: #0B1B33; resize: vertical"></textarea>
             </label>
-            <button type="submit" style="align-self: flex-start; min-height: 44px; padding: 0 16px; border-radius: 4px; border: 0; background: #0A3161; color: #FFFFFF; cursor: pointer; font-weight: 700">Send Change Request</button>
+            <button type="submit" style="align-self: flex-start; min-height: 44px; padding: 0 16px; border-radius: 4px; border: 0; background: #0A3161; color: #FFFFFF; cursor: pointer; font-weight: 700">Save Edit Note</button>
           </form>
         </sc-if>
         <sc-if value="{{sel.hasNotes}}" hint-placeholder-val="{{false}}">
@@ -304,7 +304,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
 <section style="max-width: 1320px; margin: 0 auto; padding: 36px 24px 0">
   <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 10px">
     <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 30px; text-transform: uppercase; color: #0A3161">All Sample Posts</h2>
-    <span style="font-size: 14px; color: #4A5568">Tap a post to preview it above. Quick-approve from the card.</span>
+    <span style="font-size: 14px; color: #4A5568">Tap a post to preview it above. Mark it posted from the card once it’s live.</span>
   </div>
   <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; margin-top: 14px">
     <sc-for list="{{feed}}" as="p" hint-placeholder-count="8">
@@ -325,8 +325,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
           <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 19px; line-height: 1.05; text-transform: uppercase">{{p.title}}</div>
           <div style="font-size: 12px; color: #4A5568">{{p.platText}}</div>
           <div style="margin-top: auto; padding-top: 8px; display: flex; gap: 6px">
-            <button type="button" onClick="{{p.approve}}" aria-label="Approve {{p.title}}" style="flex: 1; min-height: 40px; border-radius: 4px; border: 0; background: #2E7D4F; color: #FFFFFF; cursor: pointer; font-size: 13px; font-weight: 800">✓ Approve</button>
-            <a href="#review" onClick="{{p.changes}}" style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 40px; border-radius: 4px; background: #FFF4E8; color: #8A4A0E; text-decoration: none; font-size: 13px; font-weight: 800">Changes</a>
+            <button type="button" onClick="{{p.approve}}" aria-label="Mark {{p.title}} posted" style="flex: 1; min-height: 40px; border-radius: 4px; border: 0; background: #2E7D4F; color: #FFFFFF; cursor: pointer; font-size: 13px; font-weight: 800">✓ Posted</button>
+            <a href="#review" onClick="{{p.changes}}" style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 40px; border-radius: 4px; background: #FFF4E8; color: #8A4A0E; text-decoration: none; font-size: 13px; font-weight: 800">Edits</a>
           </div>
         </div>
       </article>
@@ -350,13 +350,13 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
         </ol>
       </sc-if>
       <sc-if value="{{noLog}}" hint-placeholder-val="{{true}}">
-        <p style="margin: 12px 0 0; font-size: 15px; color: #4A5568">No decisions yet. Approve a post or request changes and it shows up here.</p>
+        <p style="margin: 12px 0 0; font-size: 15px; color: #4A5568">Nothing logged yet. Mark a post as posted or flag it for edits and it shows up here.</p>
       </sc-if>
     </div>
     <div style="flex: 1 1 420px; min-width: 0; background: #0A3161; color: #FFFFFF; border-radius: 6px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
-      <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase">Approval Summary</h2>
-      <p style="margin: 0; font-size: 14px; color: #C3CFE0">Copy this and send it to Aethera so approved posts get scheduled.</p>
-      <textarea readonly="readonly" rows="10" aria-label="Approval summary" style="width: 100%; box-sizing: border-box; padding: 12px; border: 0; border-radius: 4px; font-family: ui-monospace, Menlo, monospace; font-size: 12px; line-height: 1.5; color: #0B1B33; resize: vertical">{{summaryText}}</textarea>
+      <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase">Posting Summary</h2>
+      <p style="margin: 0; font-size: 14px; color: #C3CFE0">Copy this to keep a record of what’s been posted and what’s next.</p>
+      <textarea readonly="readonly" rows="10" aria-label="Posting summary" style="width: 100%; box-sizing: border-box; padding: 12px; border: 0; border-radius: 4px; font-family: ui-monospace, Menlo, monospace; font-size: 12px; line-height: 1.5; color: #0B1B33; resize: vertical">{{summaryText}}</textarea>
       <button type="button" onClick="{{copySummary}}" style="align-self: flex-start; min-height: 46px; padding: 0 18px; border-radius: 4px; border: 0; background: #B31942; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: 0.06em; text-transform: uppercase">{{copyLabel}}</button>
     </div>
   </div>
@@ -420,7 +420,7 @@ var POSTS = [
   { id: 'p26', d: 31, camp: 'ent', plats: ['LI', 'FB'], format: 'Static', title: 'Plan 2027 Stock And Crew Kits Now', art: { kind: 'photo', img: '/assets/post-p26.webp', head: 'Plan 2027 Now.', sub: 'Store stock · Crew kits · Coatings' }, caption: 'Setting 2027 budgets? Put Liberty coatings and crew tools on the list for every location.\n\nBook a call and we’ll plan systems, kits and PO ordering with you.', cta: 'Schedule A Conversation', utm: 'enterprise' }
 ];
 var DOWS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-var STATUS = { pending: { label: 'Pending', bg: '#EEF1F5', fg: '#3B4658', dot: '#FFFFFF', ring: '#8A94A3' }, approved: { label: 'Approved', bg: '#2E7D4F', fg: '#FFFFFF', dot: '#2E7D4F', ring: '#2E7D4F' }, changes: { label: 'Changes', bg: '#D9822B', fg: '#FFFFFF', dot: '#D9822B', ring: '#D9822B' } };
+var STATUS = { pending: { label: 'To Post', bg: '#EEF1F5', fg: '#3B4658', dot: '#FFFFFF', ring: '#8A94A3' }, approved: { label: 'Posted', bg: '#2E7D4F', fg: '#FFFFFF', dot: '#2E7D4F', ring: '#2E7D4F' }, changes: { label: 'Needs Edits', bg: '#D9822B', fg: '#FFFFFF', dot: '#D9822B', ring: '#D9822B' } };
 function dateOf(d) { return d <= 30 ? { m: 'Nov', d: d, dow: DOWS[(d - 1) % 7] } : { m: 'Dec', d: d - 30, dow: DOWS[(d - 1) % 7] }; }
 function campOf(id) { return CAMPS.find(function (c) { return c.id === id; }); }
 function artOf(p) {
@@ -436,7 +436,7 @@ class Component extends DCLogic {
     super(props);
     this.state = { status: {}, notes: {}, log: [], sel: 'p01', plat: 'IG', fCamp: '', fPlat: '', fStatus: '', showChanges: false, reviewer: '', copied: false };
   }
-  who() { return (this.state.reviewer || '').trim() || 'Reviewer'; }
+  who() { return (this.state.reviewer || '').trim() || 'Team'; }
   stamp() { var d = new Date(); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }); }
   setStatus(ids, st, note) {
     var s = this.state, self = this, status = Object.assign({}, s.status), notes = Object.assign({}, s.notes), log = s.log.slice();
@@ -444,7 +444,7 @@ class Component extends DCLogic {
       status[id] = st;
       var p = POSTS.find(function (x) { return x.id === id; });
       if (note) { notes[id] = (notes[id] || []).concat([{ who: self.who(), when: self.stamp(), text: note }]); }
-      log.unshift({ who: self.who(), what: st === 'approved' ? 'approved' : (st === 'changes' ? 'requested changes on' : 'reset'), post: p.title, when: self.stamp(), color: STATUS[st].dot === '#FFFFFF' ? '#8A94A3' : STATUS[st].dot });
+      log.unshift({ who: self.who(), what: st === 'approved' ? 'posted' : (st === 'changes' ? 'flagged for edits' : 'reset'), post: p.title, when: self.stamp(), color: STATUS[st].dot === '#FFFFFF' ? '#8A94A3' : STATUS[st].dot });
     });
     this.setState({ status: status, notes: notes, log: log.slice(0, 60), showChanges: false, copied: false });
   }
@@ -475,12 +475,12 @@ class Component extends DCLogic {
       });
       cal.push({ label: (dd.d === 1 ? dd.m + ' ' : '') + dd.d, bg: inRange ? '#FFFFFF' : '#F7F8FA', numColor: inRange ? '#0B1B33' : '#A0A8B4', posts: ps });
     }
-    var summary = ['LTC GO-TO-MARKET SOCIAL — APPROVAL SUMMARY', 'Approved ' + counts.approved + ' · Changes ' + counts.changes + ' · Pending ' + counts.pending + ' (of ' + total + ')', ''];
+    var summary = ['LTC GO-TO-MARKET SOCIAL — POSTING SUMMARY', 'Posted ' + counts.approved + ' · Needs Edits ' + counts.changes + ' · To Post ' + counts.pending + ' (of ' + total + ')', ''];
     POSTS.forEach(function (p) { var dd = dateOf(p.d); var line = '[' + STATUS[st(p.id)].label.toUpperCase() + '] ' + dd.dow + ' ' + dd.m + ' ' + dd.d + ' · ' + campOf(p.camp).name + ' · ' + p.title; summary.push(line); (s.notes[p.id] || []).forEach(function (n) { summary.push('    ↳ ' + n.who + ': ' + n.text); }); });
     return {
       stats: {
         total: total, pApproved: Math.round(counts.approved / total * 100), pChanges: Math.round(counts.changes / total * 100),
-        tiles: [['', 'All Posts', total, '#0A3161'], ['approved', 'Approved', counts.approved, '#2E7D4F'], ['changes', 'Changes Requested', counts.changes, '#D9822B'], ['pending', 'Waiting On You', counts.pending, '#4A5568']].map(function (t) { var on = s.fStatus === t[0] && (t[0] !== '' || !s.fStatus); return { label: t[1], n: t[2], color: t[3], ring: on && t[0] ? t[3] : '#D3D9E2', pressed: on ? 'true' : 'false', pick: function () { self.setState({ fStatus: t[0] }); } }; })
+        tiles: [['', 'All Posts', total, '#0A3161'], ['approved', 'Posted', counts.approved, '#2E7D4F'], ['changes', 'Needs Edits', counts.changes, '#D9822B'], ['pending', 'To Post', counts.pending, '#4A5568']].map(function (t) { var on = s.fStatus === t[0] && (t[0] !== '' || !s.fStatus); return { label: t[1], n: t[2], color: t[3], ring: on && t[0] ? t[3] : '#D3D9E2', pressed: on ? 'true' : 'false', pick: function () { self.setState({ fStatus: t[0] }); } }; })
       },
       onReviewer: function (e) { self.setState({ reviewer: e.target.value }); },
       campaigns: CAMPS.map(function (c) {
@@ -488,7 +488,7 @@ class Component extends DCLogic {
         return { name: c.name, goal: c.goal, color: c.color, count: list.length, countLabel: list.length + (list.length === 1 ? ' post' : ' posts'), done: list.filter(function (p) { return st(p.id) === 'approved'; }).length, bg: on ? c.color : '#FFFFFF', fg: on ? '#FFFFFF' : '#0B1B33', pressed: on ? 'true' : 'false', pick: function () { self.setState({ fCamp: on ? '' : c.id }); } };
       }),
       platFilters: [['', 'All'], ['IG', 'Instagram'], ['FB', 'Facebook'], ['LI', 'LinkedIn'], ['TT', 'TikTok']].map(function (f) { return Object.assign({ label: f[1] }, chip(s.fPlat === f[0]), { pick: function () { self.setState({ fPlat: f[0] }); } }); }),
-      statusFilters: [['', 'All'], ['pending', 'Pending'], ['approved', 'Approved'], ['changes', 'Changes']].map(function (f) { return Object.assign({ label: f[1] }, chip(s.fStatus === f[0]), { pick: function () { self.setState({ fStatus: f[0] }); } }); }),
+      statusFilters: [['', 'All'], ['pending', 'To Post'], ['approved', 'Posted'], ['changes', 'Needs Edits']].map(function (f) { return Object.assign({ label: f[1] }, chip(s.fStatus === f[0]), { pick: function () { self.setState({ fStatus: f[0] }); } }); }),
       shownCount: shown.length, noneShown: shown.length === 0,
       approveShown: function () { self.setStatus(shown.map(function (p) { return p.id; }), 'approved'); },
       clearFilters: function () { self.setState({ fCamp: '', fPlat: '', fStatus: '' }); },
