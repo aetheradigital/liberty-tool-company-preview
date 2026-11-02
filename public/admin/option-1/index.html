@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LTC Admin — Option 1</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/logo-blue.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F4F5F7;color:#0B1B33;font-family:Inter,system-ui,sans-serif}
+*{box-sizing:border-box}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:#0A3161}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #B31942;outline-offset:2px}
+.app{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
+.side{background:#0A3161;color:#FFFFFF;padding:22px 16px;display:flex;flex-direction:column;gap:18px}
+.side .nav{display:flex;flex-direction:column;gap:4px}
+.nv{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;background:transparent;border:0;color:#D6E0F2;padding:11px 12px;border-radius:4px;font-weight:600;font-size:15px}
+.nv:hover{background:rgba(255,255,255,0.08);color:#FFFFFF}
+.nv[aria-current="page"]{background:#FFFFFF;color:#0A3161}
+.badge{min-width:22px;height:22px;padding:0 7px;border-radius:999px;background:#B31942;color:#FFFFFF;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.main{min-width:0;padding:26px 32px 64px}
+.h1{font-family:'Barlow Condensed', sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:0.02em;font-size:38px;line-height:1.05;margin:0}
+.h2{font-family:'Barlow Condensed', sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:0.02em;font-size:26px;line-height:1.1;margin:0}
+.h3{font-family:'Barlow Condensed', sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:0.02em;font-size:19px;line-height:1.15;margin:0}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#B31942}
+.muted{color:#4A5568}
+.card{background:#FFFFFF;border:1px solid #D3D9E2;border-radius:6px;box-shadow:none;padding:20px}
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.kpi .n{font-family:'Barlow Condensed', sans-serif;font-weight:800;font-size:34px;line-height:1;color:#0A3161}
+.kpi .l{margin-top:6px;font-size:13px;font-weight:600;color:#4A5568}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:4px;border:1px solid #0A3161;background:#0A3161;color:#FFFFFF;font-weight:700;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none}
+.btn.red{background:#B31942;border-color:#B31942}
+.btn.ghost{background:#FFFFFF;color:#0A3161}
+.btn.sm{min-height:34px;padding:0 12px;font-size:12px}
+.btn[disabled]{opacity:0.45;cursor:not-allowed}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 13px;border-radius:999px;border:1px solid #D3D9E2;background:#FFFFFF;font-size:13px;font-weight:600;color:#0B1B33}
+.chip[aria-pressed="true"]{background:#0A3161;border-color:#0A3161;color:#FFFFFF}
+.st{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.lbl{display:block;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#4A5568;margin-bottom:6px}
+.inp{width:100%;min-height:44px;padding:0 12px;border:1px solid #B8C1CD;border-radius:4px;background:#FFFFFF;font-size:15px}
+textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
+.tbl{font-size:14px;min-width:var(--minw)}
+.tr{display:grid;grid-template-columns:var(--cols);gap:0 12px;align-items:center;padding:11px 10px;border-bottom:1px solid #D3D9E2}
+.tr.th{padding:8px 10px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4A5568}
+.tr.click{cursor:pointer}
+.tr.click:hover{background:#EEF3FA}
+.scroll{overflow-x:auto}
+.opt{display:flex;flex-direction:column;gap:6px;text-align:left;padding:16px;border-radius:6px;border:1px solid #D3D9E2;background:#FFFFFF;min-height:118px}
+.opt[aria-pressed="true"]{border:2px solid #0A3161;background:#EEF3FA;padding:15px}
+.steps{display:flex;flex-wrap:wrap;gap:8px}
+.stp{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 8px;border-radius:999px;background:#FFFFFF;border:1px solid #D3D9E2;font-weight:600;font-size:14px}
+.stp .d{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#EEF3FA;color:#0A3161;font-weight:800;font-size:13px}
+.stp[aria-current="step"]{border-color:#0A3161}
+.stp[aria-current="step"] .d{background:#0A3161;color:#FFFFFF}
+.qty{display:inline-flex;align-items:center;border:1px solid #B8C1CD;border-radius:4px;overflow:hidden;background:#FFFFFF}
+.qty button{width:36px;height:38px;border:0;background:#EEF3FA;font-weight:800;color:#0A3161}
+.qty input{width:62px;height:38px;border:0;text-align:center;font-weight:700}
+.bub{max-width:560px;padding:12px 14px;border-radius:6px;font-size:15px;line-height:1.5}
+.tl{display:flex;flex-wrap:wrap;gap:0}
+.tl .s{flex:1 1 110px;min-width:110px;padding:10px 8px 0;border-top:4px solid #D3D9E2;font-size:13px}
+.tl .s.done{border-top-color:#2E7D4F}
+.tl .s.now{border-top-color:#0A3161}
+.toast{position:fixed;right:20px;bottom:20px;z-index:40;background:#0B1B33;color:#FFFFFF;padding:14px 18px;border-radius:6px;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,0.25)}
+.thumb{width:52px;height:52px;border-radius:4px;object-fit:contain;background:#EEF3FA;display:block}
+.demo{display:flex;gap:6px;background:rgba(255,255,255,0.1);padding:4px;border-radius:999px}
+.demo button{flex:1;border:0;border-radius:999px;padding:7px 8px;font-size:12px;font-weight:700;background:transparent;color:#D6E0F2}
+.demo button[aria-pressed="true"]{background:#FFFFFF;color:#0A3161}
+@media (max-width: 860px){.app{grid-template-columns:1fr}.side{padding:16px}.side .nav{flex-direction:row;flex-wrap:wrap}.nv{width:auto}.main{padding:20px 16px 56px}}
+</style>
+
+</head>
+<body>
+<div id="ltc-preview-bar" style="position: relative; z-index: 60; background: #0B1424; color: #FFFFFF; font: 500 13px/1.2 Inter, system-ui, sans-serif">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px">
+    <a href="/" style="color: #FFFFFF; text-decoration: none; font-weight: 700; letter-spacing: 0.04em; white-space: nowrap">← LTC Preview Portal</a>
+    <span style="opacity: 0.35">|</span>
+    <nav aria-label="Preview pages" style="display: flex; flex-wrap: wrap; gap: 8px 20px"><a href="/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 1 · Classic</a><a href="/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 2 · Fun</a><a href="/approvals/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Social Approval Board</a><a href="/ads/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Ad Creative</a><a href="/partner-portal/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Partner Portal 1</a><a href="/partner-portal/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Partner Portal 2</a><a href="/admin/option-1/" style="color: #FFFFFF; text-decoration: none; font-weight: 700; white-space: nowrap; border-bottom: 2px solid #B31942; padding-bottom: 2px">Admin 1</a><a href="/admin/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Admin 2</a></nav>
+  </div>
+</div>
+<script>if(window.self!==window.top){document.getElementById('ltc-preview-bar').style.display='none';}</script>
+<template id="tpl">
+
+<div class="app">
+  <aside class="side">
+    <img src="/assets/logo-white.png" alt="Liberty Tool Company" style="height: 56px; width: auto; align-self: flex-start">
+    <div>
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #AFC0DC">{{portalLabel}}</div>
+      <div style="margin-top: 4px; font-weight: 700; font-size: 16px; line-height: 1.3">{{sideTitle}}</div>
+      <div style="font-size: 13px; color: #C9D6EC">{{sideSub}}</div>
+    </div>
+    <sc-if value="{{isPortal}}" hint-placeholder-val="{{true}}">
+      <div>
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #AFC0DC; margin-bottom: 6px">Demo: View As</div>
+        <div class="demo" role="group" aria-label="Demo account">
+          <button type="button" aria-pressed="{{acctEnt}}" onClick="{{pickEnt}}">Enterprise</button>
+          <button type="button" aria-pressed="{{acctDist}}" onClick="{{pickDist}}">Distributor</button>
+        </div>
+      </div>
+    </sc-if>
+    <nav class="nav" aria-label="Portal">
+      <sc-for list="{{navs}}" as="n" hint-placeholder-count="7">
+        <button type="button" class="nv" aria-current="{{n.cur}}" onClick="{{n.go}}"><span>{{n.label}}</span><sc-if value="{{n.hasBadge}}" hint-placeholder-val="{{false}}"><span class="badge">{{n.badge}}</span></sc-if></button>
+      </sc-for>
+    </nav>
+    <div style="margin-top: auto; font-size: 12px; line-height: 1.5; color: #AFC0DC">{{sideFoot}}</div>
+  </aside>
+
+  <main class="main">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 22px">
+      <div>
+        <div class="eyebrow">{{crumb}}</div>
+        <h1 class="h1" style="margin-top: 6px">{{title}}</h1>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px">
+        <sc-if value="{{isPortal}}" hint-placeholder-val="{{true}}"><button type="button" class="btn red" onClick="{{goNewOrder}}">+ New Order</button></sc-if>
+        <sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><button type="button" class="btn ghost" onClick="{{reloadData}}">Refresh</button></sc-if>
+      </div>
+    </div>
+
+    <!-- ================= PORTAL: OVERVIEW ================= -->
+    <sc-if value="{{v.overview}}" hint-placeholder-val="{{true}}">
+      <div class="card" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; background: #EEF3FA">
+        <div>
+          <h2 class="h2">Welcome Back, {{acct.first}}.</h2>
+          <div class="muted" style="margin-top: 6px">{{acct.name}} · {{acct.type}} · {{acct.terms}}</div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <span class="chip">Pricing: {{acct.modelName}}</span>
+          <span class="chip">Your Rep: LTC Sales · 239-744-8403</span>
+        </div>
+      </div>
+      <div class="grid g4" style="margin-top: 16px">
+        <sc-for list="{{pKpis}}" as="k" hint-placeholder-count="4"><div class="card kpi"><div class="n">{{k.n}}</div><div class="l">{{k.l}}</div></div></sc-for>
+      </div>
+      <div class="grid g4" style="margin-top: 16px">
+        <sc-for list="{{quick}}" as="q" hint-placeholder-count="4">
+          <button type="button" class="card" onClick="{{q.go}}" style="text-align: left; display: flex; flex-direction: column; gap: 6px; cursor: pointer">
+            <span class="h3" style="color: #0A3161">{{q.t}}</span><span class="muted" style="font-size: 14px">{{q.d}}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div class="grid g2" style="margin-top: 16px; align-items: start">
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><h3 class="h3">Recent Orders</h3><button type="button" class="btn ghost sm" onClick="{{goOrders}}">All Orders</button></div>
+          <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 1.3fr 1.2fr 0.6fr 1fr; --minw: 0"><div class="tr th"><div>Order</div><div>PO</div><div>Units</div><div>Status</div></div>
+            <sc-for list="{{recentOrders}}" as="o" hint-placeholder-count="4"><div class="tr click" onClick="{{o.open}}"><div><b>{{o.id}}</b><div class="muted" style="font-size: 12px">{{o.created}}</div></div><div>{{o.po}}</div><div>{{o.units}}</div><div><span class="st" style="background: {{o.sbg}}; color: {{o.sfg}}">{{o.status}}</span></div></div></sc-for>
+          </div></div>
+        </div>
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><h3 class="h3">Messages</h3><button type="button" class="btn ghost sm" onClick="{{goMessages}}">Open</button></div>
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px">
+            <sc-for list="{{recentMsgs}}" as="m" hint-placeholder-count="2"><div style="padding: 12px; border-radius: 4px; background: #EEF3FA"><div style="font-size: 12px; font-weight: 700; color: #4A5568">{{m.from}} · {{m.when}}</div><div style="margin-top: 4px; font-size: 14px; line-height: 1.5">{{m.text}}</div></div></sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ================= PORTAL: NEW ORDER ================= -->
+    <sc-if value="{{v.order}}" hint-placeholder-val="{{false}}">
+      <sc-if value="{{notSubmitted}}" hint-placeholder-val="{{true}}">
+        <div class="steps" role="list">
+          <sc-for list="{{stepList}}" as="s" hint-placeholder-count="4"><button type="button" class="stp" role="listitem" aria-current="{{s.cur}}" onClick="{{s.go}}"><span class="d">{{s.n}}</span>{{s.label}}</button></sc-for>
+        </div>
+
+        <!-- step 1 -->
+        <sc-if value="{{step1}}" hint-placeholder-val="{{true}}">
+          <div class="card" style="margin-top: 16px">
+            <h2 class="h2">What Kind Of Order?</h2>
+            <div class="grid g4" style="margin-top: 14px">
+              <sc-for list="{{orderTypes}}" as="t" hint-placeholder-count="4">
+                <button type="button" class="opt" aria-pressed="{{t.on}}" onClick="{{t.pick}}"><span class="h3" style="color: #0A3161">{{t.name}}</span><span class="muted" style="font-size: 13px; line-height: 1.45">{{t.desc}}</span></button>
+              </sc-for>
+            </div>
+          </div>
+          <div class="card" style="margin-top: 16px">
+            <h2 class="h2">Purchase Order Details</h2>
+            <div class="grid g3" style="margin-top: 14px">
+              <sc-for list="{{poFields}}" as="f" hint-placeholder-count="9">
+                <label><span class="lbl">{{f.label}}</span><input class="inp" type="{{f.type}}" value="{{f.val}}" placeholder="{{f.ph}}" onChange="{{f.set}}"></label>
+              </sc-for>
+            </div>
+            <label style="display: block; margin-top: 14px"><span class="lbl">Notes For LTC</span><textarea class="inp" placeholder="Reset dates, special handling, anything we should know." onChange="{{setNotes}}">{{form.notes}}</textarea></label>
+          </div>
+        </sc-if>
+
+        <!-- step 2 -->
+        <sc-if value="{{step2}}" hint-placeholder-val="{{false}}">
+          <div class="card" style="margin-top: 16px; background: #EEF3FA">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: flex-start">
+              <div style="min-width: 0; flex: 1 1 360px">
+                <div class="eyebrow">Your Pricing</div>
+                <h2 class="h2" style="margin-top: 4px">{{acct.modelName}}</h2>
+                <p class="muted" style="margin: 6px 0 0; line-height: 1.55">{{acct.modelDesc}}</p>
+              </div>
+              <sc-if value="{{showTiers}}" hint-placeholder-val="{{false}}">
+                <div style="display: flex; flex-wrap: wrap; gap: 8px">
+                  <sc-for list="{{tierCards}}" as="t" hint-placeholder-count="3"><div style="padding: 10px 12px; border-radius: 4px; background: #FFFFFF; border: {{t.border}}; min-width: 120px"><div style="font-weight: 800; color: #0A3161">{{t.name}}</div><div style="font-size: 13px" class="muted">{{t.rule}}</div><div style="font-size: 13px; font-weight: 700">{{t.off}}</div></div></sc-for>
+                </div>
+              </sc-if>
+            </div>
+            <sc-if value="{{multiStore}}" hint-placeholder-val="{{false}}"><div style="margin-top: 12px; padding: 10px 12px; border-radius: 4px; background: #FFFFFF; font-size: 14px"><b>Multi-store order:</b> quantities below are <b>per store</b>. They'll be multiplied by your {{storeCount}} stores on the next step.</div></sc-if>
+          </div>
+          <div class="card" style="margin-top: 16px">
+            <h2 class="h2">Tape Caddy & Kits</h2>
+            <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 64px minmax(160px,2fr) 0.8fr 1fr 150px 1fr; --minw: 720px"><div class="tr th"><div></div><div>Item</div><div>MSRP</div><div>Your Price</div><div>{{qtyHead}}</div><div style="text-align: right">Line Total</div></div>
+              <sc-for list="{{prodRows}}" as="p" hint-placeholder-count="8">
+                <div class="tr"><div style="width: 64px"><img class="thumb" src="{{p.img}}" alt=""></div><div><b>{{p.name}}</b><div class="muted" style="font-size: 12px">{{p.tag}}</div></div><div>{{p.msrp}}</div><div style="font-weight: 700; color: {{p.priceColor}}">{{p.price}}</div>
+                  <div><div class="qty"><button type="button" aria-label="Less {{p.name}}" onClick="{{p.dec}}">−</button><input type="number" min="0" inputmode="numeric" aria-label="Quantity {{p.name}}" value="{{p.qty}}" onChange="{{p.set}}"><button type="button" aria-label="More {{p.name}}" onClick="{{p.inc}}">+</button></div></div>
+                  <div style="text-align: right; font-weight: 700">{{p.line}}</div></div>
+              </sc-for>
+            </div></div>
+          </div>
+          <div class="grid g2" style="margin-top: 16px; align-items: start">
+            <div class="card">
+              <h3 class="h3">Coating Tools</h3>
+              <p class="muted" style="margin: 6px 0 10px; font-size: 14px">Priced on confirmation.</p>
+              <sc-for list="{{toolRows}}" as="p" hint-placeholder-count="2">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid #D3D9E2"><span style="display: flex; align-items: center; gap: 10px"><img class="thumb" src="{{p.img}}" alt=""><b>{{p.name}}</b></span><div class="qty"><button type="button" aria-label="Less {{p.name}}" onClick="{{p.dec}}">−</button><input type="number" min="0" aria-label="Quantity {{p.name}}" value="{{p.qty}}" onChange="{{p.set}}"><button type="button" aria-label="More {{p.name}}" onClick="{{p.inc}}">+</button></div></div>
+              </sc-for>
+            </div>
+            <div class="card">
+              <h3 class="h3">Coatings — Quote Request</h3>
+              <p class="muted" style="margin: 6px 0 10px; font-size: 14px">Tap any you want priced. Your rep sends a quote with the order confirmation.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{coatRows}}" as="c" hint-placeholder-count="5"><button type="button" class="chip" aria-pressed="{{c.on}}" onClick="{{c.toggle}}">{{c.name}}</button></sc-for></div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- step 3 -->
+        <sc-if value="{{step3}}" hint-placeholder-val="{{false}}">
+          <sc-if value="{{multiStore}}" hint-placeholder-val="{{false}}">
+            <div class="card" style="margin-top: 16px">
+              <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center">
+                <div><h2 class="h2">Store List</h2><div class="muted" style="margin-top: 4px">{{storeCount}} stores · each store receives the per-store pack.</div></div>
+                <label class="btn ghost sm" style="cursor: pointer; position: relative">Upload Store List (CSV)<input type="file" accept=".csv,text/csv" onChange="{{uploadStores}}" style="position: absolute; width: 1px; height: 1px; opacity: 0"></label>
+              </div>
+              <div class="muted" style="font-size: 13px; margin-top: 8px">CSV columns: store number, city, state. Or add stores one at a time.</div>
+              <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 1fr 1.5fr 0.6fr 110px; --minw: 420px"><div class="tr th"><div>Store #</div><div>City</div><div>State</div><div></div></div>
+                <sc-for list="{{storeRows}}" as="s" hint-placeholder-count="3"><div class="tr"><div>{{s.num}}</div><div>{{s.city}}</div><div>{{s.st}}</div><div style="text-align: right"><button type="button" class="btn ghost sm" onClick="{{s.remove}}">Remove</button></div></div></sc-for>
+              </div></div>
+              <div class="grid g4" style="margin-top: 12px; align-items: end">
+                <label><span class="lbl">Store #</span><input class="inp" value="{{ns.num}}" onChange="{{setNsNum}}" placeholder="0412"></label>
+                <label><span class="lbl">City</span><input class="inp" value="{{ns.city}}" onChange="{{setNsCity}}" placeholder="Columbus"></label>
+                <label><span class="lbl">State</span><input class="inp" value="{{ns.st}}" onChange="{{setNsSt}}" placeholder="OH" maxlength="2"></label>
+                <button type="button" class="btn" onClick="{{addStore}}">Add Store</button>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{singleShip}}" hint-placeholder-val="{{true}}">
+            <div class="card" style="margin-top: 16px">
+              <h2 class="h2">{{shipTitle}}</h2>
+              <div class="grid g3" style="margin-top: 14px">
+                <sc-for list="{{shipFields}}" as="f" hint-placeholder-count="6"><label><span class="lbl">{{f.label}}</span><input class="inp" value="{{f.val}}" placeholder="{{f.ph}}" onChange="{{f.set}}"></label></sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <div class="grid g2" style="margin-top: 16px; align-items: start">
+            <div class="card">
+              <h3 class="h3">Freight & Payment</h3>
+              <label style="display: block; margin-top: 12px"><span class="lbl">Freight Terms</span><select class="inp" value="{{form.freight}}" onChange="{{setFreight}}"><sc-for list="{{freightOpts}}" as="o" hint-placeholder-count="3"><option value="{{o}}">{{o}}</option></sc-for></select></label>
+              <label style="display: block; margin-top: 12px"><span class="lbl">Payment</span><select class="inp" value="{{form.pay}}" onChange="{{setPay}}"><sc-for list="{{payOpts}}" as="o" hint-placeholder-count="3"><option value="{{o}}">{{o}}</option></sc-for></select></label>
+              <sc-if value="{{showCarrier}}" hint-placeholder-val="{{false}}"><label style="display: block; margin-top: 12px"><span class="lbl">Your Carrier & Account #</span><input class="inp" value="{{form.carrier}}" onChange="{{setCarrier}}" placeholder="Carrier name and account number"></label></sc-if>
+              <div class="muted" style="font-size: 13px; margin-top: 10px">{{freightNote}}</div>
+            </div>
+            <div class="card">
+              <h3 class="h3">Compliance & Documents</h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px"><sc-for list="{{reqRows}}" as="r" hint-placeholder-count="4"><button type="button" class="chip" aria-pressed="{{r.on}}" onClick="{{r.toggle}}">{{r.name}}</button></sc-for></div>
+              <div class="grid g2" style="margin-top: 12px; gap: 10px">
+                <sc-for list="{{docSlots}}" as="d" hint-placeholder-count="2"><label class="card" style="padding: 12px; cursor: pointer; display: flex; flex-direction: column; gap: 4px"><b style="font-size: 14px">{{d.label}}</b><span class="muted" style="font-size: 13px">{{d.file}}</span><input type="file" onChange="{{d.set}}" style="position: absolute; width: 1px; height: 1px; opacity: 0"></label></sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- step 4 -->
+        <sc-if value="{{step4}}" hint-placeholder-val="{{false}}">
+          <div class="grid g2" style="margin-top: 16px; align-items: start">
+            <div class="card">
+              <h2 class="h2">Review</h2>
+              <div style="margin-top: 12px; display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; font-size: 14px">
+                <sc-for list="{{reviewRows}}" as="r" hint-placeholder-count="8"><span class="muted" style="font-weight: 600">{{r.k}}</span><span style="font-weight: 600">{{r.v}}</span></sc-for>
+              </div>
+            </div>
+            <div class="card">
+              <h2 class="h2">Items</h2>
+              <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px">
+                <sc-for list="{{reviewLines}}" as="l" hint-placeholder-count="4"><div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; padding-bottom: 8px; border-bottom: 1px solid #D3D9E2"><span>{{l.q}} × {{l.name}}</span><b>{{l.total}}</b></div></sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- totals + nav -->
+        <div class="card" style="margin-top: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+          <div style="display: flex; flex-wrap: wrap; gap: 22px">
+            <sc-for list="{{totals}}" as="t" hint-placeholder-count="4"><div><div class="lbl" style="margin: 0">{{t.k}}</div><div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 24px; color: {{t.c}}">{{t.v}}</div></div></sc-for>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+            <sc-if value="{{hasErr}}" hint-placeholder-val="{{false}}"><span style="color: #B31942; font-weight: 600; font-size: 14px">{{err}}</span></sc-if>
+            <sc-if value="{{canBack}}" hint-placeholder-val="{{false}}"><button type="button" class="btn ghost" onClick="{{back}}">Back</button></sc-if>
+            <button type="button" class="btn {{nextClass}}" onClick="{{next}}">{{nextLabel}}</button>
+          </div>
+        </div>
+        <div class="muted" style="font-size: 12px; margin-top: 10px">{{priceFoot}}</div>
+      </sc-if>
+
+      <sc-if value="{{submitted}}" hint-placeholder-val="{{false}}">
+        <div class="card" style="text-align: center; padding: 40px 24px">
+          <div class="eyebrow">Order Received</div>
+          <h2 class="h1" style="margin-top: 8px">{{lastOrder.id}}</h2>
+          <p class="muted" style="max-width: 560px; margin: 10px auto 0; line-height: 1.6">Thanks. We'll confirm pricing and freight, then email your acknowledgement. You'll get tracking the day it ships, and we check in 3 days after delivery.</p>
+          <div class="tl" style="max-width: 760px; margin: 24px auto 0; text-align: left"><sc-for list="{{lastOrder.steps}}" as="s" hint-placeholder-count="5"><div class="s {{s.cls}}"><b>{{s.name}}</b><div class="muted">{{s.when}}</div></div></sc-for></div>
+          <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px"><button type="button" class="btn" onClick="{{goOrders}}">View My Orders</button><button type="button" class="btn ghost" onClick="{{goNewOrder}}">Start Another Order</button></div>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <!-- ================= ORDERS (portal + admin) ================= -->
+    <sc-if value="{{v.orders}}" hint-placeholder-val="{{false}}">
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px"><sc-for list="{{statusFilters}}" as="f" hint-placeholder-count="6"><button type="button" class="chip" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: start">
+        <div class="card" style="grid-column: span 2; min-width: 0">
+          <div class="scroll"><div class="tbl" style="--cols: {{ordCols}}; --minw: {{ordMin}}"><div class="tr th"><div>Order</div><sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div>Account</div></sc-if><div>PO</div><div>Type</div><div>Units</div><div>Value</div><div>Status</div></div>
+            <sc-for list="{{orderRows}}" as="o" hint-placeholder-count="6"><div class="tr click" onClick="{{o.open}}" style="background: {{o.rowBg}}"><div><b>{{o.id}}</b><div class="muted" style="font-size: 12px">{{o.created}}</div></div><sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div>{{o.acctName}}</div></sc-if><div>{{o.po}}</div><div>{{o.typeName}}</div><div>{{o.units}}</div><div>{{o.valueTxt}}</div><div><span class="st" style="background: {{o.sbg}}; color: {{o.sfg}}">{{o.status}}</span></div></div></sc-for>
+          </div></div>
+          <sc-if value="{{noOrders}}" hint-placeholder-val="{{false}}"><p class="muted">No orders here yet.</p></sc-if>
+        </div>
+      </div>
+      <sc-if value="{{hasSel}}" hint-placeholder-val="{{false}}">
+        <div class="card" style="margin-top: 16px">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: flex-start">
+            <div><div class="eyebrow">{{sel.typeName}}</div><h2 class="h2" style="margin-top: 4px">{{sel.id}} · PO {{sel.po}}</h2><div class="muted" style="margin-top: 4px">{{sel.acctName}} · {{sel.units}} units · {{sel.valueTxt}} · Ship window {{sel.window}}</div></div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <sc-if value="{{isPortal}}" hint-placeholder-val="{{true}}"><button type="button" class="btn ghost sm" onClick="{{reorder}}">Reorder</button><button type="button" class="btn ghost sm" onClick="{{goMessages}}">Ask About This Order</button></sc-if>
+              <sc-if value="{{canAdvance}}" hint-placeholder-val="{{false}}"><button type="button" class="btn sm" onClick="{{advance}}">Mark {{nextStatus}}</button></sc-if>
+            </div>
+          </div>
+          <div class="tl" style="margin-top: 18px"><sc-for list="{{sel.steps}}" as="s" hint-placeholder-count="5"><div class="s {{s.cls}}"><b>{{s.name}}</b><div class="muted">{{s.when}}</div></div></sc-for></div>
+          <div class="grid g3" style="margin-top: 18px">
+            <div><span class="lbl">Items</span><sc-for list="{{sel.lines}}" as="l" hint-placeholder-count="3"><div style="font-size: 14px; padding: 3px 0">{{l}}</div></sc-for></div>
+            <div><span class="lbl">Ship To</span><div style="font-size: 14px; line-height: 1.5">{{sel.shipTo}}</div><div class="muted" style="font-size: 13px; margin-top: 6px">{{sel.freight}} · {{sel.pay}}</div></div>
+            <div><span class="lbl">Tracking</span>
+              <sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><input class="inp" value="{{sel.tracking}}" placeholder="Add tracking number" onChange="{{setTracking}}"></sc-if>
+              <sc-if value="{{isPortal}}" hint-placeholder-val="{{true}}"><div style="font-size: 14px">{{sel.trackingTxt}}</div></sc-if>
+            </div>
+          </div>
+          <sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div style="margin-top: 14px; padding: 12px; border-radius: 4px; background: #EEF3FA; font-size: 14px"><b>Commission:</b> {{sel.commission}} · <b>Quote items:</b> {{sel.quoteTxt}}</div></sc-if>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <!-- ================= FILES ================= -->
+    <sc-if value="{{v.files}}" hint-placeholder-val="{{false}}">
+      <div class="card">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{folderChips}}" as="f" hint-placeholder-count="5"><button type="button" class="chip" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
+          <label class="btn" style="cursor: pointer; position: relative">Upload File<input type="file" onChange="{{uploadFile}}" style="position: absolute; width: 1px; height: 1px; opacity: 0"></label>
+        </div>
+        <div class="scroll" style="margin-top: 12px"><div class="tbl" style="--cols: {{fileCols}}; --minw: 560px"><div class="tr th"><div>File</div><sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div>Account</div></sc-if><div>Folder</div><div>Added</div><div>By</div></div>
+          <sc-for list="{{fileRows}}" as="f" hint-placeholder-count="6"><div class="tr"><div><b>{{f.name}}</b></div><sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div>{{f.acctName}}</div></sc-if><div>{{f.folder}}</div><div>{{f.date}}</div><div>{{f.by}}</div></div></sc-for>
+        </div></div>
+        <div class="muted" style="font-size: 12px; margin-top: 10px">Uploads go to the folder selected above ({{uploadFolder}}). Mockup only: files are listed, not stored.</div>
+      </div>
+    </sc-if>
+
+    <!-- ================= MESSAGES ================= -->
+    <sc-if value="{{v.messages}}" hint-placeholder-val="{{false}}">
+      <sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px"><sc-for list="{{threadChips}}" as="t" hint-placeholder-count="2"><button type="button" class="chip" aria-pressed="{{t.on}}" onClick="{{t.pick}}">{{t.label}}</button></sc-for></div></sc-if>
+      <div class="card" style="display: flex; flex-direction: column; gap: 12px">
+        <sc-for list="{{thread}}" as="m" hint-placeholder-count="4">
+          <div style="display: flex; justify-content: {{m.side}}"><div class="bub" style="background: {{m.bg}}; color: {{m.fg}}"><div style="font-size: 12px; font-weight: 700; opacity: 0.8">{{m.from}} · {{m.when}}</div><div style="margin-top: 4px">{{m.text}}</div></div></div>
+        </sc-for>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px"><sc-for list="{{quickReplies}}" as="q" hint-placeholder-count="3"><button type="button" class="chip" onClick="{{q.use}}">{{q.t}}</button></sc-for></div>
+        <div style="display: flex; gap: 10px; align-items: flex-end">
+          <label style="flex: 1"><span class="lbl">Message</span><textarea class="inp" placeholder="Type a message" onChange="{{setDraft}}">{{draft}}</textarea></label>
+          <button type="button" class="btn" onClick="{{send}}">Send</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ================= BOOK TIME ================= -->
+    <sc-if value="{{v.book}}" hint-placeholder-val="{{false}}">
+      <div class="card">
+        <h2 class="h2">What Do You Need?</h2>
+        <div class="grid g4" style="margin-top: 12px"><sc-for list="{{bookTypes}}" as="t" hint-placeholder-count="4"><button type="button" class="opt" aria-pressed="{{t.on}}" onClick="{{t.pick}}" style="min-height: 96px"><span class="h3" style="color: #0A3161">{{t.name}}</span><span class="muted" style="font-size: 13px">{{t.desc}}</span></button></sc-for></div>
+        <h3 class="h3" style="margin-top: 20px">Pick A Day</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px"><sc-for list="{{bookDays}}" as="d" hint-placeholder-count="6"><button type="button" class="chip" aria-pressed="{{d.on}}" onClick="{{d.pick}}">{{d.label}}</button></sc-for></div>
+        <h3 class="h3" style="margin-top: 18px">Pick A Time (Pacific)</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px"><sc-for list="{{bookTimes}}" as="d" hint-placeholder-count="6"><button type="button" class="chip" aria-pressed="{{d.on}}" onClick="{{d.pick}}">{{d.label}}</button></sc-for></div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 20px"><button type="button" class="btn red" onClick="{{confirmBook}}">Book It</button><span class="muted" style="font-size: 14px">{{bookHint}}</span></div>
+      </div>
+      <div class="card" style="margin-top: 16px">
+        <h3 class="h3">Upcoming</h3>
+        <sc-for list="{{bookRows}}" as="b" hint-placeholder-count="2"><div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px solid #D3D9E2; font-size: 14px"><span><b>{{b.type}}</b> · {{b.acctName}}</span><span>{{b.when}}</span></div></sc-for>
+        <sc-if value="{{noBooks}}" hint-placeholder-val="{{false}}"><p class="muted">Nothing booked yet.</p></sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ================= PRICE SHEET (portal) ================= -->
+    <sc-if value="{{v.prices}}" hint-placeholder-val="{{false}}">
+      <div class="card" style="background: #EEF3FA"><h2 class="h2">{{acct.modelName}}</h2><p class="muted" style="margin: 6px 0 0; line-height: 1.55">{{acct.modelDesc}}</p></div>
+      <div class="card" style="margin-top: 16px"><div class="scroll"><div class="tbl" style="--cols: 2fr 1fr 1.6fr; --minw: 420px"><div class="tr th"><div>Item</div><div>MSRP</div><div>{{priceColHead}}</div></div>
+        <sc-for list="{{sheetRows}}" as="r" hint-placeholder-count="8"><div class="tr"><div><b>{{r.name}}</b></div><div>{{r.msrp}}</div><div style="font-weight: 700">{{r.price}}</div></div></sc-for>
+      </div></div>
+      <div class="grid g3" style="margin-top: 14px"><sc-for list="{{termRows}}" as="t" hint-placeholder-count="3"><div style="padding: 12px; border-radius: 4px; background: #EEF3FA"><div class="lbl">{{t.k}}</div><div style="font-weight: 700">{{t.v}}</div></div></sc-for></div>
+      <p class="muted" style="font-size: 13px; margin: 12px 0 0">Advertised prices may not go below MSRP. Prices shown as "Set by LTC" are confirmed on your acknowledgement.</p></div>
+    </sc-if>
+
+    <!-- ================= ADMIN: OVERVIEW ================= -->
+    <sc-if value="{{v.aOverview}}" hint-placeholder-val="{{false}}">
+      <div class="grid g4"><sc-for list="{{aKpis}}" as="k" hint-placeholder-count="5"><div class="card kpi"><div class="n">{{k.n}}</div><div class="l">{{k.l}}</div></div></sc-for></div>
+      <div class="grid g2" style="margin-top: 16px; align-items: start">
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><h3 class="h3">Needs Action</h3><button type="button" class="btn ghost sm" onClick="{{goOrders}}">Order Queue</button></div>
+          <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 1fr 1.4fr 1fr 1.8fr; --minw: 520px"><div class="tr th"><div>Order</div><div>Account</div><div>Status</div><div>Next Step</div></div>
+            <sc-for list="{{actionRows}}" as="o" hint-placeholder-count="4"><div class="tr click" onClick="{{o.open}}"><div><b>{{o.id}}</b></div><div>{{o.acctName}}</div><div><span class="st" style="background: {{o.sbg}}; color: {{o.sfg}}">{{o.status}}</span></div><div class="muted">{{o.todo}}</div></div></sc-for>
+          </div></div>
+        </div>
+        <div class="card">
+          <h3 class="h3">Coming Up</h3>
+          <sc-for list="{{bookRows}}" as="b" hint-placeholder-count="2"><div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px solid #D3D9E2; font-size: 14px"><span><b>{{b.type}}</b> · {{b.acctName}}</span><span>{{b.when}}</span></div></sc-for>
+          <h3 class="h3" style="margin-top: 18px">Latest Messages</h3>
+          <sc-for list="{{aMsgs}}" as="m" hint-placeholder-count="2"><button type="button" onClick="{{m.open}}" style="display: block; width: 100%; text-align: left; border: 0; background: #EEF3FA; border-radius: 4px; padding: 10px 12px; margin-top: 8px"><div style="font-size: 12px; font-weight: 700" class="muted">{{m.acctName}} · {{m.when}}</div><div style="font-size: 14px; margin-top: 2px">{{m.text}}</div></button></sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ================= ADMIN: ACCOUNTS ================= -->
+    <sc-if value="{{v.aAccounts}}" hint-placeholder-val="{{false}}">
+      <div class="card"><div class="scroll"><div class="tbl" style="--cols: 1.8fr 1.2fr 1.3fr 0.7fr 1.1fr 1.6fr 0.6fr; --minw: 980px"><div class="tr th"><div>Account</div><div>Type</div><div>Pricing Model</div><div>Terms</div><div>Territory</div><div>Rep / Commission</div><div>Open Orders</div></div>
+        <sc-for list="{{acctRows}}" as="a" hint-placeholder-count="4"><div class="tr"><div><b>{{a.name}}</b><div class="muted" style="font-size: 12px">{{a.buyer}}</div></div><div>{{a.type}}</div><div>{{a.modelName}}</div><div>{{a.terms}}</div><div>{{a.territory}}</div><div>{{a.rep}}</div><div>{{a.open}}</div></div></sc-for>
+      </div></div>
+      <p class="muted" style="font-size: 13px; margin: 12px 0 0">Stallings territory (MI, IN, OH, Western PA, WV, KY) is flagged for commission on every order from these accounts.</p></div>
+    </sc-if>
+
+    <!-- ================= ADMIN: PRICING ================= -->
+    <sc-if value="{{v.aPricing}}" hint-placeholder-val="{{false}}">
+      <div class="grid g2" style="align-items: start">
+        <div class="card">
+          <h2 class="h2">Enterprise Contract Prices</h2>
+          <p class="muted" style="margin: 6px 0 12px; font-size: 14px">Fixed per-item prices for contract accounts. Leave blank until agreed.</p>
+          <div class="scroll"><div class="tbl" style="--cols: 2fr 1fr 150px; --minw: 380px"><div class="tr th"><div>Item</div><div>MSRP</div><div>Contract Price</div></div>
+            <sc-for list="{{contractRows}}" as="r" hint-placeholder-count="8"><div class="tr"><div><b>{{r.name}}</b></div><div>{{r.msrp}}</div><div style="width: 150px"><input class="inp" type="number" min="0" step="0.01" placeholder="$" value="{{r.val}}" onChange="{{r.set}}" aria-label="Contract price {{r.name}}"></div></div></sc-for>
+          </div></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 16px">
+          <div class="card">
+            <h2 class="h2">Distributor Volume Tiers</h2>
+            <p class="muted" style="margin: 6px 0 12px; font-size: 14px">Discount off MSRP by total units on the order.</p>
+            <sc-for list="{{tierRows}}" as="t" hint-placeholder-count="3">
+              <div class="grid" style="grid-template-columns: 90px 1fr 1fr; gap: 10px; align-items: end; margin-bottom: 10px"><b style="padding-bottom: 12px">{{t.name}}</b><label><span class="lbl">Min Units</span><input class="inp" type="number" min="0" value="{{t.min}}" onChange="{{t.setMin}}"></label><label><span class="lbl">% Off MSRP</span><input class="inp" type="number" min="0" max="90" value="{{t.pct}}" onChange="{{t.setPct}}"></label></div>
+            </sc-for>
+            <div class="muted" style="font-size: 13px">{{tierPreview}}</div>
+          </div>
+          <div class="card">
+            <h2 class="h2">Terms</h2>
+            <div class="grid g2" style="margin-top: 12px; gap: 10px">
+              <label><span class="lbl">Dealer Discount % (single tier)</span><input class="inp" type="number" min="0" value="{{pricing.dealerPct}}" onChange="{{setDealerPct}}"></label>
+              <label><span class="lbl">Free Freight Over ($)</span><input class="inp" type="number" min="0" value="{{pricing.freeFreight}}" onChange="{{setFreeFreight}}"></label>
+              <label><span class="lbl">Minimum Order (Units)</span><input class="inp" type="number" min="0" value="{{pricing.moq}}" onChange="{{setMoq}}"></label>
+            </div>
+            <p class="muted" style="font-size: 13px; margin: 12px 0 0">Changes show up in the partner portal right away (in this browser). Blank fields show as "Set by LTC".</p>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}"><div class="toast" role="status">{{toast}}</div></sc-if>
+  </main>
+</div>
+</template>
+<div id="root"></div>
+<script src="/runtime.js"></script>
+<script>
+
+
+var MODE = 'admin';
+var IMG = {
+  lowboy: '/assets/crop-lowboy.webp', c2: '/assets/crop-c2.webp', c4: '/assets/crop-c4.webp', c6: '/assets/crop-c6.webp',
+  cove: '/assets/crop-cove.webp', ddd: '/assets/crop-ddd.webp', triple: '/assets/crop-triple.webp', four: '/assets/crop-four.webp',
+  ftrowel: '/assets/sq-trowel.webp', ctrowel: '/assets/sq-covet.webp'
+};
+var C = { pri: '#0A3161', acc: '#B31942', soft: '#EEF3FA', ink: '#0B1B33', line: '#D3D9E2' };
+var PRODUCTS = [
+  { id: 'lowboy', name: 'The Lowboy', tag: 'Tape Caddy · 4 mm', msrp: 89 },
+  { id: 'c2', name: '2-Inch Caddy', tag: 'Tape Caddy · 2-inch', msrp: 89 },
+  { id: 'c4', name: '4-Inch Caddy', tag: 'Tape Caddy · 4-inch', msrp: 99 },
+  { id: 'c6', name: '6-Inch Caddy', tag: 'Tape Caddy · 6-inch', msrp: 119 },
+  { id: 'cove', name: 'Cove System', tag: 'Kit · 4" + 6"', msrp: 205 },
+  { id: 'ddd', name: 'Double Down Duo', tag: 'Kit · Lowboy + 4"', msrp: 180 },
+  { id: 'triple', name: 'Triple Threat', tag: 'Kit · Lowboy + 4" + 6"', msrp: 295 },
+  { id: 'four', name: '4-Score Complete Kit', tag: 'Kit · all four', msrp: 389 }
+];
+var TOOLS = [{ id: 'ftrowel', name: 'Finishing Trowel' }, { id: 'ctrowel', name: 'Cove Trowel' }];
+var COATINGS = ['1111 Fast Patch', '1620 TMUC Urethane Cement', '1776 Polyaspartic', '1803 WB Top Coat', 'Cove Base Resin', 'HP-CRU'];
+var ACCTS = {
+  ent: { id: 'ent', name: 'Keystone Home Centers', first: 'Jordan', buyer: 'Jordan Ellis · Merchandising Buyer', email: 'jellis@keystonehome.example', phone: '(555) 201-4410', type: 'Enterprise · Retail Chain', terms: 'Net 30', model: 'contract', modelName: 'Enterprise Contract Pricing', modelDesc: 'Fixed per-item prices set in your supply agreement. Same price on every PO, whatever the quantity.', vendor: 'V-20418', territory: 'National (418 stores)', rep: 'House account', stores: 418 },
+  dist: { id: 'dist', name: 'Northline Coatings Supply', first: 'Sam', buyer: 'Sam Ortiz · Purchasing Manager', email: 'sortiz@northline.example', phone: '(555) 318-0092', type: 'Distributor · 6 branches', terms: 'Net 30', model: 'tier', modelName: 'Distributor Volume Tiers', modelDesc: 'Your discount off MSRP goes up with the total units on each order. The tier updates as you build the order.', vendor: '', territory: 'Michigan', rep: 'The Stallings Group (MI) — commission', stores: 6 },
+  dealer: { id: 'dealer', name: 'Coastline Flooring Supply', first: 'Dana', buyer: 'Dana Reyes · Owner', type: 'Dealer · 1 store', terms: 'Credit card', model: 'dealer', modelName: 'Dealer Wholesale', modelDesc: 'One wholesale discount off MSRP on every item.', territory: 'Florida', rep: 'House account' },
+  multi: { id: 'multi', name: 'Summit Facilities Group', first: 'Lee', buyer: 'Lee Park · Procurement', type: 'Enterprise · Multi-Site', terms: 'Net 45', model: 'contract', modelName: 'Enterprise Contract Pricing', modelDesc: '', territory: 'Ohio · 22 sites', rep: 'The Stallings Group (OH) — commission' }
+};
+var ORDER_TYPES = [
+  { id: 'stores', name: 'Multi-Store Distribution', desc: 'One PO for a retail chain or paint-store network, shipped to many stores. Upload your store list.' },
+  { id: 'dc', name: 'Distribution Center / Warehouse', desc: 'Bulk stock shipped to your DC or warehouse.' },
+  { id: 'job', name: 'Drop-Ship', desc: 'Ship straight to a job site or your customer.' },
+  { id: 'demo', name: 'Demo & Display Kit', desc: 'Demo units and counter display for a new location.' }
+];
+var STATUSES = ['Received', 'Acknowledged', 'Freight Review', 'Shipped', 'Delivered'];
+var TODO = { 'Received': 'Confirm pricing and send acknowledgement', 'Acknowledged': 'Quote freight', 'Freight Review': 'Pack, ship and add tracking', 'Shipped': 'Check in 3 days after delivery', 'Delivered': 'Done' };
+var SCOL = { 'Received': ['#FDECEF', '#B31942'], 'Acknowledged': ['#E7EEFC', '#1F4FB5'], 'Freight Review': ['#FFF3DC', '#8A5A00'], 'Shipped': ['#E3F3EA', '#2E7D4F'], 'Delivered': ['#ECEEF2', '#4A5568'] };
+var FOLDERS = ['Price Sheets & Agreements', 'Sell Sheets & Displays', 'Data Sheets', 'Certificates (COI, W-9)', 'Invoices & POs'];
+var KEY = 'ltc-partner-portal-v1';
+function money(n) { return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function num(v) { var n = parseFloat(v); return isNaN(n) ? null : n; }
+function today() { var d = new Date(); return d; }
+function fmtDate(d) { return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+function daysAgo(n) { var d = today(); d.setDate(d.getDate() - n); return fmtDate(d); }
+function blankPricing() { return { contract: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, tiers: [{ name: 'Tier 1', min: '', pct: '' }, { name: 'Tier 2', min: '', pct: '' }, { name: 'Tier 3', min: '', pct: '' }], dealerPct: '', freeFreight: '', moq: '' }; }
+function seed() {
+  return {
+    pricing: blankPricing(),
+    orders: [
+      { id: 'LTC-1041', acct: 'ent', po: 'KHC-778102', type: 'stores', units: 836, list: 82764, value: null, status: 'Freight Review', created: daysAgo(6), window: 'Nov 16 – Nov 20', lines: ['2 × 4-Inch Caddy per store', '× 418 stores'], shipTo: '418 stores (store list on file)', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', tracking: '', quote: [], hist: [daysAgo(6), daysAgo(5), daysAgo(3)] },
+      { id: 'LTC-1039', acct: 'dist', po: 'NCS-5521', type: 'dc', units: 120, list: 13680, value: null, status: 'Shipped', created: daysAgo(12), window: 'Oct 24 – Oct 28', lines: ['40 × 4-Inch Caddy', '40 × 6-Inch Caddy', '40 × The Lowboy'], shipTo: 'Northline DC · 1400 Industrial Dr, Grand Rapids, MI', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', tracking: '1Z 84F 2W1 03 4471 2290', quote: ['1620 TMUC Urethane Cement'], hist: [daysAgo(12), daysAgo(11), daysAgo(10), daysAgo(8)] },
+      { id: 'LTC-1036', acct: 'multi', po: 'SFG-2026-114', type: 'dc', units: 44, list: 9136, value: null, status: 'Delivered', created: daysAgo(30), window: 'Oct 6 – Oct 9', lines: ['22 × Cove System'], shipTo: 'Summit Facilities · Columbus, OH', freight: 'Free freight', pay: 'Invoice against PO', tracking: '1Z 84F 2W1 03 1180 5521', quote: [], hist: [daysAgo(30), daysAgo(29), daysAgo(28), daysAgo(26), daysAgo(23)] },
+      { id: 'LTC-1042', acct: 'dealer', po: 'CFS-0098', type: 'demo', units: 4, list: 396, value: null, status: 'Received', created: daysAgo(1), window: 'ASAP', lines: ['1 × each Tape Caddy'], shipTo: 'Coastline Flooring Supply · Naples, FL', freight: 'Prepaid & Add', pay: 'Credit card (we send a secure pay link)', tracking: '', quote: [], hist: [daysAgo(1)] }
+    ],
+    msgs: {
+      ent: [{ from: 'LTC Sales', mine: false, when: daysAgo(3), text: 'Store list for LTC-1041 looks good. Freight quote coming tomorrow; we can split into two truckloads if your DCs prefer.' }, { from: 'Jordan Ellis', mine: true, when: daysAgo(2), text: 'Two loads works. Please include UPC on every unit and case labels per our routing guide.' }],
+      dist: [{ from: 'LTC Sales', mine: false, when: daysAgo(8), text: 'LTC-1039 shipped. Tracking is on the order. Want us to set up a counter demo for your Grand Rapids branch?' }]
+    },
+    files: [
+      { acct: 'ent', name: 'Supply Agreement — Keystone.pdf', folder: FOLDERS[0], date: daysAgo(40), by: 'LTC' },
+      { acct: 'ent', name: 'Keystone Routing Guide 2026.pdf', folder: FOLDERS[4], date: daysAgo(6), by: 'Jordan Ellis' },
+      { acct: 'all', name: 'Tape Caddy Sell Sheet.pdf', folder: FOLDERS[1], date: daysAgo(20), by: 'LTC' },
+      { acct: 'all', name: 'Counter Display Planogram.pdf', folder: FOLDERS[1], date: daysAgo(20), by: 'LTC' },
+      { acct: 'all', name: '1620 TMUC Data Sheet.pdf', folder: FOLDERS[2], date: daysAgo(25), by: 'LTC' },
+      { acct: 'all', name: 'LTC Certificate of Insurance.pdf', folder: FOLDERS[3], date: daysAgo(15), by: 'LTC' },
+      { acct: 'all', name: 'LTC W-9.pdf', folder: FOLDERS[3], date: daysAgo(15), by: 'LTC' },
+      { acct: 'dist', name: 'Northline Price Sheet.pdf', folder: FOLDERS[0], date: daysAgo(18), by: 'LTC' },
+      { acct: 'dist', name: 'INV-1039.pdf', folder: FOLDERS[4], date: daysAgo(8), by: 'LTC' }
+    ],
+    books: [{ acct: 'dist', type: 'Staff Training / Demo', when: 'Thu · 10:00 AM PT' }]
+  };
+}
+function loadData() { var d = null; try { d = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { d = null; } return d || seed(); }
+function saveData(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
+function blankForm(a) { return { type: a.id === 'ent' ? 'stores' : 'dc', company: a.name, buyer: a.buyer.split(' · ')[0], email: a.email || '', phone: a.phone || '', po: '', vendor: a.vendor || '', start: '', end: '', notes: '', shipName: a.name, addr: '', city: '', st: '', zip: '', hours: '', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', carrier: '', reqs: {}, docs: {} }; }
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    var d = loadData();
+    this.state = { data: d, acct: 'ent', view: MODE === 'admin' ? 'aOverview' : 'overview', step: 1, form: blankForm(ACCTS.ent), qty: {}, coat: {}, stores: [{ num: '0101', city: 'Columbus', st: 'OH' }, { num: '0214', city: 'Pittsburgh', st: 'PA' }, { num: '0388', city: 'Louisville', st: 'KY' }], ns: { num: '', city: '', st: '' }, err: '', submitted: null, selId: null, fStatus: '', folder: '', draft: '', thread: 'ent', bk: { type: 'Account Review', day: 0, time: '' }, toast: '' };
+  }
+  persist(d) { saveData(d); this.setState({ data: d }); }
+  flash(t) { var self = this; this.setState({ toast: t }); setTimeout(function () { if (self.state.toast === t) self.setState({ toast: '' }); }, 2600); }
+  acct() { return ACCTS[this.state.acct]; }
+  unitPrice(id, units) {
+    var a = this.acct(), p = this.state.data.pricing, prod = PRODUCTS.find(function (x) { return x.id === id; });
+    if (!prod) return null;
+    if (a.model === 'contract') return num(p.contract[id]);
+    if (a.model === 'dealer') { var dp = num(p.dealerPct); return dp == null ? null : prod.msrp * (1 - dp / 100); }
+    var t = this.tierFor(units); return t ? prod.msrp * (1 - t.pct / 100) : null;
+  }
+  tierFor(units) {
+    var best = null; this.state.data.pricing.tiers.forEach(function (t) { var m = num(t.min), pc = num(t.pct); if (m != null && pc != null && units >= m) best = { name: t.name, pct: pc, min: m }; }); return best;
+  }
+  mult() { return this.state.form.type === 'stores' ? Math.max(1, this.state.stores.length) : 1; }
+  calc() {
+    var self = this, q = this.state.qty, mult = this.mult(), units = 0, list = 0, val = 0, priced = true, lines = [];
+    PRODUCTS.forEach(function (p) { var n = q[p.id] || 0; if (n > 0) { units += n * mult; list += p.msrp * n * mult; } });
+    TOOLS.forEach(function (p) { var n = q[p.id] || 0; if (n > 0) { units += n * mult; priced = false; } });
+    PRODUCTS.forEach(function (p) { var n = q[p.id] || 0; if (n > 0) { var u = self.unitPrice(p.id, units); if (u == null) priced = false; else val += u * n * mult; lines.push({ name: p.name, q: n * mult, unit: u, total: u == null ? 'Set by LTC' : money(u * n * mult) }); } });
+    TOOLS.forEach(function (p) { var n = q[p.id] || 0; if (n > 0) lines.push({ name: p.name, q: n * mult, unit: null, total: 'Priced on confirmation' }); });
+    return { units: units, list: list, val: priced && units > 0 ? val : null, lines: lines };
+  }
+  setForm(k, v) { var f = Object.assign({}, this.state.form); f[k] = v; this.setState({ form: f, err: '' }); }
+  setQty(id, n) { var q = Object.assign({}, this.state.qty); q[id] = Math.max(0, Math.min(99999, n || 0)); this.setState({ qty: q, err: '' }); }
+  go(view) { this.setState({ view: view, selId: view === 'orders' ? this.state.selId : null, err: '' }); }
+  startOrder() { this.setState({ view: 'order', step: 1, submitted: null, form: blankForm(this.acct()), qty: {}, coat: {}, err: '' }); }
+  nextStep() {
+    var s = this.state, f = s.form, c = this.calc();
+    if (s.step === 1 && !f.po.trim()) return this.setState({ err: 'Add your PO number to continue.' });
+    if (s.step === 2 && c.units === 0 && !Object.keys(s.coat).some(function (k) { return s.coat[k]; })) return this.setState({ err: 'Add at least one item or coating quote.' });
+    if (s.step === 2) { var moq = num(s.data.pricing.moq); if (moq != null && c.units < moq) return this.setState({ err: 'Minimum order is ' + moq + ' units.' }); }
+    if (s.step === 3 && f.type === 'stores' && s.stores.length === 0) return this.setState({ err: 'Add at least one store.' });
+    if (s.step === 3 && f.type !== 'stores' && !f.addr.trim()) return this.setState({ err: 'Add a ship-to address.' });
+    if (s.step < 4) return this.setState({ step: s.step + 1, err: '' });
+    this.submit();
+  }
+  submit() {
+    var s = this.state, f = s.form, c = this.calc(), d = JSON.parse(JSON.stringify(s.data));
+    var id = 'LTC-' + (1043 + d.orders.filter(function (o) { return o.id >= 'LTC-1043'; }).length);
+    var typeName = ORDER_TYPES.find(function (t) { return t.id === f.type; }).name;
+    var o = { id: id, acct: s.acct, po: f.po, type: f.type, units: c.units, list: c.list, value: c.val, status: 'Received', created: fmtDate(today()), window: (f.start || 'TBD') + ' – ' + (f.end || 'TBD'), lines: c.lines.map(function (l) { return l.q + ' × ' + l.name; }), shipTo: f.type === 'stores' ? s.stores.length + ' stores (list attached)' : [f.shipName, f.addr, [f.city, f.st, f.zip].join(' ')].filter(Boolean).join(' · '), freight: f.freight, pay: f.pay, tracking: '', quote: COATINGS.filter(function (n) { return s.coat[n]; }), hist: [fmtDate(today())] };
+    d.orders.unshift(o);
+    d.msgs[s.acct] = (d.msgs[s.acct] || []).concat([{ from: 'LTC Sales', mine: false, when: fmtDate(today()), text: 'We received ' + id + ' (PO ' + f.po + '). We’ll confirm pricing and freight and send your acknowledgement.' }]);
+    saveData(d);
+    this.setState({ data: d, submitted: id, err: '' });
+  }
+  orderView(o) {
+    var a = ACCTS[o.acct] || { name: o.acct }, idx = STATUSES.indexOf(o.status), col = SCOL[o.status] || ['#EEE', '#333'];
+    var t = ORDER_TYPES.find(function (x) { return x.id === o.type; });
+    return Object.assign({}, o, { acctName: a.name, typeName: t ? t.name : o.type, sbg: col[0], sfg: col[1], valueTxt: o.value != null ? money(o.value) : 'List ' + money(o.list), steps: STATUSES.map(function (n, i) { return { name: n, when: i <= idx ? (o.hist[i] || '') : '', cls: i < idx ? 'done' : (i === idx ? (idx === 4 ? 'done' : 'now') : '') }; }), trackingTxt: o.tracking || 'Added when it ships', commission: a.rep || 'House account', quoteTxt: o.quote && o.quote.length ? o.quote.join(', ') : 'None', todo: TODO[o.status] });
+  }
+  renderVals() {
+    var self = this, s = this.state, d = s.data, a = this.acct(), isAdmin = MODE === 'admin', c = this.calc(), mult = this.mult();
+    var v = {}; v[s.view] = true;
+    var mine = isAdmin ? d.orders : d.orders.filter(function (o) { return o.acct === s.acct; });
+    var navP = [['overview', 'Overview'], ['order', 'New Order'], ['orders', 'Orders'], ['files', 'Files'], ['messages', 'Messages'], ['book', 'Book Time'], ['prices', 'Price Sheet']];
+    var navA = [['aOverview', 'Dashboard'], ['orders', 'Order Queue'], ['aAccounts', 'Accounts'], ['aPricing', 'Pricing'], ['messages', 'Messages'], ['book', 'Calendar'], ['files', 'Files']];
+    var newCount = d.orders.filter(function (o) { return o.status === 'Received'; }).length;
+    var titles = { overview: 'Partner Portal', order: 'New Order', orders: isAdmin ? 'Order Queue' : 'My Orders', files: 'Files', messages: 'Messages', book: isAdmin ? 'Calendar' : 'Book Time', prices: 'Price Sheet', aOverview: 'LTC Admin', aAccounts: 'Accounts', aPricing: 'Pricing' };
+    var f = s.form, sel = s.selId ? d.orders.find(function (o) { return o.id === s.selId; }) : null;
+    var tierNow = this.tierFor(c.units);
+    var shown = mine.filter(function (o) { return !s.fStatus || o.status === s.fStatus; });
+    var fileList = d.files.filter(function (x) { return (isAdmin || x.acct === 'all' || x.acct === s.acct) && (!s.folder || x.folder === s.folder); });
+    var threadKey = isAdmin ? s.thread : s.acct;
+    var days = []; var dd = today(); while (days.length < 6) { dd.setDate(dd.getDate() + 1); if (dd.getDay() > 0 && dd.getDay() < 6) days.push(new Date(dd)); }
+    var P = d.pricing;
+    var openOrder = function (o) { return function () { self.setState({ view: 'orders', selId: o.id }); }; };
+    return {
+      isPortal: !isAdmin, isAdmin: isAdmin,
+      ordCols: isAdmin ? '1fr 1.5fr 1.1fr 1.4fr 0.6fr 1fr 1fr' : '1fr 1.2fr 1.5fr 0.6fr 1.1fr 1fr', ordMin: isAdmin ? '860px' : '700px',
+      fileCols: isAdmin ? '2fr 1.2fr 1.4fr 0.9fr 0.9fr' : '2fr 1.4fr 0.9fr 0.9fr',
+      portalLabel: isAdmin ? 'LTC Admin' : 'Partner Portal',
+      sideTitle: isAdmin ? 'Liberty Tool Company' : a.name,
+      sideSub: isAdmin ? 'Orders · Accounts · Pricing' : a.type,
+      sideFoot: isAdmin ? 'Mockup. Orders placed in the partner portal show up here in this browser.' : 'Questions? Text or call 239-744-8403 · sales@libertytoolcompany.com',
+      acctEnt: s.acct === 'ent' ? 'true' : 'false', acctDist: s.acct === 'dist' ? 'true' : 'false',
+      pickEnt: function () { self.setState({ acct: 'ent', form: blankForm(ACCTS.ent), selId: null, submitted: null, step: 1 }); },
+      pickDist: function () { self.setState({ acct: 'dist', form: blankForm(ACCTS.dist), selId: null, submitted: null, step: 1 }); },
+      navs: (isAdmin ? navA : navP).map(function (n) { var b = n[0] === 'orders' && isAdmin ? newCount : (n[0] === 'messages' && !isAdmin ? 0 : 0); return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: b > 0, badge: b, go: function () { if (n[0] === 'order') self.startOrder(); else self.go(n[0]); } }; }),
+      crumb: isAdmin ? 'Liberty Tool Company · Internal' : a.name + ' · ' + a.modelName,
+      title: titles[s.view] || '', v: v,
+      goNewOrder: function () { self.startOrder(); }, goOrders: function () { self.go('orders'); }, goMessages: function () { self.go('messages'); },
+      reloadData: function () { self.setState({ data: loadData() }); self.flash('Refreshed'); },
+      acct: a, form: f,
+      pKpis: [
+        { n: mine.filter(function (o) { return o.status !== 'Delivered'; }).length, l: 'Open Orders' },
+        { n: mine.filter(function (o) { return o.status === 'Shipped'; }).length, l: 'In Transit' },
+        { n: mine.reduce(function (t, o) { return t + o.units; }, 0).toLocaleString(), l: 'Units This Year' },
+        { n: a.terms, l: 'Payment Terms' }
+      ],
+      quick: [
+        { t: 'New Order', d: 'Stock, multi-store or drop-ship.', go: function () { self.startOrder(); } },
+        { t: 'Upload A File', d: 'POs, routing guides, certificates.', go: function () { self.go('files'); } },
+        { t: 'Message LTC', d: 'Usually answered same day.', go: function () { self.go('messages'); } },
+        { t: 'Book Time', d: 'Reviews, demos, reorder planning.', go: function () { self.go('book'); } }
+      ],
+      recentOrders: mine.slice(0, 4).map(function (o) { var x = self.orderView(o); x.open = openOrder(o); return x; }),
+      recentMsgs: (d.msgs[s.acct] || []).slice(-2).reverse(),
+      notSubmitted: !s.submitted, submitted: !!s.submitted,
+      lastOrder: s.submitted ? this.orderView(d.orders.find(function (o) { return o.id === s.submitted; })) : { steps: [] },
+      stepList: ['Order Setup', 'Products', 'Shipping & Terms', 'Review'].map(function (l, i) { return { n: i + 1, label: l, cur: s.step === i + 1 ? 'step' : 'false', go: function () { if (i + 1 < s.step) self.setState({ step: i + 1, err: '' }); } }; }),
+      step1: s.step === 1, step2: s.step === 2, step3: s.step === 3, step4: s.step === 4,
+      orderTypes: ORDER_TYPES.map(function (t) { return { name: t.name, desc: t.desc, on: f.type === t.id ? 'true' : 'false', pick: function () { self.setForm('type', t.id); } }; }),
+      poFields: [['company', 'Company', 'text', ''], ['buyer', 'Buyer / Purchasing Contact', 'text', ''], ['email', 'Email', 'email', ''], ['phone', 'Phone', 'tel', ''], ['po', 'PO Number *', 'text', 'Required'], ['vendor', 'LTC Vendor # (in your system)', 'text', 'If assigned'], ['start', 'Ship Window — Start', 'date', ''], ['end', 'Ship Window — Cancel By', 'date', '']].map(function (x) { return { label: x[1], type: x[2], ph: x[3], val: f[x[0]], set: function (e) { self.setForm(x[0], e.target.value); } }; }),
+      setNotes: function (e) { self.setForm('notes', e.target.value); },
+      showTiers: a.model === 'tier',
+      tierCards: P.tiers.map(function (t) { var on = tierNow && tierNow.name === t.name; return { name: t.name, rule: num(t.min) != null ? t.min + '+ units' : 'Min: set by LTC', off: num(t.pct) != null ? t.pct + '% off MSRP' : '% set by LTC', border: on ? '2px solid ' + C.pri : '1px solid ' + C.line }; }),
+      multiStore: f.type === 'stores', singleShip: f.type !== 'stores', storeCount: s.stores.length,
+      qtyHead: f.type === 'stores' ? 'Qty Per Store' : 'Qty',
+      prodRows: PRODUCTS.map(function (p) { var n = s.qty[p.id] || 0, u = self.unitPrice(p.id, c.units || (n * mult)); return { name: p.name, tag: p.tag, img: IMG[p.id], msrp: money(p.msrp), price: u == null ? 'Set by LTC' : money(u), priceColor: u == null ? '#8A94A3' : C.pri, qty: n, line: n > 0 ? (u == null ? 'List ' + money(p.msrp * n * mult) : money(u * n * mult)) : '—', inc: function () { self.setQty(p.id, n + 1); }, dec: function () { self.setQty(p.id, n - 1); }, set: function (e) { self.setQty(p.id, parseInt(e.target.value, 10)); } }; }),
+      toolRows: TOOLS.map(function (p) { var n = s.qty[p.id] || 0; return { name: p.name, img: IMG[p.id], qty: n, inc: function () { self.setQty(p.id, n + 1); }, dec: function () { self.setQty(p.id, n - 1); }, set: function (e) { self.setQty(p.id, parseInt(e.target.value, 10)); } }; }),
+      coatRows: COATINGS.map(function (n) { return { name: n, on: s.coat[n] ? 'true' : 'false', toggle: function () { var x = Object.assign({}, s.coat); x[n] = !x[n]; self.setState({ coat: x, err: '' }); } }; }),
+      storeRows: s.stores.map(function (st, i) { return { num: st.num, city: st.city, st: st.st, remove: function () { var a2 = s.stores.slice(); a2.splice(i, 1); self.setState({ stores: a2 }); } }; }),
+      ns: s.ns,
+      setNsNum: function (e) { self.setState({ ns: Object.assign({}, s.ns, { num: e.target.value }) }); },
+      setNsCity: function (e) { self.setState({ ns: Object.assign({}, s.ns, { city: e.target.value }) }); },
+      setNsSt: function (e) { self.setState({ ns: Object.assign({}, s.ns, { st: e.target.value.toUpperCase() }) }); },
+      addStore: function () { if (!s.ns.num.trim()) return; self.setState({ stores: s.stores.concat([s.ns]), ns: { num: '', city: '', st: '' }, err: '' }); },
+      uploadStores: function (e) { var file = e.target.files && e.target.files[0]; if (!file) return; var r = new FileReader(); r.onload = function () { var rows = String(r.result).split(/\r?\n/).map(function (l) { return l.split(',').map(function (x) { return x.trim(); }); }).filter(function (c2) { return c2[0] && !/store/i.test(c2[0]); }).map(function (c2) { return { num: c2[0], city: c2[1] || '', st: (c2[2] || '').toUpperCase() }; }); self.setState({ stores: s.stores.concat(rows) }); self.flash(rows.length + ' stores added'); }; r.readAsText(file); },
+      shipTitle: f.type === 'job' ? 'Ship To (Job Site Or Customer)' : (f.type === 'demo' ? 'Ship To (Location)' : 'Ship To (Distribution Center / Warehouse)'),
+      shipFields: [['shipName', 'Location Name'], ['addr', 'Street Address *'], ['city', 'City'], ['st', 'State'], ['zip', 'ZIP'], ['hours', 'Receiving Hours / Dock Notes']].map(function (x) { return { label: x[1], val: f[x[0]], ph: '', set: function (e) { self.setForm(x[0], e.target.value); } }; }),
+      freightOpts: ['Prepaid & Add', 'Collect (my carrier)', 'Free freight (order qualifies)'],
+      payOpts: ['Net terms (approved accounts)', 'Invoice against PO', 'Credit card (we send a secure pay link)'],
+      setFreight: function (e) { self.setForm('freight', e.target.value); }, setPay: function (e) { self.setForm('pay', e.target.value); }, setCarrier: function (e) { self.setForm('carrier', e.target.value); },
+      showCarrier: f.freight === 'Collect (my carrier)',
+      freightNote: num(P.freeFreight) != null ? 'Free freight on orders over ' + money(num(P.freeFreight)) + ' (contract value).' : 'Free-freight threshold set by LTC.',
+      reqRows: ['UPC on every unit', 'Case labels', 'ASN / EDI 856', 'Palletized, shrink-wrapped'].map(function (n) { return { name: n, on: f.reqs[n] ? 'true' : 'false', toggle: function () { var r2 = Object.assign({}, f.reqs); r2[n] = !r2[n]; self.setForm('reqs', r2); } }; }),
+      docSlots: [['routing', 'Routing Guide'], ['tax', 'Tax-Exempt Certificate']].map(function (x) { return { label: x[1], file: f.docs[x[0]] || 'Tap to attach', set: function (e) { var fl = e.target.files && e.target.files[0]; if (!fl) return; var dz = Object.assign({}, f.docs); dz[x[0]] = fl.name; self.setForm('docs', dz); } }; }),
+      reviewRows: [['Order Type', ORDER_TYPES.find(function (t) { return t.id === f.type; }).name], ['Company', f.company], ['Buyer', f.buyer + (f.email ? ' · ' + f.email : '')], ['PO Number', f.po], ['Vendor #', f.vendor || '—'], ['Ship Window', (f.start || 'TBD') + ' – ' + (f.end || 'TBD')], ['Ship To', f.type === 'stores' ? s.stores.length + ' stores' : [f.addr, f.city, f.st].filter(Boolean).join(', ')], ['Freight', f.freight], ['Payment', f.pay], ['Requirements', Object.keys(f.reqs).filter(function (k) { return f.reqs[k]; }).join(', ') || 'None'], ['Coatings Quote', COATINGS.filter(function (n) { return s.coat[n]; }).join(', ') || 'None']].map(function (r) { return { k: r[0], v: r[1] }; }),
+      reviewLines: c.lines.map(function (l) { return { q: l.q, name: l.name, total: l.total }; }),
+      totals: [
+        { k: 'Units', v: c.units.toLocaleString(), c: C.ink },
+        { k: 'MSRP Value', v: money(c.list), c: C.ink },
+        { k: 'Your Price', v: c.val != null ? money(c.val) : (c.units ? 'Set by LTC' : '—'), c: C.pri },
+        { k: a.model === 'tier' ? 'Current Tier' : 'You Save', v: a.model === 'tier' ? (tierNow ? tierNow.name : 'Base') : (c.val != null ? money(c.list - c.val) : '—'), c: C.acc }
+      ],
+      hasErr: !!s.err, err: s.err, canBack: s.step > 1,
+      back: function () { self.setState({ step: s.step - 1, err: '' }); },
+      next: function () { self.nextStep(); }, nextLabel: s.step === 4 ? 'Submit Order' : 'Continue', nextClass: s.step === 4 ? 'red' : '',
+      priceFoot: 'Prices marked "Set by LTC" are confirmed on your acknowledgement. Nothing is charged until LTC confirms the order.',
+      statusFilters: [''].concat(STATUSES).map(function (st) { return { label: st || 'All', on: s.fStatus === st ? 'true' : 'false', pick: function () { self.setState({ fStatus: st }); } }; }),
+      orderRows: shown.map(function (o) { var x = self.orderView(o); x.open = openOrder(o); x.rowBg = s.selId === o.id ? C.soft : 'transparent'; return x; }),
+      noOrders: shown.length === 0, hasSel: !!sel, sel: sel ? this.orderView(sel) : { steps: [], lines: [] },
+      canAdvance: isAdmin && !!sel && STATUSES.indexOf(sel.status) < 4, nextStatus: sel ? STATUSES[Math.min(4, STATUSES.indexOf(sel.status) + 1)] : '',
+      advance: function () { var d2 = JSON.parse(JSON.stringify(d)); var o = d2.orders.find(function (x) { return x.id === s.selId; }); var i = STATUSES.indexOf(o.status); if (i < 4) { o.status = STATUSES[i + 1]; o.hist[i + 1] = fmtDate(today()); } self.persist(d2); self.flash(o.id + ' → ' + o.status); },
+      setTracking: function (e) { var d2 = JSON.parse(JSON.stringify(d)); var o = d2.orders.find(function (x) { return x.id === s.selId; }); o.tracking = e.target.value; self.persist(d2); },
+      reorder: function () { var q = {}; PRODUCTS.concat(TOOLS).forEach(function (p) { sel.lines.forEach(function (l) { var m = /^(\d+) × (.+)$/.exec(l); if (m && m[2] === p.name) q[p.id] = parseInt(m[1], 10); }); }); var fm = blankForm(a); fm.type = sel.type; self.setState({ view: 'order', step: 2, submitted: null, form: fm, qty: q, coat: {}, err: '' }); },
+      folderChips: [''].concat(FOLDERS).map(function (fo) { return { label: fo || 'All Files', on: s.folder === fo ? 'true' : 'false', pick: function () { self.setState({ folder: fo }); } }; }),
+      uploadFolder: s.folder || 'Invoices & POs',
+      uploadFile: function (e) { var fl = e.target.files && e.target.files[0]; if (!fl) return; var d2 = JSON.parse(JSON.stringify(d)); d2.files.unshift({ acct: isAdmin ? 'all' : s.acct, name: fl.name, folder: s.folder || FOLDERS[4], date: fmtDate(today()), by: isAdmin ? 'LTC' : a.buyer.split(' · ')[0] }); self.persist(d2); self.flash('Uploaded ' + fl.name); },
+      fileRows: fileList.map(function (x) { return Object.assign({}, x, { acctName: x.acct === 'all' ? 'All partners' : (ACCTS[x.acct] || {}).name }); }),
+      threadChips: ['ent', 'dist'].map(function (k) { return { label: ACCTS[k].name, on: s.thread === k ? 'true' : 'false', pick: function () { self.setState({ thread: k }); } }; }),
+      thread: (d.msgs[threadKey] || []).map(function (m) { var me = isAdmin ? !m.mine : m.mine; return { from: m.from, when: m.when, text: m.text, side: me ? 'flex-end' : 'flex-start', bg: me ? C.pri : C.soft, fg: me ? '#FFFFFF' : C.ink }; }),
+      quickReplies: (isAdmin ? ['Order received — confirming now.', 'Freight quote attached.', 'Shipped today. Tracking is on the order.'] : ['Can you send a freight quote?', 'Please add UPC labels.', 'Can we move the ship date?']).map(function (t) { return { t: t, use: function () { self.setState({ draft: t }); } }; }),
+      draft: s.draft, setDraft: function (e) { self.setState({ draft: e.target.value }); },
+      send: function () { if (!s.draft.trim()) return; var d2 = JSON.parse(JSON.stringify(d)); d2.msgs[threadKey] = (d2.msgs[threadKey] || []).concat([{ from: isAdmin ? 'LTC Sales' : a.buyer.split(' · ')[0], mine: !isAdmin, when: fmtDate(today()), text: s.draft.trim() }]); saveData(d2); self.setState({ data: d2, draft: '' }); },
+      bookTypes: [['Account Review', 'Pricing, terms, what’s selling.'], ['Staff Training / Demo', 'We show your team the tools.'], ['Reorder Planning', 'Plan stock for the season.'], ['New Store Rollout', 'Displays and opening orders.']].map(function (t) { return { name: t[0], desc: t[1], on: s.bk.type === t[0] ? 'true' : 'false', pick: function () { self.setState({ bk: Object.assign({}, s.bk, { type: t[0] }) }); } }; }),
+      bookDays: days.map(function (x, i) { return { label: x.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }), on: s.bk.day === i ? 'true' : 'false', pick: function () { self.setState({ bk: Object.assign({}, s.bk, { day: i }) }); } }; }),
+      bookTimes: ['7:00 AM', '8:30 AM', '10:00 AM', '11:30 AM', '1:00 PM', '2:30 PM'].map(function (t) { return { label: t, on: s.bk.time === t ? 'true' : 'false', pick: function () { self.setState({ bk: Object.assign({}, s.bk, { time: t }) }); } }; }),
+      bookHint: s.bk.time ? s.bk.type + ' · ' + days[s.bk.day].toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }) + ' at ' + s.bk.time + ' PT' : 'Pick a time.',
+      confirmBook: function () { if (!s.bk.time) return self.flash('Pick a time first'); var d2 = JSON.parse(JSON.stringify(d)); d2.books.push({ acct: isAdmin ? 'ent' : s.acct, type: s.bk.type, when: days[s.bk.day].toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + ' · ' + s.bk.time + ' PT' }); self.persist(d2); self.setState({ bk: Object.assign({}, s.bk, { time: '' }) }); self.flash('Booked. Calendar invite on its way.'); },
+      bookRows: d.books.filter(function (b) { return isAdmin || b.acct === s.acct; }).map(function (b) { return { type: b.type, when: b.when, acctName: (ACCTS[b.acct] || {}).name }; }),
+      noBooks: d.books.filter(function (b) { return isAdmin || b.acct === s.acct; }).length === 0,
+      priceColHead: a.model === 'tier' ? 'Tier 1 / 2 / 3' : 'Your Price',
+      sheetRows: PRODUCTS.map(function (p) { var pr; if (a.model === 'tier') { pr = P.tiers.map(function (t) { var pc = num(t.pct); return pc == null ? '—' : money(p.msrp * (1 - pc / 100)); }).join(' / '); if (pr === '— / — / —') pr = 'Set by LTC'; } else { var u = self.unitPrice(p.id, 0); pr = u == null ? 'Set by LTC' : money(u); } return { name: p.name, msrp: money(p.msrp), price: pr }; }),
+      termRows: [{ k: 'Payment Terms', v: a.terms }, { k: 'Free Freight', v: num(P.freeFreight) != null ? 'Over ' + money(num(P.freeFreight)) : 'Set by LTC' }, { k: 'Minimum Order', v: num(P.moq) != null ? P.moq + ' units' : 'None set' }],
+      aKpis: [
+        { n: newCount, l: 'New Orders To Confirm' },
+        { n: d.orders.filter(function (o) { return o.status === 'Acknowledged' || o.status === 'Freight Review'; }).length, l: 'Awaiting Freight / Ship' },
+        { n: d.orders.filter(function (o) { return o.status === 'Shipped'; }).length, l: 'In Transit' },
+        { n: money(d.orders.filter(function (o) { return o.status !== 'Delivered'; }).reduce(function (t, o) { return t + (o.value != null ? o.value : o.list); }, 0)).replace('.00', ''), l: 'Open Order Value (List)' },
+        { n: d.books.length, l: 'Meetings Booked' }
+      ],
+      actionRows: d.orders.filter(function (o) { return o.status !== 'Delivered'; }).slice(0, 6).map(function (o) { var x = self.orderView(o); x.open = openOrder(o); return x; }),
+      aMsgs: ['ent', 'dist'].map(function (k) { var m = (d.msgs[k] || []).slice(-1)[0] || { when: '', text: 'No messages' }; return { acctName: ACCTS[k].name, when: m.when, text: m.text, open: function () { self.setState({ view: 'messages', thread: k }); } }; }),
+      acctRows: Object.keys(ACCTS).map(function (k) { var x = ACCTS[k]; return { name: x.name, buyer: x.buyer, type: x.type, modelName: x.modelName, terms: x.terms, territory: x.territory, rep: x.rep, open: d.orders.filter(function (o) { return o.acct === k && o.status !== 'Delivered'; }).length }; }),
+      pricing: P,
+      contractRows: PRODUCTS.map(function (p) { return { name: p.name, msrp: money(p.msrp), val: P.contract[p.id], set: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.contract[p.id] = e.target.value; self.persist(d2); } }; }),
+      tierRows: P.tiers.map(function (t, i) { return { name: t.name, min: t.min, pct: t.pct, setMin: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.tiers[i].min = e.target.value; self.persist(d2); }, setPct: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.tiers[i].pct = e.target.value; self.persist(d2); } }; }),
+      tierPreview: P.tiers.map(function (t) { var pc = num(t.pct); return t.name + ': 4-Inch ' + (pc == null ? '—' : money(99 * (1 - pc / 100))); }).join(' · '),
+      setDealerPct: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.dealerPct = e.target.value; self.persist(d2); },
+      setFreeFreight: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.freeFreight = e.target.value; self.persist(d2); },
+      setMoq: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.moq = e.target.value; self.persist(d2); },
+      hasToast: !!s.toast, toast: s.toast
+    };
+  }
+}
+
+window.__ltcStart(Component);
+</script>
+</body>
+</html>
