@@ -41,7 +41,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
       <div style="min-width: 0">
         <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.16em; text-transform: uppercase; color: #C3CFE0">The Package · Funnels</div>
         <h1 style="margin: 2px 0 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(32px, 3.6vw, 46px); line-height: 1; text-transform: uppercase">Go-To-Market Social · Posting Calendar</h1>
-        <div style="margin-top: 6px; font-size: 15px; color: #D4DDEA">Nov 2 – Dec 1, 2026 · {{stats.total}} posts · 8 campaigns</div>
+        <div style="margin-top: 6px; font-size: 15px; color: #D4DDEA">Nov 2, 2026 – Jan 1, 2027 · {{stats.total}} posts · 8 campaigns</div>
       </div>
     </div>
     <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #C3CFE0; min-width: 240px">Posted By
@@ -115,7 +115,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
 
     <div style="flex: 999 1 640px; min-width: 0; background: #FFFFFF; border: 1px solid #D3D9E2; border-radius: 6px; overflow: hidden">
       <div style="padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px; border-bottom: 1px solid #D3D9E2">
-        <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase; color: #0A3161">November 2026</h2>
+        <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase; color: #0A3161">Nov 2026 – Jan 2027</h2>
         <span style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; font-weight: 600; color: #4A5568">
           <span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #2E7D4F"></span>Posted</span>
           <span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #D9822B"></span>Needs Edits</span>
@@ -130,7 +130,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
             </sc-for>
           </div>
           <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr))">
-            <sc-for list="{{cal}}" as="day" hint-placeholder-count="35">
+            <sc-for list="{{cal}}" as="day" hint-placeholder-count="63">
               <div style="min-height: 118px; padding: 8px; border-right: 1px solid #E6E9EE; border-bottom: 1px solid #E6E9EE; background: {{day.bg}}; display: flex; flex-direction: column; gap: 5px">
                 <span style="font-size: 13px; font-weight: 700; color: {{day.numColor}}">{{day.label}}</span>
                 <sc-for list="{{day.posts}}" as="p" hint-placeholder-count="1">
@@ -215,7 +215,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
                 <sc-if value="{{sel.art.hasLogo}}" hint-placeholder-val="{{false}}"><img src="/assets/logo-white.png" alt="" style="position: absolute; left: 18px; bottom: 16px; height: 44px; width: auto"></sc-if>
               </div>
               <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; background: #F0F2F5">
-                <span style="min-width: 0"><span style="display: block; font-size: 12px; color: #65676B; text-transform: uppercase">libertytoolcompany.com</span><span style="display: block; font-size: 15px; font-weight: 700; color: #050505">{{sel.cta}}</span></span>
+                <span style="min-width: 0"><span style="display: block; font-size: 12px; color: #65676B; text-transform: uppercase">thetapecaddy.com</span><span style="display: block; font-size: 15px; font-weight: 700; color: #050505">{{sel.cta}}</span></span>
                 <span style="flex: none; background: #E4E6EB; color: #050505; padding: 8px 12px; border-radius: 6px; font-size: 14px; font-weight: 700">Learn More</span>
               </div>
               <div style="display: flex; justify-content: space-around; padding: 8px 6px; border-top: 1px solid #DADDE1; font-size: 14px; font-weight: 600; color: #65676B"><span>Like</span><span>Comment</span><span>Share</span></div>
@@ -267,11 +267,16 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
           </sc-if>
         </div>
 
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <button type="button" onClick="{{sel.copyOne}}" style="flex: 1 1 160px; min-height: 46px; border-radius: 4px; border: 0; background: #0A3161; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase">{{sel.copyOneLabel}}</button>
+          <button type="button" onClick="{{sel.copyAll}}" style="flex: 1 1 160px; min-height: 46px; border-radius: 4px; border: 2px solid #0A3161; background: #FFFFFF; color: #0A3161; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase">{{sel.copyAllLabel}}</button>
+        </div>
         <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #D3D9E2; border: 1px solid #D3D9E2; border-radius: 4px; overflow: hidden; font-size: 13px">
           <sc-for list="{{sel.facts}}" as="f" hint-placeholder-count="4">
             <div style="background: #FFFFFF; padding: 10px 12px"><div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5568">{{f.k}}</div><div style="margin-top: 2px; font-weight: 600; overflow-wrap: anywhere">{{f.v}}</div></div>
           </sc-for>
         </div>
+        <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #4A5568">Calls to action point to thetapecaddy.com for now. They switch to libertytoolcompany.com once that site is live. Tracking links: TBD.</p>
 
         <div style="display: flex; flex-wrap: wrap; gap: 8px">
           <button type="button" onClick="{{sel.approve}}" style="flex: 1 1 140px; min-height: 50px; border-radius: 4px; border: 0; background: #2E7D4F; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase">✓ Mark Posted</button>
@@ -327,6 +332,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
           <div style="margin-top: auto; padding-top: 8px; display: flex; gap: 6px">
             <button type="button" onClick="{{p.approve}}" aria-label="Mark {{p.title}} posted" style="flex: 1; min-height: 40px; border-radius: 4px; border: 0; background: #2E7D4F; color: #FFFFFF; cursor: pointer; font-size: 13px; font-weight: 800">✓ Posted</button>
             <a href="#review" onClick="{{p.changes}}" style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 40px; border-radius: 4px; background: #FFF4E8; color: #8A4A0E; text-decoration: none; font-size: 13px; font-weight: 800">Edits</a>
+            <button type="button" onClick="{{p.copyCard}}" aria-label="Copy {{p.title}} for all platforms" style="flex: 1; min-height: 40px; border-radius: 4px; border: 0; background: #EEF3FA; color: #0A3161; cursor: pointer; font-size: 13px; font-weight: 800">{{p.copyCardLabel}}</button>
           </div>
         </div>
       </article>
@@ -357,7 +363,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
       <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase">Posting Summary</h2>
       <p style="margin: 0; font-size: 14px; color: #C3CFE0">Copy this to keep a record of what’s been posted and what’s next.</p>
       <textarea readonly="readonly" rows="10" aria-label="Posting summary" style="width: 100%; box-sizing: border-box; padding: 12px; border: 0; border-radius: 4px; font-family: ui-monospace, Menlo, monospace; font-size: 12px; line-height: 1.5; color: #0B1B33; resize: vertical">{{summaryText}}</textarea>
-      <button type="button" onClick="{{copySummary}}" style="align-self: flex-start; min-height: 46px; padding: 0 18px; border-radius: 4px; border: 0; background: #B31942; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: 0.06em; text-transform: uppercase">{{copyLabel}}</button>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px">
+      <button type="button" onClick="{{copySummary}}" style="min-height: 46px; padding: 0 18px; border-radius: 4px; border: 0; background: #B31942; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: 0.06em; text-transform: uppercase">{{copyLabel}}</button>
+      <button type="button" onClick="{{copyAllPosts}}" style="min-height: 46px; padding: 0 18px; border-radius: 4px; border: 2px solid #FFFFFF; background: transparent; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: 0.06em; text-transform: uppercase">{{copyAllPostsLabel}}</button>
+      </div>
     </div>
   </div>
   <p style="margin: 18px 0 0; font-size: 13px; color: #4A5568">Decisions on this board last while the page is open. Use the summary or canvas comments to keep a record.</p>
@@ -392,7 +401,7 @@ var CAMPS = [
 var PLAT = { IG: 'Instagram', FB: 'Facebook', LI: 'LinkedIn', TT: 'TikTok / Reels', PIN: 'Pinterest' };
 // art: kind 'card' (square graphic w/ text), 'photo' (needs headline band), 'graphic' (text only)
 var POSTS = [
-  { id: 'p01', d: 2, camp: 'brand', plats: ['IG', 'FB', 'LI'], format: 'Video', title: 'Meet The Family Behind Liberty', art: { kind: 'photo', img: '/assets/post-p01.webp', head: 'For Installers. By Installers.', sub: 'Meet Dick and Brandon' }, caption: 'Meet Dick and Brandon. Father and son. Veteran-owned. Floor guys first.\n\nOur coatings and our tools now live in one place. For installers. By installers.\n\n#LibertyToolCompany #VeteranOwned #FamilyBusiness #MadeInUSA', cta: 'Visit libertytoolcompany.com', utm: 'brand' },
+  { id: 'p01', d: 2, camp: 'brand', plats: ['IG', 'FB', 'LI'], format: 'Video', title: 'Meet The Family Behind Liberty', art: { kind: 'photo', img: '/assets/post-p01.webp', head: 'For Installers. By Installers.', sub: 'Meet Dick and Brandon' }, caption: 'Meet Dick and Brandon. Father and son. Veteran-owned. Floor guys first.\n\nOur coatings and our tools now live in one place. For installers. By installers.\n\n#LibertyToolCompany #VeteranOwned #FamilyBusiness #MadeInUSA', cta: 'Visit thetapecaddy.com', utm: 'brand' },
   { id: 'p02', d: 3, camp: 'ins', plats: ['IG', 'TT', 'FB'], format: 'Reel', title: 'The Old Way vs. The Caddy Way', art: { kind: 'photo', img: '/assets/post-p02.webp', head: 'The Old Way vs. The Caddy Way', sub: 'Same line. Every pass. No crawling.' }, caption: 'Tape measure. Chalk line. Crawl the floor. Fix it.\n\nOr: set the height, run the line, move on.\n\nSave time, money, and your knees.\n#FloorCoating #EpoxyContractor #TapeCaddy', cta: 'Equip My Crew', utm: 'installers' },
   { id: 'p03', d: 4, camp: 'dist', plats: ['LI', 'FB', 'IG'], format: 'Carousel', title: 'Put The Tape Caddy On Your Counter', art: { kind: 'photo', img: '/assets/post-p03.webp', head: 'Put It On Your Counter.', sub: 'Dealer pricing · Display · Staff demo' }, caption: 'Installers already come to your counter for tape. Sell them the tool that holds it.\n\nDealer pricing, a counter display, a live demo for your staff and easy reorders. Made in the USA.\n#FlooringDistributor #SupplyHouse #TapeCaddy', cta: 'Become A Dealer', utm: 'distributors' },
   { id: 'p04', d: 5, camp: 'aff', plats: ['IG', 'TT'], format: 'Reel', title: 'Post The Demo. Get Paid.', art: { kind: 'photo', img: '/assets/post-p04.webp', head: 'Post The Demo. Get Paid.', sub: '$10 per caddy, paid monthly' }, caption: 'Got an audience in the trades? Post the demo. Get paid.\n\n$10 for every eligible caddy your link sells. Paid monthly. We hand you the photos and clips.\n\n#LTCAmbassador #FlooringPros #TapeCaddy', cta: 'Become An Ambassador', utm: 'affiliate' },
@@ -415,14 +424,54 @@ var POSTS = [
   { id: 'p21', d: 25, camp: 'bun', plats: ['IG', 'FB'], format: 'Carousel', title: 'Gear Up The Crew For 2027', art: { kind: 'photo', img: '/assets/post-p21.webp', head: 'Gear Up The Crew For 2027', sub: 'Four Tape Caddy kits' }, caption: 'Gear up the crew for the new year. Swipe through all four Tape Caddy kits.\n\nCove System · Double Down Duo · Triple Threat · 4-Score\n#TapeCaddy #CrewGear', cta: 'Shop Crew Kits', utm: 'bundles' },
   { id: 'p22', d: 26, camp: 'brand', plats: ['IG', 'FB', 'LI'], format: 'Static', title: 'Happy Thanksgiving', art: { kind: 'photo', img: '/assets/post-p22.webp', head: 'Thankful For Our Installers.', sub: 'Happy Thanksgiving from the Szymanski family' }, caption: 'Thankful for every installer who does the work.\n\nHappy Thanksgiving from the Szymanski family and everyone at Liberty.', cta: 'None', utm: 'brand' },
   { id: 'p23', d: 27, camp: 'bun', plats: ['IG', 'FB'], format: 'Static + Boost', title: 'Black Friday: 4-Score Kit [Offer]', art: { kind: 'photo', img: '/assets/post-p23.webp', head: '4-Score Kit [Offer]', sub: 'Every caddy we make', light: true }, caption: 'Black Friday: the 4-Score Complete Kit — every caddy we make. [OFFER, IF APPROVED]\n\nLowboy + 2" + 4" + 6". Built in the USA.\n#BlackFriday #TapeCaddy', cta: 'Shop The 4-Score Kit', utm: 'bundles' },
-  { id: 'p24', d: 28, camp: 'brand', plats: ['IG', 'FB'], format: 'Static', title: 'Small Business Saturday', art: { kind: 'photo', img: '/assets/post-p24.webp', head: 'Shop Small. Shop American.', sub: 'Small Business Saturday' }, caption: 'It’s Small Business Saturday. We’re a family shop, veteran-owned, and we make our tools in the USA.\n\nThank you to every dealer and installer who buys from a small shop.\n#SmallBusinessSaturday #ShopSmall #MadeInUSA', cta: 'Visit libertytoolcompany.com', utm: 'brand' },
+  { id: 'p24', d: 28, camp: 'brand', plats: ['IG', 'FB'], format: 'Static', title: 'Small Business Saturday', art: { kind: 'photo', img: '/assets/post-p24.webp', head: 'Shop Small. Shop American.', sub: 'Small Business Saturday' }, caption: 'It’s Small Business Saturday. We’re a family shop, veteran-owned, and we make our tools in the USA.\n\nThank you to every dealer and installer who buys from a small shop.\n#SmallBusinessSaturday #ShopSmall #MadeInUSA', cta: 'Visit thetapecaddy.com', utm: 'brand' },
   { id: 'p25', d: 30, camp: 'bun', plats: ['IG', 'FB', 'TT'], format: 'Reel', title: 'Cyber Monday [Offer]', art: { kind: 'photo', img: '/assets/post-p25.webp', head: 'Cyber Monday [Offer]', sub: 'Ambassadors: share your link', light: true }, caption: 'Cyber Monday on Tape Caddy kits. [OFFER, IF APPROVED]\n\nAmbassadors — today’s the day to share your link.\n#CyberMonday #TapeCaddy', cta: 'Shop Crew Kits', utm: 'bundles' },
-  { id: 'p26', d: 31, camp: 'ent', plats: ['LI', 'FB'], format: 'Static', title: 'Plan 2027 Stock And Crew Kits Now', art: { kind: 'photo', img: '/assets/post-p26.webp', head: 'Plan 2027 Now.', sub: 'Store stock · Crew kits · Coatings' }, caption: 'Setting 2027 budgets? Put Liberty coatings and crew tools on the list for every location.\n\nBook a call and we’ll plan systems, kits and PO ordering with you.', cta: 'Schedule A Conversation', utm: 'enterprise' }
+  { id: 'p26', d: 31, camp: 'ent', plats: ['LI', 'FB'], format: 'Static', title: 'Plan 2027 Stock And Crew Kits Now', art: { kind: 'photo', img: '/assets/post-p26.webp', head: 'Plan 2027 Now.', sub: 'Store stock · Crew kits · Coatings' }, caption: 'Setting 2027 budgets? Put Liberty coatings and crew tools on the list for every location.\n\nBook a call and we’ll plan systems, kits and PO ordering with you.', cta: 'Schedule A Conversation', utm: 'enterprise' },
+  { id: 'p27', d: 32, camp: 'coat', plats: ['LI', 'FB', 'IG'], format: 'Static', title: 'Closed For The Holidays? Recoat Then.', art: { kind: 'photo', img: '/assets/post-p27.webp', head: 'Closed For The Holidays? Recoat Then.', sub: 'Plan your kitchen or plant floor now' }, caption: 'Your kitchen or plant is going to be quiet for a few days this month.\n\nThat’s the window to put down a floor that lasts. Book your Liberty urethane cement system now and we’ll plan it around your shutdown.\n#CommercialFlooring #FacilityMaintenance #UrethaneCement', cta: 'Get A Coating Quote', utm: 'coatings' },
+  { id: 'p28', d: 33, camp: 'dist', plats: ['LI', 'FB'], format: 'Static', title: 'Spring Starts In Your Stockroom', art: { kind: 'photo', img: '/assets/post-p28.webp', head: 'Spring Starts In Your Stockroom.', sub: 'Order now for Q1 floor season' }, caption: 'Floor season starts the minute the weather breaks. Installers will be at your counter asking for the tools that save them time.\n\nGet Tape Caddies on your shelf before the rush. Dealer pricing, display and staff demo included.\n#FlooringDistributor #SupplyHouse', cta: 'Become A Dealer', utm: 'distributors' },
+  { id: 'p29', d: 34, camp: 'brand', plats: ['IG', 'FB', 'LI'], format: 'Static', title: 'Happy Hanukkah', art: { kind: 'photo', img: '/assets/post-p29.webp', head: 'Happy Hanukkah.', sub: 'Wishing light and warmth to every family celebrating' }, caption: 'To every family celebrating: Happy Hanukkah.\n\nWishing you light, warmth and time together.\n#HappyHanukkah', cta: 'None', utm: 'brand' },
+  { id: 'p30', d: 35, camp: 'bun', plats: ['IG', 'FB'], format: 'Carousel', title: 'The Installer Gift Guide', art: { kind: 'photo', img: '/assets/post-p30.webp', head: 'The Installer Gift Guide', sub: 'Gifts they’ll actually use on the job' }, caption: 'Shopping for an installer? Skip the socks.\n\nSwipe for our gift guide: the Lowboy, the 2", 4" and 6" Tape Caddies, and the crew kits. Built in the USA.\n#GiftsForContractors #TapeCaddy #MadeInUSA', cta: 'Shop Crew Kits', utm: 'bundles' },
+  { id: 'p31', d: 37, camp: 'brand', plats: ['IG', 'FB', 'LI'], format: 'Static', title: 'Pearl Harbor Remembrance Day', art: { kind: 'photo', img: '/assets/post-p31.webp', head: 'We Remember.', sub: 'Pearl Harbor Remembrance Day · Dec 7, 1941' }, caption: 'Today we remember the 2,403 Americans who lost their lives at Pearl Harbor on December 7, 1941, and honor everyone who served.\n\nFrom our veteran-owned family to yours.\n#PearlHarborRemembranceDay #VeteranOwned', cta: 'None', utm: 'brand' },
+  { id: 'p32', d: 38, camp: 'ins', plats: ['IG', 'FB', 'TT'], format: 'Reel', title: 'Ask Dick & Brandon', art: { kind: 'photo', img: '/assets/post-p32.webp', head: 'Ask Dick & Brandon.', sub: 'Drop your floor questions below' }, caption: 'Got a floor question? Coatings, prep, masking, cove, pricing a job: ask it in the comments.\n\nDick and Brandon answer the best ones on video next week.\n#FloorCoating #AskAnInstaller #Installer', cta: 'Text Us: 239-744-8403', utm: 'installers' },
+  { id: 'p33', d: 39, camp: 'ent', plats: ['LI'], format: 'Static', title: 'Year-End Budget Left?', art: { kind: 'photo', img: '/assets/post-p33.webp', head: 'Year-End Budget Left?', sub: 'Put it toward crew tools and coatings' }, caption: 'Still have 2026 budget to place? Put it toward tools your crews will use every day and floors that won’t need redoing next year.\n\nBook a call and we’ll build the order with you. One PO, shipped to every site.\n#FacilitiesManagement #Procurement', cta: 'Set Up A Company Account', utm: 'enterprise' },
+  { id: 'p34', d: 40, camp: 'aff', plats: ['IG', 'TT'], format: 'Reel', title: 'Holiday Sales. Your Link.', art: { kind: 'photo', img: '/assets/post-p34.webp', head: 'Holiday Sales. Your Link.', sub: '$10 per caddy, all season long' }, caption: 'Installers are buying gifts for their crews this month. Share your link and earn $10 for every eligible caddy it sells.\n\nNot an ambassador yet? Apply in minutes. #ad #LTCAmbassador', cta: 'Become An Ambassador', utm: 'affiliate' },
+  { id: 'p35', d: 41, camp: 'coat', plats: ['IG', 'FB', 'LI'], format: 'Carousel', title: 'Gloss Or Matte?', art: { kind: 'photo', img: '/assets/post-p35.webp', head: 'Gloss Or Matte?', sub: '1803 water-based urethane top coats' }, caption: 'Same tough water-based urethane top coat, two finishes.\n\n1803 WB-G for a high-gloss shine. 1803 WB-M for a satin, low-glare look. Swipe to compare.\n#TopCoat #FloorCoating #CommercialFlooring', cta: 'Get A Coating Quote', utm: 'coatings' },
+  { id: 'p36', d: 42, camp: 'diy', plats: ['IG', 'FB', 'PIN'], format: 'Static', title: 'Gift For The Weekend DIYer', art: { kind: 'photo', img: '/assets/post-p36.webp', head: 'Gift For The Weekend DIYer', sub: 'The 2-inch Tape Caddy' }, caption: 'Know someone who’s always got a project going? The 2" Tape Caddy keeps their tape at one height, every time.\n\nBuilt in the USA. From $89.\n#DIYGifts #HomeProjects #TapeCaddy', cta: 'Shop The 2" Caddy', utm: 'diy' },
+  { id: 'p37', d: 44, camp: 'bun', plats: ['IG', 'FB'], format: 'Static', title: 'Order By [Date] For Christmas', art: { kind: 'photo', img: '/assets/post-p37.webp', head: 'Order By [Date] For Christmas', sub: 'Holiday shipping cutoff' }, caption: 'Want it under the tree? Order crew kits and Tape Caddies by [DATE — CONFIRM WITH SHIPPING] for delivery before Christmas.\n\nBuilt in the USA. Shipped from California.\n#TapeCaddy #HolidayShipping', cta: 'Shop Crew Kits', utm: 'bundles' },
+  { id: 'p38', d: 45, camp: 'dist', plats: ['LI', 'FB', 'IG'], format: 'Carousel', title: 'What Comes In A Dealer Kit', art: { kind: 'photo', img: '/assets/post-p38.webp', head: 'What Comes In A Dealer Kit', sub: 'Display · Demo units · Sell sheets' }, caption: 'Carrying Liberty comes with everything you need to sell it:\n• Counter display\n• Demo units for your staff\n• Sell sheets and point-of-sale\n• Easy reorders\n\nSwipe through the kit.\n#FlooringDistributor #Dealer', cta: 'Become A Dealer', utm: 'distributors' },
+  { id: 'p39', d: 46, camp: 'ins', plats: ['IG', 'FB'], format: 'Reel', title: 'Price 2027 Jobs In A Minute', art: { kind: 'photo', img: '/assets/post-p39.webp', head: 'Price 2027 Jobs In A Minute', sub: 'Free Bid Builder on our site' }, caption: 'Setting your 2027 prices? Plug in square footage, crew size, days and markup. The free Bid Builder does the math.\n\nLink in bio.\n#ContractorLife #FloorCoating #Estimating', cta: 'Try The Bid Builder', utm: 'installers' },
+  { id: 'p40', d: 47, camp: 'ent', plats: ['LI', 'FB'], format: 'Static', title: 'One Floor Spec For Every Site', art: { kind: 'photo', img: '/assets/post-p40.webp', head: 'One Floor Spec For Every Site', sub: 'Liberty coating systems for multi-site facilities' }, caption: 'Different floors at every location means different problems at every location.\n\nStandardize on one Liberty coating system for 2027. One spec, one supplier, one point of contact.\n#FacilitiesManagement #MultiSite #CommercialFlooring', cta: 'Schedule A Conversation', utm: 'enterprise' },
+  { id: 'p41', d: 48, camp: 'bun', plats: ['IG', 'FB'], format: 'Static + Boost', title: 'Last Call For Christmas', art: { kind: 'photo', img: '/assets/post-p41.webp', head: 'Last Call For Christmas', sub: 'Final day to order for holiday delivery' }, caption: 'Last call! Order today for delivery before Christmas. [CONFIRM CUTOFF]\n\nCrew kits, single caddies and the 4-Score Complete Kit.\n#TapeCaddy #LastMinuteGifts', cta: 'Shop Crew Kits', utm: 'bundles' },
+  { id: 'p42', d: 49, camp: 'brand', plats: ['IG', 'FB', 'LI'], format: 'Static', title: 'National Wreaths Across America Day', art: { kind: 'photo', img: '/assets/post-p42.webp', head: 'Remember. Honor. Teach.', sub: 'National Wreaths Across America Day' }, caption: 'Today, volunteers across the country are placing wreaths on veterans’ graves.\n\nAs a veteran-owned family business, we join them in remembering, honoring and teaching.\n#WreathsAcrossAmerica #VeteranOwned', cta: 'None', utm: 'brand' },
+  { id: 'p43', d: 51, camp: 'ins', plats: ['IG', 'FB', 'TT'], format: 'Reel', title: 'Shortest Day Of The Year', art: { kind: 'photo', img: '/assets/post-p43.webp', head: 'Shortest Day Of The Year.', sub: 'Make every daylight hour count' }, caption: 'Shortest day of the year. Less daylight, same job list.\n\nThe Tape Caddy holds your line so you’re not on your knees measuring. Get the masking done and move on.\n#Installer #TapeCaddy #FloorCoating', cta: 'Equip My Crew', utm: 'installers' },
+  { id: 'p44', d: 52, camp: 'coat', plats: ['LI', 'FB'], format: 'Static', title: 'Built For Holiday Traffic', art: { kind: 'photo', img: '/assets/post-p44.webp', head: 'Built For Holiday Traffic', sub: 'Urethane cement for stores and supermarkets' }, caption: 'Holiday crowds, carts and spills: your store floor takes it all this month.\n\nLiberty urethane cement systems are built for heavy traffic and constant cleaning. Plan your 2027 floor now.\n#RetailFlooring #Supermarket #UrethaneCement', cta: 'Get A Coating Quote', utm: 'coatings' },
+  { id: 'p45', d: 53, camp: 'dist', plats: ['LI', 'FB'], format: 'Static', title: 'Thank You, Dealers', art: { kind: 'photo', img: '/assets/post-p45.webp', head: 'Thank You, Dealers.', sub: 'For putting Liberty on your counter' }, caption: 'To every store that put Liberty on the counter this year: thank you.\n\nYou’re how installers find us. Here’s to a bigger 2027 together.\n#FlooringDistributor #ThankYou', cta: 'Become A Dealer', utm: 'distributors' },
+  { id: 'p46', d: 54, camp: 'brand', plats: ['IG', 'FB', 'LI'], format: 'Static', title: 'Christmas Eve Hours', art: { kind: 'photo', img: '/assets/post-p46.webp', head: 'Merry Christmas Eve.', sub: 'Holiday hours: [confirm]' }, caption: 'Merry Christmas Eve from the Szymanski family.\n\nHoliday hours: [CONFIRM]. Orders placed online still go in the queue, and we’ll ship as soon as we’re back.\n#MerryChristmas #FamilyBusiness', cta: 'None', utm: 'brand' },
+  { id: 'p47', d: 55, camp: 'brand', plats: ['IG', 'FB', 'LI'], format: 'Static', title: 'Merry Christmas', art: { kind: 'photo', img: '/assets/post-p47.webp', head: 'Merry Christmas.', sub: 'From our family to yours' }, caption: 'Merry Christmas from our family to yours.\n\nThank you for every floor, every order and every kind word this year.\n#MerryChristmas #VeteranOwned #FamilyBusiness', cta: 'None', utm: 'brand' },
+  { id: 'p48', d: 56, camp: 'bun', plats: ['IG', 'FB'], format: 'Static', title: 'Got Holiday Cash?', art: { kind: 'photo', img: '/assets/post-p48.webp', head: 'Got Holiday Cash?', sub: 'Put it toward a crew kit' }, caption: 'Got gift money burning a hole in your pocket? Put it toward something that pays you back on every job.\n\nCove System, Double Down Duo, Triple Threat or the full 4-Score kit.\n#TapeCaddy #CrewGear', cta: 'Shop Crew Kits', utm: 'bundles' },
+  { id: 'p49', d: 58, camp: 'brand', plats: ['IG', 'FB', 'LI'], format: 'Carousel', title: '2026: Our Year On The Floor', art: { kind: 'photo', img: '/assets/post-p49.webp', head: '2026: Our Year On The Floor', sub: 'Swipe for the highlights' }, caption: 'What a year. One combined home for Liberty coatings and tools, new dealers, new ambassadors and a lot of floors.\n\nSwipe for our 2026 highlights.\n#YearInReview #LibertyToolCompany', cta: 'Visit thetapecaddy.com', utm: 'brand' },
+  { id: 'p50', d: 59, camp: 'aff', plats: ['IG', 'TT'], format: 'Reel', title: 'Make 2027 Pay', art: { kind: 'photo', img: '/assets/post-p50.webp', head: 'Make 2027 Pay.', sub: 'Join the Ambassador program' }, caption: 'New year, new side income. Post real Tape Caddy demos, share your link, get paid every month.\n\n$10 per eligible caddy. Apply today. #ad #LTCAmbassador', cta: 'Become An Ambassador', utm: 'affiliate' },
+  { id: 'p51', d: 60, camp: 'ent', plats: ['LI', 'FB'], format: 'Static', title: 'Plan Q1 Now. Ship In January.', art: { kind: 'photo', img: '/assets/post-p51.webp', head: 'Plan Q1 Now.', sub: 'Ship to every site in January' }, caption: 'Q1 starts tomorrow. Get your crew kits and coatings on order now and we’ll ship to every site in January.\n\nOne account, one PO, tracking on everything.\n#Procurement #FacilitiesManagement', cta: 'Schedule A Conversation', utm: 'enterprise' },
+  { id: 'p52', d: 61, camp: 'brand', plats: ['IG', 'FB'], format: 'Static', title: 'New Year’s Eve', art: { kind: 'photo', img: '/assets/post-p52.webp', head: 'Last Day Of 2026.', sub: 'Thanks for a great year' }, caption: 'Last day of 2026. Thank you for a great year on the floor.\n\nSee you in 2027.\n#NewYearsEve #ForInstallersByInstallers', cta: 'None', utm: 'brand' },
+  { id: 'p53', d: 62, camp: 'brand', plats: ['IG', 'FB', 'LI'], format: 'Static', title: 'Happy New Year', art: { kind: 'photo', img: '/assets/post-p53.webp', head: 'Happy New Year.', sub: 'Here’s to a straight-line 2027' }, caption: 'Happy New Year from Liberty Tool Company.\n\nHere’s to straight lines, solid floors and more jobs done in 2027.\n#HappyNewYear #LibertyToolCompany #MadeInUSA', cta: 'Visit thetapecaddy.com', utm: 'brand' }
 ];
 var DOWS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 var STATUS = { pending: { label: 'To Post', bg: '#EEF1F5', fg: '#3B4658', dot: '#FFFFFF', ring: '#8A94A3' }, approved: { label: 'Posted', bg: '#2E7D4F', fg: '#FFFFFF', dot: '#2E7D4F', ring: '#2E7D4F' }, changes: { label: 'Needs Edits', bg: '#D9822B', fg: '#FFFFFF', dot: '#D9822B', ring: '#D9822B' } };
-function dateOf(d) { return d <= 30 ? { m: 'Nov', d: d, dow: DOWS[(d - 1) % 7] } : { m: 'Dec', d: d - 30, dow: DOWS[(d - 1) % 7] }; }
+function dateOf(d) { return d <= 30 ? { m: 'Nov', d: d, dow: DOWS[(d - 1) % 7] } : (d <= 61 ? { m: 'Dec', d: d - 30, dow: DOWS[(d - 1) % 7] } : { m: 'Jan', d: d - 61, dow: DOWS[(d - 1) % 7] }); }
 function campOf(id) { return CAMPS.find(function (c) { return c.id === id; }); }
+var CTA_URL = 'thetapecaddy.com';
+function ctaLine(p, k) {
+  if (!p.cta || p.cta === 'None') return '';
+  var isSite = p.cta.indexOf(CTA_URL) >= 0;
+  if (k === 'IG' || k === 'TT') return isSite ? 'Link in bio: ' + CTA_URL : p.cta + ' \u2014 link in bio (' + CTA_URL + ')';
+  return isSite ? 'https://' + CTA_URL : p.cta + ': https://' + CTA_URL;
+}
+function postText(p, k) { var c = ctaLine(p, k); return p.caption + (c ? '\n\n' + c : ''); }
+function copyText(t) {
+  var done = false;
+  try { if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(t); done = true; } } catch (e) {}
+  if (!done) { try { var ta = document.createElement('textarea'); ta.value = t; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); } catch (e) {} }
+}
 function artOf(p) {
   var a = p.art;
   return {
@@ -434,7 +483,7 @@ function artOf(p) {
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { status: {}, notes: {}, log: [], sel: 'p01', plat: 'IG', fCamp: '', fPlat: '', fStatus: '', showChanges: false, reviewer: '', copied: false };
+    this.state = { status: {}, notes: {}, log: [], sel: 'p01', plat: 'IG', fCamp: '', fPlat: '', fStatus: '', showChanges: false, reviewer: '', copied: false, copiedKey: '' };
   }
   who() { return (this.state.reviewer || '').trim() || 'Team'; }
   stamp() { var d = new Date(); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }); }
@@ -467,8 +516,8 @@ class Component extends DCLogic {
     var chip = function (on) { return { border: on ? '#0A3161' : '#C9D0DA', bg: on ? '#0A3161' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0B1B33', pressed: on ? 'true' : 'false' }; };
     // calendar: Nov 1 2026 is Sunday; render Nov 1..Dec 5
     var cal = [];
-    for (var d = 1; d <= 35; d++) {
-      var inRange = d >= 2 && d <= 31, dd = dateOf(d);
+    for (var d = 1; d <= 63; d++) {
+      var inRange = d >= 2 && d <= 62, dd = dateOf(d);
       var ps = POSTS.filter(function (p) { return p.d === d; }).map(function (p) {
         var on = p.id === sel.id, c = campOf(p.camp), t = STATUS[st(p.id)];
         return { title: p.title, color: c.color, dot: t.dot, dotRing: t.ring, ring: on ? '#B31942' : 'transparent', bg: on ? '#FFF1F3' : '#F4F5F7', pressed: on ? 'true' : 'false', opacity: match(p) ? 1 : 0.28, select: function () { self.select(p.id); } };
@@ -499,7 +548,11 @@ class Component extends DCLogic {
         isIG: mockPlat === 'IG', isFB: mockPlat === 'FB', isLI: mockPlat === 'LI', isTT: mockPlat === 'TT',
         platTabs: sel.plats.map(function (k) { return Object.assign({ label: PLAT[k] }, chip(k === plat), { pick: function () { self.setState({ plat: k }); } }); }),
         statusLabel: selSt.label, statusBg: selSt.bg, statusFg: selSt.fg,
-        facts: [{ k: 'Format', v: sel.format }, { k: 'Platforms', v: sel.plats.map(function (k) { return PLAT[k]; }).join(', ') }, { k: 'Call To Action', v: sel.cta }, { k: 'Tracking Link', v: 'libertytoolcompany.com/?utm_source=' + plat.toLowerCase() + '&utm_campaign=' + sel.utm }],
+        facts: [{ k: 'Format', v: sel.format }, { k: 'Platforms', v: sel.plats.map(function (k) { return PLAT[k]; }).join(', ') }, { k: 'Call To Action', v: sel.cta === 'None' ? 'None' : sel.cta + ' \u2192 ' + CTA_URL }, { k: 'Tracking Link', v: 'TBD' }],
+        copyOne: function () { copyText(postText(sel, plat)); self.setState({ copiedKey: sel.id + plat }); },
+        copyOneLabel: s.copiedKey === sel.id + plat ? 'Copied \u2713' : 'Copy ' + PLAT[plat] + ' Post',
+        copyAll: function () { copyText(sel.plats.map(function (k) { return '\u2014 ' + PLAT[k].toUpperCase() + ' \u2014\n' + postText(sel, k); }).join('\n\n')); self.setState({ copiedKey: sel.id + '*' }); },
+        copyAllLabel: s.copiedKey === sel.id + '*' ? 'Copied \u2713' : 'Copy All Platforms',
         approve: function () { self.setStatus([sel.id], 'approved'); },
         reset: function () { self.setStatus([sel.id], 'pending'); },
         openChanges: function () { self.setState({ showChanges: !s.showChanges }); },
@@ -511,12 +564,14 @@ class Component extends DCLogic {
       selNext: function () { self.select(nav[(idx + 1) % nav.length].id); },
       feed: shown.map(function (p) {
         var c = campOf(p.camp), t = STATUS[st(p.id)], dd = dateOf(p.d), on = p.id === sel.id;
-        return { title: p.title, color: c.color, campName: c.name, dateShort: dd.dow + ' ' + dd.m + ' ' + dd.d, format: p.format, platText: p.plats.map(function (k) { return PLAT[k]; }).join(' · '), art: artOf(p), statusLabel: t.label, statusBg: t.bg, statusFg: t.fg, ring: on ? '#B31942' : '#D3D9E2', select: function () { self.select(p.id); }, approve: function () { self.setStatus([p.id], 'approved'); }, changes: function () { self.select(p.id, true); } };
+        return { copyCard: function () { copyText(p.plats.map(function (k) { return '\u2014 ' + PLAT[k].toUpperCase() + ' \u2014\n' + postText(p, k); }).join('\n\n')); self.setState({ copiedKey: p.id + '#' }); }, copyCardLabel: s.copiedKey === p.id + '#' ? 'Copied \u2713' : 'Copy', title: p.title, color: c.color, campName: c.name, dateShort: dd.dow + ' ' + dd.m + ' ' + dd.d, format: p.format, platText: p.plats.map(function (k) { return PLAT[k]; }).join(' · '), art: artOf(p), statusLabel: t.label, statusBg: t.bg, statusFg: t.fg, ring: on ? '#B31942' : '#D3D9E2', select: function () { self.select(p.id); }, approve: function () { self.setStatus([p.id], 'approved'); }, changes: function () { self.select(p.id, true); } };
       }),
       log: s.log, hasLog: s.log.length > 0, noLog: s.log.length === 0,
       summaryText: summary.join('\n'),
       copyLabel: s.copied ? 'Copied ✓' : 'Copy Summary',
-      copySummary: function () { try { navigator.clipboard.writeText(summary.join('\n')); } catch (e) {} self.setState({ copied: true }); }
+      copyAllPosts: function () { copyText(POSTS.map(function (p) { var dd = dateOf(p.d); return '=== ' + dd.dow + ', ' + dd.m + ' ' + dd.d + ' \u00b7 ' + p.title + ' ===\n\n' + p.plats.map(function (k) { return '\u2014 ' + PLAT[k].toUpperCase() + ' \u2014\n' + postText(p, k); }).join('\n\n'); }).join('\n\n\n')); self.setState({ copiedKey: 'ALL' }); },
+      copyAllPostsLabel: s.copiedKey === 'ALL' ? 'Copied \u2713' : 'Copy Every Post',
+      copySummary: function () { copyText(summary.join('\n')); self.setState({ copied: true }); }
     };
   }
 }
