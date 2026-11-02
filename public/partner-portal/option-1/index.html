@@ -554,6 +554,30 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       </div>
     </sc-if>
 
+    <!-- ================= ADMIN: LEADERBOARD ================= -->
+    <sc-if value="{{v.aBoard}}" hint-placeholder-val="{{false}}">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 14px">
+        <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{lbPeriods}}" as="f" hint-placeholder-count="2"><button type="button" class="chip" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center"><span class="lbl" style="margin: 0">Rank By</span><sc-for list="{{lbMetrics}}" as="f" hint-placeholder-count="3"><button type="button" class="chip" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
+      </div>
+      <div class="grid g3">
+        <sc-for list="{{lbTop}}" as="t" hint-placeholder-count="3">
+          <div class="card" style="border-top: 6px solid {{t.medal}}; display: flex; flex-direction: column; gap: 6px">
+            <div style="display: flex; align-items: center; gap: 12px"><span style="width: 44px; height: 44px; border-radius: 50%; background: {{t.medal}}; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; flex: none">{{t.rank}}</span><span><b style="font-size: 16px">{{t.name}}</b><div class="muted" style="font-size: 13px">{{t.handle}}</div></span></div>
+            <div class="h1" style="color: #0A3161; margin-top: 6px">{{t.val}}</div>
+            <div class="muted" style="font-size: 13px; font-weight: 600">{{t.sub}}</div>
+            <button type="button" class="btn ghost sm" style="align-self: flex-start; margin-top: 6px" onClick="{{t.shout}}">Post Shout-Out</button>
+          </div>
+        </sc-for>
+      </div>
+      <div class="card" style="margin-top: 16px">
+        <div class="scroll"><div class="tbl" style="--cols: 60px minmax(0,1.8fr) 0.9fr 0.8fr 0.8fr 0.9fr 0.9fr 0.8fr; --minw: 860px"><div class="tr th"><div>Rank</div><div>Affiliate</div><div>Code</div><div>Clicks</div><div>Sold ({{lbPeriodShort}})</div><div>Conversion</div><div>Earned</div><div>Status</div></div>
+          <sc-for list="{{lbRows}}" as="r" hint-placeholder-count="6"><div class="tr"><div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 20px; color: {{r.rc}}">#{{r.rank}}</div><div><b>{{r.name}}</b><div class="muted" style="font-size: 12px">{{r.handle}} · {{r.city}}</div></div><div>{{r.code}}</div><div>{{r.clicks}}</div><div style="font-weight: 800">{{r.n}}</div><div>{{r.conv}}</div><div>{{r.earned}}</div><div><span class="st" style="background: {{r.sbg}}; color: {{r.sfg}}">{{r.status}}</span></div></div></sc-for>
+        </div></div>
+      </div>
+      <p class="muted" style="font-size: 13px; margin: 12px 0 0">Affiliates see the same board (rank, name, handle, caddies sold) in their portal. Clicks, conversion and earnings stay admin-only. Shout-outs post to the affiliate News feed.</p>
+    </sc-if>
+
     <!-- ================= ADMIN: NEWS & VIDEOS ================= -->
     <sc-if value="{{v.aContent}}" hint-placeholder-val="{{false}}">
       <div class="grid g2" style="align-items: start">
@@ -640,7 +664,7 @@ var TODO = { 'Received': 'Confirm pricing and send acknowledgement', 'Acknowledg
 var SCOL = { 'Received': ['#FDECEF', '#B31942'], 'Acknowledged': ['#E7EEFC', '#1F4FB5'], 'Freight Review': ['#FFF3DC', '#8A5A00'], 'Shipped': ['#E3F3EA', '#2E7D4F'], 'Delivered': ['#ECEEF2', '#4A5568'] };
 var FOLDERS = ['Price Sheets & Agreements', 'Sell Sheets & Displays', 'Data Sheets', 'Certificates (COI, W-9)', 'Invoices & POs'];
 var KEY = 'ltc-partner-portal-v1';
-var AFF_KEY = 'ltc-affiliate-portal-v1';
+var AFF_KEY = 'ltc-affiliate-portal-v2';
 var AFF_RATE = 10;
 var VCATS = ['Signing Up', 'Being An Affiliate', 'Onboarding', 'Content How-To'];
 var ONBOARD = [
@@ -655,9 +679,12 @@ function affDaysOut(n) { var d = new Date(); d.setDate(d.getDate() + n); return 
 function affSeed() {
   return {
     affiliates: [
-      { id: 'a1', name: 'Marcus Hale', handle: '@halecoatings', platform: 'Instagram · TikTok', followers: '18.4K', role: 'Epoxy installer · 11 yrs', city: 'Tampa, FL', code: 'HALE10', status: 'Active', joined: affDaysAgo(64), clicks: 1284, sold: 37, paid: 260, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
-      { id: 'a2', name: 'Tasha Greene', handle: '@floorsbytasha', platform: 'YouTube · Instagram', followers: '42K', role: 'Flake & metallic floors · 8 yrs', city: 'Phoenix, AZ', code: 'TASHA10', status: 'Active', joined: affDaysAgo(41), clicks: 2210, sold: 52, paid: 410, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v3: true, v4: true, v5: true } },
-      { id: 'a3', name: 'Ray Delgado', handle: '@raysgaragefloors', platform: 'TikTok', followers: '7.9K', role: 'Garage floor crew owner · 6 yrs', city: 'San Antonio, TX', code: 'RAY10', status: 'Active', joined: affDaysAgo(12), clicks: 214, sold: 4, paid: 0, onboard: { agree: true, payout: true, videos: false, link: true, post: false }, watched: { v1: true, v3: true } },
+      { id: 'a1', name: 'Marcus Hale', handle: '@halecoatings', platform: 'Instagram · TikTok', followers: '18.4K', role: 'Epoxy installer · 11 yrs', city: 'Tampa, FL', code: 'HALE10', mo: 11, status: 'Active', joined: affDaysAgo(64), clicks: 1284, sold: 37, paid: 260, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
+      { id: 'a2', name: 'Tasha Greene', handle: '@floorsbytasha', platform: 'YouTube · Instagram', followers: '42K', role: 'Flake & metallic floors · 8 yrs', city: 'Phoenix, AZ', code: 'TASHA10', mo: 14, status: 'Active', joined: affDaysAgo(41), clicks: 2210, sold: 52, paid: 410, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v3: true, v4: true, v5: true } },
+      { id: 'a3', name: 'Ray Delgado', handle: '@raysgaragefloors', platform: 'TikTok', followers: '7.9K', role: 'Garage floor crew owner · 6 yrs', city: 'San Antonio, TX', code: 'RAY10', mo: 4, status: 'Active', joined: affDaysAgo(12), clicks: 214, sold: 4, paid: 0, onboard: { agree: true, payout: true, videos: false, link: true, post: false }, watched: { v1: true, v3: true } },
+      { id: 'a6', name: 'Luis Ortega', handle: '@ortegafloorco', platform: 'Instagram · Facebook', followers: '9.6K', role: 'Polyaspartic garages · 9 yrs', city: 'Fresno, CA', code: 'LUIS10', mo: 9, status: 'Active', joined: affDaysAgo(55), clicks: 980, sold: 29, paid: 200, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true, v7: true } },
+      { id: 'a7', name: 'Brianna Cole', handle: '@brimakesfloors', platform: 'TikTok · YouTube', followers: '26K', role: 'Metallic epoxy artist · 5 yrs', city: 'Charlotte, NC', code: 'BRI10', mo: 6, status: 'Active', joined: affDaysAgo(33), clicks: 1540, sold: 18, paid: 120, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
+      { id: 'a8', name: 'Dev Patel', handle: '@devcoatspro', platform: 'LinkedIn', followers: '2.4K', role: 'Commercial estimator · 12 yrs', city: 'Detroit, MI', code: 'DEV10', mo: 2, status: 'Active', joined: affDaysAgo(20), clicks: 160, sold: 7, paid: 50, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
       { id: 'a4', name: 'Kelly Brandt', handle: '@kbcommercialfloors', platform: 'LinkedIn · Facebook', followers: '3.1K', role: 'Commercial PM · 15 yrs', city: 'Columbus, OH', code: '', status: 'Applied', joined: affDaysAgo(2), clicks: 0, sold: 0, paid: 0, onboard: {}, watched: {} },
       { id: 'a5', name: 'Jon Pruitt', handle: '@pruittepoxy', platform: 'Instagram', followers: '11.2K', role: 'Residential coatings · 4 yrs', city: 'Nashville, TN', code: '', status: 'Applied', joined: affDaysAgo(1), clicks: 0, sold: 0, paid: 0, onboard: {}, watched: {} }
     ],
@@ -705,6 +732,14 @@ function affLoad() { var d = null; try { d = JSON.parse(localStorage.getItem(AFF
 function affSave(d) { try { localStorage.setItem(AFF_KEY, JSON.stringify(d)); } catch (e) {} }
 function affOnboardPct(a) { var n = 0; ONBOARD.forEach(function (o) { if (a.onboard && a.onboard[o.id]) n++; }); return Math.round(n / ONBOARD.length * 100); }
 function affCopy(t) { try { if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(t); return; } } catch (e) {} var x = document.createElement('textarea'); x.value = t; x.style.position = 'fixed'; x.style.opacity = '0'; document.body.appendChild(x); x.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(x); }
+function affBoard(d, period) {
+  var key = period === 'all' ? 'sold' : 'mo';
+  return d.affiliates.filter(function (a) { return a.status === 'Active' || a.status === 'Paused'; })
+    .map(function (a) { return { a: a, n: a[key] || 0, conv: a.clicks ? (a.sold / a.clicks * 100) : 0 }; })
+    .sort(function (x, y) { return y.n - x.n || y.conv - x.conv; })
+    .map(function (x, i) { x.rank = i + 1; return x; });
+}
+var MEDAL = ['#C9A227', '#9AA4B2', '#B87333'];
 
 function money(n) { return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 function num(v) { var n = parseFloat(v); return isNaN(n) ? null : n; }
@@ -747,7 +782,7 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     var d = loadData();
-    this.state = { data: d, acct: 'ent', view: MODE === 'admin' ? 'aOverview' : 'overview', step: 1, form: blankForm(ACCTS.ent), qty: {}, coat: {}, stores: [{ num: '0101', city: 'Columbus', st: 'OH' }, { num: '0214', city: 'Pittsburgh', st: 'PA' }, { num: '0388', city: 'Louisville', st: 'KY' }], ns: { num: '', city: '', st: '' }, err: '', submitted: null, selId: null, fStatus: '', folder: '', draft: '', thread: 'ent', bk: { type: 'Account Review', day: 0, time: '' }, toast: '', aff: affLoad(), nc: { title: '', status: 'Live', start: '', end: '', brief: '', bonus: '', deliv: '', caption: '' }, nd: { title: '', off: '', code: '', ends: '', desc: '' }, nn: { title: '', tag: 'Program', body: '', pinned: false }, nv: { title: '', cat: 'Signing Up', len: '', url: '', desc: '', req: false } };
+    this.state = { data: d, acct: 'ent', view: MODE === 'admin' ? 'aOverview' : 'overview', step: 1, form: blankForm(ACCTS.ent), qty: {}, coat: {}, stores: [{ num: '0101', city: 'Columbus', st: 'OH' }, { num: '0214', city: 'Pittsburgh', st: 'PA' }, { num: '0388', city: 'Louisville', st: 'KY' }], ns: { num: '', city: '', st: '' }, err: '', submitted: null, selId: null, fStatus: '', folder: '', draft: '', thread: 'ent', bk: { type: 'Account Review', day: 0, time: '' }, toast: '', lb: 'month', lbm: 'sold', aff: affLoad(), nc: { title: '', status: 'Live', start: '', end: '', brief: '', bonus: '', deliv: '', caption: '' }, nd: { title: '', off: '', code: '', ends: '', desc: '' }, nn: { title: '', tag: 'Program', body: '', pinned: false }, nv: { title: '', cat: 'Signing Up', len: '', url: '', desc: '', req: false } };
   }
   persist(d) { saveData(d); this.setState({ data: d }); }
   flash(t) { var self = this; this.setState({ toast: t }); setTimeout(function () { if (self.state.toast === t) self.setState({ toast: '' }); }, 2600); }
@@ -819,7 +854,18 @@ class Component extends DCLogic {
     var nv = form('nv', ['title', 'cat', 'len', 'url', 'desc']);
     nv.reqOn = s.nv.req ? 'true' : 'false'; nv.toggleReq = function () { self.setState({ nv: Object.assign({}, self.state.nv, { req: !self.state.nv.req }) }); };
     nv.add = function () { var c = self.state.nv; if (!c.title.trim()) return self.flash('Add a video title'); self.affSet(function (d) { d.videos.push({ id: 'v' + Date.now(), cat: c.cat || VCATS[0], title: c.title.trim(), len: c.len || '1:00', req: !!c.req, desc: c.desc, ch: ['Intro', 'Walkthrough', 'Wrap-up'] }); }, 'Video added'); self.setState({ nv: { title: '', cat: VCATS[0], len: '', url: '', desc: '', req: false } }); };
+    var lbBase = affBoard(A, s.lb);
+    var metric = function (x) { return s.lbm === 'clicks' ? x.a.clicks : (s.lbm === 'conv' ? x.conv : x.n); };
+    var lb = lbBase.slice().sort(function (x, y) { return metric(y) - metric(x); }).map(function (x, i) { return Object.assign({}, x, { rank: i + 1 }); });
+    var fmtM = function (x) { return s.lbm === 'clicks' ? x.a.clicks.toLocaleString() : (s.lbm === 'conv' ? x.conv.toFixed(1) + '%' : x.n); };
+    var subM = { sold: s.lb === 'all' ? 'caddies sold, all time' : 'caddies sold this month', clicks: 'link clicks', conv: 'clicks that became sales' };
     return {
+      lbPeriods: [['month', 'This Month'], ['all', 'All Time']].map(function (x) { return { label: x[1], on: s.lb === x[0] ? 'true' : 'false', pick: function () { self.setState({ lb: x[0] }); } }; }),
+      lbMetrics: [['sold', 'Caddies Sold'], ['clicks', 'Clicks'], ['conv', 'Conversion']].map(function (x) { return { label: x[1], on: s.lbm === x[0] ? 'true' : 'false', pick: function () { self.setState({ lbm: x[0] }); } }; }),
+      lbPeriodShort: s.lb === 'all' ? 'All Time' : 'Month',
+      lbTop: lb.slice(0, 3).map(function (x, i) { return { rank: x.rank, name: x.a.name, handle: x.a.handle, val: fmtM(x), sub: subM[s.lbm], medal: MEDAL[i],
+        shout: function () { self.affSet(function (d) { d.news.unshift({ id: 'n' + Date.now(), date: fmtDate(today()), tag: 'Shout-Out', title: '#' + x.rank + (s.lb === 'all' ? ' All Time: ' : ' This Month: ') + x.a.handle, body: x.a.name + ' is #' + x.rank + ' with ' + x.n + ' caddies sold' + (s.lb === 'all' ? ' all time' : ' this month') + '. Nice work.', pinned: false }); }, 'Shout-out posted to affiliate News'); } }; }),
+      lbRows: lb.map(function (x) { var col = ST[x.a.status] || ST.Active; return { rank: x.rank, name: x.a.name, handle: x.a.handle, city: x.a.city, code: x.a.code || '—', clicks: x.a.clicks.toLocaleString(), n: x.n, conv: x.conv.toFixed(1) + '%', earned: usd(x.a.sold * AFF_RATE), status: x.a.status, sbg: col[0], sfg: col[1], rc: x.rank <= 3 ? MEDAL[x.rank - 1] : C.pri }; }),
       affKpis: [
         { n: A.affiliates.filter(function (a) { return a.status === 'Active'; }).length, l: 'Active Affiliates' },
         { n: apps.length, l: 'Applications To Review' },
@@ -859,7 +905,7 @@ class Component extends DCLogic {
     var navP = [['overview', 'Overview'], ['order', 'New Order'], ['orders', 'Orders'], ['files', 'Files'], ['messages', 'Messages'], ['book', 'Book Time'], ['prices', 'Price Sheet']];
     var navA = [['aOverview', 'Dashboard'], ['orders', 'Order Queue'], ['aAccounts', 'Accounts'], ['aPricing', 'Pricing'], ['messages', 'Messages'], ['book', 'Calendar'], ['files', 'Files']];
     var newCount = d.orders.filter(function (o) { return o.status === 'Received'; }).length;
-    var titles = { overview: 'Partner Portal', order: 'New Order', orders: isAdmin ? 'Order Queue' : 'My Orders', files: 'Files', messages: 'Messages', book: isAdmin ? 'Calendar' : 'Book Time', prices: 'Price Sheet', aOverview: 'LTC Admin', aAccounts: 'Accounts', aPricing: 'Pricing', aAff: 'Affiliates', aCamp: 'Campaigns & Deals', aContent: 'News & Videos' };
+    var titles = { overview: 'Partner Portal', order: 'New Order', orders: isAdmin ? 'Order Queue' : 'My Orders', files: 'Files', messages: 'Messages', book: isAdmin ? 'Calendar' : 'Book Time', prices: 'Price Sheet', aOverview: 'LTC Admin', aAccounts: 'Accounts', aPricing: 'Pricing', aAff: 'Affiliates', aBoard: 'Affiliate Leaderboard', aCamp: 'Campaigns & Deals', aContent: 'News & Videos' };
     var f = s.form, sel = s.selId ? d.orders.find(function (o) { return o.id === s.selId; }) : null;
     var tierNow = this.tierFor(c.units);
     var shown = mine.filter(function (o) { return !s.fStatus || o.status === s.fStatus; });
@@ -988,7 +1034,7 @@ class Component extends DCLogic {
     };
     if (!isAdmin) return R;
     var appsN = s.aff.affiliates.filter(function (a) { return a.status === 'Applied'; }).length;
-    R.navs2 = [['aAff', 'Affiliates', appsN], ['aCamp', 'Campaigns & Deals', 0], ['aContent', 'News & Videos', 0]].map(function (n) { return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: n[2] > 0, badge: n[2], go: function () { self.go(n[0]); } }; });
+    R.navs2 = [['aAff', 'Affiliates', appsN], ['aBoard', 'Leaderboard', 0], ['aCamp', 'Campaigns & Deals', 0], ['aContent', 'News & Videos', 0]].map(function (n) { return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: n[2] > 0, badge: n[2], go: function () { self.go(n[0]); } }; });
     return Object.assign(R, this.affVals());
   }
 }

@@ -190,7 +190,9 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
           </sc-for>
         </div>
         <div class="card">
-          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><h3 class="h3">News</h3><button type="button" class="btn ghost sm" onClick="{{goNews}}">All News</button></div>
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><h3 class="h3">Top Affiliates</h3><button type="button" class="btn ghost sm" onClick="{{goBoard}}">Leaderboard</button></div>
+          <sc-for list="{{lbTop}}" as="t" hint-placeholder-count="3"><div style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #DCE3F7"><span style="width: 30px; height: 30px; border-radius: 50%; background: {{t.medal}}; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; flex: none">{{t.rank}}</span><span style="flex: 1; min-width: 0"><b>{{t.name}}</b><span class="muted" style="font-size: 13px"> · {{t.handle}}</span></span><b>{{t.n}}</b></div></sc-for>
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 20px"><h3 class="h3">News</h3><button type="button" class="btn ghost sm" onClick="{{goNews}}">All News</button></div>
           <sc-for list="{{newsTop}}" as="n" hint-placeholder-count="3">
             <div class="news"><div style="font-size: 12px; font-weight: 700" class="muted">{{n.tag}} · {{n.date}}</div><div style="font-weight: 700; margin-top: 4px">{{n.title}}</div><div class="muted" style="font-size: 14px; margin-top: 4px; line-height: 1.5">{{n.body}}</div></div>
           </sc-for>
@@ -319,6 +321,35 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       </div>
     </sc-if>
 
+    <!-- ================= LEADERBOARD ================= -->
+    <sc-if value="{{v.board}}" hint-placeholder-val="{{false}}">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 14px">
+        <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{lbPeriods}}" as="f" hint-placeholder-count="2"><button type="button" class="chip" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
+        <div class="muted" style="font-size: 14px; font-weight: 600">Ranked by eligible caddies sold</div>
+      </div>
+      <div class="card" style="background: #E8EEFF; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px">
+        <div><div class="eyebrow">Your Spot</div><h2 class="h2" style="margin-top: 4px">#{{lbMe.rank}} of {{lbMe.of}} · {{lbMe.n}} Caddies</h2></div>
+        <div style="font-weight: 700; color: #B31942">{{lbMe.note}}</div>
+      </div>
+      <div class="grid g3">
+        <sc-for list="{{lbTop}}" as="t" hint-placeholder-count="3">
+          <div class="card" style="text-align: center; border-top: 6px solid {{t.medal}}; background: {{t.bg}}">
+            <div style="width: 56px; height: 56px; margin: 0 auto; border-radius: 50%; background: {{t.medal}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: Poppins, sans-serif; font-weight: 800; font-size: 26px">{{t.rank}}</div>
+            <div class="h3" style="margin-top: 12px">{{t.name}}</div>
+            <div class="muted" style="font-size: 13px">{{t.handle}}</div>
+            <div class="h1" style="margin-top: 10px; color: #0A35C8">{{t.n}}</div>
+            <div class="muted" style="font-size: 13px; font-weight: 600">caddies sold</div>
+          </div>
+        </sc-for>
+      </div>
+      <div class="card" style="margin-top: 16px">
+        <div class="scroll"><div class="tbl" style="--cols: 60px minmax(0,2fr) 1.2fr 0.9fr; --minw: 460px"><div class="tr th"><div>Rank</div><div>Affiliate</div><div>Platform</div><div style="text-align: right">Caddies Sold</div></div>
+          <sc-for list="{{lbRows}}" as="r" hint-placeholder-count="6"><div class="tr" style="background: {{r.bg}}"><div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 20px; color: {{r.rc}}">#{{r.rank}}</div><div><b>{{r.name}}</b><div class="muted" style="font-size: 12px">{{r.handle}}</div></div><div>{{r.platform}}</div><div style="text-align: right; font-weight: 800; font-size: 16px">{{r.n}}</div></div></sc-for>
+        </div></div>
+      </div>
+      <p class="muted" style="font-size: 13px; margin: 12px 0 0">Monthly leaders get a shout-out in News. Standings update as sales post.</p>
+    </sc-if>
+
     <!-- ================= BRAND KIT ================= -->
     <sc-if value="{{v.kit}}" hint-placeholder-val="{{false}}">
       <div class="grid g2" style="align-items: start">
@@ -347,7 +378,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 
 var IMG = ['/assets/crop-lowboy.webp', '/assets/crop-c2.webp', '/assets/crop-c4.webp', '/assets/crop-c6.webp', '/assets/crop-cove.webp', '/assets/crop-four.webp', '/assets/crop-triple.webp', '/assets/crop-ddd.webp'];
 var C = { pri: '#0A35C8', acc: '#B31942', soft: '#E8EEFF' };
-var AFF_KEY = 'ltc-affiliate-portal-v1';
+var AFF_KEY = 'ltc-affiliate-portal-v2';
 var AFF_RATE = 10;
 var VCATS = ['Signing Up', 'Being An Affiliate', 'Onboarding', 'Content How-To'];
 var ONBOARD = [
@@ -362,9 +393,12 @@ function affDaysOut(n) { var d = new Date(); d.setDate(d.getDate() + n); return 
 function affSeed() {
   return {
     affiliates: [
-      { id: 'a1', name: 'Marcus Hale', handle: '@halecoatings', platform: 'Instagram · TikTok', followers: '18.4K', role: 'Epoxy installer · 11 yrs', city: 'Tampa, FL', code: 'HALE10', status: 'Active', joined: affDaysAgo(64), clicks: 1284, sold: 37, paid: 260, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
-      { id: 'a2', name: 'Tasha Greene', handle: '@floorsbytasha', platform: 'YouTube · Instagram', followers: '42K', role: 'Flake & metallic floors · 8 yrs', city: 'Phoenix, AZ', code: 'TASHA10', status: 'Active', joined: affDaysAgo(41), clicks: 2210, sold: 52, paid: 410, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v3: true, v4: true, v5: true } },
-      { id: 'a3', name: 'Ray Delgado', handle: '@raysgaragefloors', platform: 'TikTok', followers: '7.9K', role: 'Garage floor crew owner · 6 yrs', city: 'San Antonio, TX', code: 'RAY10', status: 'Active', joined: affDaysAgo(12), clicks: 214, sold: 4, paid: 0, onboard: { agree: true, payout: true, videos: false, link: true, post: false }, watched: { v1: true, v3: true } },
+      { id: 'a1', name: 'Marcus Hale', handle: '@halecoatings', platform: 'Instagram · TikTok', followers: '18.4K', role: 'Epoxy installer · 11 yrs', city: 'Tampa, FL', code: 'HALE10', mo: 11, status: 'Active', joined: affDaysAgo(64), clicks: 1284, sold: 37, paid: 260, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
+      { id: 'a2', name: 'Tasha Greene', handle: '@floorsbytasha', platform: 'YouTube · Instagram', followers: '42K', role: 'Flake & metallic floors · 8 yrs', city: 'Phoenix, AZ', code: 'TASHA10', mo: 14, status: 'Active', joined: affDaysAgo(41), clicks: 2210, sold: 52, paid: 410, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v3: true, v4: true, v5: true } },
+      { id: 'a3', name: 'Ray Delgado', handle: '@raysgaragefloors', platform: 'TikTok', followers: '7.9K', role: 'Garage floor crew owner · 6 yrs', city: 'San Antonio, TX', code: 'RAY10', mo: 4, status: 'Active', joined: affDaysAgo(12), clicks: 214, sold: 4, paid: 0, onboard: { agree: true, payout: true, videos: false, link: true, post: false }, watched: { v1: true, v3: true } },
+      { id: 'a6', name: 'Luis Ortega', handle: '@ortegafloorco', platform: 'Instagram · Facebook', followers: '9.6K', role: 'Polyaspartic garages · 9 yrs', city: 'Fresno, CA', code: 'LUIS10', mo: 9, status: 'Active', joined: affDaysAgo(55), clicks: 980, sold: 29, paid: 200, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true, v7: true } },
+      { id: 'a7', name: 'Brianna Cole', handle: '@brimakesfloors', platform: 'TikTok · YouTube', followers: '26K', role: 'Metallic epoxy artist · 5 yrs', city: 'Charlotte, NC', code: 'BRI10', mo: 6, status: 'Active', joined: affDaysAgo(33), clicks: 1540, sold: 18, paid: 120, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
+      { id: 'a8', name: 'Dev Patel', handle: '@devcoatspro', platform: 'LinkedIn', followers: '2.4K', role: 'Commercial estimator · 12 yrs', city: 'Detroit, MI', code: 'DEV10', mo: 2, status: 'Active', joined: affDaysAgo(20), clicks: 160, sold: 7, paid: 50, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
       { id: 'a4', name: 'Kelly Brandt', handle: '@kbcommercialfloors', platform: 'LinkedIn · Facebook', followers: '3.1K', role: 'Commercial PM · 15 yrs', city: 'Columbus, OH', code: '', status: 'Applied', joined: affDaysAgo(2), clicks: 0, sold: 0, paid: 0, onboard: {}, watched: {} },
       { id: 'a5', name: 'Jon Pruitt', handle: '@pruittepoxy', platform: 'Instagram', followers: '11.2K', role: 'Residential coatings · 4 yrs', city: 'Nashville, TN', code: '', status: 'Applied', joined: affDaysAgo(1), clicks: 0, sold: 0, paid: 0, onboard: {}, watched: {} }
     ],
@@ -412,6 +446,14 @@ function affLoad() { var d = null; try { d = JSON.parse(localStorage.getItem(AFF
 function affSave(d) { try { localStorage.setItem(AFF_KEY, JSON.stringify(d)); } catch (e) {} }
 function affOnboardPct(a) { var n = 0; ONBOARD.forEach(function (o) { if (a.onboard && a.onboard[o.id]) n++; }); return Math.round(n / ONBOARD.length * 100); }
 function affCopy(t) { try { if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(t); return; } } catch (e) {} var x = document.createElement('textarea'); x.value = t; x.style.position = 'fixed'; x.style.opacity = '0'; document.body.appendChild(x); x.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(x); }
+function affBoard(d, period) {
+  var key = period === 'all' ? 'sold' : 'mo';
+  return d.affiliates.filter(function (a) { return a.status === 'Active' || a.status === 'Paused'; })
+    .map(function (a) { return { a: a, n: a[key] || 0, conv: a.clicks ? (a.sold / a.clicks * 100) : 0 }; })
+    .sort(function (x, y) { return y.n - x.n || y.conv - x.conv; })
+    .map(function (x, i) { x.rank = i + 1; return x; });
+}
+var MEDAL = ['#C9A227', '#9AA4B2', '#B87333'];
 
 var LINKP = [['All Products', 'collections/all'], ['The Lowboy', 'products/lowboy'], ['4-Inch Caddy', 'products/4-inch-caddy'], ['6-Inch Caddy', 'products/6-inch-caddy'], ['Cove System', 'products/cove-system'], ['4-Score Kit', 'products/4-score-complete-kit']];
 var CSTAT = { Live: ['#E3F3EA', '#2E7D4F'], Upcoming: ['#E7EEFC', '#1F4FB5'], Ended: ['#ECEEF2', '#4A5568'] };
@@ -420,7 +462,7 @@ var MSTAT = { Paid: ['#E3F3EA', '#2E7D4F'], Pending: ['#FFF3DC', '#8A5A00'] };
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { data: affLoad(), me: 'a1', view: 'home', cf: 'Live', vc: '', vid: 'v1', playing: false, lp: 0, toast: '' };
+    this.state = { data: affLoad(), me: 'a1', view: 'home', lb: 'month', cf: 'Live', vc: '', vid: 'v1', playing: false, lp: 0, toast: '' };
   }
   persist(d) { affSave(d); this.setState({ data: d }); }
   flash(t) { var self = this; this.setState({ toast: t }); setTimeout(function () { if (self.state.toast === t) self.setState({ toast: '' }); }, 2400); }
@@ -443,19 +485,20 @@ class Component extends DCLogic {
     var onPct = affOnboardPct(me);
     var thisMonth = d.months.filter(function (m) { return m.status === 'Pending'; }).reduce(function (t, m) { return t + m.sold; }, 0);
     var isNew = me.id === 'a3';
+    var board = affBoard(d, s.lb);
     var months = isNew ? [{ m: 'November (so far)', sold: me.sold, status: 'Pending' }] : d.months;
     var ownShare = function (t) { return t.replace('{code}', code || 'YOURCODE'); };
     var onGo = { agree: 'kit', payout: 'links', videos: 'videos', link: 'links', post: 'campaigns' };
-    var titles = { home: 'Affiliate Home', campaigns: 'Current Campaigns', deals: 'Current Deals', news: 'News', videos: 'Video Walkthroughs', links: 'My Links & Earnings', kit: 'Brand Kit & Rules' };
+    var titles = { home: 'Affiliate Home', campaigns: 'Current Campaigns', deals: 'Current Deals', news: 'News', videos: 'Video Walkthroughs', links: 'My Links & Earnings', board: 'Leaderboard', kit: 'Brand Kit & Rules' };
     return {
       v: v, title: titles[s.view],
       me: { name: me.name, first: me.name.split(' ')[0], handle: me.handle, platform: me.platform, codeTxt: code || 'Pending' },
       isActiveDemo: isNew ? 'false' : 'true', isNewDemo: isNew ? 'true' : 'false',
       pickActive: function () { self.setState({ me: 'a1', view: 'home' }); },
       pickNew: function () { self.setState({ me: 'a3', view: 'home' }); },
-      navs: [['home', 'Home'], ['campaigns', 'Current Campaigns', live.length], ['deals', 'Current Deals', deals.length], ['news', 'News'], ['videos', 'Video Walkthroughs', reqV.length - reqDone], ['links', 'My Links & Earnings'], ['kit', 'Brand Kit & Rules']].map(function (n) { return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: (n[2] || 0) > 0, badge: n[2] || 0, go: function () { self.go(n[0]); } }; }),
+      navs: [['home', 'Home'], ['campaigns', 'Current Campaigns', live.length], ['deals', 'Current Deals', deals.length], ['news', 'News'], ['board', 'Leaderboard'], ['videos', 'Video Walkthroughs', reqV.length - reqDone], ['links', 'My Links & Earnings'], ['kit', 'Brand Kit & Rules']].map(function (n) { return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: (n[2] || 0) > 0, badge: n[2] || 0, go: function () { self.go(n[0]); } }; }),
       copyCode: function () { if (!code) return self.flash('Your code is issued after approval'); self.copy(code, 'Code copied'); },
-      goLinks: function () { self.go('links'); }, goCampaigns: function () { self.go('campaigns'); }, goNews: function () { self.go('news'); },
+      goLinks: function () { self.go('links'); }, goCampaigns: function () { self.go('campaigns'); }, goNews: function () { self.go('news'); }, goBoard: function () { self.setState({ lb: 'month' }); self.go('board'); },
       needsOnboard: onPct < 100, onPct: onPct, onLeft: ONBOARD.filter(function (o) { return !me.onboard[o.id]; }).length,
       onSteps: ONBOARD.map(function (o) { var done = !!me.onboard[o.id] || (o.id === 'videos' && reqDone === reqV.length); return { t: o.t, d: o.d, cls: done ? 'on' : '', go: function () { self.go(onGo[o.id]); } }; }),
       kpis: [
@@ -494,6 +537,10 @@ class Component extends DCLogic {
       files: d.files.map(function (f) { return { name: f.name, kind: f.kind, get: function () { self.flash('Mockup: ' + f.name + ' downloads here'); } }; }),
       dos: ['Show real jobs and real results', 'Use your link or code every time', 'Tag @thetapecaddy', 'Say you’re an LTC ambassador'],
       donts: ['List or resell on Amazon', 'Change the logo or colors', 'Promise results we can’t back up'],
+      lbPeriods: [['month', 'This Month'], ['all', 'All Time']].map(function (x) { return { label: x[1], on: s.lb === x[0] ? 'true' : 'false', pick: function () { self.setState({ lb: x[0] }); } }; }),
+      lbTop: board.slice(0, 3).map(function (x, i) { return { rank: x.rank, name: x.a.name, handle: x.a.handle, n: x.n, medal: MEDAL[i], bg: x.a.id === me.id ? C.soft : '#FFFFFF' }; }),
+      lbRows: board.map(function (x) { var you = x.a.id === me.id; return { rank: x.rank, name: x.a.name + (you ? ' (You)' : ''), handle: x.a.handle, platform: x.a.platform, n: x.n, bg: you ? C.soft : 'transparent', rc: x.rank <= 3 ? MEDAL[x.rank - 1] : C.pri }; }),
+      lbMe: (function () { var mine = board.find(function (x) { return x.a.id === me.id; }) || { rank: '—', n: 0 }; var ahead = typeof mine.rank === 'number' && mine.rank > 1 ? board[mine.rank - 2] : null; return { rank: mine.rank, of: board.length, n: mine.n, note: ahead ? (ahead.n - mine.n + 1) + ' more to pass ' + ahead.a.name.split(' ')[0] + ' for #' + ahead.rank : 'You’re #1. Keep it up.' }; })(),
       hasToast: !!s.toast, toast: s.toast
     };
   }
