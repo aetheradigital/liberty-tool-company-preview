@@ -1,0 +1,1490 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liberty Tool Company — Option 2 (Fun)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/logo-blue.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F2F5FF;color:#071A52;font-family:Inter,system-ui,sans-serif}
+a{color:#0A35C8}a:hover{color:#B31942}
+html{scroll-behavior:smooth}
+button,input,select,textarea{font:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #B31942;outline-offset:2px}
+input[type=range]{accent-color:#B31942}
+@keyframes ltcRide{0%{width:0}8%{width:0}78%{width:70%}100%{width:70%}}
+@keyframes ltcRoll{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes ltcPop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes ltc2Marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ltc2Spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.ltc2-marq{animation:ltc2Marq 38s linear infinite}
+.ltc2-spin{animation:ltc2Spin 22s linear infinite}
+@keyframes ltcFade{from{opacity:0}to{opacity:1}}
+.ltc-wheel{transform-box:fill-box;transform-origin:center;animation:ltcRoll .7s linear infinite}
+@media (max-width: 640px){.ltc-tile{font-size:8px !important;border-radius:3px !important}}
+@media (prefers-reduced-motion: reduce){.ltc-anim,.ltc-wheel,.ltc2-marq,.ltc2-spin{animation:none !important}html{scroll-behavior:auto}}
+</style>
+
+</head>
+<body>
+<div id="ltc-preview-bar" style="position: relative; z-index: 60; background: #0B1424; color: #FFFFFF; font: 500 13px/1.2 Inter, system-ui, sans-serif">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px">
+    <a href="/" style="color: #FFFFFF; text-decoration: none; font-weight: 700; letter-spacing: 0.04em; white-space: nowrap">← LTC Preview Portal</a>
+    <span style="opacity: 0.35">|</span>
+    <nav aria-label="Preview pages" style="display: flex; flex-wrap: wrap; gap: 8px 20px"><a href="/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 1 · Classic</a><a href="/option-2/" style="color: #FFFFFF; text-decoration: none; font-weight: 700; white-space: nowrap; border-bottom: 2px solid #B31942; padding-bottom: 2px">Option 2 · Fun</a><a href="/approvals/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Social Approval Board</a><a href="/ads/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Ad Creative</a></nav>
+  </div>
+</div>
+<script>if(window.self!==window.top){document.getElementById('ltc-preview-bar').style.display='none';}</script>
+<template id="tpl">
+
+<div style="font-family: Inter, system-ui, sans-serif; color: #071A52; background: #F2F5FF; min-width: 0">
+
+<!-- TOP BAR -->
+<div style="background: #0A35C8; color: #FFFFFF">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 9px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; font-size: 13px; font-weight: 600">
+    <span style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; letter-spacing: 0.06em; text-transform: uppercase">
+      <span style="display: flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg>Veteran-Owned</span>
+      <span>Family-Operated</span>
+      <span>Made In The USA</span>
+    </span>
+    <span style="font-weight: 500">Coatings <a href="tel:8002084104" style="color: #FFFFFF; font-weight: 700">800-208-4104</a> · Tools, 24/7 <a href="tel:2397448403" style="color: #FFFFFF; font-weight: 700">239-744-8403</a></span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header style="background: #FFFFFF; border-bottom: 1px solid #DCE1E8">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 12px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px">
+    <a href="#top" style="display: flex; align-items: center; text-decoration: none">
+      <img src="/assets/logo-blue.png" alt="Liberty Tool Company — LTC Floor Coating Tools, Made in the USA" style="height: 58px; width: auto; display: block">
+    </a>
+    <nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; font-family: Poppins, sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 0.03em; text-transform: uppercase">
+      <a href="#finder" style="color: #071A52; text-decoration: none">Floor Finder</a>
+      <a href="#systems" style="color: #071A52; text-decoration: none">Coatings</a>
+      <a href="#products" style="color: #071A52; text-decoration: none">Products</a>
+      <a href="#tools" style="color: #071A52; text-decoration: none">Tools</a>
+      <a href="#academy" style="color: #071A52; text-decoration: none">Academy</a>
+      <a href="#wtb" style="color: #071A52; text-decoration: none">Where To Buy</a>
+      <a href="#story" style="color: #071A52; text-decoration: none">Our Story</a>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+      <a href="https://thetapecaddy.myshopify.com/collections/all" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 1.5px solid #0A35C8; border-radius: 10px; color: #0A35C8; text-decoration: none; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A35C8" stroke-width="2"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2"></path><circle cx="9" cy="20" r="1.4"></circle><circle cx="17" cy="20" r="1.4"></circle></svg>
+        Cart ({{cart}})
+      </a>
+      <a href="#schedule" onClick="{{bookCoatings}}" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">Quote List <span style="min-width: 22px; height: 22px; padding: 0 6px; box-sizing: border-box; border-radius: 11px; background: #FFFFFF; color: #B31942; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">{{quoteCount}}</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="top" style="position: relative; overflow: hidden; background-color: #0A35C8; background-image: radial-gradient(circle, #FFFFFF26 1.5px, transparent 2px); background-size: 26px 26px; color: #FFFFFF">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 56px 24px 64px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+    <div style="flex: 5 1 460px; min-width: 0">
+      <div style="border: 1.5px solid rgba(255,255,255,0.35); border-radius: 22px; padding: 30px 30px 32px; position: relative">
+        <div style="position: absolute; top: -18px; left: 22px; background: #0A35C8; padding: 0 10px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.2em; white-space: nowrap; text-transform: uppercase">Liberty Tool Company</div>
+        <h1 style="margin: 6px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(44px, 5.6vw, 80px); line-height: 0.98; letter-spacing: -0.02em; text-transform: uppercase">For<br>Installers.</h1>
+        <div style="height: 4px; background: #FFFFFF; margin: 18px 0"></div>
+        <div style="display: inline-block; background: #B31942; color: #FFFFFF; padding: 6px 16px 8px; border: 1px solid #DCE3F7; border-radius: 10px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(36px, 4.6vw, 64px); line-height: 1; letter-spacing: -0.02em; text-transform: uppercase">By Installers.</div>
+      </div>
+      <p style="margin: 26px 0 0; max-width: 520px; font-size: 20px; line-height: 1.55; color: #E3EAFF">Coating systems and jobsite tools for the installers who put floors down, the dealers who supply them and the companies that run the crews.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 26px">
+        <a href="#finder" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 26px; background: #FFFFFF; color: #0A35C8; text-decoration: none; border: 1px solid #DCE3F7; border-radius: 14px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 17px; text-transform: uppercase">Find My System →</a>
+        <a href="#partners" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 26px; background: #B31942; color: #FFFFFF; text-decoration: none; border: 1px solid #DCE3F7; border-radius: 14px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 17px; text-transform: uppercase">Carry Liberty →</a>
+      </div>
+    </div>
+    <div style="flex: 6 1 480px; min-width: 0; max-width: 680px; margin-left: auto; position: relative; padding: 20px 10px 10px">
+      <div style="position: relative; background: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 24px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); overflow: hidden">
+        <div aria-hidden="true" style="position: absolute; inset: 0; background: repeating-linear-gradient(180deg, #B22234 0 calc(100% / 13), #FFFFFF calc(100% / 13) calc(200% / 13))"></div>
+        <div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 44%; height: calc(700% / 13); background: #3C3B6E; display: flex; align-items: center; justify-content: center; padding: 3%; box-sizing: border-box">
+          <svg viewBox="0 0 100 108" preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%; display: block" fill="#FFFFFF"><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(8.33 10.80) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(25.00 10.80) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(41.67 10.80) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(58.33 10.80) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(75.00 10.80) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(91.67 10.80) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(16.67 21.60) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(33.33 21.60) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(50.00 21.60) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(66.67 21.60) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(83.33 21.60) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(8.33 32.40) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(25.00 32.40) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(41.67 32.40) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(58.33 32.40) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(75.00 32.40) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(91.67 32.40) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(16.67 43.20) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(33.33 43.20) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(50.00 43.20) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(66.67 43.20) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(83.33 43.20) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(8.33 54.00) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(25.00 54.00) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(41.67 54.00) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(58.33 54.00) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(75.00 54.00) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(91.67 54.00) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(16.67 64.80) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(33.33 64.80) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(50.00 64.80) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(66.67 64.80) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(83.33 64.80) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(8.33 75.60) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(25.00 75.60) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(41.67 75.60) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(58.33 75.60) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(75.00 75.60) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(91.67 75.60) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(16.67 86.40) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(33.33 86.40) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(50.00 86.40) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(66.67 86.40) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(83.33 86.40) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(8.33 97.20) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(25.00 97.20) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(41.67 97.20) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(58.33 97.20) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(75.00 97.20) scale(4.2)"></path><path d="M0 -1L0.2245 -0.309L0.951 -0.309L0.363 0.118L0.588 0.809L0 0.382L-0.588 0.809L-0.363 0.118L-0.951 -0.309L-0.2245 -0.309Z" transform="translate(91.67 97.20) scale(4.2)"></path></svg>
+        </div>
+        <img src="/assets/founders2.webp" alt="Brandon Szymanski and his father Dick Szymanski, owners of Liberty" style="position: relative; width: 100%; height: auto; display: block; margin-top: 24px">
+        <div style="position: absolute; left: 14px; right: 14px; bottom: 14px; display: flex; justify-content: space-between; gap: 10px">
+          <span style="background: #FFFFFF; color: #0A35C8; border: 1px solid #DCE3F7; border-radius: 10px; padding: 6px 12px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; line-height: 1.15">Brandon<br><span style="font-size: 12px; color: #B31942">Founder</span></span>
+          <span style="background: #FFFFFF; color: #0A35C8; border: 1px solid #DCE3F7; border-radius: 10px; padding: 6px 12px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; line-height: 1.15; text-align: right">Dick<br><span style="font-size: 12px; color: #B31942">Founder</span></span>
+        </div>
+      </div>
+      <div style="position: absolute; top: -6px; left: -14px; width: 132px; height: 132px; z-index: 2">
+        <svg class="ltc2-spin" viewBox="0 0 140 140" width="132" height="132" role="img" aria-label="Veteran-owned, family-operated, made in the USA">
+          <circle cx="70" cy="70" r="66" fill="#B31942" stroke="none"></circle>
+          <defs><path id="ltc2-ring" d="M70 70 m-48 0 a48 48 0 1 1 96 0 a48 48 0 1 1 -96 0"></path></defs>
+          <text font-family="Poppins, sans-serif" font-weight="800" font-size="12" fill="#FFFFFF"><textPath href="#ltc2-ring" textLength="296" lengthAdjust="spacing">VETERAN-OWNED ★ FAMILY-RUN ★ USA ★</textPath></text>
+        </svg>
+        <svg aria-hidden="true" width="44" height="44" viewBox="0 0 24 24" style="position: absolute; left: 44px; top: 44px"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg>
+      </div>
+      <div style="position: absolute; right: -6px; top: 6px; z-index: 2; background: #F2C94C; color: #071A52; border: 1px solid #DCE3F7; border-radius: 10px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); padding: 8px 12px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; line-height: 1.1">10+ Years<br>On The Floor</div>
+    </div>
+  </div>
+</section>
+<div aria-hidden="true" style="background: #FFFFFF; color: #0A35C8; overflow: hidden; border-top: 1px solid rgba(7,26,82,0.08); border-bottom: 1px solid rgba(7,26,82,0.08)">
+  <div class="ltc2-marq" style="display: flex; width: max-content; padding: 14px 0; font-family: Poppins, sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap"><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">For Installers. By Installers.<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Veteran-Owned<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Family-Operated<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Made In The USA<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Urethane Cement Systems<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">LTC Coating Tools<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">The Tape Caddy<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Faith-Based<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">For Installers. By Installers.<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Veteran-Owned<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Family-Operated<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Made In The USA<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Urethane Cement Systems<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">LTC Coating Tools<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">The Tape Caddy<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Faith-Based<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#B31942"></path></svg></span></div>
+</div>
+
+<!-- WHO WE WORK WITH -->
+<section style="max-width: 1240px; margin: 0 auto; padding: 80px 24px 24px">
+  <h2 style="margin: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(27px, 3.3vw, 41px); line-height: 1; text-transform: uppercase">Who We Work With.</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 28px">
+    <a href="#finder" style="display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: #FFFFFF; background: #0A35C8; border-radius: 4px; padding: 28px; min-height: 230px">
+      <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"></path></svg>
+      <span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 27px; line-height: 1; text-transform: uppercase">Installers & Contractors</span>
+      <span style="font-size: 15px; line-height: 1.5; color: #DDE5FF">Systems that outlast epoxy, tools that save your knees, and a Bid Builder to price the job.</span>
+      <span style="margin-top: auto; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.03em; color: #FFFFFF">Find My System →</span>
+    </a>
+    <a href="#partners" onClick="{{bookRetail}}" style="display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: #FFFFFF; background: #B31942; border-radius: 4px; padding: 28px; min-height: 230px">
+      <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2"><path d="M3 9l1-5h16l1 5M4 9v11h16V9M3 9h18M9 20v-6h6v6"></path></svg>
+      <span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 27px; line-height: 1; text-transform: uppercase">Distributors & Dealers</span>
+      <span style="font-size: 15px; line-height: 1.5; color: #FBE9ED">Carry coatings, tools or both. Your cost next to retail, staff training and reorder help.</span>
+      <span style="margin-top: auto; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.03em; color: #FFFFFF">Carry Liberty →</span>
+    </a>
+    <a href="#schedule" onClick="{{bookEnterprise}}" style="display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: #071A52; background: #FFFFFF; border-radius: 4px; padding: 28px; min-height: 230px; border: 2px solid #0A35C8">
+      <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0A35C8" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 10h.01M15 10h.01"></path></svg>
+      <span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 27px; line-height: 1; text-transform: uppercase;color: #0A35C8">Enterprise & Multi-Site</span>
+      <span style="font-size: 15px; line-height: 1.5; color: #3B4658">One spec and one supplier for every location. PO ordering, tracked shipping, one point of contact.</span>
+      <span style="margin-top: auto; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.03em; color: #0A35C8">Set Up An Account →</span>
+    </a>
+  </div>
+  <p style="margin: 18px 0 0; font-size: 15px; color: #4A5568">Homeowner with a one-time project? <a href="#tools" style="font-weight: 700">Grab a Tape Caddy →</a></p>
+</section>
+
+<!-- FLOOR FINDER QUIZ -->
+<section id="finder" style="max-width: 1240px; margin: 0 auto; padding: 72px 24px 40px">
+  <div style="background: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 20px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); overflow: hidden">
+    <div style="background: #0A35C8; color: #FFFFFF; padding: 26px 32px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px">
+      <div>
+        <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #C9D6FF">Floor Finder</div>
+        <h2 style="margin: 4px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(22px, 2.7vw, 33px); line-height: 1; text-transform: uppercase">Spec The Right System For The Job.</h2>
+      </div>
+      <div style="min-width: 220px; flex: 0 1 320px">
+        <div style="font-size: 13px; font-weight: 600; color: #C9D6FF">{{quiz.progressLabel}}</div>
+        <div style="margin-top: 8px; height: 8px; background: #ffffff33; border-radius: 4px; overflow: hidden"><div style="height: 8px; width: {{quiz.progress}}%; background: #B31942; transition: width 300ms ease"></div></div>
+      </div>
+    </div>
+    <sc-if value="{{quiz.asking}}" hint-placeholder-val="{{true}}">
+      <div style="padding: 32px">
+        <h3 style="margin: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase; color: #0A35C8">{{quiz.question}}</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-top: 20px">
+          <sc-for list="{{quiz.options}}" as="o" hint-placeholder-count="4">
+            <button type="button" onClick="{{o.pick}}" style="text-align: left; min-height: 72px; padding: 14px 16px; border-radius: 4px; border: 2px solid #C9D0DA; background: #F7F8FA; color: #071A52; cursor: pointer; display: flex; align-items: center; gap: 12px">
+              <span style="flex: none; width: 34px; height: 34px; border-radius: 50%; background: #0A35C8; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px">{{o.key}}</span>
+              <span style="font-size: 16px; font-weight: 600; line-height: 1.3">{{o.label}}</span>
+            </button>
+          </sc-for>
+        </div>
+        <sc-if value="{{quiz.canBack}}" hint-placeholder-val="{{false}}">
+          <button type="button" onClick="{{quiz.back}}" style="margin-top: 18px; min-height: 44px; padding: 0 14px; background: transparent; border: 0; color: #0A35C8; font-weight: 700; cursor: pointer">← Back</button>
+        </sc-if>
+      </div>
+    </sc-if>
+    <sc-if value="{{quiz.done}}" hint-placeholder-val="{{false}}">
+      <div style="padding: 32px; display: flex; flex-wrap: wrap; gap: 28px; align-items: stretch; animation: ltcFade 300ms ease">
+        <div style="flex: 999 1 460px; min-width: 0">
+          <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B31942">Your Best Match</div>
+          <h3 style="margin: 6px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(25px, 3.0vw, 37px); line-height: 0.98; text-transform: uppercase; color: #0A35C8">{{quiz.best.name}}</h3>
+          <p style="margin: 14px 0 0; font-size: 17px; line-height: 1.6; color: #3B4658">{{quiz.best.desc}}</p>
+          <ul style="list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px">
+            <sc-for list="{{quiz.best.features}}" as="f" hint-placeholder-count="4">
+              <li style="background: #EEF3FA; color: #0A35C8; padding: 8px 12px; border-radius: 10px; font-size: 14px; font-weight: 600">{{f}}</li>
+            </sc-for>
+          </ul>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px">
+            <a href="#schedule" onClick="{{quiz.quote}}" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 22px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase">Quote This Floor →</a>
+            <button type="button" onClick="{{quiz.details}}" style="min-height: 52px; padding: 0 20px; background: #FFFFFF; color: #0A35C8; border: 2px solid #0A35C8; border-radius: 10px; cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase">See Details</button>
+            <button type="button" onClick="{{quiz.restart}}" style="min-height: 52px; padding: 0 14px; background: transparent; color: #4A5568; border: 0; cursor: pointer; font-weight: 700">Start Over</button>
+          </div>
+        </div>
+        <div style="flex: 1 1 280px; min-width: 0; background: #F7F8FA; border: 1px solid #DCE3F7; border-radius: 20px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); padding: 22px; display: flex; flex-direction: column; gap: 10px">
+          <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #4A5568">Your Answers</div>
+          <sc-for list="{{quiz.answers}}" as="a" hint-placeholder-count="4">
+            <div style="font-size: 15px"><span style="color: #4A5568">{{a.q}}:</span> <strong>{{a.a}}</strong></div>
+          </sc-for>
+          <div style="margin-top: auto; padding-top: 12px; border-top: 1px solid #D3D9E2; font-size: 14px; color: #3B4658">Also worth a look: <button type="button" onClick="{{quiz.runnerOpen}}" style="background: transparent; border: 0; padding: 0; color: #B31942; font-weight: 700; cursor: pointer; text-decoration: underline; min-height: 24px">{{quiz.runner.name}}</button></div>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</section>
+
+<!-- COATING SYSTEMS -->
+<section id="systems" style="max-width: 1240px; margin: 0 auto; padding: 72px 24px 40px">
+  <div style="display: inline-block; align-self: flex-start; width: fit-content; background: #FDECEF; color: #B31942; border: 0; border-radius: 999px; padding: 5px 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">Liberty Coating Systems</div>
+  <h2 style="margin: 10px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(28px, 3.4vw, 44px); line-height: 0.98; text-transform: uppercase">Tough As Urethane Cement. Easy As Epoxy.</h2>
+  <p style="margin: 14px 0 0; max-width: 680px; font-size: 17px; line-height: 1.6; color: #3B4658">Six systems your crew can put down, built to outlast epoxy. Tap an environment to see what fits, or a card for details.</p>
+  <div role="group" aria-label="Filter by place" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px">
+    <sc-for list="{{envs}}" as="e" hint-placeholder-count="10">
+      <button type="button" onClick="{{e.pick}}" aria-pressed="{{e.pressed}}" style="min-height: 44px; padding: 0 14px; border-radius: 22px; border: 3px solid {{e.border}}; background: {{e.bg}}; color: {{e.fg}}; cursor: pointer; font-size: 14px; font-weight: 600">{{e.label}}</button>
+    </sc-for>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; margin-top: 26px">
+    <sc-for list="{{systems}}" as="s" hint-placeholder-count="6">
+      <article style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 20px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); overflow: hidden; opacity: {{s.opacity}}; transition: opacity 250ms ease, border-color 250ms ease">
+        <button type="button" onClick="{{s.open}}" aria-label="See photos and details for {{s.name}}" style="display: block; padding: 0; border: 0; background: transparent; cursor: pointer; text-align: left">
+          <div style="aspect-ratio: 16 / 9; background: #EEF2F7; position: relative; display: flex; flex-direction: column; justify-content: flex-end; padding: 44px 22px 18px; box-sizing: border-box">
+            <span style="position: absolute; top: 12px; left: 12px; background: #0A35C8; color: #FFFFFF; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 9px; border-radius: 2px">{{s.build}}</span>
+            <span style="position: absolute; top: 12px; right: 12px; background: #FFFFFF; color: #0A35C8; font-size: 12px; font-weight: 700; padding: 6px 9px; border-radius: 2px; border: 1px solid #D3D9E2">Photos & Details +</span>
+            <sc-for list="{{s.layers}}" as="ly" hint-placeholder-count="3">
+              <span style="display: flex; align-items: center; justify-content: space-between; height: {{ly.h}}px; padding: 0 12px; background: {{ly.bg}}; color: {{ly.fg}}; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: {{ly.r}}">{{ly.label}}<span style="opacity: 0.8; font-weight: 600">{{ly.n}}</span></span>
+            </sc-for>
+            <span style="display: flex; align-items: center; height: 30px; padding: 0 12px; background: repeating-linear-gradient(135deg, #B5BBC3 0 6px, #A9B0B9 6px 12px); color: #2B3036; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 0 0 4px 4px">Your Concrete</span>
+          </div>
+        </button>
+        <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1">
+          <h3 style="margin: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: 21px; line-height: 1; text-transform: uppercase; color: #0A35C8">{{s.name}}</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #3B4658">{{s.short}}</p>
+          <div style="margin-top: auto; padding-top: 10px; font-size: 13px; font-weight: 600; color: #4A5568">Best for: {{s.bestText}}</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px">
+            <a href="#schedule" onClick="{{s.quote}}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">Get A Quote</a>
+            <button type="button" onClick="{{s.open}}" style="min-height: 44px; padding: 0 16px; background: #FFFFFF; color: #0A35C8; border: 2px solid #0A35C8; border-radius: 10px; cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">Details</button>
+          </div>
+        </div>
+      </article>
+    </sc-for>
+  </div>
+</section>
+
+<!-- STRESS TEST -->
+<section id="stress" style="max-width: 1240px; margin: 0 auto; padding: 64px 24px 40px">
+  <div style="background: #0A35C8; color: #FFFFFF; border-radius: 24px; overflow: hidden; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10)">
+    <div style="padding: 32px 32px 8px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 18px">
+      <div style="min-width: 0; max-width: 620px">
+        <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #C9D6FF">Stress Test</div>
+        <h2 style="margin: 6px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(25px, 3.1vw, 40px); line-height: 1.2; text-transform: uppercase">Epoxy vs. Liberty.<br><span style="color: #FFFFFF; background: #B31942; padding: 0 8px; box-decoration-break: clone; -webkit-box-decoration-break: clone">You Pick The Abuse.</span></h2>
+        <p style="margin: 12px 0 0; font-size: 16px; line-height: 1.55; color: #DDE5FF">Hit both floors with what your job throws at them.</p>
+      </div>
+      <div role="group" aria-label="Pick what hits the floor" style="display: flex; flex-wrap: wrap; gap: 8px">
+        <sc-for list="{{stress.hits}}" as="h" hint-placeholder-count="4">
+          <button type="button" onClick="{{h.pick}}" aria-pressed="{{h.pressed}}" style="min-height: 48px; padding: 0 16px; border-radius: 24px; border: 2px solid {{h.border}}; background: {{h.bg}}; color: {{h.fg}}; cursor: pointer; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px">
+            <span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: {{h.dot}}"></span>{{h.label}}
+          </button>
+        </sc-for>
+        <button type="button" onClick="{{stress.reset}}" style="min-height: 48px; padding: 0 14px; border-radius: 24px; border: 2px solid #ffffff55; background: transparent; color: #FFFFFF; cursor: pointer; font-size: 15px; font-weight: 700">Reset</button>
+      </div>
+    </div>
+    <div style="padding: 20px 32px 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px">
+      <sc-for list="{{stress.panels}}" as="p" hint-placeholder-count="2">
+        <div style="background: #0526A0; border-radius: 6px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px">
+            <span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 21px; text-transform: uppercase">{{p.name}}</span>
+            <span style="background: {{p.badgeBg}}; color: #FFFFFF; padding: 6px 10px; border-radius: 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase">{{p.status}}</span>
+          </div>
+          <svg role="img" aria-label="{{p.aria}}" viewBox="0 0 520 220" style="width: 100%; height: auto; display: block; border-radius: 4px">
+            <rect x="0" y="0" width="520" height="220" fill="{{p.floor}}"></rect>
+            <rect x="0" y="0" width="520" height="220" fill="url(#ltcSheen)" opacity="0.5"></rect>
+            <defs><linearGradient id="ltcSheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.35"></stop><stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"></stop></linearGradient></defs>
+            <g opacity="{{p.heat}}" fill="none" stroke="#1B1E23" stroke-width="3" stroke-linecap="round"><path d="M40 60 L95 82 L130 70 L180 104 L230 96"></path><path d="M130 70 L140 30"></path><path d="M300 180 L340 150 L392 160 L430 128 L488 140"></path><path d="M392 160 L404 205"></path></g>
+            <g opacity="{{p.chem}}"><ellipse cx="380" cy="70" rx="62" ry="28" fill="#6B5A2E" opacity="0.55"></ellipse><ellipse cx="410" cy="62" rx="26" ry="12" fill="#4A3E1E" opacity="0.6"></ellipse><ellipse cx="120" cy="170" rx="44" ry="18" fill="#6B5A2E" opacity="0.45"></ellipse></g>
+            <g opacity="{{p.fork}}" stroke="#2B2F36" stroke-width="5" stroke-linecap="round"><path d="M60 120 L250 132"></path><path d="M60 140 L250 152"></path><path d="M270 40 L292 52 M300 30 L318 46"></path></g>
+            <g opacity="{{p.wet}}" fill="#FFFFFF" fill-opacity="0.25" stroke="#FFFFFF" stroke-opacity="0.7" stroke-width="2"><circle cx="210" cy="190" r="16"></circle><circle cx="244" cy="176" r="10"></circle><circle cx="470" cy="40" r="14"></circle><path d="M150 18 L210 18 L200 44 L156 40 Z" fill="#9AA3AE" fill-opacity="0.8"></path></g>
+            <g opacity="{{p.beads}}" fill="#FFFFFF" fill-opacity="0.55"><circle cx="160" cy="80" r="5"></circle><circle cx="176" cy="92" r="3"></circle><circle cx="330" cy="140" r="4"></circle><circle cx="420" cy="70" r="5"></circle><circle cx="250" cy="170" r="3"></circle></g>
+          </svg>
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: #C9D6FF"><span>Floor Condition</span><span>{{p.condText}}</span></div>
+            <div style="margin-top: 6px; height: 10px; background: #ffffff22; border-radius: 5px; overflow: hidden"><div style="height: 10px; width: {{p.cond}}%; background: {{p.condColor}}; transition: width 400ms ease, background 400ms ease"></div></div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="padding: 0 32px 28px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+      <p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 16px; line-height: 1.5; color: #FFFFFF; font-weight: 600">{{stress.caption}}</p>
+      <span style="font-size: 12px; color: #C9D6FF">Illustration of how each material handles heat, chemicals, impact and moisture.</span>
+    </div>
+  </div>
+</section>
+
+<!-- BID BUILDER -->
+<section id="bid" style="max-width: 1240px; margin: 0 auto; padding: 0 24px 40px">
+  <div style="display: flex; flex-wrap: wrap; border: 1px solid #DCE3F7; border-radius: 24px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); overflow: hidden; background: #FFFFFF">
+    <div style="flex: 999 1 560px; min-width: 0; padding: 30px 32px">
+      <div style="display: inline-block; align-self: flex-start; width: fit-content; background: #FDECEF; color: #B31942; border: 0; border-radius: 999px; padding: 5px 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">Bid Builder · For Contractors</div>
+      <h2 style="margin: 8px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(24px, 2.8vw, 36px); line-height: 1; text-transform: uppercase; color: #0A35C8">Price Your Next Floor In A Minute.</h2>
+      <p style="margin: 10px 0 0; font-size: 15px; line-height: 1.55; color: #3B4658">Slide in your numbers. We'll do the math.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 6px 28px; margin-top: 18px">
+        <sc-for list="{{bid.sliders}}" as="b" hint-placeholder-count="6">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+              <label for="{{b.id}}" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5568">{{b.label}}</label>
+              <span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 19px; color: #071A52">{{b.text}}</span>
+            </div>
+            <input id="{{b.id}}" type="range" min="{{b.min}}" max="{{b.max}}" step="{{b.step}}" value="{{b.value}}" onChange="{{b.on}}" style="width: 100%; height: 40px">
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin: 6px 0 0; font-size: 13px; line-height: 1.5; color: #4A5568">Material cost is an example. Call us for your Liberty pricing.</p>
+    </div>
+    <div style="flex: 1 1 340px; min-width: 0; background: #0A35C8; color: #FFFFFF; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+      <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #C9D6FF">Your Bid</div>
+      <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(33px, 3.7vw, 44px); line-height: 1">{{bid.price}}</div>
+      <div style="font-size: 14px; color: #C9D6FF">{{bid.perSf}} per sq ft</div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #ffffff26; border: 1px solid #ffffff26; border-radius: 4px; overflow: hidden">
+        <sc-for list="{{bid.rows}}" as="r" hint-placeholder-count="4">
+          <div style="background: #0A35C8; padding: 12px 14px"><div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #C9D6FF">{{r.k}}</div><div style="margin-top: 3px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 18px; color: {{r.color}}">{{r.v}}</div></div>
+        </sc-for>
+      </div>
+      <div style="background: #FFFFFF; color: #0A35C8; border-radius: 4px; padding: 12px 14px; display: flex; align-items: center; gap: 12px">
+        <span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 24px; line-height: 1">{{bid.kits}}</span>
+        <span style="font-size: 13px; line-height: 1.35; color: #3B4658">kits of 1620 TMUC for primer and bond coat (80–200 sq ft each)</span>
+      </div>
+      <a href="#schedule" onClick="{{bid.ask}}" style="margin-top: auto; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; background: #B31942; color: #FFFFFF; text-decoration: none; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; min-height: 50px">Get My Liberty Pricing →</a>
+    </div>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 16px">
+    <div style="background: #FFFFFF; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); border-left: 5px solid #B31942; border-radius: 6px; padding: 18px 20px"><div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 30px; line-height: 1; color: #0A35C8">230°F</div><div style="margin-top: 4px; font-size: 14px; font-weight: 600; color: #3B4658">Heat swings it can take</div></div>
+    <div style="background: #FFFFFF; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); border-left: 5px solid #0A35C8; border-radius: 6px; padding: 18px 20px"><div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 30px; line-height: 1; color: #0A35C8">20–30 Min</div><div style="margin-top: 4px; font-size: 14px; font-weight: 600; color: #3B4658">Patch to traffic with 1111</div></div>
+    <div style="background: #FFFFFF; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); border-left: 5px solid #B31942; border-radius: 6px; padding: 18px 20px"><div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 30px; line-height: 1; color: #0A35C8">11 Mil</div><div style="margin-top: 4px; font-size: 14px; font-weight: 600; color: #3B4658">In one coat of 1776</div></div>
+    <div style="background: #FFFFFF; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); border-left: 5px solid #0A35C8; border-radius: 6px; padding: 18px 20px"><div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 30px; line-height: 1; color: #0A35C8">USA</div><div style="margin-top: 4px; font-size: 14px; font-weight: 600; color: #3B4658">Made by an American manufacturer</div></div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" style="background: #FFFFFF; border-top: 1px solid #DCE1E8; border-bottom: 1px solid #DCE1E8">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 90px 24px">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px">
+      <div style="min-width: 0">
+        <div style="display: inline-block; align-self: flex-start; width: fit-content; background: #FDECEF; color: #B31942; border: 0; border-radius: 999px; padding: 5px 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">Liberty Products</div>
+        <h2 style="margin: 10px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(28px, 3.4vw, 44px); line-height: 0.98; text-transform: uppercase">Prep. Build. Protect.</h2>
+      </div>
+      <div role="group" aria-label="Filter products" style="display: flex; flex-wrap: wrap; gap: 8px">
+        <sc-for list="{{prodFilters}}" as="f" hint-placeholder-count="6">
+          <button type="button" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" style="min-height: 44px; padding: 0 14px; border-radius: 22px; border: 3px solid {{f.border}}; background: {{f.bg}}; color: {{f.fg}}; cursor: pointer; font-size: 14px; font-weight: 600">{{f.label}}</button>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-top: 32px">
+      <sc-for list="{{chem}}" as="p" hint-placeholder-count="9">
+        <button type="button" onClick="{{p.open}}" style="text-align: left; display: flex; flex-direction: column; gap: 10px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); border-top: 5px solid {{p.color}}; border-radius: 4px; padding: 20px; background: #F7F8FA; cursor: pointer; color: #071A52; min-height: 220px">
+          <span style="align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FFFFFF; background: {{p.color}}; padding: 5px 8px; border-radius: 2px">{{p.catLabel}}</span>
+          <span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 32px; line-height: 1; color: #0A35C8; white-space: nowrap">{{p.num}}</span>
+          <span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 18px; line-height: 1.05; text-transform: uppercase">{{p.name}}</span>
+          <span style="font-size: 14px; line-height: 1.5; color: #3B4658">{{p.short}}</span>
+          <span style="margin-top: auto; font-size: 14px; font-weight: 700; color: #B31942">See Details +</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools" style="max-width: 1240px; margin: 0 auto; padding: 96px 24px 48px">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px">
+    <div style="min-width: 0; max-width: 700px">
+      <div style="display: inline-block; align-self: flex-start; width: fit-content; background: #FDECEF; color: #B31942; border: 0; border-radius: 999px; padding: 5px 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">Liberty Tool Company</div>
+      <h2 style="margin: 10px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(28px, 3.4vw, 44px); line-height: 0.98; text-transform: uppercase">Practical Tools. <span style="color: #0A35C8">Powerful</span> <span style="color: #B31942">Connections.</span></h2>
+      <p style="margin: 14px 0 0; font-size: 17px; line-height: 1.6; color: #3B4658">Built for our own crews. Now on your crew's truck and your dealer's shelf.</p>
+    </div>
+    <div role="group" aria-label="Filter tools" style="display: flex; flex-wrap: wrap; gap: 8px">
+      <sc-for list="{{toolFilters}}" as="f" hint-placeholder-count="4">
+        <button type="button" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" style="min-height: 44px; padding: 0 14px; border-radius: 22px; border: 3px solid {{f.border}}; background: {{f.bg}}; color: {{f.fg}}; cursor: pointer; font-size: 14px; font-weight: 600">{{f.label}}</button>
+      </sc-for>
+    </div>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; margin-top: 36px">
+    <sc-for list="{{tools}}" as="item" hint-placeholder-count="10">
+      <article style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 20px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); overflow: hidden">
+        <button type="button" onClick="{{item.open}}" aria-label="See details for {{item.name}}" style="display: block; padding: 0; border: 0; background: #E6EAF0; cursor: pointer">
+          <img src="{{item.img}}" alt="{{item.name}}" style="width: 100%; aspect-ratio: 1 / 1; object-fit: contain; display: block">
+        </button>
+        <div style="height: 4px; background: {{item.stripe}}"></div>
+        <div style="padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1">
+          <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #B31942">{{item.tag}}</div>
+          <h3 style="margin: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: 20px; line-height: 1; text-transform: uppercase">{{item.name}}</h3>
+          <div style="margin-top: auto; padding-top: 8px; display: flex; align-items: baseline; justify-content: space-between; gap: 10px">
+            <span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 21px; color: #0A35C8">{{item.priceText}}</span>
+            <button type="button" onClick="{{item.open}}" style="background: transparent; border: 0; padding: 0; min-height: 32px; font-size: 14px; font-weight: 700; color: #0A35C8; cursor: pointer">Details +</button>
+          </div>
+          <sc-if value="{{item.isBuy}}" hint-placeholder-val="{{true}}">
+            <button type="button" onClick="{{item.add}}" style="width: 100%; min-height: 46px; background: {{item.btnBg}}; color: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">{{item.addLabel}}</button>
+          </sc-if>
+          <sc-if value="{{item.isQuote}}" hint-placeholder-val="{{false}}">
+            <a href="#schedule" onClick="{{item.ask}}" style="display: flex; align-items: center; justify-content: center; min-height: 46px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">Ask For Pricing</a>
+          </sc-if>
+        </div>
+      </article>
+    </sc-for>
+  </div>
+</section>
+
+<!-- FIND YOUR LINE (cartoon caddies) -->
+<section id="find" style="max-width: 1240px; margin: 0 auto; padding: 40px 24px 40px">
+  <div style="display: flex; flex-wrap: wrap; border: 1px solid #DCE3F7; border-radius: 20px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); overflow: hidden; background: #FFFFFF">
+    <div style="flex: 1 1 340px; min-width: 0; padding: 32px; display: flex; flex-direction: column">
+      <div style="display: inline-block; align-self: flex-start; width: fit-content; background: #FDECEF; color: #B31942; border: 0; border-radius: 999px; padding: 5px 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">The Tape Caddy</div>
+      <h2 style="margin: 8px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(25px, 3.0vw, 36px); line-height: 0.98; text-transform: uppercase">Pick A Size. <br>Watch It Roll.</h2>
+      <p style="margin: 14px 0 0; font-size: 16px; line-height: 1.6; color: #3B4658">Each caddy holds your tape at one height. Set it down and roll.</p>
+      <div role="group" aria-label="Caddy size" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 22px">
+        <sc-for list="{{models}}" as="m" hint-placeholder-count="4">
+          <button type="button" onClick="{{m.pick}}" aria-pressed="{{m.pressed}}" style="text-align: left; min-height: 60px; padding: 10px 14px; border-radius: 4px; border: 2px solid {{m.border}}; background: {{m.bg}}; color: {{m.fg}}; cursor: pointer">
+            <span style="display: block; font-family: Poppins, sans-serif; font-weight: 800; font-size: 17px; letter-spacing: 0.02em; text-transform: uppercase">{{m.name}}</span>
+            <span style="display: block; font-size: 13px; font-weight: 500; margin-top: 2px; opacity: 0.85">{{m.height}} line</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="margin-top: auto; padding-top: 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px">
+        <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 29px; color: #0A35C8; line-height: 1.05">{{model.priceText}}</div>
+        <button type="button" onClick="{{model.add}}" style="min-height: 50px; padding: 0 22px; background: #B31942; color: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase">{{model.addLabel}}</button>
+      </div>
+    </div>
+    <div style="flex: 999 1 560px; min-width: 0; position: relative; min-height: 400px; overflow: hidden; background: #F3EFE6">
+      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 0; bottom: 96px; background: linear-gradient(180deg, #F6F2EA 0%, #ECE6DA 100%)"></div>
+      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 96px; height: 22px; background: #E3DCCD; border-top: 2px solid #D2C8B5"></div>
+      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 96px; background: linear-gradient(180deg, #7E8B9A 0%, #5F6C7B 100%)"></div>
+      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 60px; height: 10px; background: #FFFFFF22"></div>
+      <div aria-hidden="true" style="position: absolute; left: 22px; bottom: 96px; width: 34px; height: 186px; background: #F2C94C; border: 1px solid #DCE3F7; border-bottom: 0; border-radius: 10px 3px 0 0; box-sizing: border-box">
+        <div style="position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 23px, #071A52 23px 25px)"></div>
+        <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 12px; background: repeating-linear-gradient(0deg, transparent 0 11px, #071A52 11px 12.5px)"></div>
+      </div>
+      <div aria-hidden="true" style="position: absolute; left: 56px; bottom: {{lineMark}}px; display: flex; align-items: center; transition: bottom 450ms ease">
+        <span style="width: 0; height: 0; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-right: 10px solid #B31942"></span>
+        <span style="background: #B31942; color: #FFFFFF; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; padding: 3px 7px; border-radius: 2px">{{model.height}}</span>
+      </div>
+      <div class="ltc-anim" style="position: absolute; left: 120px; bottom: 96px; height: 0; width: 72%; animation: ltcRide 6s linear infinite">
+        <div style="position: absolute; left: 0; right: 0; bottom: {{tapeBottom}}px; height: 12px; background: #EBD58F; box-shadow: inset 0 -3px 0 #D4B95F; border-radius: 2px 0 0 2px; transition: bottom 450ms ease"></div>
+        <div style="position: absolute; right: {{toon.right}}px; bottom: -2px; width: {{toon.vbW}}px; transition: right 450ms ease">
+          <svg role="img" aria-label="Cartoon of the {{model.name}} Tape Caddy" width="{{toon.vbW}}" height="{{toon.vbH}}" viewBox="0 0 {{toon.vbW}} {{toon.vbH}}" style="display: block; overflow: visible">
+            <ellipse cx="{{toon.cx}}" cy="{{toon.shadowY}}" rx="{{toon.shadowRx}}" ry="6" fill="#071A5226"></ellipse>
+            <path d="{{toon.wingL}}" fill="#2D5BE3" opacity="{{toon.wingOp}}"></path>
+            <path d="{{toon.wingR}}" fill="#2149C4" opacity="{{toon.wingOp}}"></path>
+            <g>
+              <rect x="{{toon.fx1}}" y="{{toon.forkY}}" width="8" height="12" rx="2" fill="#9AA3AE"></rect>
+              <rect x="{{toon.fx2}}" y="{{toon.forkY}}" width="8" height="12" rx="2" fill="#9AA3AE"></rect>
+            </g>
+            <rect x="18" y="{{toon.top}}" width="{{toon.bodyW}}" height="{{toon.bodyH}}" rx="16" fill="#2D5BE3"></rect>
+            <rect x="{{toon.shadeX}}" y="{{toon.top}}" width="30" height="{{toon.bodyH}}" rx="14" fill="#2149C4"></rect>
+            <rect x="{{toon.slotX}}" y="{{toon.slotY}}" width="60" height="{{toon.slotH}}" rx="10" fill="#1A3A9E"></rect>
+            <rect x="{{toon.tapeX}}" y="{{toon.slotY}}" width="30" height="{{toon.slotH}}" rx="6" fill="#EBD58F"></rect>
+            <rect x="30" y="{{toon.hiY}}" width="7" height="{{toon.hiH}}" rx="3.5" fill="#FFFFFF" fill-opacity="0.35"></rect>
+            <rect x="24" y="{{toon.r1}}" width="18" height="12" rx="6" fill="#1C1F24"></rect>
+            <rect x="24" y="{{toon.r2}}" width="18" height="12" rx="6" fill="#1C1F24" opacity="{{toon.rOp}}"></rect>
+            <rect x="24" y="{{toon.r3}}" width="18" height="12" rx="6" fill="#1C1F24" opacity="{{toon.rOp}}"></rect>
+            <rect x="{{toon.rx}}" y="{{toon.r1}}" width="18" height="12" rx="6" fill="#1C1F24"></rect>
+            <rect x="{{toon.rx}}" y="{{toon.r2}}" width="18" height="12" rx="6" fill="#1C1F24" opacity="{{toon.rOp}}"></rect>
+            <rect x="{{toon.rx}}" y="{{toon.r3}}" width="18" height="12" rx="6" fill="#1C1F24" opacity="{{toon.rOp}}"></rect>
+            <ellipse cx="{{toon.cx}}" cy="{{toon.top}}" rx="{{toon.lidRx}}" ry="14" fill="#4A7BF7"></ellipse>
+            <ellipse cx="{{toon.cx}}" cy="{{toon.top}}" rx="30" ry="9" fill="#EBD58F"></ellipse>
+            <ellipse cx="{{toon.cx}}" cy="{{toon.top}}" rx="17" ry="5" fill="#1A3A9E"></ellipse>
+            <rect x="{{toon.tagX}}" y="{{toon.tagY}}" width="34" height="16" rx="3" fill="#FFFFFF" opacity="{{toon.tagOp}}"></rect>
+            <text x="{{toon.tagTX}}" y="{{toon.tagTY}}" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="800" font-size="12" fill="#0A35C8" opacity="{{toon.tagOp}}">LTC</text>
+            <g class="ltc-wheel"><circle cx="{{toon.w1}}" cy="{{toon.wy}}" r="9" fill="#1C1F24"></circle><circle cx="{{toon.w1}}" cy="{{toon.wy}}" r="3.5" fill="#D7DCE2"></circle><rect x="{{toon.w1s}}" y="{{toon.wys}}" width="2.5" height="6" fill="#D7DCE2"></rect></g>
+            <g class="ltc-wheel"><circle cx="{{toon.w2}}" cy="{{toon.wy}}" r="9" fill="#1C1F24"></circle><circle cx="{{toon.w2}}" cy="{{toon.wy}}" r="3.5" fill="#D7DCE2"></circle><rect x="{{toon.w2s}}" y="{{toon.wys}}" width="2.5" height="6" fill="#D7DCE2"></rect></g>
+          </svg>
+        </div>
+      </div>
+      <div style="position: absolute; top: 18px; right: 18px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px">
+        <span style="background: #0A35C8; color: #FFFFFF; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; padding: 7px 12px; border-radius: 10px">{{model.name}}</span>
+        <span style="background: #FFFFFF; color: #071A52; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; padding: 7px 12px; border-radius: 10px">Line At {{model.height}}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KIT BUILDER -->
+<section id="kit" style="max-width: 1240px; margin: 0 auto; padding: 0 24px 96px">
+  <div style="display: flex; flex-wrap: wrap; border-radius: 6px; overflow: hidden; border: 1px solid #D3D9E2; background: #FFFFFF">
+    <div style="flex: 999 1 560px; min-width: 0; padding: 30px 34px">
+      <div style="display: inline-block; align-self: flex-start; width: fit-content; background: #FDECEF; color: #B31942; border: 0; border-radius: 999px; padding: 5px 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">Build A Crew Kit</div>
+      <h2 style="margin: 8px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(22px, 2.5vw, 31px); line-height: 1; text-transform: uppercase">Tap The Sizes You Use.</h2>
+      <div role="group" aria-label="Sizes in your kit" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 20px">
+        <sc-for list="{{kitTiles}}" as="k" hint-placeholder-count="4">
+          <button type="button" onClick="{{k.toggle}}" aria-pressed="{{k.pressed}}" style="text-align: left; min-height: 84px; padding: 14px; border-radius: 4px; border: 2px solid {{k.border}}; background: {{k.bg}}; color: #071A52; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; gap: 8px">
+            <span style="display: flex; justify-content: space-between; align-items: center; gap: 8px; width: 100%">
+              <span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 18px; text-transform: uppercase">{{k.name}}</span>
+              <span style="width: 20px; height: 20px; border-radius: 10px; border: 2px solid {{k.boxBorder}}; background: {{k.boxBg}}; flex: none"></span>
+            </span>
+            <span style="font-size: 13px; font-weight: 600; color: #3B4658">{{k.priceText}} each</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+    <div style="flex: 1 1 340px; min-width: 0; background: #0A35C8; color: #FFFFFF; padding: 30px; display: flex; flex-direction: column; gap: 12px">
+      <div style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #C9D6FF">Your Kit</div>
+      <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 29px; line-height: 1; text-transform: uppercase">{{kit.title}}</div>
+      <div style="font-size: 14px; line-height: 1.5; color: #C9D6FF">{{kit.note}}</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 18px; font-size: 14px; color: #C9D6FF">
+        <span>One by one <strong style="display: block; font-family: Poppins, sans-serif; font-size: 21px; color: #FFFFFF">{{kit.sumText}}</strong></span>
+        <span>Kit price <strong style="display: block; font-family: Poppins, sans-serif; font-size: 21px; color: #FFFFFF">{{kit.bundleText}}</strong></span>
+        <span>You keep <strong style="display: block; font-family: Poppins, sans-serif; font-size: 21px; color: #FFFFFF">{{kit.saveText}}</strong></span>
+      </div>
+      <button type="button" onClick="{{kit.add}}" style="margin-top: auto; min-height: 50px; background: #B31942; color: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase">{{kit.cta}}</button>
+    </div>
+  </div>
+</section>
+
+<!-- ACADEMY -->
+<section id="academy" style="background: #071A52; color: #FFFFFF">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px">
+      <div style="min-width: 0; max-width: 680px">
+        <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #E6A4AE">Installer Academy</div>
+        <h2 style="margin: 10px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(28px, 3.4vw, 44px); line-height: 0.98; text-transform: uppercase">Learn It From The Guys Who Do It.</h2>
+        <p style="margin: 12px 0 0; font-size: 17px; line-height: 1.6; color: #C9D6FF">Short, free how-to videos. Tap one to watch and see the steps.</p>
+      </div>
+      <div role="group" aria-label="Filter videos" style="display: flex; flex-wrap: wrap; gap: 8px">
+        <sc-for list="{{acad.filters}}" as="f" hint-placeholder-count="4">
+          <button type="button" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" style="min-height: 44px; padding: 0 16px; border-radius: 22px; border: 3px solid {{f.border}}; background: {{f.bg}}; color: {{f.fg}}; cursor: pointer; font-size: 14px; font-weight: 600">{{f.label}}</button>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 18px; margin-top: 34px">
+      <sc-for list="{{acad.videos}}" as="v" hint-placeholder-count="9">
+        <button type="button" onClick="{{v.open}}" style="text-align: left; padding: 0; border: 1px solid rgba(255,255,255,0.22); border-radius: 20px; overflow: hidden; background: #0526A0; box-shadow: 0 12px 30px rgba(0,0,0,0.25); color: #FFFFFF; cursor: pointer; display: flex; flex-direction: column">
+          <span style="position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; background: {{v.bg}}">
+            <sc-if value="{{v.hasImg}}" hint-placeholder-val="{{false}}"><img src="{{v.img}}" alt="" style="position: absolute; inset: 8% 10%; width: 80%; height: 84%; object-fit: contain"></sc-if>
+            <sc-if value="{{v.noImg}}" hint-placeholder-val="{{true}}"><span style="position: absolute; left: 16px; bottom: 10px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 45px; line-height: 1; color: #FFFFFF33">{{v.n}}</span></sc-if>
+            <span style="position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; background: #B31942; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px #00000055"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#FFFFFF"></path></svg></span>
+            <span style="position: absolute; top: 10px; left: 10px; background: #071A52CC; color: #FFFFFF; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 8px; border-radius: 2px">{{v.catLabel}}</span>
+            <span style="position: absolute; top: 10px; right: 10px; background: #FFFFFF; color: #0A35C8; font-size: 11px; font-weight: 700; padding: 5px 8px; border-radius: 2px">Coming Soon</span>
+          </span>
+          <span style="display: flex; flex-direction: column; gap: 6px; padding: 16px 18px 18px">
+            <span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 18px; line-height: 1.05; text-transform: uppercase">{{v.title}}</span>
+            <span style="font-size: 14px; line-height: 1.45; color: #C9D6FF">{{v.blurb}}</span>
+          </span>
+        </button>
+      </sc-for>
+    </div>
+    <p style="margin: 22px 0 0; font-size: 15px; color: #C9D6FF">Want a video on something else? <a href="sms:2397448403" style="color: #FFFFFF; font-weight: 700">Text us the topic.</a></p>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries" style="background: #0526A0; color: #FFFFFF">
+  <div aria-hidden="true" style="height: 12px; background: repeating-linear-gradient(90deg, #B31942 0 60px, #FFFFFF 60px 120px)"></div>
+  <div style="max-width: 1240px; margin: 0 auto; padding: 84px 24px">
+    <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #C9D6FF">Where Our Floors Work</div>
+    <h2 style="margin: 10px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(28px, 3.4vw, 44px); line-height: 0.98; text-transform: uppercase">Built For Floors That Take A Beating.</h2>
+    <p style="margin: 12px 0 0; font-size: 17px; color: #DDE5FF">Tap one to see a real job.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 32px">
+      <sc-for list="{{industryList}}" as="ind" hint-placeholder-count="8">
+        <button type="button" onClick="{{ind.open}}" style="text-align: left; background: #0A35C8; color: #FFFFFF; border: 1px solid rgba(255,255,255,0.22); border-radius: 20px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); padding: 20px; cursor: pointer; display: flex; align-items: center; gap: 14px; min-height: 84px">
+          <span style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #B31942; display: flex; align-items: center; justify-content: center; font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px">{{ind.n}}</span>
+          <span style="flex: 1; min-width: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.01em; text-transform: uppercase; line-height: 1.1">{{ind.label}}</span>
+          <span aria-hidden="true" style="flex: none; font-size: 22px; font-weight: 700">+</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+    <div style="min-width: 0">
+      <div style="display: inline-block; align-self: flex-start; width: fit-content; background: #FDECEF; color: #B31942; border: 0; border-radius: 999px; padding: 5px 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">From The Field</div>
+      <h2 style="margin: 10px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(28px, 3.4vw, 44px); line-height: 0.98; text-transform: uppercase">What Installers Say.</h2>
+    </div>
+    <div style="display: flex; gap: 10px">
+      <button type="button" onClick="{{rev.prev}}" aria-label="Previous review" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid #0A35C8; background: #FFFFFF; color: #0A35C8; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A35C8" stroke-width="3"><path d="M15 5l-7 7 7 7"></path></svg></button>
+      <button type="button" onClick="{{rev.next}}" aria-label="Next review" style="width: 52px; height: 52px; border-radius: 50%; border: 0; background: #0A35C8; color: #FFFFFF; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3"><path d="M9 5l7 7-7 7"></path></svg></button>
+    </div>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-top: 32px">
+    <sc-for list="{{rev.cards}}" as="c" hint-placeholder-count="2">
+      <figure style="margin: 0; background: #FFFFFF; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); border-top: 5px solid {{c.color}}; border-radius: 6px; padding: 28px; display: flex; flex-direction: column; gap: 16px; animation: ltcFade 300ms ease">
+        <svg aria-hidden="true" width="42" height="32" viewBox="0 0 42 32"><path d="M0 32V18C0 7 6 1 16 0l2 5c-6 2-9 6-9 11h8v16H0zm24 0V18c0-11 6-17 16-18l2 5c-6 2-9 6-9 11h8v16H24z" fill="{{c.color}}"></path></svg>
+        <blockquote style="margin: 0; font-size: 20px; line-height: 1.5; color: #071A52; font-weight: 500">{{c.quote}}</blockquote>
+        <figcaption style="margin-top: auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px">
+          <span><strong style="display: block; font-family: Poppins, sans-serif; font-size: 16px; text-transform: uppercase; color: #0A35C8">{{c.name}}</strong><span style="font-size: 14px; color: #4A5568">{{c.trade}} · {{c.city}}</span></span>
+          <span style="background: #EEF3FA; color: #0A35C8; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 10px; border-radius: 10px">{{c.product}}</span>
+        </figcaption>
+      </figure>
+    </sc-for>
+  </div>
+  <div style="display: flex; justify-content: center; gap: 8px; margin-top: 20px">
+    <sc-for list="{{rev.dots}}" as="d" hint-placeholder-count="3">
+      <button type="button" onClick="{{d.pick}}" aria-label="{{d.label}}" aria-pressed="{{d.pressed}}" style="width: {{d.w}}px; height: 12px; border-radius: 6px; border: 0; padding: 0; background: {{d.bg}}; cursor: pointer; transition: width 250ms ease"></button>
+    </sc-for>
+  </div>
+  <p style="margin: 14px 0 0; text-align: center; font-size: 13px; color: #4A5568">Placeholder reviews — swap in approved installer quotes.</p>
+</section>
+
+<!-- STORY -->
+<section id="story" style="background: #FFFFFF">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 96px 24px">
+    <div style="display: flex; flex-wrap: wrap; gap: 48px">
+      <div style="flex: 1 1 380px; min-width: 0">
+        <div style="display: inline-block; align-self: flex-start; width: fit-content; background: #FDECEF; color: #B31942; border: 0; border-radius: 999px; padding: 5px 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">Our Story</div>
+        <h2 style="margin: 10px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(30px, 3.7vw, 47px); line-height: 0.95; text-transform: uppercase">Built On Jobsites. <span style="color: #B31942">Not In A Boardroom.</span></h2>
+        <p style="margin: 20px 0 0; font-size: 18px; line-height: 1.65; color: #3B4658">Dick and his son Brandon have put down floors side by side in Southern California for more than ten years. When the products and tools they needed didn't exist, they made them.</p>
+        <p style="margin: 14px 0 0; font-size: 18px; line-height: 1.65; color: #3B4658">Veteran-owned. Family-run. Faith-based. Our name is on everything we sell.</p>
+        <div style="margin-top: 26px; padding: 20px 24px; background: #0A35C8; color: #FFFFFF; border-radius: 4px">
+          <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #C9D6FF">Our Mission</div>
+          <div style="margin-top: 6px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 26px; line-height: 1.05; text-transform: uppercase">Help Installers Build Better Businesses.</div>
+        </div>
+      </div>
+      <div style="flex: 1 1 420px; min-width: 0">
+        <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #4A5568">How We Got Here</div>
+        <ol style="list-style: none; margin: 16px 0 0; padding: 0; border-left: 3px solid #0A35C8">
+          <sc-for list="{{timeline}}" as="t" hint-placeholder-count="5">
+            <li style="position: relative; padding: 0 0 24px 28px">
+              <span aria-hidden="true" style="position: absolute; left: -9px; top: 4px; width: 15px; height: 15px; background: #B31942; border: 1px solid rgba(255,255,255,0.22); border-radius: 50%"></span>
+              <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 18px; text-transform: uppercase; color: #0A35C8">{{t.title}}</div>
+              <div style="margin-top: 4px; font-size: 15px; line-height: 1.55; color: #3B4658">{{t.body}}</div>
+            </li>
+          </sc-for>
+        </ol>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 44px">
+      <sc-for list="{{values}}" as="v" hint-placeholder-count="4">
+        <div style="border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); border-top: 5px solid {{v.color}}; border-radius: 4px; padding: 20px; background: #F7F8FA">
+          <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 21px; text-transform: uppercase; color: #0A35C8">{{v.title}}</div>
+          <div style="margin-top: 6px; font-size: 15px; line-height: 1.55; color: #3B4658">{{v.body}}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- SALUTE -->
+<section id="salute" style="background: #0A35C8; color: #FFFFFF; position: relative; overflow: hidden">
+  <div aria-hidden="true" style="position: absolute; left: 0; top: 0; bottom: 0; width: 14px; background: repeating-linear-gradient(180deg, #B31942 0 30px, #FFFFFF 30px 60px)"></div>
+  <div style="max-width: 1240px; margin: 0 auto; padding: 64px 24px 64px 44px; display: flex; flex-wrap: wrap; gap: 28px; align-items: center; justify-content: space-between">
+    <div style="flex: 999 1 520px; min-width: 0">
+      <div style="display: flex; align-items: center; gap: 10px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #C9D6FF"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg>From One Vet-Owned Shop To You</div>
+      <h2 style="margin: 10px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(25px, 3.0vw, 37px); line-height: 1.02; text-transform: uppercase">Served? Serving? <span style="background: #B31942; padding: 0 8px">Thank You.</span></h2>
+      <p style="margin: 14px 0 0; max-width: 560px; font-size: 17px; line-height: 1.6; color: #DDE5FF">Veterans, active duty and first responders get <strong style="color: #FFFFFF">[X]% off</strong> Liberty tools.</p>
+    </div>
+    <div style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 10px; align-items: flex-start">
+      <sc-if value="{{salute.open}}" hint-placeholder-val="{{true}}">
+        <div role="group" aria-label="I am" style="display: flex; flex-wrap: wrap; gap: 8px">
+          <sc-for list="{{salute.types}}" as="t" hint-placeholder-count="3">
+            <button type="button" onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="min-height: 44px; padding: 0 14px; border-radius: 22px; border: 3px solid {{t.border}}; background: {{t.bg}}; color: {{t.fg}}; cursor: pointer; font-size: 14px; font-weight: 700">{{t.label}}</button>
+          </sc-for>
+        </div>
+        <button type="button" onClick="{{salute.claim}}" style="display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; background: #B31942; color: #FFFFFF; text-decoration: none; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; min-height: 52px; font-size: 14px">Claim My Discount</button>
+      </sc-if>
+      <sc-if value="{{salute.done}}" hint-placeholder-val="{{false}}">
+        <div style="background: #FFFFFF; color: #0A35C8; border-radius: 6px; padding: 18px 20px; animation: ltcPop 260ms ease">
+          <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 21px; text-transform: uppercase">Thanks For Your Service.</div>
+          <div style="margin-top: 6px; font-size: 15px; color: #3B4658">We'll verify and send your code. Questions? Text 239-744-8403.</div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<!-- WHERE TO BUY -->
+<section id="wtb" style="max-width: 1240px; margin: 0 auto; padding: 96px 24px 40px">
+  <div style="display: inline-block; align-self: flex-start; width: fit-content; background: #FDECEF; color: #B31942; border: 0; border-radius: 999px; padding: 5px 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">Where To Buy</div>
+  <h2 style="margin: 10px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(28px, 3.4vw, 44px); line-height: 0.98; text-transform: uppercase">Find Liberty Near You.</h2>
+  <p style="margin: 12px 0 0; font-size: 17px; line-height: 1.6; color: #3B4658">Installers: find your closest dealer. Dealers: see if your territory is open.</p>
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 30px; align-items: stretch">
+    <div style="flex: 999 1 580px; min-width: 0; background: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 24px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); padding: 22px">
+      <div role="group" aria-label="Pick your state on the map" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 5px; max-width: 600px; margin: 0 auto">
+        <sc-for list="{{wtb.tiles}}" as="t" hint-placeholder-count="51">
+          <button type="button" class="ltc-tile" onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" aria-label="{{t.name}}" title="{{t.name}}" style="grid-column: {{t.col}}; grid-row: {{t.row}}; aspect-ratio: 1 / 1; min-width: 0; padding: 0; border: 2px solid {{t.ring}}; border-radius: 5px; background: {{t.bg}}; color: {{t.fg}}; cursor: pointer; font-size: 12px; font-weight: 800; letter-spacing: 0.02em; transition: background 200ms ease">{{t.id}}</button>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px; font-size: 13px; font-weight: 600; color: #3B4658">
+        <span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 10px; background: #B31942"></span>Liberty HQ</span>
+        <span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 10px; background: #0A35C8"></span>Your pick</span>
+        <span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 10px; background: #DCE4F0"></span>Ships to all 50 states</span>
+      </div>
+    </div>
+    <div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+      <div style="background: #0A35C8; color: #FFFFFF; border-radius: 20px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); padding: 24px; display: flex; flex-direction: column; gap: 10px">
+        <label style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #C9D6FF">Or Pick From A List
+          <select value="{{wtb.id}}" onChange="{{wtb.onSelect}}" style="display: block; width: 100%; margin-top: 8px; height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF; text-transform: none; letter-spacing: 0">
+            <sc-for list="{{wtb.options}}" as="o" hint-placeholder-count="51"><option value="{{o.id}}">{{o.name}}</option></sc-for>
+          </select>
+        </label>
+        <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 27px; line-height: 1; text-transform: uppercase; margin-top: 6px">{{wtb.name}}</div>
+        <div style="font-size: 15px; line-height: 1.55; color: #DDE5FF">{{wtb.msg}}</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px">
+          <a href="#tools" style="display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; background: #B31942; color: #FFFFFF; text-decoration: none; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; min-height: 44px; font-size: 13px">Ship It To Me</a>
+          <a href="#schedule" onClick="{{wtb.stock}}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 2px solid #FFFFFF; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">Stock Us In {{wtb.id}}</a>
+        </div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 24px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); padding: 22px">
+        <sc-if value="{{wtb.asking}}" hint-placeholder-val="{{true}}">
+          <form onSubmit="{{wtb.submit}}" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; align-items: end">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Zip<input type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF"></label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Cell<input type="tel" autocomplete="tel" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF"></label>
+            <button type="submit" style="grid-column: 1 / -1; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; background: #0A35C8; color: #FFFFFF; text-decoration: none; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">Text Me The Closest Seller</button>
+          </form>
+        </sc-if>
+        <sc-if value="{{wtb.sent}}" hint-placeholder-val="{{false}}">
+          <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 19px; text-transform: uppercase; color: #0A35C8">Got It.</div>
+          <div style="margin-top: 4px; font-size: 15px; color: #3B4658">We'll text you the closest place to buy Liberty.</div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners" style="max-width: 1240px; margin: 0 auto; padding: 96px 24px 64px">
+  <div style="display: inline-block; align-self: flex-start; width: fit-content; background: #FDECEF; color: #B31942; border: 0; border-radius: 999px; padding: 5px 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">Partner With Us</div>
+  <h2 style="margin: 10px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(28px, 3.4vw, 44px); line-height: 0.98; text-transform: uppercase">Stock It. Standardize It. Share It.</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 36px">
+    <div style="background: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 20px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); padding: 28px; display: flex; flex-direction: column; gap: 12px">
+      <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B31942">Stores & Distributors</div>
+      <h3 style="margin: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; color: #0A35C8">Carry Our Line</h3>
+      <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #3B4658">Coatings, tools or both.</p>
+      <ul style="margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.8; color: #071A52"><li>Your cost shown next to retail</li><li>We train your counter staff</li><li>Demo-ready displays</li><li>Help with reorders</li></ul>
+      <a href="#schedule" onClick="{{bookRetail}}" style="margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">Let's Talk →</a>
+    </div>
+    <div style="background: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 20px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); padding: 28px; display: flex; flex-direction: column; gap: 12px">
+      <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B31942">Big Accounts</div>
+      <h3 style="margin: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; color: #0A35C8">Equip Every Crew</h3>
+      <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #3B4658">One supplier for every crew and every site.</p>
+      <ul style="margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.8; color: #071A52"><li>Email us a PO</li><li>We ship to every location</li><li>Tracking sent to you</li><li>We check in after it lands</li></ul>
+      <a href="#schedule" onClick="{{bookEnterprise}}" style="margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; background: #0A35C8; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">Set Me Up →</a>
+    </div>
+    <div id="ambassadors" style="background: #0A35C8; color: #FFFFFF; border-radius: 20px; padding: 28px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); display: flex; flex-direction: column; gap: 12px">
+      <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #C9D6FF">Ambassadors</div>
+      <h3 style="margin: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase">Earn $10 Per Caddy</h3>
+      <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #DDE5FF">Post the demo with your link. Get paid every month.</p>
+      <label for="ltc-amb" style="font-size: 13px; font-weight: 700; color: #C9D6FF">{{amb}} caddies a month = <span style="color: #FFFFFF; font-size: 18px">{{ambMonth}}</span> / mo · {{ambYear}} / yr</label>
+      <input id="ltc-amb" type="range" min="1" max="150" step="1" value="{{amb}}" onChange="{{onAmb}}" style="width: 100%; height: 40px">
+      <a href="#schedule" onClick="{{applyAmb}}" style="margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">Sign Me Up →</a>
+      <span style="font-size: 12px; color: #C9D6FF">Program terms apply. No Amazon listings or resale.</span>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section id="careers" style="background: #FFFFFF; border-top: 1px solid #DCE1E8; border-bottom: 1px solid #DCE1E8">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 90px 24px">
+    <div style="display: inline-block; align-self: flex-start; width: fit-content; background: #FDECEF; color: #B31942; border: 0; border-radius: 999px; padding: 5px 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">Careers</div>
+    <h2 style="margin: 10px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(28px, 3.4vw, 44px); line-height: 0.98; text-transform: uppercase">Join The Crew.</h2>
+    <p style="margin: 12px 0 0; max-width: 640px; font-size: 17px; line-height: 1.6; color: #3B4658">We're a family business that's growing fast. If you like hard work and good people, we'd like to meet you.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 32px">
+      <sc-for list="{{jobs}}" as="j" hint-placeholder-count="5">
+        <article style="border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); border-top: 5px solid {{j.color}}; border-radius: 6px; padding: 22px; background: #F7F8FA; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{j.tags}}" as="tg" hint-placeholder-count="2"><span style="background: #FFFFFF; border: 1px solid #D3D9E2; color: #3B4658; font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 10px">{{tg}}</span></sc-for>
+          </div>
+          <h3 style="margin: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: 18px; line-height: 1.05; text-transform: uppercase; color: #0A35C8; overflow-wrap: anywhere">{{j.title}}</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #3B4658">{{j.blurb}}</p>
+          <a href="#apply" onClick="{{j.apply}}" style="margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; background: #0A35C8; color: #FFFFFF; text-decoration: none; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; min-height: 44px; font-size: 13px">Apply →</a>
+        </article>
+      </sc-for>
+    </div>
+    <div id="apply" style="margin-top: 28px; background: #0A35C8; color: #FFFFFF; border-radius: 20px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); padding: 28px">
+      <sc-if value="{{career.open}}" hint-placeholder-val="{{true}}">
+        <form onSubmit="{{career.submit}}" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+          <div style="grid-column: 1 / -1; font-family: Poppins, sans-serif; font-weight: 800; font-size: 24px; text-transform: uppercase">Apply Now</div>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658; color: #C9D6FF">Position
+            <select value="{{career.role}}" onChange="{{career.onRole}}" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF">
+              <sc-for list="{{career.roles}}" as="r" hint-placeholder-count="5"><option value="{{r.title}}">{{r.title}}</option></sc-for>
+            </select>
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658; color: #C9D6FF">Name<input type="text" autocomplete="name" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF"></label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658; color: #C9D6FF">Email<input type="email" autocomplete="email" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF"></label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658; color: #C9D6FF">Cell<input type="tel" autocomplete="tel" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF"></label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658; color: #C9D6FF">Resume<input type="file" accept=".pdf,.doc,.docx" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF; padding-top: 10px"></label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658; color: #C9D6FF; grid-column: 1 / -1">Why You?<textarea rows="3" style="padding: 12px 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; resize: vertical"></textarea></label>
+          <button type="submit" style="grid-column: 1 / -1; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; background: #B31942; color: #FFFFFF; text-decoration: none; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; min-height: 52px; font-size: 14px">Send My Application</button>
+        </form>
+      </sc-if>
+      <sc-if value="{{career.sent}}" hint-placeholder-val="{{false}}">
+        <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase">Application Sent.</div>
+        <p style="margin: 8px 0 0; font-size: 16px; color: #DDE5FF">Thanks for applying for {{career.role}}. We'll be in touch. Questions? Text 239-744-8403.</p>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule" style="max-width: 1240px; margin: 0 auto; padding: 32px 24px 96px">
+  <div style="display: flex; flex-wrap: wrap; gap: 44px; align-items: flex-start">
+    <div style="flex: 1 1 300px; min-width: 0">
+      <div style="display: inline-block; align-self: flex-start; width: fit-content; background: #FDECEF; color: #B31942; border: 0; border-radius: 999px; padding: 5px 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">Book A Call</div>
+      <h2 style="margin: 10px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(28px, 3.3vw, 41px); line-height: 0.98; text-transform: uppercase">Talk To A Real Installer.</h2>
+      <p style="margin: 18px 0 0; font-size: 17px; line-height: 1.6; color: #3B4658">Bids, stocking or vendor setup. Pick a time and we'll come ready.</p>
+      <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 14px; font-size: 15px">
+        <div><div style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #4A5568">Coatings</div><a href="tel:8002084104" style="font-weight: 700; font-size: 19px">800-208-4104</a></div>
+        <div><div style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #4A5568">Tools · Text Or Call 24/7</div><a href="tel:2397448403" style="font-weight: 700; font-size: 19px">239-744-8403</a><br><a href="mailto:sales@libertytoolcompany.com">sales@libertytoolcompany.com</a></div>
+        <div><div style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #4A5568">Shop</div>712 W. Cienega Ave, Unit A<br>San Dimas, CA 91773</div>
+      </div>
+    </div>
+    <div style="flex: 999 1 600px; min-width: 0; background: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 20px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); overflow: hidden">
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid #D3D9E2">
+        <sc-for list="{{schedSteps}}" as="st" hint-placeholder-count="3">
+          <div style="padding: 14px 16px; background: {{st.bg}}; color: {{st.fg}}; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase">{{st.label}}</div>
+        </sc-for>
+      </div>
+      <sc-if value="{{showStep1}}" hint-placeholder-val="{{true}}">
+        <div style="padding: 26px; display: flex; flex-direction: column; gap: 20px">
+          <div>
+            <div style="font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5568">What's It About?</div>
+            <div role="group" aria-label="Topic" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px">
+              <sc-for list="{{buyerTypes}}" as="b" hint-placeholder-count="5">
+                <button type="button" onClick="{{b.pick}}" aria-pressed="{{b.pressed}}" style="min-height: 44px; padding: 0 14px; border-radius: 22px; border: 3px solid {{b.border}}; background: {{b.bg}}; color: {{b.fg}}; cursor: pointer; font-size: 14px; font-weight: 600">{{b.label}}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5568">Pick A Day</div>
+            <div role="group" aria-label="Day" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; margin-top: 10px">
+              <sc-for list="{{days}}" as="d" hint-placeholder-count="6">
+                <button type="button" onClick="{{d.pick}}" aria-pressed="{{d.pressed}}" style="min-height: 62px; border-radius: 4px; border: 2px solid {{d.border}}; background: {{d.bg}}; color: {{d.fg}}; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px">
+                  <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase">{{d.dow}}</span>
+                  <span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px">{{d.md}}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5568">Pick A Time (Pacific)</div>
+            <div role="group" aria-label="Time" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin-top: 10px">
+              <sc-for list="{{slots}}" as="t" hint-placeholder-count="6">
+                <button type="button" onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="min-height: 46px; border-radius: 4px; border: 2px solid {{t.border}}; background: {{t.bg}}; color: {{t.fg}}; cursor: pointer; font-size: 15px; font-weight: 600">{{t.label}}</button>
+              </sc-for>
+            </div>
+          </div>
+          <button type="button" onClick="{{toStep2}}" disabled="{{noSlot}}" style="min-height: 54px; background: {{continueBg}}; color: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase">{{continueLabel}}</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{showStep2}}" hint-placeholder-val="{{false}}">
+        <form onSubmit="{{book}}" style="padding: 26px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
+          <div style="grid-column: 1 / -1; background: #F4F5F7; border-radius: 10px; padding: 12px 14px; font-size: 15px; font-weight: 600; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px">
+            <span>{{whenText}} · {{buyerLabel}}</span>
+            <button type="button" onClick="{{toStep1}}" style="background: transparent; border: 0; color: #0A35C8; font-weight: 700; cursor: pointer; text-decoration: underline; min-height: 24px">Change</button>
+          </div>
+          <sc-if value="{{hasQuote}}" hint-placeholder-val="{{false}}">
+            <div style="grid-column: 1 / -1; border: 2px dashed #B31942; border-radius: 4px; padding: 12px 14px">
+              <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #B31942">Your Quote List</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px">
+                <sc-for list="{{quoteItems}}" as="qi" hint-placeholder-count="2">
+                  <span style="display: inline-flex; align-items: center; gap: 6px; background: #EEF3FA; color: #0A35C8; border-radius: 20px; padding: 4px 4px 4px 12px; font-size: 14px; font-weight: 600">{{qi.name}}<button type="button" onClick="{{qi.remove}}" aria-label="Remove {{qi.name}}" style="width: 28px; height: 28px; border-radius: 50%; border: 0; background: #FFFFFF; color: #0A35C8; cursor: pointer; font-weight: 700">×</button></span>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Name
+            <input type="text" autocomplete="name" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Company
+            <input type="text" autocomplete="organization" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Email
+            <input type="email" autocomplete="email" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Cell (For A Text Reminder)
+            <input type="tel" autocomplete="tel" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52">
+          </label>
+          <label style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Tell Us About The Job
+            <textarea rows="3" style="padding: 12px 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; resize: vertical">{{prefill}}</textarea>
+          </label>
+          <button type="submit" style="grid-column: 1 / -1; min-height: 54px; background: #B31942; color: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase">Book It</button>
+        </form>
+      </sc-if>
+      <sc-if value="{{showStep3}}" hint-placeholder-val="{{false}}">
+        <div style="padding: 44px 28px; display: flex; flex-direction: column; gap: 14px; animation: ltcFade 300ms ease">
+          <span style="width: 56px; height: 56px; border-radius: 50%; background: #0A35C8; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3"><path d="M4 12.5l5 5L20 6.5"></path></svg></span>
+          <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 32px; line-height: 1; text-transform: uppercase; color: #0A35C8">You're Booked.</div>
+          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #3B4658">{{whenText}} · {{buyerLabel}}. Watch for a confirmation by email and text.</p>
+          <button type="button" onClick="{{resetSched}}" style="align-self: flex-start; min-height: 44px; padding: 0 18px; background: transparent; border: 2px solid #0A35C8; border-radius: 10px; color: #0A35C8; cursor: pointer; font-weight: 700">Book Another</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background: #FFFFFF; border-top: 1px solid #DCE1E8">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 90px 24px">
+    <h2 style="margin: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(28px, 3.4vw, 44px); line-height: 0.98; text-transform: uppercase">Quick Answers.</h2>
+    <div style="margin-top: 30px; border-top: 2px solid #0A35C8">
+      <sc-for list="{{faqs}}" as="q" hint-placeholder-count="7">
+        <div style="border-bottom: 1px solid #D3D9E2">
+          <button type="button" onClick="{{q.toggle}}" aria-expanded="{{q.expanded}}" style="width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px 0; min-height: 44px; background: transparent; border: 0; text-align: left; color: #071A52; cursor: pointer">
+            <span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 18px">{{q.q}}</span>
+            <span style="flex: none; width: 34px; height: 34px; border-radius: 10px; background: {{q.signBg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700">{{q.sign}}</span>
+          </button>
+          <sc-if value="{{q.isOpen}}" hint-placeholder-val="{{false}}">
+            <p style="margin: 0; padding: 0 0 22px; max-width: 820px; font-size: 16px; line-height: 1.65; color: #3B4658">{{q.a}}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<div aria-hidden="true" style="background: #B31942; color: #FFFFFF; overflow: hidden; border-top: 1px solid rgba(7,26,82,0.08); border-bottom: 1px solid rgba(7,26,82,0.08)">
+  <div class="ltc2-marq" style="display: flex; width: max-content; padding: 14px 0; font-family: Poppins, sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap"><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">For Installers. By Installers.<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Veteran-Owned<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Family-Operated<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Made In The USA<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Urethane Cement Systems<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">LTC Coating Tools<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">The Tape Caddy<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Faith-Based<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">For Installers. By Installers.<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Veteran-Owned<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Family-Operated<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Made In The USA<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Urethane Cement Systems<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">LTC Coating Tools<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">The Tape Caddy<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 22px; padding-right: 22px">Faith-Based<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg></span></div>
+</div>
+<!-- FINAL CTA -->
+<section style="background: #B31942; color: #FFFFFF">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 70px 24px; display: flex; flex-wrap: wrap; gap: 28px; align-items: center; justify-content: space-between">
+    <h2 style="margin: 0; flex: 1 1 480px; min-width: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(31px, 4.0vw, 53px); line-height: 0.92; text-transform: uppercase">For Installers.<br>By Installers.</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px">
+      <a href="#finder" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 24px; background: #FFFFFF; color: #B31942; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase">Find My System</a>
+      <a href="#partners" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 24px; background: #0A35C8; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase">Carry Liberty</a>
+      <a href="#schedule" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 24px; border: 2px solid #FFFFFF; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase">Call Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: #0A35C8; color: #DDE5FF">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 60px 24px 28px; display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between">
+    <div style="flex: 1 1 300px; min-width: 0">
+      <img src="/assets/logo-white.png" alt="Liberty Tool Company — LTC Floor Coating Tools, Made in the USA" style="height: 84px; width: auto; display: block">
+      <div style="margin-top: 16px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.03em; text-transform: uppercase; color: #FFFFFF">For Installers. By Installers.</div>
+      <div style="margin-top: 6px; font-size: 14px">Veteran-Owned · Family-Operated · Faith-Based · Made In The USA</div>
+    </div>
+    <div style="flex: 1 1 160px; min-width: 0; display: flex; flex-direction: column; gap: 10px; font-size: 15px">
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #FFFFFF">Coatings</div>
+      <a href="#finder" style="color: #DDE5FF; text-decoration: none">Floor Finder</a>
+      <a href="#systems" style="color: #DDE5FF; text-decoration: none">Coating Systems</a>
+      <a href="#products" style="color: #DDE5FF; text-decoration: none">Products</a>
+      <a href="#industries" style="color: #DDE5FF; text-decoration: none">Industries</a>
+      <a href="#bid" style="color: #DDE5FF; text-decoration: none">Bid Builder</a>
+      <a href="#wtb" style="color: #DDE5FF; text-decoration: none">Where To Buy</a>
+    </div>
+    <div style="flex: 1 1 160px; min-width: 0; display: flex; flex-direction: column; gap: 10px; font-size: 15px">
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #FFFFFF">Tools</div>
+      <a href="#tools" style="color: #DDE5FF; text-decoration: none">Coating Trowels</a>
+      <a href="#find" style="color: #DDE5FF; text-decoration: none">The Tape Caddy</a>
+      <a href="#kit" style="color: #DDE5FF; text-decoration: none">Crew Kits</a>
+      <a href="#ambassadors" style="color: #DDE5FF; text-decoration: none">Ambassadors</a>
+      <a href="#academy" style="color: #DDE5FF; text-decoration: none">Installer Academy</a>
+      <a href="#salute" style="color: #DDE5FF; text-decoration: none">Veteran Discount</a>
+    </div>
+    <div style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 10px; font-size: 15px">
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #FFFFFF">Contact</div>
+      <span>Coatings <a href="tel:8002084104" style="color: #FFFFFF; font-weight: 700">800-208-4104</a></span>
+      <span>Tools, 24/7 <a href="tel:2397448403" style="color: #FFFFFF; font-weight: 700">239-744-8403</a></span>
+      <a href="mailto:sales@libertytoolcompany.com" style="color: #DDE5FF">sales@libertytoolcompany.com</a>
+      <span>712 W. Cienega Ave, Unit A<br>San Dimas, CA 91773</span>
+    </div>
+  </div>
+  <div style="max-width: 1240px; margin: 0 auto; padding: 20px 24px 32px; border-top: 1px solid #ffffff22; font-size: 13px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px">
+    <span>© 2026 Liberty Industrial Coating Systems Inc. d/b/a Liberty Tool Company</span>
+    <span style="display: flex; flex-wrap: wrap; gap: 16px"><a href="#privacy" style="color: #DDE5FF">Privacy Policy</a><a href="#terms" style="color: #DDE5FF">Terms</a><a href="#ambassador-terms" style="color: #DDE5FF">Ambassador Terms</a><a href="#careers" style="color: #DDE5FF">Careers</a></span>
+  </div>
+</footer>
+
+<!-- TEXT US BUBBLE -->
+<div style="position: fixed; left: 16px; bottom: 16px; z-index: 21; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; max-width: calc(100% - 32px)">
+  <sc-if value="{{text.open}}" hint-placeholder-val="{{false}}">
+    <div style="width: 300px; max-width: 100%; background: #FFFFFF; border-radius: 10px; box-shadow: 0 14px 40px #071A5240; overflow: hidden; animation: ltcPop 220ms ease">
+      <div style="background: #0A35C8; color: #FFFFFF; padding: 16px 18px">
+        <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 18px; text-transform: uppercase">Text A Real Person</div>
+        <div style="font-size: 13px; color: #C9D6FF; margin-top: 2px">Tools line answers 24/7 · 239-744-8403</div>
+      </div>
+      <div style="padding: 14px; display: flex; flex-direction: column; gap: 8px">
+        <sc-for list="{{text.chips}}" as="c" hint-placeholder-count="4">
+          <a href="{{c.href}}" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 44px; padding: 0 14px; border-radius: 22px; background: #EEF3FA; color: #0A35C8; text-decoration: none; font-size: 14px; font-weight: 700">{{c.label}}<span aria-hidden="true">→</span></a>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+  <button type="button" onClick="{{text.toggle}}" aria-expanded="{{text.expanded}}" style="display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 16px; background: #0A35C8; color: #FFFFFF; border: 0; border-radius: 30px; box-shadow: 0 6px 18px #0A35C855; cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase">
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path></svg>
+    {{text.label}}
+  </button>
+</div>
+
+<!-- FLOATING AMBASSADOR BUTTON -->
+<a href="#ambassadors" style="position: fixed; right: 16px; bottom: 16px; z-index: 20; display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 16px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 30px; box-shadow: 0 6px 18px #0A35C855; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase">
+  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.6 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z" fill="#FFFFFF"></path></svg>
+  Ambassador
+</a>
+
+<!-- POPUP -->
+<sc-if value="{{modalOpen}}" hint-placeholder-val="{{false}}">
+  <div style="position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 20px; animation: ltcFade 200ms ease">
+    <button type="button" onClick="{{closeModal}}" aria-label="Close" style="position: absolute; inset: 0; background: #071A52C7; border: 0; cursor: pointer"></button>
+    <div role="dialog" aria-modal="true" aria-label="{{modal.title}}" style="position: relative; width: 100%; max-width: 980px; max-height: 100%; overflow: auto; background: #FFFFFF; border-radius: 8px; box-shadow: 0 24px 60px #071A5266; animation: ltcPop 260ms ease">
+      <div style="height: 8px; background: repeating-linear-gradient(90deg, #B31942 0 40px, #FFFFFF 40px 80px, #0A35C8 80px 120px)"></div>
+      <button type="button" onClick="{{closeModal}}" aria-label="Close" style="position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #0A35C8; color: #FFFFFF; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+      <div style="display: flex; flex-wrap: wrap">
+        <div style="flex: 1 1 380px; min-width: 0; padding: 24px; background: #F4F5F7; display: flex; flex-direction: column; gap: 12px">
+          <sc-if value="{{modal.isBA}}" hint-placeholder-val="{{false}}">
+            <div style="position: relative; aspect-ratio: 4 / 3; border-radius: 6px; overflow: hidden; background: repeating-linear-gradient(135deg, #C9CED6 0 12px, #C1C7D0 12px 24px)">
+              <span style="position: absolute; left: 62%; top: 50%; transform: translateY(-50%); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3B4658">Before Photo</span>
+              <div style="position: absolute; inset: 0; clip-path: inset(0 {{modal.baClip}}% 0 0); background: #EEF3FA">
+                <span style="position: absolute; left: 12%; top: 50%; transform: translateY(-50%); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #0A35C8">After Photo</span>
+              </div>
+              <div aria-hidden="true" style="position: absolute; top: 0; bottom: 0; left: {{modal.ba}}%; width: 4px; margin-left: -2px; background: #B31942"></div>
+              <div aria-hidden="true" style="position: absolute; top: 50%; left: {{modal.ba}}%; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; background: #B31942; border: 1px solid rgba(255,255,255,0.22); display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6"></path></svg></div>
+              <span style="position: absolute; top: 10px; left: 10px; background: #0A35C8; color: #FFFFFF; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; padding: 5px 8px; border-radius: 2px">AFTER</span>
+              <span style="position: absolute; top: 10px; right: 10px; background: #FFFFFF; color: #071A52; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; padding: 5px 8px; border-radius: 2px">BEFORE</span>
+            </div>
+            <label style="display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5568">Drag
+              <input type="range" min="0" max="100" step="1" value="{{modal.ba}}" onChange="{{modal.onBa}}" aria-label="Compare before and after" style="flex: 1; min-width: 0; height: 40px">
+            </label>
+          </sc-if>
+          <sc-if value="{{modal.isVideo}}" hint-placeholder-val="{{false}}">
+            <div style="position: relative; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #071A52; display: flex; align-items: center; justify-content: center">
+              <span style="width: 72px; height: 72px; border-radius: 50%; background: #B31942; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#FFFFFF"></path></svg></span>
+              <span style="position: absolute; left: 12px; bottom: 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #C9D6FF">Video Coming Soon</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{modal.isPhoto}}" hint-placeholder-val="{{true}}">
+          <div style="position: relative; aspect-ratio: 4 / 3; border-radius: 6px; overflow: hidden; background: {{modal.mainBg}}; border: 2px dashed {{modal.mainBorder}}; display: flex; align-items: center; justify-content: center; text-align: center; padding: 16px; box-sizing: border-box">
+            <sc-if value="{{modal.hasMain}}" hint-placeholder-val="{{false}}">
+              <img src="{{modal.mainImg}}" alt="{{modal.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block">
+            </sc-if>
+            <sc-if value="{{modal.noMain}}" hint-placeholder-val="{{true}}">
+              <span style="display: flex; flex-direction: column; align-items: center; gap: 10px; color: #4A5568">
+                <svg aria-hidden="true" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#8A94A3" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="M21 16l-5-5-8 8"></path></svg>
+                <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase">{{modal.mainLabel}}</span>
+              </span>
+            </sc-if>
+          </div>
+          </sc-if>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+            <sc-for list="{{modal.thumbs}}" as="t" hint-placeholder-count="3">
+              <button type="button" onClick="{{t.pick}}" aria-label="{{t.label}}" style="position: relative; aspect-ratio: 4 / 3; border-radius: 4px; border: 3px solid {{t.ring}}; background: #E6EAF0; cursor: pointer; padding: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden">
+                <sc-if value="{{t.hasImg}}" hint-placeholder-val="{{false}}"><img src="{{t.img}}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain"></sc-if>
+                <sc-if value="{{t.noImg}}" hint-placeholder-val="{{true}}"><span style="font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5568; line-height: 1.2">{{t.short}}</span></sc-if>
+              </button>
+            </sc-for>
+          </div>
+          <div style="font-size: 12px; color: #4A5568">{{modal.photoNote}}</div>
+        </div>
+        <div style="flex: 999 1 380px; min-width: 0; padding: 32px 30px 30px; display: flex; flex-direction: column; gap: 14px">
+          <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B31942; padding-right: 50px">{{modal.eyebrow}}</div>
+          <h2 style="margin: 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(24px, 2.7vw, 33px); line-height: 0.98; text-transform: uppercase; color: #0A35C8">{{modal.title}}</h2>
+          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #3B4658">{{modal.body}}</p>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+            <sc-for list="{{modal.points}}" as="pt" hint-placeholder-count="4">
+              <li style="display: flex; gap: 10px; font-size: 15px; font-weight: 500; line-height: 1.4"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B31942" stroke-width="2.8" style="flex: none"><path d="M4 12.5l5 5L20 6.5"></path></svg>{{pt}}</li>
+            </sc-for>
+          </ul>
+          <sc-if value="{{modal.hasChips}}" hint-placeholder-val="{{false}}">
+            <div>
+              <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #4A5568">{{modal.chipsLabel}}</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px">
+                <sc-for list="{{modal.chips}}" as="c" hint-placeholder-count="3">
+                  <button type="button" onClick="{{c.open}}" style="min-height: 40px; padding: 0 12px; border-radius: 20px; border: 2px solid #0A35C8; background: #EEF3FA; color: #0A35C8; cursor: pointer; font-size: 14px; font-weight: 700">{{c.label}}</button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{modal.canSheet}}" hint-placeholder-val="{{false}}">
+            <div style="border: 1px solid #DCE3F7; border-radius: 20px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); padding: 14px 16px; background: #F7F8FA">
+              <sc-if value="{{modal.sheetOpen}}" hint-placeholder-val="{{true}}">
+                <form onSubmit="{{modal.sendSheet}}" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end">
+                  <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658; flex: 1 1 200px; min-width: 0">Email Me The Data Sheet<input type="email" autocomplete="email" placeholder="you@company.com" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; background: #FFFFFF"></label>
+                  <button type="submit" style="display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; background: #0A35C8; color: #FFFFFF; text-decoration: none; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; min-height: 48px">Send It</button>
+                </form>
+              </sc-if>
+              <sc-if value="{{modal.sheetDone}}" hint-placeholder-val="{{false}}">
+                <div style="display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; color: #0A35C8"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E7D4F" stroke-width="3"><path d="M4 12.5l5 5L20 6.5"></path></svg>Sent! Check your inbox for the {{modal.sheetName}} sheet.</div>
+              </sc-if>
+            </div>
+          </sc-if>
+          <div style="margin-top: auto; padding-top: 10px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+            <sc-if value="{{modal.hasPrice}}" hint-placeholder-val="{{false}}"><span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 27px; color: #0A35C8">{{modal.priceText}}</span></sc-if>
+            <sc-if value="{{modal.isCart}}" hint-placeholder-val="{{false}}">
+              <button type="button" onClick="{{modal.cartAdd}}" style="min-height: 52px; padding: 0 24px; background: #0A35C8; color: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase">{{modal.cartLabel}}</button>
+            </sc-if>
+            <sc-if value="{{modal.canList}}" hint-placeholder-val="{{false}}">
+              <button type="button" onClick="{{modal.toggleList}}" style="min-height: 52px; padding: 0 18px; background: {{modal.listBg}}; color: {{modal.listFg}}; border: 2px solid #0A35C8; border-radius: 10px; cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.03em; text-transform: uppercase">{{modal.listLabel}}</button>
+            </sc-if>
+            <sc-if value="{{modal.isQuote}}" hint-placeholder-val="{{true}}">
+              <a href="#schedule" onClick="{{modal.quote}}" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase">{{modal.quoteLabel}}</a>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</template>
+<div id="root"></div>
+<script src="/runtime.js"></script>
+<script>
+
+
+var CARD = { lowboy: '/assets/card-lowboy.webp', c2: '/assets/card-c2.webp', c4: '/assets/card-c4.webp', c6: '/assets/card-c6.webp', cove: '/assets/card-cove.webp', ddd: '/assets/card-ddd.webp', triple: '/assets/card-triple.webp', four: '/assets/card-four.webp' };
+var CROP = { lowboy: '/assets/crop-lowboy.webp', c2: '/assets/crop-c2.webp', c4: '/assets/crop-c4.webp', c6: '/assets/crop-c6.webp', cove: '/assets/crop-cove.webp', ddd: '/assets/crop-ddd.webp', triple: '/assets/crop-triple.webp', four: '/assets/crop-four.webp' };
+var TOOLS = [
+  { id: 'trowel', group: 'coating', name: 'Finishing Trowel', tag: 'LTC Coating Tools', price: null, img: '/assets/sq-trowel.webp', alt: '/assets/sq-trowel2.webp', body: 'A flat steel trowel for spreading and finishing coatings.', points: ['Steel blade with rounded corners', 'Soft blue grip', 'Threaded end on the handle', 'Made in the USA'] },
+  { id: 'covetrowel', group: 'coating', name: 'Cove Trowel', tag: 'LTC Coating Tools', price: null, img: '/assets/sq-covet.webp', alt: '/assets/sq-covet2.webp', body: 'A steel trowel with a curved lip for shaping cove where the floor meets the wall.', points: ['Curved steel lip for cove', 'Riveted steel handle', 'Blue grip with LTC branding', 'Made in the USA'] },
+  { id: 'lowboy', group: 'caddy', name: 'The Lowboy', tag: 'Tape Caddy · 4 mm', price: 89, body: 'Our lowest caddy. Mask a cove without crawling across the floor.', points: ['Holds tape at 4 mm', 'Rolls on casters', 'Made in the USA'], url: 'hardware-and-tools-example-product-1' },
+  { id: 'c2', group: 'caddy', name: '2-Inch Caddy', tag: 'Tape Caddy · 2-Inch', price: 89, body: 'Holds your tape at 2 inches, the same on every pass.', points: ['Holds tape at 2 inches', 'Rolls on casters', 'Made in the USA'], url: 'hardware-and-tools-example-product-2' },
+  { id: 'c4', group: 'caddy', name: '4-Inch Caddy', tag: 'Tape Caddy · 4-Inch', price: 99, body: 'The everyday 4-inch line for cove and floor prep.', points: ['Holds tape at 4 inches', 'Rolls on casters', 'Made in the USA'], url: 'hardware-and-tools-example-product-3' },
+  { id: 'c6', group: 'caddy', name: '6-Inch Caddy', tag: 'Tape Caddy · 6-Inch', price: 119, body: 'A taller 6-inch line, held steady with no measuring.', points: ['Holds tape at 6 inches', 'Rolls on casters', 'Made in the USA'], url: 'hardware-and-tools-example-product-4' },
+  { id: 'cove', group: 'bundle', name: 'Cove System', tag: 'Kit · 4" + 6"', price: 205, body: 'The 4-inch and 6-inch caddies together, for cove work.', points: ['4-Inch Caddy', '6-Inch Caddy', 'You keep $13 vs. buying separately'], url: '4-6-cove-package' },
+  { id: 'ddd', group: 'bundle', name: 'Double Down Duo', tag: 'Kit · Lowboy + 4"', price: 180, body: 'The Lowboy and the 4-inch in one kit.', points: ['The Lowboy', '4-Inch Caddy', 'You keep $8 vs. buying separately'], url: 'lowboy-4-double-down-duo-ddd' },
+  { id: 'triple', group: 'bundle', name: 'Triple Threat', tag: 'Kit · Lowboy + 4" + 6"', price: 295, body: 'Three heights for crews that mask a bit of everything.', points: ['The Lowboy', '4-Inch Caddy', '6-Inch Caddy', 'You keep $12 vs. buying separately'], url: 'lowboy-4-6' },
+  { id: 'four', group: 'bundle', name: '4-Score Complete Kit', tag: 'Kit · All Four', price: 389, body: 'Every caddy we make, for a fully loaded crew.', points: ['The Lowboy', '2-Inch, 4-Inch and 6-Inch Caddies', 'You keep $7 vs. buying separately'], url: '4-score' }
+];
+var MODELS = [
+  { id: 'lowboy', name: 'Lowboy', height: '4 mm', inches: 0.16, bodyH: 26 },
+  { id: 'c2', name: '2-Inch', height: '2 in.', inches: 2, bodyH: 66 },
+  { id: 'c4', name: '4-Inch', height: '4 in.', inches: 4, bodyH: 116 },
+  { id: 'c6', name: '6-Inch', height: '6 in.', inches: 6, bodyH: 166 }
+];
+var BUNDLE_MATCH = { 'c4,c6': 'cove', 'c4,lowboy': 'ddd', 'c4,c6,lowboy': 'triple', 'c2,c4,c6,lowboy': 'four' };
+var ENVS = [
+  { id: 'all', label: 'Show All' }, { id: 'kitchen', label: 'Kitchens' }, { id: 'food', label: 'Food Plants' },
+  { id: 'warehouse', label: 'Warehouses & Plants' }, { id: 'forklift', label: 'Forklifts' }, { id: 'cannabis', label: 'Grow Facilities' },
+  { id: 'health', label: 'Hospitals & Clean Rooms' }, { id: 'lab', label: 'Labs & Pharma' }, { id: 'retail', label: 'Stores & Showrooms' }, { id: 'school', label: 'Schools' }
+];
+var SYSTEMS = [
+  { id: '3uc', name: '3 Layer UC System', build: '3 Layers', look: 'texture', short: 'Our toughest floor. Built for heat, chemicals and forklifts.', body: 'Three layers of urethane cement for the hardest places: hot washdowns, spills and forklift traffic all day.', features: ['Takes heat swings', 'Slip-resistant texture', 'Stands up to chemicals', 'UV-stable top coat'], env: ['kitchen', 'forklift', 'warehouse', 'food'], traffic: ['heavy', 'heat'], fast: false, bestText: 'Kitchens, forklift areas, plants, warehouses', swatch: 'radial-gradient(circle, #ffffff22 0 1px, transparent 1.4px) 0 0/6px 6px, radial-gradient(circle, #00000022 0 1px, transparent 1.4px) 3px 3px/7px 7px, #5B636D' },
+  { id: 'quartz', name: 'Decorative Quartz System', build: 'Quartz', look: 'quartz', short: 'Tough and good-looking, with a grippy quartz finish.', body: 'Colored quartz gives you a floor that looks finished and holds up to heavy use.', features: ['Decorative quartz look', 'Takes heat swings', 'Heavy wear protection', 'Slip-resistant'], env: ['kitchen', 'lab', 'school', 'retail'], traffic: ['light', 'heat'], fast: false, bestText: 'Kitchens, labs, schools, showrooms', swatch: 'radial-gradient(circle, #E9DCC6 0 1px, transparent 1.4px) 0 0/5px 5px, radial-gradient(circle, #6B5A45 0 1.1px, transparent 1.5px) 2px 3px/6px 7px, #A8927A' },
+  { id: '2uc', name: '2 Layer Ultra Fast UC', build: '2 Layers · Fast', look: 'texture', short: 'Back in service fast. For places that can’t shut down.', body: 'A two-layer urethane cement floor that cures fast so you lose as little time as possible.', features: ['Fast cure', 'Handles moisture', 'Heavy-duty protection', 'Forklift ready'], env: ['kitchen', 'food', 'warehouse', 'forklift'], traffic: ['heavy', 'heat'], fast: true, bestText: 'Kitchens, food plants, warehouses', swatch: 'radial-gradient(circle, #ffffff1c 0 1px, transparent 1.4px) 0 0/6px 6px, #6E5A4A' },
+  { id: 'sflake', name: 'Standard Flake System', build: 'Flake', look: 'flake', short: 'Clean, colorful flake for lobbies, stores and clinics.', body: 'A seamless flake floor for light to medium traffic. Easy to clean and nice to look at.', features: ['Colored vinyl flake', 'Seamless', 'Easy to clean', 'Chemical-resistant top coat'], env: ['health', 'retail', 'school'], traffic: ['light'], fast: false, bestText: 'Hospitals, lobbies, stores, schools', swatch: 'radial-gradient(circle at 20% 30%, #DADDE2 0 2px, transparent 2.6px) 0 0/13px 13px, radial-gradient(circle at 70% 60%, #2B3036 0 2.4px, transparent 3px) 0 0/17px 19px, radial-gradient(circle at 45% 85%, #ffffff 0 1.6px, transparent 2.2px) 0 0/23px 21px, #7A828C' },
+  { id: 'iflake', name: 'Industrial Flake System', build: 'Heavy Flake', look: 'flake', short: 'The flake look, built heavy enough for forklifts.', body: 'Extra layers under the flake so it can take forklifts and heat and still look good.', features: ['Forklift rated', 'Extra layers', 'Colored vinyl flake', 'Takes heat swings'], env: ['cannabis', 'warehouse', 'retail', 'forklift'], traffic: ['heavy', 'heat'], fast: false, bestText: 'Grow facilities, plants, showrooms, warehouses', swatch: 'radial-gradient(circle at 20% 30%, #9DB0C8 0 2px, transparent 2.6px) 0 0/13px 13px, radial-gradient(circle at 70% 60%, #0E1A2B 0 2.4px, transparent 3px) 0 0/17px 19px, radial-gradient(circle at 45% 85%, #ffffff 0 1.6px, transparent 2.2px) 0 0/23px 21px, #34465F' },
+  { id: 'neat', name: 'Industrial Neat System', build: '3 Layers · Smooth', look: 'smooth', short: 'Smooth and seamless for rooms that must stay clean.', body: 'A smooth, seamless finish that’s easy to keep clean and built for heavy use.', features: ['Smooth, seamless finish', 'UV-resistant top coat', 'Heavy-duty protection', 'Handles heat cycles'], env: ['health', 'lab', 'warehouse'], traffic: ['light', 'heavy', 'heat'], fast: false, bestText: 'Clean rooms, labs, plants, pharma', swatch: 'linear-gradient(160deg, #ffffff40 0%, transparent 40%, transparent 70%, #00000020 100%), #8E9AA6' }
+];
+var CATS = { prep: { label: 'Prep', color: '#4A5568' }, uc: { label: 'Urethane Cement', color: '#0A35C8' }, pa: { label: 'Polyaspartic', color: '#B31942' }, top: { label: 'Top Coat', color: '#2F6DB5' }, spec: { label: 'Cove', color: '#0526A0' } };
+var CHEM = [
+  { id: '1111', num: '1111', name: 'Fast Patch TG', cat: 'prep', short: 'Fixes cracks and chips fast. Drive on it in 20–30 minutes.', body: 'A two-part patch for spalls, control joints and big cracks.', points: ['Two-part patch', 'Fills spalls, joints and large cracks', 'Car traffic in 20–30 minutes'] },
+  { id: '1620', num: '1620', name: 'TMUC Urethane Cement', cat: 'uc', short: 'Our thin urethane cement. Primer and bond coat.', body: 'Thin mil urethane cement for rough places with big temperature swings. Use it as your primer and bond coat.', points: ['Primer and bond coat', 'Handles hot-cold cycles', 'About 80–200 sq ft per kit'] },
+  { id: 'hpcru', num: 'HP-CRU', name: 'Liberty HP-CRU', cat: 'uc', short: 'Ask us where it fits your job.', body: 'Call us and we’ll walk you through where HP-CRU fits in your system.', points: ['Data sheet on request'] },
+  { id: '1776', num: '1776', name: 'Premium Polyaspartic', cat: 'pa', short: 'Up to 11 mil in one coat. Won’t yellow.', body: 'A fast-curing, two-part polyaspartic top coat.', points: ['Up to 11 mil in one coat', 'Cures in 6–8 hours', 'Won’t yellow', 'Low odor'] },
+  { id: '1776sc', num: '1776 SC', name: 'Polyaspartic — Slow', cat: 'pa', short: 'More working time for big pours.', body: 'The slow-cure version of 1776, for when your crew needs more time.', points: ['Slower cure', 'More working time'] },
+  { id: '1776fc', num: '1776-FC', name: 'Polyaspartic — Fast', cat: 'pa', short: 'Faster cure for quick turnarounds.', body: 'The fast-cure version of 1776, for jobs that need to open sooner.', points: ['Faster cure', 'Quick turnarounds'] },
+  { id: '1803g', num: '1803 WB-G', name: 'Urethane Gloss', cat: 'top', short: 'Water-based gloss top coat. Inside or out.', body: 'A water-based, low-VOC urethane that keeps its shine and stands up to sun.', points: ['Water-based, low VOC', 'Holds its gloss', 'UV resistant', 'Inside or outside'] },
+  { id: '1803m', num: '1803 WB-M', name: 'Urethane Matte', cat: 'top', short: 'Same top coat, matte finish.', body: 'The matte version of our 1803 water-based urethane top coat.', points: ['Water-based, low VOC', 'Matte finish', 'UV resistant'] },
+  { id: 'cove', num: 'COVE', name: 'Cove Base Resin', cat: 'spec', short: 'Build a seamless cove up the wall.', body: 'Resin for building an integral cove base where the floor meets the wall.', points: ['For integral cove base', 'Pairs with our cove trowel'] }
+];
+var INDUSTRIES = [
+  { id: 'kitchen', label: 'Commercial Kitchens', body: 'Kitchens throw boiling water, grease and cleaners at the floor every day. Epoxy cracks and peels. Urethane cement takes the heat and stays put.', points: ['Handles hot washdowns', 'Slip-resistant texture', 'Stands up to grease and cleaners'], systems: ['3uc', '2uc', 'quartz'] },
+  { id: 'cannabis', label: 'Grow Facilities', body: 'Grow rooms stay wet, humid and busy. Through our Cannafloors brand we’ve floored grow facilities across the country.', points: ['Handles constant moisture', 'Easy to keep clean', 'Takes carts and forklifts'], systems: ['iflake', '3uc'] },
+  { id: 'health', label: 'Hospitals & Clean Rooms', body: 'These floors have to stay clean and seamless. No cracks or seams for dirt to hide in.', points: ['Seamless finish', 'Easy to disinfect', 'Chemical-resistant'], systems: ['neat', 'sflake'] },
+  { id: 'lab', label: 'Pharmaceutical', body: 'Labs and pharma plants need smooth, cleanable floors that hold up to chemicals.', points: ['Smooth and seamless', 'Chemical-resistant', 'Handles heat cycles'], systems: ['neat', 'quartz'] },
+  { id: 'warehouse', label: 'Warehouses & Plants', body: 'Heavy loads, pallet jacks and forklifts all day. You need a floor that won’t chip or wear through.', points: ['Forklift rated', 'Heavy wear protection', 'Fast options to limit downtime'], systems: ['3uc', '2uc', 'iflake'] },
+  { id: 'auto', label: 'Auto Dealerships', body: 'Showrooms need to shine. Service bays get oil, tires and heat. Our floors handle both.', points: ['Showroom finish', 'Resists oil and fluids', 'Hot-tire resistant'], systems: ['iflake', 'quartz'] },
+  { id: 'retail', label: 'Supermarkets & Retail', body: 'High foot traffic, carts and spills, often in stores that can’t close for long.', points: ['Takes cart traffic', 'Easy to clean', 'Fast install options'], systems: ['sflake', '2uc'] },
+  { id: 'forklift', label: 'Forklift Areas', body: 'Forklifts grind, turn and drop loads. Our heavy systems are built for it.', points: ['Forklift rated', 'Impact resistant', 'Slip-resistant options'], systems: ['3uc', 'iflake', '2uc'] }
+];
+var QUIZ = [
+  { id: 'env', q: 'Where is the floor?', short: 'Place', opts: [['kitchen', 'Commercial kitchen'], ['food', 'Food plant'], ['warehouse', 'Warehouse or factory'], ['cannabis', 'Grow facility'], ['health', 'Hospital or clean room'], ['lab', 'Lab or pharma'], ['retail', 'Store, lobby or showroom'], ['school', 'School']] },
+  { id: 'traffic', q: 'What hits it hardest?', short: 'Abuse', opts: [['light', 'Mostly foot traffic'], ['heavy', 'Carts and forklifts'], ['heat', 'Hot water and chemicals']] },
+  { id: 'speed', q: 'How soon do you need it back?', short: 'Timing', opts: [['normal', 'Normal schedule'], ['fast', 'As fast as possible']] },
+  { id: 'look', q: 'What look do you want?', short: 'Look', opts: [['smooth', 'Smooth and clean'], ['flake', 'Colorful flake'], ['quartz', 'Quartz texture'], ['any', 'Doesn’t matter']] }
+];
+var VIZ_FIN = [{ id: 'flake', label: 'Flake' }, { id: 'iflake', label: 'Heavy Flake' }, { id: 'quartz', label: 'Quartz' }, { id: 'smooth', label: 'Smooth' }];
+var VIZ_COL = [
+  { id: 'gray', name: 'Gray', base: '#7A828C', light: '#DADDE2', dark: '#2B3036' },
+  { id: 'navy', name: 'Navy', base: '#34465F', light: '#9DB0C8', dark: '#0E1A2B' },
+  { id: 'tan', name: 'Tan', base: '#A8927A', light: '#E9DCC6', dark: '#6B5A45' },
+  { id: 'red', name: 'Red', base: '#8E2F3C', light: '#E6A4AE', dark: '#4A1219' },
+  { id: 'char', name: 'Charcoal', base: '#3C4046', light: '#9AA0A8', dark: '#15181C' }
+];
+function tex(f, c) {
+  var B = c.base, L = c.light, D = c.dark;
+  if (f === 'flake') return 'radial-gradient(circle at 20% 30%, ' + L + ' 0 2px, transparent 2.6px) 0 0/13px 13px, radial-gradient(circle at 70% 60%, ' + D + ' 0 2.4px, transparent 3px) 0 0/17px 19px, radial-gradient(circle at 45% 85%, #ffffff 0 1.6px, transparent 2.2px) 0 0/23px 21px, ' + B;
+  if (f === 'iflake') return 'radial-gradient(circle at 20% 30%, ' + L + ' 0 2.6px, transparent 3.2px) 0 0/10px 10px, radial-gradient(circle at 70% 60%, ' + D + ' 0 2.8px, transparent 3.4px) 0 0/12px 13px, radial-gradient(circle at 45% 85%, #ffffff 0 1.8px, transparent 2.4px) 0 0/15px 14px, radial-gradient(circle at 85% 20%, #111418 0 1.6px, transparent 2.2px) 0 0/9px 11px, ' + B;
+  if (f === 'quartz') return 'radial-gradient(circle, ' + L + ' 0 1px, transparent 1.4px) 0 0/5px 5px, radial-gradient(circle, ' + D + ' 0 1.1px, transparent 1.5px) 2px 3px/6px 7px, radial-gradient(circle, #ffffffaa 0 .8px, transparent 1.2px) 1px 1px/7px 6px, ' + B;
+  return 'linear-gradient(160deg, #ffffff30 0%, transparent 38%, transparent 70%, #00000025 100%), ' + B;
+}
+var ACATS = { coat: 'Coatings', tools: 'Tools', biz: 'Business' };
+var ACADEMY = [
+  { id: 'v1', cat: 'coat', title: 'Fixing Cracks With 1111 Fast Patch', blurb: 'Open it, fill it, drive on it.', steps: ['Open up and clean the crack', 'Mix both parts', 'Fill, level and let it set'], rel: [['product', '1111', '1111 Fast Patch']] },
+  { id: 'v2', cat: 'coat', title: 'Laying 1620 TMUC', blurb: 'Primer and bond coat, done right.', steps: ['Check and prep the slab', 'Mix the full kit', 'Spread it as your primer and bond coat'], rel: [['product', '1620', '1620 TMUC']] },
+  { id: 'v3', cat: 'coat', title: 'Rolling 1776 Polyaspartic', blurb: 'Slow, regular or fast — pick for the day.', steps: ['Pick slow, regular or fast for the weather', 'Mix only what you can roll', 'Roll it out and watch your time'], rel: [['product', '1776', '1776 Polyaspartic'], ['product', '1776sc', '1776 SC'], ['product', '1776fc', '1776-FC']] },
+  { id: 'v4', cat: 'coat', title: 'Broadcasting Flake Evenly', blurb: 'No bald spots, no piles.', steps: ['Work in sections', 'Throw up and let it fall', 'Scrape and vacuum before the top coat'], rel: [['system', 'sflake', 'Standard Flake'], ['system', 'iflake', 'Industrial Flake']] },
+  { id: 'v5', cat: 'tools', title: 'Pulling Cove With The Cove Trowel', blurb: 'A clean cove base in one pass.', steps: ['Load the cove resin', 'Set the lip in the corner', 'Pull with steady pressure'], rel: [['tool', 'covetrowel', 'Cove Trowel'], ['product', 'cove', 'Cove Base Resin']], img: '/assets/sq-covet.webp' },
+  { id: 'v6', cat: 'tools', title: 'Masking A Cove With The Lowboy', blurb: 'Stay off your knees.', steps: ['Load the tape', 'Set the Lowboy against the wall', 'Roll it down the line'], rel: [['tool', 'lowboy', 'The Lowboy']], img: '/assets/cut-lowboy.png' },
+  { id: 'v7', cat: 'tools', title: 'Using The 4" + 6" Cove System', blurb: 'Two heights, zero measuring.', steps: ['Pick the height for the job', 'Load and set the caddy', 'Roll it, then swap for the second line'], rel: [['tool', 'cove', 'Cove System'], ['tool', 'c4', '4-Inch Caddy'], ['tool', 'c6', '6-Inch Caddy']], img: '/assets/cut-c6.png' },
+  { id: 'v8', cat: 'biz', title: 'How To Price A Coating Job', blurb: 'Stop leaving money on the floor.', steps: ['Know your real material cost', 'Count crew days honestly', 'Add your markup — then check it in the Bid Builder'], rel: [] },
+  { id: 'v9', cat: 'biz', title: 'Selling Urethane Cement Over Epoxy', blurb: 'What to tell the customer.', steps: ['Ask what hits their floor', 'Show what heat and water do to epoxy', 'Walk them through the right system'], rel: [['system', '3uc', '3 Layer UC'], ['system', '2uc', '2 Layer Ultra Fast']] }
+];
+var STATES = [['AK','Alaska',1,1],['ME','Maine',12,1],['VT','Vermont',11,2],['NH','New Hampshire',12,2],['WA','Washington',2,3],['ID','Idaho',3,3],['MT','Montana',4,3],['ND','North Dakota',5,3],['MN','Minnesota',6,3],['IL','Illinois',7,3],['WI','Wisconsin',8,3],['MI','Michigan',9,3],['NY','New York',10,3],['RI','Rhode Island',11,3],['MA','Massachusetts',12,3],['OR','Oregon',2,4],['NV','Nevada',3,4],['WY','Wyoming',4,4],['SD','South Dakota',5,4],['IA','Iowa',6,4],['IN','Indiana',7,4],['OH','Ohio',8,4],['PA','Pennsylvania',9,4],['NJ','New Jersey',10,4],['CT','Connecticut',11,4],['CA','California',2,5],['UT','Utah',3,5],['CO','Colorado',4,5],['NE','Nebraska',5,5],['MO','Missouri',6,5],['KY','Kentucky',7,5],['WV','West Virginia',8,5],['VA','Virginia',9,5],['MD','Maryland',10,5],['DE','Delaware',11,5],['AZ','Arizona',3,6],['NM','New Mexico',4,6],['KS','Kansas',5,6],['AR','Arkansas',6,6],['TN','Tennessee',7,6],['NC','North Carolina',8,6],['SC','South Carolina',9,6],['DC','Washington, D.C.',10,6],['OK','Oklahoma',5,7],['LA','Louisiana',6,7],['MS','Mississippi',7,7],['AL','Alabama',8,7],['GA','Georgia',9,7],['HI','Hawaii',1,8],['TX','Texas',5,8],['FL','Florida',10,8]];
+var REVIEWS = [
+  { quote: '[Approved installer quote about the Tape Caddy goes here.]', name: '[Installer Name]', trade: '[Trade]', city: '[City, ST]', product: 'Tape Caddy', color: '#B31942' },
+  { quote: '[Approved contractor quote about a Liberty urethane cement floor goes here.]', name: '[Contractor Name]', trade: '[Company]', city: '[City, ST]', product: 'Coating Systems', color: '#0A35C8' },
+  { quote: '[Approved quote from a store or distributor goes here.]', name: '[Store Name]', trade: 'Dealer', city: '[City, ST]', product: 'Distributor', color: '#2F6DB5' },
+  { quote: '[Approved quote about the LTC cove trowel goes here.]', name: '[Installer Name]', trade: '[Trade]', city: '[City, ST]', product: 'Coating Tools', color: '#B31942' }
+];
+var JOBS = [
+  { title: 'Regional Manager', tags: ['Field', 'Territory'], blurb: 'Lead sales in your region: distributors, contractors and new accounts.', color: '#0A35C8' },
+  { title: 'Administrative Assistant / Operations Admin', tags: ['Naples, FL', 'San Dimas, CA'], blurb: 'Keep the office running: orders, CRM and Shopify records, and marketing help.', color: '#B31942' },
+  { title: 'Logistics Specialist & 3D Machine Operator', tags: ['Shop Floor', 'Day & Night Shifts'], blurb: 'Ship orders and run the 3D printers that make the Tape Caddy.', color: '#2F6DB5' },
+  { title: 'Independent Sales Representative (1099)', tags: ['1099', 'Commission'], blurb: 'Sell Liberty to contractors, paint stores and supply houses in your territory.', color: '#0A35C8' },
+  { title: 'Marketing Director', tags: ['Content', 'Ads', 'Social'], blurb: 'Own our brand, daily ads, content and social media.', color: '#B31942' }
+];
+var TEXT_CHIPS = ['Help speccing a system', 'Crew pricing on tools', 'Become a dealer', 'Set up a company account'];
+var TIMELINE = [
+  { title: 'Contractors First', body: 'Dick and Brandon start as a general contracting business in Southern California.' },
+  { title: 'Floors Take Over', body: 'Over ten years ago, floor coatings become the main thing they do.' },
+  { title: 'Cannafloors', body: 'Their grow-room floors go national through the Cannafloors brand.' },
+  { title: 'Better Than Epoxy', body: 'Tired of epoxy failing, they develop their own thin urethane cement and launch Liberty Coating Systems.' },
+  { title: 'Liberty Tool Company', body: 'The tools they built for their own crews — the Tape Caddy and LTC trowels — go to installers everywhere.' }
+];
+var VALUES = [
+  { title: 'Veteran-Owned', body: 'Discipline and service, on every job.', color: '#0A35C8' },
+  { title: 'Family-Run', body: 'A dad and his son who still answer the phone.', color: '#B31942' },
+  { title: 'Faith-Based', body: 'Honest products. Honest deals.', color: '#0A35C8' },
+  { title: 'Made In The USA', body: 'Made here, for American crews.', color: '#B31942' }
+];
+var BUYERS = [{ id: 'coatings', label: 'System Quote / Bid' }, { id: 'tools', label: 'Crew Tools' }, { id: 'retail', label: 'Become A Dealer' }, { id: 'enterprise', label: 'Company Account / PO' }, { id: 'ambassador', label: 'Ambassador' }];
+var SLOTS = ['7:00 AM', '8:30 AM', '10:00 AM', '11:30 AM', '1:00 PM', '2:30 PM'];
+var FAQS = [
+  { q: 'What is thin urethane cement?', a: 'It’s urethane cement put down thinner. You get the toughness of urethane cement — heat, water and chemicals — with the easy install and price of epoxy.' },
+  { q: 'Which system should I spec?', a: 'Run the Floor Finder, or call 800-208-4104. Tell us the environment and what hits the floor, and we’ll help you spec it for the bid.' },
+  { q: 'Do you install floors?', a: 'No. We make the products and tools, and we back the installers who use them.' },
+  { q: 'Can my store or distribution company carry Liberty?', a: 'Yes. Coatings, tools or both. You see your cost next to retail, we train your counter staff, and we help with reorders. Book a call to go over pricing, freight and terms.' },
+  { q: 'We buy for crews in several locations. How does ordering work?', a: 'Set up a company account, then email POs to sales@libertytoolcompany.com. We ship to every site, send tracking and check in after delivery.' },
+  { q: 'How do I order tools for my crew?', a: 'Add caddies or crew kits to your cart and check out with Shopify, or call for crew pricing. Company accounts can order by PO.' },
+  { q: 'How do ambassadors get paid?', a: 'You get your own link and earn $10 for every eligible caddy it sells, paid monthly. No Amazon listings or resale.' },
+  { q: 'Is it all made in the USA?', a: 'Yes. Our coatings, Tape Caddies and LTC trowels are all made in the USA.' }
+];
+function money(n) { return '$' + n.toLocaleString('en-US', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }); }
+function sel(on, onBg) { return { border: on ? (onBg || '#0A35C8') : '#C9D0DA', bg: on ? (onBg || '#0A35C8') : '#FFFFFF', fg: on ? '#FFFFFF' : '#071A52', pressed: on ? 'true' : 'false' }; }
+function scoreSystems(a) {
+  return SYSTEMS.map(function (s) {
+    var sc = 0;
+    if (a.env && s.env.indexOf(a.env) >= 0) sc += 3;
+    if (a.traffic && s.traffic.indexOf(a.traffic) >= 0) sc += 2;
+    if (a.speed === 'fast' && s.fast) sc += 3;
+    if (a.look && a.look !== 'any' && s.look === a.look) sc += 2;
+    if (a.look === 'smooth' && s.look === 'texture') sc += 1;
+    return { s: s, sc: sc };
+  }).sort(function (x, y) { return y.sc - x.sc; });
+}
+var LAYERS = {
+  '3uc': [['Polyaspartic Top Coat', 'UV-stable', '#B31942'], ['Urethane Cement Body', 'Slip texture', '#2F6DB5'], ['Urethane Cement Prime', 'Bond coat', '#0A35C8']],
+  'quartz': [['Clear Top Coat', 'Seals it', '#B31942'], ['Quartz Broadcast', 'Color + grip', '#A8927A'], ['Urethane Cement Base', 'Strength', '#0A35C8']],
+  '2uc': [['Fast Top Coat', 'Quick cure', '#B31942'], ['Urethane Cement Base', 'Moisture tough', '#0A35C8']],
+  'sflake': [['Clear Top Coat', 'Easy clean', '#B31942'], ['Vinyl Flake', 'Color', '#7A828C'], ['Base Coat', 'Bond', '#0A35C8']],
+  'iflake': [['Clear Top Coat', 'Chemical tough', '#B31942'], ['Vinyl Flake', 'Color', '#34465F'], ['Build Coat', 'Extra layer', '#2F6DB5'], ['Urethane Cement Base', 'Strength', '#0A35C8']],
+  'neat': [['UV Top Coat', 'Smooth finish', '#B31942'], ['Build Coat', 'Heavy duty', '#2F6DB5'], ['Urethane Cement Base', 'Heat cycles', '#0A35C8']]
+};
+var HITS = [
+  { id: 'heat', label: 'Hot Water', dot: '#F2994A', msg: 'Hot water: epoxy can crack when temperatures swing. Liberty urethane cement handles heat swings up to 230°F.' },
+  { id: 'chem', label: 'Chemicals', dot: '#F2C94C', msg: 'Chemicals and grease: epoxy can stain and soften. Liberty systems are built to resist chemicals.' },
+  { id: 'fork', label: 'Forklifts', dot: '#9AA3AE', msg: 'Forklifts: heavy wheels chip and gouge weaker floors. Our heavy systems are forklift rated.' },
+  { id: 'wet', label: 'Moisture', dot: '#56CCF2', msg: 'Moisture: water under epoxy can bubble and peel it. Urethane cement is made for wet spaces.' }
+];
+function toon(m) {
+  var bodyH = m.bodyH, isLow = m.id === 'lowboy', W = isLow ? 210 : 170, top = 18, bottom = top + bodyH, bodyW = W - 36, cx = W / 2;
+  var tall = bodyH > 40, rTop = top + 16, rStep = Math.max(16, Math.min(22, (bodyH - 24) / 3));
+  return {
+    vbW: W, vbH: bottom + 30, right: -Math.round(W / 2), cx: cx, top: top, bodyW: bodyW, bodyH: bodyH, lidRx: bodyW / 2,
+    shadeX: W - 18 - 30, slotX: cx - 30, slotY: top + 12, slotH: tall ? bodyH - 18 : 0, tapeX: cx - 15,
+    hiY: top + 16, hiH: Math.max(0, bodyH - 28),
+    r1: tall ? rTop : top + 8, r2: rTop + rStep, r3: rTop + rStep * 2, rOp: tall ? 1 : 0, rx: W - 42,
+    wingL: 'M22 ' + (top + 2) + ' Q0 ' + (top + 14) + ' 4 ' + (top + 22) + ' L22 ' + (top + 24) + ' Z',
+    wingR: 'M' + (W - 22) + ' ' + (top + 2) + ' Q' + W + ' ' + (top + 14) + ' ' + (W - 4) + ' ' + (top + 22) + ' L' + (W - 22) + ' ' + (top + 24) + ' Z',
+    wingOp: isLow ? 1 : 0,
+    tagX: cx + 26, tagY: bottom - 26, tagTX: cx + 43, tagTY: bottom - 14, tagOp: tall ? 1 : 0,
+    fx1: 38, fx2: W - 46, forkY: bottom - 2,
+    w1: 42, w2: W - 42, wy: bottom + 15, w1s: 40.75, w2s: W - 43.25, wys: bottom + 7,
+    shadowY: bottom + 25, shadowRx: W * 0.42
+  };
+}
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    var days = [], d = new Date();
+    while (days.length < 6) { d.setDate(d.getDate() + 1); var w = d.getDay(); if (w !== 0 && w !== 6) days.push({ dow: d.toLocaleDateString('en-US', { weekday: 'short' }), md: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }); }
+    this.days = days;
+    this.state = { model: 'c4', env: 'all', prodCat: 'all', toolFilter: 'all', cart: 0, added: {}, kit: { lowboy: true, c2: false, c4: true, c6: true }, amb: 20, faq: 0, buyer: 'coatings', note: '', day: 0, slot: -1, step: 1, qi: 0, qa: {}, modal: null, mThumb: 0, hits: {}, lastHit: '', quote: [], ba: 50, sheets: {}, bSf: 2000, bMat: 3.5, bCrew: 3, bDays: 2, bRate: 45, bMark: 35, acad: 'all', wtb: 'CA', wtbSent: false, rev: 0, textOpen: false, salType: 'vet', salDone: false, role: 'Regional Manager', careerSent: false };
+  }
+  add(id) { var a = Object.assign({}, this.state.added); a[id] = true; this.setState({ cart: this.state.cart + 1, added: a }); }
+  open(kind, id) { this.setState({ modal: { kind: kind, id: id }, mThumb: 0, ba: 50 }); }
+  inQuote(key) { return this.state.quote.some(function (q) { return q.key === key; }); }
+  toggleQuote(key, name) { var q = this.state.quote.slice(); var i = q.findIndex(function (x) { return x.key === key; }); if (i >= 0) q.splice(i, 1); else q.push({ key: key, name: name }); this.setState({ quote: q }); }
+  buildModal() {
+    var s = this.state, self = this, m = s.modal;
+    if (!m) return { isBA: false, isVideo: false, isPhoto: false, ba: 50, baClip: 50, onBa: function () {}, canSheet: false, sheetOpen: false, sheetDone: false, sheetName: '', sendSheet: function () {}, canList: false, listLabel: '', listBg: '#FFFFFF', listFg: '#0A35C8', title: '', eyebrow: '', body: '', points: [], thumbs: [], chips: [], hasChips: false, hasMain: false, noMain: true, mainImg: '', mainLabel: '', mainBg: '#FFFFFF', mainBorder: '#FFFFFF', hasPrice: false, isCart: false, isQuote: false, priceText: '', photoNote: '', quoteLabel: '', cartLabel: '', chipsLabel: '' };
+    var quoteFor = function (note, buyer) { return function () { self.setState({ modal: null, buyer: buyer || 'coatings', step: 1, note: note }); }; };
+    var ph = function (labels) { return labels.map(function (l, i) { return { label: l, short: l, hasImg: false, noImg: true, img: '', ring: i === s.mThumb ? '#B31942' : '#FFFFFF', pick: function () { self.setState({ mThumb: i }); } }; }); };
+    var out;
+    if (m.kind === 'system') {
+      var sy = SYSTEMS.find(function (x) { return x.id === m.id; });
+      var lk = 'system:' + sy.id, ln = sy.name;
+      out = { listKey: lk, listName: ln, eyebrow: 'Coating System · ' + sy.build, title: sy.name, body: sy.body, points: sy.features, thumbs: ph(['Finished floor', 'Close-up', 'Install day']), chipsLabel: 'Best for', chips: sy.env.map(function (e) { var ind = INDUSTRIES.find(function (i) { return i.id === e; }); var en = ENVS.find(function (x) { return x.id === e; }); return { label: en ? en.label : e, open: ind ? function () { self.open('industry', ind.id); } : function () {} }; }), quoteLabel: 'Get A Quote →', quote: quoteFor('Interested in the ' + sy.name + '.'), photoNote: 'Photo placeholders — real job photos coming soon.' };
+    } else if (m.kind === 'product') {
+      var p = CHEM.find(function (x) { return x.id === m.id; });
+      var lk2 = 'product:' + p.id;
+      out = { listKey: lk2, listName: p.num + ' ' + p.name, eyebrow: CATS[p.cat].label + ' · ' + p.num, title: p.name, body: p.body, points: p.points.concat(['Data sheet on request']), thumbs: ph(['Product', 'On the job', 'Finished floor']), quoteLabel: 'Get Pricing →', quote: quoteFor('Interested in ' + p.num + ' ' + p.name + '.'), photoNote: 'Photo placeholders — product photos coming soon.' };
+    } else if (m.kind === 'industry') {
+      var ind = INDUSTRIES.find(function (x) { return x.id === m.id; });
+      out = { isBA: true, eyebrow: 'Real Job', title: ind.label, body: ind.body, points: ind.points, thumbs: ph(['Crew at work', 'Close-up', 'Finished room']), chipsLabel: 'Systems we use here', chips: ind.systems.map(function (id) { var sy2 = SYSTEMS.find(function (x) { return x.id === id; }); return { label: sy2.name, open: function () { self.open('system', id); } }; }), quoteLabel: 'Quote A Floor Like This →', quote: quoteFor('Floor for a ' + ind.label.toLowerCase() + ' job.'), photoNote: 'Drag to compare. Photo placeholders — send us real before and after shots.' };
+    } else if (m.kind === 'video') {
+      var v = ACADEMY.find(function (x) { return x.id === m.id; });
+      out = { isVideo: true, eyebrow: 'Installer Academy · ' + ACATS[v.cat], title: v.title, body: v.blurb, points: v.steps.map(function (x, i) { return 'Step ' + (i + 1) + ': ' + x; }), thumbs: [], chipsLabel: 'In This Video', chips: v.rel.map(function (r) { return { label: r[2], open: function () { self.open(r[0], r[1]); } }; }), quoteLabel: 'Ask An Installer →', quote: quoteFor('Question about the video: ' + v.title + '.', v.cat === 'tools' ? 'tools' : 'coatings'), photoNote: 'Video coming soon. Always follow the product data sheet.' };
+    } else {
+      var t = TOOLS.find(function (x) { return x.id === m.id; });
+      var imgs = t.group === 'coating' ? [t.img, t.alt] : [CARD[t.id], CROP[t.id]];
+      var th = imgs.map(function (src, i) { return { label: t.name + ' photo ' + (i + 1), short: '', hasImg: true, noImg: false, img: src, ring: i === s.mThumb ? '#B31942' : '#FFFFFF', pick: function () { self.setState({ mThumb: i }); } }; }).concat(ph(['In use']).map(function (x) { x.ring = s.mThumb === 2 ? '#B31942' : '#FFFFFF'; x.pick = function () { self.setState({ mThumb: 2 }); }; return x; }));
+      var quote = t.price == null;
+      out = { eyebrow: t.tag, title: t.name, body: t.body, points: t.points, thumbs: th, mainImgList: imgs, hasPrice: true, priceText: quote ? 'Price On Request' : money(t.price), isCart: !quote, cartLabel: s.added[t.id] ? 'Added — Add Another' : 'Add To Cart', cartAdd: function () { self.add(t.id); }, quoteLabel: quote ? 'Ask For Pricing →' : 'Questions? Book A Call', quote: quoteFor('Question about the ' + t.name + '.', 'tools'), photoNote: 'In-use photos coming soon.' };
+    }
+    var thumb = out.thumbs[s.mThumb] || out.thumbs[0] || { hasImg: false, label: '', short: '' };
+    out.hasMain = !!thumb.hasImg; out.noMain = !thumb.hasImg; out.mainImg = thumb.img || ''; out.mainLabel = 'Photo: ' + (thumb.label || thumb.short);
+    out.mainBg = thumb.hasImg ? '#E6EAF0' : '#EEF1F5'; out.mainBorder = thumb.hasImg ? '#E6EAF0' : '#B8C1CD';
+    out.hasChips = !!(out.chips && out.chips.length); out.chips = out.chips || [];
+    out.hasPrice = !!out.hasPrice; out.isCart = !!out.isCart; out.isQuote = true;
+    out.canList = !!out.listKey; var on = out.listKey ? self.inQuote(out.listKey) : false;
+    out.listLabel = on ? 'On Your List ✓' : '+ Add To Quote List'; out.listBg = on ? '#0A35C8' : '#FFFFFF'; out.listFg = on ? '#FFFFFF' : '#0A35C8';
+    var key = out.listKey, nm = out.listName; out.toggleList = function () { if (key) self.toggleQuote(key, nm); };
+    out.isBA = !!out.isBA; out.isVideo = !!out.isVideo; out.isPhoto = !out.isBA && !out.isVideo;
+    out.ba = s.ba; out.baClip = 100 - s.ba; out.onBa = function (e) { self.setState({ ba: Number(e.target.value) }); };
+    out.canSheet = !!key; out.sheetDone = !!(key && s.sheets[key]); out.sheetOpen = out.canSheet && !out.sheetDone; out.sheetName = nm || '';
+    out.sendSheet = function (e) { if (e && e.preventDefault) e.preventDefault(); var x = Object.assign({}, s.sheets); x[key] = true; self.setState({ sheets: x }); };
+    return out;
+  }
+  renderVals() {
+    var s = this.state, self = this;
+    var byId = {}; TOOLS.forEach(function (p) { byId[p.id] = p; });
+    var m = MODELS.find(function (x) { return x.id === s.model; }) || MODELS[2];
+    var picked = Object.keys(s.kit).filter(function (k) { return s.kit[k]; }).sort();
+    var sum = picked.reduce(function (a, k) { return a + byId[k].price; }, 0);
+    var match = BUNDLE_MATCH[picked.join(',')];
+    var kit;
+    if (!picked.length) kit = { title: 'Pick A Size', note: 'Tap the sizes your crew uses.', sumText: '—', bundleText: '—', saveText: '—', cta: 'Pick A Size', add: function () {} };
+    else if (match) { var b = byId[match]; kit = { title: b.name, note: 'That’s our ' + b.name + ' kit. One box, one checkout.', sumText: money(sum), bundleText: money(b.price), saveText: money(sum - b.price), cta: s.added[match] ? 'Added To Cart' : 'Add The Kit', add: function () { self.add(match); } }; }
+    else kit = { title: 'Custom Mix', note: 'No kit for this mix yet. Grab them one by one, or call about crew pricing.', sumText: money(sum), bundleText: '—', saveText: '—', cta: 'Add ' + picked.length + (picked.length === 1 ? ' Caddy' : ' Caddies'), add: function () { picked.forEach(function (k) { self.add(k); }); } };
+    var buyer = BUYERS.find(function (x) { return x.id === s.buyer; }) || BUYERS[0];
+    var bookAs = function (t) { return function () { self.setState({ buyer: t, step: 1, note: '' }); }; };
+    // quiz
+    var done = s.qi >= QUIZ.length, ranked = scoreSystems(s.qa), best = ranked[0].s, runner = ranked[1].s;
+    var qq = QUIZ[Math.min(s.qi, QUIZ.length - 1)];
+    var quiz = {
+      asking: !done, done: done, canBack: s.qi > 0 && !done,
+      progress: Math.round(Math.min(s.qi, QUIZ.length) / QUIZ.length * 100),
+      progressLabel: done ? 'Done!' : 'Question ' + (s.qi + 1) + ' of ' + QUIZ.length,
+      question: qq.q,
+      options: qq.opts.map(function (o, i) { return { key: String.fromCharCode(65 + i), label: o[1], pick: function () { var a = Object.assign({}, s.qa); a[qq.id] = o[0]; self.setState({ qa: a, qi: s.qi + 1 }); } }; }),
+      back: function () { self.setState({ qi: Math.max(0, s.qi - 1) }); },
+      best: best, runner: runner,
+      answers: QUIZ.map(function (q) { var v = s.qa[q.id]; var o = q.opts.find(function (x) { return x[0] === v; }); return { q: q.short, a: o ? o[1] : '—' }; }),
+      quote: function () { self.setState({ buyer: 'coatings', step: 1, note: 'Floor Finder match: ' + best.name + '.' }); },
+      details: function () { self.open('system', best.id); },
+      runnerOpen: function () { self.open('system', runner.id); },
+      restart: function () { self.setState({ qi: 0, qa: {} }); }
+    };
+    var vc = VIZ_COL.find(function (c) { return c.id === s.vizC; }) || VIZ_COL[0];
+    var vf = VIZ_FIN.find(function (f) { return f.id === s.vizF; }) || VIZ_FIN[0];
+    var t = toon(m);
+    return {
+      cart: s.cart,
+      quiz: quiz,
+      envs: ENVS.map(function (e) { return Object.assign({ label: e.label }, sel(e.id === s.env), { pick: function () { self.setState({ env: e.id }); } }); }),
+      systems: SYSTEMS.map(function (x) {
+        var on = s.env === 'all' || x.env.indexOf(s.env) >= 0, hit = on && s.env !== 'all';
+        var L = LAYERS[x.id] || []; return Object.assign({}, x, { layers: L.map(function (l, i) { return { label: l[0], n: l[1], bg: l[2], fg: '#FFFFFF', h: 26, r: i === 0 ? '4px 4px 0 0' : '0' }; }), opacity: on ? 1 : 0.35, border: hit ? '#B31942' : '#D3D9E2', open: function () { self.open('system', x.id); }, quote: function () { self.setState({ buyer: 'coatings', step: 1, note: 'Interested in the ' + x.name + '.' }); } });
+      }),
+      stress: (function () {
+        var n = Object.keys(s.hits).filter(function (k) { return s.hits[k]; }).length;
+        var cond = Math.max(10, 100 - n * 22), words = ['Like New', 'Showing Wear', 'Cracking', 'Peeling', 'Failing'];
+        var last = HITS.find(function (h) { return h.id === s.lastHit; });
+        return {
+          hits: HITS.map(function (h) { var on = !!s.hits[h.id]; return { label: h.label, dot: h.dot, pressed: on ? 'true' : 'false', border: on ? '#FFFFFF' : '#ffffff55', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#0A35C8' : '#FFFFFF', pick: function () { var x = Object.assign({}, s.hits); x[h.id] = !x[h.id]; self.setState({ hits: x, lastHit: x[h.id] ? h.id : '' }); } }; }),
+          reset: function () { self.setState({ hits: {}, lastHit: '' }); },
+          caption: last ? last.msg : (n ? 'Keep going — add more abuse.' : 'Tap Hot Water, Chemicals, Forklifts or Moisture to start.'),
+          panels: [
+            { name: 'Typical Epoxy', aria: 'Epoxy floor showing damage', floor: '#9AA6B4', heat: s.hits.heat ? 1 : 0, chem: s.hits.chem ? 1 : 0, fork: s.hits.fork ? 1 : 0, wet: s.hits.wet ? 1 : 0, beads: 0, cond: cond, condText: words[n], condColor: n >= 3 ? '#E25B5B' : (n ? '#F2C94C' : '#6FCF97'), status: n ? 'Damaged' : 'Fresh', badgeBg: n ? '#B31942' : '#4A5568' },
+            { name: 'Liberty Urethane Cement', aria: 'Liberty floor holding up', floor: '#7C8A99', heat: 0, chem: 0, fork: 0, wet: 0, beads: n ? 1 : 0, cond: 100, condText: 'Holding Up', condColor: '#6FCF97', status: 'Holding Up', badgeBg: '#2E7D4F' }
+          ]
+        };
+      })(),
+      bid: (function () {
+        var mat = s.bSf * s.bMat, labor = s.bCrew * s.bDays * 8 * s.bRate, cost = mat + labor, price = cost * (1 + s.bMark / 100), profit = price - cost;
+        var m0 = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
+        var mk = function (id, label, min, max, step, key, fmt) { return { id: 'bid-' + id, label: label, min: min, max: max, step: step, value: s[key], text: fmt(s[key]), on: function (e) { var o = {}; o[key] = Number(e.target.value); self.setState(o); } }; };
+        return {
+          sliders: [
+            mk('sf', 'Floor Size', 100, 20000, 100, 'bSf', function (v) { return v.toLocaleString('en-US') + ' sq ft'; }),
+            mk('mat', 'Material Cost / Sq Ft', 0.5, 12, 0.25, 'bMat', function (v) { return '$' + v.toFixed(2); }),
+            mk('crew', 'Crew Size', 1, 8, 1, 'bCrew', function (v) { return v + (v === 1 ? ' person' : ' people'); }),
+            mk('days', 'Days On Site', 1, 10, 1, 'bDays', function (v) { return v + (v === 1 ? ' day' : ' days'); }),
+            mk('rate', 'Labor Rate / Hour', 20, 100, 1, 'bRate', function (v) { return '$' + v; }),
+            mk('mark', 'Your Markup', 0, 100, 5, 'bMark', function (v) { return v + '%'; })
+          ],
+          price: m0(price), perSf: '$' + (price / s.bSf).toFixed(2),
+          rows: [{ k: 'Material', v: m0(mat), color: '#FFFFFF' }, { k: 'Labor', v: m0(labor), color: '#FFFFFF' }, { k: 'Your Cost', v: m0(cost), color: '#FFFFFF' }, { k: 'Your Profit', v: m0(profit), color: '#6FCF97' }],
+          kits: Math.ceil(s.bSf / 200) + '–' + Math.ceil(s.bSf / 80),
+          ask: function () { self.setState({ buyer: 'coatings', step: 1, note: 'Bid Builder: ' + s.bSf.toLocaleString('en-US') + ' sq ft job. Need Liberty material pricing.' }); }
+        };
+      })(),
+      acad: {
+        filters: [{ id: 'all', label: 'All' }, { id: 'coat', label: 'Coatings' }, { id: 'tools', label: 'Tools' }, { id: 'biz', label: 'Business' }].map(function (f) { var on = f.id === s.acad; return { label: f.label, pressed: on ? 'true' : 'false', border: on ? '#FFFFFF' : '#ffffff44', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#071A52' : '#FFFFFF', pick: function () { self.setState({ acad: f.id }); } }; }),
+        videos: ACADEMY.filter(function (v) { return s.acad === 'all' || v.cat === s.acad; }).map(function (v) { var i = ACADEMY.indexOf(v); return { title: v.title, blurb: v.blurb, catLabel: ACATS[v.cat], n: (i < 9 ? '0' : '') + (i + 1), hasImg: !!v.img, noImg: !v.img, img: v.img || '', bg: v.img ? '#EEF3FA' : (v.cat === 'biz' ? 'linear-gradient(135deg, #B31942, #7E1230)' : 'linear-gradient(135deg, #2F6DB5, #0A35C8)'), open: function () { self.open('video', v.id); } }; })
+      },
+      wtb: (function () {
+        var cur = STATES.find(function (x) { return x[0] === s.wtb; }) || STATES[25];
+        return {
+          tiles: STATES.map(function (x) { var hq = x[0] === 'CA', on = x[0] === s.wtb; return { id: x[0], name: x[1], col: x[2], row: x[3], pressed: on ? 'true' : 'false', bg: on ? '#0A35C8' : (hq ? '#B31942' : '#DCE4F0'), fg: on || hq ? '#FFFFFF' : '#0A35C8', ring: on ? '#B31942' : 'transparent', pick: function () { self.setState({ wtb: x[0] }); } }; }),
+          options: STATES.slice().sort(function (a, b) { return a[1] < b[1] ? -1 : 1; }).map(function (x) { return { id: x[0], name: x[1], selected: x[0] === s.wtb }; }),
+          onSelect: function (e) { self.setState({ wtb: e.target.value }); },
+          id: cur[0], name: cur[1],
+          msg: cur[0] === 'CA' ? 'Home base. Liberty HQ is at 712 W. Cienega Ave, Unit A, San Dimas. Call 800-208-4104.' : 'Our dealer list for ' + cur[1] + ' is growing. We ship tools anywhere in the U.S. — or drop your zip below and we\u2019ll point you to the closest seller.',
+          stock: function () { self.setState({ buyer: 'retail', step: 1, note: 'Interested in carrying Liberty in ' + cur[1] + '.' }); },
+          asking: !s.wtbSent, sent: s.wtbSent,
+          submit: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ wtbSent: true }); }
+        };
+      })(),
+      rev: (function () {
+        var n = REVIEWS.length, a = s.rev % n, b = (s.rev + 1) % n;
+        return {
+          cards: [REVIEWS[a], REVIEWS[b]],
+          prev: function () { self.setState({ rev: (s.rev - 1 + n) % n }); },
+          next: function () { self.setState({ rev: (s.rev + 1) % n }); },
+          dots: REVIEWS.map(function (r, i) { var on = i === a; return { label: 'Show review ' + (i + 1), pressed: on ? 'true' : 'false', w: on ? 34 : 12, bg: on ? '#B31942' : '#C9D0DA', pick: function () { self.setState({ rev: i }); } }; })
+        };
+      })(),
+      salute: {
+        open: !s.salDone, done: s.salDone,
+        types: [{ id: 'vet', label: 'Veteran' }, { id: 'active', label: 'Active Duty' }, { id: 'first', label: 'First Responder' }].map(function (t) { var on = t.id === s.salType; return { label: t.label, pressed: on ? 'true' : 'false', border: on ? '#FFFFFF' : '#ffffff55', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#0A35C8' : '#FFFFFF', pick: function () { self.setState({ salType: t.id }); } }; }),
+        claim: function () { self.setState({ salDone: true }); }
+      },
+      jobs: JOBS.map(function (j) { return Object.assign({}, j, { apply: function () { self.setState({ role: j.title, careerSent: false }); } }); }),
+      career: {
+        open: !s.careerSent, sent: s.careerSent, role: s.role,
+        roles: JOBS.map(function (j) { return { title: j.title, selected: j.title === s.role }; }),
+        onRole: function (e) { self.setState({ role: e.target.value }); },
+        submit: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ careerSent: true }); }
+      },
+      text: {
+        open: s.textOpen, expanded: s.textOpen ? 'true' : 'false', label: s.textOpen ? 'Close' : 'Text Us',
+        toggle: function () { self.setState({ textOpen: !s.textOpen }); },
+        chips: TEXT_CHIPS.map(function (c) { return { label: c, href: 'sms:2397448403?&body=' + encodeURIComponent('Hi Liberty! ' + c) }; })
+      },
+      bookCoatings: bookAs('coatings'), bookRetail: bookAs('retail'), bookEnterprise: bookAs('enterprise'), applyAmb: bookAs('ambassador'),
+      prodFilters: [{ id: 'all', label: 'All' }, { id: 'prep', label: 'Prep' }, { id: 'uc', label: 'Urethane Cement' }, { id: 'pa', label: 'Polyaspartic' }, { id: 'top', label: 'Top Coats' }, { id: 'spec', label: 'Cove' }].map(function (f) { return Object.assign({ label: f.label }, sel(f.id === s.prodCat), { pick: function () { self.setState({ prodCat: f.id }); } }); }),
+      chem: CHEM.filter(function (p) { return s.prodCat === 'all' || p.cat === s.prodCat; }).map(function (p) { return Object.assign({}, p, { catLabel: CATS[p.cat].label, color: CATS[p.cat].color, open: function () { self.open('product', p.id); } }); }),
+      toolFilters: [{ id: 'all', label: 'All Tools' }, { id: 'coating', label: 'Coating Tools' }, { id: 'caddy', label: 'Tape Caddy' }, { id: 'bundle', label: 'Crew Kits' }].map(function (f) { return Object.assign({ label: f.label }, sel(f.id === s.toolFilter), { pick: function () { self.setState({ toolFilter: f.id }); } }); }),
+      tools: TOOLS.filter(function (p) { return s.toolFilter === 'all' || p.group === s.toolFilter; }).map(function (p) {
+        var on = !!s.added[p.id], quote = p.price == null;
+        return Object.assign({}, p, {
+          img: p.img || CARD[p.id], stripe: p.group === 'coating' ? '#0A35C8' : (p.group === 'bundle' ? '#B31942' : '#2F6DB5'),
+          priceText: quote ? 'Call For Price' : money(p.price), isBuy: !quote, isQuote: quote,
+          btnBg: on ? '#2E5E2E' : '#0A35C8', addLabel: on ? 'Added — Add Another' : 'Add To Cart',
+          add: function () { self.add(p.id); }, open: function () { self.open('tool', p.id); },
+          ask: function () { self.setState({ buyer: 'tools', step: 1, note: 'Pricing for the ' + p.name + '.' }); }
+        });
+      }),
+      models: MODELS.map(function (x) { return Object.assign({}, x, sel(x.id === s.model), { pick: function () { self.setState({ model: x.id }); } }); }),
+      model: Object.assign({}, m, { priceText: money(byId[m.id].price), addLabel: s.added[m.id] ? 'Added To Cart' : 'Add To Cart', add: function () { self.add(m.id); } }),
+      tapeBottom: Math.max(4, Math.round(m.inches * 25)), lineMark: 96 + Math.max(4, Math.round(m.inches * 25)) - 7, toon: t,
+      kitTiles: ['lowboy', 'c2', 'c4', 'c6'].map(function (k) { var on = !!s.kit[k]; return { name: byId[k].name.replace(' Caddy', '').replace('The ', ''), priceText: money(byId[k].price), pressed: on ? 'true' : 'false', border: on ? '#0A35C8' : '#C9D0DA', bg: on ? '#EEF3FA' : '#FFFFFF', boxBorder: on ? '#B31942' : '#8A94A3', boxBg: on ? '#B31942' : '#FFFFFF', toggle: function () { var n = Object.assign({}, s.kit); n[k] = !n[k]; self.setState({ kit: n }); } }; }),
+      kit: kit,
+      industryList: INDUSTRIES.map(function (ind, i) { return { label: ind.label, n: i + 1, open: function () { self.open('industry', ind.id); } }; }),
+      timeline: TIMELINE, values: VALUES,
+      amb: s.amb, ambMonth: '$' + (s.amb * 10).toLocaleString('en-US'), ambYear: '$' + (s.amb * 120).toLocaleString('en-US'),
+      onAmb: function (e) { self.setState({ amb: Number(e.target.value) }); },
+      schedSteps: ['1  Pick A Time', '2  Your Info', '3  Done'].map(function (l, i) { var on = s.step === i + 1; return { label: l, bg: on ? '#0A35C8' : '#F4F5F7', fg: on ? '#FFFFFF' : '#4A5568' }; }),
+      showStep1: s.step === 1, showStep2: s.step === 2, showStep3: s.step === 3,
+      buyerTypes: BUYERS.map(function (b) { return Object.assign({ label: b.label }, sel(b.id === s.buyer), { pick: function () { self.setState({ buyer: b.id }); } }); }),
+      days: self.days.map(function (d, i) { return Object.assign({}, d, sel(i === s.day), { pick: function () { self.setState({ day: i }); } }); }),
+      slots: SLOTS.map(function (x, i) { return Object.assign({ label: x }, sel(i === s.slot, '#B31942'), { pick: function () { self.setState({ slot: i }); } }); }),
+      noSlot: s.slot < 0, continueBg: s.slot < 0 ? '#8A94A3' : '#0A35C8', continueLabel: s.slot < 0 ? 'Pick A Time First' : 'Next →',
+      toStep2: function () { if (s.slot >= 0) self.setState({ step: 2 }); },
+      toStep1: function () { self.setState({ step: 1 }); },
+      book: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ step: 3 }); },
+      resetSched: function () { self.setState({ step: 1, slot: -1 }); },
+      whenText: (self.days[s.day] ? self.days[s.day].dow + ', ' + self.days[s.day].md : '') + (s.slot >= 0 ? ' · ' + SLOTS[s.slot] + ' PT' : ''),
+      buyerLabel: buyer.label, prefill: [s.note].concat(s.quote.length ? ['Quote list: ' + s.quote.map(function (q) { return q.name; }).join(', ') + '.'] : []).filter(Boolean).join(' '),
+      faqs: FAQS.map(function (q, i) { var open = s.faq === i; return Object.assign({}, q, { isOpen: open, expanded: open ? 'true' : 'false', sign: open ? '−' : '+', signBg: open ? '#B31942' : '#0A35C8', toggle: function () { self.setState({ faq: open ? -1 : i }); } }); }),
+      quoteCount: s.quote.length, hasQuote: s.quote.length > 0,
+      quoteItems: s.quote.map(function (q) { return { name: q.name, remove: function () { self.toggleQuote(q.key, q.name); } }; }),
+      modalOpen: !!s.modal, modal: self.buildModal(), closeModal: function () { self.setState({ modal: null }); }
+    };
+  }
+}
+
+window.__ltcStart(Component);
+</script>
+</body>
+</html>

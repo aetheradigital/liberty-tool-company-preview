@@ -38,11 +38,11 @@ function morph(o,n){
 }
 function finish(el){ if(el.nodeType!==1)return; wire(el); if(el.tagName==='INPUT'||el.tagName==='SELECT'||el.tagName==='TEXTAREA')setVal(el); for(var c=el.firstChild;c;c=c.nextSibling)finish(c); }
 window.DCLogic=function(props){this.props=props||{};this.state={};};
-DCLogic.prototype.setState=function(o){Object.assign(this.state,typeof o==='function'?o(this.state):o);schedule();};
+DCLogic.prototype.setState=function(o){Object.assign(this.state,typeof o==='function'?o(this.state):o);if(window.__ltcSave){try{window.__ltcSave(this.state);}catch(e){}}schedule();};
 DCLogic.prototype.forceUpdate=function(){schedule();};
 var comp,root,tpl,queued=false;
 function render(){queued=false;var ctx=comp.renderVals();var fresh=document.createElement('div');tpl.content.childNodes.forEach(function(ch){build(ch,ctx,fresh);});
   if(!root.firstChild){while(fresh.firstChild){var c=fresh.firstChild;root.appendChild(c);finish(c);}} else morph(root,(function(){var r=root.cloneNode(false);while(fresh.firstChild)r.appendChild(fresh.firstChild);return r;})());}
 function schedule(){if(!queued){queued=true;(window.queueMicrotask||setTimeout)(render);}}
-window.__ltcStart=function(Cls){tpl=document.getElementById('tpl');root=document.getElementById('root');comp=new Cls({});window.__comp=comp;render();};
+window.__ltcStart=function(Cls){tpl=document.getElementById('tpl');root=document.getElementById('root');comp=new Cls({});window.__comp=comp;if(window.__ltcRestore){try{window.__ltcRestore(comp);}catch(e){}}render();};
 })();

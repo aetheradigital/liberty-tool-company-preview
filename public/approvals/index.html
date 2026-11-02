@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LTC — Social Approval Board</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/logo-blue.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F4F5F7;color:#0B1B33;font-family:Inter,system-ui,sans-serif}
+a{color:#0A3161}a:hover{color:#B31942}
+button,input,select,textarea{font:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #B31942;outline-offset:2px}
+@keyframes gtmFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){*{animation:none !important}}
+</style>
+
+</head>
+<body>
+<div id="ltc-preview-bar" style="position: relative; z-index: 60; background: #0B1424; color: #FFFFFF; font: 500 13px/1.2 Inter, system-ui, sans-serif">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px">
+    <a href="/" style="color: #FFFFFF; text-decoration: none; font-weight: 700; letter-spacing: 0.04em; white-space: nowrap">← LTC Preview Portal</a>
+    <span style="opacity: 0.35">|</span>
+    <nav aria-label="Preview pages" style="display: flex; flex-wrap: wrap; gap: 8px 20px"><a href="/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 1 · Classic</a><a href="/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 2 · Fun</a><a href="/approvals/" style="color: #FFFFFF; text-decoration: none; font-weight: 700; white-space: nowrap; border-bottom: 2px solid #B31942; padding-bottom: 2px">Social Approval Board</a><a href="/ads/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Ad Creative</a></nav>
+  </div>
+</div>
+<script>if(window.self!==window.top){document.getElementById('ltc-preview-bar').style.display='none';}</script>
+<template id="tpl">
+
+<div style="font-family: Inter, system-ui, sans-serif; color: #0B1B33; background: #F4F5F7; min-width: 0">
+
+<!-- HEADER -->
+<header style="background: #0A3161; color: #FFFFFF">
+  <div style="height: 8px; background: repeating-linear-gradient(90deg, #B31942 0 40px, #FFFFFF 40px 80px)"></div>
+  <div style="max-width: 1320px; margin: 0 auto; padding: 28px 24px 30px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; min-width: 0">
+      <img src="/assets/logo-white.png" alt="Liberty Tool Company" style="height: 64px; width: auto; display: block">
+      <div style="min-width: 0">
+        <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.16em; text-transform: uppercase; color: #C3CFE0">The Package · Funnels</div>
+        <h1 style="margin: 2px 0 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(32px, 3.6vw, 46px); line-height: 1; text-transform: uppercase">Go-To-Market Social · Approval Board</h1>
+        <div style="margin-top: 6px; font-size: 15px; color: #D4DDEA">Nov 2 – Dec 1, 2026 · {{stats.total}} posts · 8 campaigns</div>
+      </div>
+    </div>
+    <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #C3CFE0; min-width: 240px">Reviewing As
+      <input type="text" placeholder="Your name" onChange="{{onReviewer}}" autocomplete="name" style="height: 46px; padding: 0 14px; border: 0; border-radius: 4px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #0B1B33; background: #FFFFFF">
+    </label>
+  </div>
+</header>
+
+<!-- STATS -->
+<section style="max-width: 1320px; margin: 0 auto; padding: 28px 24px 0">
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
+    <sc-for list="{{stats.tiles}}" as="t" hint-placeholder-count="4">
+      <button type="button" onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="text-align: left; background: #FFFFFF; border: 2px solid {{t.ring}}; border-left: 8px solid {{t.color}}; border-radius: 6px; padding: 16px 18px; cursor: pointer; color: #0B1B33">
+        <span style="display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 40px; line-height: 1; color: {{t.color}}">{{t.n}}</span>
+        <span style="display: block; margin-top: 4px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5568">{{t.label}}</span>
+      </button>
+    </sc-for>
+  </div>
+  <div style="margin-top: 14px; display: flex; align-items: center; gap: 14px">
+    <div style="flex: 1; height: 14px; background: #DCE1E8; border-radius: 7px; overflow: hidden; display: flex">
+      <div style="width: {{stats.pApproved}}%; background: #2E7D4F; transition: width 300ms ease"></div>
+      <div style="width: {{stats.pChanges}}%; background: #D9822B; transition: width 300ms ease"></div>
+    </div>
+    <span style="font-size: 14px; font-weight: 700; color: #0A3161; white-space: nowrap">{{stats.pApproved}}% approved</span>
+  </div>
+</section>
+
+<!-- CAMPAIGNS -->
+<section style="max-width: 1320px; margin: 0 auto; padding: 28px 24px 0">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 10px">
+    <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 30px; text-transform: uppercase; color: #0A3161">Campaigns</h2>
+    <span style="font-size: 14px; color: #4A5568">Tap a campaign to filter. Tap again to clear.</span>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; margin-top: 12px">
+    <sc-for list="{{campaigns}}" as="c" hint-placeholder-count="8">
+      <button type="button" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" style="text-align: left; background: {{c.bg}}; color: {{c.fg}}; border: 2px solid {{c.color}}; border-top: 8px solid {{c.color}}; border-radius: 6px; padding: 14px; cursor: pointer; display: flex; flex-direction: column; gap: 6px; min-height: 150px">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 20px; line-height: 1.05; text-transform: uppercase">{{c.name}}</span>
+        <span style="font-size: 13px; line-height: 1.4; opacity: 0.9">{{c.goal}}</span>
+        <span style="margin-top: auto; font-size: 12px; font-weight: 700">{{c.countLabel}} · {{c.done}} approved</span>
+      </button>
+    </sc-for>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<section style="max-width: 1320px; margin: 0 auto; padding: 22px 24px 0">
+  <div style="background: #FFFFFF; border: 1px solid #D3D9E2; border-radius: 6px; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5568">Platform</span>
+      <sc-for list="{{platFilters}}" as="f" hint-placeholder-count="5">
+        <button type="button" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" style="min-height: 40px; padding: 0 12px; border-radius: 20px; border: 2px solid {{f.border}}; background: {{f.bg}}; color: {{f.fg}}; cursor: pointer; font-size: 13px; font-weight: 700">{{f.label}}</button>
+      </sc-for>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5568">Status</span>
+      <sc-for list="{{statusFilters}}" as="f" hint-placeholder-count="4">
+        <button type="button" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" style="min-height: 40px; padding: 0 12px; border-radius: 20px; border: 2px solid {{f.border}}; background: {{f.bg}}; color: {{f.fg}}; cursor: pointer; font-size: 13px; font-weight: 700">{{f.label}}</button>
+      </sc-for>
+    </div>
+    <div style="margin-left: auto; display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+      <span style="font-size: 14px; font-weight: 600; color: #4A5568">Showing {{shownCount}} of {{stats.total}}</span>
+      <button type="button" onClick="{{approveShown}}" style="min-height: 40px; padding: 0 14px; border-radius: 4px; border: 0; background: #2E7D4F; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase">Approve All Shown</button>
+      <button type="button" onClick="{{clearFilters}}" style="min-height: 40px; padding: 0 12px; border-radius: 4px; border: 2px solid #0A3161; background: #FFFFFF; color: #0A3161; cursor: pointer; font-size: 13px; font-weight: 700">Clear Filters</button>
+    </div>
+  </div>
+</section>
+
+<!-- BOARD: CALENDAR + REVIEW -->
+<section id="review" style="max-width: 1320px; margin: 0 auto; padding: 22px 24px 0">
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+
+    <div style="flex: 999 1 640px; min-width: 0; background: #FFFFFF; border: 1px solid #D3D9E2; border-radius: 6px; overflow: hidden">
+      <div style="padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px; border-bottom: 1px solid #D3D9E2">
+        <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase; color: #0A3161">November 2026</h2>
+        <span style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; font-weight: 600; color: #4A5568">
+          <span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #2E7D4F"></span>Approved</span>
+          <span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #D9822B"></span>Changes</span>
+          <span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FFFFFF; border: 2px solid #8A94A3; box-sizing: border-box"></span>Pending</span>
+        </span>
+      </div>
+      <div style="overflow-x: auto">
+        <div style="min-width: 640px">
+          <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); background: #F4F5F7; border-bottom: 1px solid #D3D9E2">
+            <sc-for list="{{dows}}" as="d" hint-placeholder-count="7">
+              <div style="padding: 8px 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5568">{{d}}</div>
+            </sc-for>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr))">
+            <sc-for list="{{cal}}" as="day" hint-placeholder-count="35">
+              <div style="min-height: 118px; padding: 8px; border-right: 1px solid #E6E9EE; border-bottom: 1px solid #E6E9EE; background: {{day.bg}}; display: flex; flex-direction: column; gap: 5px">
+                <span style="font-size: 13px; font-weight: 700; color: {{day.numColor}}">{{day.label}}</span>
+                <sc-for list="{{day.posts}}" as="p" hint-placeholder-count="1">
+                  <button type="button" onClick="{{p.select}}" aria-pressed="{{p.pressed}}" title="{{p.title}}" style="text-align: left; display: flex; align-items: center; gap: 6px; width: 100%; min-height: 40px; padding: 5px 7px; border-radius: 4px; border: 2px solid {{p.ring}}; border-left: 6px solid {{p.color}}; background: {{p.bg}}; cursor: pointer; color: #0B1B33; opacity: {{p.opacity}}">
+                    <span style="flex: none; width: 10px; height: 10px; border-radius: 50%; background: {{p.dot}}; border: 2px solid {{p.dotRing}}; box-sizing: border-box"></span>
+                    <span style="min-width: 0; font-size: 12px; font-weight: 600; line-height: 1.25; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical">{{p.title}}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex: 1 1 440px; min-width: 0; background: #FFFFFF; border: 1px solid #D3D9E2; border-radius: 6px; overflow: hidden">
+      <div style="background: {{sel.color}}; color: #FFFFFF; padding: 14px 18px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px">
+        <div style="min-width: 0">
+          <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.9">{{sel.campName}} · {{sel.dateLong}}</div>
+          <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 24px; line-height: 1.05; text-transform: uppercase">{{sel.title}}</div>
+        </div>
+        <div style="display: flex; gap: 6px">
+          <button type="button" onClick="{{selPrev}}" aria-label="Previous post" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid #FFFFFF; background: transparent; color: #FFFFFF; cursor: pointer; font-size: 18px; font-weight: 700">‹</button>
+          <button type="button" onClick="{{selNext}}" aria-label="Next post" style="width: 40px; height: 40px; border-radius: 50%; border: 0; background: #FFFFFF; color: {{sel.color}}; cursor: pointer; font-size: 18px; font-weight: 700">›</button>
+        </div>
+      </div>
+      <div style="padding: 16px 18px 20px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between">
+          <div role="tablist" aria-label="Preview on" style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{sel.platTabs}}" as="pt" hint-placeholder-count="3">
+              <button type="button" role="tab" onClick="{{pt.pick}}" aria-selected="{{pt.pressed}}" style="min-height: 38px; padding: 0 12px; border-radius: 19px; border: 2px solid {{pt.border}}; background: {{pt.bg}}; color: {{pt.fg}}; cursor: pointer; font-size: 13px; font-weight: 700">{{pt.label}}</button>
+            </sc-for>
+          </div>
+          <span style="background: {{sel.statusBg}}; color: {{sel.statusFg}}; padding: 6px 10px; border-radius: 4px; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase">{{sel.statusLabel}}</span>
+        </div>
+
+        <!-- MOCK -->
+        <div style="display: flex; justify-content: center; background: #EEF1F5; border-radius: 6px; padding: 18px 12px">
+          <sc-if value="{{sel.isIG}}" hint-placeholder-val="{{true}}">
+            <div style="width: 100%; max-width: 380px; background: #FFFFFF; border: 1px solid #DBDBDB; border-radius: 8px; overflow: hidden; animation: gtmFade 250ms ease">
+              <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px">
+                <span style="width: 34px; height: 34px; border-radius: 50%; background: #0A3161; display: flex; align-items: center; justify-content: center; overflow: hidden"><img src="/assets/logo-white.png" alt="" style="width: 30px; height: auto"></span>
+                <span style="font-size: 14px; font-weight: 700">libertytoolcompany</span>
+                <span style="margin-left: auto; font-size: 18px; font-weight: 700; color: #262626">···</span>
+              </div>
+              <div style="position: relative; aspect-ratio: {{sel.igRatio}}; background: {{sel.art.bg}}; overflow: hidden">
+                <sc-if value="{{sel.art.hasImg}}" hint-placeholder-val="{{true}}"><img src="{{sel.art.img}}" alt="{{sel.title}}" style="position: absolute; inset: {{sel.art.inset}}; width: {{sel.art.w}}; height: {{sel.art.h}}; object-fit: contain; display: block"></sc-if>
+                <sc-if value="{{sel.art.hasHead}}" hint-placeholder-val="{{false}}">
+                  <div style="position: absolute; left: 0; top: 0; max-width: 78%; padding: 16px 16px 0; display: flex; flex-direction: column; gap: 5px">
+                    <span style="width: 44px; height: 4px; background: #B31942"></span>
+                    <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: {{sel.art.headSize}}px; line-height: 0.95; text-transform: uppercase; color: {{sel.art.headColor}}">{{sel.art.head}}</span>
+                    <span style="font-size: 13px; font-weight: 600; color: {{sel.art.subColor}}">{{sel.art.sub}}</span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{sel.art.hasLogo}}" hint-placeholder-val="{{false}}"><img src="/assets/logo-white.png" alt="" style="position: absolute; left: 18px; bottom: 16px; height: 44px; width: auto"></sc-if>
+              </div>
+              <div style="display: flex; gap: 14px; padding: 10px 12px 4px">
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6C19 16.5 12 21 12 21z"></path></svg>
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path></svg>
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M22 3L11 13M22 3l-7 18-4-8-8-4z"></path></svg>
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2" style="margin-left: auto"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>
+              </div>
+              <p style="margin: 0; padding: 4px 12px 14px; font-size: 14px; line-height: 1.45; color: #262626; white-space: pre-line"><strong>libertytoolcompany</strong> {{sel.caption}}</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{sel.isFB}}" hint-placeholder-val="{{false}}">
+            <div style="width: 100%; max-width: 420px; background: #FFFFFF; border: 1px solid #DADDE1; border-radius: 8px; overflow: hidden; animation: gtmFade 250ms ease">
+              <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px 8px">
+                <span style="width: 40px; height: 40px; border-radius: 50%; background: #0A3161; display: flex; align-items: center; justify-content: center; overflow: hidden"><img src="/assets/logo-white.png" alt="" style="width: 36px; height: auto"></span>
+                <span><span style="display: block; font-size: 15px; font-weight: 700; color: #050505">Liberty Tool Company</span><span style="display: block; font-size: 13px; color: #65676B">{{sel.dateShort}} · Public</span></span>
+              </div>
+              <p style="margin: 0; padding: 0 14px 10px; font-size: 15px; line-height: 1.45; color: #050505; white-space: pre-line">{{sel.caption}}</p>
+              <div style="position: relative; aspect-ratio: 1 / 1; background: {{sel.art.bg}}; overflow: hidden">
+                <sc-if value="{{sel.art.hasImg}}" hint-placeholder-val="{{true}}"><img src="{{sel.art.img}}" alt="{{sel.title}}" style="position: absolute; inset: {{sel.art.inset}}; width: {{sel.art.w}}; height: {{sel.art.h}}; object-fit: contain; display: block"></sc-if>
+                <sc-if value="{{sel.art.hasHead}}" hint-placeholder-val="{{false}}">
+                  <div style="position: absolute; left: 0; top: 0; max-width: 78%; padding: 16px 16px 0; display: flex; flex-direction: column; gap: 5px">
+                    <span style="width: 44px; height: 4px; background: #B31942"></span>
+                    <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: {{sel.art.headSize}}px; line-height: 0.95; text-transform: uppercase; color: {{sel.art.headColor}}">{{sel.art.head}}</span>
+                    <span style="font-size: 13px; font-weight: 600; color: {{sel.art.subColor}}">{{sel.art.sub}}</span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{sel.art.hasLogo}}" hint-placeholder-val="{{false}}"><img src="/assets/logo-white.png" alt="" style="position: absolute; left: 18px; bottom: 16px; height: 44px; width: auto"></sc-if>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; background: #F0F2F5">
+                <span style="min-width: 0"><span style="display: block; font-size: 12px; color: #65676B; text-transform: uppercase">libertytoolcompany.com</span><span style="display: block; font-size: 15px; font-weight: 700; color: #050505">{{sel.cta}}</span></span>
+                <span style="flex: none; background: #E4E6EB; color: #050505; padding: 8px 12px; border-radius: 6px; font-size: 14px; font-weight: 700">Learn More</span>
+              </div>
+              <div style="display: flex; justify-content: space-around; padding: 8px 6px; border-top: 1px solid #DADDE1; font-size: 14px; font-weight: 600; color: #65676B"><span>Like</span><span>Comment</span><span>Share</span></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{sel.isLI}}" hint-placeholder-val="{{false}}">
+            <div style="width: 100%; max-width: 420px; background: #FFFFFF; border: 1px solid #E0DFDC; border-radius: 8px; overflow: hidden; animation: gtmFade 250ms ease">
+              <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px 8px">
+                <span style="width: 46px; height: 46px; border-radius: 4px; background: #0A3161; display: flex; align-items: center; justify-content: center; overflow: hidden"><img src="/assets/logo-white.png" alt="" style="width: 42px; height: auto"></span>
+                <span><span style="display: block; font-size: 15px; font-weight: 700; color: #000000E6">Liberty Tool Company</span><span style="display: block; font-size: 12px; color: #00000099">Building Materials · {{sel.dateShort}}</span></span>
+                <span style="margin-left: auto; color: #0A66C2; font-size: 14px; font-weight: 700">+ Follow</span>
+              </div>
+              <p style="margin: 0; padding: 0 14px 10px; font-size: 14px; line-height: 1.5; color: #000000E6; white-space: pre-line">{{sel.caption}}</p>
+              <div style="position: relative; aspect-ratio: 1 / 1; background: {{sel.art.bg}}; overflow: hidden">
+                <sc-if value="{{sel.art.hasImg}}" hint-placeholder-val="{{true}}"><img src="{{sel.art.img}}" alt="{{sel.title}}" style="position: absolute; inset: {{sel.art.inset}}; width: {{sel.art.w}}; height: {{sel.art.h}}; object-fit: contain; display: block"></sc-if>
+                <sc-if value="{{sel.art.hasHead}}" hint-placeholder-val="{{false}}">
+                  <div style="position: absolute; left: 0; top: 0; max-width: 78%; padding: 16px 16px 0; display: flex; flex-direction: column; gap: 5px">
+                    <span style="width: 44px; height: 4px; background: #B31942"></span>
+                    <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: {{sel.art.headSize}}px; line-height: 0.95; text-transform: uppercase; color: {{sel.art.headColor}}">{{sel.art.head}}</span>
+                    <span style="font-size: 13px; font-weight: 600; color: {{sel.art.subColor}}">{{sel.art.sub}}</span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{sel.art.hasLogo}}" hint-placeholder-val="{{false}}"><img src="/assets/logo-white.png" alt="" style="position: absolute; left: 18px; bottom: 16px; height: 44px; width: auto"></sc-if>
+              </div>
+              <div style="display: flex; justify-content: space-around; padding: 10px 6px; border-top: 1px solid #E0DFDC; font-size: 13px; font-weight: 700; color: #00000099"><span>Like</span><span>Comment</span><span>Repost</span><span>Send</span></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{sel.isTT}}" hint-placeholder-val="{{false}}">
+            <div style="position: relative; width: 100%; max-width: 300px; aspect-ratio: 9 / 16; background: #000000; border-radius: 18px; overflow: hidden; animation: gtmFade 250ms ease">
+              <div style="position: absolute; left: 0; right: 0; top: 22%; aspect-ratio: 1 / 1; background: {{sel.art.bg}}">
+                <sc-if value="{{sel.art.hasImg}}" hint-placeholder-val="{{true}}"><img src="{{sel.art.img}}" alt="{{sel.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block"></sc-if>
+                <sc-if value="{{sel.art.hasHead}}" hint-placeholder-val="{{false}}">
+                  <div style="position: absolute; left: 0; right: 0; top: 0; padding: 12px 12px 0"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 20px; line-height: 0.95; text-transform: uppercase; color: {{sel.art.headColor}}">{{sel.art.head}}</span></div>
+                </sc-if>
+              </div>
+              <div style="position: absolute; top: 12px; left: 0; right: 0; text-align: center; font-size: 13px; font-weight: 700; color: #FFFFFF">Following &#160; <span style="border-bottom: 2px solid #FFFFFF; padding-bottom: 2px">For You</span></div>
+              <div style="position: absolute; right: 8px; bottom: 90px; display: flex; flex-direction: column; gap: 16px; align-items: center">
+                <span style="width: 40px; height: 40px; border-radius: 50%; background: #0A3161; border: 2px solid #FFFFFF; display: flex; align-items: center; justify-content: center; overflow: hidden"><img src="/assets/logo-white.png" alt="" style="width: 34px; height: auto"></span>
+                <svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6C19 16.5 12 21 12 21z"></path></svg>
+                <svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path></svg>
+                <svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M14 4l8 8-8 8v-5C8 15 4 17 2 20c0-6 4-11 12-12z"></path></svg>
+              </div>
+              <div style="position: absolute; left: 12px; right: 58px; bottom: 16px; color: #FFFFFF">
+                <div style="font-size: 14px; font-weight: 700">@libertytoolcompany</div>
+                <div style="margin-top: 4px; font-size: 12px; line-height: 1.35; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical">{{sel.caption}}</div>
+                <div style="margin-top: 6px; font-size: 12px; opacity: 0.9">♪ original sound · Liberty Tool Company</div>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #D3D9E2; border: 1px solid #D3D9E2; border-radius: 4px; overflow: hidden; font-size: 13px">
+          <sc-for list="{{sel.facts}}" as="f" hint-placeholder-count="4">
+            <div style="background: #FFFFFF; padding: 10px 12px"><div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5568">{{f.k}}</div><div style="margin-top: 2px; font-weight: 600; overflow-wrap: anywhere">{{f.v}}</div></div>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <button type="button" onClick="{{sel.approve}}" style="flex: 1 1 140px; min-height: 50px; border-radius: 4px; border: 0; background: #2E7D4F; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase">✓ Approve</button>
+          <button type="button" onClick="{{sel.openChanges}}" style="flex: 1 1 140px; min-height: 50px; border-radius: 4px; border: 0; background: #D9822B; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase">Request Changes</button>
+          <button type="button" onClick="{{sel.reset}}" style="min-height: 50px; padding: 0 14px; border-radius: 4px; border: 2px solid #8A94A3; background: #FFFFFF; color: #3B4658; cursor: pointer; font-size: 14px; font-weight: 700">Reset</button>
+        </div>
+        <sc-if value="{{sel.showChanges}}" hint-placeholder-val="{{false}}">
+          <form onSubmit="{{sel.submitChanges}}" style="display: flex; flex-direction: column; gap: 8px; animation: gtmFade 200ms ease">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #3B4658">What Should Change?
+              <textarea name="note" rows="3" placeholder="e.g. Swap the photo for a jobsite shot. Shorten the caption." style="padding: 10px 12px; border: 1.5px solid #B8C1CD; border-radius: 4px; font-size: 15px; text-transform: none; letter-spacing: 0; color: #0B1B33; resize: vertical"></textarea>
+            </label>
+            <button type="submit" style="align-self: flex-start; min-height: 44px; padding: 0 16px; border-radius: 4px; border: 0; background: #0A3161; color: #FFFFFF; cursor: pointer; font-weight: 700">Send Change Request</button>
+          </form>
+        </sc-if>
+        <sc-if value="{{sel.hasNotes}}" hint-placeholder-val="{{false}}">
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5568">Notes</div>
+            <sc-for list="{{sel.notes}}" as="n" hint-placeholder-count="1">
+              <div style="background: #FFF4E8; border-left: 4px solid #D9822B; border-radius: 3px; padding: 10px 12px; font-size: 14px; line-height: 1.45"><strong>{{n.who}}</strong> <span style="color: #4A5568; font-size: 12px">{{n.when}}</span><br>{{n.text}}</div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEED -->
+<section style="max-width: 1320px; margin: 0 auto; padding: 36px 24px 0">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 10px">
+    <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 30px; text-transform: uppercase; color: #0A3161">All Sample Posts</h2>
+    <span style="font-size: 14px; color: #4A5568">Tap a post to preview it above. Quick-approve from the card.</span>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; margin-top: 14px">
+    <sc-for list="{{feed}}" as="p" hint-placeholder-count="8">
+      <article style="background: #FFFFFF; border: 2px solid {{p.ring}}; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column">
+        <a href="#review" onClick="{{p.select}}" aria-label="Preview {{p.title}}" style="position: relative; display: block; aspect-ratio: 1 / 1; background: {{p.art.bg}}; overflow: hidden; text-decoration: none">
+          <sc-if value="{{p.art.hasImg}}" hint-placeholder-val="{{true}}"><img src="{{p.art.img}}" alt="" style="position: absolute; inset: {{p.art.inset}}; width: {{p.art.w}}; height: {{p.art.h}}; object-fit: contain; display: block"></sc-if>
+          <sc-if value="{{p.art.hasHead}}" hint-placeholder-val="{{false}}">
+            <span style="position: absolute; left: 0; right: 0; top: 0; padding: 12px 12px 0; display: flex; flex-direction: column; gap: 4px">
+              <span style="width: 30px; height: 3px; background: #B31942"></span>
+              <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: {{p.art.headSmall}}px; line-height: 0.95; text-transform: uppercase; color: {{p.art.headColor}}">{{p.art.head}}</span>
+            </span>
+          </sc-if>
+          <span style="position: absolute; bottom: 8px; right: 8px; background: {{p.statusBg}}; color: {{p.statusFg}}; padding: 4px 8px; border-radius: 3px; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase">{{p.statusLabel}}</span>
+          <span style="position: absolute; left: 8px; bottom: 8px; background: #FFFFFF; color: #0B1B33; padding: 4px 8px; border-radius: 3px; font-size: 11px; font-weight: 700">{{p.format}}</span>
+        </a>
+        <div style="padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; border-top: 5px solid {{p.color}}">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: {{p.color}}">{{p.dateShort}} · {{p.campName}}</div>
+          <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 19px; line-height: 1.05; text-transform: uppercase">{{p.title}}</div>
+          <div style="font-size: 12px; color: #4A5568">{{p.platText}}</div>
+          <div style="margin-top: auto; padding-top: 8px; display: flex; gap: 6px">
+            <button type="button" onClick="{{p.approve}}" aria-label="Approve {{p.title}}" style="flex: 1; min-height: 40px; border-radius: 4px; border: 0; background: #2E7D4F; color: #FFFFFF; cursor: pointer; font-size: 13px; font-weight: 800">✓ Approve</button>
+            <a href="#review" onClick="{{p.changes}}" style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 40px; border-radius: 4px; background: #FFF4E8; color: #8A4A0E; text-decoration: none; font-size: 13px; font-weight: 800">Changes</a>
+          </div>
+        </div>
+      </article>
+    </sc-for>
+  </div>
+  <sc-if value="{{noneShown}}" hint-placeholder-val="{{false}}">
+    <div style="margin-top: 14px; background: #FFFFFF; border: 1px dashed #8A94A3; border-radius: 6px; padding: 28px; text-align: center; font-size: 16px; color: #4A5568">No posts match these filters. <button type="button" onClick="{{clearFilters}}" style="background: transparent; border: 0; color: #B31942; font-weight: 700; cursor: pointer; text-decoration: underline; min-height: 24px">Clear filters</button></div>
+  </sc-if>
+</section>
+
+<!-- SUMMARY -->
+<section style="max-width: 1320px; margin: 0 auto; padding: 36px 24px 64px">
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+    <div style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; border: 1px solid #D3D9E2; border-radius: 6px; padding: 20px">
+      <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase; color: #0A3161">Activity</h2>
+      <sc-if value="{{hasLog}}" hint-placeholder-val="{{false}}">
+        <ol style="list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; max-height: 360px; overflow: auto">
+          <sc-for list="{{log}}" as="l" hint-placeholder-count="3">
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.4"><span style="flex: none; margin-top: 4px; width: 10px; height: 10px; border-radius: 50%; background: {{l.color}}"></span><span><strong>{{l.who}}</strong> {{l.what}} <em>{{l.post}}</em> <span style="color: #4A5568; font-size: 12px">· {{l.when}}</span></span></li>
+          </sc-for>
+        </ol>
+      </sc-if>
+      <sc-if value="{{noLog}}" hint-placeholder-val="{{true}}">
+        <p style="margin: 12px 0 0; font-size: 15px; color: #4A5568">No decisions yet. Approve a post or request changes and it shows up here.</p>
+      </sc-if>
+    </div>
+    <div style="flex: 1 1 420px; min-width: 0; background: #0A3161; color: #FFFFFF; border-radius: 6px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase">Approval Summary</h2>
+      <p style="margin: 0; font-size: 14px; color: #C3CFE0">Copy this and send it to Aethera so approved posts get scheduled.</p>
+      <textarea readonly="readonly" rows="10" aria-label="Approval summary" style="width: 100%; box-sizing: border-box; padding: 12px; border: 0; border-radius: 4px; font-family: ui-monospace, Menlo, monospace; font-size: 12px; line-height: 1.5; color: #0B1B33; resize: vertical">{{summaryText}}</textarea>
+      <button type="button" onClick="{{copySummary}}" style="align-self: flex-start; min-height: 46px; padding: 0 18px; border-radius: 4px; border: 0; background: #B31942; color: #FFFFFF; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: 0.06em; text-transform: uppercase">{{copyLabel}}</button>
+    </div>
+  </div>
+  <p style="margin: 18px 0 0; font-size: 13px; color: #4A5568">Decisions on this board last while the page is open. Use the summary or canvas comments to keep a record.</p>
+</section>
+
+</div>
+</template>
+<div id="root"></div>
+<script src="/runtime.js"></script>
+<script>
+var LTC_KEY='ltc-social-approvals-v1';
+window.__ltcRestore=function(c){var v=JSON.parse(localStorage.getItem(LTC_KEY)||'null');if(v){['status','notes','log','reviewer'].forEach(function(k){if(v[k]!==undefined)c.state[k]=v[k];});}};
+window.__ltcSave=function(st){localStorage.setItem(LTC_KEY,JSON.stringify({status:st.status,notes:st.notes,log:st.log,reviewer:st.reviewer}));};
+
+var IMG = {
+  founders: '/assets/founders2.webp',
+  cardLowboy: '/assets/card-lowboy.webp', cardC2: '/assets/card-c2.webp', cardC4: '/assets/card-c4.webp', cardC6: '/assets/card-c6.webp',
+  cardCove: '/assets/card-cove.webp', cardDdd: '/assets/card-ddd.webp', cardTriple: '/assets/card-triple.webp', cardFour: '/assets/card-four.webp',
+  cropLowboy: '/assets/crop-lowboy.webp', cropC2: '/assets/crop-c2.webp', cropC4: '/assets/crop-c4.webp', cropC6: '/assets/crop-c6.webp', cropTriple: '/assets/crop-triple.webp', cropFour: '/assets/crop-four.webp',
+  coveTrowel: '/assets/sq-covet.webp'
+};
+var CAMPS = [
+  { id: 'ins', name: 'Installers', goal: 'Show crews the tools and products that save time on every job.', color: '#13305A' },
+  { id: 'dist', name: 'Distributors & Dealers', goal: 'Get supply houses and dealers to stock Liberty on the counter.', color: '#0A3161' },
+  { id: 'ent', name: 'Enterprise & Multi-Site', goal: 'Standardize Liberty across every location and crew, ordered by PO.', color: '#5A2A82' },
+  { id: 'coat', name: 'Coating Systems', goal: 'Get installers and facility owners to switch from epoxy.', color: '#2E7D4F' },
+  { id: 'bun', name: 'Bundle Offers', goal: 'Move crews from one caddy to a full kit.', color: '#2F6DB5' },
+  { id: 'aff', name: 'Become An Affiliate', goal: 'Sign up trade creators with an audience at $10 per caddy.', color: '#B31942' },
+  { id: 'brand', name: 'Brand & Holidays', goal: 'Introduce the family and the combined Liberty brand.', color: '#4A5568' },
+  { id: 'diy', name: 'Homeowner', goal: 'Light touch: one post a month for weekend projects.', color: '#C26A12' }
+];
+var PLAT = { IG: 'Instagram', FB: 'Facebook', LI: 'LinkedIn', TT: 'TikTok / Reels', PIN: 'Pinterest' };
+// art: kind 'card' (square graphic w/ text), 'photo' (needs headline band), 'graphic' (text only)
+var POSTS = [
+  { id: 'p01', d: 2, camp: 'brand', plats: ['IG', 'FB', 'LI'], format: 'Video', title: 'Meet The Family Behind Liberty', art: { kind: 'toon', img: '/assets/toon-family.webp', head: 'Meet Dick & Brandon', sub: 'Father & son. Veteran-owned.', light: true }, caption: 'Meet Dick and Brandon. Father and son. Veteran-owned. Floor guys first.\n\nOur coatings and our tools now live in one place. For installers. By installers.\n\n#LibertyToolCompany #VeteranOwned #FamilyBusiness #MadeInUSA', cta: 'Visit libertytoolcompany.com', utm: 'brand' },
+  { id: 'p02', d: 3, camp: 'ins', plats: ['IG', 'TT', 'FB'], format: 'Reel', title: 'The Old Way vs. The Caddy Way', art: { kind: 'toon', img: '/assets/toon-oldnew.webp', head: 'The Old Way vs. The Caddy Way', sub: 'Same line. Every pass. No crawling.' }, caption: 'Tape measure. Chalk line. Crawl the floor. Fix it.\n\nOr: set the height, run the line, move on.\n\nSave time, money, and your knees.\n#FloorCoating #EpoxyContractor #TapeCaddy', cta: 'Equip My Crew', utm: 'installers' },
+  { id: 'p03', d: 4, camp: 'dist', plats: ['LI', 'FB', 'IG'], format: 'Carousel', title: 'Put The Tape Caddy On Your Counter', art: { kind: 'toon', img: '/assets/toon-display.webp', head: 'Put It On Your Counter.', sub: 'Dealer pricing · Display · Staff demo' }, caption: 'Installers already come to your counter for tape. Sell them the tool that holds it.\n\nDealer pricing, a counter display, a live demo for your staff and easy reorders. Made in the USA.\n#FlooringDistributor #SupplyHouse #TapeCaddy', cta: 'Become A Dealer', utm: 'distributors' },
+  { id: 'p04', d: 5, camp: 'aff', plats: ['IG', 'TT'], format: 'Reel', title: 'Post The Demo. Get Paid.', art: { kind: 'toon', img: '/assets/toon-creator.webp', head: 'Post The Demo. Get Paid.', sub: '$10 per caddy, paid monthly' }, caption: 'Got an audience in the trades? Post the demo. Get paid.\n\n$10 for every eligible caddy your link sells. Paid monthly. We hand you the photos and clips.\n\n#LTCAmbassador #FlooringPros #TapeCaddy', cta: 'Become An Ambassador', utm: 'affiliate' },
+  { id: 'p05', d: 6, camp: 'bun', plats: ['IG', 'FB'], format: 'Static', title: 'Cove System — $205', art: { kind: 'toon', img: '/assets/toon-cove.webp', head: 'Cove System — $205', sub: 'The 4" + 6" pair for cove work' }, caption: 'The 4" and 6" Tape Caddy, together. $205 for the pair — $13 less than buying them separately.\n\nBuilt for cove work. Built in the USA.\n#TapeCaddy #CoveBase #FloorPrep', cta: 'Shop Crew Kits', utm: 'bundles' },
+  { id: 'p06', d: 7, camp: 'diy', plats: ['IG', 'FB', 'TT'], format: 'Reel', title: 'Garage Floor Prep In One Pass', art: { kind: 'toon', img: '/assets/toon-garage.webp', head: 'Mask The Garage In One Pass', sub: 'No tape measure needed' }, caption: 'Homeowner coating the garage this weekend? Mask the wall first — same height all the way around.\n\n1. Pick your height\n2. Set the caddy\n3. Roll\n\n#GarageFloor #EpoxyGarage #DIY', cta: 'Shop The Tape Caddy', utm: 'diy' },
+  { id: 'p07', d: 9, camp: 'dist', plats: ['LI', 'FB'], format: 'Static', title: 'Stock The Tools Installers Ask For', art: { kind: 'toon', img: '/assets/toon-store.webp', head: 'Equip Every Crew. Stock Every Store.', sub: 'American-made tools for your counter' }, caption: 'Installers come to your counter every morning. Give them a tool they can see work.\n\nYou see your cost next to retail. Order by PO. We train your staff.', cta: 'Become A Dealer', utm: 'distributors' },
+  { id: 'p08', d: 10, camp: 'ins', plats: ['IG', 'TT', 'FB'], format: 'Reel', title: 'Meet The Lowboy', art: { kind: 'toon', img: '/assets/toon-lowboy.webp', head: 'Meet The Lowboy', sub: 'Cove masking without the knee pads' }, caption: 'Cove masking without working your way across the floor on your belly.\n\nMeet the Lowboy. 4 mm. Rolls on casters. Built in the USA.\n#TapeCaddy #FloorCoating #CoveBase', cta: 'Book A Live Demo', utm: 'installers' },
+  { id: 'p09', d: 11, camp: 'brand', plats: ['IG', 'FB', 'LI'], format: 'Static', title: 'Veterans Day — Thank You', art: { kind: 'toon', img: '/assets/toon-veterans.webp', head: 'Thank You For Your Service.', sub: 'From one veteran-owned shop to every vet.', light: true }, caption: 'To every veteran: thank you.\n\nWe’re a veteran-owned family business, and today we’re proud of it. Veterans get [X]% off Liberty tools — link in bio.\n\n#VeteransDay #VeteranOwned #MadeInUSA', cta: 'Claim The Veteran Discount', utm: 'brand' },
+  { id: 'p10', d: 12, camp: 'aff', plats: ['IG', 'FB'], format: 'Carousel', title: 'How The Ambassador Program Works', art: { kind: 'toon', img: '/assets/toon-steps.webp', head: 'How The Ambassador Program Works', sub: 'Get your link. Post. Get paid.', light: true }, caption: 'How it works:\n1. Apply and get your own link\n2. Post real demos\n3. Get paid every month\n\nNo Amazon listings or resale. Program terms apply. #ad-ready content included.', cta: 'Become An Ambassador', utm: 'affiliate' },
+  { id: 'p11', d: 13, camp: 'coat', plats: ['IG', 'FB', 'TT'], format: 'Reel', title: 'Hot Water Test: Epoxy vs. Urethane Cement', art: { kind: 'toon', img: '/assets/toon-kitchen.webp', head: 'Hot Water Test', sub: 'Epoxy vs. Liberty urethane cement' }, caption: 'We poured boiling water on epoxy and on our urethane cement. Watch what happens.\n\nLiberty urethane cement handles heat swings up to 230°F.\n#UrethaneCement #CommercialFlooring #FloorCoating', cta: 'Take The Floor Finder', utm: 'coatings' },
+  { id: 'p12', d: 14, camp: 'ins', plats: ['IG', 'FB', 'TT'], format: 'Reel', title: '1111 Fast Patch: Drive On It In 20–30 Minutes', art: { kind: 'toon', img: '/assets/toon-patch.webp', head: 'Patch It. Drive On It.', sub: '1111 Fast Patch · 20–30 minutes' }, caption: 'Spalls, joints, big cracks — fixed before lunch.\n\n1111 Fast Patch is a two-part patch that takes car traffic in 20–30 minutes. Clean it, mix it, fill it, move on.\n#FloorPrep #ConcreteRepair #Installer', cta: 'Get 1111 Fast Patch', utm: 'installers' },
+  { id: 'p13', d: 16, camp: 'dist', plats: ['LI'], format: 'Carousel', title: 'Open A Liberty Account In 7 Steps', art: { kind: 'toon', img: '/assets/toon-handshake.webp', head: 'Open An Account In 7 Steps', sub: 'We bring the demo and the support' }, caption: 'Carrying Liberty is simple:\n1. Make sure we’re a fit\n2. Live demo\n3. Your business details\n4. Products, pricing and terms\n5. Paperwork\n6. Opening order + staff intro\n7. Reorder reviews', cta: 'Become A Dealer', utm: 'distributors' },
+  { id: 'p14', d: 17, camp: 'ins', plats: ['IG', 'FB'], format: 'Reel', title: 'What Does Masking Cost Your Crew?', art: { kind: 'toon', img: '/assets/toon-cost.webp', head: 'What Does Masking Cost You?', sub: 'Run your numbers in the Bid Builder' }, caption: 'Every minute your crew spends measuring and re-sticking tape costs you money.\n\nRun your own numbers in our free Bid Builder — link in bio.\n#ContractorLife #FloorCoating', cta: 'Try The Bid Builder', utm: 'installers' },
+  { id: 'p15', d: 18, camp: 'coat', plats: ['IG', 'FB', 'LI'], format: 'Static', title: 'Kitchens: Done Fixing Epoxy?', art: { kind: 'toon', img: '/assets/toon-kitchen2.webp', head: 'Done Fixing Epoxy?', sub: 'Kitchens need urethane cement' }, caption: 'Hot washdowns. Grease. Cleaners. Every day.\n\nEpoxy cracks and peels. Urethane cement takes the heat and stays put. Ask us which Liberty system fits your kitchen.\n#CommercialKitchen #RestaurantFlooring', cta: 'Get A Coating Quote', utm: 'coatings' },
+  { id: 'p16', d: 19, camp: 'aff', plats: ['IG', 'TT'], format: 'Reel', title: '[First Ambassador] Demo', art: { kind: 'toon', img: '/assets/toon-creator.webp', head: '[Ambassador Name] Runs The Caddy', sub: 'Placeholder — ambassador video' }, caption: '[Ambassador quote, in their words.]\n\nWant to earn like [Name]? Apply to be a Liberty ambassador. #ad #LTCAmbassador', cta: 'Become An Ambassador', utm: 'affiliate' },
+  { id: 'p17', d: 20, camp: 'bun', plats: ['IG', 'FB'], format: 'Static', title: 'Triple Threat — $295', art: { kind: 'toon', img: '/assets/toon-triple.webp', head: 'Triple Threat — $295', sub: 'Lowboy + 4" + 6"' }, caption: 'Three heights for crews that mask a bit of everything.\n\nLowboy + 4" + 6" for $295. You keep $12 vs. buying separately.\n#TapeCaddy #CrewGear', cta: 'Shop Crew Kits', utm: 'bundles' },
+  { id: 'p18', d: 21, camp: 'ent', plats: ['LI', 'FB'], format: 'Carousel', title: 'One Standard For Every Location', art: { kind: 'toon', img: '/assets/toon-multisite.webp', head: 'One Standard. Every Site.', sub: 'Same tools · Same systems · One PO' }, caption: 'Running crews or facilities in more than one location?\n\nSpec one Liberty coating system and one tool kit for every site. One account, one PO, one point of contact.\n#FacilitiesManagement #MultiSite #CommercialFlooring', cta: 'Set Up A Company Account', utm: 'enterprise' },
+  { id: 'p19', d: 23, camp: 'ent', plats: ['LI', 'FB'], format: 'Static', title: 'Order By PO. We Ship It.', art: { kind: 'toon', img: '/assets/toon-warehouse.webp', head: 'Email A PO. We Ship It.', sub: 'Tracking sent. We check in after.' }, caption: 'Buying for crews in more than one location?\n\nEmail your PO to sales@libertytoolcompany.com. We ship to every site, send tracking and check in after it lands.', cta: 'Set Up My Account', utm: 'enterprise' },
+  { id: 'p20', d: 24, camp: 'coat', plats: ['IG', 'FB', 'TT'], format: 'Video', title: 'Pulling Cove With The LTC Cove Trowel', art: { kind: 'toon', img: '/assets/toon-trowel.webp', head: 'Pull A Clean Cove In One Pass', sub: 'LTC Cove Trowel · Made in the USA' }, caption: 'A clean cove base in one pass.\n\nLoad the resin, set the lip in the corner, pull with steady pressure. LTC Cove Trowel — made in the USA.\n#CoveBase #FloorCoatingTools #Installer', cta: 'Ask About The Cove Trowel', utm: 'coatings' },
+  { id: 'p21', d: 25, camp: 'bun', plats: ['IG', 'FB'], format: 'Carousel', title: 'Gear Up The Crew For 2027', art: { kind: 'toon', img: '/assets/toon-crew.webp', head: 'Gear Up The Crew For 2027', sub: 'Four Tape Caddy kits' }, caption: 'Gear up the crew for the new year. Swipe through all four Tape Caddy kits.\n\nCove System · Double Down Duo · Triple Threat · 4-Score\n#TapeCaddy #CrewGear', cta: 'Shop Crew Kits', utm: 'bundles' },
+  { id: 'p22', d: 26, camp: 'brand', plats: ['IG', 'FB', 'LI'], format: 'Static', title: 'Happy Thanksgiving', art: { kind: 'toon', img: '/assets/toon-thanks.webp', head: 'Thankful For Our Installers.', sub: 'Happy Thanksgiving from the Szymanski family' }, caption: 'Thankful for every installer who does the work.\n\nHappy Thanksgiving from the Szymanski family and everyone at Liberty.', cta: 'None', utm: 'brand' },
+  { id: 'p23', d: 27, camp: 'bun', plats: ['IG', 'FB'], format: 'Static + Boost', title: 'Black Friday: 4-Score Kit [Offer]', art: { kind: 'toon', img: '/assets/toon-blackfriday.webp', head: '4-Score Kit [Offer]', sub: 'Every caddy we make', light: true }, caption: 'Black Friday: the 4-Score Complete Kit — every caddy we make. [OFFER, IF APPROVED]\n\nLowboy + 2" + 4" + 6". Built in the USA.\n#BlackFriday #TapeCaddy', cta: 'Shop The 4-Score Kit', utm: 'bundles' },
+  { id: 'p24', d: 28, camp: 'brand', plats: ['IG', 'FB'], format: 'Static', title: 'Small Business Saturday', art: { kind: 'toon', img: '/assets/toon-smallbiz.webp', head: 'Shop Small. Shop American.', sub: 'Small Business Saturday' }, caption: 'It’s Small Business Saturday. We’re a family shop, veteran-owned, and we make our tools in the USA.\n\nThank you to every dealer and installer who buys from a small shop.\n#SmallBusinessSaturday #ShopSmall #MadeInUSA', cta: 'Visit libertytoolcompany.com', utm: 'brand' },
+  { id: 'p25', d: 30, camp: 'bun', plats: ['IG', 'FB', 'TT'], format: 'Reel', title: 'Cyber Monday [Offer]', art: { kind: 'toon', img: '/assets/toon-cyber.webp', head: 'Cyber Monday [Offer]', sub: 'Ambassadors: share your link', light: true }, caption: 'Cyber Monday on Tape Caddy kits. [OFFER, IF APPROVED]\n\nAmbassadors — today’s the day to share your link.\n#CyberMonday #TapeCaddy', cta: 'Shop Crew Kits', utm: 'bundles' },
+  { id: 'p26', d: 31, camp: 'ent', plats: ['LI', 'FB'], format: 'Static', title: 'Plan 2027 Stock And Crew Kits Now', art: { kind: 'toon', img: '/assets/toon-plan.webp', head: 'Plan 2027 Now.', sub: 'Store stock · Crew kits · Coatings' }, caption: 'Setting 2027 budgets? Put Liberty coatings and crew tools on the list for every location.\n\nBook a call and we’ll plan systems, kits and PO ordering with you.', cta: 'Schedule A Conversation', utm: 'enterprise' }
+];
+var DOWS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+var STATUS = { pending: { label: 'Pending', bg: '#EEF1F5', fg: '#3B4658', dot: '#FFFFFF', ring: '#8A94A3' }, approved: { label: 'Approved', bg: '#2E7D4F', fg: '#FFFFFF', dot: '#2E7D4F', ring: '#2E7D4F' }, changes: { label: 'Changes', bg: '#D9822B', fg: '#FFFFFF', dot: '#D9822B', ring: '#D9822B' } };
+function dateOf(d) { return d <= 30 ? { m: 'Nov', d: d, dow: DOWS[(d - 1) % 7] } : { m: 'Dec', d: d - 30, dow: DOWS[(d - 1) % 7] }; }
+function campOf(id) { return CAMPS.find(function (c) { return c.id === id; }); }
+function artOf(p) {
+  var a = p.art;
+  return {
+    bg: '#EEF2F8', hasImg: true, img: a.img, inset: '0', w: '100%', h: '100%',
+    hasHead: true, head: a.head, sub: a.sub || '', headSize: 30, headSmall: 19,
+    headColor: a.light ? '#FFFFFF' : '#0A3161', subColor: a.light ? '#DDE5FF' : '#3B4658', hasLogo: false
+  };
+}
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { status: {}, notes: {}, log: [], sel: 'p01', plat: 'IG', fCamp: '', fPlat: '', fStatus: '', showChanges: false, reviewer: '', copied: false };
+  }
+  who() { return (this.state.reviewer || '').trim() || 'Reviewer'; }
+  stamp() { var d = new Date(); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }); }
+  setStatus(ids, st, note) {
+    var s = this.state, self = this, status = Object.assign({}, s.status), notes = Object.assign({}, s.notes), log = s.log.slice();
+    ids.forEach(function (id) {
+      status[id] = st;
+      var p = POSTS.find(function (x) { return x.id === id; });
+      if (note) { notes[id] = (notes[id] || []).concat([{ who: self.who(), when: self.stamp(), text: note }]); }
+      log.unshift({ who: self.who(), what: st === 'approved' ? 'approved' : (st === 'changes' ? 'requested changes on' : 'reset'), post: p.title, when: self.stamp(), color: STATUS[st].dot === '#FFFFFF' ? '#8A94A3' : STATUS[st].dot });
+    });
+    this.setState({ status: status, notes: notes, log: log.slice(0, 60), showChanges: false, copied: false });
+  }
+  select(id, openChanges) {
+    var p = POSTS.find(function (x) { return x.id === id; });
+    var plat = p.plats.indexOf(this.state.plat) >= 0 ? this.state.plat : p.plats[0];
+    this.setState({ sel: id, plat: plat, showChanges: !!openChanges });
+  }
+  renderVals() {
+    var s = this.state, self = this;
+    var st = function (id) { return s.status[id] || 'pending'; };
+    var match = function (p) { return (!s.fCamp || p.camp === s.fCamp) && (!s.fPlat || p.plats.indexOf(s.fPlat) >= 0) && (!s.fStatus || st(p.id) === s.fStatus); };
+    var shown = POSTS.filter(match);
+    var counts = { approved: 0, changes: 0, pending: 0 }; POSTS.forEach(function (p) { counts[st(p.id)]++; });
+    var total = POSTS.length;
+    var sel = POSTS.find(function (p) { return p.id === s.sel; }) || POSTS[0], selCamp = campOf(sel.camp), selSt = STATUS[st(sel.id)], sd = dateOf(sel.d);
+    var plat = sel.plats.indexOf(s.plat) >= 0 ? s.plat : sel.plats[0];
+    var mockPlat = plat === 'PIN' ? 'IG' : plat;
+    var nav = shown.length ? shown : POSTS, idx = Math.max(0, nav.findIndex(function (p) { return p.id === sel.id; }));
+    var chip = function (on) { return { border: on ? '#0A3161' : '#C9D0DA', bg: on ? '#0A3161' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0B1B33', pressed: on ? 'true' : 'false' }; };
+    // calendar: Nov 1 2026 is Sunday; render Nov 1..Dec 5
+    var cal = [];
+    for (var d = 1; d <= 35; d++) {
+      var inRange = d >= 2 && d <= 31, dd = dateOf(d);
+      var ps = POSTS.filter(function (p) { return p.d === d; }).map(function (p) {
+        var on = p.id === sel.id, c = campOf(p.camp), t = STATUS[st(p.id)];
+        return { title: p.title, color: c.color, dot: t.dot, dotRing: t.ring, ring: on ? '#B31942' : 'transparent', bg: on ? '#FFF1F3' : '#F4F5F7', pressed: on ? 'true' : 'false', opacity: match(p) ? 1 : 0.28, select: function () { self.select(p.id); } };
+      });
+      cal.push({ label: (dd.d === 1 ? dd.m + ' ' : '') + dd.d, bg: inRange ? '#FFFFFF' : '#F7F8FA', numColor: inRange ? '#0B1B33' : '#A0A8B4', posts: ps });
+    }
+    var summary = ['LTC GO-TO-MARKET SOCIAL — APPROVAL SUMMARY', 'Approved ' + counts.approved + ' · Changes ' + counts.changes + ' · Pending ' + counts.pending + ' (of ' + total + ')', ''];
+    POSTS.forEach(function (p) { var dd = dateOf(p.d); var line = '[' + STATUS[st(p.id)].label.toUpperCase() + '] ' + dd.dow + ' ' + dd.m + ' ' + dd.d + ' · ' + campOf(p.camp).name + ' · ' + p.title; summary.push(line); (s.notes[p.id] || []).forEach(function (n) { summary.push('    ↳ ' + n.who + ': ' + n.text); }); });
+    return {
+      stats: {
+        total: total, pApproved: Math.round(counts.approved / total * 100), pChanges: Math.round(counts.changes / total * 100),
+        tiles: [['', 'All Posts', total, '#0A3161'], ['approved', 'Approved', counts.approved, '#2E7D4F'], ['changes', 'Changes Requested', counts.changes, '#D9822B'], ['pending', 'Waiting On You', counts.pending, '#4A5568']].map(function (t) { var on = s.fStatus === t[0] && (t[0] !== '' || !s.fStatus); return { label: t[1], n: t[2], color: t[3], ring: on && t[0] ? t[3] : '#D3D9E2', pressed: on ? 'true' : 'false', pick: function () { self.setState({ fStatus: t[0] }); } }; })
+      },
+      onReviewer: function (e) { self.setState({ reviewer: e.target.value }); },
+      campaigns: CAMPS.map(function (c) {
+        var on = s.fCamp === c.id, list = POSTS.filter(function (p) { return p.camp === c.id; });
+        return { name: c.name, goal: c.goal, color: c.color, count: list.length, countLabel: list.length + (list.length === 1 ? ' post' : ' posts'), done: list.filter(function (p) { return st(p.id) === 'approved'; }).length, bg: on ? c.color : '#FFFFFF', fg: on ? '#FFFFFF' : '#0B1B33', pressed: on ? 'true' : 'false', pick: function () { self.setState({ fCamp: on ? '' : c.id }); } };
+      }),
+      platFilters: [['', 'All'], ['IG', 'Instagram'], ['FB', 'Facebook'], ['LI', 'LinkedIn'], ['TT', 'TikTok']].map(function (f) { return Object.assign({ label: f[1] }, chip(s.fPlat === f[0]), { pick: function () { self.setState({ fPlat: f[0] }); } }); }),
+      statusFilters: [['', 'All'], ['pending', 'Pending'], ['approved', 'Approved'], ['changes', 'Changes']].map(function (f) { return Object.assign({ label: f[1] }, chip(s.fStatus === f[0]), { pick: function () { self.setState({ fStatus: f[0] }); } }); }),
+      shownCount: shown.length, noneShown: shown.length === 0,
+      approveShown: function () { self.setStatus(shown.map(function (p) { return p.id; }), 'approved'); },
+      clearFilters: function () { self.setState({ fCamp: '', fPlat: '', fStatus: '' }); },
+      dows: DOWS, cal: cal,
+      sel: {
+        title: sel.title, color: selCamp.color, campName: selCamp.name, dateLong: sd.dow + ', ' + sd.m + ' ' + sd.d, dateShort: sd.m + ' ' + sd.d,
+        caption: sel.caption, cta: sel.cta, art: artOf(sel), igRatio: '1 / 1',
+        isIG: mockPlat === 'IG', isFB: mockPlat === 'FB', isLI: mockPlat === 'LI', isTT: mockPlat === 'TT',
+        platTabs: sel.plats.map(function (k) { return Object.assign({ label: PLAT[k] }, chip(k === plat), { pick: function () { self.setState({ plat: k }); } }); }),
+        statusLabel: selSt.label, statusBg: selSt.bg, statusFg: selSt.fg,
+        facts: [{ k: 'Format', v: sel.format }, { k: 'Platforms', v: sel.plats.map(function (k) { return PLAT[k]; }).join(', ') }, { k: 'Call To Action', v: sel.cta }, { k: 'Tracking Link', v: 'libertytoolcompany.com/?utm_source=' + plat.toLowerCase() + '&utm_campaign=' + sel.utm }],
+        approve: function () { self.setStatus([sel.id], 'approved'); },
+        reset: function () { self.setStatus([sel.id], 'pending'); },
+        openChanges: function () { self.setState({ showChanges: !s.showChanges }); },
+        showChanges: s.showChanges,
+        submitChanges: function (e) { if (e && e.preventDefault) e.preventDefault(); var ta = e && e.target && e.target.querySelector ? e.target.querySelector('textarea') : null; var note = ta ? ta.value.trim() : ''; self.setStatus([sel.id], 'changes', note || 'Changes requested.'); },
+        notes: s.notes[sel.id] || [], hasNotes: !!(s.notes[sel.id] && s.notes[sel.id].length)
+      },
+      selPrev: function () { self.select(nav[(idx - 1 + nav.length) % nav.length].id); },
+      selNext: function () { self.select(nav[(idx + 1) % nav.length].id); },
+      feed: shown.map(function (p) {
+        var c = campOf(p.camp), t = STATUS[st(p.id)], dd = dateOf(p.d), on = p.id === sel.id;
+        return { title: p.title, color: c.color, campName: c.name, dateShort: dd.dow + ' ' + dd.m + ' ' + dd.d, format: p.format, platText: p.plats.map(function (k) { return PLAT[k]; }).join(' · '), art: artOf(p), statusLabel: t.label, statusBg: t.bg, statusFg: t.fg, ring: on ? '#B31942' : '#D3D9E2', select: function () { self.select(p.id); }, approve: function () { self.setStatus([p.id], 'approved'); }, changes: function () { self.select(p.id, true); } };
+      }),
+      log: s.log, hasLog: s.log.length > 0, noLog: s.log.length === 0,
+      summaryText: summary.join('\n'),
+      copyLabel: s.copied ? 'Copied ✓' : 'Copy Summary',
+      copySummary: function () { try { navigator.clipboard.writeText(summary.join('\n')); } catch (e) {} self.setState({ copied: true }); }
+    };
+  }
+}
+
+window.__ltcStart(Component);
+</script>
+</body>
+</html>
