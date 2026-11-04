@@ -279,6 +279,22 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
               <label style="display: block; margin-top: 12px"><span class="lbl">Payment</span><select class="inp" value="{{form.pay}}" onChange="{{setPay}}"><sc-for list="{{payOpts}}" as="o" hint-placeholder-count="3"><option value="{{o}}">{{o}}</option></sc-for></select></label>
               <sc-if value="{{showCarrier}}" hint-placeholder-val="{{false}}"><label style="display: block; margin-top: 12px"><span class="lbl">Your Carrier & Account #</span><input class="inp" value="{{form.carrier}}" onChange="{{setCarrier}}" placeholder="Carrier name and account number"></label></sc-if>
               <div class="muted" style="font-size: 13px; margin-top: 10px">{{freightNote}}</div>
+              <sc-if value="{{fe.show}}" hint-placeholder-val="{{true}}">
+                <div style="margin-top: 14px; padding: 14px; border-radius: 4px; background: #EEF3FA">
+                  <div style="display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: baseline"><span class="lbl" style="margin: 0">Freight Estimate · R+L Carriers</span><span class="muted" style="font-size: 12px; font-weight: 600">Ships from San Dimas, CA</span></div>
+                  <sc-if value="{{fe.needSt}}" hint-placeholder-val="{{false}}"><div style="font-size: 14px; margin-top: 8px">{{fe.needMsg}}</div></sc-if>
+                  <sc-if value="{{fe.noLane}}" hint-placeholder-val="{{false}}"><div style="font-size: 14px; margin-top: 8px">{{fe.noLaneMsg}}</div></sc-if>
+                  <sc-if value="{{fe.ok}}" hint-placeholder-val="{{true}}">
+                    <div style="margin-top: 8px; display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; font-size: 14px">
+                      <sc-for list="{{fe.rows}}" as="x" hint-placeholder-count="3"><span class="muted">{{x.k}}</span><b style="text-align: right">{{x.v}}</b></sc-for>
+                    </div>
+                    <div class="lbl" style="margin: 12px 0 6px">Delivery Needs</div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{fe.accs}}" as="a" hint-placeholder-count="5"><button type="button" class="chip" aria-pressed="{{a.on}}" onClick="{{a.toggle}}" title="{{a.note}}">{{a.name}} · {{a.amt}}</button></sc-for></div>
+                    <div style="display: flex; justify-content: space-between; gap: 10px; align-items: baseline; margin-top: 12px; padding-top: 10px; border-top: 1px solid #B8C1CD"><b>Estimated Freight</b><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 24px; color: #0A3161">{{fe.total}}</span></div>
+                    <div class="muted" style="font-size: 12px; margin-top: 6px; line-height: 1.45">{{fe.foot}}</div>
+                  </sc-if>
+                </div>
+              </sc-if>
             </div>
             <div class="card">
               <h3 class="h3">Compliance & Documents</h3>
@@ -356,7 +372,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
           <div class="tl" style="margin-top: 18px"><sc-for list="{{sel.steps}}" as="s" hint-placeholder-count="5"><div class="s {{s.cls}}"><b>{{s.name}}</b><div class="muted">{{s.when}}</div></div></sc-for></div>
           <div class="grid g3" style="margin-top: 18px">
             <div><span class="lbl">Items</span><sc-for list="{{sel.lines}}" as="l" hint-placeholder-count="3"><div style="font-size: 14px; padding: 3px 0">{{l}}</div></sc-for></div>
-            <div><span class="lbl">Ship To</span><div style="font-size: 14px; line-height: 1.5">{{sel.shipTo}}</div><div class="muted" style="font-size: 13px; margin-top: 6px">{{sel.freight}} · {{sel.pay}}</div></div>
+            <div><span class="lbl">Ship To</span><div style="font-size: 14px; line-height: 1.5">{{sel.shipTo}}</div><div class="muted" style="font-size: 13px; margin-top: 6px">{{sel.freight}} · {{sel.pay}}</div><div style="font-size: 14px; margin-top: 6px"><b>Freight:</b> {{sel.freightTxt}}</div><sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><button type="button" class="btn ghost sm" style="margin-top: 8px" onClick="{{quoteSel}}">Quote Freight</button></sc-if></div>
             <div><span class="lbl">Tracking</span>
               <sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><input class="inp" value="{{sel.tracking}}" placeholder="Add tracking number" onChange="{{setTracking}}"></sc-if>
               <sc-if value="{{isPortal}}" hint-placeholder-val="{{true}}"><div style="font-size: 14px">{{sel.trackingTxt}}</div></sc-if>
@@ -479,6 +495,59 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
             </div>
             <p class="muted" style="font-size: 13px; margin: 12px 0 0">Changes show up in the partner portal right away (in this browser). Blank fields show as "Set by LTC".</p>
           </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ================= ADMIN: FREIGHT CALCULATOR ================= -->
+    <sc-if value="{{v.aFreight}}" hint-placeholder-val="{{false}}">
+      <div class="grid g2" style="align-items: start">
+        <div class="card">
+          <h2 class="h2">Quote A Shipment</h2>
+          <div class="lbl" style="margin: 14px 0 6px">Bill Type</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{fqBills}}" as="b" hint-placeholder-count="4"><button type="button" class="chip" aria-pressed="{{b.on}}" title="{{b.title}}" onClick="{{b.pick}}">{{b.label}}</button></sc-for></div>
+          <div class="grid g2" style="margin-top: 12px; gap: 10px">
+            <label><span class="lbl">Ship From</span><select class="inp" value="{{fq.from}}" onChange="{{fqSet.from}}"><sc-for list="{{fqFromOpts}}" as="o" hint-placeholder-count="5"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></label>
+            <label><span class="lbl">Ship To</span><select class="inp" value="{{fq.to}}" onChange="{{fqSet.to}}"><sc-for list="{{fqToOpts}}" as="o" hint-placeholder-count="5"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></label>
+            <label><span class="lbl">Weight (lbs)</span><input class="inp" type="number" min="1" value="{{fq.lbs}}" onChange="{{fqSet.lbs}}" placeholder="e.g. 850"></label>
+            <label><span class="lbl">Freight Class</span><select class="inp" value="{{fq.cls}}" onChange="{{fqSet.cls}}"><sc-for list="{{fqClasses}}" as="o" hint-placeholder-count="5"><option value="{{o}}">Class {{o}}</option></sc-for></select></label>
+            <label><span class="lbl">R+L Gross Charge ($)</span><input class="inp" type="number" min="0" step="0.01" value="{{fq.gross}}" onChange="{{fqSet.gross}}" placeholder="Before discount"></label>
+            <label><span class="lbl">Fuel Surcharge (%)</span><input class="inp" type="number" min="0" step="0.1" value="{{fq.fuel}}" onChange="{{fqSet.fuel}}" placeholder="This week’s %"></label>
+          </div>
+          <div class="muted" style="font-size: 12px; margin-top: 6px">Gross charge = R+L’s class rate for this lane, weight and class before LTC’s discount. Leave blank to see the minimum.</div>
+          <div class="lbl" style="margin: 14px 0 6px">Accessorials</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{fqAccs}}" as="a" hint-placeholder-count="6"><button type="button" class="chip" aria-pressed="{{a.on}}" title="{{a.note}}" onClick="{{a.toggle}}">{{a.name}} · {{a.amt}}</button></sc-for></div>
+        </div>
+        <div class="card">
+          <h2 class="h2">Freight Charge</h2>
+          <sc-if value="{{fqNo}}" hint-placeholder-val="{{false}}"><p class="muted">This lane isn’t in the R+L agreement. Get a spot quote from R+L.</p></sc-if>
+          <sc-if value="{{fqHas}}" hint-placeholder-val="{{true}}">
+            <div style="margin-top: 12px; display: grid; grid-template-columns: 1fr auto; gap: 8px 14px; font-size: 14px">
+              <sc-for list="{{fqRes}}" as="x" hint-placeholder-count="8"><span class="muted">{{x.k}}</span><b style="text-align: right; color: {{x.c}}">{{x.v}}</b></sc-for>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-top: 14px; padding-top: 12px; border-top: 2px solid #B8C1CD"><b>{{fqTotalLbl}}</b><span class="h1" style="color: #0A3161">{{fqTotal}}</span></div>
+            <sc-if value="{{fqHasWarn}}" hint-placeholder-val="{{false}}"><div style="margin-top: 10px; padding: 10px 12px; border-radius: 4px; background: #FDECEF; color: #B31942; font-weight: 600; font-size: 14px">{{fqWarn}}</div></sc-if>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin-top: 14px">
+              <label style="flex: 1 1 220px"><span class="lbl">Apply To Order</span><select class="inp" value="{{fq.order}}" onChange="{{fqSet.order}}"><sc-for list="{{fqOrders}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></label>
+              <button type="button" class="btn red" onClick="{{fqApply}}">Apply Freight</button>
+              <button type="button" class="btn ghost" onClick="{{fqCopy}}">Copy Quote</button>
+            </div>
+            <div class="muted" style="font-size: 12px; margin-top: 8px">Applied freight shows on the order in the partner portal.</div>
+          </sc-if>
+        </div>
+      </div>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: start; margin-top: 16px">
+        <div class="card" style="grid-column: span 2; min-width: 0">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: end"><div><h3 class="h3">Contract Lanes From {{fq.from}}</h3><div class="muted" style="font-size: 13px">{{laneCount}} destinations · tap a row to quote it</div></div><label style="min-width: 200px"><span class="lbl">Find A State</span><input class="inp" value="{{laneQ}}" onInput="{{setLaneQ}}" onChange="{{setLaneQ}}" placeholder="Ohio or OH"></label></div>
+          <div class="scroll" style="margin-top: 10px; max-height: 460px; overflow-y: auto"><div class="tbl" style="--cols: minmax(0,1.6fr) 0.7fr 0.7fr 0.7fr 0.9fr 0.9fr; --minw: 560px"><div class="tr th"><div>Destination</div><div>Outbound</div><div>Collect</div><div>Inbound</div><div>Minimum</div><div>IB Minimum</div></div>
+            <sc-for list="{{laneRows}}" as="l" hint-placeholder-count="8"><div class="tr click" onClick="{{l.use}}"><div><b>{{l.name}}</b> <span class="muted">{{l.st}}</span></div><div>{{l.ob}}</div><div>{{l.obc}}</div><div>{{l.ib}}</div><div>{{l.floor}}</div><div>{{l.fi}}</div></div></sc-for>
+          </div></div>
+        </div>
+        <div class="card">
+          <h3 class="h3">R+L Agreement</h3>
+          <div style="margin-top: 10px; display: grid; gap: 8px"><sc-for list="{{rlMeta}}" as="m" hint-placeholder-count="4"><div style="padding: 10px 12px; border-radius: 4px; background: #EEF3FA"><div class="lbl" style="margin: 0 0 2px">{{m.k}}</div><b style="font-size: 14px">{{m.v}}</b></div></sc-for></div>
+          <div class="lbl" style="margin: 14px 0 6px">How It’s Priced</div>
+          <sc-for list="{{rlRules}}" as="x" hint-placeholder-count="5"><div style="font-size: 13px; line-height: 1.5; padding: 4px 0">• {{x}}</div></sc-for>
         </div>
       </div>
     </sc-if>
@@ -663,7 +732,88 @@ var STATUSES = ['Received', 'Acknowledged', 'Freight Review', 'Shipped', 'Delive
 var TODO = { 'Received': 'Confirm pricing and send acknowledgement', 'Acknowledged': 'Quote freight', 'Freight Review': 'Pack, ship and add tracking', 'Shipped': 'Check in 3 days after delivery', 'Delivered': 'Done' };
 var SCOL = { 'Received': ['#FDECEF', '#B31942'], 'Acknowledged': ['#E7EEFC', '#1F4FB5'], 'Freight Review': ['#FFF3DC', '#8A5A00'], 'Shipped': ['#E3F3EA', '#2E7D4F'], 'Delivered': ['#ECEEF2', '#4A5568'] };
 var FOLDERS = ['Price Sheets & Agreements', 'Sell Sheets & Displays', 'Data Sheets', 'Certificates (COI, W-9)', 'Invoices & POs'];
-var KEY = 'ltc-partner-portal-v1';
+var KEY = 'ltc-partner-portal-v2';
+var RL_LANES = 'CA|CT|94.5|93.4|94.5|94.5|196.1|158.3;CA|DC|93.9|93.6|93.9|93.9|177.50|179.90;CA|DE|93.9|93.6|93.9|93.9|177.50|179.90;CA|MA|94|93.2|94|94|188.6|189.5;CA|VA|94.2|94.5|94.2|94.2|192.7|175.3;CA|ME|93.9|93.6|93.9|93.9|177.50|179.90;CA|NH|94.2|93.6|94.2|94.2|162.9|162.9;CA|NJ|94.7|94.4|94.7|94.7|173.6|172.5;CA|NY|94.6|94.2|94.6|94.6|196.1|187.1;CA|RI|93.9|93.6|93.9|93.9|177.50|179.90;CA|MD|94|94|94|94|195.1|159.2;CA|IN|94.3|93.9|94.3|94.3|159.6|152.6;CA|IL|95|94.5|95|95|157.2|160.1;CA|KY|94.1|93.7|94.1|94.1|172|170.2;CA|WV|94.1|93.9|94.1|94.1|170.90|168.90;CA|WI|94.3|93.8|94.3|94.3|159.9|160;CA|PA|94.5|94.2|94.5|94.5|189.7|176.5;CA|OH|94.3|94.4|94.3|94.3|181.9|156.1;CA|MO|93.8|93.3|93.8|93.8|161|157.2;CA|MI|94.4|93.7|94.4|94.4|170.3|168.7;CA|NC|94.4|93.8|94.4|94.4|173.4|170.4;CA|MS|94.4|93.3|94.4|94.4|176.6|176.6;CA|GA|94.7|94.3|94.7|94.7|167.1|160;CA|FL|95.2|95|95.2|95.2|186.1|173.7;CA|AL|93.7|93.8|93.7|93.7|173.9|166.2;CA|SC|94.2|94|94.2|94.2|166.2|171.3;CA|TN|94.2|93.6|94.2|94.2|166.5|165;CA|MN|93.1|93.7|93.1|93.1|165.1|164.1;CA|IA|93.9|93.4|93.9|93.9|164|165;CA|NE|93.7|92.7|93.7|93.7|172.6|172.6;CA|SD|93.3|92.7|93.3|93.3|196.1|196.1;CA|LA|93.9|92.7|93.9|93.9|172.9|172.9;CA|KS|93|93.6|93|93|156.2|158.6;CA|AR|94.1|92.7|94.1|94.1|162.4|162.4;CA|TX|94.6|94|94.6|94.6|148.1|147;CA|OK|94|93.4|94|94|145.1|157.7;CA|NV|92.9|93.4|92.9|92.9|129.2|119.2;CA|OR|93.5|93.3|93.5|93.5|139.7|130.2;CA|UT|94.2|93.5|94.2|94.2|141.2|142.1;CA|NM|93.9|94.1|93.9|93.9|139.7|139.7;CA|ID|93|93.2|93|93|149.9|133.6;CA|CO|92.9|93|92.9|92.9|156.2|146.4;CA|WA|93.6|93.5|93.6|93.6|143.1|135.9;CA|AZ|93|93.5|93|93|130.7|122.4;CA|AO|70.0|70.0|70.0|70.0|335.00|335.00;CA|BU|70.0|70.0|70.0|70.0|335.00|335.00;CA|WY|70.0|70.0|70.0|70.0|335.00|335.00;CA|CE|70.0|70.0|70.0|70.0|335.00|335.00;CA|CP|70.0|70.0|70.0|70.0|335.00|335.00;CA|FK|70.0|70.0|70.0|70.0|335.00|335.00;CA|IU|70.0|70.0|70.0|70.0|335.00|335.00;CA|MT|70.0|70.0|70.0|70.0|335.00|335.00;CA|ND|70.0|70.0|70.0|70.0|335.00|335.00;CA|NO|70.0|70.0|70.0|70.0|335.00|335.00;CA|OO|70.0|70.0|70.0|70.0|335.00|335.00;CA|UO|70.0|70.0|70.0|70.0|335.00|335.00;CA|UP|70.0|70.0|70.0|70.0|335.00|335.00;CA|VT|70.0|70.0|70.0|70.0|335.00|335.00;CA|WO|70.0|70.0|70.0|70.0|335.00|335.00;CA|MH|65.0|65.0|65.0|65.0|600.00|600.00;CA|MV|30.0|30.0|30.0|30.0|600.00|600.00;CA|IT|94.2|94.2|94.2|94.2|115.90|115.90;CA|NF|91.5|91.5|91.5|91.5|335.00|335.00;CA|NB|91.5|91.5|91.5|91.5|335.00|335.00;CA|NL|91.5|91.5|91.5|91.5|335.00|335.00;CA|NS|91.5|91.5|91.5|91.5|335.00|335.00;CA|PE|91.5|91.5|91.5|91.5|335.00|335.00;CA|ON|91.5|91.5|91.5|91.5|262.8|262.8;CA|QC|91.5|91.5|91.5|91.5|262.8|262.8;CA|BC|89.2|89.2|89.2|89.2|251.1|251.1;CA|AB|89.2|89.2|89.2|89.2|251.1|251.1;CA|MB|89.2|89.2|89.2|89.2|251.1|251.1;CA|SK|89.2|89.2|89.2|89.2|251.1|251.1;CA|AI|60.0|60.0|60.0|60.0|600.00|600.00;CA|BI|60.0|60.0|60.0|60.0|600.00|600.00;CA|IC|60.0|60.0|60.0|60.0|600.00|600.00;CA|NT|60.0|60.0|60.0|60.0|600.00|600.00;CA|NU|60.0|60.0|60.0|60.0|600.00|600.00;CA|OI|60.0|60.0|60.0|60.0|600.00|600.00;CA|QI|60.0|60.0|60.0|60.0|600.00|600.00;CA|YT|60.0|60.0|60.0|60.0|600.00|600.00;CA|CA|92.6|92.6|92.6|92.6|118.2|118.2';
+// R+L Carriers pricing agreement RLCA 6018 · Item 524640.000 v1 · Liberty Tool Co · acct L01HP2 · effective 11/03/26
+var RL = {
+  carrier: 'R+L Carriers', acct: 'L01HP2', item: 'RLCA 6018 · Item 524640.000 v1', effective: 'Nov 3, 2026',
+  origin: { name: 'Liberty Tool Co', addr: '712 W Cienega Ave', city: 'San Dimas', st: 'CA', zip: '91773' },
+  maxLbs: 16000,
+  bills: [
+    { id: 'OB', name: 'Outbound Prepaid', desc: 'LTC ships and pays (Prepaid & Add).' },
+    { id: 'OBC', name: 'Outbound Collect', desc: 'LTC ships, customer pays R+L at LTC rates.' },
+    { id: '3RD', name: 'Third Party', desc: 'A third party pays.' },
+    { id: 'IB', name: 'Inbound', desc: 'Shipments coming in to LTC.' }
+  ],
+  // Western Direct region table (PDF page 1): used when a lane is not listed state-to-state
+  regions: [
+    { st: 'CT DC DE MA MD ME NH NJ NY RI VA', OB: 93.9, IB: 93.6, '3RD': 93.9, OBC: 93.9, f: 177.50, fi: 179.90 },
+    { st: 'IL IN KY MI MO OH PA WI WV', OB: 94.1, IB: 93.9, '3RD': 94.1, OBC: 94.1, f: 170.90, fi: 168.90 },
+    { st: 'AL FL GA MS NC SC TN', OB: 94.0, IB: 93.3, '3RD': 94.0, OBC: 94.0, f: 174.40, fi: 167.80 },
+    { st: 'IA MN NE SD', OB: 93.0, IB: 92.7, '3RD': 93.0, OBC: 93.0, f: 185.70, fi: 190.50 },
+    { st: 'AR KS LA OK TX', OB: 93.6, IB: 92.7, '3RD': 93.6, OBC: 93.6, f: 162.30, fi: 158.40 },
+    { st: 'AZ CA CO ID NM NV OR UT WA', OB: 94.1, IB: 94.1, '3RD': 94.1, OBC: 94.1, f: 134.00, fi: 134.00 },
+    { st: 'AO BU CE CP FK IU MT ND NO OO UO UP VT WO WY', OB: 70.0, IB: 70.0, '3RD': 70.0, OBC: 70.0, f: 335.00, fi: 335.00 },
+    { st: 'MH', OB: 65.0, IB: 65.0, '3RD': 65.0, OBC: 65.0, f: 600.00, fi: 600.00 },
+    { st: 'MV', OB: 30.0, IB: 30.0, '3RD': 30.0, OBC: 30.0, f: 600.00, fi: 600.00 },
+    { st: 'NB NF NL NS PE', OB: 91.5, IB: 91.5, '3RD': 91.5, OBC: 91.5, f: 335.00, fi: 335.00 },
+    { st: 'ON QC', OB: 91.5, IB: 91.0, '3RD': 91.5, OBC: 91.5, f: 262.80, fi: 224.60 },
+    { st: 'AB BC MB SK', OB: 89.2, IB: 88.0, '3RD': 89.2, OBC: 89.2, f: 251.10, fi: 282.60 },
+    { st: 'AI BI IC NT NU OI QI YT', OB: 60.0, IB: 60.0, '3RD': 60.0, OBC: 60.0, f: 600.00, fi: 600.00 }
+  ],
+  intra: { OB: 94.2, IB: 94.2, '3RD': 94.2, OBC: 94.2, f: 115.90, fi: 115.90 },
+  wd: 'AZ CA CO ID NM NV OR UT WA'.split(' '),
+  acc: [
+    { id: 'lift', name: 'Liftgate', note: 'No dock at delivery' },
+    { id: 'res', name: 'Residential Delivery', note: 'Home or jobsite address' },
+    { id: 'lim', name: 'Limited Access Delivery', note: 'Schools, churches, construction sites, storage units' },
+    { id: 'inside', name: 'Inside Delivery', note: 'Brought inside past the door' },
+    { id: 'notify', name: 'Call Before Delivery', note: 'Delivery appointment / notification' },
+    { id: 'freeze', name: 'Protect From Freezing', note: 'Water-based coatings in winter' }
+  ],
+  names: { AL: 'Alabama', AR: 'Arkansas', AZ: 'Arizona', CA: 'California', CO: 'Colorado', CT: 'Connecticut', DC: 'Washington DC', DE: 'Delaware', FL: 'Florida', GA: 'Georgia', IA: 'Iowa', ID: 'Idaho', IL: 'Illinois', IN: 'Indiana', KS: 'Kansas', KY: 'Kentucky', LA: 'Louisiana', MA: 'Massachusetts', MD: 'Maryland', ME: 'Maine', MI: 'Michigan', MN: 'Minnesota', MO: 'Missouri', MS: 'Mississippi', MT: 'Montana', NC: 'North Carolina', ND: 'North Dakota', NE: 'Nebraska', NH: 'New Hampshire', NJ: 'New Jersey', NM: 'New Mexico', NV: 'Nevada', NY: 'New York', OH: 'Ohio', OK: 'Oklahoma', OR: 'Oregon', PA: 'Pennsylvania', RI: 'Rhode Island', SC: 'South Carolina', SD: 'South Dakota', TN: 'Tennessee', TX: 'Texas', UT: 'Utah', VA: 'Virginia', VT: 'Vermont', WA: 'Washington', WI: 'Wisconsin', WV: 'West Virginia', WY: 'Wyoming',
+    AB: 'Alberta', BC: 'British Columbia', MB: 'Manitoba', NB: 'New Brunswick', NF: 'Newfoundland', NL: 'Newfoundland & Labrador', NS: 'Nova Scotia', ON: 'Ontario', PE: 'Prince Edward Island', QC: 'Quebec', SK: 'Saskatchewan', NT: 'Northwest Territories', NU: 'Nunavut', YT: 'Yukon',
+    AO: 'Arizona Indirect', BU: 'NYC Boroughs Indirect', CE: 'Colorado Indirect', CP: 'California Indirect', FK: 'Florida Keys', IU: 'Indirect US', MH: 'Manhattan', MV: 'Martha’s Vineyard / Cape Cod', NO: 'Nevada Indirect', OO: 'Oregon Indirect', UO: 'Utah Indirect', UP: 'Upper Peninsula MI / WI', WO: 'Washington Indirect', AI: 'Alberta Indirect', BI: 'British Columbia Indirect', IC: 'Indirect Canada', OI: 'Ontario Indirect', QI: 'Quebec Indirect', IT: 'Indirect', CW: 'Canada West' }
+};
+var RL_MAP = null;
+function rlMap() { if (RL_MAP) return RL_MAP; RL_MAP = {}; RL_LANES.split(';').forEach(function (r) { var c = r.split('|'); RL_MAP[c[0] + '>' + c[1]] = { OB: +c[2], IB: +c[3], '3RD': +c[4], OBC: +c[5], f: +c[6], fi: +c[7] }; }); return RL_MAP; }
+function rlDests(o) { var m = rlMap(), out = []; Object.keys(m).forEach(function (k) { var p = k.split('>'); if (p[0] === (o || 'CA')) out.push(p[1]); }); return out.sort(function (a, b) { return (RL.names[a] || a).localeCompare(RL.names[b] || b); }); }
+function rlOrigins() { var m = rlMap(), s = {}; Object.keys(m).forEach(function (k) { s[k.split('>')[0]] = 1; }); return Object.keys(s).sort(function (a, b) { return (RL.names[a] || a).localeCompare(RL.names[b] || b); }); }
+// Returns { disc, floor, src } for a lane + bill type, or null if not covered
+function rlLane(o, d, bill) {
+  o = (o || '').toUpperCase(); d = (d || '').toUpperCase(); bill = bill || 'OB';
+  var row = rlMap()[o + '>' + d], src = 'State-to-state lane';
+  if (!row && RL.wd.indexOf(o) >= 0) {
+    if (o === d) { row = RL.intra; src = 'Intrastate'; }
+    else { RL.regions.forEach(function (g) { if (!row && g.st.split(' ').indexOf(d) >= 0) row = g; }); src = 'Western Direct region table'; }
+  }
+  if (!row) return null;
+  return { disc: row[bill], floor: bill === 'IB' ? row.fi : row.f, src: src };
+}
+// Accessorial charges from the agreement. cwt = hundredweight (lbs / 100)
+function rlAcc(id, d, lbs) {
+  var special = ['CT', 'ID', 'MH', 'MV'].indexOf((d || '').toUpperCase()) >= 0;
+  if (id === 'lift') return special ? 55 : 53;
+  if (id === 'res') return 159;
+  if (id === 'lim') return 69;
+  if (id === 'notify') return 6;
+  if (id === 'freeze') return 16;
+  if (id === 'inside') { if (!special) return 80; var c = (lbs || 0) / 100 * 25.44; return Math.min(2385, Math.max(239, c)); }
+  return 0;
+}
+// Net charge: gross R+L class-rate charge less the contract discount, never below the floor (minimum), plus fuel % and accessorials
+function rlQuote(o) {
+  var lane = rlLane(o.from, o.to, o.bill); if (!lane) return null;
+  var g = parseFloat(o.gross), fuelPct = parseFloat(o.fuel), lbs = parseFloat(o.lbs) || 0;
+  var disc = isNaN(g) ? null : g * (1 - lane.disc / 100);
+  var line = disc == null ? lane.floor : Math.max(lane.floor, disc);
+  var fuel = isNaN(fuelPct) ? null : line * fuelPct / 100;
+  var accs = (o.acc || []).map(function (id) { var a = RL.acc.find(function (x) { return x.id === id; }); return { id: id, name: a ? a.name : id, amt: rlAcc(id, o.to, lbs) }; });
+  var accT = accs.reduce(function (t, a) { return t + a.amt; }, 0);
+  return { lane: lane, gross: isNaN(g) ? null : g, discounted: disc, floorApplies: disc == null || disc < lane.floor, linehaul: line, fuel: fuel, accs: accs, accTotal: accT, total: line + (fuel || 0) + accT, exact: disc != null, overMax: lbs > RL.maxLbs };
+}
+function rlName(st) { return (RL.names[st] || st) + ' (' + st + ')'; }
+
 var AFF_KEY = 'ltc-affiliate-portal-v2';
 var AFF_RATE = 10;
 var VCATS = ['Signing Up', 'Being An Affiliate', 'Onboarding', 'Content How-To'];
@@ -751,10 +901,10 @@ function seed() {
   return {
     pricing: blankPricing(),
     orders: [
-      { id: 'LTC-1041', acct: 'ent', po: 'KHC-778102', type: 'stores', units: 836, list: 82764, value: null, status: 'Freight Review', created: daysAgo(6), window: 'Nov 16 – Nov 20', lines: ['2 × 4-Inch Caddy per store', '× 418 stores'], shipTo: '418 stores (store list on file)', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', tracking: '', quote: [], hist: [daysAgo(6), daysAgo(5), daysAgo(3)] },
-      { id: 'LTC-1039', acct: 'dist', po: 'NCS-5521', type: 'dc', units: 120, list: 13680, value: null, status: 'Shipped', created: daysAgo(12), window: 'Oct 24 – Oct 28', lines: ['40 × 4-Inch Caddy', '40 × 6-Inch Caddy', '40 × The Lowboy'], shipTo: 'Northline DC · 1400 Industrial Dr, Grand Rapids, MI', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', tracking: '1Z 84F 2W1 03 4471 2290', quote: ['1620 TMUC Urethane Cement'], hist: [daysAgo(12), daysAgo(11), daysAgo(10), daysAgo(8)] },
-      { id: 'LTC-1036', acct: 'multi', po: 'SFG-2026-114', type: 'dc', units: 44, list: 9136, value: null, status: 'Delivered', created: daysAgo(30), window: 'Oct 6 – Oct 9', lines: ['22 × Cove System'], shipTo: 'Summit Facilities · Columbus, OH', freight: 'Free freight', pay: 'Invoice against PO', tracking: '1Z 84F 2W1 03 1180 5521', quote: [], hist: [daysAgo(30), daysAgo(29), daysAgo(28), daysAgo(26), daysAgo(23)] },
-      { id: 'LTC-1042', acct: 'dealer', po: 'CFS-0098', type: 'demo', units: 4, list: 396, value: null, status: 'Received', created: daysAgo(1), window: 'ASAP', lines: ['1 × each Tape Caddy'], shipTo: 'Coastline Flooring Supply · Naples, FL', freight: 'Prepaid & Add', pay: 'Credit card (we send a secure pay link)', tracking: '', quote: [], hist: [daysAgo(1)] }
+      { id: 'LTC-1041', acct: 'ent', po: 'KHC-778102', type: 'stores', units: 836, list: 82764, value: null, status: 'Freight Review', created: daysAgo(6), window: 'Nov 16 – Nov 20', lines: ['2 × 4-Inch Caddy per store', '× 418 stores'], shipTo: '418 stores (store list on file)', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', tracking: '', quote: [], hist: [daysAgo(6), daysAgo(5), daysAgo(3)], st: '', acc: [], freightQuote: null },
+      { id: 'LTC-1039', acct: 'dist', po: 'NCS-5521', type: 'dc', units: 120, list: 13680, value: null, status: 'Shipped', created: daysAgo(12), window: 'Oct 24 – Oct 28', lines: ['40 × 4-Inch Caddy', '40 × 6-Inch Caddy', '40 × The Lowboy'], shipTo: 'Northline DC · 1400 Industrial Dr, Grand Rapids, MI', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', tracking: '1Z 84F 2W1 03 4471 2290', quote: ['1620 TMUC Urethane Cement'], hist: [daysAgo(12), daysAgo(11), daysAgo(10), daysAgo(8)], st: 'MI', acc: [], freightQuote: 412.37 },
+      { id: 'LTC-1036', acct: 'multi', po: 'SFG-2026-114', type: 'dc', units: 44, list: 9136, value: null, status: 'Delivered', created: daysAgo(30), window: 'Oct 6 – Oct 9', lines: ['22 × Cove System'], shipTo: 'Summit Facilities · Columbus, OH', freight: 'Free freight', pay: 'Invoice against PO', tracking: '1Z 84F 2W1 03 1180 5521', quote: [], hist: [daysAgo(30), daysAgo(29), daysAgo(28), daysAgo(26), daysAgo(23)], st: 'OH', acc: ['lift'], freightQuote: 0 },
+      { id: 'LTC-1042', acct: 'dealer', po: 'CFS-0098', type: 'demo', units: 4, list: 396, value: null, status: 'Received', created: daysAgo(1), window: 'ASAP', lines: ['1 × each Tape Caddy'], shipTo: 'Coastline Flooring Supply · Naples, FL', freight: 'Prepaid & Add', pay: 'Credit card (we send a secure pay link)', tracking: '', quote: [], hist: [daysAgo(1)], st: 'FL', acc: ['lift', 'res'], freightQuote: null }
     ],
     msgs: {
       ent: [{ from: 'LTC Sales', mine: false, when: daysAgo(3), text: 'Store list for LTC-1041 looks good. Freight quote coming tomorrow; we can split into two truckloads if your DCs prefer.' }, { from: 'Jordan Ellis', mine: true, when: daysAgo(2), text: 'Two loads works. Please include UPC on every unit and case labels per our routing guide.' }],
@@ -776,13 +926,13 @@ function seed() {
 }
 function loadData() { var d = null; try { d = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { d = null; } return d || seed(); }
 function saveData(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
-function blankForm(a) { return { type: a.id === 'ent' ? 'stores' : 'dc', company: a.name, buyer: a.buyer.split(' · ')[0], email: a.email || '', phone: a.phone || '', po: '', vendor: a.vendor || '', start: '', end: '', notes: '', shipName: a.name, addr: '', city: '', st: '', zip: '', hours: '', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', carrier: '', reqs: {}, docs: {} }; }
+function blankForm(a) { return { type: a.id === 'ent' ? 'stores' : 'dc', company: a.name, buyer: a.buyer.split(' · ')[0], email: a.email || '', phone: a.phone || '', po: '', vendor: a.vendor || '', start: '', end: '', notes: '', shipName: a.name, addr: '', city: '', st: '', zip: '', hours: '', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', carrier: '', reqs: {}, docs: {}, acc: {} }; }
 
 class Component extends DCLogic {
   constructor(props) {
     super(props);
     var d = loadData();
-    this.state = { data: d, acct: 'ent', view: MODE === 'admin' ? 'aOverview' : 'overview', step: 1, form: blankForm(ACCTS.ent), qty: {}, coat: {}, stores: [{ num: '0101', city: 'Columbus', st: 'OH' }, { num: '0214', city: 'Pittsburgh', st: 'PA' }, { num: '0388', city: 'Louisville', st: 'KY' }], ns: { num: '', city: '', st: '' }, err: '', submitted: null, selId: null, fStatus: '', folder: '', draft: '', thread: 'ent', bk: { type: 'Account Review', day: 0, time: '' }, toast: '', lb: 'month', lbm: 'sold', aff: affLoad(), nc: { title: '', status: 'Live', start: '', end: '', brief: '', bonus: '', deliv: '', caption: '' }, nd: { title: '', off: '', code: '', ends: '', desc: '' }, nn: { title: '', tag: 'Program', body: '', pinned: false }, nv: { title: '', cat: 'Signing Up', len: '', url: '', desc: '', req: false } };
+    this.state = { data: d, acct: 'ent', view: MODE === 'admin' ? 'aOverview' : 'overview', step: 1, form: blankForm(ACCTS.ent), qty: {}, coat: {}, stores: [{ num: '0101', city: 'Columbus', st: 'OH' }, { num: '0214', city: 'Pittsburgh', st: 'PA' }, { num: '0388', city: 'Louisville', st: 'KY' }], ns: { num: '', city: '', st: '' }, err: '', submitted: null, selId: null, fStatus: '', folder: '', draft: '', thread: 'ent', bk: { type: 'Account Review', day: 0, time: '' }, toast: '', fq: { bill: 'OB', from: 'CA', to: 'OH', lbs: '', cls: '70', gross: '', fuel: '', acc: {}, order: '' }, laneQ: '', lb: 'month', lbm: 'sold', aff: affLoad(), nc: { title: '', status: 'Live', start: '', end: '', brief: '', bonus: '', deliv: '', caption: '' }, nd: { title: '', off: '', code: '', ends: '', desc: '' }, nn: { title: '', tag: 'Program', body: '', pinned: false }, nv: { title: '', cat: 'Signing Up', len: '', url: '', desc: '', req: false } };
   }
   persist(d) { saveData(d); this.setState({ data: d }); }
   flash(t) { var self = this; this.setState({ toast: t }); setTimeout(function () { if (self.state.toast === t) self.setState({ toast: '' }); }, 2600); }
@@ -824,7 +974,7 @@ class Component extends DCLogic {
     var s = this.state, f = s.form, c = this.calc(), d = JSON.parse(JSON.stringify(s.data));
     var id = 'LTC-' + (1043 + d.orders.filter(function (o) { return o.id >= 'LTC-1043'; }).length);
     var typeName = ORDER_TYPES.find(function (t) { return t.id === f.type; }).name;
-    var o = { id: id, acct: s.acct, po: f.po, type: f.type, units: c.units, list: c.list, value: c.val, status: 'Received', created: fmtDate(today()), window: (f.start || 'TBD') + ' – ' + (f.end || 'TBD'), lines: c.lines.map(function (l) { return l.q + ' × ' + l.name; }), shipTo: f.type === 'stores' ? s.stores.length + ' stores (list attached)' : [f.shipName, f.addr, [f.city, f.st, f.zip].join(' ')].filter(Boolean).join(' · '), freight: f.freight, pay: f.pay, tracking: '', quote: COATINGS.filter(function (n) { return s.coat[n]; }), hist: [fmtDate(today())] };
+    var o = { id: id, acct: s.acct, po: f.po, type: f.type, units: c.units, list: c.list, value: c.val, status: 'Received', created: fmtDate(today()), window: (f.start || 'TBD') + ' – ' + (f.end || 'TBD'), lines: c.lines.map(function (l) { return l.q + ' × ' + l.name; }), shipTo: f.type === 'stores' ? s.stores.length + ' stores (list attached)' : [f.shipName, f.addr, [f.city, f.st, f.zip].join(' ')].filter(Boolean).join(' · '), freight: f.freight, pay: f.pay, tracking: '', quote: COATINGS.filter(function (n) { return s.coat[n]; }), hist: [fmtDate(today())], st: f.type === 'stores' ? '' : (f.st || '').toUpperCase(), acc: Object.keys(f.acc).filter(function (k) { return f.acc[k]; }), freightQuote: null, freightEst: this.freightEst().totalTxt };
     d.orders.unshift(o);
     d.msgs[s.acct] = (d.msgs[s.acct] || []).concat([{ from: 'LTC Sales', mine: false, when: fmtDate(today()), text: 'We received ' + id + ' (PO ' + f.po + '). We’ll confirm pricing and freight and send your acknowledgement.' }]);
     saveData(d);
@@ -833,7 +983,7 @@ class Component extends DCLogic {
   orderView(o) {
     var a = ACCTS[o.acct] || { name: o.acct }, idx = STATUSES.indexOf(o.status), col = SCOL[o.status] || ['#EEE', '#333'];
     var t = ORDER_TYPES.find(function (x) { return x.id === o.type; });
-    return Object.assign({}, o, { acctName: a.name, typeName: t ? t.name : o.type, sbg: col[0], sfg: col[1], valueTxt: o.value != null ? money(o.value) : 'List ' + money(o.list), steps: STATUSES.map(function (n, i) { return { name: n, when: i <= idx ? (o.hist[i] || '') : '', cls: i < idx ? 'done' : (i === idx ? (idx === 4 ? 'done' : 'now') : '') }; }), trackingTxt: o.tracking || 'Added when it ships', commission: a.rep || 'House account', quoteTxt: o.quote && o.quote.length ? o.quote.join(', ') : 'None', todo: TODO[o.status] });
+    return Object.assign({}, o, { acctName: a.name, typeName: t ? t.name : o.type, sbg: col[0], sfg: col[1], valueTxt: o.value != null ? money(o.value) : 'List ' + money(o.list), steps: STATUSES.map(function (n, i) { return { name: n, when: i <= idx ? (o.hist[i] || '') : '', cls: i < idx ? 'done' : (i === idx ? (idx === 4 ? 'done' : 'now') : '') }; }), trackingTxt: o.tracking || 'Added when it ships', freightTxt: o.freightQuote === 0 ? 'Free freight' : (o.freightQuote != null ? money(o.freightQuote) + ' (R+L quote)' : (o.freight === 'Collect (my carrier)' ? 'Your carrier' : (o.freightEst ? 'Est. ' + o.freightEst + ' · LTC confirms' : 'Quoted by LTC'))), commission: a.rep || 'House account', quoteTxt: o.quote && o.quote.length ? o.quote.join(', ') : 'None', todo: TODO[o.status] });
   }
   affSet(fn, msg) { var d2 = JSON.parse(JSON.stringify(this.state.aff)); fn(d2); affSave(d2); this.setState({ aff: d2 }); if (msg) this.flash(msg); }
   affVals() {
@@ -898,14 +1048,89 @@ class Component extends DCLogic {
       uploadKit: function (e) { var fl = e.target.files && e.target.files[0]; if (!fl) return; self.affSet(function (d) { d.files.unshift({ name: fl.name, kind: 'Uploaded ' + fmtDate(today()) }); }, 'Added to the brand kit'); }
     };
   }
+  billFor(fr) { return fr === 'Collect via R+L (LTC rates)' ? 'OBC' : 'OB'; }
+  freightEst() {
+    var s = this.state, f = s.form, bill = this.billFor(f.freight), acc = Object.keys(f.acc || {}).filter(function (k) { return f.acc[k]; });
+    if (f.freight === 'Collect (my carrier)') return { kind: 'carrier', totalTxt: 'Your carrier' };
+    if (f.freight === 'Free freight (order qualifies)') return { kind: 'free', totalTxt: 'Free freight (LTC confirms)' };
+    var dests = f.type === 'stores' ? s.stores.map(function (x) { return (x.st || '').toUpperCase(); }).filter(Boolean) : ((f.st || '').trim() ? [f.st.trim().toUpperCase()] : []);
+    if (!dests.length) return { kind: 'need', totalTxt: 'Quoted by LTC' };
+    var miss = [], total = 0, per = {}, lanes = [];
+    dests.forEach(function (d) { var q = rlQuote({ from: 'CA', to: d, bill: bill, acc: acc }); if (!q) { miss.push(d); return; } total += q.total; per[d] = (per[d] || 0) + 1; lanes.push(q); });
+    if (!lanes.length) return { kind: 'nolane', miss: miss, totalTxt: 'Quoted by LTC' };
+    return { kind: 'ok', bill: bill, dests: dests, per: per, lanes: lanes, miss: miss, acc: acc, total: total, totalTxt: 'From ' + money(total) + ' + fuel' };
+  }
+  feVals() {
+    var self = this, f = this.state.form, e = this.freightEst();
+    var show = e.kind !== 'carrier' && e.kind !== 'free';
+    var out = { show: show, needSt: e.kind === 'need', needMsg: f.type === 'stores' ? 'Add store states to see the freight estimate.' : 'Enter the ship-to state (like OH) to see your freight estimate.', noLane: e.kind === 'nolane', noLaneMsg: 'That destination isn’t in LTC’s R+L agreement. LTC will quote freight on your acknowledgement.', ok: e.kind === 'ok', rows: [], accs: [], total: '', foot: '' };
+    if (e.kind !== 'ok') return out;
+    var first = e.lanes[0], states = Object.keys(e.per);
+    if (states.length === 1 && e.dests.length === 1) {
+      out.rows = [{ k: 'Lane', v: 'CA → ' + rlName(states[0]) }, { k: 'Bill Type', v: e.bill === 'OBC' ? 'Outbound Collect' : 'Outbound Prepaid' }, { k: 'LTC Contract Discount', v: first.lane.disc + '% off R+L rates' }, { k: 'Freight Minimum', v: money(first.lane.floor) }];
+    } else {
+      var floors = e.lanes.reduce(function (t, q) { return t + q.lane.floor; }, 0);
+      out.rows = [{ k: 'Shipments', v: e.dests.length + ' stores · ' + states.length + ' states' }, { k: 'Contract Discounts', v: Math.min.apply(null, e.lanes.map(function (q) { return q.lane.disc; })) + '–' + Math.max.apply(null, e.lanes.map(function (q) { return q.lane.disc; })) + '% off' }, { k: 'Freight Minimums (all stores)', v: money(floors) }];
+      if (e.miss.length) out.rows.push({ k: 'Not In Agreement', v: e.miss.join(', ') + ' (LTC quotes)' });
+    }
+    var d0 = states[0];
+    out.accs = RL.acc.map(function (a) { var on = !!(f.acc || {})[a.id]; return { name: a.name, note: a.note, amt: a.id === 'inside' && ['CT', 'ID', 'MH', 'MV'].indexOf(d0) >= 0 ? '$25.44/cwt' : money(rlAcc(a.id, d0, 0)).replace('.00', ''), on: on ? 'true' : 'false', toggle: function () { var x = Object.assign({}, f.acc || {}); x[a.id] = !x[a.id]; self.setForm('acc', x); } }; });
+    out.total = 'From ' + money(e.total);
+    out.foot = 'Starts at the R+L minimum for each shipment plus delivery needs, before fuel surcharge (R+L Item 563). Your exact freight is quoted from R+L class rates on your acknowledgement. LTL up to 16,000 lbs.';
+    return out;
+  }
+  fqVals(sel) {
+    var self = this, s = this.state, q = s.fq, d = s.data;
+    var setQ = function (k, v) { var x = Object.assign({}, self.state.fq); x[k] = v; self.setState({ fq: x }); };
+    var accList = Object.keys(q.acc).filter(function (k) { return q.acc[k]; });
+    var Q = rlQuote({ from: q.from, to: q.to, bill: q.bill, gross: q.gross, fuel: q.fuel, lbs: q.lbs, acc: accList });
+    var lane = Q ? Q.lane : null;
+    var res = [];
+    if (Q) {
+      res.push({ k: 'Lane', v: rlName(q.from) + ' → ' + rlName(q.to), c: '' });
+      res.push({ k: 'Source', v: lane.src, c: '' });
+      res.push({ k: 'Contract Discount (' + q.bill + ')', v: lane.disc + '%', c: '' });
+      res.push({ k: 'R+L Gross Charge', v: Q.gross != null ? money(Q.gross) : 'Enter from R+L class rates', c: '' });
+      res.push({ k: 'After Discount', v: Q.discounted != null ? money(Q.discounted) : '—', c: '' });
+      res.push({ k: 'Minimum (Floor)', v: money(lane.floor) + (Q.floorApplies ? ' · applies' : ''), c: Q.floorApplies ? C.acc : '' });
+      res.push({ k: 'Linehaul', v: money(Q.linehaul), c: '' });
+      res.push({ k: 'Fuel Surcharge', v: Q.fuel != null ? money(Q.fuel) + ' (' + q.fuel + '%)' : 'Enter this week’s %', c: '' });
+      Q.accs.forEach(function (a) { res.push({ k: a.name, v: money(a.amt), c: '' }); });
+    }
+    var lanesFrom = rlDests(q.from).filter(function (dst) { var t = (s.laneQ || '').toLowerCase(); return !t || dst.toLowerCase() === t || (RL.names[dst] || '').toLowerCase().indexOf(t) >= 0; });
+    var openOrders = d.orders.filter(function (o) { return o.status !== 'Delivered'; });
+    return {
+      fqBills: RL.bills.map(function (b) { return { label: b.name, title: b.desc, on: q.bill === b.id ? 'true' : 'false', pick: function () { setQ('bill', b.id); } }; }),
+      fqFromOpts: rlOrigins().map(function (o) { return { v: o, label: rlName(o), sel: o === q.from ? 'selected' : null }; }),
+      fqToOpts: rlDests(q.from).map(function (o) { return { v: o, label: rlName(o) }; }),
+      fq: q,
+      fqSet: { from: function (e) { var x = Object.assign({}, self.state.fq, { from: e.target.value }); if (rlDests(x.from).indexOf(x.to) < 0) x.to = rlDests(x.from)[0]; self.setState({ fq: x }); }, to: function (e) { setQ('to', e.target.value); }, lbs: function (e) { setQ('lbs', e.target.value); }, cls: function (e) { setQ('cls', e.target.value); }, gross: function (e) { setQ('gross', e.target.value); }, fuel: function (e) { setQ('fuel', e.target.value); }, order: function (e) { setQ('order', e.target.value); } },
+      fqClasses: ['50', '55', '60', '65', '70', '77.5', '85', '92.5', '100', '110', '125', '150', '175', '200', '250', '300', '400', '500'],
+      fqAccs: RL.acc.map(function (a) { var on = !!q.acc[a.id]; return { name: a.name, note: a.note, amt: money(rlAcc(a.id, q.to, parseFloat(q.lbs) || 0)), on: on ? 'true' : 'false', toggle: function () { var x = Object.assign({}, q.acc); x[a.id] = !x[a.id]; setQ('acc', x); } }; }),
+      fqHas: !!Q, fqNo: !Q, fqRes: res,
+      fqTotal: Q ? money(Q.total) : '—',
+      fqTotalLbl: Q && Q.exact ? 'Total Freight' : 'Minimum Freight (no gross entered)',
+      fqWarn: Q && Q.overMax ? 'Over 16,000 lbs: LTL rates don’t apply. Get a volume / truckload quote from R+L.' : '',
+      fqHasWarn: !!(Q && Q.overMax),
+      fqOrders: [{ v: '', label: 'Pick an open order' }].concat(openOrders.map(function (o) { return { v: o.id, label: o.id + ' · ' + ((ACCTS[o.acct] || {}).name || o.acct) + (o.st ? ' · ' + o.st : '') }; })),
+      fqApply: function () { if (!Q) return self.flash('Pick a lane first'); if (!q.order) return self.flash('Pick an order to apply this to'); var d2 = JSON.parse(JSON.stringify(d)); var o = d2.orders.find(function (x) { return x.id === q.order; }); o.freightQuote = Math.round(Q.total * 100) / 100; if (o.status === 'Acknowledged') { o.status = 'Freight Review'; o.hist[2] = fmtDate(today()); } self.persist(d2); self.flash(money(Q.total) + ' freight applied to ' + o.id); },
+      fqCopy: function () { if (!Q) return; var t = 'R+L freight ' + rlName(q.from) + ' → ' + rlName(q.to) + ' (' + q.bill + ', class ' + q.cls + (q.lbs ? ', ' + q.lbs + ' lbs' : '') + '): ' + money(Q.total) + (Q.fuel == null ? ' + fuel surcharge' : ''); affCopy(t); self.flash('Quote copied'); },
+      laneQ: s.laneQ, setLaneQ: function (e) { self.setState({ laneQ: e.target.value }); },
+      laneRows: lanesFrom.map(function (dst) { var m = rlMap()[q.from + '>' + dst]; return { st: dst, name: RL.names[dst] || dst, ob: m.OB + '%', ib: m.IB + '%', obc: m.OBC + '%', floor: money(m.f), fi: money(m.fi), use: function () { setQ('to', dst); try { window.scrollTo(0, 0); } catch (e) {} } }; }),
+      laneCount: lanesFrom.length,
+      rlMeta: [{ k: 'Carrier', v: 'R+L Carriers' }, { k: 'Account', v: 'L01HP2 · San Dimas, CA' }, { k: 'Agreement', v: 'RLCA 6018 · Item 524640.000 v1' }, { k: 'Effective', v: 'Nov 3, 2026 · no expiration' }],
+      rlRules: ['Discounts come off current R+L class rates (no FAK, standard class rates apply).', 'The floor is the minimum charge per shipment after the discount.', 'LTL rates apply up to 16,000 lbs or 16 ft of trailer.', 'Fuel surcharge per R+L Item 563 (changes weekly).', 'Other fees: correction, inspection and reweigh $11; hazmat $16; limited access pickup $69; residential pickup $159.', 'Pricing may be cancelled if no shipments move under it for 120 days.'],
+      quoteSel: function () { if (!sel) return; var a = {}; (sel.acc || []).forEach(function (k) { a[k] = true; }); self.setState({ view: 'aFreight', fq: Object.assign({}, self.state.fq, { from: 'CA', to: sel.st || self.state.fq.to, bill: sel.freight === 'Collect via R+L (LTC rates)' ? 'OBC' : 'OB', acc: a, order: sel.id, gross: '' }) }); try { window.scrollTo(0, 0); } catch (e) {} }
+    };
+  }
   renderVals() {
     var self = this, s = this.state, d = s.data, a = this.acct(), isAdmin = MODE === 'admin', c = this.calc(), mult = this.mult();
     var v = {}; v[s.view] = true;
     var mine = isAdmin ? d.orders : d.orders.filter(function (o) { return o.acct === s.acct; });
     var navP = [['overview', 'Overview'], ['order', 'New Order'], ['orders', 'Orders'], ['files', 'Files'], ['messages', 'Messages'], ['book', 'Book Time'], ['prices', 'Price Sheet']];
-    var navA = [['aOverview', 'Dashboard'], ['orders', 'Order Queue'], ['aAccounts', 'Accounts'], ['aPricing', 'Pricing'], ['messages', 'Messages'], ['book', 'Calendar'], ['files', 'Files']];
+    var navA = [['aOverview', 'Dashboard'], ['orders', 'Order Queue'], ['aAccounts', 'Accounts'], ['aPricing', 'Pricing'], ['aFreight', 'Freight Calculator'], ['messages', 'Messages'], ['book', 'Calendar'], ['files', 'Files']];
     var newCount = d.orders.filter(function (o) { return o.status === 'Received'; }).length;
-    var titles = { overview: 'Partner Portal', order: 'New Order', orders: isAdmin ? 'Order Queue' : 'My Orders', files: 'Files', messages: 'Messages', book: isAdmin ? 'Calendar' : 'Book Time', prices: 'Price Sheet', aOverview: 'LTC Admin', aAccounts: 'Accounts', aPricing: 'Pricing', aAff: 'Affiliates', aBoard: 'Affiliate Leaderboard', aCamp: 'Campaigns & Deals', aContent: 'News & Videos' };
+    var titles = { overview: 'Partner Portal', order: 'New Order', orders: isAdmin ? 'Order Queue' : 'My Orders', files: 'Files', messages: 'Messages', book: isAdmin ? 'Calendar' : 'Book Time', prices: 'Price Sheet', aOverview: 'LTC Admin', aAccounts: 'Accounts', aPricing: 'Pricing', aFreight: 'Freight Calculator', aAff: 'Affiliates', aBoard: 'Affiliate Leaderboard', aCamp: 'Campaigns & Deals', aContent: 'News & Videos' };
     var f = s.form, sel = s.selId ? d.orders.find(function (o) { return o.id === s.selId; }) : null;
     var tierNow = this.tierFor(c.units);
     var shown = mine.filter(function (o) { return !s.fStatus || o.status === s.fStatus; });
@@ -968,14 +1193,15 @@ class Component extends DCLogic {
       uploadStores: function (e) { var file = e.target.files && e.target.files[0]; if (!file) return; var r = new FileReader(); r.onload = function () { var rows = String(r.result).split(/\r?\n/).map(function (l) { return l.split(',').map(function (x) { return x.trim(); }); }).filter(function (c2) { return c2[0] && !/store/i.test(c2[0]); }).map(function (c2) { return { num: c2[0], city: c2[1] || '', st: (c2[2] || '').toUpperCase() }; }); self.setState({ stores: s.stores.concat(rows) }); self.flash(rows.length + ' stores added'); }; r.readAsText(file); },
       shipTitle: f.type === 'job' ? 'Ship To (Job Site Or Customer)' : (f.type === 'demo' ? 'Ship To (Location)' : 'Ship To (Distribution Center / Warehouse)'),
       shipFields: [['shipName', 'Location Name'], ['addr', 'Street Address *'], ['city', 'City'], ['st', 'State'], ['zip', 'ZIP'], ['hours', 'Receiving Hours / Dock Notes']].map(function (x) { return { label: x[1], val: f[x[0]], ph: '', set: function (e) { self.setForm(x[0], e.target.value); } }; }),
-      freightOpts: ['Prepaid & Add', 'Collect (my carrier)', 'Free freight (order qualifies)'],
+      freightOpts: ['Prepaid & Add', 'Collect via R+L (LTC rates)', 'Collect (my carrier)', 'Free freight (order qualifies)'],
       payOpts: ['Net terms (approved accounts)', 'Invoice against PO', 'Credit card (we send a secure pay link)'],
       setFreight: function (e) { self.setForm('freight', e.target.value); }, setPay: function (e) { self.setForm('pay', e.target.value); }, setCarrier: function (e) { self.setForm('carrier', e.target.value); },
       showCarrier: f.freight === 'Collect (my carrier)',
+      fe: this.feVals(),
       freightNote: num(P.freeFreight) != null ? 'Free freight on orders over ' + money(num(P.freeFreight)) + ' (contract value).' : 'Free-freight threshold set by LTC.',
       reqRows: ['UPC on every unit', 'Case labels', 'ASN / EDI 856', 'Palletized, shrink-wrapped'].map(function (n) { return { name: n, on: f.reqs[n] ? 'true' : 'false', toggle: function () { var r2 = Object.assign({}, f.reqs); r2[n] = !r2[n]; self.setForm('reqs', r2); } }; }),
       docSlots: [['routing', 'Routing Guide'], ['tax', 'Tax-Exempt Certificate']].map(function (x) { return { label: x[1], file: f.docs[x[0]] || 'Tap to attach', set: function (e) { var fl = e.target.files && e.target.files[0]; if (!fl) return; var dz = Object.assign({}, f.docs); dz[x[0]] = fl.name; self.setForm('docs', dz); } }; }),
-      reviewRows: [['Order Type', ORDER_TYPES.find(function (t) { return t.id === f.type; }).name], ['Company', f.company], ['Buyer', f.buyer + (f.email ? ' · ' + f.email : '')], ['PO Number', f.po], ['Vendor #', f.vendor || '—'], ['Ship Window', (f.start || 'TBD') + ' – ' + (f.end || 'TBD')], ['Ship To', f.type === 'stores' ? s.stores.length + ' stores' : [f.addr, f.city, f.st].filter(Boolean).join(', ')], ['Freight', f.freight], ['Payment', f.pay], ['Requirements', Object.keys(f.reqs).filter(function (k) { return f.reqs[k]; }).join(', ') || 'None'], ['Coatings Quote', COATINGS.filter(function (n) { return s.coat[n]; }).join(', ') || 'None']].map(function (r) { return { k: r[0], v: r[1] }; }),
+      reviewRows: [['Order Type', ORDER_TYPES.find(function (t) { return t.id === f.type; }).name], ['Company', f.company], ['Buyer', f.buyer + (f.email ? ' · ' + f.email : '')], ['PO Number', f.po], ['Vendor #', f.vendor || '—'], ['Ship Window', (f.start || 'TBD') + ' – ' + (f.end || 'TBD')], ['Ship To', f.type === 'stores' ? s.stores.length + ' stores' : [f.addr, f.city, f.st].filter(Boolean).join(', ')], ['Freight', f.freight], ['Freight Estimate', this.freightEst().totalTxt], ['Payment', f.pay], ['Requirements', Object.keys(f.reqs).filter(function (k) { return f.reqs[k]; }).join(', ') || 'None'], ['Coatings Quote', COATINGS.filter(function (n) { return s.coat[n]; }).join(', ') || 'None']].map(function (r) { return { k: r[0], v: r[1] }; }),
       reviewLines: c.lines.map(function (l) { return { q: l.q, name: l.name, total: l.total }; }),
       totals: [
         { k: 'Units', v: c.units.toLocaleString(), c: C.ink },
@@ -1033,6 +1259,7 @@ class Component extends DCLogic {
       hasToast: !!s.toast, toast: s.toast
     };
     if (!isAdmin) return R;
+    Object.assign(R, this.fqVals(sel));
     var appsN = s.aff.affiliates.filter(function (a) { return a.status === 'Applied'; }).length;
     R.navs2 = [['aAff', 'Affiliates', appsN], ['aBoard', 'Leaderboard', 0], ['aCamp', 'Campaigns & Deals', 0], ['aContent', 'News & Videos', 0]].map(function (n) { return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: n[2] > 0, badge: n[2], go: function () { self.go(n[0]); } }; });
     return Object.assign(R, this.affVals());
