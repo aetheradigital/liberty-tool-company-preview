@@ -9,6 +9,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&amp;display=swap">
 <style>
 body{margin:0;background:#F4F5F7;color:#0B1B33;font-family:Inter,system-ui,sans-serif}
 *{box-sizing:border-box}
@@ -95,6 +96,48 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 .tick.on{background:#2E7D4F;border-color:#2E7D4F;color:#FFFFFF}
 .news{padding:16px 0;border-bottom:1px solid #D3D9E2}
 .news:last-child{border-bottom:0}
+.gate{min-height:100vh;background:#F4F5F7}
+.gtop{background:#0A3161;color:#FFFFFF;padding:14px 28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
+.gwrap{max-width:1180px;margin:0 auto;padding:28px 24px 48px}
+.ggrid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px;align-items:start;margin-top:20px}
+@media (max-width:960px){.ggrid{grid-template-columns:minmax(0,1fr)}}
+.docbox{height:640px;overflow-y:auto;padding:30px 34px;background:#FFFFFF;border:1px solid #D3D9E2;border-radius:4px;font-size:14px;line-height:1.6;color:#1E2633}
+@media (max-width:640px){.docbox{height:460px;padding:20px}.gtop{padding:12px 16px}.gwrap{padding:20px 16px 40px}}
+.agdoc .dh{text-align:center;padding-bottom:16px;border-bottom:2px solid #0A3161;margin-bottom:16px}
+.agdoc .dbrand{font-family:'GFS Baskerville',Georgia,serif;font-weight:700;letter-spacing:0.18em;color:#0A3161;font-size:18px}
+.agdoc .dtitle{font-family:'Barlow Condensed', sans-serif;font-weight:800;text-transform:uppercase;font-size:22px;color:#0B1B33;margin-top:6px;line-height:1.15}
+.agdoc .dsub{font-weight:700;color:#B31942;font-size:13px;margin-top:4px;letter-spacing:0.04em}
+.agdoc h4{font-family:'Barlow Condensed', sans-serif;font-weight:800;text-transform:uppercase;font-size:16px;color:#0A3161;margin:22px 0 6px;letter-spacing:0.02em}
+.agdoc .ss{font-weight:700;margin:12px 0 4px;color:#0B1B33}
+.agdoc p{margin:0 0 9px}
+.agdoc .li{display:flex;gap:8px;margin:0 0 5px 6px}
+.agdoc .li:before{content:"•";color:#B31942;font-weight:800}
+.agdoc .ack{margin-top:22px;padding:14px 16px;background:#EEF3FA;border-radius:4px;font-weight:600}
+.agdoc .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px}
+@media (max-width:640px){.agdoc .sgrid{grid-template-columns:1fr}}
+.agdoc .sf{display:grid;grid-template-columns:130px minmax(0,1fr);gap:4px 10px;font-size:13px;margin-top:8px}
+.agdoc .sf span:nth-child(odd){color:#4A5568}
+.agdoc .sf b{border-bottom:1px solid #B8C1CD;padding-bottom:2px;min-height:20px;overflow-wrap:anywhere}
+.agdoc .sigln{height:70px;border-bottom:1.5px solid #0B1B33;display:flex;align-items:flex-end;padding-bottom:4px}
+.agdoc .sigln img{max-height:66px;max-width:100%}
+.agdoc .dfoot{margin-top:26px;padding-top:12px;border-top:1px solid #D3D9E2;text-align:center;font-size:12px;color:#4A5568;line-height:1.6}
+.script{font-family:'Dancing Script',cursive;font-weight:700;font-size:38px;color:#0B1B33;line-height:1}
+.sigwrap{position:relative;border:1.5px dashed #B8C1CD;border-radius:4px;background:#FFFFFF;aspect-ratio:600/170;overflow:hidden}
+.sigwrap img,.sigwrap canvas{position:absolute;inset:0;width:100%;height:100%}
+.sigwrap canvas{touch-action:none;cursor:crosshair}
+.sigwrap .hint{position:absolute;left:14px;bottom:8px;font-size:12px;color:#4A5568;pointer-events:none}
+.sigwrap .base{position:absolute;left:14px;right:14px;bottom:28%;border-bottom:1px solid #B8C1CD;pointer-events:none}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;cursor:pointer}
+.chk input{width:20px;height:20px;margin-top:1px;flex:none;accent-color:#0A3161}
+.ovl{position:fixed;inset:0;z-index:60;background:rgba(7,18,40,0.6);display:flex;justify-content:center;align-items:flex-start;padding:0 16px;overflow-y:auto}
+.ovl .panel{width:100%;max-width:900px;margin:28px 0;background:#F4F5F7;border-radius:6px;box-shadow:0 30px 80px rgba(0,0,0,0.35)}
+.ovl .ptop{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid #D3D9E2;position:sticky;top:0;background:#F4F5F7;border-radius:6px 6px 0 0;z-index:1}
+.ovl .agdoc{background:#FFFFFF;margin:18px;padding:36px 40px;border:1px solid #D3D9E2;font-size:14px;line-height:1.6;color:#1E2633}
+@media (max-width:640px){.ovl .agdoc{margin:10px;padding:20px}}
+.frow{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid #D3D9E2}
+.frow:last-child{border-bottom:0}
+.ficon{width:44px;height:54px;border-radius:4px;background:#EEF3FA;border:1px solid #D3D9E2;display:flex;align-items:center;justify-content:center;color:#0A3161;font-size:11px;font-weight:800;flex:none}
+@media print{body *{visibility:hidden !important}.ovl,.ovl .agdoc,.ovl .agdoc *{visibility:visible !important}.ovl{position:absolute;background:none;padding:0;overflow:visible}.ovl .panel{box-shadow:none;background:none}.ovl .ptop{display:none}.ovl .agdoc{margin:0;border:0;padding:0}}
 @media (prefers-reduced-motion: reduce){.prog>i{animation:none;width:100%}}
 </style>
 
@@ -110,6 +153,63 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 <script>if(window.self!==window.top){document.getElementById('ltc-preview-bar').style.display='none';}</script>
 <template id="tpl">
 
+<sc-if value="{{gated}}" hint-placeholder-val="{{false}}">
+<div class="gate">
+  <div class="gtop">
+    <div style="display: flex; align-items: center; gap: 14px"><img src="/assets/logo-white.png" alt="Liberty Tool Company" style="height: 44px; width: auto"><div style="font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #AFC0DC">Affiliate Portal</div></div>
+    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #AFC0DC">Demo: View As</span><div class="demo" role="group" aria-label="Demo affiliate" style="min-width: 240px"><button type="button" aria-pressed="{{isActiveDemo}}" onClick="{{pickActive}}">Active</button><button type="button" aria-pressed="{{isNewDemo}}" onClick="{{pickNew}}">New Affiliate</button></div></div>
+  </div>
+  <div class="gwrap">
+    <div class="eyebrow">Welcome, {{me.first}} · One Step Before You Enter</div>
+    <h1 class="h1" style="margin-top: 6px">Sign Your Affiliate Agreement</h1>
+    <p class="muted" style="margin: 8px 0 0; max-width: 760px; line-height: 1.55">Read the agreement, fill in your info and sign. Your portal opens right after, and a signed copy is saved in <b>My Files</b>.</p>
+    <div class="ggrid">
+      <div class="card" style="padding: 16px">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px"><h3 class="h3">Affiliate &amp; Brand Ambassador Agreement</h3><span class="st" style="background: {{readBg}}; color: {{readFg}}">{{readLabel}}</span></div>
+        <div class="docbox agdoc" tabindex="0" aria-label="Agreement text" onScroll="{{onDocScroll}}">
+          <div class="dh"><div class="dbrand">LIBERTY TOOL COMPANY</div><div class="dtitle">Affiliate &amp; Brand Ambassador Agreement</div><div class="dsub">THE TAPE CADDY AFFILIATE PROGRAM</div><div style="font-size: 13px; margin-top: 8px">Effective Date: <b>{{gToday}} (date of signature)</b></div></div>
+          <sc-for list="{{agBlocks}}" as="b" hint-placeholder-count="12"><sc-if value="{{b.h}}" hint-placeholder-val="{{false}}"><h4>{{b.x}}</h4></sc-if><sc-if value="{{b.s}}" hint-placeholder-val="{{false}}"><div class="ss">{{b.x}}</div></sc-if><sc-if value="{{b.p}}" hint-placeholder-val="{{true}}"><p>{{b.x}}</p></sc-if><sc-if value="{{b.li}}" hint-placeholder-val="{{false}}"><div class="li"><span>{{b.x}}</span></div></sc-if></sc-for>
+          <h4>Affiliate Acknowledgment &amp; Acceptance</h4>
+          <div class="ack">{{agAck}}</div>
+          <p class="muted" style="margin-top: 14px; font-size: 13px">Fill in your info and sign in the panel to finish.</p>
+          <div class="dfoot"><b style="color: #0A3161; letter-spacing: 0.12em">LIBERTY TOOL COMPANY</b><br><i>Practical Tools. Powerful Connections.</i><br>thetapecaddy.com · sales@libertytoolcompany.com · 239-744-8403<br><b>Confidential — Affiliate Program Agreement</b></div>
+        </div>
+        <div class="muted" style="font-size: 12px; margin-top: 8px">Version {{agVersion}} · Scroll to the end to unlock signing.</div>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Affiliate Information</div>
+        <div style="display: grid; gap: 12px; margin-top: 10px">
+          <sc-for list="{{gFields}}" as="f" hint-placeholder-count="5"><label><span class="lbl">{{f.label}}</span><input class="inp" type="{{f.type}}" value="{{f.val}}" autocomplete="{{f.ac}}" onChange="{{f.set}}" style="border-color: {{f.bc}}"></label></sc-for>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 18px; flex-wrap: wrap">
+          <span class="lbl" style="margin: 0">Affiliate Signature *</span>
+          <div style="display: flex; gap: 6px"><button type="button" class="chip" aria-pressed="{{sigDrawOn}}" onClick="{{pickDraw}}">Draw</button><button type="button" class="chip" aria-pressed="{{sigTypeOn}}" onClick="{{pickType}}">Type</button></div>
+        </div>
+        <sc-if value="{{sigIsDraw}}" hint-placeholder-val="{{true}}">
+          <div class="sigwrap" style="margin-top: 8px; border-color: {{sigBc}}">
+            <div class="base"></div>
+            <sc-if value="{{hasSigData}}" hint-placeholder-val="{{false}}"><img src="{{sigData}}" alt="Your drawn signature"></sc-if>
+            <canvas width="600" height="170" aria-label="Signature pad. Draw your signature with a mouse, finger or stylus." onPointerDown="{{sigDown}}" onPointerMove="{{sigMove}}" onPointerUp="{{sigUp}}" onPointerLeave="{{sigUp}}"></canvas>
+            <sc-if value="{{noSigData}}" hint-placeholder-val="{{true}}"><span class="hint">Sign here with your mouse, finger or stylus</span></sc-if>
+          </div>
+          <div style="display: flex; justify-content: flex-end; margin-top: 6px"><button type="button" class="btn ghost sm" onClick="{{sigClear}}">Clear</button></div>
+        </sc-if>
+        <sc-if value="{{sigIsType}}" hint-placeholder-val="{{false}}">
+          <input class="inp" style="margin-top: 8px; border-color: {{sigBc}}" value="{{sigText}}" placeholder="Type your full legal name" onChange="{{setSigText}}" aria-label="Type your signature">
+          <div class="sigwrap" style="margin-top: 8px; display: flex; align-items: center; padding: 0 18px"><div class="base"></div><span class="script" style="position: relative">{{sigTextShow}}</span></div>
+        </sc-if>
+        <div style="display: flex; justify-content: space-between; gap: 10px; font-size: 13px; margin-top: 12px"><span class="muted">Date</span><b>{{gToday}}</b></div>
+        <label class="chk" style="margin-top: 14px"><input type="checkbox" onChange="{{toggleAgree}}"><span>I've read the full Affiliate &amp; Brand Ambassador Agreement and agree to its terms, including the $10 per caddy commission, the brand rules, the Amazon restrictions and the independent contractor terms. My electronic signature is the same as my handwritten one.</span></label>
+        <sc-if value="{{hasMissing}}" hint-placeholder-val="{{false}}"><div style="margin-top: 12px; padding: 10px 12px; border-radius: 4px; background: #FDECEF; color: #B31942; font-size: 13px; font-weight: 600">Still needed: {{missing}}</div></sc-if>
+        <button type="button" class="btn red" style="width: 100%; margin-top: 14px; min-height: 50px; font-size: 16px" onClick="{{signNow}}">Sign &amp; Enter Portal</button>
+        <div class="muted" style="font-size: 12px; margin-top: 10px; line-height: 1.5">We record the date, time and email with your signature. LTC countersigns and the final copy updates in My Files.</div>
+      </div>
+    </div>
+  </div>
+  <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}"><div class="toast" role="status">{{toast}}</div></sc-if>
+</div>
+</sc-if>
+<sc-if value="{{notGated}}" hint-placeholder-val="{{true}}">
 <div class="app">
   <aside class="side">
     <img src="/assets/logo-white.png" alt="Liberty Tool Company" style="height: 56px; width: auto; align-self: flex-start">
@@ -367,9 +467,64 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       </div>
     </sc-if>
 
+    <!-- ================= MY FILES ================= -->
+    <sc-if value="{{v.files}}" hint-placeholder-val="{{false}}">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap"><h2 class="h2">Agreements</h2><span class="muted" style="font-size: 13px">Your signed copies live here. Download anytime.</span></div>
+        <sc-for list="{{agFiles}}" as="f" hint-placeholder-count="1">
+          <div class="frow">
+            <div class="ficon">PDF</div>
+            <div style="flex: 1 1 280px; min-width: 0"><b>{{f.name}}</b><div class="muted" style="font-size: 13px; margin-top: 2px">{{f.meta}}</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px"><span class="st" style="background: #E3F3EA; color: #2E7D4F">Signed By You · {{f.date}}</span><span class="st" style="background: {{f.cbg}}; color: {{f.cfg}}">{{f.ctr}}</span></div></div>
+            <div style="display: flex; gap: 8px"><button type="button" class="btn ghost sm" onClick="{{f.view}}">View</button><button type="button" class="btn sm" onClick="{{f.dl}}">Download</button></div>
+          </div>
+        </sc-for>
+      </div>
+      <div class="card" style="margin-top: 16px">
+        <h2 class="h2">Payout Statements</h2>
+        <sc-for list="{{stmtFiles}}" as="f" hint-placeholder-count="2">
+          <div class="frow"><div class="ficon">PDF</div><div style="flex: 1 1 280px; min-width: 0"><b>{{f.name}}</b><div class="muted" style="font-size: 13px; margin-top: 2px">{{f.meta}}</div></div><button type="button" class="btn ghost sm" onClick="{{f.get}}">Download</button></div>
+        </sc-for>
+        <sc-if value="{{noStmts}}" hint-placeholder-val="{{false}}"><p class="muted" style="margin: 10px 0 0">Your first statement shows here after your first monthly payout.</p></sc-if>
+      </div>
+      <sc-if value="{{canReset}}" hint-placeholder-val="{{false}}"><button type="button" class="btn ghost sm" style="margin-top: 14px" onClick="{{resetSign}}">Demo: Reset Signature And Re-Sign</button></sc-if>
+    </sc-if>
+
     <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}"><div class="toast" role="status">{{toast}}</div></sc-if>
   </main>
 </div>
+</sc-if>
+<sc-if value="{{docOpen}}" hint-placeholder-val="{{false}}">
+  <div class="ovl" role="dialog" aria-modal="true" aria-label="Signed affiliate agreement">
+    <div class="panel">
+      <div class="ptop"><div><div class="eyebrow">My Files</div><b>Affiliate &amp; Brand Ambassador Agreement · Signed</b></div><div style="display: flex; flex-wrap: wrap; gap: 8px"><button type="button" class="btn ghost sm" onClick="{{printDoc}}">Print / Save As PDF</button><button type="button" class="btn sm" onClick="{{dlDoc}}">Download</button><button type="button" class="btn ghost sm" onClick="{{closeDoc}}">Close</button></div></div>
+      <div class="agdoc">
+        <div class="dh"><div class="dbrand">LIBERTY TOOL COMPANY</div><div class="dtitle">Affiliate &amp; Brand Ambassador Agreement</div><div class="dsub">THE TAPE CADDY AFFILIATE PROGRAM</div><div style="font-size: 13px; margin-top: 8px">Effective Date: <b>{{ag.date}}</b></div></div>
+          <sc-for list="{{agBlocks}}" as="b" hint-placeholder-count="12"><sc-if value="{{b.h}}" hint-placeholder-val="{{false}}"><h4>{{b.x}}</h4></sc-if><sc-if value="{{b.s}}" hint-placeholder-val="{{false}}"><div class="ss">{{b.x}}</div></sc-if><sc-if value="{{b.p}}" hint-placeholder-val="{{true}}"><p>{{b.x}}</p></sc-if><sc-if value="{{b.li}}" hint-placeholder-val="{{false}}"><div class="li"><span>{{b.x}}</span></div></sc-if></sc-for>
+          <h4>Affiliate Acknowledgment &amp; Acceptance</h4>
+          <div class="ack">{{agAck}}</div>
+        <div class="sgrid">
+          <div>
+            <div class="ss">Affiliate Information</div>
+            <div class="sf"><span>Full Legal Name</span><b>{{ag.name}}</b><span>Business Name</span><b>{{ag.business}}</b><span>Email Address</span><b>{{ag.email}}</b><span>Phone Number</span><b>{{ag.phone}}</b><span>Business Address</span><b>{{ag.address}}</b></div>
+            <div class="ss" style="margin-top: 16px">Affiliate Signature</div>
+            <div class="sigln"><sc-if value="{{ag.isImg}}" hint-placeholder-val="{{false}}"><img src="{{ag.sigData}}" alt="Signature of {{ag.name}}"></sc-if><sc-if value="{{ag.isText}}" hint-placeholder-val="{{true}}"><span class="script">{{ag.sigText}}</span></sc-if></div>
+            <div class="sf"><span>Date</span><b>{{ag.date}}</b></div>
+          </div>
+          <div>
+            <div class="ss">Liberty Tool Company</div>
+            <div class="sf"><span>Authorized Rep.</span><b>{{ag.ltcName}}</b><span>Title</span><b>{{ag.ltcTitle}}</b></div>
+            <div class="ss" style="margin-top: 16px">Signature</div>
+            <div class="sigln"><span class="muted" style="font-size: 13px">{{ag.ltcSig}}</span></div>
+            <div class="sf"><span>Date</span><b>{{ag.ltcDate}}</b></div>
+          </div>
+        </div>
+        <div style="margin-top: 18px; padding: 10px 12px; border: 1px solid #D3D9E2; border-radius: 4px; font-size: 12px; color: #4A5568; line-height: 1.6"><b style="color: #0B1B33">Electronic Signature Record</b><br>Signed electronically by {{ag.name}} ({{ag.email}}) on {{ag.date}} at {{ag.time}} · Method: {{ag.method}} · Document ID {{ag.id}} · Version {{ag.version}}</div>
+        <div class="dfoot"><b style="color: #0A3161; letter-spacing: 0.12em">LIBERTY TOOL COMPANY</b><br><i>Practical Tools. Powerful Connections.</i><br>thetapecaddy.com · sales@libertytoolcompany.com · 239-744-8403<br><b>Confidential — Affiliate Program Agreement</b></div>
+      </div>
+    </div>
+  </div>
+</sc-if>
 </template>
 <div id="root"></div>
 <script src="/runtime.js"></script>
@@ -378,11 +533,14 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 
 var IMG = ['/assets/crop-lowboy.webp', '/assets/crop-c2.webp', '/assets/crop-c4.webp', '/assets/crop-c6.webp', '/assets/crop-cove.webp', '/assets/crop-four.webp', '/assets/crop-triple.webp', '/assets/crop-ddd.webp'];
 var C = { pri: '#0A3161', acc: '#B31942', soft: '#EEF3FA' };
-var AFF_KEY = 'ltc-affiliate-portal-v2';
+var AGREEMENT_VERSION = "v1 (Nov 2026)";
+var AGREEMENT = [{"t": "p", "x": "This Affiliate & Brand Ambassador Agreement (\"Agreement\") is entered into between Liberty Industrial Coating Systems Inc., doing business as Liberty Tool Company (\"LTC,\" \"Company,\" \"we,\" or \"us\"), and the undersigned individual or business (\"Affiliate,\" \"Ambassador,\" or \"you\")."}, {"t": "p", "x": "By signing this Agreement, Affiliate agrees to the following terms governing participation in the Liberty Tool Company Affiliate Program (\"Program\")."}, {"t": "h", "x": "1. Program Overview"}, {"t": "p", "x": "The Program allows approved Affiliates to promote Liberty Tool Company products, including The Tape Caddy, through personal referrals, professional networks, digital marketing, social media, and other approved promotional channels."}, {"t": "p", "x": "Affiliates may earn commissions on qualifying product sales attributed to their assigned affiliate links, promotional codes, or other Company-approved tracking methods."}, {"t": "p", "x": "Participation does not grant Affiliate exclusive sales rights, a distribution territory, or authority to represent LTC in contractual negotiations."}, {"t": "p", "x": "LTC reserves the right to approve, decline, suspend, or terminate participation in the Program in accordance with this Agreement."}, {"t": "h", "x": "2. Affiliate Compensation"}, {"t": "s", "x": "2.1 Commission Rate"}, {"t": "p", "x": "Affiliate shall receive $10.00 USD for each eligible individual Tape Caddy unit sold through an approved and properly attributed referral."}, {"t": "p", "x": "Commissions are calculated based on the number of eligible Tape Caddy units purchased, not the number of orders placed."}, {"t": "p", "x": "For illustration:"}, {"t": "li", "x": "One Tape Caddy sold: $10 commission."}, {"t": "li", "x": "Three individual Tape Caddies sold: $30 commission."}, {"t": "li", "x": "One Triple Threat bundle containing three eligible Tape Caddies: $30 commission."}, {"t": "p", "x": "Other products, accessories, and future product categories are not commissionable unless LTC expressly establishes their eligibility and commission rates in writing."}, {"t": "s", "x": "2.2 Qualifying Sales"}, {"t": "p", "x": "A sale qualifies for commission when:"}, {"t": "li", "x": "1. The customer completes a purchase through an LTC-approved sales channel."}, {"t": "li", "x": "2. The transaction is successfully attributed to Affiliate through an approved tracking method."}, {"t": "li", "x": "3. LTC receives payment for the order."}, {"t": "li", "x": "4. The transaction is not canceled, refunded, fraudulent, or otherwise disqualified under this Agreement."}, {"t": "p", "x": "Sales generated through unauthorized marketplaces, manipulated tracking systems, or prohibited promotional activities are not eligible for commission."}, {"t": "s", "x": "2.3 Monthly Payments"}, {"t": "p", "x": "Affiliate commissions shall be calculated and paid once per calendar month, following LTC's reconciliation of eligible sales."}, {"t": "p", "x": "LTC may withhold commissions associated with pending refunds, chargebacks, disputed transactions, suspected fraud, or incomplete payment information until the matter is resolved."}, {"t": "p", "x": "Any commissions previously paid on refunded or reversed transactions may be deducted from future payouts or recovered where legally permitted."}, {"t": "p", "x": "Affiliate is responsible for providing accurate payment information and any required tax documentation."}, {"t": "s", "x": "2.4 Commission Adjustments"}, {"t": "p", "x": "LTC may modify commission rates for future transactions upon written or electronic notice to Affiliate. Changes shall not retroactively reduce commissions already earned on qualifying transactions."}, {"t": "h", "x": "3. Affiliate Links & Sales Tracking"}, {"t": "p", "x": "LTC will provide Affiliate with one or more approved tracking methods, which may include unique referral links, promotional codes, or access to an affiliate portal."}, {"t": "p", "x": "Affiliate agrees to use only Company-authorized tracking methods when promoting LTC products."}, {"t": "p", "x": "LTC's designated transaction and attribution records shall serve as the primary basis for commission calculations, subject to correction of demonstrated errors."}, {"t": "p", "x": "Affiliate shall not manipulate referral links, create fraudulent transactions, artificially inflate sales, or engage in unauthorized self-referrals."}, {"t": "p", "x": "LTC may review and correct tracking discrepancies. Affiliate may submit a written commission dispute within thirty (30) days after receiving the applicable payout statement."}, {"t": "p", "x": "LTC does not guarantee that every introduction or customer interaction will result in a commissionable sale."}, {"t": "h", "x": "4. Marketing & Brand Guidelines"}, {"t": "p", "x": "Affiliate agrees to represent Liberty Tool Company and its products accurately, professionally, and consistently with the Company's brand standards."}, {"t": "p", "x": "Affiliate shall:"}, {"t": "li", "x": "Use approved LTC logos, product photographs, marketing materials, and brand assets."}, {"t": "li", "x": "Follow LTC's current Brand Guidelines and written promotional instructions."}, {"t": "li", "x": "Accurately describe product functionality, benefits, specifications, pricing, and availability."}, {"t": "li", "x": "Clearly identify their affiliate relationship when promoting LTC products."}, {"t": "li", "x": "Obtain written approval before using LTC trademarks in paid advertisements, website domains, or other promotional materials requiring Company authorization."}, {"t": "li", "x": "Comply with applicable advertising, consumer protection, privacy, and intellectual property laws."}, {"t": "p", "x": "Affiliate shall not:"}, {"t": "li", "x": "Alter LTC trademarks or logos without authorization."}, {"t": "li", "x": "Make misleading product claims, unverified performance guarantees, or unsupported earnings claims."}, {"t": "li", "x": "Suggest that Affiliate is an employee, authorized distributor, or official spokesperson of LTC."}, {"t": "li", "x": "Use deceptive advertising, unsolicited bulk messaging, or misleading promotional tactics."}, {"t": "li", "x": "Represent or imply an endorsement by Sherwin-Williams or any other LTC business partner without express written authorization."}, {"t": "p", "x": "Affiliate shall clearly and conspicuously disclose material connections to LTC in endorsements and promotional content, including commission arrangements, as required by the Federal Trade Commission and other applicable laws."}, {"t": "p", "x": "LTC may require Affiliate to correct or remove promotional content that violates this Agreement or the Company's brand standards."}, {"t": "h", "x": "5. Amazon & Third-Party Marketplace Restrictions"}, {"t": "p", "x": "Affiliate is strictly prohibited from independently listing, selling, reselling, or distributing LTC products through Amazon or other third-party marketplaces without prior written authorization from LTC."}, {"t": "p", "x": "Affiliate shall not:"}, {"t": "li", "x": "Create unauthorized Amazon product listings or storefronts for LTC products."}, {"t": "li", "x": "Represent themselves as an authorized Amazon seller or distributor of LTC products."}, {"t": "li", "x": "Redirect customers to unauthorized third-party product listings."}, {"t": "li", "x": "Use LTC trademarks or product images in unauthorized marketplace listings."}, {"t": "li", "x": "Purchase LTC products for unauthorized marketplace resale."}, {"t": "p", "x": "Affiliate may promote an LTC-approved marketplace listing only when expressly authorized by LTC and when the associated referral method complies with the marketplace's applicable rules."}, {"t": "p", "x": "Violation of this section may result in immediate suspension or termination and forfeiture of commissions arising from the prohibited activity, to the extent permitted by law."}, {"t": "h", "x": "6. Customer Relationships & Referral Conduct"}, {"t": "p", "x": "Affiliate is encouraged to introduce LTC products to installers, contractors, flooring professionals, supply houses, businesses, and other relevant audiences."}, {"t": "p", "x": "Affiliate agrees to conduct all outreach professionally and in compliance with applicable laws."}, {"t": "p", "x": "All purchases, fulfillment obligations, customer service matters, warranties, and returns shall be handled by LTC or its authorized sales partners."}, {"t": "p", "x": "Affiliate may not negotiate binding product prices, offer unauthorized discounts, provide warranties, accept payments on behalf of LTC, or enter into agreements binding the Company."}, {"t": "p", "x": "Affiliate has no ownership interest in LTC customers or customer accounts by virtue of participation in the Program."}, {"t": "h", "x": "7. Affiliate Team Referrals"}, {"t": "p", "x": "LTC may permit Affiliates to introduce additional individuals or businesses to the Program."}, {"t": "p", "x": "Any such introductions shall be subject to LTC's approval and internal tracking procedures."}, {"t": "p", "x": "This Agreement does not establish a multilevel marketing program, downline commission structure, or entitlement to compensation from another Affiliate's sales."}, {"t": "p", "x": "No recruitment commissions, team overrides, or additional referral compensation shall apply unless separately authorized by LTC in a written agreement."}, {"t": "h", "x": "8. Intellectual Property & Promotional Content"}, {"t": "p", "x": "All LTC trademarks, trade names, logos, product designs, marketing materials, photographs, and other proprietary assets remain the exclusive property of LTC or their respective owners."}, {"t": "p", "x": "LTC grants Affiliate a limited, nonexclusive, nontransferable, revocable license to use approved brand assets solely for authorized Program activities during the term of this Agreement."}, {"t": "p", "x": "Affiliate retains ownership of original promotional content created independently, subject to LTC's underlying intellectual property rights."}, {"t": "p", "x": "LTC may repost or share Affiliate's publicly posted promotional content using ordinary platform sharing features, subject to applicable platform rules."}, {"t": "p", "x": "Any broader use of Affiliate-created photographs, videos, testimonials, likenesses, or other original content in paid advertising or Company-owned promotional materials requires separate authorization or a signed Media Release."}, {"t": "p", "x": "Affiliate shall obtain all necessary permissions from individuals appearing in promotional content."}, {"t": "h", "x": "9. Confidentiality & Data Protection"}, {"t": "p", "x": "Affiliate may receive access to nonpublic Company information, including marketing strategies, commission records, pricing information, internal processes, or business contacts."}, {"t": "p", "x": "Affiliate agrees not to disclose or misuse confidential Company information except as necessary to perform authorized Program activities."}, {"t": "p", "x": "Affiliate shall use customer and prospect information only for legitimate, authorized Program purposes and comply with applicable privacy and marketing laws."}, {"t": "p", "x": "Affiliate shall not export, sell, share, or independently exploit customer information obtained through LTC systems."}, {"t": "p", "x": "Upon termination, Affiliate shall discontinue use of Company systems and return or delete confidential information upon reasonable request, except where retention is legally required."}, {"t": "h", "x": "10. Independent Contractor Relationship"}, {"t": "p", "x": "Affiliate participates as an independent contractor and not as an employee, partner, franchisee, joint venturer, or legal representative of LTC."}, {"t": "p", "x": "Affiliate controls the manner, timing, and methods of their promotional activities, subject to this Agreement and applicable law."}, {"t": "p", "x": "Affiliate is not entitled to employee benefits, wages, insurance, paid leave, or reimbursement of expenses unless expressly agreed in writing."}, {"t": "p", "x": "Affiliate is solely responsible for applicable taxes, reporting obligations, business licenses, and expenses associated with their activities."}, {"t": "p", "x": "Nothing in this Agreement guarantees minimum earnings, sales volume, or continued participation."}, {"t": "h", "x": "11. Term & Termination"}, {"t": "p", "x": "This Agreement begins on the Effective Date and continues until terminated."}, {"t": "p", "x": "Either party may terminate this Agreement for any reason upon written or electronic notice to the other party."}, {"t": "p", "x": "LTC may immediately suspend or terminate Affiliate for fraud, misleading marketing, unauthorized marketplace activity, intellectual property misuse, material breach of this Agreement, or unlawful conduct."}, {"t": "p", "x": "Upon termination:"}, {"t": "li", "x": "1. Affiliate must immediately discontinue use of LTC affiliate links, trademarks, and promotional materials."}, {"t": "li", "x": "2. Access to Company affiliate systems may be revoked."}, {"t": "li", "x": "3. Valid commissions earned before the effective termination date remain payable in accordance with the normal payout cycle, subject to refunds, chargebacks, fraud review, and lawful offsets."}, {"t": "li", "x": "4. No commissions accrue on sales occurring after termination unless LTC expressly agrees otherwise in writing."}, {"t": "p", "x": "Sections concerning confidentiality, intellectual property, unpaid commissions, liability, dispute resolution, and other provisions intended to survive shall remain effective."}, {"t": "h", "x": "12. Representations, Liability & Indemnification"}, {"t": "p", "x": "Affiliate represents that they have the legal authority to enter into this Agreement and will comply with all applicable laws and Program requirements."}, {"t": "p", "x": "Affiliate agrees to indemnify and hold harmless LTC and its officers, employees, and representatives from third-party claims, losses, damages, and reasonable legal expenses arising from Affiliate's unlawful conduct, unauthorized representations, intellectual property infringement, or material breach of this Agreement, except to the extent caused by LTC's own misconduct."}, {"t": "p", "x": "To the maximum extent permitted by applicable law, neither party shall be liable to the other for indirect, incidental, special, or consequential damages arising from participation in the Program."}, {"t": "p", "x": "Nothing in this Agreement excludes liability that cannot lawfully be excluded."}, {"t": "h", "x": "13. Program Modifications"}, {"t": "p", "x": "LTC may update its Program procedures, approved marketing channels, tracking technology, brand guidelines, and commission policies upon reasonable notice."}, {"t": "p", "x": "Material changes to this Agreement shall be communicated electronically or in writing."}, {"t": "p", "x": "Continued participation after the stated effective date of a notified material change constitutes acceptance, where permitted by applicable law."}, {"t": "p", "x": "Changes to already-earned commissions shall not apply retroactively."}, {"t": "h", "x": "14. Governing Law & Dispute Resolution"}, {"t": "p", "x": "This Agreement shall be governed by the laws of the State of Florida, without regard to conflict-of-law principles."}, {"t": "p", "x": "The parties agree to first attempt to resolve disputes through good-faith discussions."}, {"t": "p", "x": "If a dispute cannot be resolved informally, either party may pursue available legal remedies in the state or federal courts having jurisdiction in the Florida county where LTC maintains its principal business office, subject to applicable law."}, {"t": "h", "x": "15. Entire Agreement"}, {"t": "p", "x": "This Agreement, together with the current LTC Brand Guidelines and any expressly incorporated written Program policies, constitutes the entire agreement between the parties concerning Affiliate participation."}, {"t": "p", "x": "It supersedes prior discussions or representations regarding the same subject matter."}, {"t": "p", "x": "If any provision is found unenforceable, the remaining provisions shall continue in effect."}, {"t": "p", "x": "No Affiliate may assign this Agreement without LTC's prior written consent."}, {"t": "p", "x": "Electronic signatures and electronically maintained copies shall have the same effect as original signatures to the extent permitted by law."}];
+var AGREEMENT_ACK = "By signing below, Affiliate acknowledges that they have read, understood, and agreed to the terms of this Agreement, including the commission structure, marketing requirements, Amazon restrictions, and independent contractor provisions.";
+var AFF_KEY = 'ltc-affiliate-portal-v3';
 var AFF_RATE = 10;
 var VCATS = ['Signing Up', 'Being An Affiliate', 'Onboarding', 'Content How-To'];
 var ONBOARD = [
-  { id: 'agree', t: 'Sign The Ambassador Agreement', d: 'Read the terms and sign online.' },
+  { id: 'agree', t: 'Sign The Affiliate Agreement', d: 'Signed copy saved in My Files.' },
   { id: 'payout', t: 'Set Up Payouts', d: 'Connect your payout account so we can pay you monthly.' },
   { id: 'videos', t: 'Watch The Onboarding Videos', d: 'Every video marked Required.' },
   { id: 'link', t: 'Grab Your Link & Code', d: 'Copy it from My Links.' },
@@ -395,7 +553,7 @@ function affSeed() {
     affiliates: [
       { id: 'a1', name: 'Marcus Hale', handle: '@halecoatings', platform: 'Instagram · TikTok', followers: '18.4K', role: 'Epoxy installer · 11 yrs', city: 'Tampa, FL', code: 'HALE10', mo: 11, status: 'Active', joined: affDaysAgo(64), clicks: 1284, sold: 37, paid: 260, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
       { id: 'a2', name: 'Tasha Greene', handle: '@floorsbytasha', platform: 'YouTube · Instagram', followers: '42K', role: 'Flake & metallic floors · 8 yrs', city: 'Phoenix, AZ', code: 'TASHA10', mo: 14, status: 'Active', joined: affDaysAgo(41), clicks: 2210, sold: 52, paid: 410, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v3: true, v4: true, v5: true } },
-      { id: 'a3', name: 'Ray Delgado', handle: '@raysgaragefloors', platform: 'TikTok', followers: '7.9K', role: 'Garage floor crew owner · 6 yrs', city: 'San Antonio, TX', code: 'RAY10', mo: 4, status: 'Active', joined: affDaysAgo(12), clicks: 214, sold: 4, paid: 0, onboard: { agree: true, payout: true, videos: false, link: true, post: false }, watched: { v1: true, v3: true } },
+      { id: 'a3', name: 'Ray Delgado', handle: '@raysgaragefloors', platform: 'TikTok', followers: '7.9K', role: 'Garage floor crew owner · 6 yrs', city: 'San Antonio, TX', code: 'RAY10', mo: 4, status: 'Active', joined: affDaysAgo(0), clicks: 0, sold: 0, paid: 0, onboard: { agree: false, payout: false, videos: false, link: false, post: false }, watched: {} },
       { id: 'a6', name: 'Luis Ortega', handle: '@ortegafloorco', platform: 'Instagram · Facebook', followers: '9.6K', role: 'Polyaspartic garages · 9 yrs', city: 'Fresno, CA', code: 'LUIS10', mo: 9, status: 'Active', joined: affDaysAgo(55), clicks: 980, sold: 29, paid: 200, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true, v7: true } },
       { id: 'a7', name: 'Brianna Cole', handle: '@brimakesfloors', platform: 'TikTok · YouTube', followers: '26K', role: 'Metallic epoxy artist · 5 yrs', city: 'Charlotte, NC', code: 'BRI10', mo: 6, status: 'Active', joined: affDaysAgo(33), clicks: 1540, sold: 18, paid: 120, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
       { id: 'a8', name: 'Dev Patel', handle: '@devcoatspro', platform: 'LinkedIn', followers: '2.4K', role: 'Commercial estimator · 12 yrs', city: 'Detroit, MI', code: 'DEV10', mo: 2, status: 'Active', joined: affDaysAgo(20), clicks: 160, sold: 7, paid: 50, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
@@ -433,7 +591,7 @@ function affSeed() {
       { name: 'Tape Caddy Product Photos.zip', kind: 'Photos' },
       { name: 'Jobsite B-Roll Clips.zip', kind: 'Video' },
       { name: 'Approved Captions & Hashtags.pdf', kind: 'Copy' },
-      { name: 'Ambassador Terms.pdf', kind: 'Terms' }
+      { name: 'LTC Brand Guidelines.pdf', kind: 'Guidelines' }
     ],
     months: [
       { m: 'October', sold: 21, status: 'Paid' },
@@ -442,7 +600,16 @@ function affSeed() {
     ]
   };
 }
-function affLoad() { var d = null; try { d = JSON.parse(localStorage.getItem(AFF_KEY) || 'null'); } catch (e) { d = null; } return d || affSeed(); }
+function affSeedAgreements(d) {
+  var biz = { a1: 'Hale Coatings LLC', a2: 'Floors By Tasha', a6: 'Ortega Floor Co.', a7: '', a8: '' };
+  d.affiliates.forEach(function (a) {
+    if (!a.onboard || !a.onboard.agree || a.agreement) return;
+    var first = a.name.split(' ')[0].toLowerCase(), dom = (a.handle || '').replace('@', '') || 'example';
+    a.agreement = { id: 'AG-' + a.id.toUpperCase() + '-1026', version: AGREEMENT_VERSION, signedAt: a.joined, signedTime: '10:14 AM ET', name: a.name, business: biz[a.id] || '', email: first + '@' + dom + '.com', phone: '(555) 010-' + (1000 + a.mo * 37).toString().slice(0, 4), address: a.city, sigType: 'type', sigText: a.name, sigData: '' };
+  });
+  return d;
+}
+function affLoad() { var d = null; try { d = JSON.parse(localStorage.getItem(AFF_KEY) || 'null'); } catch (e) { d = null; } return d || affSeedAgreements(affSeed()); }
 function affSave(d) { try { localStorage.setItem(AFF_KEY, JSON.stringify(d)); } catch (e) {} }
 function affOnboardPct(a) { var n = 0; ONBOARD.forEach(function (o) { if (a.onboard && a.onboard[o.id]) n++; }); return Math.round(n / ONBOARD.length * 100); }
 function affCopy(t) { try { if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(t); return; } } catch (e) {} var x = document.createElement('textarea'); x.value = t; x.style.position = 'fixed'; x.style.opacity = '0'; document.body.appendChild(x); x.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(x); }
@@ -455,6 +622,9 @@ function affBoard(d, period) {
 }
 var MEDAL = ['#C9A227', '#9AA4B2', '#B87333'];
 
+function affSigned(a) { return !!(a && a.agreement && a.agreement.signedAt); }
+function affFmt(d) { return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+
 var LINKP = [['All Products', 'collections/all'], ['The Lowboy', 'products/lowboy'], ['4-Inch Caddy', 'products/4-inch-caddy'], ['6-Inch Caddy', 'products/6-inch-caddy'], ['Cove System', 'products/cove-system'], ['4-Score Kit', 'products/4-score-complete-kit']];
 var CSTAT = { Live: ['#E3F3EA', '#2E7D4F'], Upcoming: ['#E7EEFC', '#1F4FB5'], Ended: ['#ECEEF2', '#4A5568'] };
 var MSTAT = { Paid: ['#E3F3EA', '#2E7D4F'], Pending: ['#FFF3DC', '#8A5A00'] };
@@ -462,12 +632,45 @@ var MSTAT = { Paid: ['#E3F3EA', '#2E7D4F'], Pending: ['#FFF3DC', '#8A5A00'] };
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { data: affLoad(), me: 'a1', view: 'home', lb: 'month', cf: 'Live', vc: '', vid: 'v1', playing: false, lp: 0, toast: '' };
+    this.state = { data: affLoad(), me: 'a1', view: 'home', lb: 'month', cf: 'Live', vc: '', vid: 'v1', playing: false, lp: 0, toast: '', sf: {}, sigMode: 'draw', sigText: '', sigData: '', agreeChk: false, readAll: false, tried: false, docOpen: false };
   }
   persist(d) { affSave(d); this.setState({ data: d }); }
   flash(t) { var self = this; this.setState({ toast: t }); setTimeout(function () { if (self.state.toast === t) self.setState({ toast: '' }); }, 2400); }
   copy(t, msg) { affCopy(t); this.flash(msg || 'Copied'); }
   go(v) { this.setState({ view: v, playing: false }); try { window.scrollTo(0, 0); } catch (e) {} }
+  pick(id) { this.strokes = []; this.setState({ me: id, view: 'home', sf: {}, sigMode: 'draw', sigText: '', sigData: '', agreeChk: false, readAll: false, tried: false, docOpen: false }); try { window.scrollTo(0, 0); } catch (e) {} }
+  meRec() { var s = this.state; return s.data.affiliates.find(function (a) { return a.id === s.me; }) || s.data.affiliates[0]; }
+  formVal(k) { var me = this.meRec(), sf = this.state.sf; if (sf[k] !== undefined) return sf[k]; return { name: me.name, business: '', email: me.email || '', phone: '', address: '' }[k] || ''; }
+  missing() {
+    var s = this.state, out = [];
+    if (!s.readAll) out.push('read to the end');
+    if (!this.formVal('name').trim()) out.push('full legal name');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(this.formVal('email').trim())) out.push('valid email');
+    if (this.formVal('phone').replace(/\D/g, '').length < 10) out.push('phone number');
+    if (!this.formVal('address').trim()) out.push('business address');
+    if (s.sigMode === 'draw' ? !s.sigData : !s.sigText.trim()) out.push('signature');
+    if (!s.agreeChk) out.push('agree checkbox');
+    return out;
+  }
+  pt(c, e) { var r = c.getBoundingClientRect(); return [(e.clientX - r.left) * c.width / r.width, (e.clientY - r.top) * c.height / r.height]; }
+  redraw(c) { var x = c.getContext('2d'); x.clearRect(0, 0, c.width, c.height); x.lineWidth = 3.2; x.lineCap = 'round'; x.lineJoin = 'round'; x.strokeStyle = '#0B1B33'; (this.strokes || []).forEach(function (st) { x.beginPath(); x.moveTo(st[0][0], st[0][1]); if (st.length === 1) x.lineTo(st[0][0] + 0.1, st[0][1] + 0.1); st.forEach(function (p) { x.lineTo(p[0], p[1]); }); x.stroke(); }); }
+  agDoc(ag) {
+    var esc = function (t) { return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
+    var body = AGREEMENT.map(function (b) { return b.t === 'h' ? '<h4>' + esc(b.x) + '</h4>' : b.t === 's' ? '<div class="ss">' + esc(b.x) + '</div>' : b.t === 'li' ? '<div class="li">&bull; ' + esc(b.x) + '</div>' : '<p>' + esc(b.x) + '</p>'; }).join('');
+    var sig = ag.sigData ? '<img src="' + ag.sigData + '" style="max-height:66px">' : '<span class="script">' + esc(ag.sigText) + '</span>';
+    var row = function (k, v) { return '<tr><td>' + k + '</td><td><b>' + esc(v) + '</b></td></tr>'; };
+    return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LTC Affiliate Agreement - ' + esc(ag.name) + '</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=GFS+Baskerville&family=Inter:wght@400;600;700&display=swap"><style>@page{size:Letter;margin:0.7in}body{font-family:Inter,Arial,sans-serif;color:#1E2633;font-size:12.5px;line-height:1.55;max-width:7.2in;margin:24px auto;padding:0 16px}h1{font-family:"GFS Baskerville",Georgia,serif;letter-spacing:.18em;color:#0A3161;text-align:center;font-size:20px;margin:0}.t{text-align:center;font-weight:800;text-transform:uppercase;font-size:17px;margin-top:4px}.st{text-align:center;color:#B31942;font-weight:700;font-size:12px}.hd{border-bottom:2px solid #0A3161;padding-bottom:12px;margin-bottom:14px}h4{color:#0A3161;text-transform:uppercase;font-size:13.5px;margin:18px 0 4px;page-break-after:avoid}.ss{font-weight:700;margin:10px 0 3px}p{margin:0 0 7px}.li{margin:0 0 4px 10px}.ack{background:#EEF3FA;padding:10px 12px;font-weight:600;margin-top:16px}.g{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px;page-break-inside:avoid}table{width:100%;border-collapse:collapse}td{padding:3px 6px 3px 0;vertical-align:bottom}td:first-child{color:#4A5568;width:120px}td b{display:block;border-bottom:1px solid #B8C1CD;min-height:17px}.sl{height:68px;border-bottom:1.5px solid #0B1B33;display:flex;align-items:flex-end}.script{font-family:"Dancing Script",cursive;font-size:34px;font-weight:700}.rec{margin-top:16px;border:1px solid #D3D9E2;padding:8px 10px;font-size:11px;color:#4A5568;page-break-inside:avoid}.f{margin-top:20px;border-top:1px solid #D3D9E2;padding-top:10px;text-align:center;font-size:11px;color:#4A5568}</style></head><body>' +
+      '<div class="hd"><h1>LIBERTY TOOL COMPANY</h1><div class="t">Affiliate &amp; Brand Ambassador Agreement</div><div class="st">THE TAPE CADDY AFFILIATE PROGRAM</div><div style="text-align:center;margin-top:6px">Effective Date: <b>' + esc(ag.signedAt) + '</b></div></div>' + body +
+      '<h4>Affiliate Acknowledgment &amp; Acceptance</h4><div class="ack">' + esc(AGREEMENT_ACK) + '</div>' +
+      '<div class="g"><div><div class="ss">Affiliate Information</div><table>' + row('Full Legal Name', ag.name) + row('Business Name', ag.business) + row('Email Address', ag.email) + row('Phone Number', ag.phone) + row('Business Address', ag.address) + '</table><div class="ss">Affiliate Signature</div><div class="sl">' + sig + '</div><table>' + row('Date', ag.signedAt) + '</table></div>' +
+      '<div><div class="ss">Liberty Tool Company</div><table>' + row('Authorized Rep.', ag.ltcName || '') + row('Title', ag.ltcTitle || '') + '</table><div class="ss">Signature</div><div class="sl"><span style="color:#4A5568">' + (ag.ltcName ? 'Signed electronically' : 'Pending countersignature') + '</span></div><table>' + row('Date', ag.ltcDate || '') + '</table></div></div>' +
+      '<div class="rec"><b>Electronic Signature Record</b><br>Signed electronically by ' + esc(ag.name) + ' (' + esc(ag.email) + ') on ' + esc(ag.signedAt) + ' at ' + esc(ag.signedTime) + ' &middot; Method: ' + (ag.sigData ? 'Drawn signature' : 'Typed signature') + ' &middot; Document ID ' + esc(ag.id) + ' &middot; Version ' + esc(ag.version) + '</div>' +
+      '<div class="f"><b>LIBERTY TOOL COMPANY</b><br><i>Practical Tools. Powerful Connections.</i><br>thetapecaddy.com &middot; sales@libertytoolcompany.com &middot; 239-744-8403<br><b>Confidential &mdash; Affiliate Program Agreement</b></div></body></html>';
+  }
+  download(a) {
+    var html = this.agDoc(a.agreement), fn = 'LTC-Affiliate-Agreement-' + a.name.replace(/[^A-Za-z]+/g, '-') + '-Signed.html';
+    try { var b = new Blob([html], { type: 'text/html' }), u = URL.createObjectURL(b), l = document.createElement('a'); l.href = u; l.download = fn; document.body.appendChild(l); l.click(); document.body.removeChild(l); setTimeout(function () { URL.revokeObjectURL(u); }, 4000); this.flash('Downloaded. Open it and print to save a PDF.'); } catch (e) { this.flash('Download is blocked in this preview. Use Print / Save As PDF.'); }
+  }
   renderVals() {
     var self = this, s = this.state, d = s.data;
     var me = d.affiliates.find(function (a) { return a.id === s.me; }) || d.affiliates[0];
@@ -488,15 +691,15 @@ class Component extends DCLogic {
     var board = affBoard(d, s.lb);
     var months = isNew ? [{ m: 'November (so far)', sold: me.sold, status: 'Pending' }] : d.months;
     var ownShare = function (t) { return t.replace('{code}', code || 'YOURCODE'); };
-    var onGo = { agree: 'kit', payout: 'links', videos: 'videos', link: 'links', post: 'campaigns' };
-    var titles = { home: 'Affiliate Home', campaigns: 'Current Campaigns', deals: 'Current Deals', news: 'News', videos: 'Video Walkthroughs', links: 'My Links & Earnings', board: 'Leaderboard', kit: 'Brand Kit & Rules' };
+    var onGo = { agree: 'files', payout: 'links', videos: 'videos', link: 'links', post: 'campaigns' };
+    var titles = { home: 'Affiliate Home', campaigns: 'Current Campaigns', deals: 'Current Deals', news: 'News', videos: 'Video Walkthroughs', links: 'My Links & Earnings', board: 'Leaderboard', kit: 'Brand Kit & Rules', files: 'My Files' };
     return {
       v: v, title: titles[s.view],
       me: { name: me.name, first: me.name.split(' ')[0], handle: me.handle, platform: me.platform, codeTxt: code || 'Pending' },
       isActiveDemo: isNew ? 'false' : 'true', isNewDemo: isNew ? 'true' : 'false',
-      pickActive: function () { self.setState({ me: 'a1', view: 'home' }); },
-      pickNew: function () { self.setState({ me: 'a3', view: 'home' }); },
-      navs: [['home', 'Home'], ['campaigns', 'Current Campaigns', live.length], ['deals', 'Current Deals', deals.length], ['news', 'News'], ['board', 'Leaderboard'], ['videos', 'Video Walkthroughs', reqV.length - reqDone], ['links', 'My Links & Earnings'], ['kit', 'Brand Kit & Rules']].map(function (n) { return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: (n[2] || 0) > 0, badge: n[2] || 0, go: function () { self.go(n[0]); } }; }),
+      pickActive: function () { self.pick('a1'); },
+      pickNew: function () { self.pick('a3'); },
+      navs: [['home', 'Home'], ['campaigns', 'Current Campaigns', live.length], ['deals', 'Current Deals', deals.length], ['news', 'News'], ['board', 'Leaderboard'], ['videos', 'Video Walkthroughs', reqV.length - reqDone], ['links', 'My Links & Earnings'], ['kit', 'Brand Kit & Rules'], ['files', 'My Files']].map(function (n) { return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: (n[2] || 0) > 0, badge: n[2] || 0, go: function () { self.go(n[0]); } }; }),
       copyCode: function () { if (!code) return self.flash('Your code is issued after approval'); self.copy(code, 'Code copied'); },
       goLinks: function () { self.go('links'); }, goCampaigns: function () { self.go('campaigns'); }, goNews: function () { self.go('news'); }, goBoard: function () { self.setState({ lb: 'month' }); self.go('board'); },
       needsOnboard: onPct < 100, onPct: onPct, onLeft: ONBOARD.filter(function (o) { return !me.onboard[o.id]; }).length,
@@ -541,6 +744,45 @@ class Component extends DCLogic {
       lbTop: board.slice(0, 3).map(function (x, i) { return { rank: x.rank, name: x.a.name, handle: x.a.handle, n: x.n, medal: MEDAL[i], bg: x.a.id === me.id ? C.soft : '#FFFFFF' }; }),
       lbRows: board.map(function (x) { var you = x.a.id === me.id; return { rank: x.rank, name: x.a.name + (you ? ' (You)' : ''), handle: x.a.handle, platform: x.a.platform, n: x.n, bg: you ? C.soft : 'transparent', rc: x.rank <= 3 ? MEDAL[x.rank - 1] : C.pri }; }),
       lbMe: (function () { var mine = board.find(function (x) { return x.a.id === me.id; }) || { rank: '—', n: 0 }; var ahead = typeof mine.rank === 'number' && mine.rank > 1 ? board[mine.rank - 2] : null; return { rank: mine.rank, of: board.length, n: mine.n, note: ahead ? (ahead.n - mine.n + 1) + ' more to pass ' + ahead.a.name.split(' ')[0] + ' for #' + ahead.rank : 'You’re #1. Keep it up.' }; })(),
+      gated: !affSigned(me), notGated: affSigned(me),
+      agVersion: AGREEMENT_VERSION, agAck: AGREEMENT_ACK,
+      agBlocks: AGREEMENT.map(function (b) { return { h: b.t === 'h', s: b.t === 's', p: b.t === 'p', li: b.t === 'li', x: b.x }; }),
+      gToday: affFmt(new Date()),
+      readBg: s.readAll ? '#E3F3EA' : '#FFF3DC', readFg: s.readAll ? '#2E7D4F' : '#8A5A00', readLabel: s.readAll ? 'Read ✓' : 'Scroll To Read',
+      onDocScroll: function (e) { var el = e.currentTarget || e.target; if (!self.state.readAll && el.scrollTop + el.clientHeight >= el.scrollHeight - 40) self.setState({ readAll: true }); },
+      gFields: (function () { var miss = self.missing(); var key = { name: 'full legal name', email: 'valid email', phone: 'phone number', address: 'business address' };
+        return [['name', 'Full Legal Name *', 'text', 'name'], ['business', 'Business Name (If Applicable)', 'text', 'organization'], ['email', 'Email Address *', 'email', 'email'], ['phone', 'Phone Number *', 'tel', 'tel'], ['address', 'Business Address *', 'text', 'street-address']].map(function (x) {
+          var bad = s.tried && key[x[0]] && miss.indexOf(key[x[0]]) >= 0;
+          return { label: x[1], type: x[2], ac: x[3], val: self.formVal(x[0]), bc: bad ? C.acc : '', set: function (e) { var sf = Object.assign({}, self.state.sf); sf[x[0]] = e.target.value; self.setState({ sf: sf }); } };
+        }); })(),
+      sigIsDraw: s.sigMode === 'draw', sigIsType: s.sigMode === 'type', sigDrawOn: s.sigMode === 'draw' ? 'true' : 'false', sigTypeOn: s.sigMode === 'type' ? 'true' : 'false',
+      pickDraw: function () { self.setState({ sigMode: 'draw' }); }, pickType: function () { self.setState({ sigMode: 'type', sigText: s.sigText || self.formVal('name') }); },
+      sigBc: s.tried && (s.sigMode === 'draw' ? !s.sigData : !s.sigText.trim()) ? C.acc : '',
+      hasSigData: !!s.sigData, noSigData: !s.sigData, sigData: s.sigData,
+      sigDown: function (e) { var c = e.currentTarget; self.drawing = true; self.strokes = self.strokes || []; self.strokes.push([self.pt(c, e)]); try { c.setPointerCapture(e.pointerId); } catch (x) {} self.redraw(c); if (e.preventDefault) e.preventDefault(); },
+      sigMove: function (e) { if (!self.drawing) return; self.strokes[self.strokes.length - 1].push(self.pt(e.currentTarget, e)); self.redraw(e.currentTarget); },
+      sigUp: function (e) { if (!self.drawing) return; self.drawing = false; self.setState({ sigData: e.currentTarget.toDataURL('image/png') }); },
+      sigClear: function (e) { self.strokes = []; try { var c = e.currentTarget.closest('.card').querySelector('canvas'); if (c) self.redraw(c); } catch (x) {} self.setState({ sigData: '' }); },
+      sigText: s.sigText, sigTextShow: s.sigText || 'Your Signature', setSigText: function (e) { self.setState({ sigText: e.target.value }); },
+      toggleAgree: function (e) { self.setState({ agreeChk: e && e.target && typeof e.target.checked === 'boolean' ? e.target.checked : !self.state.agreeChk }); },
+      hasMissing: s.tried && self.missing().length > 0, missing: self.missing().join(', '),
+      signNow: function () {
+        var miss = self.missing(); if (miss.length) { self.setState({ tried: true }); return self.flash('Still needed: ' + miss.join(', ')); }
+        var st = self.state, d2 = JSON.parse(JSON.stringify(st.data)), m = d2.affiliates.find(function (a) { return a.id === me.id; }), now = new Date();
+        m.agreement = { id: 'AG-' + me.id.toUpperCase() + '-' + now.getTime().toString(36).toUpperCase().slice(-6), version: AGREEMENT_VERSION, signedAt: affFmt(now), signedTime: now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }), name: self.formVal('name').trim(), business: self.formVal('business').trim(), email: self.formVal('email').trim(), phone: self.formVal('phone').trim(), address: self.formVal('address').trim(), sigType: st.sigMode, sigText: st.sigMode === 'type' ? st.sigText.trim() : '', sigData: st.sigMode === 'draw' ? st.sigData : '' };
+        m.onboard = Object.assign({}, m.onboard, { agree: true }); if (!m.email) m.email = m.agreement.email;
+        self.strokes = []; self.persist(d2); self.setState({ view: 'home', tried: false }); try { window.scrollTo(0, 0); } catch (e) {}
+        self.flash('Agreement signed. Your copy is saved in My Files.');
+      },
+      agFiles: affSigned(me) ? [me.agreement].map(function (ag) { var ct = !!ag.ltcName; return { name: 'Affiliate & Brand Ambassador Agreement (Signed)', date: ag.signedAt, meta: 'Signed ' + ag.signedAt + ' at ' + ag.signedTime + ' · Doc ID ' + ag.id + ' · Version ' + ag.version, ctr: ct ? 'Countersigned By LTC · ' + ag.ltcDate : 'LTC Countersignature Pending', cbg: ct ? '#E3F3EA' : '#FFF3DC', cfg: ct ? '#2E7D4F' : '#8A5A00', view: function () { self.setState({ docOpen: true }); }, dl: function () { self.download(me); } }; }) : [],
+      stmtFiles: months.filter(function (m) { return m.status === 'Paid'; }).map(function (m) { return { name: 'Payout Statement — ' + m.m + '.pdf', meta: m.sold + ' eligible caddies · $' + (m.sold * AFF_RATE).toLocaleString() + ' paid', get: function () { self.flash('Mockup: ' + m.m + ' statement downloads here'); } }; }),
+      noStmts: months.filter(function (m) { return m.status === 'Paid'; }).length === 0,
+      canReset: me.id === 'a3' && affSigned(me),
+      resetSign: function () { var d2 = JSON.parse(JSON.stringify(self.state.data)), m = d2.affiliates.find(function (a) { return a.id === me.id; }); delete m.agreement; m.onboard.agree = false; self.persist(d2); self.pick(me.id); },
+      docOpen: s.docOpen && affSigned(me),
+      ag: (function () { var ag = me.agreement || {}; return { name: ag.name, business: ag.business || '—', email: ag.email, phone: ag.phone, address: ag.address, date: ag.signedAt, time: ag.signedTime, id: ag.id, version: ag.version, isImg: !!ag.sigData, isText: !ag.sigData, sigData: ag.sigData || '', sigText: ag.sigText, method: ag.sigData ? 'Drawn signature' : 'Typed signature', ltcName: ag.ltcName || 'Pending', ltcTitle: ag.ltcTitle || '—', ltcSig: ag.ltcName ? 'Signed electronically by ' + ag.ltcName : 'Pending countersignature', ltcDate: ag.ltcDate || '—' }; })(),
+      printDoc: function () { try { window.print(); } catch (e) { self.flash('Use your browser’s print to save as PDF'); } },
+      dlDoc: function () { self.download(me); }, closeDoc: function () { self.setState({ docOpen: false }); },
       hasToast: !!s.toast, toast: s.toast
     };
   }
