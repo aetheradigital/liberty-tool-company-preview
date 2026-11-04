@@ -82,7 +82,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
   <div style="max-width: 1320px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px">
     <a href="/" style="color: #FFFFFF; text-decoration: none; font-weight: 700; letter-spacing: 0.04em; white-space: nowrap">← LTC Preview Portal</a>
     <span style="opacity: 0.35">|</span>
-    <nav aria-label="Preview pages" style="display: flex; flex-wrap: wrap; gap: 8px 20px"><a href="/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 1 · Classic</a><a href="/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 2 · Fun</a><a href="/approvals/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Social Posting Calendar</a><a href="/partner-portal/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Partner Portal 1</a><a href="/partner-portal/option-2/" style="color: #FFFFFF; text-decoration: none; font-weight: 700; white-space: nowrap; border-bottom: 2px solid #B31942; padding-bottom: 2px">Partner Portal 2</a><a href="/affiliate-portal/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Affiliate Portal 1</a><a href="/affiliate-portal/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Affiliate Portal 2</a><a href="/admin/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Admin 1</a><a href="/admin/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Admin 2</a></nav>
+    <nav aria-label="Preview pages" style="display: flex; flex-wrap: wrap; gap: 8px 20px"><a href="/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 1 · Classic</a><a href="/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Option 2 · Fun</a><a href="/approvals/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Social Posting Calendar</a><a href="/partner-portal/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Partner Portal 1</a><a href="/partner-portal/option-2/" style="color: #FFFFFF; text-decoration: none; font-weight: 700; white-space: nowrap; border-bottom: 2px solid #B31942; padding-bottom: 2px">Partner Portal 2</a><a href="/affiliate-portal/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Affiliate Portal 1</a><a href="/affiliate-portal/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Affiliate Portal 2</a><a href="/sales-rep/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Sales Rep 1</a><a href="/sales-rep/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Sales Rep 2</a><a href="/admin/option-1/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Admin 1</a><a href="/admin/option-2/" style="color: #B9C6DA; text-decoration: none; font-weight: 500; white-space: nowrap; ">Admin 2</a></nav>
   </div>
 </div>
 <script>if(window.self!==window.top){document.getElementById('ltc-preview-bar').style.display='none';}</script>
@@ -99,10 +99,8 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
     <sc-if value="{{isPortal}}" hint-placeholder-val="{{true}}">
       <div>
         <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #AFC0DC; margin-bottom: 6px">Demo: View As</div>
-        <div class="demo" role="group" aria-label="Demo account">
-          <button type="button" aria-pressed="{{acctEnt}}" onClick="{{pickEnt}}">Enterprise</button>
-          <button type="button" aria-pressed="{{acctDist}}" onClick="{{pickDist}}">Distributor</button>
-        </div>
+        <label style="display: block"><span style="font-size: 11px; color: #C9D6EC">Account</span><select class="inp" style="min-height: 36px; font-size: 13px; color: #071A52; margin-top: 2px" value="{{acctKey}}" onChange="{{setAcct}}"><sc-for list="{{acctOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></label>
+        <label style="display: block; margin-top: 8px"><span style="font-size: 11px; color: #C9D6EC">Signed In As</span><select class="inp" style="min-height: 36px; font-size: 13px; color: #071A52; margin-top: 2px" value="{{curUser}}" onChange="{{setUser}}"><sc-for list="{{userOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></label>
       </div>
     </sc-if>
     <nav class="nav" aria-label="Portal">
@@ -117,6 +115,12 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
           <sc-for list="{{navs2}}" as="n" hint-placeholder-count="3">
             <button type="button" class="nv" aria-current="{{n.cur}}" onClick="{{n.go}}"><span>{{n.label}}</span><sc-if value="{{n.hasBadge}}" hint-placeholder-val="{{false}}"><span class="badge">{{n.badge}}</span></sc-if></button>
           </sc-for>
+        </nav>
+      </div>
+      <div>
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #AFC0DC; margin: 0 0 6px 12px">Sales Team</div>
+        <nav class="nav" aria-label="Sales team">
+          <button type="button" class="nv" aria-current="{{repNav.cur}}" onClick="{{repNav.go}}"><span>Sales Reps</span></button>
         </nav>
       </div>
     </sc-if>
@@ -139,11 +143,12 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
     <sc-if value="{{v.overview}}" hint-placeholder-val="{{true}}">
       <div class="card" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; background: #E8EEFF">
         <div>
-          <h2 class="h2">Welcome Back, {{acct.first}}.</h2>
+          <h2 class="h2">Welcome Back, {{me.first}}.</h2>
           <div class="muted" style="margin-top: 6px">{{acct.name}} · {{acct.type}} · {{acct.terms}}</div>
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 8px">
-          <span class="chip">Pricing: {{acct.modelName}}</span>
+          <span class="chip">{{me.role}} · {{me.locName}}</span>
+          <sc-if value="{{showPricing}}" hint-placeholder-val="{{true}}"><span class="chip">Pricing: {{acct.modelName}}</span></sc-if>
           <span class="chip">Your Rep: LTC Sales · 239-744-8403</span>
         </div>
       </div>
@@ -161,7 +166,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><h3 class="h3">Recent Orders</h3><button type="button" class="btn ghost sm" onClick="{{goOrders}}">All Orders</button></div>
           <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 1.3fr 1.2fr 0.6fr 1fr; --minw: 0"><div class="tr th"><div>Order</div><div>PO</div><div>Units</div><div>Status</div></div>
-            <sc-for list="{{recentOrders}}" as="o" hint-placeholder-count="4"><div class="tr click" onClick="{{o.open}}"><div><b>{{o.id}}</b><div class="muted" style="font-size: 12px">{{o.created}}</div></div><div>{{o.po}}</div><div>{{o.units}}</div><div><span class="st" style="background: {{o.sbg}}; color: {{o.sfg}}">{{o.status}}</span></div></div></sc-for>
+            <sc-for list="{{recentOrders}}" as="o" hint-placeholder-count="4"><div class="tr click" onClick="{{o.open}}"><div><b>{{o.id}}</b><div class="muted" style="font-size: 12px">{{o.created}} · {{o.locTxt}}</div></div><div>{{o.po}}</div><div>{{o.units}}</div><div><span class="st" style="background: {{o.sbg}}; color: {{o.sfg}}">{{o.status}}</span></div></div></sc-for>
           </div></div>
         </div>
         <div class="card">
@@ -238,7 +243,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
             </div>
             <div class="card">
               <h3 class="h3">Coatings — Quote Request</h3>
-              <p class="muted" style="margin: 6px 0 10px; font-size: 14px">Tap any you want priced. Your rep sends a quote with the order confirmation.</p>
+              <sc-if value="{{noCoat}}" hint-placeholder-val="{{false}}"><p class="muted" style="margin: 6px 0 0; font-size: 14px">Coatings aren’t turned on for this account. Ask your rep.</p></sc-if><p class="muted" style="margin: 6px 0 10px; font-size: 14px">Tap any you want priced. Your rep sends a quote with the order confirmation.</p>
               <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{coatRows}}" as="c" hint-placeholder-count="5"><button type="button" class="chip" aria-pressed="{{c.on}}" onClick="{{c.toggle}}">{{c.name}}</button></sc-for></div>
             </div>
           </div>
@@ -355,7 +360,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: start">
         <div class="card" style="grid-column: span 2; min-width: 0">
           <div class="scroll"><div class="tbl" style="--cols: {{ordCols}}; --minw: {{ordMin}}"><div class="tr th"><div>Order</div><sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div>Account</div></sc-if><div>PO</div><div>Type</div><div>Units</div><div>Value</div><div>Status</div></div>
-            <sc-for list="{{orderRows}}" as="o" hint-placeholder-count="6"><div class="tr click" onClick="{{o.open}}" style="background: {{o.rowBg}}"><div><b>{{o.id}}</b><div class="muted" style="font-size: 12px">{{o.created}}</div></div><sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div>{{o.acctName}}</div></sc-if><div>{{o.po}}</div><div>{{o.typeName}}</div><div>{{o.units}}</div><div>{{o.valueTxt}}</div><div><span class="st" style="background: {{o.sbg}}; color: {{o.sfg}}">{{o.status}}</span></div></div></sc-for>
+            <sc-for list="{{orderRows}}" as="o" hint-placeholder-count="6"><div class="tr click" onClick="{{o.open}}" style="background: {{o.rowBg}}"><div><b>{{o.id}}</b><div class="muted" style="font-size: 12px">{{o.created}} · {{o.locTxt}}</div></div><sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div>{{o.acctName}}</div></sc-if><div>{{o.po}}</div><div>{{o.typeName}}</div><div>{{o.units}}</div><div>{{o.valueTxt}}</div><div><span class="st" style="background: {{o.sbg}}; color: {{o.sfg}}">{{o.status}}</span></div></div></sc-for>
           </div></div>
           <sc-if value="{{noOrders}}" hint-placeholder-val="{{false}}"><p class="muted">No orders here yet.</p></sc-if>
         </div>
@@ -430,6 +435,41 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       </div>
     </sc-if>
 
+    <!-- ================= PORTAL: TEAM ================= -->
+    <sc-if value="{{v.team}}" hint-placeholder-val="{{false}}">
+      <div class="card">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center"><div><h2 class="h2">Your Team</h2><div class="muted" style="margin-top: 4px">Everyone at {{acct.name}} who can sign in. Store users only see their own store.</div></div><span class="chip">{{tm.count}} Logins</span></div>
+        <div class="scroll" style="margin-top: 10px"><div class="tbl" style="--cols: 1.6fr 1.1fr 1.3fr 1.8fr 0.8fr 150px; --minw: 960px"><div class="tr th"><div>Name</div><div>Role</div><div>Location</div><div>Can</div><div>Status</div><div></div></div>
+          <sc-for list="{{tm.rows}}" as="u" hint-placeholder-count="4"><div class="tr"><div><b>{{u.name}}</b><div class="muted" style="font-size: 12px">{{u.email}}</div></div><div>{{u.role}}</div><div>{{u.locName}}</div><div style="font-size: 13px">{{u.can}}</div><div><span class="st" style="background: {{u.sbg}}; color: {{u.sfg}}">{{u.status}}</span></div><div style="display: flex; gap: 6px; justify-content: flex-end"><sc-if value="{{u.canEdit}}" hint-placeholder-val="{{true}}"><button type="button" class="btn ghost sm" onClick="{{u.toggle}}">{{u.toggleLabel}}</button></sc-if></div></div></sc-for>
+        </div></div>
+      </div>
+      <div class="card" style="margin-top: 16px">
+        <h3 class="h3">Invite A Team Member</h3>
+        <p class="muted" style="margin: 6px 0 0; font-size: 14px">They get an email to set a password. You can change access or turn it off anytime.</p>
+        <div class="grid g4" style="margin-top: 12px; gap: 10px">
+          <label><span class="lbl">Name *</span><input class="inp" value="{{tm.f.name}}" onChange="{{tm.setName}}" placeholder="First and last name"></label>
+          <label><span class="lbl">Email *</span><input class="inp" type="email" value="{{tm.f.email}}" onChange="{{tm.setEmail}}" placeholder="name@company.com"></label>
+          <label><span class="lbl">Role</span><select class="inp" value="{{tm.f.role}}" onChange="{{tm.setRole}}"><sc-for list="{{tm.roles}}" as="o" hint-placeholder-count="4"><option value="{{o}}">{{o}}</option></sc-for></select></label>
+          <label><span class="lbl">Location</span><select class="inp" value="{{tm.f.loc}}" onChange="{{tm.setLoc}}"><sc-for list="{{tm.locOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></label>
+        </div>
+        <div class="lbl" style="margin: 14px 0 6px">What They Can Do</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{tm.perms}}" as="p" hint-placeholder-count="5"><button type="button" class="chip" aria-pressed="{{p.on}}" onClick="{{p.toggle}}">{{p.label}}</button></sc-for></div>
+        <button type="button" class="btn red" style="margin-top: 14px" onClick="{{tm.invite}}">Send Invite</button>
+      </div>
+    </sc-if>
+
+    <!-- ================= PORTAL: LOCATIONS ================= -->
+    <sc-if value="{{v.locs}}" hint-placeholder-val="{{false}}">
+      <div class="grid g4"><sc-for list="{{lc.kpis}}" as="k" hint-placeholder-count="4"><div class="card kpi"><div class="n">{{k.n}}</div><div class="l">{{k.l}}</div></div></sc-for></div>
+      <div class="card" style="margin-top: 16px">
+        <h3 class="h3">Every Location</h3>
+        <div class="muted" style="font-size: 13px; margin-top: 4px">What each store is ordering, and who can sign in there.</div>
+        <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 1.8fr 0.8fr 0.8fr 0.9fr 1fr 130px; --minw: 760px"><div class="tr th"><div>Location</div><div>Team</div><div>Open</div><div>Units</div><div>Last Order</div><div></div></div>
+          <sc-for list="{{lc.rows}}" as="l" hint-placeholder-count="4"><div class="tr"><div><b>{{l.name}}</b></div><div>{{l.team}}</div><div>{{l.open}}</div><div>{{l.units}}</div><div>{{l.last}}</div><div style="text-align: right"><button type="button" class="btn ghost sm" onClick="{{l.view}}">View Orders</button></div></div></sc-for>
+        </div></div>
+      </div>
+    </sc-if>
+
     <!-- ================= PRICE SHEET (portal) ================= -->
     <sc-if value="{{v.prices}}" hint-placeholder-val="{{false}}">
       <div class="card" style="background: #E8EEFF"><h2 class="h2">{{acct.modelName}}</h2><p class="muted" style="margin: 6px 0 0; line-height: 1.55">{{acct.modelDesc}}</p></div>
@@ -456,6 +496,70 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
           <h3 class="h3" style="margin-top: 18px">Latest Messages</h3>
           <sc-for list="{{aMsgs}}" as="m" hint-placeholder-count="2"><button type="button" onClick="{{m.open}}" style="display: block; width: 100%; text-align: left; border: 0; background: #E8EEFF; border-radius: 12px; padding: 10px 12px; margin-top: 8px"><div style="font-size: 12px; font-weight: 700" class="muted">{{m.acctName}} · {{m.when}}</div><div style="font-size: 14px; margin-top: 2px">{{m.text}}</div></button></sc-for>
         </div>
+      </div>
+    </sc-if>
+
+    <!-- ================= ADMIN: USERS & ACCESS ================= -->
+    <sc-if value="{{v.aUsers}}" hint-placeholder-val="{{false}}">
+      <div class="grid g4"><sc-for list="{{ua.kpis}}" as="k" hint-placeholder-count="4"><div class="card kpi"><div class="n">{{k.n}}</div><div class="l">{{k.l}}</div></div></sc-for></div>
+      <div class="card" style="margin-top: 16px">
+        <h2 class="h2">Create An Account</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px"><sc-for list="{{ua.kinds}}" as="k" hint-placeholder-count="3"><button type="button" class="chip" aria-pressed="{{k.on}}" onClick="{{k.pick}}">{{k.label}}</button></sc-for></div>
+        <sc-if value="{{ua.isPartner}}" hint-placeholder-val="{{true}}">
+          <div class="grid g3" style="margin-top: 14px; gap: 10px">
+            <label><span class="lbl">Company *</span><input class="inp" value="{{ua.f.company}}" onChange="{{ua.set.company}}" placeholder="Sherwin-Williams"></label>
+            <label><span class="lbl">Account Type</span><select class="inp" value="{{ua.f.atype}}" onChange="{{ua.set.atype}}"><sc-for list="{{ua.atypes}}" as="o" hint-placeholder-count="4"><option value="{{o}}">{{o}}</option></sc-for></select></label>
+            <label><span class="lbl">Pricing Model</span><select class="inp" value="{{ua.f.model}}" onChange="{{ua.set.model}}"><sc-for list="{{ua.models}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></label>
+            <label><span class="lbl">Payment Terms</span><select class="inp" value="{{ua.f.terms}}" onChange="{{ua.set.terms}}"><sc-for list="{{ua.termsOpts}}" as="o" hint-placeholder-count="4"><option value="{{o}}">{{o}}</option></sc-for></select></label>
+            <label><span class="lbl">Territory</span><input class="inp" value="{{ua.f.territory}}" onChange="{{ua.set.territory}}" placeholder="National, or states"></label>
+            <label><span class="lbl">Assigned Rep</span><select class="inp" value="{{ua.f.rep}}" onChange="{{ua.set.rep}}"><sc-for list="{{ua.repOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></label>
+            <label><span class="lbl">Primary Contact *</span><input class="inp" value="{{ua.f.name}}" onChange="{{ua.set.name}}" placeholder="Name of the account admin"></label>
+            <label><span class="lbl">Contact Email *</span><input class="inp" type="email" value="{{ua.f.email}}" onChange="{{ua.set.email}}" placeholder="name@company.com"></label>
+            <label><span class="lbl">Locations (Separate With ;)</span><input class="inp" value="{{ua.f.locs}}" onChange="{{ua.set.locs}}" placeholder="Store 1042 · Dayton, OH; Store 2210 · Akron, OH"></label>
+          </div>
+          <div class="lbl" style="margin: 14px 0 6px">Products They Can Order</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{ua.access}}" as="p" hint-placeholder-count="4"><button type="button" class="chip" aria-pressed="{{p.on}}" onClick="{{p.toggle}}">{{p.label}}</button></sc-for></div>
+        </sc-if>
+        <sc-if value="{{ua.isRep}}" hint-placeholder-val="{{false}}">
+          <div class="grid g3" style="margin-top: 14px; gap: 10px">
+            <label><span class="lbl">Name *</span><input class="inp" value="{{ua.f.name}}" onChange="{{ua.set.name}}"></label>
+            <label><span class="lbl">Email *</span><input class="inp" type="email" value="{{ua.f.email}}" onChange="{{ua.set.email}}"></label>
+            <label><span class="lbl">Rep Type</span><select class="inp" value="{{ua.f.rtype}}" onChange="{{ua.set.rtype}}"><sc-for list="{{ua.rtypes}}" as="o" hint-placeholder-count="3"><option value="{{o}}">{{o}}</option></sc-for></select></label>
+            <label><span class="lbl">Territory</span><input class="inp" value="{{ua.f.territory}}" onChange="{{ua.set.territory}}" placeholder="AZ, NM, NV"></label>
+            <label><span class="lbl">Commission Rate (%)</span><input class="inp" type="number" min="0" step="0.5" value="{{ua.f.rate}}" onChange="{{ua.set.rate}}"></label>
+            <label><span class="lbl">Monthly Goal ($)</span><input class="inp" type="number" min="0" step="500" value="{{ua.f.monthGoal}}" onChange="{{ua.set.monthGoal}}"></label>
+          </div>
+        </sc-if>
+        <sc-if value="{{ua.isAff}}" hint-placeholder-val="{{false}}">
+          <div class="grid g3" style="margin-top: 14px; gap: 10px">
+            <label><span class="lbl">Name *</span><input class="inp" value="{{ua.f.name}}" onChange="{{ua.set.name}}"></label>
+            <label><span class="lbl">Email *</span><input class="inp" type="email" value="{{ua.f.email}}" onChange="{{ua.set.email}}"></label>
+            <label><span class="lbl">Social Handle</span><input class="inp" value="{{ua.f.handle}}" onChange="{{ua.set.handle}}" placeholder="@handle"></label>
+            <label><span class="lbl">Platforms</span><input class="inp" value="{{ua.f.platform}}" onChange="{{ua.set.platform}}" placeholder="Instagram · TikTok"></label>
+            <label><span class="lbl">City, State</span><input class="inp" value="{{ua.f.city}}" onChange="{{ua.set.city}}"></label>
+            <label><span class="lbl">Affiliate Code</span><input class="inp" value="{{ua.f.code}}" onChange="{{ua.set.code}}" placeholder="{{ua.codePh}}"></label>
+          </div>
+        </sc-if>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px"><button type="button" class="btn red" onClick="{{ua.create}}">{{ua.createLabel}}</button><span class="muted" style="font-size: 13px">{{ua.hint}}</span></div>
+      </div>
+      <div class="card" style="margin-top: 16px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center"><h3 class="h3">Partner Teams</h3><label style="min-width: 260px"><span class="lbl">Account</span><select class="inp" value="{{ua.teamAcct}}" onChange="{{ua.setTeamAcct}}"><sc-for list="{{ua.acctOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></label></div>
+        <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 1.6fr 1.1fr 1.4fr 0.8fr 120px; --minw: 760px"><div class="tr th"><div>Name</div><div>Role</div><div>Location</div><div>Status</div><div></div></div>
+          <sc-for list="{{ua.teamRows}}" as="u" hint-placeholder-count="3"><div class="tr"><div><b>{{u.name}}</b><div class="muted" style="font-size: 12px">{{u.email}}</div></div><div>{{u.role}}</div><div>{{u.locName}}</div><div><span class="st" style="background: {{u.sbg}}; color: {{u.sfg}}">{{u.status}}</span></div><div style="text-align: right"><button type="button" class="btn ghost sm" onClick="{{u.toggle}}">{{u.toggleLabel}}</button></div></div></sc-for>
+        </div></div>
+        <div class="grid g4" style="margin-top: 12px; gap: 10px; align-items: end">
+          <label><span class="lbl">Name</span><input class="inp" value="{{ua.tf.name}}" onChange="{{ua.setTfName}}"></label>
+          <label><span class="lbl">Email</span><input class="inp" value="{{ua.tf.email}}" onChange="{{ua.setTfEmail}}"></label>
+          <label><span class="lbl">Location</span><select class="inp" value="{{ua.tf.loc}}" onChange="{{ua.setTfLoc}}"><sc-for list="{{ua.tfLocs}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></label>
+          <button type="button" class="btn" onClick="{{ua.addTeam}}">Add To Team</button>
+        </div>
+        <div class="muted" style="font-size: 12px; margin-top: 8px">Partners can also invite their own team from the Team tab in their portal.</div>
+      </div>
+      <div class="card" style="margin-top: 16px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center"><h3 class="h3">Every Login</h3><div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{ua.filters}}" as="f" hint-placeholder-count="4"><button type="button" class="chip" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div></div>
+        <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 1.6fr 0.9fr 1.6fr 1.2fr 0.8fr; --minw: 820px"><div class="tr th"><div>Name</div><div>Portal</div><div>Company / Territory</div><div>Role</div><div>Status</div></div>
+          <sc-for list="{{ua.all}}" as="u" hint-placeholder-count="8"><div class="tr"><div><b>{{u.name}}</b><div class="muted" style="font-size: 12px">{{u.email}}</div></div><div><span class="st" style="background: #E8EEFF; color: #0A35C8">{{u.portal}}</span></div><div>{{u.org}}</div><div>{{u.role}}</div><div><span class="st" style="background: {{u.sbg}}; color: {{u.sfg}}">{{u.status}}</span></div></div></sc-for>
+        </div></div>
       </div>
     </sc-if>
 
@@ -495,6 +599,30 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
             </div>
             <p class="muted" style="font-size: 13px; margin: 12px 0 0">Changes show up in the partner portal right away (in this browser). Blank fields show as "Set by LTC".</p>
           </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ================= ADMIN: SALES TEAM ================= -->
+    <sc-if value="{{v.aReps}}" hint-placeholder-val="{{false}}">
+      <div class="grid g4"><sc-for list="{{repKpis}}" as="k" hint-placeholder-count="4"><div class="card kpi"><div class="n">{{k.n}}</div><div class="l">{{k.l}}</div></div></sc-for></div>
+      <div class="card" style="margin-top: 16px">
+        <div style="display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: center"><h3 class="h3">Reps</h3><span class="muted" style="font-size: 13px">Set each rep’s monthly goal and commission rate. Reps see their own numbers only.</span></div>
+        <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 1.6fr 1.2fr 1fr 1.4fr 130px 100px; --minw: 960px"><div class="tr th"><div>Rep</div><div>Territory</div><div>This Month</div><div>Year Goal</div><div>Monthly Goal ($)</div><div>Rate (%)</div></div>
+          <sc-for list="{{repRows}}" as="r" hint-placeholder-count="4"><div class="tr"><div><b>{{r.name}}</b><div class="muted" style="font-size: 12px">{{r.type}}</div></div><div>{{r.territory}}</div><div><b>{{r.month}}</b><div style="height: 6px; border-radius: 999px; background: #E8EEFF; margin-top: 4px; overflow: hidden"><div style="height: 100%; width: {{r.mBar}}%; background: #0A35C8"></div></div><div class="muted" style="font-size: 11px">{{r.mPct}}% of goal</div></div><div style="font-size: 13px">{{r.goalTxt}}<div style="height: 6px; border-radius: 999px; background: #E8EEFF; margin-top: 4px; overflow: hidden"><div style="height: 100%; width: {{r.gPct}}%; background: #B31942"></div></div></div><div style="width: 130px"><input class="inp" type="number" min="0" step="500" value="{{r.monthGoal}}" onChange="{{r.setMonth}}" aria-label="Monthly goal for {{r.name}}"></div><div style="width: 100px"><input class="inp" type="number" min="0" max="50" step="0.5" value="{{r.rate}}" onChange="{{r.setRate}}" aria-label="Commission rate for {{r.name}}"></div></div></sc-for>
+        </div></div>
+      </div>
+      <div class="grid g2" style="margin-top: 16px; align-items: start">
+        <div class="card">
+          <h3 class="h3">Account Assignment</h3>
+          <div class="muted" style="font-size: 13px; margin-top: 4px">Each rep only sees the accounts assigned to them.</div>
+          <sc-for list="{{assignRows}}" as="a" hint-placeholder-count="4"><div style="display: grid; grid-template-columns: minmax(0,1fr) 220px; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid #DCE3F7"><div><b>{{a.name}}</b><div class="muted" style="font-size: 12px">{{a.type}}</div></div><select class="inp" value="{{a.rep}}" onChange="{{a.set}}"><sc-for list="{{a.opts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></div></sc-for>
+        </div>
+        <div class="card">
+          <h3 class="h3">Leaderboard · This Month</h3>
+          <sc-for list="{{repBoardRows}}" as="t" hint-placeholder-count="4"><div style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #DCE3F7"><span style="width: 30px; height: 30px; border-radius: 50%; background: {{t.medal}}; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; flex: none">{{t.rank}}</span><span style="flex: 1; min-width: 0"><b>{{t.name}}</b><div class="muted" style="font-size: 12px">{{t.pct}}% of monthly goal</div></span><b>{{t.v}}</b></div></sc-for>
+          <h3 class="h3" style="margin-top: 18px">Latest Field Visits</h3>
+          <sc-for list="{{repVisits}}" as="x" hint-placeholder-count="3"><div style="padding: 8px 0; border-bottom: 1px solid #DCE3F7; font-size: 14px"><b>{{x.acct}}</b> · {{x.outcome}}<div class="muted" style="font-size: 12px">{{x.rep}} · {{x.when}} · {{x.note}}</div></div></sc-for>
         </div>
       </div>
     </sc-if>
@@ -720,19 +848,26 @@ var ACCTS = {
   ent: { id: 'ent', name: 'Keystone Home Centers', first: 'Jordan', buyer: 'Jordan Ellis · Merchandising Buyer', email: 'jellis@keystonehome.example', phone: '(555) 201-4410', type: 'Enterprise · Retail Chain', terms: 'Net 30', model: 'contract', modelName: 'Enterprise Contract Pricing', modelDesc: 'Fixed per-item prices set in your supply agreement. Same price on every PO, whatever the quantity.', vendor: 'V-20418', territory: 'National (418 stores)', rep: 'House account', stores: 418 },
   dist: { id: 'dist', name: 'Northline Coatings Supply', first: 'Sam', buyer: 'Sam Ortiz · Purchasing Manager', email: 'sortiz@northline.example', phone: '(555) 318-0092', type: 'Distributor · 6 branches', terms: 'Net 30', model: 'tier', modelName: 'Distributor Volume Tiers', modelDesc: 'Your discount off MSRP goes up with the total units on each order. The tier updates as you build the order.', vendor: '', territory: 'Michigan', rep: 'The Stallings Group (MI) — commission', stores: 6 },
   dealer: { id: 'dealer', name: 'Coastline Flooring Supply', first: 'Dana', buyer: 'Dana Reyes · Owner', type: 'Dealer · 1 store', terms: 'Credit card', model: 'dealer', modelName: 'Dealer Wholesale', modelDesc: 'One wholesale discount off MSRP on every item.', territory: 'Florida', rep: 'House account' },
-  multi: { id: 'multi', name: 'Summit Facilities Group', first: 'Lee', buyer: 'Lee Park · Procurement', type: 'Enterprise · Multi-Site', terms: 'Net 45', model: 'contract', modelName: 'Enterprise Contract Pricing', modelDesc: '', territory: 'Ohio · 22 sites', rep: 'The Stallings Group (OH) — commission' }
+  multi: { id: 'multi', name: 'Summit Facilities Group', first: 'Lee', buyer: 'Lee Park · Procurement', type: 'Enterprise · Multi-Site', terms: 'Net 45', model: 'contract', modelName: 'Enterprise Contract Pricing', modelDesc: '', territory: 'Ohio · 22 sites', rep: 'The Stallings Group (OH) — commission' , access: { caddy: true, bundles: false, trowels: true, coatings: false } , access: { caddy: true, bundles: false, trowels: true, coatings: false } , access: { caddy: true, bundles: false, trowels: true, coatings: false } , access: { caddy: true, bundles: false, trowels: true, coatings: false } }
 };
 var ORDER_TYPES = [
   { id: 'stores', name: 'Multi-Store Distribution', desc: 'One PO for a retail chain or paint-store network, shipped to many stores. Upload your store list.' },
   { id: 'dc', name: 'Distribution Center / Warehouse', desc: 'Bulk stock shipped to your DC or warehouse.' },
   { id: 'job', name: 'Drop-Ship', desc: 'Ship straight to a job site or your customer.' },
-  { id: 'demo', name: 'Demo & Display Kit', desc: 'Demo units and counter display for a new location.' }
+  { id: 'demo', name: 'Demo & Display Kit', desc: 'Demo units and counter display for a new location.' },
+  { id: 'restock', name: 'Store Restock', desc: 'Reorder for one store location.' }
 ];
 var STATUSES = ['Received', 'Acknowledged', 'Freight Review', 'Shipped', 'Delivered'];
 var TODO = { 'Received': 'Confirm pricing and send acknowledgement', 'Acknowledged': 'Quote freight', 'Freight Review': 'Pack, ship and add tracking', 'Shipped': 'Check in 3 days after delivery', 'Delivered': 'Done' };
 var SCOL = { 'Received': ['#FDECEF', '#B31942'], 'Acknowledged': ['#E7EEFC', '#1F4FB5'], 'Freight Review': ['#FFF3DC', '#8A5A00'], 'Shipped': ['#E3F3EA', '#2E7D4F'], 'Delivered': ['#ECEEF2', '#4A5568'] };
 var FOLDERS = ['Price Sheets & Agreements', 'Sell Sheets & Displays', 'Data Sheets', 'Certificates (COI, W-9)', 'Invoices & POs'];
-var KEY = 'ltc-partner-portal-v2';
+var KEY = 'ltc-partner-portal-v3';
+var PERMS = [['order', 'Place Orders'], ['approve', 'Approve Orders'], ['pricing', 'See Pricing'], ['team', 'Manage Team'], ['files', 'Files & Messages']];
+var ROLES = ['Account Admin', 'Purchasing Manager', 'Store Manager', 'Viewer'];
+var ROLE_PERMS = { 'Account Admin': { order: true, approve: true, pricing: true, team: true, files: true }, 'Purchasing Manager': { order: true, approve: true, pricing: true, files: true }, 'Store Manager': { order: true, files: true }, 'Viewer': { files: true } };
+function blankTeamForm() { return { name: '', email: '', role: 'Store Manager', loc: 'all', perms: Object.assign({}, ROLE_PERMS['Store Manager']) }; }
+function blankUa() { return { kind: 'partner', company: '', atype: 'Enterprise · Retail Chain', model: 'contract', terms: 'Net 30', territory: '', rep: '', name: '', email: '', locs: '', rtype: 'Territory Representative', rate: '5', monthGoal: '10000', handle: '', platform: '', city: '', code: '', access: { caddy: true, bundles: false, trowels: true, coatings: false } }; }
+function applyAccts(d) { Object.keys((d && d.accounts) || {}).forEach(function (k) { ACCTS[k] = d.accounts[k]; }); return d; }
 var RL_LANES = 'CA|CT|94.5|93.4|94.5|94.5|196.1|158.3;CA|DC|93.9|93.6|93.9|93.9|177.50|179.90;CA|DE|93.9|93.6|93.9|93.9|177.50|179.90;CA|MA|94|93.2|94|94|188.6|189.5;CA|VA|94.2|94.5|94.2|94.2|192.7|175.3;CA|ME|93.9|93.6|93.9|93.9|177.50|179.90;CA|NH|94.2|93.6|94.2|94.2|162.9|162.9;CA|NJ|94.7|94.4|94.7|94.7|173.6|172.5;CA|NY|94.6|94.2|94.6|94.6|196.1|187.1;CA|RI|93.9|93.6|93.9|93.9|177.50|179.90;CA|MD|94|94|94|94|195.1|159.2;CA|IN|94.3|93.9|94.3|94.3|159.6|152.6;CA|IL|95|94.5|95|95|157.2|160.1;CA|KY|94.1|93.7|94.1|94.1|172|170.2;CA|WV|94.1|93.9|94.1|94.1|170.90|168.90;CA|WI|94.3|93.8|94.3|94.3|159.9|160;CA|PA|94.5|94.2|94.5|94.5|189.7|176.5;CA|OH|94.3|94.4|94.3|94.3|181.9|156.1;CA|MO|93.8|93.3|93.8|93.8|161|157.2;CA|MI|94.4|93.7|94.4|94.4|170.3|168.7;CA|NC|94.4|93.8|94.4|94.4|173.4|170.4;CA|MS|94.4|93.3|94.4|94.4|176.6|176.6;CA|GA|94.7|94.3|94.7|94.7|167.1|160;CA|FL|95.2|95|95.2|95.2|186.1|173.7;CA|AL|93.7|93.8|93.7|93.7|173.9|166.2;CA|SC|94.2|94|94.2|94.2|166.2|171.3;CA|TN|94.2|93.6|94.2|94.2|166.5|165;CA|MN|93.1|93.7|93.1|93.1|165.1|164.1;CA|IA|93.9|93.4|93.9|93.9|164|165;CA|NE|93.7|92.7|93.7|93.7|172.6|172.6;CA|SD|93.3|92.7|93.3|93.3|196.1|196.1;CA|LA|93.9|92.7|93.9|93.9|172.9|172.9;CA|KS|93|93.6|93|93|156.2|158.6;CA|AR|94.1|92.7|94.1|94.1|162.4|162.4;CA|TX|94.6|94|94.6|94.6|148.1|147;CA|OK|94|93.4|94|94|145.1|157.7;CA|NV|92.9|93.4|92.9|92.9|129.2|119.2;CA|OR|93.5|93.3|93.5|93.5|139.7|130.2;CA|UT|94.2|93.5|94.2|94.2|141.2|142.1;CA|NM|93.9|94.1|93.9|93.9|139.7|139.7;CA|ID|93|93.2|93|93|149.9|133.6;CA|CO|92.9|93|92.9|92.9|156.2|146.4;CA|WA|93.6|93.5|93.6|93.6|143.1|135.9;CA|AZ|93|93.5|93|93|130.7|122.4;CA|AO|70.0|70.0|70.0|70.0|335.00|335.00;CA|BU|70.0|70.0|70.0|70.0|335.00|335.00;CA|WY|70.0|70.0|70.0|70.0|335.00|335.00;CA|CE|70.0|70.0|70.0|70.0|335.00|335.00;CA|CP|70.0|70.0|70.0|70.0|335.00|335.00;CA|FK|70.0|70.0|70.0|70.0|335.00|335.00;CA|IU|70.0|70.0|70.0|70.0|335.00|335.00;CA|MT|70.0|70.0|70.0|70.0|335.00|335.00;CA|ND|70.0|70.0|70.0|70.0|335.00|335.00;CA|NO|70.0|70.0|70.0|70.0|335.00|335.00;CA|OO|70.0|70.0|70.0|70.0|335.00|335.00;CA|UO|70.0|70.0|70.0|70.0|335.00|335.00;CA|UP|70.0|70.0|70.0|70.0|335.00|335.00;CA|VT|70.0|70.0|70.0|70.0|335.00|335.00;CA|WO|70.0|70.0|70.0|70.0|335.00|335.00;CA|MH|65.0|65.0|65.0|65.0|600.00|600.00;CA|MV|30.0|30.0|30.0|30.0|600.00|600.00;CA|IT|94.2|94.2|94.2|94.2|115.90|115.90;CA|NF|91.5|91.5|91.5|91.5|335.00|335.00;CA|NB|91.5|91.5|91.5|91.5|335.00|335.00;CA|NL|91.5|91.5|91.5|91.5|335.00|335.00;CA|NS|91.5|91.5|91.5|91.5|335.00|335.00;CA|PE|91.5|91.5|91.5|91.5|335.00|335.00;CA|ON|91.5|91.5|91.5|91.5|262.8|262.8;CA|QC|91.5|91.5|91.5|91.5|262.8|262.8;CA|BC|89.2|89.2|89.2|89.2|251.1|251.1;CA|AB|89.2|89.2|89.2|89.2|251.1|251.1;CA|MB|89.2|89.2|89.2|89.2|251.1|251.1;CA|SK|89.2|89.2|89.2|89.2|251.1|251.1;CA|AI|60.0|60.0|60.0|60.0|600.00|600.00;CA|BI|60.0|60.0|60.0|60.0|600.00|600.00;CA|IC|60.0|60.0|60.0|60.0|600.00|600.00;CA|NT|60.0|60.0|60.0|60.0|600.00|600.00;CA|NU|60.0|60.0|60.0|60.0|600.00|600.00;CA|OI|60.0|60.0|60.0|60.0|600.00|600.00;CA|QI|60.0|60.0|60.0|60.0|600.00|600.00;CA|YT|60.0|60.0|60.0|60.0|600.00|600.00;CA|CA|92.6|92.6|92.6|92.6|118.2|118.2';
 // R+L Carriers pricing agreement RLCA 6018 · Item 524640.000 v1 · Liberty Tool Co · acct L01HP2 · effective 11/03/26
 var RL = {
@@ -891,6 +1026,70 @@ function affBoard(d, period) {
 }
 var MEDAL = ['#C9A227', '#9AA4B2', '#B87333'];
 
+var REP_KEY = 'ltc-sales-reps-v2';
+var PARTNER_KEY = 'ltc-partner-portal-v3';
+var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+var REP_TYPES = ['Territory Representative', 'Independent Sales Rep (1099)', 'Rep Agency'];
+var STAGES = ['Prospect', 'Demo Booked', 'Opening Order', 'Stocking', 'Reordering'];
+var PARTNER_NAMES = { ent: 'Keystone Home Centers', dist: 'Northline Coatings Supply', dealer: 'Coastline Flooring Supply', multi: 'Summit Facilities Group' };
+function repToday() { return new Date(); }
+function repFmt(d) { return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+function repAgo(n) { var d = repToday(); d.setDate(d.getDate() - n); return repFmt(d); }
+function repSeed() {
+  return {
+    reps: [
+      { id: 'r1', name: 'The Stallings Group', contact: 'Rep agency', type: 'Rep Agency', territory: 'MI, IN, OH, W. PA, WV, KY', rate: 7, goalType: 'revenue', goal: 250000, monthGoal: 22000, ytd: [8200, 9100, 11800, 12400, 14100, 15800, 16900, 18300, 17600, 21400, 9800, 0], units: 0, joined: repAgo(300) },
+      { id: 'r2', name: 'Mike Torres', contact: 'mtorres@libertytoolcompany.com', type: 'Territory Representative', territory: 'AZ, NM, NV', rate: 5, goalType: 'revenue', goal: 120000, monthGoal: 11000, ytd: [0, 0, 0, 4200, 6800, 7900, 9600, 10400, 11800, 12900, 6100, 0], joined: repAgo(220) },
+      { id: 'r3', name: 'Jenna Price', contact: 'jprice@example.com', type: 'Independent Sales Rep (1099)', territory: 'FL, GA', rate: 10, goalType: 'units', goal: 1500, monthGoal: 7000, ytdUnits: [0, 0, 0, 0, 0, 38, 61, 77, 92, 118, 64, 0], ytd: [0, 0, 0, 0, 0, 3800, 6100, 7700, 9200, 11800, 6400, 0], joined: repAgo(150) },
+      { id: 'r4', name: 'Carlos Vega', contact: 'cvega@example.com', type: 'Independent Sales Rep (1099)', territory: 'TX', rate: 10, goalType: '', goal: 0, monthGoal: 6000, ytd: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1200, 0], joined: repAgo(9) }
+    ],
+    assign: { ent: '', dist: 'r1', dealer: 'r3', multi: 'r1' },
+    prospects: [
+      { id: 'p1', rep: 'r1', name: 'Great Lakes Paint & Supply', city: 'Toledo, OH', stage: 'Demo Booked', last: repAgo(3), next: 'Counter demo Thursday' },
+      { id: 'p2', rep: 'r1', name: 'Hoosier Flooring Distributors', city: 'Indianapolis, IN', stage: 'Prospect', last: repAgo(12), next: 'Send sell sheet + MSRP' },
+      { id: 'p3', rep: 'r2', name: 'Desert Coatings Supply', city: 'Phoenix, AZ', stage: 'Opening Order', last: repAgo(2), next: 'Confirm opening order quantities' },
+      { id: 'p4', rep: 'r2', name: 'Silver State Epoxy Crew', city: 'Las Vegas, NV', stage: 'Reordering', last: repAgo(6), next: 'Check in on 6-inch stock' },
+      { id: 'p5', rep: 'r2', name: 'Rio Grande Paint Center', city: 'Albuquerque, NM', stage: 'Prospect', last: repAgo(20), next: 'Walk in with demo caddy' },
+      { id: 'p6', rep: 'r3', name: 'Gulf Coast Floor Pros', city: 'Tampa, FL', stage: 'Stocking', last: repAgo(4), next: 'Tools & Tacos day in December' },
+      { id: 'p7', rep: 'r3', name: 'Peach State Coatings', city: 'Atlanta, GA', stage: 'Demo Booked', last: repAgo(1), next: 'Demo at their branch' },
+      { id: 'p8', rep: 'r4', name: 'Lone Star Garage Floors', city: 'Austin, TX', stage: 'Prospect', last: repAgo(2), next: 'First visit' }
+    ],
+    visits: [
+      { rep: 'r2', acct: 'Desert Coatings Supply', when: repAgo(2), outcome: 'Order coming', note: 'Wants 2 of each caddy for the counter.' },
+      { rep: 'r2', acct: 'Silver State Epoxy Crew', when: repAgo(6), outcome: 'Follow up', note: 'Crew loves the Lowboy. Asked about the cove trowel.' },
+      { rep: 'r1', acct: 'Great Lakes Paint & Supply', when: repAgo(3), outcome: 'Demo booked', note: 'Manager wants to see it on a wall.' }
+    ],
+    files: [
+      { name: 'Tape Caddy Sell Sheet.pdf', kind: 'Sell Sheet' }, { name: 'Dealer Price Sheet (MSRP + Cost).pdf', kind: 'Pricing' }, { name: 'Counter Display Planogram.pdf', kind: 'Display' },
+      { name: 'Demo Script: 60-Second Wall Demo.pdf', kind: 'Demo' }, { name: 'Distributor Onboarding Packet.pdf', kind: 'Onboarding' }, { name: 'Credit Application + W-9.pdf', kind: 'Forms' }
+    ]
+  };
+}
+function repLoad() { var d = null; try { d = JSON.parse(localStorage.getItem(REP_KEY) || 'null'); } catch (e) { d = null; } return d || repSeed(); }
+function repSave(d) { try { localStorage.setItem(REP_KEY, JSON.stringify(d)); } catch (e) {} }
+function repPartnerOrders() {
+  var p = null; try { p = JSON.parse(localStorage.getItem(PARTNER_KEY) || 'null'); } catch (e) { p = null; }
+  if (p && p.orders) return p.orders;
+  return [
+    { id: 'LTC-1041', acct: 'ent', po: 'KHC-778102', units: 836, list: 82764, value: null, status: 'Freight Review', created: repAgo(6) },
+    { id: 'LTC-1039', acct: 'dist', po: 'NCS-5521', units: 120, list: 13680, value: null, status: 'Shipped', created: repAgo(12) },
+    { id: 'LTC-1036', acct: 'multi', po: 'SFG-2026-114', units: 44, list: 9136, value: null, status: 'Delivered', created: repAgo(30) },
+    { id: 'LTC-1042', acct: 'dealer', po: 'CFS-0098', units: 4, list: 396, value: null, status: 'Received', created: repAgo(1) }
+  ];
+}
+function repNames() { var p = null; try { p = JSON.parse(localStorage.getItem(PARTNER_KEY) || 'null'); } catch (e) { p = null; } var n = Object.assign({}, PARTNER_NAMES); if (p && p.accounts) Object.keys(p.accounts).forEach(function (k) { n[k] = p.accounts[k].name; }); return n; }
+function repMonthIdx() { return repToday().getMonth(); }
+function repYtd(r) { var m = repMonthIdx(); return r.ytd.slice(0, m + 1).reduce(function (a, b) { return a + b; }, 0); }
+function repYtdUnits(r) { var m = repMonthIdx(), u = r.ytdUnits || r.ytd.map(function (x) { return Math.round(x / 100); }); return u.slice(0, m + 1).reduce(function (a, b) { return a + b; }, 0); }
+function repThisMonth(r) { return r.ytd[repMonthIdx()] || 0; }
+function repUsd(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+function repGoalPct(r) { if (!r.goal) return 0; var v = r.goalType === 'units' ? repYtdUnits(r) : repYtd(r); return Math.min(100, Math.round(v / r.goal * 100)); }
+function repBoard(d, period) {
+  return d.reps.map(function (r) { var v = period === 'ytd' ? repYtd(r) : repThisMonth(r); var g = period === 'ytd' ? 0 : r.monthGoal; return { r: r, v: v, pct: g ? Math.round(v / g * 100) : 0 }; })
+    .sort(function (a, b) { return b.v - a.v; }).map(function (x, i) { x.rank = i + 1; return x; });
+}
+var REP_MEDAL = ['#C9A227', '#9AA4B2', '#B87333'];
+
 function money(n) { return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 function num(v) { var n = parseFloat(v); return isNaN(n) ? null : n; }
 function today() { var d = new Date(); return d; }
@@ -901,11 +1100,21 @@ function seed() {
   return {
     pricing: blankPricing(),
     orders: [
-      { id: 'LTC-1041', acct: 'ent', po: 'KHC-778102', type: 'stores', units: 836, list: 82764, value: null, status: 'Freight Review', created: daysAgo(6), window: 'Nov 16 – Nov 20', lines: ['2 × 4-Inch Caddy per store', '× 418 stores'], shipTo: '418 stores (store list on file)', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', tracking: '', quote: [], hist: [daysAgo(6), daysAgo(5), daysAgo(3)], st: '', acc: [], freightQuote: null },
-      { id: 'LTC-1039', acct: 'dist', po: 'NCS-5521', type: 'dc', units: 120, list: 13680, value: null, status: 'Shipped', created: daysAgo(12), window: 'Oct 24 – Oct 28', lines: ['40 × 4-Inch Caddy', '40 × 6-Inch Caddy', '40 × The Lowboy'], shipTo: 'Northline DC · 1400 Industrial Dr, Grand Rapids, MI', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', tracking: '1Z 84F 2W1 03 4471 2290', quote: ['1620 TMUC Urethane Cement'], hist: [daysAgo(12), daysAgo(11), daysAgo(10), daysAgo(8)], st: 'MI', acc: [], freightQuote: 412.37 },
-      { id: 'LTC-1036', acct: 'multi', po: 'SFG-2026-114', type: 'dc', units: 44, list: 9136, value: null, status: 'Delivered', created: daysAgo(30), window: 'Oct 6 – Oct 9', lines: ['22 × Cove System'], shipTo: 'Summit Facilities · Columbus, OH', freight: 'Free freight', pay: 'Invoice against PO', tracking: '1Z 84F 2W1 03 1180 5521', quote: [], hist: [daysAgo(30), daysAgo(29), daysAgo(28), daysAgo(26), daysAgo(23)], st: 'OH', acc: ['lift'], freightQuote: 0 },
-      { id: 'LTC-1042', acct: 'dealer', po: 'CFS-0098', type: 'demo', units: 4, list: 396, value: null, status: 'Received', created: daysAgo(1), window: 'ASAP', lines: ['1 × each Tape Caddy'], shipTo: 'Coastline Flooring Supply · Naples, FL', freight: 'Prepaid & Add', pay: 'Credit card (we send a secure pay link)', tracking: '', quote: [], hist: [daysAgo(1)], st: 'FL', acc: ['lift', 'res'], freightQuote: null }
+      { id: 'LTC-1041', acct: 'ent', po: 'KHC-778102', type: 'stores', units: 836, list: 82764, value: null, status: 'Freight Review', created: daysAgo(6), window: 'Nov 16 – Nov 20', lines: ['2 × 4-Inch Caddy per store', '× 418 stores'], shipTo: '418 stores (store list on file)', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', tracking: '', quote: [], hist: [daysAgo(6), daysAgo(5), daysAgo(3)], st: '', acc: [], freightQuote: null, loc: 'all', by: 'Jordan Ellis' },
+      { id: 'LTC-1040', acct: 'ent', po: 'KHC-S0101-221', type: 'restock', units: 12, list: 1188, value: null, status: 'Shipped', created: daysAgo(9), window: 'ASAP', lines: ['6 × 4-Inch Caddy', '6 × The Lowboy'], shipTo: 'Keystone Store 0101 · Columbus, OH', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', tracking: '1Z 84F 2W1 03 5512 0918', quote: [], hist: [daysAgo(9), daysAgo(8), daysAgo(7), daysAgo(6)], st: 'OH', acc: [], freightQuote: 186.4, loc: '0101', by: 'Marcus Lee' },
+      { id: 'LTC-1037', acct: 'ent', po: 'KHC-S0214-090', type: 'demo', units: 4, list: 396, value: null, status: 'Delivered', created: daysAgo(21), window: 'ASAP', lines: ['1 × each Tape Caddy'], shipTo: 'Keystone Store 0214 · Pittsburgh, PA', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', tracking: '1Z 84F 2W1 03 2209 7741', quote: [], hist: [daysAgo(21), daysAgo(20), daysAgo(19), daysAgo(18), daysAgo(15)], st: 'PA', acc: ['lift'], freightQuote: 189.7, loc: '0214', by: 'Priya Shah' },
+      { id: 'LTC-1039', acct: 'dist', po: 'NCS-5521', type: 'dc', units: 120, list: 13680, value: null, status: 'Shipped', created: daysAgo(12), window: 'Oct 24 – Oct 28', lines: ['40 × 4-Inch Caddy', '40 × 6-Inch Caddy', '40 × The Lowboy'], shipTo: 'Northline DC · 1400 Industrial Dr, Grand Rapids, MI', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', tracking: '1Z 84F 2W1 03 4471 2290', quote: ['1620 TMUC Urethane Cement'], hist: [daysAgo(12), daysAgo(11), daysAgo(10), daysAgo(8)], st: 'MI', acc: [], freightQuote: 412.37, loc: 'all', by: 'Sam Ortiz' },
+      { id: 'LTC-1036', acct: 'multi', po: 'SFG-2026-114', type: 'dc', units: 44, list: 9136, value: null, status: 'Delivered', created: daysAgo(30), window: 'Oct 6 – Oct 9', lines: ['22 × Cove System'], shipTo: 'Summit Facilities · Columbus, OH', freight: 'Free freight', pay: 'Invoice against PO', tracking: '1Z 84F 2W1 03 1180 5521', quote: [], hist: [daysAgo(30), daysAgo(29), daysAgo(28), daysAgo(26), daysAgo(23)], st: 'OH', acc: ['lift'], freightQuote: 0, loc: 'all', by: 'Lee Park' },
+      { id: 'LTC-1042', acct: 'dealer', po: 'CFS-0098', type: 'demo', units: 4, list: 396, value: null, status: 'Received', created: daysAgo(1), window: 'ASAP', lines: ['1 × each Tape Caddy'], shipTo: 'Coastline Flooring Supply · Naples, FL', freight: 'Prepaid & Add', pay: 'Credit card (we send a secure pay link)', tracking: '', quote: [], hist: [daysAgo(1)], st: 'FL', acc: ['lift', 'res'], freightQuote: null, loc: 'all', by: 'Dana Reyes' }
     ],
+    accounts: {},
+    locations: { ent: [{ id: '0101', name: 'Store 0101 · Columbus, OH' }, { id: '0214', name: 'Store 0214 · Pittsburgh, PA' }, { id: '0388', name: 'Store 0388 · Louisville, KY' }], dist: [{ id: 'gr', name: 'Grand Rapids Branch' }, { id: 'det', name: 'Detroit Branch' }] },
+    team: {
+      ent: [{ id: 'u1', name: 'Jordan Ellis', email: 'jellis@keystonehome.example', role: 'Account Admin', loc: 'all', status: 'Active', perms: Object.assign({}, ROLE_PERMS['Account Admin']) }, { id: 'u2', name: 'Priya Shah', email: 'pshah@keystonehome.example', role: 'Purchasing Manager', loc: 'all', status: 'Active', perms: Object.assign({}, ROLE_PERMS['Purchasing Manager']) }, { id: 'u3', name: 'Marcus Lee', email: 'store0101@keystonehome.example', role: 'Store Manager', loc: '0101', status: 'Active', perms: Object.assign({}, ROLE_PERMS['Store Manager']) }, { id: 'u4', name: 'Dana Cruz', email: 'store0214@keystonehome.example', role: 'Store Manager', loc: '0214', status: 'Invited', perms: Object.assign({}, ROLE_PERMS['Store Manager']) }],
+      dist: [{ id: 'u5', name: 'Sam Ortiz', email: 'sortiz@northline.example', role: 'Account Admin', loc: 'all', status: 'Active', perms: Object.assign({}, ROLE_PERMS['Account Admin']) }, { id: 'u6', name: 'Kevin Ward', email: 'kward@northline.example', role: 'Store Manager', loc: 'gr', status: 'Active', perms: Object.assign({}, ROLE_PERMS['Store Manager']) }],
+      dealer: [{ id: 'u7', name: 'Dana Reyes', email: 'dana@coastlinefloor.example', role: 'Account Admin', loc: 'all', status: 'Active', perms: Object.assign({}, ROLE_PERMS['Account Admin']) }],
+      multi: [{ id: 'u8', name: 'Lee Park', email: 'lpark@summitfacilities.example', role: 'Account Admin', loc: 'all', status: 'Active', perms: Object.assign({}, ROLE_PERMS['Account Admin']) }]
+    },
     msgs: {
       ent: [{ from: 'LTC Sales', mine: false, when: daysAgo(3), text: 'Store list for LTC-1041 looks good. Freight quote coming tomorrow; we can split into two truckloads if your DCs prefer.' }, { from: 'Jordan Ellis', mine: true, when: daysAgo(2), text: 'Two loads works. Please include UPC on every unit and case labels per our routing guide.' }],
       dist: [{ from: 'LTC Sales', mine: false, when: daysAgo(8), text: 'LTC-1039 shipped. Tracking is on the order. Want us to set up a counter demo for your Grand Rapids branch?' }]
@@ -924,7 +1133,7 @@ function seed() {
     books: [{ acct: 'dist', type: 'Staff Training / Demo', when: 'Thu · 10:00 AM PT' }]
   };
 }
-function loadData() { var d = null; try { d = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { d = null; } return d || seed(); }
+function loadData() { var d = null; try { d = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { d = null; } return applyAccts(d || seed()); }
 function saveData(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
 function blankForm(a) { return { type: a.id === 'ent' ? 'stores' : 'dc', company: a.name, buyer: a.buyer.split(' · ')[0], email: a.email || '', phone: a.phone || '', po: '', vendor: a.vendor || '', start: '', end: '', notes: '', shipName: a.name, addr: '', city: '', st: '', zip: '', hours: '', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', carrier: '', reqs: {}, docs: {}, acc: {} }; }
 
@@ -932,7 +1141,7 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     var d = loadData();
-    this.state = { data: d, acct: 'ent', view: MODE === 'admin' ? 'aOverview' : 'overview', step: 1, form: blankForm(ACCTS.ent), qty: {}, coat: {}, stores: [{ num: '0101', city: 'Columbus', st: 'OH' }, { num: '0214', city: 'Pittsburgh', st: 'PA' }, { num: '0388', city: 'Louisville', st: 'KY' }], ns: { num: '', city: '', st: '' }, err: '', submitted: null, selId: null, fStatus: '', folder: '', draft: '', thread: 'ent', bk: { type: 'Account Review', day: 0, time: '' }, toast: '', fq: { bill: 'OB', from: 'CA', to: 'OH', lbs: '', cls: '70', gross: '', fuel: '', acc: {}, order: '' }, laneQ: '', lb: 'month', lbm: 'sold', aff: affLoad(), nc: { title: '', status: 'Live', start: '', end: '', brief: '', bonus: '', deliv: '', caption: '' }, nd: { title: '', off: '', code: '', ends: '', desc: '' }, nn: { title: '', tag: 'Program', body: '', pinned: false }, nv: { title: '', cat: 'Signing Up', len: '', url: '', desc: '', req: false } };
+    this.state = { data: d, acct: 'ent', user: 'u1', fLoc: '', tf: blankTeamForm(), ua: blankUa(), uaFilter: 'all', uaTeamAcct: '', uaTf: { name: '', email: '', loc: 'all' }, view: MODE === 'admin' ? 'aOverview' : 'overview', step: 1, form: blankForm(ACCTS.ent), qty: {}, coat: {}, stores: [{ num: '0101', city: 'Columbus', st: 'OH' }, { num: '0214', city: 'Pittsburgh', st: 'PA' }, { num: '0388', city: 'Louisville', st: 'KY' }], ns: { num: '', city: '', st: '' }, err: '', submitted: null, selId: null, fStatus: '', folder: '', draft: '', thread: 'ent', bk: { type: 'Account Review', day: 0, time: '' }, toast: '', reps: repLoad(), fq: { bill: 'OB', from: 'CA', to: 'OH', lbs: '', cls: '70', gross: '', fuel: '', acc: {}, order: '' }, laneQ: '', lb: 'month', lbm: 'sold', aff: affLoad(), nc: { title: '', status: 'Live', start: '', end: '', brief: '', bonus: '', deliv: '', caption: '' }, nd: { title: '', off: '', code: '', ends: '', desc: '' }, nn: { title: '', tag: 'Program', body: '', pinned: false }, nv: { title: '', cat: 'Signing Up', len: '', url: '', desc: '', req: false } };
   }
   persist(d) { saveData(d); this.setState({ data: d }); }
   flash(t) { var self = this; this.setState({ toast: t }); setTimeout(function () { if (self.state.toast === t) self.setState({ toast: '' }); }, 2600); }
@@ -974,7 +1183,7 @@ class Component extends DCLogic {
     var s = this.state, f = s.form, c = this.calc(), d = JSON.parse(JSON.stringify(s.data));
     var id = 'LTC-' + (1043 + d.orders.filter(function (o) { return o.id >= 'LTC-1043'; }).length);
     var typeName = ORDER_TYPES.find(function (t) { return t.id === f.type; }).name;
-    var o = { id: id, acct: s.acct, po: f.po, type: f.type, units: c.units, list: c.list, value: c.val, status: 'Received', created: fmtDate(today()), window: (f.start || 'TBD') + ' – ' + (f.end || 'TBD'), lines: c.lines.map(function (l) { return l.q + ' × ' + l.name; }), shipTo: f.type === 'stores' ? s.stores.length + ' stores (list attached)' : [f.shipName, f.addr, [f.city, f.st, f.zip].join(' ')].filter(Boolean).join(' · '), freight: f.freight, pay: f.pay, tracking: '', quote: COATINGS.filter(function (n) { return s.coat[n]; }), hist: [fmtDate(today())], st: f.type === 'stores' ? '' : (f.st || '').toUpperCase(), acc: Object.keys(f.acc).filter(function (k) { return f.acc[k]; }), freightQuote: null, freightEst: this.freightEst().totalTxt };
+    var o = { id: id, acct: s.acct, po: f.po, type: f.type, units: c.units, list: c.list, value: c.val, status: 'Received', created: fmtDate(today()), window: (f.start || 'TBD') + ' – ' + (f.end || 'TBD'), lines: c.lines.map(function (l) { return l.q + ' × ' + l.name; }), shipTo: f.type === 'stores' ? s.stores.length + ' stores (list attached)' : [f.shipName, f.addr, [f.city, f.st, f.zip].join(' ')].filter(Boolean).join(' · '), freight: f.freight, pay: f.pay, tracking: '', quote: COATINGS.filter(function (n) { return s.coat[n]; }), hist: [fmtDate(today())], loc: this.me().loc || 'all', by: this.me().name, st: f.type === 'stores' ? '' : (f.st || '').toUpperCase(), acc: Object.keys(f.acc).filter(function (k) { return f.acc[k]; }), freightQuote: null, freightEst: this.freightEst().totalTxt };
     d.orders.unshift(o);
     d.msgs[s.acct] = (d.msgs[s.acct] || []).concat([{ from: 'LTC Sales', mine: false, when: fmtDate(today()), text: 'We received ' + id + ' (PO ' + f.po + '). We’ll confirm pricing and freight and send your acknowledgement.' }]);
     saveData(d);
@@ -983,7 +1192,24 @@ class Component extends DCLogic {
   orderView(o) {
     var a = ACCTS[o.acct] || { name: o.acct }, idx = STATUSES.indexOf(o.status), col = SCOL[o.status] || ['#EEE', '#333'];
     var t = ORDER_TYPES.find(function (x) { return x.id === o.type; });
-    return Object.assign({}, o, { acctName: a.name, typeName: t ? t.name : o.type, sbg: col[0], sfg: col[1], valueTxt: o.value != null ? money(o.value) : 'List ' + money(o.list), steps: STATUSES.map(function (n, i) { return { name: n, when: i <= idx ? (o.hist[i] || '') : '', cls: i < idx ? 'done' : (i === idx ? (idx === 4 ? 'done' : 'now') : '') }; }), trackingTxt: o.tracking || 'Added when it ships', freightTxt: o.freightQuote === 0 ? 'Free freight' : (o.freightQuote != null ? money(o.freightQuote) + ' (R+L quote)' : (o.freight === 'Collect (my carrier)' ? 'Your carrier' : (o.freightEst ? 'Est. ' + o.freightEst + ' · LTC confirms' : 'Quoted by LTC'))), commission: a.rep || 'House account', quoteTxt: o.quote && o.quote.length ? o.quote.join(', ') : 'None', todo: TODO[o.status] });
+    return Object.assign({}, o, { acctName: a.name, typeName: t ? t.name : o.type, sbg: col[0], sfg: col[1], valueTxt: o.value != null ? money(o.value) : 'List ' + money(o.list), steps: STATUSES.map(function (n, i) { return { name: n, when: i <= idx ? (o.hist[i] || '') : '', cls: i < idx ? 'done' : (i === idx ? (idx === 4 ? 'done' : 'now') : '') }; }), trackingTxt: o.tracking || 'Added when it ships', locTxt: this.locName(o.acct, o.loc || 'all') + (o.by ? ' · ' + o.by : ''), freightTxt: o.freightQuote === 0 ? 'Free freight' : (o.freightQuote != null ? money(o.freightQuote) + ' (R+L quote)' : (o.freight === 'Collect (my carrier)' ? 'Your carrier' : (o.freightEst ? 'Est. ' + o.freightEst + ' · LTC confirms' : 'Quoted by LTC'))), commission: a.rep || 'House account', quoteTxt: o.quote && o.quote.length ? o.quote.join(', ') : 'None', todo: TODO[o.status] });
+  }
+  repVals() {
+    var self = this, s = this.state, D = s.reps;
+    var setR = function (fn, msg) { var d2 = JSON.parse(JSON.stringify(self.state.reps)); fn(d2); repSave(d2); self.setState({ reps: d2 }); if (msg) self.flash(msg); };
+    var bm = repBoard(D, 'month');
+    var totM = D.reps.reduce(function (a, r) { return a + repThisMonth(r); }, 0), goalM = D.reps.reduce(function (a, r) { return a + (r.monthGoal || 0); }, 0);
+    var repName = function (id) { var r = D.reps.find(function (x) { return x.id === id; }); return r ? r.name : 'House account'; };
+    return {
+      repNav: { cur: s.view === 'aReps' ? 'page' : 'false', go: function () { self.go('aReps'); } },
+      repKpis: [{ n: D.reps.length, l: 'Active Reps' }, { n: repUsd(totM), l: 'Team Sales This Month' }, { n: goalM ? Math.round(totM / goalM * 100) + '%' : '—', l: 'Of Team Monthly Goal' }, { n: D.reps.filter(function (r) { return !r.goal; }).length, l: 'Reps Without A Year Goal' }],
+      repRows: D.reps.map(function (r) { var m = repThisMonth(r), mp = r.monthGoal ? Math.round(m / r.monthGoal * 100) : 0; return { name: r.name, type: r.type, territory: r.territory, month: repUsd(m), mPct: mp, mBar: Math.min(100, mp), goalTxt: r.goal ? (r.goalType === 'units' ? r.goal.toLocaleString('en-US') + ' caddies' : repUsd(r.goal)) + ' · ' + repGoalPct(r) + '%' : 'Not set yet', gPct: repGoalPct(r), monthGoal: r.monthGoal, rate: r.rate,
+        setMonth: function (e) { var n = parseFloat(e.target.value); setR(function (d2) { d2.reps.find(function (x) { return x.id === r.id; }).monthGoal = isNaN(n) ? 0 : n; }, r.name + ' monthly goal updated'); },
+        setRate: function (e) { var n = parseFloat(e.target.value); setR(function (d2) { d2.reps.find(function (x) { return x.id === r.id; }).rate = isNaN(n) ? 0 : n; }, r.name + ' rate updated'); } }; }),
+      assignRows: Object.keys(ACCTS).map(function (k) { return { name: ACCTS[k].name, type: (ACCTS[k] || {}).type || '', rep: D.assign[k] || '', opts: [{ v: '', label: 'House account' }].concat(D.reps.map(function (r) { return { v: r.id, label: r.name }; })), set: function (e) { var val = e.target.value; setR(function (d2) { d2.assign[k] = val; }, ACCTS[k].name + ' → ' + repName(val)); } }; }),
+      repBoardRows: bm.map(function (x, i) { return { rank: x.rank, name: x.r.name, pct: x.pct, v: repUsd(x.v), medal: i < 3 ? REP_MEDAL[i] : C.pri }; }),
+      repVisits: D.visits.slice(0, 4).map(function (x) { return { acct: x.acct, outcome: x.outcome, rep: repName(x.rep), when: x.when, note: x.note }; })
+    };
   }
   affSet(fn, msg) { var d2 = JSON.parse(JSON.stringify(this.state.aff)); fn(d2); affSave(d2); this.setState({ aff: d2 }); if (msg) this.flash(msg); }
   affVals() {
@@ -1123,14 +1349,109 @@ class Component extends DCLogic {
       quoteSel: function () { if (!sel) return; var a = {}; (sel.acc || []).forEach(function (k) { a[k] = true; }); self.setState({ view: 'aFreight', fq: Object.assign({}, self.state.fq, { from: 'CA', to: sel.st || self.state.fq.to, bill: sel.freight === 'Collect via R+L (LTC rates)' ? 'OBC' : 'OB', acc: a, order: sel.id, gross: '' }) }); try { window.scrollTo(0, 0); } catch (e) {} }
     };
   }
+  me() { var t = (this.state.data.team || {})[this.state.acct] || []; return t.find(function (u) { return u.id === this.state.user; }, this) || t[0] || { id: '', name: (this.acct().buyer || '').split(' · ')[0], email: this.acct().email || '', role: 'Account Admin', loc: 'all', status: 'Active', perms: { order: true, approve: true, pricing: true, team: true, files: true } }; }
+  locName(acct, loc) { if (!loc || loc === 'all') return 'All Locations'; var l = ((this.state.data.locations || {})[acct] || []).find(function (x) { return x.id === loc; }); return l ? l.name : loc; }
+  teamVals() {
+    var self = this, s = this.state, d = s.data, a = this.acct(), me = this.me();
+    var team = (d.team || {})[s.acct] || [], locs = (d.locations || {})[s.acct] || [];
+    var stCol = { Active: ['#E3F3EA', '#2E7D4F'], Invited: ['#FFF3DC', '#8A5A00'], Off: ['#ECEEF2', '#4A5568'] };
+    var canText = function (u) { return PERMS.filter(function (p) { return u.perms && u.perms[p[0]]; }).map(function (p) { return p[1]; }).join(', ') || 'View only'; };
+    var setT = function (fn, msg) { var d2 = JSON.parse(JSON.stringify(self.state.data)); fn(d2); self.persist(d2); if (msg) self.flash(msg); };
+    var f = s.tf, setF = function (k) { return function (e) { var x = Object.assign({}, self.state.tf); x[k] = e.target.value; if (k === 'role') x.perms = Object.assign({}, ROLE_PERMS[e.target.value] || {}); self.setState({ tf: x }); }; };
+    var rowsOf = function (acct, list) { return list.map(function (u) { var col = stCol[u.status] || stCol.Active; return { name: u.name, email: u.email, role: u.role, locName: self.locName(acct, u.loc), can: canText(u), status: u.status, sbg: col[0], sfg: col[1], canEdit: u.id !== me.id, toggleLabel: u.status === 'Off' ? 'Turn On' : 'Turn Off',
+      toggle: function () { setT(function (d2) { var x = d2.team[acct].find(function (y) { return y.id === u.id; }); x.status = x.status === 'Off' ? 'Active' : 'Off'; }, u.name + (u.status === 'Off' ? ' turned on' : ' turned off')); } }; }); };
+    var myLoc = me.loc !== 'all' ? me.loc : null;
+    var acctOrders = d.orders.filter(function (o) { return o.acct === s.acct; });
+    return {
+      me: { first: me.name.split(' ')[0], name: me.name, role: me.role, locName: this.locName(s.acct, me.loc) },
+      isStoreUser: !!myLoc,
+      acctOpts: Object.keys(ACCTS).map(function (k) { return { v: k, label: ACCTS[k].name }; }),
+      setAcct: function (e) { var k = e.target.value, t = (self.state.data.team || {})[k] || []; self.setState({ acct: k, user: t[0] ? t[0].id : '', view: 'overview', form: blankForm(ACCTS[k]), selId: null, submitted: null, step: 1, fLoc: '' }); },
+      userOpts: team.filter(function (u) { return u.status !== 'Off'; }).map(function (u) { return { v: u.id, label: u.name + ' · ' + (u.loc === 'all' ? u.role : self.locName(s.acct, u.loc)) }; }),
+      curUser: me.id,
+      setUser: function (e) { self.setState({ user: e.target.value, view: 'overview', selId: null, fLoc: '' }); },
+      tm: { count: team.filter(function (u) { return u.status !== 'Off'; }).length, rows: rowsOf(s.acct, team), f: f, roles: ROLES,
+        locOpts: [{ v: 'all', label: 'All Locations' }].concat(locs.map(function (l) { return { v: l.id, label: l.name }; })),
+        setName: setF('name'), setEmail: setF('email'), setRole: setF('role'), setLoc: setF('loc'),
+        perms: PERMS.map(function (p) { return { label: p[1], on: f.perms[p[0]] ? 'true' : 'false', toggle: function () { var x = Object.assign({}, self.state.tf); x.perms = Object.assign({}, x.perms); x.perms[p[0]] = !x.perms[p[0]]; self.setState({ tf: x }); } }; }),
+        invite: function () { var t = self.state.tf; if (!t.name.trim() || !/@/.test(t.email)) return self.flash('Add a name and email'); setT(function (d2) { d2.team[s.acct] = (d2.team[s.acct] || []).concat([{ id: 'u' + Date.now(), name: t.name.trim(), email: t.email.trim(), role: t.role, loc: t.loc, status: 'Invited', perms: t.perms }]); }, 'Invite sent to ' + t.email.trim()); self.setState({ tf: blankTeamForm() }); } },
+      lc: { kpis: [{ n: locs.length, l: 'Locations' }, { n: team.filter(function (u) { return u.status !== 'Off'; }).length, l: 'Team Logins' }, { n: acctOrders.filter(function (o) { return o.status !== 'Delivered'; }).length, l: 'Open Orders' }, { n: acctOrders.reduce(function (t, o) { return t + o.units; }, 0).toLocaleString(), l: 'Units Ordered' }],
+        rows: [{ id: 'all', name: 'Company-Wide (HQ / Multi-Store POs)' }].concat(locs).map(function (l) { var os = acctOrders.filter(function (o) { return (o.loc || 'all') === l.id; }); return { name: l.name, team: team.filter(function (u) { return u.loc === l.id && u.status !== 'Off'; }).length, open: os.filter(function (o) { return o.status !== 'Delivered'; }).length, units: os.reduce(function (t, o) { return t + o.units; }, 0).toLocaleString(), last: os.length ? os[0].created : '—', view: function () { self.setState({ view: 'orders', fLoc: l.id, selId: null }); } }; }) },
+      rowsOf: rowsOf, setT: setT
+    };
+  }
+  userVals(T) {
+    var self = this, s = this.state, d = s.data, R = s.reps, A = s.aff, u = s.ua;
+    var setU = function (k) { return function (e) { var x = Object.assign({}, self.state.ua); x[k] = e.target.value; self.setState({ ua: x }); }; };
+    var keys = ['company', 'atype', 'model', 'terms', 'territory', 'rep', 'name', 'email', 'locs', 'rtype', 'rate', 'monthGoal', 'handle', 'platform', 'city', 'code'];
+    var set = {}; keys.forEach(function (k) { set[k] = setU(k); });
+    var stCol = { Active: ['#E3F3EA', '#2E7D4F'], Invited: ['#FFF3DC', '#8A5A00'], Off: ['#ECEEF2', '#4A5568'], Applied: ['#FFF3DC', '#8A5A00'], Paused: ['#ECEEF2', '#4A5568'] };
+    var MODELS = { contract: ['Enterprise Contract Pricing', 'Fixed per-item prices set in your supply agreement.'], tier: ['Distributor Volume Tiers', 'Your discount off MSRP goes up with the total units on each order.'], dealer: ['Dealer Wholesale', 'One wholesale discount off MSRP on every item.'] };
+    var all = [];
+    Object.keys(ACCTS).forEach(function (k) { ((d.team || {})[k] || []).forEach(function (m) { all.push({ kind: 'partner', name: m.name, email: m.email, portal: 'Partner', org: ACCTS[k].name + ' · ' + self.locName(k, m.loc), role: m.role, status: m.status }); }); });
+    R.reps.forEach(function (r) { all.push({ kind: 'rep', name: r.name, email: r.contact, portal: 'Sales Rep', org: r.territory, role: r.type, status: r.status || 'Active' }); });
+    A.affiliates.forEach(function (a) { all.push({ kind: 'aff', name: a.name, email: a.email || a.handle, portal: 'Affiliate', org: a.city || '', role: a.handle, status: a.status }); });
+    var shown = all.filter(function (x) { return s.uaFilter === 'all' || x.kind === s.uaFilter; }).map(function (x) { var c = stCol[x.status] || stCol.Active; return Object.assign({}, x, { sbg: c[0], sfg: c[1] }); });
+    var ta = s.uaTeamAcct && ACCTS[s.uaTeamAcct] ? s.uaTeamAcct : Object.keys(ACCTS)[0];
+    var first = (u.name || '').trim().split(' ')[0] || '';
+    return { ua: {
+      kpis: [{ n: Object.keys(ACCTS).length, l: 'Partner Accounts' }, { n: all.filter(function (x) { return x.kind === 'partner'; }).length, l: 'Partner Team Logins' }, { n: R.reps.length, l: 'Sales Reps' }, { n: A.affiliates.filter(function (a) { return a.status !== 'Applied'; }).length, l: 'Affiliates' }],
+      kinds: [['partner', 'Partner Account'], ['rep', 'Sales Rep'], ['aff', 'Affiliate']].map(function (k) { return { label: k[1], on: u.kind === k[0] ? 'true' : 'false', pick: function () { self.setState({ ua: Object.assign({}, self.state.ua, { kind: k[0] }) }); } }; }),
+      isPartner: u.kind === 'partner', isRep: u.kind === 'rep', isAff: u.kind === 'aff', f: u, set: set,
+      atypes: ['Enterprise · Retail Chain', 'Enterprise · Multi-Site', 'Distributor', 'Dealer · Single Store'],
+      models: [{ v: 'contract', label: 'Enterprise Contract Pricing' }, { v: 'tier', label: 'Distributor Volume Tiers' }, { v: 'dealer', label: 'Dealer Wholesale' }],
+      termsOpts: ['Net 30', 'Net 45', 'Net 60', 'Credit card'],
+      repOpts: [{ v: '', label: 'House account' }].concat(R.reps.map(function (r) { return { v: r.id, label: r.name }; })),
+      rtypes: REP_TYPES,
+      access: [['caddy', 'Tape Caddy'], ['bundles', 'Bundles / Kits'], ['trowels', 'Trowels & Strap'], ['coatings', 'Coatings']].map(function (p) { return { label: p[1], on: u.access[p[0]] ? 'true' : 'false', toggle: function () { var x = Object.assign({}, self.state.ua); x.access = Object.assign({}, x.access); x.access[p[0]] = !x.access[p[0]]; self.setState({ ua: x }); } }; }),
+      codePh: first ? first.toUpperCase() + '10' : 'Auto from first name',
+      createLabel: u.kind === 'partner' ? 'Create Partner & Invite Admin' : (u.kind === 'rep' ? 'Create Sales Rep & Send Invite' : 'Create Affiliate & Send Invite'),
+      hint: u.kind === 'partner' ? 'Their admin can add store and purchasing logins from their Team tab.' : (u.kind === 'rep' ? 'They set their year goal the first time they sign in.' : 'They see the onboarding checklist the first time they sign in.'),
+      create: function () {
+        var x = self.state.ua, nm = (x.name || '').trim(), em = (x.email || '').trim();
+        if (!nm || !/@/.test(em)) return self.flash('Add a name and email');
+        if (x.kind === 'partner') {
+          if (!(x.company || '').trim()) return self.flash('Add the company name');
+          var id = 'p' + Date.now(), M = MODELS[x.model] || MODELS.contract, locs = (x.locs || '').split(/[;\n]/).map(function (l) { return l.trim(); }).filter(Boolean);
+          var d2 = JSON.parse(JSON.stringify(self.state.data));
+          d2.accounts = d2.accounts || {}; d2.team = d2.team || {}; d2.locations = d2.locations || {};
+          d2.accounts[id] = { id: id, name: x.company.trim(), first: nm.split(' ')[0], buyer: nm + ' · Account Admin', email: em, phone: '', type: x.atype, terms: x.terms, model: x.model, modelName: M[0], modelDesc: M[1], vendor: '', territory: x.territory || '—', rep: x.rep ? (R.reps.find(function (r) { return r.id === x.rep; }) || {}).name : 'House account', stores: locs.length, access: x.access };
+          d2.team[id] = [{ id: 'u' + Date.now(), name: nm, email: em, role: 'Account Admin', loc: 'all', status: 'Invited', perms: Object.assign({}, ROLE_PERMS['Account Admin']) }];
+          d2.locations[id] = locs.map(function (l, i) { return { id: 'l' + (i + 1), name: l }; });
+          applyAccts(d2); saveData(d2);
+          if (x.rep) { var r2 = JSON.parse(JSON.stringify(R)); r2.assign[id] = x.rep; repSave(r2); self.setState({ reps: r2 }); }
+          self.setState({ data: d2, uaTeamAcct: id }); self.flash(x.company.trim() + ' created. Invite sent to ' + em);
+        } else if (x.kind === 'rep') {
+          var r3 = JSON.parse(JSON.stringify(R)); r3.reps.push({ id: 'r' + Date.now(), name: nm, contact: em, type: x.rtype, territory: x.territory || '—', rate: parseFloat(x.rate) || 0, goalType: '', goal: 0, monthGoal: parseFloat(x.monthGoal) || 0, ytd: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], status: 'Invited', joined: fmtDate(today()) }); repSave(r3); self.setState({ reps: r3 }); self.flash(nm + ' added. Invite sent to ' + em);
+        } else {
+          var a3 = JSON.parse(JSON.stringify(A)); a3.affiliates.unshift({ id: 'a' + Date.now(), name: nm, email: em, handle: x.handle || '', platform: x.platform || '', followers: '—', role: '', city: x.city || '', code: ((x.code || '').trim() || nm.split(' ')[0] + '10').toUpperCase(), mo: 0, status: 'Active', joined: fmtDate(today()), clicks: 0, sold: 0, paid: 0, onboard: {}, watched: {} }); affSave(a3); self.setState({ aff: a3 }); self.flash(nm + ' added. Invite sent to ' + em);
+        }
+        self.setState({ ua: Object.assign(blankUa(), { kind: x.kind }) });
+      },
+      teamAcct: ta,
+      acctOpts: Object.keys(ACCTS).map(function (k) { return { v: k, label: ACCTS[k].name }; }),
+      setTeamAcct: function (e) { self.setState({ uaTeamAcct: e.target.value }); },
+      teamRows: T.rowsOf(ta, (d.team || {})[ta] || []).map(function (r) { r.canEdit = true; return r; }),
+      tf: s.uaTf,
+      setTfName: function (e) { self.setState({ uaTf: Object.assign({}, self.state.uaTf, { name: e.target.value }) }); },
+      setTfEmail: function (e) { self.setState({ uaTf: Object.assign({}, self.state.uaTf, { email: e.target.value }) }); },
+      setTfLoc: function (e) { self.setState({ uaTf: Object.assign({}, self.state.uaTf, { loc: e.target.value }) }); },
+      tfLocs: [{ v: 'all', label: 'All Locations' }].concat(((d.locations || {})[ta] || []).map(function (l) { return { v: l.id, label: l.name }; })),
+      addTeam: function () { var t = self.state.uaTf; if (!t.name.trim() || !/@/.test(t.email)) return self.flash('Add a name and email'); var role = t.loc === 'all' ? 'Purchasing Manager' : 'Store Manager'; T.setT(function (d2) { d2.team = d2.team || {}; d2.team[ta] = (d2.team[ta] || []).concat([{ id: 'u' + Date.now(), name: t.name.trim(), email: t.email.trim(), role: role, loc: t.loc, status: 'Invited', perms: Object.assign({}, ROLE_PERMS[role]) }]); }, 'Invite sent to ' + t.email.trim()); self.setState({ uaTf: { name: '', email: '', loc: 'all' } }); },
+      filters: [['all', 'All'], ['partner', 'Partners'], ['rep', 'Sales Reps'], ['aff', 'Affiliates']].map(function (f) { return { label: f[1], on: s.uaFilter === f[0] ? 'true' : 'false', pick: function () { self.setState({ uaFilter: f[0] }); } }; }),
+      all: shown
+    } };
+  }
   renderVals() {
     var self = this, s = this.state, d = s.data, a = this.acct(), isAdmin = MODE === 'admin', c = this.calc(), mult = this.mult();
     var v = {}; v[s.view] = true;
-    var mine = isAdmin ? d.orders : d.orders.filter(function (o) { return o.acct === s.acct; });
-    var navP = [['overview', 'Overview'], ['order', 'New Order'], ['orders', 'Orders'], ['files', 'Files'], ['messages', 'Messages'], ['book', 'Book Time'], ['prices', 'Price Sheet']];
-    var navA = [['aOverview', 'Dashboard'], ['orders', 'Order Queue'], ['aAccounts', 'Accounts'], ['aPricing', 'Pricing'], ['aFreight', 'Freight Calculator'], ['messages', 'Messages'], ['book', 'Calendar'], ['files', 'Files']];
+    var T = this.teamVals(), meU = this.me(), myLoc = !isAdmin && meU.loc !== 'all' ? meU.loc : null, can = function (k) { return isAdmin || !!(meU.perms && meU.perms[k]); };
+    var hasLocs = ((d.locations || {})[s.acct] || []).length > 0;
+    var mine = isAdmin ? d.orders : d.orders.filter(function (o) { return o.acct === s.acct && (!myLoc || (o.loc || 'all') === myLoc) && (!s.fLoc || (o.loc || 'all') === s.fLoc); });
+    var navP = [['overview', 'Overview']].concat(!myLoc && hasLocs ? [['locs', 'Locations']] : []).concat(can('order') ? [['order', 'New Order']] : []).concat([['orders', 'Orders'], ['files', 'Files'], ['messages', 'Messages'], ['book', 'Book Time']]).concat(can('pricing') ? [['prices', 'Price Sheet']] : []).concat(can('team') ? [['team', 'Team']] : []);
+    var navA = [['aOverview', 'Dashboard'], ['orders', 'Order Queue'], ['aAccounts', 'Accounts'], ['aUsers', 'Users & Access'], ['aPricing', 'Pricing'], ['aFreight', 'Freight Calculator'], ['messages', 'Messages'], ['book', 'Calendar'], ['files', 'Files']];
     var newCount = d.orders.filter(function (o) { return o.status === 'Received'; }).length;
-    var titles = { overview: 'Partner Portal', order: 'New Order', orders: isAdmin ? 'Order Queue' : 'My Orders', files: 'Files', messages: 'Messages', book: isAdmin ? 'Calendar' : 'Book Time', prices: 'Price Sheet', aOverview: 'LTC Admin', aAccounts: 'Accounts', aPricing: 'Pricing', aFreight: 'Freight Calculator', aAff: 'Affiliates', aBoard: 'Affiliate Leaderboard', aCamp: 'Campaigns & Deals', aContent: 'News & Videos' };
+    var titles = { overview: 'Partner Portal', order: 'New Order', orders: isAdmin ? 'Order Queue' : 'My Orders', files: 'Files', messages: 'Messages', book: isAdmin ? 'Calendar' : 'Book Time', prices: 'Price Sheet', aOverview: 'LTC Admin', aAccounts: 'Accounts', aUsers: 'Users & Access', team: 'Team', locs: 'Locations', aPricing: 'Pricing', aFreight: 'Freight Calculator', aAff: 'Affiliates', aBoard: 'Affiliate Leaderboard', aCamp: 'Campaigns & Deals', aContent: 'News & Videos', aReps: 'Sales Team' };
     var f = s.form, sel = s.selId ? d.orders.find(function (o) { return o.id === s.selId; }) : null;
     var tierNow = this.tierFor(c.units);
     var shown = mine.filter(function (o) { return !s.fStatus || o.status === s.fStatus; });
@@ -1154,7 +1475,7 @@ class Component extends DCLogic {
       crumb: isAdmin ? 'Liberty Tool Company · Internal' : a.name + ' · ' + a.modelName,
       title: titles[s.view] || '', v: v,
       goNewOrder: function () { self.startOrder(); }, goOrders: function () { self.go('orders'); }, goMessages: function () { self.go('messages'); },
-      reloadData: function () { self.setState({ data: loadData(), aff: affLoad() }); self.flash('Refreshed'); },
+      reloadData: function () { self.setState({ data: loadData(), aff: affLoad(), reps: repLoad() }); self.flash('Refreshed'); },
       acct: a, form: f,
       pKpis: [
         { n: mine.filter(function (o) { return o.status !== 'Delivered'; }).length, l: 'Open Orders' },
@@ -1181,9 +1502,9 @@ class Component extends DCLogic {
       tierCards: P.tiers.map(function (t) { var on = tierNow && tierNow.name === t.name; return { name: t.name, rule: num(t.min) != null ? t.min + '+ units' : 'Min: set by LTC', off: num(t.pct) != null ? t.pct + '% off MSRP' : '% set by LTC', border: on ? '2px solid ' + C.pri : '1px solid ' + C.line }; }),
       multiStore: f.type === 'stores', singleShip: f.type !== 'stores', storeCount: s.stores.length,
       qtyHead: f.type === 'stores' ? 'Qty Per Store' : 'Qty',
-      prodRows: PRODUCTS.map(function (p) { var n = s.qty[p.id] || 0, u = self.unitPrice(p.id, c.units || (n * mult)); return { name: p.name, tag: p.tag, img: IMG[p.id], msrp: money(p.msrp), price: u == null ? 'Set by LTC' : money(u), priceColor: u == null ? '#8A94A3' : C.pri, qty: n, line: n > 0 ? (u == null ? 'List ' + money(p.msrp * n * mult) : money(u * n * mult)) : '—', inc: function () { self.setQty(p.id, n + 1); }, dec: function () { self.setQty(p.id, n - 1); }, set: function (e) { self.setQty(p.id, parseInt(e.target.value, 10)); } }; }),
-      toolRows: TOOLS.map(function (p) { var n = s.qty[p.id] || 0; return { name: p.name, img: IMG[p.id], qty: n, inc: function () { self.setQty(p.id, n + 1); }, dec: function () { self.setQty(p.id, n - 1); }, set: function (e) { self.setQty(p.id, parseInt(e.target.value, 10)); } }; }),
-      coatRows: COATINGS.map(function (n) { return { name: n, on: s.coat[n] ? 'true' : 'false', toggle: function () { var x = Object.assign({}, s.coat); x[n] = !x[n]; self.setState({ coat: x, err: '' }); } }; }),
+      prodRows: PRODUCTS.filter(function (p) { var ac = a.access || {}, kit = ['cove', 'ddd', 'triple', 'four'].indexOf(p.id) >= 0; return isAdmin || (kit ? ac.bundles : ac.caddy !== false); }).map(function (p) { var n = s.qty[p.id] || 0, u = self.unitPrice(p.id, c.units || (n * mult)); return { name: p.name, tag: p.tag, img: IMG[p.id], msrp: money(p.msrp), price: u == null ? 'Set by LTC' : money(u), priceColor: u == null ? '#8A94A3' : C.pri, qty: n, line: n > 0 ? (u == null ? 'List ' + money(p.msrp * n * mult) : money(u * n * mult)) : '—', inc: function () { self.setQty(p.id, n + 1); }, dec: function () { self.setQty(p.id, n - 1); }, set: function (e) { self.setQty(p.id, parseInt(e.target.value, 10)); } }; }),
+      toolRows: TOOLS.filter(function () { return isAdmin || (a.access || {}).trowels !== false; }).map(function (p) { var n = s.qty[p.id] || 0; return { name: p.name, img: IMG[p.id], qty: n, inc: function () { self.setQty(p.id, n + 1); }, dec: function () { self.setQty(p.id, n - 1); }, set: function (e) { self.setQty(p.id, parseInt(e.target.value, 10)); } }; }),
+      coatRows: COATINGS.filter(function () { return isAdmin || !!(a.access || {}).coatings; }).map(function (n) { return { name: n, on: s.coat[n] ? 'true' : 'false', toggle: function () { var x = Object.assign({}, s.coat); x[n] = !x[n]; self.setState({ coat: x, err: '' }); } }; }),
       storeRows: s.stores.map(function (st, i) { return { num: st.num, city: st.city, st: st.st, remove: function () { var a2 = s.stores.slice(); a2.splice(i, 1); self.setState({ stores: a2 }); } }; }),
       ns: s.ns,
       setNsNum: function (e) { self.setState({ ns: Object.assign({}, s.ns, { num: e.target.value }) }); },
@@ -1258,8 +1579,10 @@ class Component extends DCLogic {
       setMoq: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.moq = e.target.value; self.persist(d2); },
       hasToast: !!s.toast, toast: s.toast
     };
+    Object.assign(R, T, { acctKey: s.acct, showPricing: can('pricing'), noCoat: !(a.access || {}).coatings });
+    if (isAdmin) Object.assign(R, this.userVals(T));
     if (!isAdmin) return R;
-    Object.assign(R, this.fqVals(sel));
+    Object.assign(R, this.fqVals(sel), this.repVals());
     var appsN = s.aff.affiliates.filter(function (a) { return a.status === 'Applied'; }).length;
     R.navs2 = [['aAff', 'Affiliates', appsN], ['aBoard', 'Leaderboard', 0], ['aCamp', 'Campaigns & Deals', 0], ['aContent', 'News & Videos', 0]].map(function (n) { return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: n[2] > 0, badge: n[2], go: function () { self.go(n[0]); } }; });
     return Object.assign(R, this.affVals());
