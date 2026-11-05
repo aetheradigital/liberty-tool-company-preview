@@ -18,6 +18,50 @@ a{color:#0A35C8}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #B31942;outline-offset:2px}
 .app{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
 .side{background:#0A35C8;color:#FFFFFF;padding:22px 16px;display:flex;flex-direction:column;gap:18px}
+.side{position:sticky;top:0;height:100vh;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.35) transparent}
+.sidemore{position:sticky;bottom:-22px;margin:auto -16px -22px;padding:26px 16px 14px;background:linear-gradient(to bottom,transparent,#0A35C8 55%);display:flex;justify-content:center;pointer-events:none}
+.sidemore button{pointer-events:auto;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.45);background:rgba(255,255,255,0.16);color:#FFFFFF;font-weight:700;font-size:13px;letter-spacing:0.04em;box-shadow:0 6px 16px rgba(0,0,0,0.25)}
+.sidemore button:hover{background:rgba(255,255,255,0.26)}
+.linkbtn{border:0;background:none;padding:0;margin-top:4px;color:#0A35C8;font-weight:700;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;text-decoration:underline;text-underline-offset:2px}
+.drop{border:2px dashed #C9D4F2;border-radius:12px;padding:18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:#FFFFFF}
+.pill{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.lblrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #DCE3F7;font-size:14px}
+.lblrow:last-child{border-bottom:0}
+.lbic{width:34px;height:34px;border-radius:6px;background:#FFFFFF;border:1px solid #DCE3F7;display:inline-flex;align-items:center;justify-content:center;flex:none;color:#0A35C8}
+.csov{position:fixed;inset:0;z-index:70;background:rgba(7,18,40,0.62);display:flex;justify-content:center;align-items:flex-start;padding:0 16px;overflow-y:auto}
+.cspanel{width:100%;max-width:900px;margin:28px 0;background:#F2F5FF;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,0.35)}
+.cstop{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid #DCE3F7;position:sticky;top:0;background:#F2F5FF;border-radius:20px 20px 0 0;z-index:1}
+.cssheet{background:#FFFFFF;margin:18px;border:1px solid #DCE3F7;color:#1E2633;font-size:14px;line-height:1.5}
+.cshead{background:#0A35C8;color:#FFFFFF;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:18px 26px;flex-wrap:wrap}
+.cshead img{height:46px;width:auto;display:block}
+.csbody{padding:26px}
+.csgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:26px;align-items:start}
+@media (max-width:700px){.csgrid{grid-template-columns:1fr}.csbody{padding:18px}.cssheet{margin:10px}}
+.csimg{background:#E8EEFF;border-radius:12px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.csimg img{width:86%;height:86%;object-fit:contain}
+.csname{font-family:Poppins, sans-serif;font-weight:800;text-transform:uppercase;font-size:34px;line-height:1;color:#071A52;margin-top:6px}
+.csfeat{margin:12px 0 0;padding:0;list-style:none}
+.csfeat li{display:flex;gap:8px;padding:5px 0;border-bottom:1px solid #DCE3F7}
+.csfeat li:before{content:"✓";color:#B31942;font-weight:800}
+.csprice{display:flex;align-items:baseline;gap:8px;margin-top:14px;padding:12px 14px;background:#E8EEFF;border-radius:12px}
+.csspec{display:grid;grid-template-columns:150px minmax(0,1fr);border-top:2px solid #0A35C8;margin-top:22px;font-size:13px}
+.csspec span{padding:7px 8px;border-bottom:1px solid #DCE3F7}
+.csspec span:nth-child(odd){font-weight:700;color:#4A5578;background:#FAFBFD}
+.cstbd{color:#8A5A00;font-style:italic}
+.csfoot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:14px 26px;border-top:1px solid #DCE3F7;font-size:12px;color:#4A5578}
+.lcgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:10px}
+@media (max-width:700px){.lcgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.lctile{border:1px solid #DCE3F7;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:4px}
+.lctile .csimg{aspect-ratio:4/3}
+.lcsec{font-family:Poppins, sans-serif;font-weight:800;text-transform:uppercase;font-size:18px;color:#0A35C8;margin-top:18px;padding-bottom:4px;border-bottom:2px solid #B31942}
+@media print{body *{visibility:hidden !important}.csov,.csov .cssheet,.csov .cssheet *{visibility:visible !important}.csov{position:absolute;background:none;padding:0;overflow:visible}.cspanel{box-shadow:none;background:none;margin:0}.cstop{display:none}.cssheet{margin:0;border:0}.cshead,.csprice,.csimg,.csspec span{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.script{font-family:'Dancing Script',cursive;font-weight:700;font-size:34px;color:#071A52;line-height:1}
+.pthumb{width:48px;height:48px;border-radius:8px;object-fit:cover;background:#E8EEFF;border:1px solid #DCE3F7;display:block}
+.pimg{aspect-ratio:1/1;border-radius:12px;background:#E8EEFF;border:1px solid #DCE3F7;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pimg img{width:100%;height:100%;object-fit:contain}
+.diff{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #DCE3F7}
+.diff:last-child{border-bottom:0}
+.sigbox{border:1.5px dashed #C9D4F2;border-radius:12px;background:#FFFFFF;min-height:76px;display:flex;align-items:flex-end;padding:8px 14px 10px}
 .side .nav{display:flex;flex-direction:column;gap:4px}
 .nv{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;background:transparent;border:0;color:#D6E0F2;padding:11px 12px;border-radius:12px;font-weight:600;font-size:15px}
 .nv:hover{background:rgba(255,255,255,0.08);color:#FFFFFF}
@@ -73,7 +117,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 .demo{display:flex;gap:6px;background:rgba(255,255,255,0.1);padding:4px;border-radius:999px}
 .demo button{flex:1;border:0;border-radius:999px;padding:7px 8px;font-size:12px;font-weight:700;background:transparent;color:#D6E0F2}
 .demo button[aria-pressed="true"]{background:#FFFFFF;color:#0A35C8}
-@media (max-width: 860px){.app{grid-template-columns:1fr}.side{padding:16px}.side .nav{flex-direction:row;flex-wrap:wrap}.nv{width:auto}.main{padding:20px 16px 56px}}
+@media (max-width: 860px){.app{grid-template-columns:1fr}.side{padding:16px;position:static;height:auto;overflow:visible}.sidemore{display:none}.side .nav{flex-direction:row;flex-wrap:wrap}.nv{width:auto}.main{padding:20px 16px 56px}}
 
 .bar{height:12px;border-radius:999px;background:#E8EEFF;overflow:hidden}
 .bar>i{display:block;height:100%;background:#B31942;border-radius:999px;transition:width .3s}
@@ -85,6 +129,26 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 .chart .c i{display:block;width:100%;max-width:38px;border-radius:12px 12px 0 0;background:#0A35C8}
 .chart .c i.now{background:#B31942}
 .chart .c span{font-size:11px;font-weight:700;color:#4A5578}
+.vid{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#071A52,#0A35C8);display:flex;align-items:center;justify-content:center;color:#FFFFFF}
+.vid.doc{background:linear-gradient(135deg,#FFFFFF,#E8EEFF);color:#071A52;border:1px solid #DCE3F7}
+.vt{position:absolute;left:18px;top:16px;right:18px;font-family:Poppins, sans-serif;font-weight:800;text-transform:uppercase;font-size:20px;line-height:1.1}
+.vlen{position:absolute;left:16px;bottom:14px;font-size:12px;font-weight:700;background:rgba(0,0,0,0.45);color:#FFFFFF;padding:3px 8px;border-radius:999px}
+.play{position:relative;width:64px;height:64px;border-radius:50%;border:0;background:#B31942;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+.prog{position:absolute;left:0;right:0;bottom:0;height:5px;background:rgba(255,255,255,0.2)}
+.prog>i{display:block;height:100%;width:0;background:#B31942;animation:repPlay 8s linear forwards}
+@keyframes repPlay{to{width:100%}}
+@media (prefers-reduced-motion: reduce){.prog>i{animation:none;width:100%}}
+.pg{width:96px;height:124px;background:#FFFFFF;border:1px solid #C9D4F2;border-radius:4px;box-shadow:0 8px 20px rgba(11,27,51,0.12);display:flex;flex-direction:column;gap:7px;padding:14px 12px}
+.pg i{display:block;height:5px;border-radius:3px;background:#DCE3F7}
+.pg i:first-child{background:#0A35C8;width:60%}
+.trow{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:center;text-align:left;width:100%;padding:10px;border-radius:12px;border:1px solid #DCE3F7;background:#FFFFFF}
+.trow[aria-pressed="true"]{border:2px solid #0A35C8;padding:9px;background:#E8EEFF}
+.ticon{width:44px;height:44px;border-radius:12px;background:#E8EEFF;color:#0A35C8;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;letter-spacing:0.04em}
+.trow[aria-pressed="true"] .ticon{background:#FFFFFF}
+.tick{width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none;font-size:10px;font-weight:800;border:2px solid #C9D4F2;color:transparent}
+.tick.on{background:#2E7D4F;border-color:#2E7D4F;color:#FFFFFF}
+.news{padding:16px 0;border-bottom:1px solid #DCE3F7}
+.news:last-child{border-bottom:0}
 .goalline{position:absolute;left:0;right:0;border-top:2px dashed #B31942}
 </style>
 
@@ -122,6 +186,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       </sc-for>
     </nav>
     <div style="margin-top: auto; font-size: 12px; line-height: 1.5; color: #AFC0DC">You see only the accounts LTC assigns to you. Questions? Text 239-744-8403.</div>
+    <sc-if value="{{sideMore}}" hint-placeholder-val="{{false}}"><div class="sidemore"><button type="button" onClick="{{sideDown}}" aria-label="Scroll the menu down">More <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div></sc-if>
   </aside>
 
   <main class="main">
@@ -173,6 +238,15 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
           <sc-for list="{{nextSteps}}" as="p" hint-placeholder-count="3"><div style="display: flex; justify-content: space-between; gap: 10px; padding: 11px 0; border-bottom: 1px solid #DCE3F7; font-size: 14px"><span><b>{{p.name}}</b><div class="muted" style="font-size: 13px">{{p.next}}</div></span><span class="st" style="background: #E8EEFF; color: #0A35C8">{{p.stage}}</span></div></sc-for>
           <sc-if value="{{noSteps}}" hint-placeholder-val="{{false}}"><p class="muted">Add your first prospect in My Accounts.</p></sc-if>
         </div>
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><h3 class="h3">Latest News</h3><button type="button" class="btn ghost sm" onClick="{{goNews}}">All News</button></div>
+          <sc-for list="{{newsTop}}" as="n" hint-placeholder-count="2"><div class="news" style="padding: 12px 0"><div class="muted" style="font-size: 12px; font-weight: 700">{{n.tag}} · {{n.date}}</div><div style="font-weight: 700; margin-top: 3px">{{n.title}}</div></div></sc-for>
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 16px"><h3 class="h3">Training</h3><button type="button" class="btn ghost sm" onClick="{{goTraining}}">Open Training</button></div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-top: 10px"><span>{{tr.done}} of {{tr.total}} required done</span><span class="muted">{{tr.pct}}%</span></div>
+          <div class="bar blue" style="margin-top: 6px"><i style="width: {{tr.pct}}%"></i></div>
+        </div>
+      </div>
+      <div class="grid g2" style="margin-top: 16px; align-items: start">
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><h3 class="h3">Leaderboard · {{monthNow}}</h3><button type="button" class="btn ghost sm" onClick="{{goBoard}}">Full Board</button></div>
           <sc-for list="{{lbTop}}" as="t" hint-placeholder-count="3"><div style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #DCE3F7; background: {{t.bg}}"><span style="width: 30px; height: 30px; border-radius: 50%; background: {{t.medal}}; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; flex: none">{{t.rank}}</span><span style="flex: 1; min-width: 0"><b>{{t.name}}</b><div class="muted" style="font-size: 12px">{{t.pct}}% of monthly goal</div></span><b>{{t.v}}</b></div></sc-for>
@@ -226,6 +300,11 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
         </div></div>
         <sc-if value="{{noOrders}}" hint-placeholder-val="{{false}}"><p class="muted">No orders from your assigned accounts yet.</p></sc-if>
         <div class="muted" style="font-size: 12px; margin-top: 10px">Commission is figured on the order value at your rate and paid after delivery, per your rep agreement.</div>
+      </div>
+      <div class="card" style="margin-top: 16px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center"><h3 class="h3">Commission Statements</h3><span class="muted" style="font-size: 13px">Posted by LTC when each month is paid.</span></div>
+        <sc-for list="{{stmts}}" as="x" hint-placeholder-count="1"><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #DCE3F7"><span style="width: 40px; height: 48px; border-radius: 4px; background: #E8EEFF; border: 1px solid #DCE3F7; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; color: #0A35C8; flex: none">PDF</span><span style="flex: 1 1 240px; min-width: 0"><b>Commission Statement · {{x.period}}</b><div class="muted" style="font-size: 13px">{{x.meta}}</div></span><b>{{x.total}}</b><button type="button" class="btn ghost sm" onClick="{{x.view}}">View</button></div></sc-for>
+        <sc-if value="{{noStmts}}" hint-placeholder-val="{{false}}"><p class="muted" style="margin: 10px 0 0">Your first statement shows here after LTC runs the monthly payout.</p></sc-if>
       </div>
       <div class="card" style="margin-top: 16px">
         <h3 class="h3">Sales By Month</h3>
@@ -307,6 +386,77 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       </div>
     </sc-if>
 
+    <!-- ================= TRAINING ================= -->
+    <sc-if value="{{v.training}}" hint-placeholder-val="{{false}}">
+      <div class="card" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; background: #E8EEFF; margin-bottom: 16px">
+        <div style="flex: 1 1 320px; min-width: 0"><div class="eyebrow">Required Training</div><h2 class="h2" style="margin-top: 4px">{{tr.done}} Of {{tr.total}} Complete</h2><div class="muted" style="font-size: 14px; margin-top: 4px">{{tr.note}}</div></div>
+        <div style="flex: 0 1 320px; min-width: 220px"><div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700"><span>{{tr.pct}}%</span><span class="muted">{{tr.left}} left</span></div><div class="bar blue" style="margin-top: 6px"><i style="width: {{tr.pct}}%"></i></div></div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px"><sc-for list="{{tcats}}" as="f" hint-placeholder-count="5"><button type="button" class="chip" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: start">
+        <div class="card" style="grid-column: span 2; min-width: 0">
+          <sc-if value="{{tc.isVideo}}" hint-placeholder-val="{{true}}">
+            <div class="vid">
+              <div class="vt">{{tc.title}}</div>
+              <sc-if value="{{notPlaying}}" hint-placeholder-val="{{true}}"><button type="button" class="play" aria-label="Play {{tc.title}}" onClick="{{playCur}}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#FFFFFF"></path></svg></button></sc-if>
+              <sc-if value="{{playing}}" hint-placeholder-val="{{false}}"><div style="position: relative; font-weight: 700; background: rgba(0,0,0,0.45); padding: 8px 14px; border-radius: 999px">Playing</div><div class="prog"><i></i></div></sc-if>
+              <div class="vlen">{{tc.len}}</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{tc.isDoc}}" hint-placeholder-val="{{false}}">
+            <div class="vid doc">
+              <div class="vt" style="color: #0A35C8">{{tc.title}}</div>
+              <div class="pg" aria-hidden="true"><i></i><i></i><i></i><i style="width: 70%"></i><i></i><i style="width: 50%"></i></div>
+              <div class="vlen">{{tc.len}}</div>
+            </div>
+          </sc-if>
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: flex-start; margin-top: 14px">
+            <div style="min-width: 0; flex: 1 1 320px">
+              <div class="eyebrow">{{tc.cat}} · {{tc.kind}}<sc-if value="{{tc.req}}" hint-placeholder-val="{{true}}"> · Required</sc-if></div>
+              <h2 class="h2" style="margin-top: 4px">{{tc.title}}</h2>
+              <p class="muted" style="margin: 6px 0 0; line-height: 1.55">{{tc.desc}}</p>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <sc-if value="{{tc.isDoc}}" hint-placeholder-val="{{false}}"><button type="button" class="btn ghost" onClick="{{openDoc}}">Open {{tc.fileTxt}}</button></sc-if>
+              <button type="button" class="btn {{tc.doneCls}}" onClick="{{markDone}}">{{tc.doneLabel}}</button>
+            </div>
+          </div>
+          <div style="margin-top: 14px"><span class="lbl">Key Points</span>
+            <sc-for list="{{tc.pts}}" as="x" hint-placeholder-count="3"><div style="display: flex; gap: 10px; font-size: 14px; padding: 6px 0; border-bottom: 1px solid #DCE3F7"><b style="color: #0A35C8">{{x.n}}</b>{{x.t}}</div></sc-for>
+          </div>
+          <div class="muted" style="font-size: 12px; margin-top: 10px">Added by LTC {{tc.added}}. New training shows up here as soon as LTC uploads it.</div>
+        </div>
+        <div class="card">
+          <h3 class="h3">Modules</h3>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px">
+            <sc-for list="{{tmods}}" as="x" hint-placeholder-count="6">
+              <button type="button" class="trow" aria-pressed="{{x.on}}" onClick="{{x.pick}}">
+                <span class="ticon">{{x.icon}}</span>
+                <span style="min-width: 0"><span class="muted" style="display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">{{x.cat}} · {{x.len}}</span><b style="display: block; font-size: 14px; line-height: 1.3; margin-top: 2px">{{x.title}}</b><span style="display: flex; gap: 6px; align-items: center; margin-top: 6px; font-size: 12px; font-weight: 700"><span class="tick {{x.cls}}">✓</span>{{x.state}}</span></span>
+              </button>
+            </sc-for>
+          </div>
+          <sc-if value="{{noMods}}" hint-placeholder-val="{{false}}"><p class="muted">Nothing in this section yet.</p></sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ================= NEWS ================= -->
+    <sc-if value="{{v.news}}" hint-placeholder-val="{{false}}">
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px"><sc-for list="{{ntags}}" as="f" hint-placeholder-count="5"><button type="button" class="chip" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
+      <div class="card" style="max-width: 880px">
+        <sc-for list="{{newsAll}}" as="n" hint-placeholder-count="4">
+          <article class="news">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center"><span class="st" style="background: #E8EEFF; color: #0A35C8">{{n.tag}}</span><sc-if value="{{n.pinned}}" hint-placeholder-val="{{false}}"><span class="st" style="background: #FDECEF; color: #B31942">Pinned</span></sc-if><span class="muted" style="font-size: 13px">{{n.date}}</span></div>
+            <h2 class="h2" style="margin-top: 8px">{{n.title}}</h2>
+            <p style="margin: 6px 0 0; line-height: 1.6">{{n.body}}</p>
+            <sc-if value="{{n.hasFile}}" hint-placeholder-val="{{false}}"><button type="button" class="btn ghost sm" style="margin-top: 10px" onClick="{{n.get}}">Download {{n.file}}</button></sc-if>
+          </article>
+        </sc-for>
+        <sc-if value="{{noNews}}" hint-placeholder-val="{{false}}"><p class="muted" style="margin: 0">No posts here yet.</p></sc-if>
+      </div>
+    </sc-if>
+
     <!-- ================= RESOURCES ================= -->
     <sc-if value="{{v.resources}}" hint-placeholder-val="{{false}}">
       <div class="grid g2" style="align-items: start">
@@ -331,6 +481,26 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
     <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}"><div class="toast" role="status">{{toast}}</div></sc-if>
   </main>
 </div>
+<sc-if value="{{stOpen}}" hint-placeholder-val="{{false}}">
+  <div class="csov" role="dialog" aria-modal="true" aria-label="{{stm.kindLabel}}">
+    <div class="cspanel">
+      <div class="cstop"><div><div class="eyebrow">{{stm.kindLabel}}</div><b>{{stm.period}} · {{stm.no}}</b></div><div style="display: flex; flex-wrap: wrap; gap: 8px"><button type="button" class="btn ghost sm" onClick="{{stm.print}}">Print / Save As PDF</button><button type="button" class="btn sm" onClick="{{stm.download}}">Download</button><button type="button" class="btn ghost sm" onClick="{{stm.close}}">Close</button></div></div>
+      <div class="cssheet">
+        <div class="cshead"><img src="/assets/logo-white.png" alt="Liberty Tool Company"><div style="text-align: right"><div style="font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #C9D6FF">{{stm.kindLabel}}</div><div style="font-weight: 700">{{stm.no}}</div></div></div>
+        <div class="csbody">
+          <div class="eyebrow">{{stm.period}}</div>
+          <div class="csname">{{stm.name}}</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 14px; font-size: 14px"><div><span class="muted" style="font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em">Period</span><div style="font-weight: 600">{{stm.range}}</div></div><div><span class="muted" style="font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em">Paid On</span><div style="font-weight: 600">{{stm.paid}}</div></div></div>
+          <div class="csspec"><sc-for list="{{stm.rows}}" as="x" hint-placeholder-count="3"><span>{{x.k}}</span><span style="text-align: right; font-weight: 600">{{x.v}}</span></sc-for></div>
+          <div class="csprice" style="justify-content: space-between"><span style="font-weight: 800">Total Paid</span><span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 28px; color: #0A35C8">{{stm.total}}</span></div>
+          <p class="muted" style="font-size: 12px; margin: 12px 0 0">Questions about this statement? Reply within 30 days to sales@libertytoolcompany.com.</p>
+        </div>
+        <div class="csfoot"><span><b style="color: #0A35C8">LIBERTY TOOL COMPANY</b> · Practical Tools. Powerful Connections.</span><span>239-744-8403 · sales@libertytoolcompany.com</span></div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
 </template>
 <div id="root"></div>
 <script src="/runtime.js"></script>
@@ -342,6 +512,9 @@ var REP_KEY = 'ltc-sales-reps-v2';
 var PARTNER_KEY = 'ltc-partner-portal-v3';
 var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 var REP_TYPES = ['Territory Representative', 'Independent Sales Rep (1099)', 'Rep Agency'];
+var TCATS = ['Getting Started', 'Product Knowledge', 'Selling', 'Portal & Process'];
+var RNTAGS = ['Promo', 'Product', 'Policy', 'Win', 'Reminder'];
+function repTrainPct(d, id) { var req = d.training.filter(function (t) { return t.req; }), dn = d.trainDone[id] || {}; var n = req.filter(function (t) { return dn[t.id]; }).length; return { done: n, total: req.length, pct: req.length ? Math.round(n / req.length * 100) : 100 }; }
 var STAGES = ['Prospect', 'Demo Booked', 'Opening Order', 'Stocking', 'Reordering'];
 var PARTNER_NAMES = { ent: 'Keystone Home Centers', dist: 'Northline Coatings Supply', dealer: 'Coastline Flooring Supply', multi: 'Summit Facilities Group' };
 function repToday() { return new Date(); }
@@ -371,13 +544,30 @@ function repSeed() {
       { rep: 'r2', acct: 'Silver State Epoxy Crew', when: repAgo(6), outcome: 'Follow up', note: 'Crew loves the Lowboy. Asked about the cove trowel.' },
       { rep: 'r1', acct: 'Great Lakes Paint & Supply', when: repAgo(3), outcome: 'Demo booked', note: 'Manager wants to see it on a wall.' }
     ],
+    training: [
+      { id: 't1', cat: 'Getting Started', kind: 'Video', title: 'Welcome To The LTC Sales Team', len: '3:20', req: true, desc: 'Who LTC is, who we sell to and how your portal, goals and commission work.', pts: ['Installers, dealers, distributors, enterprise', 'How your accounts are assigned', 'Goals, commission and payout timing'], added: repAgo(60) },
+      { id: 't2', cat: 'Product Knowledge', kind: 'Video', title: 'The Tape Caddy Line: Lowboy, 2", 4", 6"', len: '6:45', req: true, desc: 'What each caddy does, which crews need which size, and the questions that pick the right one.', pts: ['Lowboy vs. standard caddies', 'Matching size to cove height', 'Bundles: online only'], added: repAgo(60) },
+      { id: 't3', cat: 'Product Knowledge', kind: 'Document', title: 'Trowels & Broadcast Strap Spec Sheet', len: '4 pages', req: true, desc: 'Sizes, materials, MSRP and dealer cost for the trowels and the broadcast strap.', pts: ['Finishing and cove trowels', 'Broadcast strap uses', 'Price and margin talking points'], added: repAgo(40) },
+      { id: 't4', cat: 'Selling', kind: 'Video', title: 'Running The 60-Second Wall Demo', len: '4:10', req: true, desc: 'The demo that closes counter orders. Film of a real supply-house demo, start to finish.', pts: ['Set up with blue tape', 'Let them roll it', 'Ask for the opening order'], added: repAgo(40) },
+      { id: 't5', cat: 'Selling', kind: 'Document', title: 'Objection Handling Cheat Sheet', len: '2 pages', req: false, desc: 'The ten pushbacks we hear most from dealers and how top reps answer them.', pts: ['"We already stock tape"', '"Too pricey for my crews"', '"Send me info"'], added: repAgo(25) },
+      { id: 't6', cat: 'Selling', kind: 'Video', title: 'Opening A Distributor Account', len: '5:30', req: false, desc: 'Credit app, opening order, planogram and the first reorder call.', pts: ['Credit app + W-9', 'Opening order mix', 'Day-30 reorder call'], added: repAgo(18) },
+      { id: 't7', cat: 'Portal & Process', kind: 'Video', title: 'Logging Visits And Working Your Pipeline', len: '2:40', req: true, desc: 'Use My Accounts to move prospects through each stage and log every visit.', pts: ['Add a prospect', 'Move a stage', 'Log a visit'], added: repAgo(12) },
+      { id: 't8', cat: 'Portal & Process', kind: 'Document', title: 'Commission & Payout Policy', len: '3 pages', req: true, desc: 'How commission is calculated, when it posts and when it pays.', pts: ['Paid on delivered orders', 'Monthly payout cycle', 'House accounts'], added: repAgo(12) }
+    ],
+    trainDone: { r1: { t1: true, t2: true, t3: true, t4: true, t7: true, t8: true, t5: true }, r2: { t1: true, t2: true, t3: true, t4: true, t5: true, t7: true }, r3: { t1: true, t2: true, t4: true }, r4: { t1: true } },
+    news: [
+      { id: 'rn1', date: repAgo(1), tag: 'Promo', title: 'Holiday Stocking Push: Free Freight On Opening Orders', body: 'Through Dec 31, any new dealer opening order over $1,500 ships free. Use it to close the accounts sitting at Demo Booked.', pinned: true, file: 'Holiday Stocking Promo.pdf' },
+      { id: 'rn2', date: repAgo(4), tag: 'Product', title: '4-Inch Caddy Price Confirmed At $99', body: 'MSRP on the 4-inch caddy is $99.00. Updated dealer price sheet is in the Sales Kit.', pinned: false, file: '' },
+      { id: 'rn3', date: repAgo(7), tag: 'Win', title: 'Stallings Group Opens Great Lakes Paint & Supply', body: 'Big opening order in Toledo after a counter demo. Ask them how they ran it.', pinned: false, file: '' },
+      { id: 'rn4', date: repAgo(14), tag: 'Policy', title: 'Log Every Visit Within 24 Hours', body: 'Visit notes feed the CRM and help LTC back you up with follow-up marketing. Log same day when you can.', pinned: false, file: '' }
+    ],
     files: [
       { name: 'Tape Caddy Sell Sheet.pdf', kind: 'Sell Sheet' }, { name: 'Dealer Price Sheet (MSRP + Cost).pdf', kind: 'Pricing' }, { name: 'Counter Display Planogram.pdf', kind: 'Display' },
       { name: 'Demo Script: 60-Second Wall Demo.pdf', kind: 'Demo' }, { name: 'Distributor Onboarding Packet.pdf', kind: 'Onboarding' }, { name: 'Credit Application + W-9.pdf', kind: 'Forms' }
     ]
   };
 }
-function repLoad() { var d = null; try { d = JSON.parse(localStorage.getItem(REP_KEY) || 'null'); } catch (e) { d = null; } return d || repSeed(); }
+function repLoad() { var d = null; try { d = JSON.parse(localStorage.getItem(REP_KEY) || 'null'); } catch (e) { d = null; } var seed = repSeed(); if (!d) return seed; ['training', 'trainDone', 'news'].forEach(function (k) { if (!d[k]) d[k] = seed[k]; }); return d; }
 function repSave(d) { try { localStorage.setItem(REP_KEY, JSON.stringify(d)); } catch (e) {} }
 function repPartnerOrders() {
   var p = null; try { p = JSON.parse(localStorage.getItem(PARTNER_KEY) || 'null'); } catch (e) { p = null; }
@@ -402,17 +592,95 @@ function repBoard(d, period) {
 }
 var REP_MEDAL = ['#C9A227', '#9AA4B2', '#B87333'];
 
+function sideWatch(comp) {
+  if (comp.__sw) return; comp.__sw = 1;
+  var chk = function () { var el = document.querySelector('.side'), m = false; try { if (el && getComputedStyle(el).position === 'sticky') m = el.scrollHeight - el.clientHeight - el.scrollTop > 8; } catch (e) {} if (!!comp.state.sideMore !== m) comp.setState({ sideMore: m }); };
+  setTimeout(chk, 60); setInterval(chk, 500);
+  try { window.addEventListener('resize', chk); document.addEventListener('scroll', chk, true); } catch (e) {}
+}
+function sideDown() { var el = document.querySelector('.side'); if (!el) return; try { el.scrollBy({ top: Math.round(el.clientHeight * 0.6), behavior: 'smooth' }); } catch (e) { el.scrollTop += Math.round(el.clientHeight * 0.6); } }
+
+// ---------- Monthly payout ledger (shared by Admin, Affiliate and Sales Rep portals) ----------
+var PAY_KEY = 'ltc-payouts-v1';
+var PAY_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var PAY_AFF_RATE = 10;
+function payPeriod(back) { var d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - back); var y = d.getFullYear(), m = d.getMonth(); return { key: y + '-' + (m < 9 ? '0' : '') + (m + 1), label: PAY_MONTHS[m] + ' ' + y, month: PAY_MONTHS[m], idx: m, year: y, back: back, last: new Date(y, m + 1, 0).toLocaleDateString('en-US', { month: 'long', day: 'numeric' }) }; }
+function payPeriods() { return [payPeriod(0), payPeriod(1), payPeriod(2)]; }
+function payFmt(d) { return (d || new Date()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+function payUsd(n) { return '$' + (Math.round(n * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function paySeed() {
+  var p1 = payPeriod(1), p2 = payPeriod(2), units = {}, runs = {};
+  units[p1.key] = { a1: 21, a2: 24, a6: 13, a7: 9, a8: 4 };
+  units[p2.key] = { a1: 5, a2: 19, a6: 10, a7: 6, a8: 3 };
+  var paid = new Date(); paid.setDate(1); paid.setMonth(paid.getMonth() - 1); paid.setDate(10);
+  runs[p2.key] = { paidOn: payFmt(paid), by: 'LTC Admin', items: [
+    { kind: 'aff', id: 'a1', name: 'Marcus Hale', units: 5, base: 50, adj: 0, note: '', total: 50 },
+    { kind: 'aff', id: 'a2', name: 'Tasha Greene', units: 19, base: 190, adj: 0, note: '', total: 190 },
+    { kind: 'aff', id: 'a6', name: 'Luis Ortega', units: 10, base: 100, adj: 0, note: '', total: 100 },
+    { kind: 'aff', id: 'a7', name: 'Brianna Cole', units: 6, base: 60, adj: 0, note: '', total: 60 },
+    { kind: 'aff', id: 'a8', name: 'Dev Patel', units: 3, base: 30, adj: 0, note: '', total: 30 },
+    { kind: 'rep', id: 'r1', name: 'The Stallings Group', sales: 17600, rate: 7, base: 1232, adj: 0, note: '', total: 1232 },
+    { kind: 'rep', id: 'r2', name: 'Mike Torres', sales: 11800, rate: 5, base: 590, adj: 0, note: '', total: 590 },
+    { kind: 'rep', id: 'r3', name: 'Jenna Price', sales: 9200, rate: 10, base: 920, adj: 0, note: '', total: 920 }
+  ] };
+  return { units: units, runs: runs };
+}
+function payLoad() { var d = null; try { d = JSON.parse(localStorage.getItem(PAY_KEY) || 'null'); } catch (e) { d = null; } return d && d.runs ? d : paySeed(); }
+function paySave(d) { try { localStorage.setItem(PAY_KEY, JSON.stringify(d)); } catch (e) {} }
+function payRunsFor(L, kind, id) {
+  return payPeriods().concat([payPeriod(3), payPeriod(4)]).map(function (p) { var r = L.runs[p.key]; if (!r) return null; var it = r.items.find(function (x) { return x.kind === kind && x.id === id; }); return it ? { period: p, run: r, item: it } : null; }).filter(Boolean);
+}
+function payAffMonths(L, a) {
+  var ps = payPeriods(), out = [{ m: ps[0].month + ' (so far)', sold: a.mo || 0, status: 'Pending', amt: (a.mo || 0) * PAY_AFF_RATE }];
+  ps.slice(1).forEach(function (p) {
+    var r = L.runs[p.key], it = r ? r.items.find(function (x) { return x.kind === 'aff' && x.id === a.id; }) : null, u = ((L.units || {})[p.key] || {})[a.id];
+    if (it) out.push({ m: p.month, sold: it.units, status: 'Paid', amt: it.total });
+    else if (u) out.push({ m: p.month, sold: u, status: r ? 'On Hold' : 'Approved', amt: u * PAY_AFF_RATE });
+  });
+  return out;
+}
+function payStmtNo(p, it) { return 'ST-' + p.key.replace('-', '') + '-' + it.id.toUpperCase(); }
+function payStmtRows(it) {
+  var rows = it.kind === 'aff'
+    ? [['Eligible Tape Caddies Sold', String(it.units)], ['Rate', payUsd(PAY_AFF_RATE) + ' per caddy'], ['Commission', payUsd(it.base)]]
+    : [['Sales From Your Accounts', payUsd(it.sales)], ['Commission Rate', it.rate + '%'], ['Commission', payUsd(it.base)]];
+  if (it.adj) rows.push(['Adjustment' + (it.note ? ' (' + it.note + ')' : ''), (it.adj > 0 ? '+' : '−') + payUsd(Math.abs(it.adj))]);
+  return rows.map(function (r) { return { k: r[0], v: r[1] }; });
+}
+function payStmtHtml(p, run, it, logo) {
+  var esc = function (t) { return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
+  var abs = function (u) { try { return new URL(u, location.href).href; } catch (e) { return u; } };
+  var rows = payStmtRows(it).map(function (r) { return '<tr><td>' + esc(r.k) + '</td><td style="text-align:right">' + esc(r.v) + '</td></tr>'; }).join('');
+  return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(payStmtNo(p, it)) + '</title><style>@page{size:Letter;margin:0.6in}body{font-family:Inter,Arial,sans-serif;color:#1E2633;max-width:7.3in;margin:0 auto;font-size:13px;line-height:1.5}.hd{background:#0A3161;color:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 22px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.hd img{height:42px}.b{padding:22px}.e{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#B31942}h1{font-size:28px;text-transform:uppercase;margin:4px 0 14px}table{width:100%;border-collapse:collapse;margin-top:14px}td{padding:8px;border-bottom:1px solid #E3E8EF}.g{display:grid;grid-template-columns:1fr 1fr;gap:16px}.t{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding:12px 14px;background:#EEF3FA;-webkit-print-color-adjust:exact;print-color-adjust:exact}.f{border-top:1px solid #E3E8EF;padding:10px 22px;font-size:11px;color:#4A5568}</style></head><body>' +
+    '<div class="hd"><img src="' + abs(logo) + '" alt="Liberty Tool Company"><div style="text-align:right"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#C9D6FF;font-weight:800">' + (it.kind === 'aff' ? 'Affiliate Payout Statement' : 'Commission Statement') + '</div><b>' + esc(payStmtNo(p, it)) + '</b></div></div>' +
+    '<div class="b"><div class="e">' + esc(p.label) + '</div><h1>' + esc(it.name) + '</h1><div class="g"><div><b>Period</b><br>' + esc(p.month) + ' 1 – ' + esc(p.last) + ', ' + p.year + '</div><div><b>Paid On</b><br>' + esc(run.paidOn) + '</div></div><table>' + rows + '</table><div class="t"><b>Total Paid</b><b style="font-size:24px;color:#0A3161">' + payUsd(it.total) + '</b></div><p style="color:#4A5568;font-size:12px">Questions about this statement? Reply within 30 days to sales@libertytoolcompany.com.</p></div>' +
+    '<div class="f"><b style="color:#0A3161">LIBERTY TOOL COMPANY</b> · Practical Tools. Powerful Connections. · 239-744-8403 · sales@libertytoolcompany.com</div></body></html>';
+}
+function payDl(name, html) { try { var b = new Blob([html], { type: 'text/html' }), u = URL.createObjectURL(b), l = document.createElement('a'); l.href = u; l.download = name; document.body.appendChild(l); l.click(); document.body.removeChild(l); setTimeout(function () { URL.revokeObjectURL(u); }, 4000); return true; } catch (e) { return false; } }
+// statement modal values: self.state.stmt = { key, kind, id } ; L = ledger
+function payStmtVals(self, L) {
+  var st = self.state.stmt, logo = '/assets/logo-white.png';
+  var p = st ? payPeriods().concat([payPeriod(3), payPeriod(4)]).find(function (x) { return x.key === st.key; }) : null;
+  var run = p ? L.runs[p.key] : null, it = run ? run.items.find(function (x) { return x.kind === st.kind && x.id === st.id; }) : null;
+  if (!it) return { stOpen: false, stm: { rows: [], name: '', period: '', no: '', paid: '', total: '', kindLabel: '', range: '', close: function () {}, print: function () {}, download: function () {} } };
+  return { stOpen: true, stm: { kindLabel: it.kind === 'aff' ? 'Affiliate Payout Statement' : 'Commission Statement', name: it.name, period: p.label, range: p.month + ' 1 – ' + p.last + ', ' + p.year, no: payStmtNo(p, it), paid: run.paidOn, total: payUsd(it.total), rows: payStmtRows(it),
+    close: function () { self.setState({ stmt: null }); },
+    print: function () { try { window.print(); } catch (e) {} },
+    download: function () { var nm = payStmtNo(p, it) + '.html'; if (payDl(nm, payStmtHtml(p, run, it, logo))) self.flash('Downloaded ' + nm + '. Open it and print to save a PDF.'); else self.flash('Download is blocked in this preview. Use Print / Save As PDF.'); } } };
+}
+
 var OUTCOMES = ['Order coming', 'Demo booked', 'Follow up', 'Left samples / sell sheet', 'Not a fit'];
 
 class Component extends DCLogic {
   constructor(props) {
     super(props);
+    sideWatch(this);
     var d = repLoad(), me = d.reps.find(function (r) { return r.id === 'r2'; });
-    this.state = { data: d, me: 'r2', view: 'home', lb: 'month', gType: me.goalType || 'revenue', gDraft: me.goal || '', np: { name: '', city: '', next: '' }, vf: { acct: '', outcome: OUTCOMES[0], note: '' }, calc: { open: 2, first: 1500, re: 4, reAmt: 900, base: 3 }, toast: '' };
+    this.state = { data: d, me: 'r2', view: 'home', lb: 'month', gType: me.goalType || 'revenue', gDraft: me.goal || '', np: { name: '', city: '', next: '' }, vf: { acct: '', outcome: OUTCOMES[0], note: '' }, calc: { open: 2, first: 1500, re: 4, reAmt: 900, base: 3 }, toast: '', tcat: '', tid: '', playing: false, ntag: '', pay: payLoad(), stmt: null };
   }
   persist(d) { repSave(d); this.setState({ data: d }); }
   flash(t) { var self = this; this.setState({ toast: t }); setTimeout(function () { if (self.state.toast === t) self.setState({ toast: '' }); }, 2400); }
-  go(v) { this.setState({ view: v }); try { window.scrollTo(0, 0); } catch (e) {} }
+  go(v) { this.setState({ view: v, playing: false }); try { window.scrollTo(0, 0); } catch (e) {} }
   pick(id) { var r = this.state.data.reps.find(function (x) { return x.id === id; }); this.setState({ me: id, view: 'home', gType: r.goalType || 'revenue', gDraft: r.goal || '', vf: { acct: '', outcome: OUTCOMES[0], note: '' } }); }
   upd(fn, msg) { var d2 = JSON.parse(JSON.stringify(this.state.data)); fn(d2); this.persist(d2); if (msg) this.flash(msg); }
   renderVals() {
@@ -431,7 +699,12 @@ class Component extends DCLogic {
     var pros = d.prospects.filter(function (p) { return p.rep === me.id; });
     var visits = d.visits.filter(function (x) { return x.rep === me.id; });
     var com = function (o) { return (o.value != null ? o.value : o.list) * me.rate / 100; };
-    var titles = { home: 'Dashboard', accounts: 'My Accounts', orders: 'Orders & Commission', calc: 'Income Calculator', board: 'Leaderboard', goals: 'Goals', resources: 'Sales Kit' };
+    var titles = { home: 'Dashboard', accounts: 'My Accounts', orders: 'Orders & Commission', calc: 'Income Calculator', board: 'Leaderboard', goals: 'Goals', resources: 'Sales Kit', training: 'Training', news: 'News' };
+    var trp = repTrainPct(d, me.id), dn = d.trainDone[me.id] || {};
+    var mods = d.training.filter(function (t) { return !s.tcat || t.cat === s.tcat; });
+    var cur = d.training.find(function (t) { return t.id === s.tid; }) || d.training.find(function (t) { return t.req && !dn[t.id]; }) || d.training[0] || { id: '', cat: '', kind: 'Video', title: 'No Training Yet', len: '', req: false, desc: 'LTC will add training here.', pts: [], added: '' };
+    var newsSorted = d.news.slice().sort(function (a, b) { return (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0); });
+    var newsNew = d.news.filter(function (n) { var t = Date.parse(n.date); return !isNaN(t) && (now - t) / 864e5 <= 3; }).length;
     var c = s.calc;
     var newAccts = c.open * 12, yearSales = newAccts * c.first + (c.base + newAccts / 2) * c.re * c.reAmt, yearCom = yearSales * me.rate / 100;
     var draft = parseFloat(s.gDraft);
@@ -448,7 +721,7 @@ class Component extends DCLogic {
       me: { name: me.name, type: me.type, territory: me.territory, rateTxt: me.rate + '% of sales' },
       isActive: me.id === 'r2' ? 'true' : 'false', isAgency: me.id === 'r1' ? 'true' : 'false', isNew: me.id === 'r4' ? 'true' : 'false',
       pickActive: function () { self.pick('r2'); }, pickAgency: function () { self.pick('r1'); }, pickNew: function () { self.pick('r4'); },
-      navs: [['home', 'Dashboard'], ['accounts', 'My Accounts', pros.filter(function (p) { return p.stage === 'Prospect'; }).length], ['orders', 'Orders & Commission'], ['calc', 'Income Calculator'], ['board', 'Leaderboard'], ['goals', 'Goals', me.goal ? 0 : 1], ['resources', 'Sales Kit']].map(function (n) { return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: (n[2] || 0) > 0, badge: n[2] || 0, go: function () { self.go(n[0]); } }; }),
+      navs: [['home', 'Dashboard'], ['accounts', 'My Accounts', pros.filter(function (p) { return p.stage === 'Prospect'; }).length], ['orders', 'Orders & Commission'], ['calc', 'Income Calculator'], ['board', 'Leaderboard'], ['goals', 'Goals', me.goal ? 0 : 1], ['training', 'Training', trp.total - trp.done], ['news', 'News', newsNew], ['resources', 'Sales Kit']].map(function (n) { return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: (n[2] || 0) > 0, badge: n[2] || 0, go: function () { self.go(n[0]); } }; }),
       goVisit: function () { self.setState({ view: 'accounts' }); setTimeout(function () { var el = document.getElementById('visit'); if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth' }); }, 50); },
       goGoals: function () { self.go('goals'); }, goAccounts: function () { self.go('accounts'); }, goBoard: function () { self.go('board'); },
       noGoal: !me.goal, hasGoal: !!me.goal, yearNow: now.getFullYear(), monthNow: MONTHS[mi],
@@ -488,7 +761,24 @@ class Component extends DCLogic {
       useAsGoal: function () { self.setState({ gType: 'revenue', gDraft: Math.round(yearSales) }); self.go('goals'); },
       chart: (function () { var max = Math.max.apply(null, me.ytd.concat([me.monthGoal])) || 1; return MONTHS.map(function (m, i) { return { m: m, h: Math.round((me.ytd[i] || 0) / max * 100 * 0.86), cls: i === mi ? 'now' : '', title: m + ': ' + repUsd(me.ytd[i] || 0) }; }); })(),
       chartGoal: (me.monthGoal / (Math.max.apply(null, me.ytd.concat([me.monthGoal])) || 1) * 0.86).toFixed(3),
+      stmts: payRunsFor(s.pay, 'rep', me.id).map(function (x) { return { period: x.period.label, meta: repUsd(x.item.sales) + ' in sales · ' + x.item.rate + '% · Paid ' + x.run.paidOn, total: payUsd(x.item.total), view: function () { self.setState({ stmt: { key: x.period.key, kind: 'rep', id: me.id } }); } }; }),
+      noStmts: payRunsFor(s.pay, 'rep', me.id).length === 0,
+      stOpen: payStmtVals(self, s.pay).stOpen, stm: payStmtVals(self, s.pay).stm,
+      tr: { done: trp.done, total: trp.total, pct: trp.pct, left: trp.total - trp.done, note: trp.done === trp.total ? 'All required training done. Optional modules are there when you want them.' : 'Finish the required modules to stay certified to sell. LTC can see your progress.' },
+      goTraining: function () { self.go('training'); }, goNews: function () { self.go('news'); },
+      tcats: [''].concat(TCATS).map(function (c2) { return { label: c2 || 'All Training', on: s.tcat === c2 ? 'true' : 'false', pick: function () { self.setState({ tcat: c2 }); } }; }),
+      tc: { title: cur.title, cat: cur.cat, kind: cur.kind, len: cur.len, req: cur.req, desc: cur.desc, added: cur.added, isVideo: cur.kind !== 'Document', isDoc: cur.kind === 'Document', fileTxt: cur.file ? cur.file : 'Document', pts: (cur.pts || []).map(function (t, i) { return { n: '0' + (i + 1), t: t }; }), doneCls: dn[cur.id] ? 'ghost' : '', doneLabel: dn[cur.id] ? 'Completed ✓' : 'Mark Complete' },
+      playing: s.playing, notPlaying: !s.playing, playCur: function () { self.setState({ playing: true }); },
+      openDoc: function () { self.flash('Mockup: ' + (cur.file || cur.title) + ' opens here'); },
+      markDone: function () { if (!cur.id) return; var was = !!dn[cur.id]; self.upd(function (d2) { d2.trainDone[me.id] = d2.trainDone[me.id] || {}; d2.trainDone[me.id][cur.id] = !was; }, was ? '' : 'Nice. Marked complete.'); },
+      tmods: mods.map(function (t) { var w = !!dn[t.id]; return { title: t.title, cat: t.cat, len: t.len, icon: t.kind === 'Document' ? 'PDF' : 'VIDEO', on: t.id === cur.id ? 'true' : 'false', cls: w ? 'on' : '', state: w ? 'Completed' : (t.req ? 'Required' : 'Optional'), pick: function () { self.setState({ tid: t.id, playing: false }); } }; }),
+      noMods: mods.length === 0,
+      ntags: [''].concat(RNTAGS).map(function (t) { return { label: t || 'All News', on: s.ntag === t ? 'true' : 'false', pick: function () { self.setState({ ntag: t }); } }; }),
+      newsAll: newsSorted.filter(function (n) { return !s.ntag || n.tag === s.ntag; }).map(function (n) { return { tag: n.tag, date: n.date, title: n.title, body: n.body, pinned: !!n.pinned, hasFile: !!n.file, file: n.file, get: function () { self.flash('Mockup: ' + n.file + ' downloads here'); } }; }),
+      noNews: newsSorted.filter(function (n) { return !s.ntag || n.tag === s.ntag; }).length === 0,
+      newsTop: newsSorted.slice(0, 3),
       files: d.files.map(function (f) { return { name: f.name, kind: f.kind, get: function () { self.flash('Mockup: ' + f.name + ' downloads here'); } }; }),
+      sideMore: !!s.sideMore, sideDown: sideDown,
       hasToast: !!s.toast, toast: s.toast
     });
   }

@@ -19,6 +19,50 @@ a{color:#0A35C8}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #B31942;outline-offset:2px}
 .app{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
 .side{background:#0A35C8;color:#FFFFFF;padding:22px 16px;display:flex;flex-direction:column;gap:18px}
+.side{position:sticky;top:0;height:100vh;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.35) transparent}
+.sidemore{position:sticky;bottom:-22px;margin:auto -16px -22px;padding:26px 16px 14px;background:linear-gradient(to bottom,transparent,#0A35C8 55%);display:flex;justify-content:center;pointer-events:none}
+.sidemore button{pointer-events:auto;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.45);background:rgba(255,255,255,0.16);color:#FFFFFF;font-weight:700;font-size:13px;letter-spacing:0.04em;box-shadow:0 6px 16px rgba(0,0,0,0.25)}
+.sidemore button:hover{background:rgba(255,255,255,0.26)}
+.linkbtn{border:0;background:none;padding:0;margin-top:4px;color:#0A35C8;font-weight:700;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;text-decoration:underline;text-underline-offset:2px}
+.drop{border:2px dashed #C9D4F2;border-radius:12px;padding:18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:#FFFFFF}
+.pill{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.lblrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #DCE3F7;font-size:14px}
+.lblrow:last-child{border-bottom:0}
+.lbic{width:34px;height:34px;border-radius:6px;background:#FFFFFF;border:1px solid #DCE3F7;display:inline-flex;align-items:center;justify-content:center;flex:none;color:#0A35C8}
+.csov{position:fixed;inset:0;z-index:70;background:rgba(7,18,40,0.62);display:flex;justify-content:center;align-items:flex-start;padding:0 16px;overflow-y:auto}
+.cspanel{width:100%;max-width:900px;margin:28px 0;background:#F2F5FF;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,0.35)}
+.cstop{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid #DCE3F7;position:sticky;top:0;background:#F2F5FF;border-radius:20px 20px 0 0;z-index:1}
+.cssheet{background:#FFFFFF;margin:18px;border:1px solid #DCE3F7;color:#1E2633;font-size:14px;line-height:1.5}
+.cshead{background:#0A35C8;color:#FFFFFF;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:18px 26px;flex-wrap:wrap}
+.cshead img{height:46px;width:auto;display:block}
+.csbody{padding:26px}
+.csgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:26px;align-items:start}
+@media (max-width:700px){.csgrid{grid-template-columns:1fr}.csbody{padding:18px}.cssheet{margin:10px}}
+.csimg{background:#E8EEFF;border-radius:12px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.csimg img{width:86%;height:86%;object-fit:contain}
+.csname{font-family:Poppins, sans-serif;font-weight:800;text-transform:uppercase;font-size:34px;line-height:1;color:#071A52;margin-top:6px}
+.csfeat{margin:12px 0 0;padding:0;list-style:none}
+.csfeat li{display:flex;gap:8px;padding:5px 0;border-bottom:1px solid #DCE3F7}
+.csfeat li:before{content:"✓";color:#B31942;font-weight:800}
+.csprice{display:flex;align-items:baseline;gap:8px;margin-top:14px;padding:12px 14px;background:#E8EEFF;border-radius:12px}
+.csspec{display:grid;grid-template-columns:150px minmax(0,1fr);border-top:2px solid #0A35C8;margin-top:22px;font-size:13px}
+.csspec span{padding:7px 8px;border-bottom:1px solid #DCE3F7}
+.csspec span:nth-child(odd){font-weight:700;color:#4A5578;background:#FAFBFD}
+.cstbd{color:#8A5A00;font-style:italic}
+.csfoot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:14px 26px;border-top:1px solid #DCE3F7;font-size:12px;color:#4A5578}
+.lcgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:10px}
+@media (max-width:700px){.lcgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.lctile{border:1px solid #DCE3F7;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:4px}
+.lctile .csimg{aspect-ratio:4/3}
+.lcsec{font-family:Poppins, sans-serif;font-weight:800;text-transform:uppercase;font-size:18px;color:#0A35C8;margin-top:18px;padding-bottom:4px;border-bottom:2px solid #B31942}
+@media print{body *{visibility:hidden !important}.csov,.csov .cssheet,.csov .cssheet *{visibility:visible !important}.csov{position:absolute;background:none;padding:0;overflow:visible}.cspanel{box-shadow:none;background:none;margin:0}.cstop{display:none}.cssheet{margin:0;border:0}.cshead,.csprice,.csimg,.csspec span{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.script{font-family:'Dancing Script',cursive;font-weight:700;font-size:34px;color:#071A52;line-height:1}
+.pthumb{width:48px;height:48px;border-radius:8px;object-fit:cover;background:#E8EEFF;border:1px solid #DCE3F7;display:block}
+.pimg{aspect-ratio:1/1;border-radius:12px;background:#E8EEFF;border:1px solid #DCE3F7;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pimg img{width:100%;height:100%;object-fit:contain}
+.diff{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #DCE3F7}
+.diff:last-child{border-bottom:0}
+.sigbox{border:1.5px dashed #C9D4F2;border-radius:12px;background:#FFFFFF;min-height:76px;display:flex;align-items:flex-end;padding:8px 14px 10px}
 .side .nav{display:flex;flex-direction:column;gap:4px}
 .nv{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;background:transparent;border:0;color:#D6E0F2;padding:11px 12px;border-radius:12px;font-weight:600;font-size:15px}
 .nv:hover{background:rgba(255,255,255,0.08);color:#FFFFFF}
@@ -74,7 +118,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 .demo{display:flex;gap:6px;background:rgba(255,255,255,0.1);padding:4px;border-radius:999px}
 .demo button{flex:1;border:0;border-radius:999px;padding:7px 8px;font-size:12px;font-weight:700;background:transparent;color:#D6E0F2}
 .demo button[aria-pressed="true"]{background:#FFFFFF;color:#0A35C8}
-@media (max-width: 860px){.app{grid-template-columns:1fr}.side{padding:16px}.side .nav{flex-direction:row;flex-wrap:wrap}.nv{width:auto}.main{padding:20px 16px 56px}}
+@media (max-width: 860px){.app{grid-template-columns:1fr}.side{padding:16px;position:static;height:auto;overflow:visible}.sidemore{display:none}.side .nav{flex-direction:row;flex-wrap:wrap}.nv{width:auto}.main{padding:20px 16px 56px}}
 
 .bar{height:10px;border-radius:999px;background:#E8EEFF;overflow:hidden}
 .bar>i{display:block;height:100%;background:#B31942;border-radius:999px}
@@ -231,6 +275,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       </sc-for>
     </nav>
     <div style="margin-top: auto; font-size: 12px; line-height: 1.5; color: #AFC0DC">Liberty Ambassador Program · Questions? Text 239-744-8403</div>
+    <sc-if value="{{sideMore}}" hint-placeholder-val="{{false}}"><div class="sidemore"><button type="button" onClick="{{sideDown}}" aria-label="Scroll the menu down">More <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div></sc-if>
   </aside>
 
   <main class="main">
@@ -483,7 +528,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       <div class="card" style="margin-top: 16px">
         <h2 class="h2">Payout Statements</h2>
         <sc-for list="{{stmtFiles}}" as="f" hint-placeholder-count="2">
-          <div class="frow"><div class="ficon">PDF</div><div style="flex: 1 1 280px; min-width: 0"><b>{{f.name}}</b><div class="muted" style="font-size: 13px; margin-top: 2px">{{f.meta}}</div></div><button type="button" class="btn ghost sm" onClick="{{f.get}}">Download</button></div>
+          <div class="frow"><div class="ficon">PDF</div><div style="flex: 1 1 280px; min-width: 0"><b>{{f.name}}</b><div class="muted" style="font-size: 13px; margin-top: 2px">{{f.meta}}</div></div><button type="button" class="btn ghost sm" onClick="{{f.get}}">View</button></div>
         </sc-for>
         <sc-if value="{{noStmts}}" hint-placeholder-val="{{false}}"><p class="muted" style="margin: 10px 0 0">Your first statement shows here after your first monthly payout.</p></sc-if>
       </div>
@@ -515,16 +560,36 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
             <div class="ss">Liberty Tool Company</div>
             <div class="sf"><span>Authorized Rep.</span><b>{{ag.ltcName}}</b><span>Title</span><b>{{ag.ltcTitle}}</b></div>
             <div class="ss" style="margin-top: 16px">Signature</div>
-            <div class="sigln"><span class="muted" style="font-size: 13px">{{ag.ltcSig}}</span></div>
+            <div class="sigln"><sc-if value="{{ag.ltcSigned}}" hint-placeholder-val="{{false}}"><span class="script">{{ag.ltcSigText}}</span></sc-if><sc-if value="{{ag.ltcPending}}" hint-placeholder-val="{{true}}"><span class="muted" style="font-size: 13px">Pending countersignature</span></sc-if></div>
             <div class="sf"><span>Date</span><b>{{ag.ltcDate}}</b></div>
           </div>
         </div>
-        <div style="margin-top: 18px; padding: 10px 12px; border: 1px solid #DCE3F7; border-radius: 12px; font-size: 12px; color: #4A5578; line-height: 1.6"><b style="color: #071A52">Electronic Signature Record</b><br>Signed electronically by {{ag.name}} ({{ag.email}}) on {{ag.date}} at {{ag.time}} · Method: {{ag.method}} · Document ID {{ag.id}} · Version {{ag.version}}</div>
+        <div style="margin-top: 18px; padding: 10px 12px; border: 1px solid #DCE3F7; border-radius: 12px; font-size: 12px; color: #4A5578; line-height: 1.6"><b style="color: #071A52">Electronic Signature Record</b><br>Signed electronically by {{ag.name}} ({{ag.email}}) on {{ag.date}} at {{ag.time}} · Method: {{ag.method}} · Document ID {{ag.id}} · Version {{ag.version}}<br>{{ag.ltcRec}}</div>
         <div class="dfoot"><b style="color: #0A35C8; letter-spacing: 0.12em">LIBERTY TOOL COMPANY</b><br><i>Practical Tools. Powerful Connections.</i><br>thetapecaddy.com · sales@libertytoolcompany.com · 239-744-8403<br><b>Confidential — Affiliate Program Agreement</b></div>
       </div>
     </div>
   </div>
 </sc-if>
+<sc-if value="{{stOpen}}" hint-placeholder-val="{{false}}">
+  <div class="csov" role="dialog" aria-modal="true" aria-label="{{stm.kindLabel}}">
+    <div class="cspanel">
+      <div class="cstop"><div><div class="eyebrow">{{stm.kindLabel}}</div><b>{{stm.period}} · {{stm.no}}</b></div><div style="display: flex; flex-wrap: wrap; gap: 8px"><button type="button" class="btn ghost sm" onClick="{{stm.print}}">Print / Save As PDF</button><button type="button" class="btn sm" onClick="{{stm.download}}">Download</button><button type="button" class="btn ghost sm" onClick="{{stm.close}}">Close</button></div></div>
+      <div class="cssheet">
+        <div class="cshead"><img src="/assets/logo-white.png" alt="Liberty Tool Company"><div style="text-align: right"><div style="font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #C9D6FF">{{stm.kindLabel}}</div><div style="font-weight: 700">{{stm.no}}</div></div></div>
+        <div class="csbody">
+          <div class="eyebrow">{{stm.period}}</div>
+          <div class="csname">{{stm.name}}</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 14px; font-size: 14px"><div><span class="muted" style="font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em">Period</span><div style="font-weight: 600">{{stm.range}}</div></div><div><span class="muted" style="font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em">Paid On</span><div style="font-weight: 600">{{stm.paid}}</div></div></div>
+          <div class="csspec"><sc-for list="{{stm.rows}}" as="x" hint-placeholder-count="3"><span>{{x.k}}</span><span style="text-align: right; font-weight: 600">{{x.v}}</span></sc-for></div>
+          <div class="csprice" style="justify-content: space-between"><span style="font-weight: 800">Total Paid</span><span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 28px; color: #0A35C8">{{stm.total}}</span></div>
+          <p class="muted" style="font-size: 12px; margin: 12px 0 0">Questions about this statement? Reply within 30 days to sales@libertytoolcompany.com.</p>
+        </div>
+        <div class="csfoot"><span><b style="color: #0A35C8">LIBERTY TOOL COMPANY</b> · Practical Tools. Powerful Connections.</span><span>239-744-8403 · sales@libertytoolcompany.com</span></div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
 </template>
 <div id="root"></div>
 <script src="/runtime.js"></script>
@@ -553,10 +618,10 @@ function affSeed() {
     affiliates: [
       { id: 'a1', name: 'Marcus Hale', handle: '@halecoatings', platform: 'Instagram · TikTok', followers: '18.4K', role: 'Epoxy installer · 11 yrs', city: 'Tampa, FL', code: 'HALE10', mo: 11, status: 'Active', joined: affDaysAgo(64), clicks: 1284, sold: 37, paid: 260, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
       { id: 'a2', name: 'Tasha Greene', handle: '@floorsbytasha', platform: 'YouTube · Instagram', followers: '42K', role: 'Flake & metallic floors · 8 yrs', city: 'Phoenix, AZ', code: 'TASHA10', mo: 14, status: 'Active', joined: affDaysAgo(41), clicks: 2210, sold: 52, paid: 410, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v3: true, v4: true, v5: true } },
-      { id: 'a3', name: 'Ray Delgado', handle: '@raysgaragefloors', platform: 'TikTok', followers: '7.9K', role: 'Garage floor crew owner · 6 yrs', city: 'San Antonio, TX', code: 'RAY10', mo: 4, status: 'Active', joined: affDaysAgo(0), clicks: 0, sold: 0, paid: 0, onboard: { agree: false, payout: false, videos: false, link: false, post: false }, watched: {} },
+      { id: 'a3', name: 'Ray Delgado', handle: '@raysgaragefloors', platform: 'TikTok', followers: '7.9K', role: 'Garage floor crew owner · 6 yrs', city: 'San Antonio, TX', code: 'RAY10', mo: 0, status: 'Active', joined: affDaysAgo(0), clicks: 0, sold: 0, paid: 0, onboard: { agree: false, payout: false, videos: false, link: false, post: false }, watched: {} },
       { id: 'a6', name: 'Luis Ortega', handle: '@ortegafloorco', platform: 'Instagram · Facebook', followers: '9.6K', role: 'Polyaspartic garages · 9 yrs', city: 'Fresno, CA', code: 'LUIS10', mo: 9, status: 'Active', joined: affDaysAgo(55), clicks: 980, sold: 29, paid: 200, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true, v7: true } },
       { id: 'a7', name: 'Brianna Cole', handle: '@brimakesfloors', platform: 'TikTok · YouTube', followers: '26K', role: 'Metallic epoxy artist · 5 yrs', city: 'Charlotte, NC', code: 'BRI10', mo: 6, status: 'Active', joined: affDaysAgo(33), clicks: 1540, sold: 18, paid: 120, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
-      { id: 'a8', name: 'Dev Patel', handle: '@devcoatspro', platform: 'LinkedIn', followers: '2.4K', role: 'Commercial estimator · 12 yrs', city: 'Detroit, MI', code: 'DEV10', mo: 2, status: 'Active', joined: affDaysAgo(20), clicks: 160, sold: 7, paid: 50, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
+      { id: 'a8', name: 'Dev Patel', handle: '@devcoatspro', platform: 'LinkedIn', followers: '2.4K', role: 'Commercial estimator · 12 yrs', city: 'Detroit, MI', code: 'DEV10', mo: 2, status: 'Active', joined: affDaysAgo(20), clicks: 160, sold: 7, paid: 50, onboard: { agree: true, payout: false, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
       { id: 'a4', name: 'Kelly Brandt', handle: '@kbcommercialfloors', platform: 'LinkedIn · Facebook', followers: '3.1K', role: 'Commercial PM · 15 yrs', city: 'Columbus, OH', code: '', status: 'Applied', joined: affDaysAgo(2), clicks: 0, sold: 0, paid: 0, onboard: {}, watched: {} },
       { id: 'a5', name: 'Jon Pruitt', handle: '@pruittepoxy', platform: 'Instagram', followers: '11.2K', role: 'Residential coatings · 4 yrs', city: 'Nashville, TN', code: '', status: 'Applied', joined: affDaysAgo(1), clicks: 0, sold: 0, paid: 0, onboard: {}, watched: {} }
     ],
@@ -625,20 +690,98 @@ var MEDAL = ['#C9A227', '#9AA4B2', '#B87333'];
 function affSigned(a) { return !!(a && a.agreement && a.agreement.signedAt); }
 function affFmt(d) { return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
 
+function sideWatch(comp) {
+  if (comp.__sw) return; comp.__sw = 1;
+  var chk = function () { var el = document.querySelector('.side'), m = false; try { if (el && getComputedStyle(el).position === 'sticky') m = el.scrollHeight - el.clientHeight - el.scrollTop > 8; } catch (e) {} if (!!comp.state.sideMore !== m) comp.setState({ sideMore: m }); };
+  setTimeout(chk, 60); setInterval(chk, 500);
+  try { window.addEventListener('resize', chk); document.addEventListener('scroll', chk, true); } catch (e) {}
+}
+function sideDown() { var el = document.querySelector('.side'); if (!el) return; try { el.scrollBy({ top: Math.round(el.clientHeight * 0.6), behavior: 'smooth' }); } catch (e) { el.scrollTop += Math.round(el.clientHeight * 0.6); } }
+
+// ---------- Monthly payout ledger (shared by Admin, Affiliate and Sales Rep portals) ----------
+var PAY_KEY = 'ltc-payouts-v1';
+var PAY_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var PAY_AFF_RATE = 10;
+function payPeriod(back) { var d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - back); var y = d.getFullYear(), m = d.getMonth(); return { key: y + '-' + (m < 9 ? '0' : '') + (m + 1), label: PAY_MONTHS[m] + ' ' + y, month: PAY_MONTHS[m], idx: m, year: y, back: back, last: new Date(y, m + 1, 0).toLocaleDateString('en-US', { month: 'long', day: 'numeric' }) }; }
+function payPeriods() { return [payPeriod(0), payPeriod(1), payPeriod(2)]; }
+function payFmt(d) { return (d || new Date()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+function payUsd(n) { return '$' + (Math.round(n * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function paySeed() {
+  var p1 = payPeriod(1), p2 = payPeriod(2), units = {}, runs = {};
+  units[p1.key] = { a1: 21, a2: 24, a6: 13, a7: 9, a8: 4 };
+  units[p2.key] = { a1: 5, a2: 19, a6: 10, a7: 6, a8: 3 };
+  var paid = new Date(); paid.setDate(1); paid.setMonth(paid.getMonth() - 1); paid.setDate(10);
+  runs[p2.key] = { paidOn: payFmt(paid), by: 'LTC Admin', items: [
+    { kind: 'aff', id: 'a1', name: 'Marcus Hale', units: 5, base: 50, adj: 0, note: '', total: 50 },
+    { kind: 'aff', id: 'a2', name: 'Tasha Greene', units: 19, base: 190, adj: 0, note: '', total: 190 },
+    { kind: 'aff', id: 'a6', name: 'Luis Ortega', units: 10, base: 100, adj: 0, note: '', total: 100 },
+    { kind: 'aff', id: 'a7', name: 'Brianna Cole', units: 6, base: 60, adj: 0, note: '', total: 60 },
+    { kind: 'aff', id: 'a8', name: 'Dev Patel', units: 3, base: 30, adj: 0, note: '', total: 30 },
+    { kind: 'rep', id: 'r1', name: 'The Stallings Group', sales: 17600, rate: 7, base: 1232, adj: 0, note: '', total: 1232 },
+    { kind: 'rep', id: 'r2', name: 'Mike Torres', sales: 11800, rate: 5, base: 590, adj: 0, note: '', total: 590 },
+    { kind: 'rep', id: 'r3', name: 'Jenna Price', sales: 9200, rate: 10, base: 920, adj: 0, note: '', total: 920 }
+  ] };
+  return { units: units, runs: runs };
+}
+function payLoad() { var d = null; try { d = JSON.parse(localStorage.getItem(PAY_KEY) || 'null'); } catch (e) { d = null; } return d && d.runs ? d : paySeed(); }
+function paySave(d) { try { localStorage.setItem(PAY_KEY, JSON.stringify(d)); } catch (e) {} }
+function payRunsFor(L, kind, id) {
+  return payPeriods().concat([payPeriod(3), payPeriod(4)]).map(function (p) { var r = L.runs[p.key]; if (!r) return null; var it = r.items.find(function (x) { return x.kind === kind && x.id === id; }); return it ? { period: p, run: r, item: it } : null; }).filter(Boolean);
+}
+function payAffMonths(L, a) {
+  var ps = payPeriods(), out = [{ m: ps[0].month + ' (so far)', sold: a.mo || 0, status: 'Pending', amt: (a.mo || 0) * PAY_AFF_RATE }];
+  ps.slice(1).forEach(function (p) {
+    var r = L.runs[p.key], it = r ? r.items.find(function (x) { return x.kind === 'aff' && x.id === a.id; }) : null, u = ((L.units || {})[p.key] || {})[a.id];
+    if (it) out.push({ m: p.month, sold: it.units, status: 'Paid', amt: it.total });
+    else if (u) out.push({ m: p.month, sold: u, status: r ? 'On Hold' : 'Approved', amt: u * PAY_AFF_RATE });
+  });
+  return out;
+}
+function payStmtNo(p, it) { return 'ST-' + p.key.replace('-', '') + '-' + it.id.toUpperCase(); }
+function payStmtRows(it) {
+  var rows = it.kind === 'aff'
+    ? [['Eligible Tape Caddies Sold', String(it.units)], ['Rate', payUsd(PAY_AFF_RATE) + ' per caddy'], ['Commission', payUsd(it.base)]]
+    : [['Sales From Your Accounts', payUsd(it.sales)], ['Commission Rate', it.rate + '%'], ['Commission', payUsd(it.base)]];
+  if (it.adj) rows.push(['Adjustment' + (it.note ? ' (' + it.note + ')' : ''), (it.adj > 0 ? '+' : '−') + payUsd(Math.abs(it.adj))]);
+  return rows.map(function (r) { return { k: r[0], v: r[1] }; });
+}
+function payStmtHtml(p, run, it, logo) {
+  var esc = function (t) { return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
+  var abs = function (u) { try { return new URL(u, location.href).href; } catch (e) { return u; } };
+  var rows = payStmtRows(it).map(function (r) { return '<tr><td>' + esc(r.k) + '</td><td style="text-align:right">' + esc(r.v) + '</td></tr>'; }).join('');
+  return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(payStmtNo(p, it)) + '</title><style>@page{size:Letter;margin:0.6in}body{font-family:Inter,Arial,sans-serif;color:#1E2633;max-width:7.3in;margin:0 auto;font-size:13px;line-height:1.5}.hd{background:#0A3161;color:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 22px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.hd img{height:42px}.b{padding:22px}.e{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#B31942}h1{font-size:28px;text-transform:uppercase;margin:4px 0 14px}table{width:100%;border-collapse:collapse;margin-top:14px}td{padding:8px;border-bottom:1px solid #E3E8EF}.g{display:grid;grid-template-columns:1fr 1fr;gap:16px}.t{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding:12px 14px;background:#EEF3FA;-webkit-print-color-adjust:exact;print-color-adjust:exact}.f{border-top:1px solid #E3E8EF;padding:10px 22px;font-size:11px;color:#4A5568}</style></head><body>' +
+    '<div class="hd"><img src="' + abs(logo) + '" alt="Liberty Tool Company"><div style="text-align:right"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#C9D6FF;font-weight:800">' + (it.kind === 'aff' ? 'Affiliate Payout Statement' : 'Commission Statement') + '</div><b>' + esc(payStmtNo(p, it)) + '</b></div></div>' +
+    '<div class="b"><div class="e">' + esc(p.label) + '</div><h1>' + esc(it.name) + '</h1><div class="g"><div><b>Period</b><br>' + esc(p.month) + ' 1 – ' + esc(p.last) + ', ' + p.year + '</div><div><b>Paid On</b><br>' + esc(run.paidOn) + '</div></div><table>' + rows + '</table><div class="t"><b>Total Paid</b><b style="font-size:24px;color:#0A3161">' + payUsd(it.total) + '</b></div><p style="color:#4A5568;font-size:12px">Questions about this statement? Reply within 30 days to sales@libertytoolcompany.com.</p></div>' +
+    '<div class="f"><b style="color:#0A3161">LIBERTY TOOL COMPANY</b> · Practical Tools. Powerful Connections. · 239-744-8403 · sales@libertytoolcompany.com</div></body></html>';
+}
+function payDl(name, html) { try { var b = new Blob([html], { type: 'text/html' }), u = URL.createObjectURL(b), l = document.createElement('a'); l.href = u; l.download = name; document.body.appendChild(l); l.click(); document.body.removeChild(l); setTimeout(function () { URL.revokeObjectURL(u); }, 4000); return true; } catch (e) { return false; } }
+// statement modal values: self.state.stmt = { key, kind, id } ; L = ledger
+function payStmtVals(self, L) {
+  var st = self.state.stmt, logo = '/assets/logo-white.png';
+  var p = st ? payPeriods().concat([payPeriod(3), payPeriod(4)]).find(function (x) { return x.key === st.key; }) : null;
+  var run = p ? L.runs[p.key] : null, it = run ? run.items.find(function (x) { return x.kind === st.kind && x.id === st.id; }) : null;
+  if (!it) return { stOpen: false, stm: { rows: [], name: '', period: '', no: '', paid: '', total: '', kindLabel: '', range: '', close: function () {}, print: function () {}, download: function () {} } };
+  return { stOpen: true, stm: { kindLabel: it.kind === 'aff' ? 'Affiliate Payout Statement' : 'Commission Statement', name: it.name, period: p.label, range: p.month + ' 1 – ' + p.last + ', ' + p.year, no: payStmtNo(p, it), paid: run.paidOn, total: payUsd(it.total), rows: payStmtRows(it),
+    close: function () { self.setState({ stmt: null }); },
+    print: function () { try { window.print(); } catch (e) {} },
+    download: function () { var nm = payStmtNo(p, it) + '.html'; if (payDl(nm, payStmtHtml(p, run, it, logo))) self.flash('Downloaded ' + nm + '. Open it and print to save a PDF.'); else self.flash('Download is blocked in this preview. Use Print / Save As PDF.'); } } };
+}
+
 var LINKP = [['All Products', 'collections/all'], ['The Lowboy', 'products/lowboy'], ['4-Inch Caddy', 'products/4-inch-caddy'], ['6-Inch Caddy', 'products/6-inch-caddy'], ['Cove System', 'products/cove-system'], ['4-Score Kit', 'products/4-score-complete-kit']];
 var CSTAT = { Live: ['#E3F3EA', '#2E7D4F'], Upcoming: ['#E7EEFC', '#1F4FB5'], Ended: ['#ECEEF2', '#4A5568'] };
-var MSTAT = { Paid: ['#E3F3EA', '#2E7D4F'], Pending: ['#FFF3DC', '#8A5A00'] };
+var MSTAT = { Paid: ['#E3F3EA', '#2E7D4F'], Pending: ['#FFF3DC', '#8A5A00'], Approved: ['#E8EEFF', '#0A35C8'], 'On Hold': ['#FDECEF', '#B31942'] };
 
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { data: affLoad(), me: 'a1', view: 'home', lb: 'month', cf: 'Live', vc: '', vid: 'v1', playing: false, lp: 0, toast: '', sf: {}, sigMode: 'draw', sigText: '', sigData: '', agreeChk: false, readAll: false, tried: false, docOpen: false };
+    sideWatch(this);
+    this.state = { data: affLoad(), me: 'a1', view: 'home', lb: 'month', cf: 'Live', vc: '', vid: 'v1', playing: false, lp: 0, toast: '', pay: payLoad(), stmt: null, sf: {}, sigMode: 'draw', sigText: '', sigData: '', agreeChk: false, readAll: false, tried: false, docOpen: false };
   }
   persist(d) { affSave(d); this.setState({ data: d }); }
   flash(t) { var self = this; this.setState({ toast: t }); setTimeout(function () { if (self.state.toast === t) self.setState({ toast: '' }); }, 2400); }
   copy(t, msg) { affCopy(t); this.flash(msg || 'Copied'); }
   go(v) { this.setState({ view: v, playing: false }); try { window.scrollTo(0, 0); } catch (e) {} }
-  pick(id) { this.strokes = []; this.setState({ me: id, view: 'home', sf: {}, sigMode: 'draw', sigText: '', sigData: '', agreeChk: false, readAll: false, tried: false, docOpen: false }); try { window.scrollTo(0, 0); } catch (e) {} }
+  pick(id) { this.strokes = []; this.setState({ stmt: null, me: id, view: 'home', sf: {}, sigMode: 'draw', sigText: '', sigData: '', agreeChk: false, readAll: false, tried: false, docOpen: false }); try { window.scrollTo(0, 0); } catch (e) {} }
   meRec() { var s = this.state; return s.data.affiliates.find(function (a) { return a.id === s.me; }) || s.data.affiliates[0]; }
   formVal(k) { var me = this.meRec(), sf = this.state.sf; if (sf[k] !== undefined) return sf[k]; return { name: me.name, business: '', email: me.email || '', phone: '', address: '' }[k] || ''; }
   missing() {
@@ -663,8 +806,8 @@ class Component extends DCLogic {
       '<div class="hd"><h1>LIBERTY TOOL COMPANY</h1><div class="t">Affiliate &amp; Brand Ambassador Agreement</div><div class="st">THE TAPE CADDY AFFILIATE PROGRAM</div><div style="text-align:center;margin-top:6px">Effective Date: <b>' + esc(ag.signedAt) + '</b></div></div>' + body +
       '<h4>Affiliate Acknowledgment &amp; Acceptance</h4><div class="ack">' + esc(AGREEMENT_ACK) + '</div>' +
       '<div class="g"><div><div class="ss">Affiliate Information</div><table>' + row('Full Legal Name', ag.name) + row('Business Name', ag.business) + row('Email Address', ag.email) + row('Phone Number', ag.phone) + row('Business Address', ag.address) + '</table><div class="ss">Affiliate Signature</div><div class="sl">' + sig + '</div><table>' + row('Date', ag.signedAt) + '</table></div>' +
-      '<div><div class="ss">Liberty Tool Company</div><table>' + row('Authorized Rep.', ag.ltcName || '') + row('Title', ag.ltcTitle || '') + '</table><div class="ss">Signature</div><div class="sl"><span style="color:#4A5568">' + (ag.ltcName ? 'Signed electronically' : 'Pending countersignature') + '</span></div><table>' + row('Date', ag.ltcDate || '') + '</table></div></div>' +
-      '<div class="rec"><b>Electronic Signature Record</b><br>Signed electronically by ' + esc(ag.name) + ' (' + esc(ag.email) + ') on ' + esc(ag.signedAt) + ' at ' + esc(ag.signedTime) + ' &middot; Method: ' + (ag.sigData ? 'Drawn signature' : 'Typed signature') + ' &middot; Document ID ' + esc(ag.id) + ' &middot; Version ' + esc(ag.version) + '</div>' +
+      '<div><div class="ss">Liberty Tool Company</div><table>' + row('Authorized Rep.', ag.ltcName || '') + row('Title', ag.ltcTitle || '') + '</table><div class="ss">Signature</div><div class="sl">' + (ag.ltcName ? '<span class="script">' + esc(ag.ltcSigText || ag.ltcName) + '</span>' : '<span style="color:#4A5568">Pending countersignature</span>') + '</div><table>' + row('Date', ag.ltcDate || '') + '</table></div></div>' +
+      '<div class="rec"><b>Electronic Signature Record</b><br>Signed electronically by ' + esc(ag.name) + ' (' + esc(ag.email) + ') on ' + esc(ag.signedAt) + ' at ' + esc(ag.signedTime) + ' &middot; Method: ' + (ag.sigData ? 'Drawn signature' : 'Typed signature') + ' &middot; Document ID ' + esc(ag.id) + ' &middot; Version ' + esc(ag.version) + (ag.ltcName ? '<br>Countersigned electronically by ' + esc(ag.ltcName) + ', ' + esc(ag.ltcTitle || '') + ', Liberty Tool Company on ' + esc(ag.ltcDate) + (ag.ltcTime ? ' at ' + esc(ag.ltcTime) : '') : '') + '</div>' +
       '<div class="f"><b>LIBERTY TOOL COMPANY</b><br><i>Practical Tools. Powerful Connections.</i><br>thetapecaddy.com &middot; sales@libertytoolcompany.com &middot; 239-744-8403<br><b>Confidential &mdash; Affiliate Program Agreement</b></div></body></html>';
   }
   download(a) {
@@ -689,7 +832,7 @@ class Component extends DCLogic {
     var thisMonth = d.months.filter(function (m) { return m.status === 'Pending'; }).reduce(function (t, m) { return t + m.sold; }, 0);
     var isNew = me.id === 'a3';
     var board = affBoard(d, s.lb);
-    var months = isNew ? [{ m: 'November (so far)', sold: me.sold, status: 'Pending' }] : d.months;
+    var PL = s.pay || payLoad(), months = payAffMonths(PL, me), myRuns = payRunsFor(PL, 'aff', me.id), SV = payStmtVals(self, PL);
     var ownShare = function (t) { return t.replace('{code}', code || 'YOURCODE'); };
     var onGo = { agree: 'files', payout: 'links', videos: 'videos', link: 'links', post: 'campaigns' };
     var titles = { home: 'Affiliate Home', campaigns: 'Current Campaigns', deals: 'Current Deals', news: 'News', videos: 'Video Walkthroughs', links: 'My Links & Earnings', board: 'Leaderboard', kit: 'Brand Kit & Rules', files: 'My Files' };
@@ -735,7 +878,7 @@ class Component extends DCLogic {
       linkUrl: link,
       copyLink: function () { if (!code) return self.flash('Your link is issued after approval'); self.copy('https://' + link, 'Link copied'); },
       rules: [{ k: 'You Earn', v: '$10 per eligible caddy' }, { k: 'Paid', v: 'Monthly, for the month before' }, { k: 'Tracked By', v: 'Your link + code' }, { k: 'Not Allowed', v: 'Amazon listings or resale' }],
-      months: months.map(function (m) { var col = MSTAT[m.status] || MSTAT.Pending; return { m: m.m, sold: m.sold, earned: '$' + (m.sold * AFF_RATE).toLocaleString(), status: m.status, sbg: col[0], sfg: col[1] }; }),
+      months: months.map(function (m) { var col = MSTAT[m.status] || MSTAT.Pending; return { m: m.m, sold: m.sold, earned: '$' + (m.amt != null ? m.amt : m.sold * AFF_RATE).toLocaleString(), status: m.status, sbg: col[0], sfg: col[1] }; }),
       noMonths: months.length === 0,
       files: d.files.map(function (f) { return { name: f.name, kind: f.kind, get: function () { self.flash('Mockup: ' + f.name + ' downloads here'); } }; }),
       dos: ['Show real jobs and real results', 'Use your link or code every time', 'Tag @thetapecaddy', 'Say you’re an LTC ambassador'],
@@ -775,14 +918,15 @@ class Component extends DCLogic {
         self.flash('Agreement signed. Your copy is saved in My Files.');
       },
       agFiles: affSigned(me) ? [me.agreement].map(function (ag) { var ct = !!ag.ltcName; return { name: 'Affiliate & Brand Ambassador Agreement (Signed)', date: ag.signedAt, meta: 'Signed ' + ag.signedAt + ' at ' + ag.signedTime + ' · Doc ID ' + ag.id + ' · Version ' + ag.version, ctr: ct ? 'Countersigned By LTC · ' + ag.ltcDate : 'LTC Countersignature Pending', cbg: ct ? '#E3F3EA' : '#FFF3DC', cfg: ct ? '#2E7D4F' : '#8A5A00', view: function () { self.setState({ docOpen: true }); }, dl: function () { self.download(me); } }; }) : [],
-      stmtFiles: months.filter(function (m) { return m.status === 'Paid'; }).map(function (m) { return { name: 'Payout Statement — ' + m.m + '.pdf', meta: m.sold + ' eligible caddies · $' + (m.sold * AFF_RATE).toLocaleString() + ' paid', get: function () { self.flash('Mockup: ' + m.m + ' statement downloads here'); } }; }),
-      noStmts: months.filter(function (m) { return m.status === 'Paid'; }).length === 0,
+      stmtFiles: myRuns.map(function (x) { return { name: 'Payout Statement — ' + x.period.label, meta: x.item.units + ' eligible caddies · ' + payUsd(x.item.total) + ' paid ' + x.run.paidOn + ' · ' + payStmtNo(x.period, x.item), get: function () { self.setState({ stmt: { key: x.period.key, kind: 'aff', id: me.id } }); } }; }),
+      noStmts: myRuns.length === 0, stOpen: SV.stOpen, stm: SV.stm,
       canReset: me.id === 'a3' && affSigned(me),
       resetSign: function () { var d2 = JSON.parse(JSON.stringify(self.state.data)), m = d2.affiliates.find(function (a) { return a.id === me.id; }); delete m.agreement; m.onboard.agree = false; self.persist(d2); self.pick(me.id); },
       docOpen: s.docOpen && affSigned(me),
-      ag: (function () { var ag = me.agreement || {}; return { name: ag.name, business: ag.business || '—', email: ag.email, phone: ag.phone, address: ag.address, date: ag.signedAt, time: ag.signedTime, id: ag.id, version: ag.version, isImg: !!ag.sigData, isText: !ag.sigData, sigData: ag.sigData || '', sigText: ag.sigText, method: ag.sigData ? 'Drawn signature' : 'Typed signature', ltcName: ag.ltcName || 'Pending', ltcTitle: ag.ltcTitle || '—', ltcSig: ag.ltcName ? 'Signed electronically by ' + ag.ltcName : 'Pending countersignature', ltcDate: ag.ltcDate || '—' }; })(),
+      ag: (function () { var ag = me.agreement || {}; return { name: ag.name, business: ag.business || '—', email: ag.email, phone: ag.phone, address: ag.address, date: ag.signedAt, time: ag.signedTime, id: ag.id, version: ag.version, isImg: !!ag.sigData, isText: !ag.sigData, sigData: ag.sigData || '', sigText: ag.sigText, method: ag.sigData ? 'Drawn signature' : 'Typed signature', ltcName: ag.ltcName || 'Pending', ltcTitle: ag.ltcTitle || '—', ltcSigned: !!ag.ltcName, ltcPending: !ag.ltcName, ltcSigText: ag.ltcSigText || ag.ltcName || '', ltcDate: ag.ltcDate || '—', ltcRec: ag.ltcName ? 'Countersigned electronically by ' + ag.ltcName + ', ' + (ag.ltcTitle || '') + ', Liberty Tool Company on ' + ag.ltcDate + (ag.ltcTime ? ' at ' + ag.ltcTime : '') : 'LTC countersignature pending' }; })(),
       printDoc: function () { try { window.print(); } catch (e) { self.flash('Use your browser’s print to save as PDF'); } },
       dlDoc: function () { self.download(me); }, closeDoc: function () { self.setState({ docOpen: false }); },
+      sideMore: !!s.sideMore, sideDown: sideDown,
       hasToast: !!s.toast, toast: s.toast
     };
   }
