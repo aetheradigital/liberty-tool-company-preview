@@ -2214,6 +2214,21 @@ function extMigrate(d) {
   if (!d.prefs) d.prefs = {};
   if (!d.seq) d.seq = { req: 502, cr: 301, rma: 2002 };
   if (!d.poReq) d.poReq = { ent: true, dist: true, dealer: false, multi: true };
+  if (!d.demoV || d.demoV < 2) {
+    var hasO = function (id) { return (d.orders || []).some(function (o) { return o.id === id; }); };
+    d.requests = d.requests || []; d.claims = d.claims || [];
+    if (hasO('LTC-1041') && !d.requests.some(function (r) { return r.demo; })) {
+      d.requests.unshift({ id: 'CR-' + d.seq.cr, acct: 'ent', order: 'LTC-1041', kind: 'change', topics: ['Ship date / ship window'], reason: '', note: 'Our DCs can’t receive until after the 20th. Please move the ship window to Nov 23 – Nov 25.', status: 'Pending', created: daysAgo(1), by: 'Priya Shah', demo: true });
+      d.seq.cr++;
+      d.msgs.ent = (d.msgs.ent || []).concat([{ from: 'Priya Shah', mine: true, when: daysAgo(1), text: 'Change request CR-' + (d.seq.cr - 1) + ' for LTC-1041 (Ship date / ship window): Our DCs can’t receive until after the 20th. Please move the ship window to Nov 23 – Nov 25.' }]);
+    }
+    if (hasO('LTC-1039') && !d.claims.some(function (c) { return c.demo; })) {
+      d.claims.unshift({ id: 'RMA-' + d.seq.rma, acct: 'dist', order: 'LTC-1039', po: 'NCS-5521', kind: 'short', items: [{ name: '6-Inch Caddy', q: 4 }], desc: 'Packing slip shows 40 × 6-Inch Caddy but we counted 36 on the pallet. Shrink wrap was intact.', noted: false, photos: [], status: 'Submitted', created: daysAgo(2), by: 'Sam Ortiz', loc: 'all', hist: [daysAgo(2)], ltcNote: '', demo: true });
+      d.seq.rma++;
+      d.msgs.dist = (d.msgs.dist || []).concat([{ from: 'Sam Ortiz', mine: true, when: daysAgo(2), text: 'New short shipment claim RMA-' + (d.seq.rma - 1) + ' on LTC-1039 (PO NCS-5521): 4 × 6-Inch Caddy.' }]);
+    }
+    d.demoV = 2;
+  }
   return d;
 }
 function poPrefix(a) { var w = String((a && a.name) || 'PO').replace(/[^A-Za-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean); return (w.length > 1 ? w.map(function (x) { return x[0]; }).join('') : (w[0] || 'PO').slice(0, 3)).toUpperCase().slice(0, 4); }
