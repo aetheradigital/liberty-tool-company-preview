@@ -1087,15 +1087,15 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
           <div class="scroll"><div class="tbl" style="--cols: 2fr 0.9fr 130px 130px; --minw: 520px"><div class="tr th"><div>Item</div><div>MSRP</div><div>Contract Price</div><div>At Break Qty</div></div>
             <sc-for list="{{contractRows}}" as="r" hint-placeholder-count="8"><div class="tr"><div><b>{{r.name}}</b></div><div>{{r.msrp}}</div><div><input class="inp" type="number" min="0" step="0.01" placeholder="$" value="{{r.val}}" onChange="{{r.set}}" aria-label="Contract price {{r.name}}"></div><div><input class="inp" type="number" min="0" step="0.01" placeholder="$" value="{{r.brk}}" onChange="{{r.setBrk}}" aria-label="Price at break quantity {{r.name}}"></div></div></sc-for>
           </div></div>
-          <p class="muted" style="font-size: 12px; margin: 10px 0 0">4-Inch Caddy: $62 for 10–99 units and $58 for 100+ units, from the Sherwin-Williams pricing discussed Sep 4, 2026. Other items are still to be set.</p>
+          <p class="muted" style="font-size: 12px; margin: 10px 0 0">Caddy prices follow The Tape Caddy Price Sheet (Aug 30, 2026): 10–99 units and 100+ units. Kit prices are still to be set.</p>
         </div>
         <div class="card">
           <h2 class="h2">Distributor Prices</h2>
           <p class="muted" style="margin: 6px 0 12px; font-size: 14px">Fixed per-item distributor price. A price here overrides the volume tiers for that item.</p>
-          <div class="scroll"><div class="tbl" style="--cols: 2fr 0.9fr 130px 0.9fr; --minw: 500px"><div class="tr th"><div>Item</div><div>MSRP</div><div>Distributor Price</div><div></div></div>
-            <sc-for list="{{distRows}}" as="r" hint-placeholder-count="8"><div class="tr"><div><b>{{r.name}}</b></div><div>{{r.msrp}}</div><div><input class="inp" type="number" min="0" step="0.01" placeholder="$" value="{{r.val}}" onChange="{{r.set}}" aria-label="Distributor price {{r.name}}"></div><div class="muted" style="font-size: 12px">{{r.off}}</div></div></sc-for>
+          <div class="scroll"><div class="tbl" style="--cols: 2fr 0.9fr 130px 130px 0.8fr; --minw: 600px"><div class="tr th"><div>Item</div><div>MSRP</div><div>10+ Units</div><div>At Break Qty</div><div></div></div>
+            <sc-for list="{{distRows}}" as="r" hint-placeholder-count="8"><div class="tr"><div><b>{{r.name}}</b></div><div>{{r.msrp}}</div><div><input class="inp" type="number" min="0" step="0.01" placeholder="$" value="{{r.val}}" onChange="{{r.set}}" aria-label="Distributor price {{r.name}}"></div><div><input class="inp" type="number" min="0" step="0.01" placeholder="$" value="{{r.brk}}" onChange="{{r.setBrk}}" aria-label="Distributor price at break quantity {{r.name}}"></div><div class="muted" style="font-size: 12px">{{r.off}}</div></div></sc-for>
           </div></div>
-          <p class="muted" style="font-size: 12px; margin: 10px 0 0">4-Inch Caddy: $62 distributor price, from the Aug 25, 2026 OakGrove onboarding call. Other items are still to be set.</p>
+          <p class="muted" style="font-size: 12px; margin: 10px 0 0">Uses the same break quantity as contract prices ({{contractBreakMin}} units). Caddy prices are from The Tape Caddy Price Sheet (Aug 30, 2026). Kit prices are still to be set.</p>
         </div>
         <div style="display: flex; flex-direction: column; gap: 16px">
           <div class="card">
@@ -2081,7 +2081,7 @@ function num(v) { var n = parseFloat(v); return isNaN(n) ? null : n; }
 function today() { var d = new Date(); return d; }
 function fmtDate(d) { return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
 function daysAgo(n) { var d = today(); d.setDate(d.getDate() - n); return fmtDate(d); }
-function blankPricing() { return { contract: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, contractBreak: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, contractBreakMin: '100', dist: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, tiers: [{ name: 'Tier 1', min: '', pct: '' }, { name: 'Tier 2', min: '', pct: '' }, { name: 'Tier 3', min: '', pct: '' }], dealerPct: '', freeFreight: '', moq: '' }; }
+function blankPricing() { return { contract: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, contractBreak: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, contractBreakMin: '100', dist: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, distBreak: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, tiers: [{ name: 'Tier 1', min: '', pct: '' }, { name: 'Tier 2', min: '', pct: '' }, { name: 'Tier 3', min: '', pct: '' }], dealerPct: '', freeFreight: '', moq: '' }; }
 function seed() {
   return {
     pricing: blankPricing(),
@@ -2249,6 +2249,17 @@ function extMigrate(d) {
     if (P0.dist.c4 === '') P0.dist.c4 = '62';
     d.demoV = 3;
   }
+  if (d.demoV < 4) {
+    var P1 = d.pricing, SHEET = { lowboy: ['62', '58'], c2: ['62', '58'], c4: ['69', '65'], c6: ['83', '78'] }, V3 = { contract: '62', contractBreak: '58', dist: '62' };
+    P1.distBreak = P1.distBreak || {};
+    ['lowboy', 'c2', 'c4', 'c6', 'cove', 'ddd', 'triple', 'four'].forEach(function (k) { if (P1.distBreak[k] == null) P1.distBreak[k] = ''; });
+    Object.keys(SHEET).forEach(function (k) {
+      var base = SHEET[k][0], brk = SHEET[k][1], fill = function (obj, key, val, old) { var cur = String(obj[k] == null ? '' : obj[k]); if (cur === '' || (k === 'c4' && old != null && cur === old)) obj[k] = val; };
+      fill(P1.contract, 'contract', base, V3.contract); fill(P1.contractBreak, 'contractBreak', brk, V3.contractBreak);
+      fill(P1.dist, 'dist', base, V3.dist); fill(P1.distBreak, 'distBreak', brk, null);
+    });
+    d.demoV = 4;
+  }
   return d;
 }
 function poPrefix(a) { var w = String((a && a.name) || 'PO').replace(/[^A-Za-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean); return (w.length > 1 ? w.map(function (x) { return x[0]; }).join('') : (w[0] || 'PO').slice(0, 3)).toUpperCase().slice(0, 4); }
@@ -2272,7 +2283,7 @@ class Component extends DCLogic {
     var a = this.acct(), p = this.state.data.pricing, prod = PRODUCTS.find(function (x) { return x.id === id; });
     if (!prod) return null;
     if (a.model === 'contract') { var bk = num((p.contractBreak || {})[id]), bm = num(p.contractBreakMin); return bk != null && bm != null && units >= bm ? bk : num(p.contract[id]); }
-    if (a.model === 'tier' && num((p.dist || {})[id]) != null) return num(p.dist[id]);
+    if (a.model === 'tier' && num((p.dist || {})[id]) != null) { var db = num((p.distBreak || {})[id]), dm = num(p.contractBreakMin); return db != null && dm != null && units >= dm ? db : num(p.dist[id]); }
     if (a.model === 'dealer') { var dp = num(p.dealerPct); return dp == null ? null : prod.msrp * (1 - dp / 100); }
     var t = this.tierFor(units); return t ? prod.msrp * (1 - t.pct / 100) : null;
   }
@@ -3280,6 +3291,7 @@ class Component extends DCLogic {
     var titles = { overview: 'Partner Portal', order: 'New Order', orders: isAdmin ? 'Order Queue' : 'My Orders', files: 'Files', messages: 'Messages', book: isAdmin ? 'Calendar' : 'Book Time', prices: 'Price Sheet', aOverview: 'LTC Admin', aAccounts: 'Accounts', aUsers: 'Users & Access', team: 'Team', locs: 'Locations', addr: 'Addresses', aPricing: 'Pricing', aFreight: 'Freight Calculator', aAff: 'Affiliates', aBoard: 'Affiliate Leaderboard', aCamp: 'Campaigns & Deals', aContent: 'News & Videos', aReps: 'Sales Team', aRepTrain: 'Rep Training', aRepNews: 'Rep News', aProducts: 'Products', aPayouts: 'Monthly Payouts', aShip: 'Shipping', xAppr: 'Approvals', xClaims: 'Returns & Claims', xBill: 'Billing', xRep: 'Reports', xProf: 'My Profile', aRequests: 'Requests' };
     var f = s.form, sel = s.selId ? (isAdmin ? d.orders : d.orders.concat(d.pending || [])).find(function (o) { return o.id === s.selId; }) : null;
     var tierNow = this.tierFor(c.units);
+    var useFixed = Object.keys(d.pricing.dist || {}).some(function (k) { return num(d.pricing.dist[k]) != null; });
     var shown = mine.filter(function (o) { return !s.fStatus || o.status === s.fStatus; });
     var fileList = d.files.filter(function (x) { return (isAdmin || x.acct === 'all' || x.acct === s.acct) && (!s.folder || x.folder === s.folder); });
     var threadKey = isAdmin ? s.thread : s.acct;
@@ -3364,7 +3376,7 @@ class Component extends DCLogic {
         { k: 'Units', v: c.units.toLocaleString(), c: C.ink },
         { k: 'MSRP Value', v: money(c.list), c: C.ink },
         { k: 'Your Price', v: c.val != null ? money(c.val) : (c.units ? 'Set by LTC' : '—'), c: C.pri },
-        { k: a.model === 'tier' ? 'Current Tier' : 'You Save', v: a.model === 'tier' ? (tierNow ? tierNow.name : 'Base') : (c.val != null ? money(c.list - c.val) : '—'), c: C.acc }
+        { k: a.model === 'tier' && !useFixed ? 'Current Tier' : 'You Save', v: a.model === 'tier' && !useFixed ? (tierNow ? tierNow.name : 'Base') : (c.val != null ? money(c.list - c.val) : '—'), c: C.acc }
       ],
       hasErr: !!s.err, err: s.err, canBack: s.step > 1,
       back: function () { self.setState({ step: s.step - 1, err: '' }); },
@@ -3394,7 +3406,7 @@ class Component extends DCLogic {
       bookRows: d.books.filter(function (b) { return isAdmin || b.acct === s.acct; }).map(function (b) { return { type: b.type, when: b.when, acctName: (ACCTS[b.acct] || {}).name }; }),
       noBooks: d.books.filter(function (b) { return isAdmin || b.acct === s.acct; }).length === 0,
       priceColHead: a.model === 'tier' ? 'Tier 1 / 2 / 3' : 'Your Price',
-      sheetRows: PRODUCTS.map(function (p) { var pr; if (a.model === 'tier' && num((P.dist || {})[p.id]) != null) { pr = money(num(P.dist[p.id])); } else if (a.model === 'contract' && num((P.contract || {})[p.id]) != null) { var bk = num((P.contractBreak || {})[p.id]), bm = num(P.contractBreakMin); pr = money(num(P.contract[p.id])) + (bk != null && bm != null ? ' · ' + money(bk) + ' at ' + bm + '+ units' : ''); } else if (a.model === 'tier') { pr = P.tiers.map(function (t) { var pc = num(t.pct); return pc == null ? '—' : money(p.msrp * (1 - pc / 100)); }).join(' / '); if (pr === '— / — / —') pr = 'Set by LTC'; } else { var u = self.unitPrice(p.id, 0); pr = u == null ? 'Set by LTC' : money(u); } return { name: p.name, msrp: money(p.msrp), price: pr }; }),
+      sheetRows: PRODUCTS.map(function (p) { var pr; if (a.model === 'tier' && num((P.dist || {})[p.id]) != null) { var db2 = num((P.distBreak || {})[p.id]), dm2 = num(P.contractBreakMin); pr = money(num(P.dist[p.id])) + (db2 != null && dm2 != null ? ' · ' + money(db2) + ' at ' + dm2 + '+ units' : ''); } else if (a.model === 'contract' && num((P.contract || {})[p.id]) != null) { var bk = num((P.contractBreak || {})[p.id]), bm = num(P.contractBreakMin); pr = money(num(P.contract[p.id])) + (bk != null && bm != null ? ' · ' + money(bk) + ' at ' + bm + '+ units' : ''); } else if (a.model === 'tier') { pr = P.tiers.map(function (t) { var pc = num(t.pct); return pc == null ? '—' : money(p.msrp * (1 - pc / 100)); }).join(' / '); if (pr === '— / — / —') pr = 'Set by LTC'; } else { var u = self.unitPrice(p.id, 0); pr = u == null ? 'Set by LTC' : money(u); } return { name: p.name, msrp: money(p.msrp), price: pr }; }),
       termRows: [{ k: 'Payment Terms', v: a.terms }, { k: 'Free Freight', v: num(P.freeFreight) != null ? 'Over ' + money(num(P.freeFreight)) : 'Set by LTC' }, { k: 'Minimum Order', v: num(P.moq) != null ? P.moq + ' units' : 'None set' }],
       aKpis: [
         { n: newCount, l: 'New Orders To Confirm' },
@@ -3409,7 +3421,7 @@ class Component extends DCLogic {
       pricing: P,
       contractRows: PRODUCTS.map(function (p) { return { name: p.name, msrp: money(p.msrp), val: P.contract[p.id], brk: (P.contractBreak || {})[p.id] || '', set: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.contract[p.id] = e.target.value; self.persist(d2); }, setBrk: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.contractBreak = d2.pricing.contractBreak || {}; d2.pricing.contractBreak[p.id] = e.target.value; self.persist(d2); } }; }),
       contractBreakMin: P.contractBreakMin || '', setBreakMin: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.contractBreakMin = e.target.value; self.persist(d2); },
-      distRows: PRODUCTS.map(function (p) { var v = (P.dist || {})[p.id] || '', n = num(v); return { name: p.name, msrp: money(p.msrp), val: v, off: n != null && p.msrp ? Math.round((1 - n / p.msrp) * 1000) / 10 + '% off' : '', set: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.dist = d2.pricing.dist || {}; d2.pricing.dist[p.id] = e.target.value; self.persist(d2); } }; }),
+      distRows: PRODUCTS.map(function (p) { var v = (P.dist || {})[p.id] || '', n = num(v); return { name: p.name, msrp: money(p.msrp), val: v, brk: (P.distBreak || {})[p.id] || '', off: n != null && p.msrp ? Math.round((1 - n / p.msrp) * 1000) / 10 + '% off' : '', set: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.dist = d2.pricing.dist || {}; d2.pricing.dist[p.id] = e.target.value; self.persist(d2); }, setBrk: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.distBreak = d2.pricing.distBreak || {}; d2.pricing.distBreak[p.id] = e.target.value; self.persist(d2); } }; }),
       tierRows: P.tiers.map(function (t, i) { return { name: t.name, min: t.min, pct: t.pct, setMin: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.tiers[i].min = e.target.value; self.persist(d2); }, setPct: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.tiers[i].pct = e.target.value; self.persist(d2); } }; }),
       tierPreview: P.tiers.map(function (t) { var pc = num(t.pct); return t.name + ': 4-Inch ' + (pc == null ? '—' : money(99 * (1 - pc / 100))); }).join(' · '),
       setDealerPct: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.dealerPct = e.target.value; self.persist(d2); },
