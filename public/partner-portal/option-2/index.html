@@ -570,10 +570,10 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
           </div>
           <div class="grid g2" style="margin-top: 16px; align-items: start">
             <div class="card">
-              <h3 class="h3">Coating Tools</h3>
-              <p class="muted" style="margin: 6px 0 10px; font-size: 14px">Priced on confirmation.</p>
+              <h3 class="h3">Trowels &amp; Tools</h3>
+              <p class="muted" style="margin: 6px 0 10px; font-size: 14px">LTC trowels, priced per tool.</p>
               <sc-for list="{{toolRows}}" as="p" hint-placeholder-count="2">
-                <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid #DCE3F7"><span style="display: flex; align-items: center; gap: 10px"><img class="thumb" src="{{p.img}}" alt=""><span><b>{{p.name}}</b><br><button type="button" class="linkbtn" onClick="{{p.cut}}" aria-label="Cut sheet for {{p.name}}">Cut Sheet</button></span></span><div class="qty"><button type="button" aria-label="Less {{p.name}}" onClick="{{p.dec}}">−</button><input type="number" min="0" aria-label="Quantity {{p.name}}" value="{{p.qty}}" onChange="{{p.set}}"><button type="button" aria-label="More {{p.name}}" onClick="{{p.inc}}">+</button></div></div>
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid #DCE3F7"><span style="display: flex; align-items: center; gap: 10px"><img class="thumb" src="{{p.img}}" alt=""><span><b>{{p.name}}</b><div class="muted" style="font-size: 12px">{{p.priceTxt}}</div><button type="button" class="linkbtn" onClick="{{p.cut}}" aria-label="Cut sheet for {{p.name}}">Cut Sheet</button></span></span><div class="qty"><button type="button" aria-label="Less {{p.name}}" onClick="{{p.dec}}">−</button><input type="number" min="0" aria-label="Quantity {{p.name}}" value="{{p.qty}}" onChange="{{p.set}}"><button type="button" aria-label="More {{p.name}}" onClick="{{p.inc}}">+</button></div></div>
               </sc-for>
             </div>
             <div class="card">
@@ -981,6 +981,8 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       <div class="card" style="background: #E8EEFF"><h2 class="h2">{{acct.modelName}}</h2><p class="muted" style="margin: 6px 0 0; line-height: 1.55">{{acct.modelDesc}}</p></div>
       <div class="card" style="margin-top: 16px"><div class="scroll"><div class="tbl" style="--cols: 2fr 1fr 1.6fr; --minw: 420px"><div class="tr th"><div>Item</div><div>MSRP</div><div>{{priceColHead}}</div></div>
         <sc-for list="{{sheetRows}}" as="r" hint-placeholder-count="8"><div class="tr"><div><b>{{r.name}}</b></div><div>{{r.msrp}}</div><div style="font-weight: 700">{{r.price}}</div></div></sc-for>
+        <div class="tr th" style="margin-top: 8px"><div>Trowels</div><div></div><div></div></div>
+        <sc-for list="{{toolSheetRows}}" as="r" hint-placeholder-count="8"><div class="tr"><div><b>{{r.name}}</b></div><div>{{r.msrp}}</div><div style="font-weight: 700">{{r.price}}</div></div></sc-for>
       </div></div>
       <div class="grid g3" style="margin-top: 14px"><sc-for list="{{termRows}}" as="t" hint-placeholder-count="3"><div style="padding: 12px; border-radius: 12px; background: #E8EEFF"><div class="lbl">{{t.k}}</div><div style="font-weight: 700">{{t.v}}</div></div></sc-for></div>
       <p class="muted" style="font-size: 13px; margin: 12px 0 0">Advertised prices may not go below MSRP. Prices shown as "Set by LTC" are confirmed on your acknowledgement.</p></div>
@@ -1096,6 +1098,14 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
             <sc-for list="{{distRows}}" as="r" hint-placeholder-count="8"><div class="tr"><div><b>{{r.name}}</b></div><div>{{r.msrp}}</div><div><input class="inp" type="number" min="0" step="0.01" placeholder="$" value="{{r.val}}" onChange="{{r.set}}" aria-label="Distributor price {{r.name}}"></div><div><input class="inp" type="number" min="0" step="0.01" placeholder="$" value="{{r.brk}}" onChange="{{r.setBrk}}" aria-label="Distributor price at break quantity {{r.name}}"></div><div class="muted" style="font-size: 12px">{{r.off}}</div></div></sc-for>
           </div></div>
           <p class="muted" style="font-size: 12px; margin: 10px 0 0">Uses the same break quantity as contract prices ({{contractBreakMin}} units). Caddy prices are from The Tape Caddy Price Sheet (Aug 30, 2026). Kit prices are still to be set.</p>
+        </div>
+        <div class="card">
+          <h2 class="h2">Trowel Prices</h2>
+          <p class="muted" style="margin: 6px 0 12px; font-size: 14px">One price per trowel for distributor and enterprise accounts. Dealers get their dealer discount off MSRP.</p>
+          <div class="scroll"><div class="tbl" style="--cols: 2.2fr 1fr 0.8fr 130px; --minw: 560px"><div class="tr th"><div>Trowel</div><div>SKU</div><div>MSRP</div><div>Partner Price</div></div>
+            <sc-for list="{{toolPriceRows}}" as="r" hint-placeholder-count="8"><div class="tr"><div><b>{{r.name}}</b></div><div style="font-size: 13px">{{r.sku}}</div><div>{{r.msrp}}</div><div><input class="inp" type="number" min="0" step="0.01" placeholder="$" value="{{r.val}}" onChange="{{r.set}}" aria-label="Partner price {{r.name}}"></div></div></sc-for>
+          </div></div>
+          <p class="muted" style="font-size: 12px; margin: 10px 0 0">From the Distribution MAP sheet in Drive (listed there in AUD; entered here as USD). Edit MSRP, SKU and photos in Products.</p>
         </div>
         <div style="display: flex; flex-direction: column; gap: 16px">
           <div class="card">
@@ -1262,7 +1272,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
               <label style="display: block; margin-top: 10px"><span class="lbl">Features (One Per Line)</span><textarea class="inp" onChange="{{pm.set.pts}}">{{pm.f.pts}}</textarea></label>
               <div class="lbl" style="margin: 14px 0 6px">Cut Sheet Specs</div>
               <div class="grid g4" style="gap: 10px">
-                <label><span class="lbl">Item # / UPC</span><input class="inp" value="{{pm.f.upc}}" onChange="{{pm.set.upc}}"></label>
+                <label><span class="lbl">SKU</span><input class="inp" value="{{pm.f.sku}}" onChange="{{pm.set.sku}}" placeholder="e.g. LTC-4TC"></label><label><span class="lbl">GTIN / UPC</span><input class="inp" value="{{pm.f.upc}}" onChange="{{pm.set.upc}}"></label>
                 <label><span class="lbl">Case Pack</span><input class="inp" value="{{pm.f.casePack}}" onChange="{{pm.set.casePack}}" placeholder="e.g. 6 per case"></label>
                 <label><span class="lbl">Size</span><input class="inp" value="{{pm.f.size}}" onChange="{{pm.set.size}}" placeholder="L × W × H"></label>
                 <label><span class="lbl">Weight</span><input class="inp" value="{{pm.f.weight}}" onChange="{{pm.set.weight}}" placeholder="e.g. 2.1 lb"></label>
@@ -1623,7 +1633,19 @@ var PRODUCTS = [
   { id: 'triple', name: 'Triple Threat', tag: 'Kit · Lowboy + 4" + 6"', msrp: 295 },
   { id: 'four', name: '4-Score Complete Kit', tag: 'Kit · all four', msrp: 389 }
 ];
-var TOOLS = [{ id: 'ftrowel', name: 'Finishing Trowel' }, { id: 'ctrowel', name: 'Cove Trowel' }];
+var TRW = [
+  { id: 'hawk', name: 'Patch Hawk (10" x 10")', sku: '', gtin: '', msrp: 36.99, dist: 25.99, img: '/assets/logo-blue.png', spec: '10 x 10 inch hawk', body: 'A 10 x 10 inch hawk for holding patch and cove material while you work.', pts: ['10 x 10 inch platform', 'Made in the USA'] },
+  { id: 'snub', name: '6" Snub Flat Hanging Trowel', sku: 'LTC-SNUB', gtin: '00850089875118', msrp: 34.99, dist: 24.50, img: '/assets/sq-trowel.webp', spec: '6 inch snub-nose flat trowel', body: 'A 6 inch snub-nose flat trowel for hanging and finishing work.', pts: ['6 inch flat blade', 'Snub nose', 'Made in the USA'] },
+  { id: 'cct', name: '2" Can\u2019t Cove Trowel', sku: 'LTC-CCT', gtin: '00850089875088', msrp: 29.99, dist: 19.50, img: '/assets/sq-covet2.webp', spec: '2 inch cant cove', body: 'A 2 inch cant cove trowel for shaping a straight angled cove.', pts: ['2 inch cant cove', 'Made in the USA'] },
+  { id: 'cct45', name: '2" Can\u2019t Cove Trowel w/ 45\u00b0 Taper', sku: 'LTC-CCTW45', gtin: '00850089875055', msrp: 31.99, dist: 22.00, img: '/assets/sq-covet2.webp', spec: '2 inch cant cove, 45\u00b0 taper', body: 'A 2 inch cant cove trowel with a 45 degree taper.', pts: ['2 inch cant cove', '45\u00b0 taper', 'Made in the USA'] },
+  { id: 'ct4', name: '4" Standard Cove Trowel', sku: 'LTC-45CT', gtin: '00850089875064', msrp: 25.99, dist: 18.00, img: '/assets/sq-covet.webp', spec: '4 inch standard cove', body: 'A 4 inch standard cove trowel for shaping cove where the floor meets the wall.', pts: ['4 inch standard cove', 'Made in the USA'] },
+  { id: 'ct4t', name: '4" Standard Cove Trowel w/ 45\u00b0 Taper', sku: 'LTC-45CTW45', gtin: '00850089875071', msrp: 27.99, dist: 19.00, img: '/assets/sq-covet.webp', spec: '4 inch standard cove, 45\u00b0 taper', body: 'A 4 inch standard cove trowel with a 45 degree taper.', pts: ['4 inch standard cove', '45\u00b0 taper', 'Made in the USA'] },
+  { id: 'ct6', name: '6" Standard Cove Trowel', sku: 'LTC-65CT', gtin: '00850089875057', msrp: 25.99, dist: 18.00, img: '/assets/sq-covet.webp', spec: '6 inch standard cove', body: 'A 6 inch standard cove trowel for taller cove details.', pts: ['6 inch standard cove', 'Made in the USA'] },
+  { id: 'ct6t', name: '6" Standard Cove Trowel w/ 45\u00b0 Taper', sku: 'LTC-65CTW45', gtin: '00850089875095', msrp: 27.99, dist: 19.00, img: '/assets/sq-covet.webp', spec: '6 inch standard cove, 45\u00b0 taper', body: 'A 6 inch standard cove trowel with a 45 degree taper.', pts: ['6 inch standard cove', '45\u00b0 taper', 'Made in the USA'] }
+];
+var CADDY_SKU = { lowboy: ['LTC-LBO', '850089875002'], c2: ['LTC-2TC', '850089875019'], c4: ['LTC-4TC', '850089875026'], c6: ['LTC-6TC', '850089875033'] };
+var TOOLS = TRW.map(function (t) { return { id: t.id, name: t.name, msrp: t.msrp, sku: t.sku }; });
+TRW.forEach(function (t) { IMG[t.id] = t.img; });
 var LABEL_OPT = 'Prepaid label (I’ll upload)';
 var CUT = {
   lowboy: { cat: 'Tape Caddy', spec: 'Holds tape at 4 mm', body: 'Our lowest caddy. Mask floor edges and thin lines without crawling across the floor.', pts: ['Holds tape at 4 mm', 'Rolls on casters', 'Made in the USA'] },
@@ -1637,6 +1659,8 @@ var CUT = {
   ftrowel: { cat: 'Trowel', spec: 'Flat steel finishing blade', body: 'A flat steel trowel for a smooth, even finish pass.', pts: ['Steel blade with rounded corners', 'Soft blue grip', 'Threaded end on the handle', 'Made in the USA'] },
   ctrowel: { cat: 'Trowel', spec: 'Curved steel cove lip', body: 'A steel trowel with a curved lip for shaping cove where the floor meets the wall.', pts: ['Curved steel lip for cove', 'Riveted steel handle', 'Blue grip with LTC branding', 'Made in the USA'] }
 };
+TRW.forEach(function (t) { CUT[t.id] = { cat: 'Trowel', spec: t.spec, body: t.body, pts: t.pts.slice(), sku: t.sku, upc: t.gtin }; });
+Object.keys(CADDY_SKU).forEach(function (k) { if (CUT[k]) { CUT[k].sku = CADDY_SKU[k][0]; CUT[k].upc = CADDY_SKU[k][1]; } });
 var LOGO_W = '/assets/logo-white.png';
 function csvParse(text) {
   var rows = [], row = [], cur = '', q = false, t = String(text || '').replace(/^﻿/, '');
@@ -1701,7 +1725,7 @@ function blankTeamForm() { return { name: '', email: '', role: 'Store Manager', 
 function blankNt() { return { title: '', cat: 'Selling', kind: 'Video', len: '', url: '', desc: '', pts: '', file: '', req: false }; }
 function blankNrn() { return { title: '', tag: 'Promo', body: '', file: '', pinned: false }; }
 function csfLoad() { var d = null; try { d = JSON.parse(localStorage.getItem('ltc-countersigner') || 'null'); } catch (e) {} return Object.assign({ name: '', title: '', sig: '', ok: false }, d || {}, { ok: false }); }
-function blankProd() { return { id: '', name: '', tag: '', cat: 'caddy', msrp: '', status: 'Draft', spec: '', body: '', pts: '', upc: '', casePack: '', size: '', weight: '', img: '', imgData: '', portal: true, site: true, pushShopify: true, shopify: null }; }
+function blankProd() { return { id: '', name: '', tag: '', cat: 'caddy', msrp: '', status: 'Draft', spec: '', body: '', pts: '', sku: '', upc: '', casePack: '', size: '', weight: '', img: '', imgData: '', portal: true, site: true, pushShopify: true, shopify: null }; }
 function blankUa() { return { kind: 'partner', company: '', atype: 'Enterprise · Retail Chain', model: 'contract', terms: 'Net 30', territory: '', rep: '', name: '', email: '', locs: '', rtype: 'Territory Representative', rate: '5', monthGoal: '10000', handle: '', platform: '', city: '', code: '', access: { caddy: true, bundles: false, trowels: true, coatings: false } }; }
 function applyAccts(d) { Object.keys((d && d.accounts) || {}).forEach(function (k) { ACCTS[k] = d.accounts[k]; }); return d; }
 var RL_LANES = 'CA|CT|94.5|93.4|94.5|94.5|196.1|158.3;CA|DC|93.9|93.6|93.9|93.9|177.50|179.90;CA|DE|93.9|93.6|93.9|93.9|177.50|179.90;CA|MA|94|93.2|94|94|188.6|189.5;CA|VA|94.2|94.5|94.2|94.2|192.7|175.3;CA|ME|93.9|93.6|93.9|93.9|177.50|179.90;CA|NH|94.2|93.6|94.2|94.2|162.9|162.9;CA|NJ|94.7|94.4|94.7|94.7|173.6|172.5;CA|NY|94.6|94.2|94.6|94.6|196.1|187.1;CA|RI|93.9|93.6|93.9|93.9|177.50|179.90;CA|MD|94|94|94|94|195.1|159.2;CA|IN|94.3|93.9|94.3|94.3|159.6|152.6;CA|IL|95|94.5|95|95|157.2|160.1;CA|KY|94.1|93.7|94.1|94.1|172|170.2;CA|WV|94.1|93.9|94.1|94.1|170.90|168.90;CA|WI|94.3|93.8|94.3|94.3|159.9|160;CA|PA|94.5|94.2|94.5|94.5|189.7|176.5;CA|OH|94.3|94.4|94.3|94.3|181.9|156.1;CA|MO|93.8|93.3|93.8|93.8|161|157.2;CA|MI|94.4|93.7|94.4|94.4|170.3|168.7;CA|NC|94.4|93.8|94.4|94.4|173.4|170.4;CA|MS|94.4|93.3|94.4|94.4|176.6|176.6;CA|GA|94.7|94.3|94.7|94.7|167.1|160;CA|FL|95.2|95|95.2|95.2|186.1|173.7;CA|AL|93.7|93.8|93.7|93.7|173.9|166.2;CA|SC|94.2|94|94.2|94.2|166.2|171.3;CA|TN|94.2|93.6|94.2|94.2|166.5|165;CA|MN|93.1|93.7|93.1|93.1|165.1|164.1;CA|IA|93.9|93.4|93.9|93.9|164|165;CA|NE|93.7|92.7|93.7|93.7|172.6|172.6;CA|SD|93.3|92.7|93.3|93.3|196.1|196.1;CA|LA|93.9|92.7|93.9|93.9|172.9|172.9;CA|KS|93|93.6|93|93|156.2|158.6;CA|AR|94.1|92.7|94.1|94.1|162.4|162.4;CA|TX|94.6|94|94.6|94.6|148.1|147;CA|OK|94|93.4|94|94|145.1|157.7;CA|NV|92.9|93.4|92.9|92.9|129.2|119.2;CA|OR|93.5|93.3|93.5|93.5|139.7|130.2;CA|UT|94.2|93.5|94.2|94.2|141.2|142.1;CA|NM|93.9|94.1|93.9|93.9|139.7|139.7;CA|ID|93|93.2|93|93|149.9|133.6;CA|CO|92.9|93|92.9|92.9|156.2|146.4;CA|WA|93.6|93.5|93.6|93.6|143.1|135.9;CA|AZ|93|93.5|93|93|130.7|122.4;CA|AO|70.0|70.0|70.0|70.0|335.00|335.00;CA|BU|70.0|70.0|70.0|70.0|335.00|335.00;CA|WY|70.0|70.0|70.0|70.0|335.00|335.00;CA|CE|70.0|70.0|70.0|70.0|335.00|335.00;CA|CP|70.0|70.0|70.0|70.0|335.00|335.00;CA|FK|70.0|70.0|70.0|70.0|335.00|335.00;CA|IU|70.0|70.0|70.0|70.0|335.00|335.00;CA|MT|70.0|70.0|70.0|70.0|335.00|335.00;CA|ND|70.0|70.0|70.0|70.0|335.00|335.00;CA|NO|70.0|70.0|70.0|70.0|335.00|335.00;CA|OO|70.0|70.0|70.0|70.0|335.00|335.00;CA|UO|70.0|70.0|70.0|70.0|335.00|335.00;CA|UP|70.0|70.0|70.0|70.0|335.00|335.00;CA|VT|70.0|70.0|70.0|70.0|335.00|335.00;CA|WO|70.0|70.0|70.0|70.0|335.00|335.00;CA|MH|65.0|65.0|65.0|65.0|600.00|600.00;CA|MV|30.0|30.0|30.0|30.0|600.00|600.00;CA|IT|94.2|94.2|94.2|94.2|115.90|115.90;CA|NF|91.5|91.5|91.5|91.5|335.00|335.00;CA|NB|91.5|91.5|91.5|91.5|335.00|335.00;CA|NL|91.5|91.5|91.5|91.5|335.00|335.00;CA|NS|91.5|91.5|91.5|91.5|335.00|335.00;CA|PE|91.5|91.5|91.5|91.5|335.00|335.00;CA|ON|91.5|91.5|91.5|91.5|262.8|262.8;CA|QC|91.5|91.5|91.5|91.5|262.8|262.8;CA|BC|89.2|89.2|89.2|89.2|251.1|251.1;CA|AB|89.2|89.2|89.2|89.2|251.1|251.1;CA|MB|89.2|89.2|89.2|89.2|251.1|251.1;CA|SK|89.2|89.2|89.2|89.2|251.1|251.1;CA|AI|60.0|60.0|60.0|60.0|600.00|600.00;CA|BI|60.0|60.0|60.0|60.0|600.00|600.00;CA|IC|60.0|60.0|60.0|60.0|600.00|600.00;CA|NT|60.0|60.0|60.0|60.0|600.00|600.00;CA|NU|60.0|60.0|60.0|60.0|600.00|600.00;CA|OI|60.0|60.0|60.0|60.0|600.00|600.00;CA|QI|60.0|60.0|60.0|60.0|600.00|600.00;CA|YT|60.0|60.0|60.0|60.0|600.00|600.00;CA|CA|92.6|92.6|92.6|92.6|118.2|118.2';
@@ -2049,15 +2073,16 @@ var SHOPIFY_MOCK = [
 ];
 function prodDate(n) { var d = new Date(); d.setDate(d.getDate() - (n || 0)); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
 function prodSeed() {
-  var list = PRODUCTS.map(function (p) { var kit = ['cove', 'ddd', 'triple', 'four'].indexOf(p.id) >= 0, c = CUT[p.id] || {}; return { id: p.id, name: p.name, tag: p.tag, cat: kit ? 'kit' : 'caddy', msrp: p.msrp, img: IMG[p.id] || '', imgData: '', body: c.body || '', pts: (c.pts || []).slice(), spec: c.spec || '', upc: '', casePack: '', size: '', weight: '', status: 'Active', portal: true, site: true, shopify: { handle: PROD_HANDLES[p.id], price: p.id === 'c4' ? 99.99 : p.msrp, title: p.name, synced: prodDate(3) } }; })
-    .concat(TOOLS.map(function (t) { var c = CUT[t.id] || {}; return { id: t.id, name: t.name, tag: 'LTC Trowels', cat: 'trowel', msrp: null, img: IMG[t.id] || '', imgData: '', body: c.body || '', pts: (c.pts || []).slice(), spec: c.spec || '', upc: '', casePack: '', size: '', weight: '', status: 'Active', portal: true, site: true, shopify: null }; }));
+  var list = PRODUCTS.map(function (p) { var kit = ['cove', 'ddd', 'triple', 'four'].indexOf(p.id) >= 0, c = CUT[p.id] || {}; return { id: p.id, name: p.name, tag: p.tag, cat: kit ? 'kit' : 'caddy', msrp: p.msrp, img: IMG[p.id] || '', imgData: '', body: c.body || '', pts: (c.pts || []).slice(), spec: c.spec || '', sku: (CADDY_SKU[p.id] || [])[0] || '', upc: (CADDY_SKU[p.id] || [])[1] || '', casePack: '', size: '', weight: '', status: 'Active', portal: true, site: true, shopify: { handle: PROD_HANDLES[p.id], price: p.id === 'c4' ? 99.99 : p.msrp, title: p.name, synced: prodDate(3) } }; })
+    .concat(TRW.map(function (t) { return { id: t.id, name: t.name, tag: 'LTC Trowels', cat: 'trowel', msrp: t.msrp, img: t.img, imgData: '', body: t.body, pts: t.pts.slice(), spec: t.spec, sku: t.sku, upc: t.gtin, casePack: '', size: '', weight: '', status: 'Active', portal: true, site: true, shopify: null }; }));
   return { products: list, lastSync: prodDate(3) };
 }
 var PROD_BASE = null;
-function prodLoad() { if (!PROD_BASE) PROD_BASE = prodSeed(); var d = null; try { d = JSON.parse(localStorage.getItem(PROD_KEY) || 'null'); } catch (e) { d = null; } return d && d.products ? d : JSON.parse(JSON.stringify(PROD_BASE)); }
+function prodMig(d) { if (!d || !d.products || d.v >= 2) return d; var seedL = PROD_BASE.products; d.products = d.products.filter(function (p) { return p.id !== 'ftrowel' && p.id !== 'ctrowel'; }); seedL.forEach(function (sp) { var ex = d.products.find(function (p) { return p.id === sp.id; }); if (!ex) d.products.push(JSON.parse(JSON.stringify(sp))); else { if (!ex.sku && sp.sku) ex.sku = sp.sku; if (!ex.upc && sp.upc) ex.upc = sp.upc; if (ex.msrp == null && sp.msrp != null) ex.msrp = sp.msrp; } }); d.v = 2; return d; }
+function prodLoad() { if (!PROD_BASE) PROD_BASE = prodSeed(); var d = null; try { d = JSON.parse(localStorage.getItem(PROD_KEY) || 'null'); } catch (e) { d = null; } d = prodMig(d); return d && d.products ? d : JSON.parse(JSON.stringify(PROD_BASE)); }
 function prodSave(d) { try { localStorage.setItem(PROD_KEY, JSON.stringify(d)); } catch (e) {} }
 function prodIsKit(id) { var p = (PROD_STORE.products || []).find(function (x) { return x.id === id; }); return p ? p.cat === 'kit' : ['cove', 'ddd', 'triple', 'four'].indexOf(id) >= 0; }
-function prodIsTool(id) { var p = (PROD_STORE.products || []).find(function (x) { return x.id === id; }); return p ? (p.cat === 'trowel' || p.cat === 'other') : (id === 'ftrowel' || id === 'ctrowel'); }
+function prodIsTool(id) { var p = (PROD_STORE.products || []).find(function (x) { return x.id === id; }); return p ? (p.cat === 'trowel' || p.cat === 'other') : (TRW.some(function (t) { return t.id === id; })); }
 var PROD_STORE = { products: [] };
 function prodApply(d) {
   PROD_STORE = d;
@@ -2065,9 +2090,9 @@ function prodApply(d) {
   PRODUCTS.length = 0; TOOLS.length = 0;
   live.forEach(function (p) {
     if (p.cat === 'caddy' || p.cat === 'kit') PRODUCTS.push({ id: p.id, name: p.name, tag: p.tag, msrp: p.msrp == null ? 0 : p.msrp });
-    else TOOLS.push({ id: p.id, name: p.name, msrp: p.msrp });
+    else TOOLS.push({ id: p.id, name: p.name, msrp: p.msrp, sku: p.sku });
     IMG[p.id] = p.imgData || p.img || IMG[p.id] || '';
-    CUT[p.id] = { cat: PCAT[p.cat] || 'Tool', spec: p.spec || p.tag, body: p.body, pts: p.pts || [], upc: p.upc, casePack: p.casePack, size: p.size, weight: p.weight };
+    CUT[p.id] = { cat: PCAT[p.cat] || 'Tool', spec: p.spec || p.tag, body: p.body, pts: p.pts || [], sku: p.sku || (CADDY_SKU[p.id] || [])[0] || '', upc: p.upc || (CADDY_SKU[p.id] || [])[1] || '', casePack: p.casePack, size: p.size, weight: p.weight };
   });
 }
 function prodMissing(p) { var m = []; if (!p.upc) m.push('UPC'); if (!p.casePack) m.push('Case Pack'); if (!p.size) m.push('Size'); if (!p.weight) m.push('Weight'); if (!(p.imgData || p.img)) m.push('Photo'); return m; }
@@ -2081,7 +2106,7 @@ function num(v) { var n = parseFloat(v); return isNaN(n) ? null : n; }
 function today() { var d = new Date(); return d; }
 function fmtDate(d) { return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
 function daysAgo(n) { var d = today(); d.setDate(d.getDate() - n); return fmtDate(d); }
-function blankPricing() { return { contract: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, contractBreak: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, contractBreakMin: '100', dist: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, distBreak: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, tiers: [{ name: 'Tier 1', min: '', pct: '' }, { name: 'Tier 2', min: '', pct: '' }, { name: 'Tier 3', min: '', pct: '' }], dealerPct: '', freeFreight: '', moq: '' }; }
+function blankPricing() { return { contract: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, contractBreak: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, contractBreakMin: '100', dist: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, tool: {}, distBreak: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, tiers: [{ name: 'Tier 1', min: '', pct: '' }, { name: 'Tier 2', min: '', pct: '' }, { name: 'Tier 3', min: '', pct: '' }], dealerPct: '', freeFreight: '', moq: '' }; }
 function seed() {
   return {
     pricing: blankPricing(),
@@ -2260,6 +2285,11 @@ function extMigrate(d) {
     });
     d.demoV = 4;
   }
+  if (d.demoV < 5) {
+    d.pricing.tool = d.pricing.tool || {};
+    TRW.forEach(function (t) { if (d.pricing.tool[t.id] == null || d.pricing.tool[t.id] === '') d.pricing.tool[t.id] = String(t.dist.toFixed(2)); });
+    d.demoV = 5;
+  }
   return d;
 }
 function poPrefix(a) { var w = String((a && a.name) || 'PO').replace(/[^A-Za-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean); return (w.length > 1 ? w.map(function (x) { return x[0]; }).join('') : (w[0] || 'PO').slice(0, 3)).toUpperCase().slice(0, 4); }
@@ -2281,6 +2311,8 @@ class Component extends DCLogic {
   acct() { return ACCTS[this.state.acct]; }
   unitPrice(id, units) {
     var a = this.acct(), p = this.state.data.pricing, prod = PRODUCTS.find(function (x) { return x.id === id; });
+    var tl = !prod ? TOOLS.find(function (x) { return x.id === id; }) : null;
+    if (tl) { if (a.model === 'dealer') { var tdp = num(p.dealerPct); return tdp == null || tl.msrp == null ? null : tl.msrp * (1 - tdp / 100); } return num((p.tool || {})[id]); }
     if (!prod) return null;
     if (a.model === 'contract') { var bk = num((p.contractBreak || {})[id]), bm = num(p.contractBreakMin); return bk != null && bm != null && units >= bm ? bk : num(p.contract[id]); }
     if (a.model === 'tier' && num((p.dist || {})[id]) != null) { var db = num((p.distBreak || {})[id]), dm = num(p.contractBreakMin); return db != null && dm != null && units >= dm ? db : num(p.dist[id]); }
@@ -2294,9 +2326,9 @@ class Component extends DCLogic {
   calc() {
     var self = this, q = this.state.qty, mult = this.mult(), units = 0, list = 0, val = 0, priced = true, lines = [];
     PRODUCTS.forEach(function (p) { var n = q[p.id] || 0; if (n > 0) { units += n * mult; list += p.msrp * n * mult; } });
-    TOOLS.forEach(function (p) { var n = q[p.id] || 0; if (n > 0) { units += n * mult; priced = false; } });
+    TOOLS.forEach(function (p) { var n = q[p.id] || 0; if (n > 0) { units += n * mult; list += (p.msrp || 0) * n * mult; } });
     PRODUCTS.forEach(function (p) { var n = q[p.id] || 0; if (n > 0) { var u = self.unitPrice(p.id, units); if (u == null) priced = false; else val += u * n * mult; lines.push({ name: p.name, q: n * mult, unit: u, total: u == null ? 'Set by LTC' : money(u * n * mult) }); } });
-    TOOLS.forEach(function (p) { var n = q[p.id] || 0; if (n > 0) lines.push({ name: p.name, q: n * mult, unit: null, total: 'Priced on confirmation' }); });
+    TOOLS.forEach(function (p) { var n = q[p.id] || 0; if (n > 0) { var u = self.unitPrice(p.id, units); if (u == null) priced = false; else val += u * n * mult; lines.push({ name: p.name, q: n * mult, unit: u, total: u == null ? 'Priced on confirmation' : money(u * n * mult) }); } });
     return { units: units, list: list, val: priced && units > 0 ? val : null, lines: lines };
   }
   setForm(k, v) { var f = Object.assign({}, this.state.form); f[k] = v; this.setState({ form: f, err: '' }); }
@@ -2628,7 +2660,7 @@ class Component extends DCLogic {
     var items = PRODUCTS.map(function (p) { return { id: p.id, name: p.name, tag: p.tag, msrp: p.msrp }; }).concat(TOOLS.map(function (t) { var pr = (PROD_STORE.products || []).find(function (x) { return x.id === t.id; }); return { id: t.id, name: t.name, tag: pr ? pr.tag : 'LTC Trowels', msrp: t.msrp != null ? t.msrp : null }; })).filter(function (p) { return allow(p.id); });
     var abs = function (u) { try { return new URL(u, location.href).href; } catch (e) { return u; } };
     var full = function (p) { var pr = (PROD_STORE.products || []).find(function (x) { return x.id === p.id; }); var c = CUT[p.id] || (pr ? { cat: PCAT[pr.cat], spec: pr.spec || pr.tag, body: pr.body, pts: pr.pts, upc: pr.upc, casePack: pr.casePack, size: pr.size, weight: pr.weight } : {}); if (pr && !IMG[p.id]) IMG[p.id] = pr.imgData || pr.img; return { id: p.id, name: p.name, tag: p.tag, img: IMG[p.id], body: c.body, pts: c.pts || [], cat: c.cat, specTxt: c.spec, msrp: p.msrp != null ? money(p.msrp) : 'Priced on quote',
-      spec: [['Product', p.name], ['Category', c.cat], [c.cat === 'Kit' ? 'Includes' : 'Spec', c.spec], ['MSRP', p.msrp != null ? money(p.msrp) : 'Priced on quote'], ['Item # / UPC', c.upc || 'To come from LTC'], ['Case Pack', c.casePack || 'To come from LTC'], ['Size & Weight', [c.size, c.weight].filter(Boolean).join(' · ') || 'To come from LTC'], ['Ships From', 'San Dimas, CA'], ['Made In', 'USA']].map(function (x) { return { k: x[0], v: x[1], cls: /To come/.test(x[1]) ? 'cstbd' : '' }; }) }; };
+      spec: [['Product', p.name], ['Category', c.cat], [c.cat === 'Kit' ? 'Includes' : 'Spec', c.spec], ['MSRP', p.msrp != null ? money(p.msrp) : 'Priced on quote'], ['SKU', c.sku || 'To come from LTC'], ['GTIN / UPC', c.upc || 'To come from LTC'], ['Case Pack', c.casePack || 'To come from LTC'], ['Size & Weight', [c.size, c.weight].filter(Boolean).join(' · ') || 'To come from LTC'], ['Ships From', 'San Dimas, CA'], ['Made In', 'USA']].map(function (x) { return { k: x[0], v: x[1], cls: /To come/.test(x[1]) ? 'cstbd' : '' }; }) }; };
     var openSheet = function (id) { self.setState({ cs: { kind: 'sheet', id: id } }); };
     var catOf = function (id) { var pr = (PROD_STORE.products || []).find(function (x) { return x.id === id; }); return pr ? pr.cat : 'caddy'; };
     var secs = [['Tape Caddies', ['caddy']], ['Kits', ['kit']], ['Trowels & Tools', ['trowel', 'other']]].map(function (g) { return { name: g[0], items: items.filter(function (p) { return g[1].indexOf(catOf(p.id)) >= 0; }).map(function (p) { var f = full(p); return { name: f.name, img: f.img, spec: f.specTxt, msrp: f.msrp }; }) }; }).filter(function (g) { return g.items.length; });
@@ -2740,7 +2772,7 @@ class Component extends DCLogic {
     var commit = function (preview) {
       var x = self.state.pf; if (!x.name.trim()) { self.setState({ pf: Object.assign({}, x, { err: 'Add a product name.' }) }); return; }
       var id = x.id || x.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 30) + '-' + Date.now().toString(36).slice(-3);
-      var rec = { id: id, name: x.name.trim(), tag: x.tag.trim() || PCAT[x.cat], cat: x.cat, msrp: x.msrp === '' || x.msrp == null ? null : Math.round(parseFloat(x.msrp) * 100) / 100, img: x.img || '', imgData: x.imgData || '', body: x.body, pts: String(x.pts || '').split(/\n/).map(function (y) { return y.trim(); }).filter(Boolean), spec: x.spec, upc: x.upc, casePack: x.casePack, size: x.size, weight: x.weight, status: x.status, portal: !!x.portal, site: !!x.site, shopify: x.shopify };
+      var rec = { id: id, name: x.name.trim(), tag: x.tag.trim() || PCAT[x.cat], cat: x.cat, msrp: x.msrp === '' || x.msrp == null ? null : Math.round(parseFloat(x.msrp) * 100) / 100, img: x.img || '', imgData: x.imgData || '', body: x.body, pts: String(x.pts || '').split(/\n/).map(function (y) { return y.trim(); }).filter(Boolean), spec: x.spec, sku: (x.sku || '').trim(), upc: x.upc, casePack: x.casePack, size: x.size, weight: x.weight, status: x.status, portal: !!x.portal, site: !!x.site, shopify: x.shopify };
       if (!rec.shopify && x.pushShopify && !x.id) rec.shopify = { handle: id, price: rec.msrp, title: rec.name, synced: prodDate(0) };
       else if (rec.shopify) rec.shopify = Object.assign({}, rec.shopify, { price: rec.msrp, title: rec.name, synced: prodDate(0) });
       setP(function (d2) { var i = d2.products.findIndex(function (y) { return y.id === id; }); if (i >= 0) d2.products[i] = rec; else d2.products.push(rec); }, (x.id ? 'Saved. ' : 'Added. ') + (rec.status === 'Active' ? 'Live on ' + [rec.site ? 'the website' : '', rec.portal ? 'the portals' : ''].filter(Boolean).join(' and ') + (rec.shopify ? ' · synced to Shopify' : '') : 'Saved as a draft (hidden).'));
@@ -2772,13 +2804,13 @@ class Component extends DCLogic {
           edit: function () { self.setState({ pf: Object.assign(blankProd(), p, { msrp: p.msrp == null ? '' : String(p.msrp), pts: (p.pts || []).join('\n'), pushShopify: false, err: '' }) }); } }; }),
       addNew: function () { self.setState({ pf: Object.assign(blankProd(), { err: '' }) }); },
       editing: !!f,
-      f: { eyebrow: form.id ? 'Edit Product' : 'New Product', title: form.id ? form.name : 'Add A Product', name: form.name, tag: form.tag, cat: form.cat, msrp: form.msrp, spec: form.spec, status: form.status, body: form.body, pts: form.pts, upc: form.upc, casePack: form.casePack, size: form.size, weight: form.weight,
+      f: { eyebrow: form.id ? 'Edit Product' : 'New Product', title: form.id ? form.name : 'Add A Product', name: form.name, tag: form.tag, cat: form.cat, msrp: form.msrp, spec: form.spec, status: form.status, body: form.body, pts: form.pts, sku: form.sku, upc: form.upc, casePack: form.casePack, size: form.size, weight: form.weight,
         hasImg: !!(form.imgData || form.img), noImg: !(form.imgData || form.img), imgShow: form.imgData || form.img,
         siteOn: form.site ? 'true' : 'false', portalOn: form.portal ? 'true' : 'false', pushOn: form.pushShopify ? 'true' : 'false', canPush: !form.shopify && !form.id,
         shopTxt: form.shopify ? 'Linked to Shopify · /products/' + form.shopify.handle : 'Not on Shopify yet',
         hasErr: !!form.err, err: form.err || '',
         foot: 'Saving updates the website, partner portals, cut sheets and line card. ' + (form.shopify ? 'Price and name changes push to Shopify.' : '') },
-      set: { name: setF('name'), tag: setF('tag'), cat: setF('cat'), msrp: setF('msrp'), spec: setF('spec'), status: setF('status'), body: setF('body'), pts: setF('pts'), upc: setF('upc'), casePack: setF('casePack'), size: setF('size'), weight: setF('weight') },
+      set: { name: setF('name'), tag: setF('tag'), cat: setF('cat'), msrp: setF('msrp'), spec: setF('spec'), status: setF('status'), body: setF('body'), pts: setF('pts'), sku: setF('sku'), upc: setF('upc'), casePack: setF('casePack'), size: setF('size'), weight: setF('weight') },
       tSite: tog('site'), tPortal: tog('portal'), tPush: tog('pushShopify'),
       setPhoto: function (e) { var fl = e.target.files && e.target.files[0]; if (!fl) return; prodResize(fl, function (u) { if (!u) return self.flash('Could not read that image'); self.setState({ pf: Object.assign({}, self.state.pf, { imgData: u }) }); }); try { e.target.value = ''; } catch (x) {} },
       save: function () { commit(false); }, savePreview: function () { commit(true); }, cancel: function () { self.setState({ pf: null }); }
@@ -3343,7 +3375,7 @@ class Component extends DCLogic {
       multiStore: f.type === 'stores', singleShip: f.type !== 'stores', storeCount: s.stores.length,
       qtyHead: f.type === 'stores' ? 'Qty Per Store' : 'Qty',
       prodRows: PRODUCTS.filter(function (p) { var ac = a.access || {}, kit = prodIsKit(p.id); return isAdmin || (kit ? ac.bundles : ac.caddy !== false); }).map(function (p) { var n = s.qty[p.id] || 0, u = self.unitPrice(p.id, c.units || (n * mult)); return { cut: function () { self.setState({ cs: { kind: 'sheet', id: p.id } }); }, name: p.name, tag: p.tag, img: IMG[p.id], msrp: money(p.msrp), price: u == null ? 'Set by LTC' : money(u), priceColor: u == null ? '#8A94A3' : C.pri, qty: n, line: n > 0 ? (u == null ? 'List ' + money(p.msrp * n * mult) : money(u * n * mult)) : '—', inc: function () { self.setQty(p.id, n + 1); }, dec: function () { self.setQty(p.id, n - 1); }, set: function (e) { self.setQty(p.id, parseInt(e.target.value, 10)); } }; }),
-      toolRows: TOOLS.filter(function () { return isAdmin || (a.access || {}).trowels !== false; }).map(function (p) { var n = s.qty[p.id] || 0; return { cut: function () { self.setState({ cs: { kind: 'sheet', id: p.id } }); }, name: p.name, img: IMG[p.id], qty: n, inc: function () { self.setQty(p.id, n + 1); }, dec: function () { self.setQty(p.id, n - 1); }, set: function (e) { self.setQty(p.id, parseInt(e.target.value, 10)); } }; }),
+      toolRows: TOOLS.filter(function () { return isAdmin || (a.access || {}).trowels !== false; }).map(function (p) { var n = s.qty[p.id] || 0, u = self.unitPrice(p.id, c.units); return { priceTxt: (p.msrp != null ? 'MSRP ' + money(p.msrp) : 'MSRP set by LTC') + ' · Your price ' + (u == null ? 'Set by LTC' : money(u)), skuTxt: p.sku || '', cut: function () { self.setState({ cs: { kind: 'sheet', id: p.id } }); }, name: p.name, img: IMG[p.id], qty: n, inc: function () { self.setQty(p.id, n + 1); }, dec: function () { self.setQty(p.id, n - 1); }, set: function (e) { self.setQty(p.id, parseInt(e.target.value, 10)); } }; }),
       coatRows: COATINGS.filter(function () { return isAdmin || !!(a.access || {}).coatings; }).map(function (n) { return { name: n, on: s.coat[n] ? 'true' : 'false', toggle: function () { var x = Object.assign({}, s.coat); x[n] = !x[n]; self.setState({ coat: x, err: '' }); } }; }),
       storeRows: s.stores.map(function (st, i) { var sv = ((d.locations || {})[s.acct] || []).find(function (l) { return l.id === st.num; }); return { addr: sv && sv.ship && sv.ship.line1 ? sv.ship.line1 + (sv.ship.zip ? ' · ' + sv.ship.zip : '') : (st.addr || 'Not saved yet. LTC confirms.'), num: st.num, city: st.city, st: st.st, remove: function () { var a2 = s.stores.slice(); a2.splice(i, 1); self.setState({ stores: a2 }); } }; }),
       ns: s.ns,
@@ -3407,6 +3439,7 @@ class Component extends DCLogic {
       noBooks: d.books.filter(function (b) { return isAdmin || b.acct === s.acct; }).length === 0,
       priceColHead: a.model === 'tier' ? 'Tier 1 / 2 / 3' : 'Your Price',
       sheetRows: PRODUCTS.map(function (p) { var pr; if (a.model === 'tier' && num((P.dist || {})[p.id]) != null) { var db2 = num((P.distBreak || {})[p.id]), dm2 = num(P.contractBreakMin); pr = money(num(P.dist[p.id])) + (db2 != null && dm2 != null ? ' · ' + money(db2) + ' at ' + dm2 + '+ units' : ''); } else if (a.model === 'contract' && num((P.contract || {})[p.id]) != null) { var bk = num((P.contractBreak || {})[p.id]), bm = num(P.contractBreakMin); pr = money(num(P.contract[p.id])) + (bk != null && bm != null ? ' · ' + money(bk) + ' at ' + bm + '+ units' : ''); } else if (a.model === 'tier') { pr = P.tiers.map(function (t) { var pc = num(t.pct); return pc == null ? '—' : money(p.msrp * (1 - pc / 100)); }).join(' / '); if (pr === '— / — / —') pr = 'Set by LTC'; } else { var u = self.unitPrice(p.id, 0); pr = u == null ? 'Set by LTC' : money(u); } return { name: p.name, msrp: money(p.msrp), price: pr }; }),
+      toolSheetRows: TOOLS.map(function (t) { var u = self.unitPrice(t.id, 0); return { name: t.name + (t.sku ? ' (' + t.sku + ')' : ''), msrp: t.msrp != null ? money(t.msrp) : 'Set by LTC', price: u == null ? 'Set by LTC' : money(u) }; }),
       termRows: [{ k: 'Payment Terms', v: a.terms }, { k: 'Free Freight', v: num(P.freeFreight) != null ? 'Over ' + money(num(P.freeFreight)) : 'Set by LTC' }, { k: 'Minimum Order', v: num(P.moq) != null ? P.moq + ' units' : 'None set' }],
       aKpis: [
         { n: newCount, l: 'New Orders To Confirm' },
@@ -3421,6 +3454,7 @@ class Component extends DCLogic {
       pricing: P,
       contractRows: PRODUCTS.map(function (p) { return { name: p.name, msrp: money(p.msrp), val: P.contract[p.id], brk: (P.contractBreak || {})[p.id] || '', set: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.contract[p.id] = e.target.value; self.persist(d2); }, setBrk: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.contractBreak = d2.pricing.contractBreak || {}; d2.pricing.contractBreak[p.id] = e.target.value; self.persist(d2); } }; }),
       contractBreakMin: P.contractBreakMin || '', setBreakMin: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.contractBreakMin = e.target.value; self.persist(d2); },
+      toolPriceRows: TOOLS.map(function (t) { return { name: t.name, sku: t.sku || '—', msrp: t.msrp != null ? money(t.msrp) : '—', val: (P.tool || {})[t.id] || '', set: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.tool = d2.pricing.tool || {}; d2.pricing.tool[t.id] = e.target.value; self.persist(d2); } }; }),
       distRows: PRODUCTS.map(function (p) { var v = (P.dist || {})[p.id] || '', n = num(v); return { name: p.name, msrp: money(p.msrp), val: v, brk: (P.distBreak || {})[p.id] || '', off: n != null && p.msrp ? Math.round((1 - n / p.msrp) * 1000) / 10 + '% off' : '', set: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.dist = d2.pricing.dist || {}; d2.pricing.dist[p.id] = e.target.value; self.persist(d2); }, setBrk: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.distBreak = d2.pricing.distBreak || {}; d2.pricing.distBreak[p.id] = e.target.value; self.persist(d2); } }; }),
       tierRows: P.tiers.map(function (t, i) { return { name: t.name, min: t.min, pct: t.pct, setMin: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.tiers[i].min = e.target.value; self.persist(d2); }, setPct: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.tiers[i].pct = e.target.value; self.persist(d2); } }; }),
       tierPreview: P.tiers.map(function (t) { var pc = num(t.pct); return t.name + ': 4-Inch ' + (pc == null ? '—' : money(99 * (1 - pc / 100))); }).join(' · '),
