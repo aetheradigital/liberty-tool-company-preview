@@ -119,6 +119,17 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 .demo button{flex:1;border:0;border-radius:999px;padding:7px 8px;font-size:12px;font-weight:700;background:transparent;color:#D6E0F2}
 .demo button[aria-pressed="true"]{background:#FFFFFF;color:#0A35C8}
 @media (max-width: 860px){.app{grid-template-columns:1fr}.side{padding:16px;position:static;height:auto;overflow:visible}.sidemore{display:none}.side .nav{flex-direction:row;flex-wrap:wrap}.nv{width:auto}.main{padding:20px 16px 56px}}
+.chk{width:24px;height:24px;border-radius:7px;border:2px solid #C9D4F2;background:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;padding:0}
+.chk[aria-pressed="true"]{background:#0A35C8;border-color:#0A35C8}
+.chk[aria-pressed="true"]:after{content:"\2713";color:#FFFFFF;font-size:14px;font-weight:800;line-height:1}
+.bar{height:10px;border-radius:999px;background:#E8EEFF;overflow:hidden}
+.bar span{display:block;height:100%;background:#0A35C8;border-radius:999px}
+.ph{width:96px;height:96px;border-radius:12px;object-fit:cover;border:1px solid #DCE3F7;background:#E8EEFF;display:block}
+.phx{position:absolute;top:-8px;right:-8px;width:26px;height:26px;border-radius:50%;border:0;background:#B31942;color:#FFFFFF;font-weight:800;font-size:15px;line-height:1;display:inline-flex;align-items:center;justify-content:center}
+.tog{position:relative;width:46px;height:26px;border-radius:999px;border:0;background:#C9D4F2;padding:0}
+.tog span{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,0.25);transition:left .15s}
+.tog[aria-pressed="true"]{background:#0A35C8}
+.tog[aria-pressed="true"] span{left:23px}
 </style>
 
 </head>
@@ -187,8 +198,284 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       </div>
     </div>
 
+
+    <!-- ================= PORTAL: APPROVALS ================= -->
+    <sc-if value="{{v.xAppr}}" hint-placeholder-val="{{false}}">
+      <div class="card" style="background: #E8EEFF">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; align-items: flex-start">
+          <div style="min-width: 0; flex: 1 1 380px"><h3 class="h3">Approval Rule</h3><div style="font-size: 14px; margin-top: 6px; line-height: 1.5">{{xa.ruleTxt}}</div><div class="muted" style="font-size: 13px; margin-top: 6px">Approvers: {{xa.approvers}}. Give someone “Approve Orders” on the Team tab to add them.</div></div>
+          <sc-if value="{{xa.canRule}}" hint-placeholder-val="{{true}}">
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: end">
+              <div><span class="lbl">Approvals</span><div style="display: flex; gap: 6px"><button type="button" class="chip" aria-pressed="{{xa.ruleOn}}" onClick="{{xa.setOn}}">On</button><button type="button" class="chip" aria-pressed="{{xa.ruleOff}}" onClick="{{xa.setOff}}">Off</button></div></div>
+              <label style="width: 190px"><span class="lbl">Only Orders Over (Units)</span><input class="inp" type="number" min="0" inputmode="numeric" value="{{xa.over}}" onChange="{{xa.setOver}}" placeholder="Blank = every order"></label>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 16px">
+        <h3 class="h3">Waiting For Approval</h3>
+        <sc-for list="{{xa.rows}}" as="o" hint-placeholder-count="1">
+          <div style="margin-top: 14px; padding: 16px; border-radius: 12px; border: 1px solid #DCE3F7">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: flex-start">
+              <div style="min-width: 0; flex: 1 1 320px">
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center"><b style="font-size: 16px">{{o.id}} · PO {{o.po}}</b><span class="st" style="background: {{o.sbg}}; color: {{o.sfg}}">{{o.status}}</span></div>
+                <div class="muted" style="font-size: 13px; margin-top: 4px">{{o.typeName}} · {{o.locName}} · placed by {{o.by}} on {{o.created}}</div>
+                <div style="font-size: 14px; margin-top: 8px"><sc-for list="{{o.lines}}" as="l" hint-placeholder-count="2"><div>{{l}}</div></sc-for></div>
+                <div class="muted" style="font-size: 13px; margin-top: 6px">{{o.units}} units · {{o.valueTxt}} · Ship to {{o.shipTo}} · {{o.window}}</div>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px; flex: 0 1 300px; min-width: 240px">
+                <div style="display: flex; flex-wrap: wrap; gap: 8px"><button type="button" class="btn red sm" onClick="{{o.approve}}">Approve &amp; Send To LTC</button><button type="button" class="btn ghost sm" onClick="{{o.open}}">View</button></div>
+                <label><span class="lbl">Note (needed to send back)</span><input class="inp" value="{{o.note}}" onChange="{{o.setNote}}" placeholder="e.g. Cut the 6-Inch to 4 units"></label>
+                <button type="button" class="btn ghost sm" onClick="{{o.decline}}">Send Back With Note</button>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+        <sc-if value="{{xa.none}}" hint-placeholder-val="{{false}}"><p class="muted" style="margin: 12px 0 0">Nothing waiting. Orders that need your approval show up here.</p></sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ================= PORTAL: RETURNS & CLAIMS ================= -->
+    <sc-if value="{{v.xClaims}}" hint-placeholder-val="{{false}}">
+      <sc-if value="{{xc.canStart}}" hint-placeholder-val="{{true}}">
+        <div class="card" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; align-items: center; background: #E8EEFF">
+          <div style="min-width: 0; flex: 1 1 380px"><h3 class="h3">Something Wrong With A Delivery?</h3><div style="font-size: 14px; margin-top: 6px; line-height: 1.5">Report freight damage, a short shipment, a wrong or defective item, or start a return for credit. For freight damage, note it on the delivery receipt and take photos before you unpack.</div></div>
+          <button type="button" class="btn red" onClick="{{xc.start}}">Start A Return Or Claim</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{xc.formOpen}}" hint-placeholder-val="{{false}}">
+        <div class="card" style="border: 2px solid #0A35C8">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center"><h2 class="h2">New Return Or Claim</h2><button type="button" class="btn ghost sm" onClick="{{xc.cancel}}">Cancel</button></div>
+          <label style="display: block; margin-top: 14px; max-width: 560px"><span class="lbl">Order</span><select class="inp" value="{{xc.order}}" onChange="{{xc.setOrder}}"><sc-for list="{{xc.orderOpts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></label>
+          <span class="lbl" style="margin-top: 16px">What Happened?</span>
+          <div class="grid g4" style="gap: 10px"><sc-for list="{{xc.kinds}}" as="k" hint-placeholder-count="5"><button type="button" class="opt" aria-pressed="{{k.on}}" onClick="{{k.pick}}" style="min-height: 96px"><span class="h3" style="color: #0A35C8; font-size: 14px">{{k.name}}</span><span class="muted" style="font-size: 13px">{{k.desc}}</span></button></sc-for></div>
+          <span class="lbl" style="margin-top: 16px">Items And Quantities</span>
+          <div class="scroll"><div class="tbl" style="--cols: minmax(0, 2fr) 0.8fr 150px; --minw: 420px"><div class="tr th"><div>Item</div><div>On Order</div><div>In This Claim</div></div>
+            <sc-for list="{{xc.items}}" as="i" hint-placeholder-count="3"><div class="tr"><div><b>{{i.name}}</b></div><div>{{i.max}}</div><div><input class="inp" type="number" min="0" max="{{i.max}}" inputmode="numeric" value="{{i.q}}" onChange="{{i.set}}" aria-label="Quantity of {{i.name}} in this claim" style="min-height: 38px"></div></div></sc-for>
+          </div></div>
+          <label style="display: block; margin-top: 16px"><span class="lbl">Describe It</span><textarea class="inp" placeholder="{{xc.descPh}}" onChange="{{xc.setDesc}}">{{xc.desc}}</textarea></label>
+          <sc-if value="{{xc.isDamage}}" hint-placeholder-val="{{true}}"><div style="margin-top: 12px"><button type="button" class="chip" aria-pressed="{{xc.noted}}" onClick="{{xc.toggleNoted}}">Damage was noted on the delivery receipt</button></div></sc-if>
+          <span class="lbl" style="margin-top: 16px">Photos</span>
+          <div class="drop">
+            <div style="min-width: 0; flex: 1 1 280px"><b>Add photos</b><div class="muted" style="font-size: 13px; margin-top: 4px">{{xc.photoHint}} Up to 6 images.</div></div>
+            <label class="btn ghost sm" style="cursor: pointer; position: relative">Choose Photos<input type="file" multiple accept="image/*" onChange="{{xc.addPhotos}}" aria-label="Add photos to this claim" style="position: absolute; width: 1px; height: 1px; opacity: 0"></label>
+          </div>
+          <sc-if value="{{xc.hasPhotos}}" hint-placeholder-val="{{false}}"><div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px"><sc-for list="{{xc.photos}}" as="p" hint-placeholder-count="2"><div style="position: relative"><img class="ph" src="{{p.src}}" alt="Claim photo"><button type="button" class="phx" onClick="{{p.remove}}" aria-label="Remove photo">×</button></div></sc-for></div></sc-if>
+          <sc-if value="{{xc.hasErr}}" hint-placeholder-val="{{false}}"><div style="color: #B31942; font-weight: 600; font-size: 14px; margin-top: 12px">{{xc.err}}</div></sc-if>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px"><button type="button" class="btn red" onClick="{{xc.submit}}">Submit To LTC</button><button type="button" class="btn ghost" onClick="{{xc.cancel}}">Cancel</button></div>
+        </div>
+      </sc-if>
+      <div class="card" style="margin-top: 16px">
+        <h3 class="h3">Your Returns &amp; Claims</h3>
+        <sc-for list="{{xc.rows}}" as="c" hint-placeholder-count="1">
+          <div style="margin-top: 14px; padding: 16px; border-radius: 12px; border: 1px solid #DCE3F7">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: flex-start">
+              <div style="min-width: 0; flex: 1 1 320px"><div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center"><b style="font-size: 16px">{{c.id}} · {{c.kindName}}</b><span class="st" style="background: {{c.sbg}}; color: {{c.sfg}}">{{c.status}}</span></div>
+                <div class="muted" style="font-size: 13px; margin-top: 4px">{{c.order}} · PO {{c.po}} · {{c.itemsTxt}} · opened {{c.created}} by {{c.by}}</div></div>
+              <button type="button" class="btn ghost sm" onClick="{{c.toggle}}">{{c.toggleTxt}}</button>
+            </div>
+            <sc-if value="{{c.open}}" hint-placeholder-val="{{false}}">
+              <div class="tl" style="margin-top: 14px"><sc-for list="{{c.steps}}" as="s" hint-placeholder-count="5"><div class="s {{s.cls}}"><b>{{s.name}}</b><div class="muted">{{s.when}}</div></div></sc-for></div>
+              <div style="font-size: 14px; line-height: 1.5; margin-top: 14px">{{c.desc}}</div>
+              <div class="muted" style="font-size: 13px; margin-top: 4px">{{c.notedTxt}}</div>
+              <sc-if value="{{c.hasPhotos}}" hint-placeholder-val="{{false}}"><div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px"><sc-for list="{{c.photos}}" as="p" hint-placeholder-count="2"><img class="ph" src="{{p}}" alt="Claim photo"></sc-for></div></sc-if>
+              <sc-if value="{{c.hasLtc}}" hint-placeholder-val="{{false}}"><div style="margin-top: 12px; padding: 12px 14px; border-radius: 12px; background: #E8EEFF; font-size: 14px; line-height: 1.5"><b>From LTC:</b> {{c.ltcNote}}</div></sc-if>
+              <sc-if value="{{c.hasCredit}}" hint-placeholder-val="{{false}}"><div style="margin-top: 8px; font-size: 14px; font-weight: 600; color: #2E7D4F">{{c.creditTxt}}</div></sc-if>
+            </sc-if>
+          </div>
+        </sc-for>
+        <sc-if value="{{xc.none}}" hint-placeholder-val="{{false}}"><p class="muted" style="margin: 12px 0 0">No returns or claims yet.</p></sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ================= BILLING (portal) ================= -->
+    <sc-if value="{{v.xBill}}" hint-placeholder-val="{{false}}">
+      <div class="grid g4"><sc-for list="{{xb.kpis}}" as="k" hint-placeholder-count="4"><div class="card kpi"><div class="n" style="color: {{k.c}}; font-size: 28px">{{k.n}}</div><div class="l">{{k.l}}</div></div></sc-for></div>
+      <sc-if value="{{xb.payOpen}}" hint-placeholder-val="{{false}}">
+        <div class="card" style="margin-top: 16px; border: 2px solid #0A35C8">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center"><h2 class="h2">Pay {{xb.payTotal}}</h2><button type="button" class="btn ghost sm" onClick="{{xb.cancelPay}}">Cancel</button></div>
+          <sc-for list="{{xb.payRows}}" as="p" hint-placeholder-count="2"><div style="display: flex; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px solid #DCE3F7; font-size: 14px"><span><b>{{p.id}}</b> · PO {{p.po}}</span><b>{{p.amt}}</b></div></sc-for>
+          <span class="lbl" style="margin-top: 16px">How Do You Want To Pay?</span>
+          <div class="grid g2" style="gap: 10px"><sc-for list="{{xb.methods}}" as="m" hint-placeholder-count="2"><button type="button" class="opt" aria-pressed="{{m.on}}" onClick="{{m.pick}}" style="min-height: 80px"><span class="h3" style="color: #0A35C8">{{m.name}}</span><span class="muted" style="font-size: 13px">{{m.desc}}</span></button></sc-for></div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px"><button type="button" class="btn red" onClick="{{xb.confirmPay}}">Continue To Secure Payment</button><span class="muted" style="font-size: 13px">You’ll finish on a secure payment page. LTC confirms when it clears.</span></div>
+        </div>
+      </sc-if>
+      <div class="card" style="margin-top: 16px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center">
+          <div><h3 class="h3">Invoices &amp; Credits</h3><sc-if value="{{xb.canPay}}" hint-placeholder-val="{{true}}"><div class="muted" style="font-size: 13px; margin-top: 4px">Tick the invoices you want to pay, then Pay Selected.</div></sc-if></div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px"><button type="button" class="btn ghost sm" onClick="{{xb.exportCsv}}">Download (CSV)</button><sc-if value="{{xb.canPay}}" hint-placeholder-val="{{true}}"><button type="button" class="btn red sm" onClick="{{xb.startPay}}" disabled="{{xb.noSel}}">Pay Selected · {{xb.selTotal}}</button></sc-if></div>
+        </div>
+        <div class="scroll" style="margin-top: 10px"><div class="tbl" style="--cols: {{xbCols}}; --minw: 820px"><div class="tr th"><div></div><div>Invoice</div><sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div>Account</div></sc-if><div>Order · PO</div><div>Date</div><div>Due</div><div>Amount</div><div>Balance</div><div>Status</div><div></div></div>
+          <sc-for list="{{xb.rows}}" as="i" hint-placeholder-count="3"><div class="tr">
+            <div><sc-if value="{{i.canPick}}" hint-placeholder-val="{{true}}"><button type="button" class="chk" aria-pressed="{{i.on}}" onClick="{{i.toggle}}" aria-label="Select {{i.id}}"></button></sc-if></div>
+            <div><b>{{i.id}}</b></div><sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div>{{i.acctName}}</div></sc-if><div>{{i.order}}<div class="muted" style="font-size: 12px">{{i.po}}</div></div><div>{{i.date}}</div><div>{{i.due}}</div><div>{{i.amt}}</div><div><b>{{i.bal}}</b></div><div><span class="st" style="background: {{i.sbg}}; color: {{i.sfg}}">{{i.status}}</span></div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end"><button type="button" class="btn ghost sm" onClick="{{i.view}}">View</button><sc-if value="{{i.adminPay}}" hint-placeholder-val="{{false}}"><button type="button" class="btn sm" onClick="{{i.markPaid}}">Mark Paid</button></sc-if></div>
+          </div></sc-for>
+        </div></div>
+        <sc-if value="{{xb.none}}" hint-placeholder-val="{{false}}"><p class="muted">No invoices yet. Invoices appear here once an order ships.</p></sc-if>
+      </div>
+      <sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}">
+        <div class="card" style="margin-top: 16px">
+          <h3 class="h3">Create An Invoice</h3>
+          <div class="muted" style="font-size: 13px; margin-top: 4px">Bill a shipped order. Due date follows the account’s terms and the partner gets a message.</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: end; margin-top: 12px">
+            <label style="flex: 1 1 360px"><span class="lbl">Order</span><select class="inp" value="{{xai.order}}" onChange="{{xai.setOrder}}"><sc-for list="{{xai.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></label>
+            <label style="flex: 0 1 180px"><span class="lbl">Amount ($)</span><input class="inp" type="number" min="0" step="0.01" inputmode="decimal" value="{{xai.amount}}" onChange="{{xai.setAmount}}"></label>
+            <button type="button" class="btn red" onClick="{{xai.create}}">Create Invoice</button>
+          </div>
+        </div>
+      </sc-if>
+      <div class="card" style="margin-top: 16px">
+        <h3 class="h3">Monthly Statements</h3>
+        <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 1.4fr 1fr 1fr 1.2fr 1fr 150px; --minw: 680px"><div class="tr th"><div>Month</div><div>Documents</div><div>Charges</div><div>Payments &amp; Credits</div><div>Balance</div><div></div></div>
+          <sc-for list="{{xb.stmts}}" as="m" hint-placeholder-count="2"><div class="tr"><div><b>{{m.label}}</b></div><div>{{m.n}}</div><div>{{m.charges}}</div><div>{{m.credits}}</div><div><b>{{m.bal}}</b></div><div style="text-align: right"><button type="button" class="btn ghost sm" onClick="{{m.dl}}">Download</button></div></div></sc-for>
+        </div></div>
+        <sc-if value="{{xb.noStmts}}" hint-placeholder-val="{{false}}"><p class="muted">No statements yet.</p></sc-if>
+        <div class="muted" style="font-size: 12px; margin-top: 12px">{{xb.note}}</div>
+      </div>
+    </sc-if>
+
+    <!-- ================= PORTAL: REPORTS ================= -->
+    <sc-if value="{{v.xRep}}" hint-placeholder-val="{{false}}">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center">
+        <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{xr.ranges}}" as="r" hint-placeholder-count="4"><button type="button" class="chip" aria-pressed="{{r.on}}" onClick="{{r.pick}}">{{r.label}}</button></sc-for></div>
+        <span class="muted" style="font-size: 13px">{{xr.scopeTxt}} Cancelled and unapproved orders aren’t counted.</span>
+      </div>
+      <div class="grid g4" style="margin-top: 14px"><sc-for list="{{xr.kpis}}" as="k" hint-placeholder-count="4"><div class="card kpi"><div class="n">{{k.n}}</div><div class="l">{{k.l}} · {{xr.rangeName}}</div></div></sc-for></div>
+      <div class="grid g2" style="margin-top: 16px; align-items: start">
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; gap: 10px; align-items: center"><h3 class="h3">Units By Product</h3><button type="button" class="btn ghost sm" onClick="{{xr.expProds}}">CSV</button></div>
+          <sc-for list="{{xr.prods}}" as="p" hint-placeholder-count="4"><div style="padding: 10px 0; border-bottom: 1px solid #DCE3F7"><div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px"><b>{{p.name}}</b><span><b>{{p.units}}</b> <span class="muted">· {{p.orders}}</span></span></div><div class="bar" style="margin-top: 6px"><span style="width: {{p.pct}}%"></span></div></div></sc-for>
+          <sc-if value="{{xr.none}}" hint-placeholder-val="{{false}}"><p class="muted">No orders in this range.</p></sc-if>
+        </div>
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; gap: 10px; align-items: center"><h3 class="h3">Units By Store</h3><button type="button" class="btn ghost sm" onClick="{{xr.expStores}}">CSV</button></div>
+          <sc-for list="{{xr.locs}}" as="l" hint-placeholder-count="3"><div style="padding: 10px 0; border-bottom: 1px solid #DCE3F7"><div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px"><b>{{l.name}}</b><span><b>{{l.units}}</b> units</span></div><div class="bar" style="margin-top: 6px"><span style="width: {{l.pct}}%"></span></div><div class="muted" style="font-size: 12px; margin-top: 4px">{{l.orders}} orders · {{l.list}} at MSRP · last order {{l.last}}</div></div></sc-for>
+          <sc-if value="{{xr.none}}" hint-placeholder-val="{{false}}"><p class="muted">No orders in this range.</p></sc-if>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 16px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; align-items: center">
+        <div style="min-width: 0; flex: 1 1 340px"><h3 class="h3">Export Order History</h3><div class="muted" style="font-size: 13px; margin-top: 4px">CSV files open in Excel or Google Sheets. They use the date range above.</div></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px"><button type="button" class="btn" onClick="{{xr.expOrders}}">Orders (CSV)</button><button type="button" class="btn ghost" onClick="{{xr.expLines}}">Order Lines (CSV)</button></div>
+      </div>
+    </sc-if>
+
+    <!-- ================= PORTAL: MY PROFILE ================= -->
+    <sc-if value="{{v.xProf}}" hint-placeholder-val="{{false}}">
+      <div class="grid g2" style="align-items: start">
+        <div class="card">
+          <h3 class="h3">Profile</h3>
+          <div class="grid g2" style="gap: 12px; margin-top: 12px">
+            <label><span class="lbl">Name</span><input class="inp" value="{{xp.name}}" onChange="{{xp.setName}}" autocomplete="name"></label>
+            <label><span class="lbl">Job Title</span><input class="inp" value="{{xp.title}}" onChange="{{xp.setTitle}}" placeholder="e.g. Purchasing Manager" autocomplete="organization-title"></label>
+            <label><span class="lbl">Mobile (For Texts)</span><input class="inp" type="tel" value="{{xp.phone}}" onChange="{{xp.setPhone}}" placeholder="(555) 555-0100" autocomplete="tel"></label>
+            <div><span class="lbl">Email (Sign-In)</span><div style="min-height: 44px; display: flex; align-items: center; font-size: 15px">{{xp.email}}</div></div>
+          </div>
+          <div class="muted" style="font-size: 13px; margin-top: 10px">{{xp.role}} · {{xp.locName}}. To change your email, role or location, ask your account admin. Changes save as you type.</div>
+        </div>
+        <div class="card">
+          <h3 class="h3">Change Password</h3>
+          <div class="muted" style="font-size: 13px; margin-top: 4px">{{xp.pwTxt}}</div>
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px">
+            <label><span class="lbl">Current Password</span><input class="inp" type="password" value="{{xp.pw.cur}}" onChange="{{xp.setCur}}" autocomplete="current-password"></label>
+            <label><span class="lbl">New Password</span><input class="inp" type="password" value="{{xp.pw.nw}}" onChange="{{xp.setNw}}" autocomplete="new-password"></label>
+            <label><span class="lbl">Confirm New Password</span><input class="inp" type="password" value="{{xp.pw.cf}}" onChange="{{xp.setCf}}" autocomplete="new-password"></label>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; font-size: 13px; font-weight: 600"><sc-for list="{{xp.checks}}" as="c" hint-placeholder-count="4"><span style="color: {{c.fg}}">{{c.mark}} {{c.t}}</span></sc-for></div>
+          <sc-if value="{{xp.hasPwErr}}" hint-placeholder-val="{{false}}"><div style="color: #B31942; font-weight: 600; font-size: 14px; margin-top: 10px">{{xp.pwErr}}</div></sc-if>
+          <button type="button" class="btn" style="margin-top: 14px" onClick="{{xp.savePw}}">Update Password</button>
+          <div class="muted" style="font-size: 12px; margin-top: 8px">Forgot it? Sign out and use “Forgot password” on the sign-in page. Mockup: passwords aren’t stored.</div>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 16px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center"><div><h3 class="h3">Email &amp; Text Notifications</h3><div class="muted" style="font-size: 13px; margin-top: 4px">Pick what you hear about and how. {{xp.textTo}}</div></div><div style="display: flex; gap: 8px"><button type="button" class="btn ghost sm" onClick="{{xp.reset}}">Reset</button><button type="button" class="btn ghost sm" onClick="{{xp.allOff}}">Turn All Off</button></div></div>
+        <div class="scroll" style="margin-top: 10px"><div class="tbl" style="--cols: minmax(0, 2fr) 110px 110px; --minw: 460px"><div class="tr th"><div>Notify Me When</div><div>Email</div><div>Text</div></div>
+          <sc-for list="{{xp.events}}" as="e" hint-placeholder-count="6"><div class="tr"><div><b>{{e.name}}</b></div><div><button type="button" class="tog" aria-pressed="{{e.email}}" onClick="{{e.togEmail}}" aria-label="Email: {{e.name}}"><span></span></button></div><div><button type="button" class="tog" aria-pressed="{{e.text}}" onClick="{{e.togText}}" aria-label="Text: {{e.name}}"><span></span></button></div></div></sc-for>
+        </div></div>
+        <span class="lbl" style="margin-top: 16px">Email Delivery</span>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{xp.digests}}" as="g" hint-placeholder-count="2"><button type="button" class="chip" aria-pressed="{{g.on}}" onClick="{{g.pick}}">{{g.label}}</button></sc-for></div>
+      </div>
+    </sc-if>
+
+    <!-- ================= ADMIN: REQUESTS ================= -->
+    <sc-if value="{{v.aRequests}}" hint-placeholder-val="{{false}}">
+      <div class="card">
+        <h3 class="h3">Change &amp; Cancel Requests</h3>
+        <sc-for list="{{xar.reqs}}" as="r" hint-placeholder-count="1">
+          <div style="margin-top: 14px; padding: 14px; border-radius: 12px; border: 1px solid #DCE3F7">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: flex-start">
+              <div style="min-width: 0; flex: 1 1 320px"><div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center"><b>{{r.id}} · {{r.title}}</b><span class="st" style="background: {{r.sbg}}; color: {{r.sfg}}">{{r.status}}</span></div>
+                <div class="muted" style="font-size: 13px; margin-top: 4px">{{r.acctName}} · {{r.order}} · {{r.by}} · {{r.when}}</div>
+                <div style="font-size: 14px; margin-top: 6px"><b>{{r.detail}}</b></div><sc-if value="{{r.hasNote}}" hint-placeholder-val="{{true}}"><div style="font-size: 14px; margin-top: 4px; line-height: 1.5">{{r.note}}</div></sc-if>
+                <sc-if value="{{r.hasReply}}" hint-placeholder-val="{{false}}"><div class="muted" style="font-size: 13px; margin-top: 6px">LTC reply: {{r.reply}}</div></sc-if></div>
+              <button type="button" class="btn ghost sm" onClick="{{r.open}}">Open Order</button>
+            </div>
+            <sc-if value="{{r.canAct}}" hint-placeholder-val="{{false}}"><div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: end; margin-top: 12px"><label style="flex: 1 1 320px"><span class="lbl">Reply To Partner (optional)</span><input class="inp" value="{{r.replyVal}}" onChange="{{r.setReply}}" placeholder="e.g. Updated to ship Nov 20."></label><button type="button" class="btn sm" onClick="{{r.approve}}">Approve</button><button type="button" class="btn ghost sm" onClick="{{r.decline}}">Decline</button></div></sc-if>
+          </div>
+        </sc-for>
+        <sc-if value="{{xar.noReqs}}" hint-placeholder-val="{{false}}"><p class="muted" style="margin: 12px 0 0">No change or cancel requests yet.</p></sc-if>
+      </div>
+      <div class="card" style="margin-top: 16px">
+        <h3 class="h3">Returns &amp; Claims</h3>
+        <sc-for list="{{xc.rows}}" as="c" hint-placeholder-count="1">
+          <div style="margin-top: 14px; padding: 14px; border-radius: 12px; border: 1px solid #DCE3F7">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: flex-start">
+              <div style="min-width: 0; flex: 1 1 320px"><div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center"><b>{{c.id}} · {{c.kindName}}</b><span class="st" style="background: {{c.sbg}}; color: {{c.sfg}}">{{c.status}}</span></div>
+                <div class="muted" style="font-size: 13px; margin-top: 4px">{{c.acctName}} · {{c.order}} · PO {{c.po}} · {{c.itemsTxt}} · {{c.by}} · {{c.created}}</div>
+                <div style="font-size: 14px; line-height: 1.5; margin-top: 6px">{{c.desc}}</div><div class="muted" style="font-size: 13px">{{c.notedTxt}}</div>
+                <sc-if value="{{c.hasPhotos}}" hint-placeholder-val="{{false}}"><div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px"><sc-for list="{{c.photos}}" as="p" hint-placeholder-count="2"><img class="ph" src="{{p}}" alt="Claim photo"></sc-for></div></sc-if>
+                <sc-if value="{{c.hasLtc}}" hint-placeholder-val="{{false}}"><div class="muted" style="font-size: 13px; margin-top: 6px">Note to partner: {{c.ltcNote}}</div></sc-if>
+                <sc-if value="{{c.hasCredit}}" hint-placeholder-val="{{false}}"><div style="font-size: 13px; margin-top: 6px; font-weight: 600; color: #2E7D4F">{{c.creditTxt}}</div></sc-if>
+              </div>
+            </div>
+            <sc-if value="{{c.adm}}" hint-placeholder-val="{{false}}">
+              <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: end; margin-top: 12px">
+                <label style="flex: 1 1 300px"><span class="lbl">Note To Partner (return steps, decision)</span><input class="inp" value="{{c.note}}" onChange="{{c.setNote}}" placeholder="e.g. Use the prepaid label we emailed. Ship within 14 days."></label>
+                <sc-if value="{{c.canCredit}}" hint-placeholder-val="{{false}}"><label style="flex: 0 1 150px"><span class="lbl">Credit ($)</span><input class="inp" type="number" min="0" step="0.01" inputmode="decimal" value="{{c.amt}}" onChange="{{c.setAmt}}"></label></sc-if>
+              </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px">
+                <sc-if value="{{c.canReview}}" hint-placeholder-val="{{false}}"><button type="button" class="btn ghost sm" onClick="{{c.review}}">Mark In Review</button></sc-if>
+                <sc-if value="{{c.canRma}}" hint-placeholder-val="{{false}}"><button type="button" class="btn sm" onClick="{{c.rma}}">Issue RMA</button></sc-if>
+                <sc-if value="{{c.canCredit}}" hint-placeholder-val="{{false}}"><button type="button" class="btn sm red" onClick="{{c.credit}}">Issue Credit</button></sc-if>
+                <sc-if value="{{c.canClose}}" hint-placeholder-val="{{false}}"><button type="button" class="btn ghost sm" onClick="{{c.close}}">Close</button></sc-if>
+                <button type="button" class="btn ghost sm" onClick="{{c.decline}}">Decline</button>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+        <sc-if value="{{xc.none}}" hint-placeholder-val="{{false}}"><p class="muted" style="margin: 12px 0 0">No returns or claims yet.</p></sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ================= INVOICE VIEW ================= -->
+    <sc-if value="{{xiv.open}}" hint-placeholder-val="{{false}}">
+      <div class="csov" role="dialog" aria-modal="true" aria-label="{{xiv.kindTxt}} {{xiv.id}}">
+        <div class="cspanel">
+          <div class="cstop"><b>{{xiv.kindTxt}} {{xiv.id}}</b><div style="display: flex; gap: 8px"><button type="button" class="btn ghost sm" onClick="{{xiv.print}}">Print / Save As PDF</button><button type="button" class="btn ghost sm" onClick="{{xiv.close}}">Close</button></div></div>
+          <div class="cssheet">
+            <div class="cshead"><img src="/assets/logo-white.png" alt="Liberty Tool Company"><div style="text-align: right"><div style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700">{{xiv.kindTxt}}</div><div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 22px">{{xiv.id}}</div></div></div>
+            <div class="csbody">
+              <div class="csgrid">
+                <div><span class="lbl">Bill To</span><sc-for list="{{xiv.billLines}}" as="l" hint-placeholder-count="4"><div>{{l}}</div></sc-for></div>
+                <div class="csspec" style="margin-top: 0"><span>Date</span><span>{{xiv.date}}</span><span>Due</span><span>{{xiv.due}}</span><span>Terms</span><span>{{xiv.terms}}</span><span>Order</span><span>{{xiv.order}}</span><span>PO</span><span>{{xiv.po}}</span><span>Status</span><span>{{xiv.status}}</span></div>
+              </div>
+              <div class="tbl" style="--cols: 90px minmax(0, 1fr); --minw: 0; margin-top: 22px"><div class="tr th"><div>Qty</div><div>Description</div></div><sc-for list="{{xiv.lines}}" as="l" hint-placeholder-count="2"><div class="tr"><div>{{l.q}}</div><div>{{l.name}}</div></div></sc-for></div>
+              <div style="margin: 16px 0 0 auto; max-width: 300px; font-size: 14px">
+                <div style="display: flex; justify-content: space-between; padding: 4px 0"><span>Subtotal</span><span>{{xiv.sub}}</span></div>
+                <div style="display: flex; justify-content: space-between; padding: 4px 0"><span>Freight</span><span>{{xiv.freight}}</span></div>
+                <div style="display: flex; justify-content: space-between; padding: 8px 0 0; border-top: 2px solid #0A35C8; font-weight: 800; font-size: 16px"><span>Total</span><span>{{xiv.total}}</span></div>
+                <div style="color: #2E7D4F; font-weight: 600; margin-top: 6px">{{xiv.paidTxt}}</div>
+              </div>
+            </div>
+            <div class="csfoot"><span>Liberty Tool Company · San Dimas, CA · 239-744-8403 · sales@libertytoolcompany.com</span><span>Sample document</span></div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
     <!-- ================= PORTAL: OVERVIEW ================= -->
     <sc-if value="{{v.overview}}" hint-placeholder-val="{{true}}">
+      <sc-if value="{{xa.show}}" hint-placeholder-val="{{false}}"><div class="card" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 16px; background: #FFF3DC; border-color: #F2D7A0"><b style="font-size: 15px; color: #5C3D00">{{xa.bannerTxt}}</b><button type="button" class="btn red sm" onClick="{{xa.go}}">Review Approvals</button></div></sc-if>
       <div class="card" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; background: #E8EEFF">
         <div>
           <h2 class="h2">Welcome Back, {{me.first}}.</h2>
@@ -406,9 +693,9 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 
       <sc-if value="{{submitted}}" hint-placeholder-val="{{false}}">
         <div class="card" style="text-align: center; padding: 40px 24px">
-          <div class="eyebrow">Order Received</div>
+          <div class="eyebrow">{{subEyebrow}}</div>
           <h2 class="h1" style="margin-top: 8px">{{lastOrder.id}}</h2>
-          <p class="muted" style="max-width: 560px; margin: 10px auto 0; line-height: 1.6">Thanks. We'll confirm pricing and freight, then email your acknowledgement. You'll get tracking the day it ships, and we check in 3 days after delivery.</p>
+          <p class="muted" style="max-width: 560px; margin: 10px auto 0; line-height: 1.6">{{subTxt}}</p>
           <div class="tl" style="max-width: 760px; margin: 24px auto 0; text-align: left"><sc-for list="{{lastOrder.steps}}" as="s" hint-placeholder-count="5"><div class="s {{s.cls}}"><b>{{s.name}}</b><div class="muted">{{s.when}}</div></div></sc-for></div>
           <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px"><button type="button" class="btn" onClick="{{goOrders}}">View My Orders</button><button type="button" class="btn ghost" onClick="{{goNewOrder}}">Start Another Order</button></div>
         </div>
@@ -432,9 +719,35 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
             <div><div class="eyebrow">{{sel.typeName}}</div><h2 class="h2" style="margin-top: 4px">{{sel.id}} · PO {{sel.po}}</h2><div class="muted" style="margin-top: 4px">{{sel.acctName}} · {{sel.units}} units · {{sel.valueTxt}} · Ship window {{sel.window}}</div></div>
             <div style="display: flex; flex-wrap: wrap; gap: 8px">
               <sc-if value="{{isPortal}}" hint-placeholder-val="{{true}}"><button type="button" class="btn ghost sm" onClick="{{reorder}}">Reorder</button><button type="button" class="btn ghost sm" onClick="{{goMessages}}">Ask About This Order</button></sc-if>
+              <sc-if value="{{xq.canAsk}}" hint-placeholder-val="{{false}}"><button type="button" class="btn ghost sm" onClick="{{xq.askChange}}">Request Change</button><button type="button" class="btn ghost sm" onClick="{{xq.askCancel}}">Request Cancel</button></sc-if>
+              <sc-if value="{{xq.canWithdraw}}" hint-placeholder-val="{{false}}"><button type="button" class="btn ghost sm" onClick="{{xq.withdraw}}">Withdraw Order</button></sc-if>
               <sc-if value="{{canAdvance}}" hint-placeholder-val="{{false}}"><button type="button" class="btn sm" onClick="{{advance}}">{{advanceLabel}}</button></sc-if>
             </div>
           </div>
+          <sc-if value="{{xq.isPend}}" hint-placeholder-val="{{false}}"><div style="margin-top: 16px; padding: 12px 14px; border-radius: 12px; background: #FFF3DC; color: #5C3D00; font-size: 14px; font-weight: 600">{{xq.pendTxt}}</div></sc-if>
+          <sc-if value="{{xq.isDeclined}}" hint-placeholder-val="{{false}}"><div style="margin-top: 16px; padding: 12px 14px; border-radius: 12px; background: #ECEEF2; font-size: 14px"><b>Sent back.</b> {{xq.declineTxt}} Use Reorder to place a corrected order.</div></sc-if>
+          <sc-if value="{{xq.has}}" hint-placeholder-val="{{false}}">
+            <sc-for list="{{xq.list}}" as="r" hint-placeholder-count="1">
+              <div style="margin-top: 16px; padding: 14px; border-radius: 12px; border: 1px solid #DCE3F7; background: #FAFBFF">
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center"><b>{{r.title}} {{r.id}}</b><span class="st" style="background: {{r.sbg}}; color: {{r.sfg}}">{{r.status}}</span><span class="muted" style="font-size: 13px">{{r.by}} · {{r.when}}</span></div>
+                <div style="font-size: 14px; margin-top: 6px"><b>{{r.detail}}</b></div>
+                <sc-if value="{{r.hasNote}}" hint-placeholder-val="{{true}}"><div style="font-size: 14px; margin-top: 4px; line-height: 1.5">{{r.note}}</div></sc-if>
+                <sc-if value="{{r.hasReply}}" hint-placeholder-val="{{false}}"><div style="font-size: 14px; margin-top: 6px"><b>LTC:</b> {{r.reply}}</div></sc-if>
+                <sc-if value="{{r.canAct}}" hint-placeholder-val="{{false}}"><div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: end; margin-top: 12px"><label style="flex: 1 1 320px"><span class="lbl">Reply To Partner (optional)</span><input class="inp" value="{{r.replyVal}}" onChange="{{r.setReply}}" placeholder="e.g. Updated to ship Nov 20."></label><button type="button" class="btn sm" onClick="{{r.approve}}">Approve</button><button type="button" class="btn ghost sm" onClick="{{r.decline}}">Decline</button></div></sc-if>
+              </div>
+            </sc-for>
+          </sc-if>
+          <sc-if value="{{xq.formOpen}}" hint-placeholder-val="{{false}}">
+            <div style="margin-top: 16px; padding: 16px; border-radius: 12px; background: #E8EEFF; border: 2px solid #0A35C8">
+              <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center"><h3 class="h3">{{xq.formTitle}}</h3><button type="button" class="btn ghost sm" onClick="{{xq.close}}">Cancel</button></div>
+              <sc-if value="{{xq.isChange}}" hint-placeholder-val="{{true}}"><span class="lbl" style="margin-top: 12px">What Needs To Change?</span><div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{xq.topics}}" as="t" hint-placeholder-count="6"><button type="button" class="chip" aria-pressed="{{t.on}}" onClick="{{t.toggle}}">{{t.t}}</button></sc-for></div></sc-if>
+              <sc-if value="{{xq.isCancel}}" hint-placeholder-val="{{false}}"><label style="display: block; margin-top: 12px; max-width: 420px"><span class="lbl">Reason</span><select class="inp" value="{{xq.reason}}" onChange="{{xq.setReason}}"><sc-for list="{{xq.reasons}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></label></sc-if>
+              <label style="display: block; margin-top: 12px"><span class="lbl">Details</span><textarea class="inp" placeholder="{{xq.notePh}}" onChange="{{xq.setNote}}">{{xq.note}}</textarea></label>
+              <sc-if value="{{xq.hasErr}}" hint-placeholder-val="{{false}}"><div style="color: #B31942; font-weight: 600; font-size: 14px; margin-top: 8px">{{xq.err}}</div></sc-if>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px"><button type="button" class="btn red" onClick="{{xq.submit}}">Send Request To LTC</button><span class="muted" style="font-size: 13px">Nothing changes until LTC approves. You’ll get an updated acknowledgement.</span></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{xq.lockedTxt}}" hint-placeholder-val="{{false}}"><div class="muted" style="margin-top: 12px; font-size: 13px">{{xq.lockedTxt}} <button type="button" class="linkbtn" onClick="{{goClaims}}">Open Returns &amp; Claims</button></div></sc-if>
           <div class="tl" style="margin-top: 18px"><sc-for list="{{sel.steps}}" as="s" hint-placeholder-count="5"><div class="s {{s.cls}}"><b>{{s.name}}</b><div class="muted">{{s.when}}</div></div></sc-for></div>
           <div class="grid g3" style="margin-top: 18px">
             <div><span class="lbl">Items</span><sc-for list="{{sel.lines}}" as="l" hint-placeholder-count="3"><div style="font-size: 14px; padding: 3px 0">{{l}}</div></sc-for></div>
@@ -1855,9 +2168,54 @@ function shipMigrate(d) {
   return d;
 }
 function locBill(d, acct, l) { return l && !l.billSame && addrOk(l.bill) ? l.bill : ((d.addresses || {})[acct] || {}).bill; }
-function loadData() { var d = null; try { d = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { d = null; } return applyAccts(shipMigrate(addrMigrate(d || seed()))); }
+function loadData() { var d = null; try { d = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { d = null; } return extMigrate(applyAccts(shipMigrate(addrMigrate(d || seed())))); }
 function saveData(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
 function blankForm(a) { return { type: a.id === 'ent' ? 'stores' : 'dc', company: a.name, buyer: a.buyer.split(' · ')[0], email: a.email || '', phone: a.phone || '', po: '', vendor: a.vendor || '', start: '', end: '', notes: '', shipName: a.name, addr: '', city: '', st: '', zip: '', hours: '', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', carrier: '', reqs: {}, docs: {}, acc: {}, labels: [] }; }
+
+/* ---------- Billing, requests, approvals, claims, reports, profile ---------- */
+var DONE_ST = ['Delivered', 'Cancelled', 'Declined'];
+function isDone(o) { return DONE_ST.indexOf(o.status) >= 0; }
+SCOL['Awaiting Approval'] = ['#FFF3DC', '#8A5A00']; SCOL['Declined'] = ['#ECEEF2', '#4A5568']; SCOL['Cancelled'] = ['#ECEEF2', '#4A5568'];
+var INV_COL = { 'Open': ['#E7EEFC', '#1F4FB5'], 'Past Due': ['#FDECEF', '#B31942'], 'Payment Pending': ['#FFF3DC', '#8A5A00'], 'Paid': ['#E3F3EA', '#2E7D4F'], 'Credit': ['#E3F3EA', '#2E7D4F'] };
+var CLAIM_ST = ['Submitted', 'In Review', 'RMA Issued', 'Credit Issued', 'Closed'];
+var CLAIM_COL = { 'Submitted': ['#FDECEF', '#B31942'], 'In Review': ['#FFF3DC', '#8A5A00'], 'RMA Issued': ['#E7EEFC', '#1F4FB5'], 'Credit Issued': ['#E3F3EA', '#2E7D4F'], 'Closed': ['#ECEEF2', '#4A5568'], 'Declined': ['#ECEEF2', '#4A5568'] };
+var REQ_COL = { 'Pending': ['#FFF3DC', '#8A5A00'], 'Approved': ['#E3F3EA', '#2E7D4F'], 'Declined': ['#ECEEF2', '#4A5568'] };
+var CLAIM_KINDS = [['damage', 'Freight Damage', 'Arrived damaged. Add photos of the cartons and the product.'], ['short', 'Short Shipment', 'Fewer units arrived than the packing slip shows.'], ['wrong', 'Wrong Item', 'A different item arrived than you ordered.'], ['defect', 'Defective', 'A tool doesn’t work the way it should.'], ['return', 'Return For Credit', 'Unused stock you want to send back.']];
+var CHANGE_TOPICS = ['Quantities or items', 'Ship date / ship window', 'Ship-to address', 'Freight or delivery needs', 'PO number or billing', 'Something else'];
+var CANCEL_REASONS = ['Ordered by mistake', 'Duplicate order', 'Ship date no longer works', 'Store or project cancelled', 'Other'];
+var NOTIFY = [['ack', 'Order acknowledged', ''], ['freight', 'Freight quote ready', ''], ['shipped', 'Order shipped (with tracking)', ''], ['delivered', 'Order delivered', ''], ['msg', 'New message from LTC', ''], ['approve', 'An order needs my approval', 'approve'], ['invoice', 'New invoice issued', 'bill'], ['due', 'Payment due reminder', 'bill'], ['claim', 'Return and claim updates', '']];
+function pDate(s) { var d = new Date(s); return isNaN(d) ? null : d; }
+function addDays(s, n) { var d = pDate(s) || today(); d.setDate(d.getDate() + n); return fmtDate(d); }
+function daysAhead(n) { return addDays(fmtDate(today()), n); }
+function csvCell(v) { v = v == null ? '' : String(v); return /[",\r\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+function dlCsv(name, rows) {
+  var t = rows.map(function (r) { return r.map(csvCell).join(','); }).join('\r\n');
+  try { var b = new Blob(['﻿' + t], { type: 'text/csv;charset=utf-8' }), u = URL.createObjectURL(b), el = document.createElement('a'); el.href = u; el.download = name; document.body.appendChild(el); el.click(); setTimeout(function () { URL.revokeObjectURL(u); el.remove(); }, 800); } catch (e) {}
+}
+function fileStamp() { var d = today(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+function shrinkImg(file, cb) {
+  var r = new FileReader();
+  r.onload = function () { var im = new Image(); im.onload = function () { var m = 420, k = Math.min(1, m / Math.max(im.width, im.height)), c = document.createElement('canvas'); c.width = Math.max(1, Math.round(im.width * k)); c.height = Math.max(1, Math.round(im.height * k)); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); cb(c.toDataURL('image/jpeg', 0.72)); }; im.onerror = function () { cb(null); }; im.src = r.result; };
+  r.onerror = function () { cb(null); }; r.readAsDataURL(file);
+}
+function invStatus(x) { if (x.kind === 'credit') return 'Credit'; if (x.paid) return 'Paid'; if (x.pending) return 'Payment Pending'; var dd = pDate(x.due), t0 = new Date(today().toDateString()); return dd && dd < t0 ? 'Past Due' : 'Open'; }
+function extMigrate(d) {
+  if (!d) return d;
+  if (!d.invoices) d.invoices = [
+    { id: 'INV-1040', acct: 'ent', order: 'LTC-1040', po: 'KHC-S0101-221', date: daysAgo(6), due: daysAhead(24), amount: 928.40, paid: false },
+    { id: 'INV-1037', acct: 'ent', order: 'LTC-1037', po: 'KHC-S0214-090', date: daysAgo(18), due: daysAhead(12), amount: 436.70, paid: true, paidOn: daysAgo(4), paidHow: 'ACH' },
+    { id: 'INV-1039', acct: 'dist', order: 'LTC-1039', po: 'NCS-5521', date: daysAgo(8), due: daysAhead(22), amount: 8620.37, paid: false },
+    { id: 'INV-1036', acct: 'multi', order: 'LTC-1036', po: 'SFG-2026-114', date: daysAgo(26), due: daysAhead(19), amount: 6852.00, paid: true, paidOn: daysAgo(9), paidHow: 'ACH' }
+  ];
+  if (!d.claims) d.claims = [{ id: 'RMA-2001', acct: 'ent', order: 'LTC-1037', po: 'KHC-S0214-090', kind: 'damage', items: [{ name: '2-Inch Caddy', q: 1 }], desc: 'One carton was crushed on arrival and the 2-Inch Caddy inside has a cracked caster. Noted on the delivery receipt.', noted: true, photos: [], status: 'RMA Issued', created: daysAgo(12), by: 'Priya Shah', loc: '0214', hist: [daysAgo(12), daysAgo(11), daysAgo(10)], ltcNote: 'A replacement 2-Inch Caddy ships with your next order. Please keep the damaged unit until we confirm the carrier claim.' }];
+  if (!d.requests) d.requests = [];
+  if (!d.pending) d.pending = [{ id: 'REQ-501', acct: 'ent', po: 'KHC-S0101-240', type: 'restock', units: 18, list: 1902, value: null, status: 'Awaiting Approval', created: daysAgo(1), window: 'ASAP', lines: ['12 × 4-Inch Caddy', '6 × 6-Inch Caddy'], shipTo: 'Keystone Store 0101 · Columbus, OH', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', tracking: '', quote: [], hist: [], loc: '0101', by: 'Marcus Lee', st: 'OH', acc: [], shipments: [], freightQuote: null }];
+  if (!d.apRules) d.apRules = { ent: { on: true, over: '' }, dist: { on: true, over: '' }, dealer: { on: false, over: '' }, multi: { on: false, over: '' } };
+  if (!d.prefs) d.prefs = {};
+  if (!d.seq) d.seq = { req: 502, cr: 301, rma: 2002 };
+  return d;
+}
+function nextLtcId(d) { return 'LTC-' + (1043 + d.orders.filter(function (o) { return o.id >= 'LTC-1043'; }).length); }
 
 class Component extends DCLogic {
   constructor(props) {
@@ -1912,10 +2270,16 @@ class Component extends DCLogic {
     var id = 'LTC-' + (1043 + d.orders.filter(function (o) { return o.id >= 'LTC-1043'; }).length);
     var typeName = ORDER_TYPES.find(function (t) { return t.id === f.type; }).name;
     var o = { id: id, acct: s.acct, po: f.po, type: f.type, units: c.units, list: c.list, value: c.val, status: 'Received', created: fmtDate(today()), window: (f.start || 'TBD') + ' – ' + (f.end || 'TBD'), lines: c.lines.map(function (l) { return l.q + ' × ' + l.name; }), shipTo: f.type === 'stores' ? s.stores.length + ' stores (list attached)' : [f.shipName, f.addr, [f.city, f.st, f.zip].join(' ')].filter(Boolean).join(' · '), freight: f.freight, pay: f.pay, tracking: '', quote: COATINGS.filter(function (n) { return s.coat[n]; }), hist: [fmtDate(today())], loc: this.me().loc || 'all', by: this.me().name, st: f.type === 'stores' ? '' : (f.st || '').toUpperCase(), acc: Object.keys(f.acc).filter(function (k) { return f.acc[k]; }), freightQuote: null, items: c.lines.map(function (l) { return { name: l.name, q: l.q }; }), stores: f.type === 'stores' ? s.stores.slice() : [], shipments: [], bo: {}, freightEst: this.freightEst().totalTxt, billTo: this.billToFor() ? addrTxt(this.billToFor()) : '', labels: f.freight === LABEL_OPT ? (f.labels || []) : [] };
-    d.orders.unshift(o);
-    d.msgs[s.acct] = (d.msgs[s.acct] || []).concat([{ from: 'LTC Sales', mine: false, when: fmtDate(today()), text: 'We received ' + id + ' (PO ' + f.po + '). We’ll confirm pricing and freight and send your acknowledgement.' }]);
+    var mu = this.me(), rule = (d.apRules || {})[s.acct] || {}, ov = num(rule.over), needAp = MODE !== 'admin' && !(mu.perms && mu.perms.approve) && !!rule.on && (ov == null || o.units > ov);
+    if (needAp) {
+      d.seq = d.seq || { req: 502, cr: 301, rma: 2002 }; o.id = 'REQ-' + d.seq.req; d.seq.req++; o.status = 'Awaiting Approval'; o.hist = []; o.shipments = [];
+      d.pending = d.pending || []; d.pending.unshift(o);
+    } else {
+      d.orders.unshift(o);
+      d.msgs[s.acct] = (d.msgs[s.acct] || []).concat([{ from: 'LTC Sales', mine: false, when: fmtDate(today()), text: 'We received ' + id + ' (PO ' + f.po + '). We’ll confirm pricing and freight and send your acknowledgement.' }]);
+    }
     saveData(d);
-    this.setState({ data: d, submitted: id, err: '' });
+    this.setState({ data: d, submitted: o.id, err: '' });
   }
   orderView(o) {
     var self2 = this;
@@ -2082,7 +2446,7 @@ class Component extends DCLogic {
       Q.accs.forEach(function (a) { res.push({ k: a.name, v: money(a.amt), c: '' }); });
     }
     var lanesFrom = rlDests(q.from).filter(function (dst) { var t = (s.laneQ || '').toLowerCase(); return !t || dst.toLowerCase() === t || (RL.names[dst] || '').toLowerCase().indexOf(t) >= 0; });
-    var openOrders = d.orders.filter(function (o) { return o.status !== 'Delivered'; });
+    var openOrders = d.orders.filter(function (o) { return !isDone(o); });
     return {
       fqBills: RL.bills.map(function (b) { return { label: b.name, title: b.desc, on: q.bill === b.id ? 'true' : 'false', pick: function () { setQ('bill', b.id); } }; }),
       fqFromOpts: rlOrigins().map(function (o) { return { v: o, label: rlName(o), sel: o === q.from ? 'selected' : null }; }),
@@ -2133,8 +2497,8 @@ class Component extends DCLogic {
         setName: setF('name'), setEmail: setF('email'), setRole: setF('role'), setLoc: setF('loc'),
         perms: PERMS.map(function (p) { return { label: p[1], on: f.perms[p[0]] ? 'true' : 'false', toggle: function () { var x = Object.assign({}, self.state.tf); x.perms = Object.assign({}, x.perms); x.perms[p[0]] = !x.perms[p[0]]; self.setState({ tf: x }); } }; }),
         invite: function () { var t = self.state.tf; if (!t.name.trim() || !/@/.test(t.email)) return self.flash('Add a name and email'); setT(function (d2) { d2.team[s.acct] = (d2.team[s.acct] || []).concat([{ id: 'u' + Date.now(), name: t.name.trim(), email: t.email.trim(), role: t.role, loc: t.loc, status: 'Invited', perms: t.perms }]); }, 'Invite sent to ' + t.email.trim()); self.setState({ tf: blankTeamForm() }); } },
-      lc: { kpis: [{ n: locs.length, l: 'Locations' }, { n: team.filter(function (u) { return u.status !== 'Off'; }).length, l: 'Team Logins' }, { n: acctOrders.filter(function (o) { return o.status !== 'Delivered'; }).length, l: 'Open Orders' }, { n: acctOrders.reduce(function (t, o) { return t + o.units; }, 0).toLocaleString(), l: 'Units Ordered' }],
-        rows: [{ id: 'all', name: 'Company-Wide (HQ / Multi-Store POs)' }].concat(locs).map(function (l) { var os = acctOrders.filter(function (o) { return (o.loc || 'all') === l.id; }); return { name: l.name, addr: [l.addr, l.zip].filter(Boolean).join(' · ') + (l.mgr ? (l.addr || l.zip ? ' · ' : '') + 'Mgr: ' + l.mgr : ''), team: team.filter(function (u) { return u.loc === l.id && u.status !== 'Off'; }).length, open: os.filter(function (o) { return o.status !== 'Delivered'; }).length, units: os.reduce(function (t, o) { return t + o.units; }, 0).toLocaleString(), last: os.length ? os[0].created : '—', view: function () { self.setState({ view: 'orders', fLoc: l.id, selId: null }); } }; }) },
+      lc: { kpis: [{ n: locs.length, l: 'Locations' }, { n: team.filter(function (u) { return u.status !== 'Off'; }).length, l: 'Team Logins' }, { n: acctOrders.filter(function (o) { return !isDone(o); }).length, l: 'Open Orders' }, { n: acctOrders.reduce(function (t, o) { return t + o.units; }, 0).toLocaleString(), l: 'Units Ordered' }],
+        rows: [{ id: 'all', name: 'Company-Wide (HQ / Multi-Store POs)' }].concat(locs).map(function (l) { var os = acctOrders.filter(function (o) { return (o.loc || 'all') === l.id; }); return { name: l.name, addr: [l.addr, l.zip].filter(Boolean).join(' · ') + (l.mgr ? (l.addr || l.zip ? ' · ' : '') + 'Mgr: ' + l.mgr : ''), team: team.filter(function (u) { return u.loc === l.id && u.status !== 'Off'; }).length, open: os.filter(function (o) { return !isDone(o); }).length, units: os.reduce(function (t, o) { return t + o.units; }, 0).toLocaleString(), last: os.length ? os[0].created : '—', view: function () { self.setState({ view: 'orders', fLoc: l.id, selId: null }); } }; }) },
       rowsOf: rowsOf, setT: setT
     };
     Object.assign(out.lc, this.impVals(locs, team, me, setT));
@@ -2620,17 +2984,257 @@ class Component extends DCLogic {
       empty: list.length === 0
     } };
   }
+  extVals(sel, mine, can) {
+    var self = this, s = this.state, d = s.data, a = this.acct(), isAdmin = MODE === 'admin', me = this.me();
+    var myLoc = !isAdmin && me.loc !== 'all' ? me.loc : null;
+    var clone = function () { return JSON.parse(JSON.stringify(self.state.data)); };
+    var post = function (d2, acct, text, fromMe) { d2.msgs[acct] = (d2.msgs[acct] || []).concat([{ from: fromMe ? me.name : 'LTC Sales', mine: !!fromMe, when: fmtDate(today()), text: text }]); };
+    var sum = function (l) { return l.reduce(function (t, x) { return t + (x.amount || 0); }, 0); };
+    var seq = function (d2, k) { d2.seq = d2.seq || { req: 502, cr: 301, rma: 2002 }; var n = d2.seq[k]; d2.seq[k] = n + 1; return n; };
+    var col = function (m, k) { return m[k] || ['#ECEEF2', '#4A5568']; };
+    var billAccess = isAdmin || can('pricing') || can('approve');
+    var X = {};
+
+    /* ---------- BILLING ---------- */
+    var acctInv = (d.invoices || []).filter(function (x) { return isAdmin || x.acct === s.acct; }).slice().sort(function (p, q) { return (pDate(q.date) || 0) - (pDate(p.date) || 0); });
+    var xSel = s.xSel || {};
+    var payable = function (x) { var st = invStatus(x); return st === 'Open' || st === 'Past Due'; };
+    var selInv = acctInv.filter(function (x) { return xSel[x.id] && payable(x); });
+    var invView = function (x) {
+      var st = invStatus(x), c = col(INV_COL, st), cr = x.kind === 'credit';
+      return { id: x.id, acctName: (ACCTS[x.acct] || {}).name || x.acct, order: x.order || '—', po: x.po || '—', date: x.date, due: cr ? '—' : x.due, amt: cr ? '−' + money(Math.abs(x.amount)) : money(x.amount), bal: cr ? '—' : money(x.paid ? 0 : x.amount), status: st, sbg: c[0], sfg: c[1], canPick: !isAdmin && payable(x), noPick: isAdmin || !payable(x), on: xSel[x.id] ? 'true' : 'false',
+        toggle: function () { var m = Object.assign({}, self.state.xSel || {}); m[x.id] = !m[x.id]; self.setState({ xSel: m }); },
+        view: function () { self.setState({ xInv: x.id }); },
+        adminPay: isAdmin && (st === 'Open' || st === 'Past Due' || st === 'Payment Pending'),
+        markPaid: function () { var d2 = clone(), y = d2.invoices.find(function (z) { return z.id === x.id; }); y.paid = true; y.pending = false; y.paidOn = fmtDate(today()); y.paidHow = y.payMethod || 'Recorded by LTC'; post(d2, x.acct, 'Payment received for ' + x.id + ' (' + money(x.amount) + '). Thank you.', false); self.persist(d2); self.flash(x.id + ' marked paid'); } };
+    };
+    var openInv = acctInv.filter(function (x) { return x.kind !== 'credit' && !x.paid; });
+    var pastDue = acctInv.filter(function (x) { return invStatus(x) === 'Past Due'; });
+    var creditsAvail = acctInv.filter(function (x) { return x.kind === 'credit'; });
+    var months = {};
+    acctInv.forEach(function (x) { var dt = pDate(x.date); if (!dt) return; var k = dt.getFullYear() + '-' + ('0' + (dt.getMonth() + 1)).slice(-2); (months[k] = months[k] || []).push(x); });
+    var invCsvRows = function (list) { return [['Invoice', 'Account', 'Order', 'PO', 'Invoice Date', 'Due Date', 'Amount', 'Balance', 'Status', 'Paid On']].concat(list.map(function (x) { var cr = x.kind === 'credit'; return [x.id, (ACCTS[x.acct] || {}).name || x.acct, x.order || '', x.po || '', x.date, cr ? '' : x.due, (cr ? -Math.abs(x.amount) : x.amount).toFixed(2), cr || x.paid ? '0.00' : x.amount.toFixed(2), invStatus(x), x.paidOn || '']; })); };
+    var pay = s.xPay;
+    X.xb = {
+      kpis: [
+        { n: money(sum(openInv)), l: 'Balance Due', c: C.pri },
+        { n: money(sum(pastDue)), l: 'Past Due', c: pastDue.length ? C.acc : C.pri },
+        { n: money(Math.abs(sum(creditsAvail))), l: 'Credits On Account', c: C.pri },
+        { n: isAdmin ? '—' : a.terms, l: 'Payment Terms', c: C.pri }
+      ],
+      rows: acctInv.map(invView), none: acctInv.length === 0,
+      canPay: !isAdmin, noSel: selInv.length === 0, selTotal: money(sum(selInv)), selN: selInv.length,
+      startPay: function () { if (!selInv.length) return self.flash('Tick at least one invoice'); self.setState({ xPay: { ids: selInv.map(function (x) { return x.id; }), method: 'ach' } }); },
+      payOpen: !!pay,
+      payRows: pay ? acctInv.filter(function (x) { return pay.ids.indexOf(x.id) >= 0; }).map(function (x) { return { id: x.id, po: x.po, amt: money(x.amount) }; }) : [],
+      payTotal: pay ? money(sum(acctInv.filter(function (x) { return pay.ids.indexOf(x.id) >= 0; }))) : '',
+      methods: [['ach', 'Bank Transfer (ACH)', 'No fee. Usually clears in 1–3 business days.'], ['card', 'Credit Card', 'Card processing fee may apply.']].map(function (m) { return { name: m[1], desc: m[2], on: pay && pay.method === m[0] ? 'true' : 'false', pick: function () { self.setState({ xPay: Object.assign({}, self.state.xPay, { method: m[0] }) }); } }; }),
+      confirmPay: function () { var p = self.state.xPay; if (!p) return; var d2 = clone(), how = p.method === 'card' ? 'Credit card' : 'ACH', tot = 0; d2.invoices.forEach(function (x) { if (p.ids.indexOf(x.id) >= 0) { x.pending = true; x.payMethod = how; tot += x.amount; } }); post(d2, s.acct, 'Payment started for ' + p.ids.join(', ') + ' (' + money(tot) + ') by ' + how + '. Please confirm when it clears.', true); saveData(d2); self.setState({ data: d2, xPay: null, xSel: {} }); self.flash('Secure payment link sent to ' + (me.email || 'your email')); },
+      cancelPay: function () { self.setState({ xPay: null }); },
+      exportCsv: function () { dlCsv('ltc-invoices-' + fileStamp() + '.csv', invCsvRows(acctInv)); },
+      stmts: Object.keys(months).sort().reverse().map(function (k) { var l = months[k], dt = new Date(k + '-01T12:00:00'), charges = sum(l.filter(function (x) { return x.kind !== 'credit'; })), paidAmt = sum(l.filter(function (x) { return x.kind !== 'credit' && x.paid; })), creds = Math.abs(sum(l.filter(function (x) { return x.kind === 'credit'; }))), lab = dt.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }); return { label: lab, n: l.length + ' document' + (l.length === 1 ? '' : 's'), charges: money(charges), credits: money(paidAmt + creds), bal: money(Math.max(0, charges - paidAmt - creds)), dl: function () { dlCsv('ltc-statement-' + k + '.csv', [['Statement', lab], ['Account', isAdmin ? 'All accounts' : a.name], []].concat(invCsvRows(l))); } }; }),
+      noStmts: Object.keys(months).length === 0,
+      note: 'Mockup: invoice amounts are sample figures until LTC sets pricing. In the live portal, Pay opens a secure payment page; no card or bank details are entered here.'
+    };
+    var iv = s.xInv ? (d.invoices || []).find(function (x) { return x.id === s.xInv; }) : null;
+    var ivo = iv ? d.orders.find(function (o) { return o.id === iv.order; }) : null;
+    var ivFr = ivo && ivo.freightQuote ? ivo.freightQuote : 0;
+    X.xiv = iv ? { open: true, id: iv.id, isCredit: iv.kind === 'credit', kindTxt: iv.kind === 'credit' ? 'Credit Memo' : 'Invoice', date: iv.date, due: iv.kind === 'credit' ? '—' : iv.due, po: iv.po || '—', order: iv.order || '—', terms: (ACCTS[iv.acct] || {}).terms || '', status: invStatus(iv), billLines: addrLines(((d.addresses || {})[iv.acct] || {}).bill), lines: iv.kind === 'credit' ? [{ q: '', name: iv.memo || 'Credit' }] : (ivo ? orderItems(ivo) : []).map(function (i) { return { q: i.q + ' ×', name: i.name }; }), sub: money(Math.abs(iv.amount) - (iv.kind === 'credit' ? 0 : ivFr)), freight: money(iv.kind === 'credit' ? 0 : ivFr), total: (iv.kind === 'credit' ? '−' : '') + money(Math.abs(iv.amount)), paidTxt: iv.paid ? 'Paid ' + (iv.paidOn || '') + (iv.paidHow ? ' · ' + iv.paidHow : '') : (iv.pending ? 'Payment pending · ' + (iv.payMethod || '') : ''), close: function () { self.setState({ xInv: null }); }, print: function () { try { window.print(); } catch (e) {} } } : { open: false, lines: [], billLines: [] };
+
+    /* admin: create invoice */
+    var invoiced = {}; (d.invoices || []).forEach(function (x) { if (x.order && x.kind !== 'credit') invoiced[x.order] = true; });
+    var canInv = d.orders.filter(function (o) { return (o.status === 'Shipped' || o.status === 'Delivered') && !invoiced[o.id]; });
+    var xn = s.xNewInv || { order: '', amount: '' };
+    X.xai = { opts: [{ v: '', label: canInv.length ? 'Pick a shipped order' : 'No shipped orders left to invoice' }].concat(canInv.map(function (o) { return { v: o.id, label: o.id + ' · ' + (ACCTS[o.acct] || {}).name + ' · PO ' + o.po }; })), order: xn.order, amount: xn.amount,
+      setOrder: function (e) { self.setState({ xNewInv: Object.assign({}, self.state.xNewInv || {}, { order: e.target.value }) }); },
+      setAmount: function (e) { self.setState({ xNewInv: Object.assign({}, self.state.xNewInv || {}, { amount: e.target.value }) }); },
+      create: function () { var n2 = self.state.xNewInv || {}, o = d.orders.find(function (z) { return z.id === n2.order; }), amt = num(n2.amount); if (!o) return self.flash('Pick an order'); if (amt == null || amt <= 0) return self.flash('Enter the invoice amount'); var d2 = clone(), days = (function () { var m = /(\d+)/.exec((ACCTS[o.acct] || {}).terms || ''); return m ? parseInt(m[1], 10) : 0; })(), id = 'INV-' + o.id.replace(/\D/g, ''); d2.invoices.unshift({ id: id, acct: o.acct, order: o.id, po: o.po, date: fmtDate(today()), due: daysAhead(days), amount: Math.round(amt * 100) / 100, paid: false }); post(d2, o.acct, 'Invoice ' + id + ' for ' + o.id + ' (PO ' + o.po + ') is ready: ' + money(amt) + ', due ' + daysAhead(days) + '. It’s in Billing.', false); saveData(d2); self.setState({ data: d2, xNewInv: { order: '', amount: '' } }); self.flash(id + ' created'); } };
+
+    /* ---------- CHANGE / CANCEL REQUESTS ---------- */
+    var live = sel && d.orders.some(function (o) { return o.id === sel.id; });
+    var preShip = !!(sel && live && ['Received', 'Acknowledged', 'Freight Review'].indexOf(sel.status) >= 0 && !(sel.shipments || []).length);
+    var reqsFor = function (oid) { return (d.requests || []).filter(function (r) { return r.order === oid; }); };
+    var reqView = function (r) {
+      var c = col(REQ_COL, r.status), rep = (s.xReply || {})[r.id] || '';
+      var act = function (ok) { return function () { var d2 = clone(), y = d2.requests.find(function (z) { return z.id === r.id; }), o = d2.orders.find(function (z) { return z.id === r.order; }), msg = (self.state.xReply || {})[r.id] || ''; y.status = ok ? 'Approved' : 'Declined'; y.reply = msg; y.doneOn = fmtDate(today());
+        if (ok && r.kind === 'cancel' && o) { o.status = 'Cancelled'; o.cancelledOn = fmtDate(today()); }
+        post(d2, r.acct, (r.kind === 'cancel' ? 'Cancel request ' : 'Change request ') + r.id + ' for ' + r.order + (ok ? (r.kind === 'cancel' ? ' approved. The order is cancelled and nothing will ship.' : ' approved. We’ll send an updated acknowledgement.') : ' declined.') + (msg ? ' ' + msg : ''), false);
+        saveData(d2); var xr = Object.assign({}, self.state.xReply || {}); delete xr[r.id]; self.setState({ data: d2, xReply: xr }); self.flash(r.id + (ok ? ' approved' : ' declined')); }; };
+      return { id: r.id, title: r.kind === 'cancel' ? 'Cancel Request' : 'Change Request', detail: r.kind === 'cancel' ? 'Reason: ' + r.reason : r.topics.join(' · '), note: r.note, hasNote: !!r.note, when: r.created, by: r.by, status: r.status, sbg: c[0], sfg: c[1], reply: r.reply, hasReply: !!r.reply, acctName: (ACCTS[r.acct] || {}).name, order: r.order,
+        canAct: isAdmin && r.status === 'Pending', replyVal: rep, setReply: function (e) { var xr = Object.assign({}, self.state.xReply || {}); xr[r.id] = e.target.value; self.setState({ xReply: xr }); },
+        approve: act(true), decline: act(false), open: function () { self.setState({ view: 'orders', selId: r.order }); } };
+    };
+    var selReqs = sel ? reqsFor(sel.id) : [];
+    var openReq = selReqs.some(function (r) { return r.status === 'Pending'; });
+    var rq = s.xRq && sel && s.xRq.order === sel.id ? s.xRq : null;
+    var setRq = function (k, v) { var x = Object.assign({}, self.state.xRq); x[k] = v; x.err = ''; self.setState({ xRq: x }); };
+    var isPend = !!(sel && sel.status === 'Awaiting Approval');
+    X.xq = {
+      canAsk: !isAdmin && preShip && !openReq && !rq, lockedTxt: !isAdmin && live && !preShip && sel && ['Shipped', 'Delivered'].indexOf(sel.status) >= 0 ? 'This order has shipped. For damage, shortages or returns, use Returns & Claims.' : '',
+      askChange: function () { self.setState({ xRq: { order: sel.id, kind: 'change', topics: {}, note: '', reason: CANCEL_REASONS[0], err: '' } }); },
+      askCancel: function () { self.setState({ xRq: { order: sel.id, kind: 'cancel', topics: {}, note: '', reason: CANCEL_REASONS[0], err: '' } }); },
+      formOpen: !!rq, isChange: !!(rq && rq.kind === 'change'), isCancel: !!(rq && rq.kind === 'cancel'),
+      formTitle: rq && rq.kind === 'cancel' ? 'Request To Cancel ' + (sel ? sel.id : '') : 'Request A Change To ' + (sel ? sel.id : ''),
+      topics: CHANGE_TOPICS.map(function (t) { return { t: t, on: rq && rq.topics[t] ? 'true' : 'false', toggle: function () { var x = Object.assign({}, self.state.xRq.topics); x[t] = !x[t]; setRq('topics', x); } }; }),
+      reasons: CANCEL_REASONS.map(function (t) { return { v: t, label: t }; }), reason: rq ? rq.reason : '', setReason: function (e) { setRq('reason', e.target.value); },
+      note: rq ? rq.note : '', setNote: function (e) { setRq('note', e.target.value); },
+      notePh: rq && rq.kind === 'cancel' ? 'Anything LTC should know (optional)' : 'What should change? e.g. Make it 30 × 4-Inch instead of 24, ship Nov 20 instead of Nov 16.',
+      hasErr: !!(rq && rq.err), err: rq ? rq.err : '',
+      submit: function () { var x = self.state.xRq, tl = Object.keys(x.topics).filter(function (k) { return x.topics[k]; }); if (x.kind === 'change' && !tl.length) return setRq('err', 'Pick what you want to change.'); if (x.kind === 'change' && !x.note.trim()) return setRq('err', 'Describe the change so LTC can update the order.'); var d2 = clone(), id = 'CR-' + seq(d2, 'cr'); d2.requests.unshift({ id: id, acct: s.acct, order: x.order, kind: x.kind, topics: tl, reason: x.kind === 'cancel' ? x.reason : '', note: x.note.trim(), status: 'Pending', created: fmtDate(today()), by: me.name });
+        post(d2, s.acct, (x.kind === 'cancel' ? 'Cancel request ' + id + ' for ' + x.order + ' — ' + x.reason + '.' : 'Change request ' + id + ' for ' + x.order + ' (' + tl.join(', ') + '): ' + x.note.trim()) + (x.kind === 'cancel' && x.note.trim() ? ' ' + x.note.trim() : ''), true);
+        saveData(d2); self.setState({ data: d2, xRq: null }); self.flash(id + ' sent to LTC'); },
+      close: function () { self.setState({ xRq: null }); },
+      list: selReqs.map(reqView), has: selReqs.length > 0,
+      isPend: isPend, isDeclined: !!(sel && sel.status === 'Declined'), declineTxt: sel && sel.status === 'Declined' ? 'Declined by ' + (sel.declinedBy || 'your approver') + (sel.declineNote ? ': ' + sel.declineNote : '') : '',
+      pendTxt: isPend ? 'Waiting for approval from someone at ' + a.name + ' who can approve orders. It goes to LTC once approved.' : '',
+      canWithdraw: !isAdmin && isPend,
+      withdraw: function () { var d2 = clone(); d2.pending = (d2.pending || []).filter(function (z) { return z.id !== sel.id; }); saveData(d2); self.setState({ data: d2, selId: null }); self.flash('Order withdrawn'); }
+    };
+
+    /* ---------- APPROVALS ---------- */
+    var rule = (d.apRules || {})[s.acct] || { on: false, over: '' };
+    var pend = (d.pending || []).filter(function (o) { return o.acct === s.acct && o.status === 'Awaiting Approval'; });
+    var apNote = s.xApNote || {};
+    var setRule = function (k, v) { var d2 = clone(); d2.apRules = d2.apRules || {}; d2.apRules[s.acct] = Object.assign({ on: false, over: '' }, d2.apRules[s.acct] || {}); d2.apRules[s.acct][k] = v; self.persist(d2); };
+    X.xa = {
+      n: pend.length, none: pend.length === 0, show: !isAdmin && can('approve') && pend.length > 0,
+      bannerTxt: pend.length + ' order' + (pend.length === 1 ? ' is' : 's are') + ' waiting for your approval.',
+      go: function () { self.go('xAppr'); },
+      rows: pend.map(function (o) { var x = self.orderView(o);
+        x.locName = self.locName(o.acct, o.loc || 'all'); x.note = apNote[o.id] || '';
+        x.setNote = function (e) { var m = Object.assign({}, self.state.xApNote || {}); m[o.id] = e.target.value; self.setState({ xApNote: m }); };
+        x.open = function () { self.setState({ view: 'orders', selId: o.id }); };
+        x.approve = function () { var d2 = clone(), i = d2.pending.findIndex(function (z) { return z.id === o.id; }); if (i < 0) return; var p = d2.pending.splice(i, 1)[0], nid = nextLtcId(d2); p.reqId = p.id; p.id = nid; p.status = 'Received'; p.hist = [fmtDate(today())]; p.approvedBy = me.name; p.approvedOn = fmtDate(today()); d2.orders.unshift(p);
+          post(d2, s.acct, 'We received ' + nid + ' (PO ' + p.po + ') from ' + p.by + ', approved by ' + me.name + '. We’ll confirm pricing and freight and send your acknowledgement.', false);
+          saveData(d2); self.setState({ data: d2, selId: self.state.selId === o.id ? nid : self.state.selId }); self.flash(nid + ' approved and sent to LTC'); };
+        x.decline = function () { var nt = (self.state.xApNote || {})[o.id] || ''; if (!nt.trim()) return self.flash('Add a note so ' + (o.by || 'they').split(' ')[0] + ' knows what to fix'); var d2 = clone(), p = d2.pending.find(function (z) { return z.id === o.id; }); p.status = 'Declined'; p.declineNote = nt.trim(); p.declinedBy = me.name; p.declinedOn = fmtDate(today()); saveData(d2); self.setState({ data: d2 }); self.flash(o.id + ' sent back'); };
+        return x; }),
+      ruleOn: rule.on ? 'true' : 'false', ruleOff: rule.on ? 'false' : 'true', canRule: can('team'),
+      setOn: function () { setRule('on', true); }, setOff: function () { setRule('on', false); },
+      over: rule.over || '', setOver: function (e) { setRule('over', e.target.value); },
+      ruleTxt: rule.on ? 'Orders from team members who can’t approve wait here' + (num(rule.over) != null ? ' when they are over ' + num(rule.over) + ' units.' : '.') + ' Everyone else’s orders go straight to LTC.' : 'Approvals are off. Every order goes straight to LTC.',
+      approvers: (((d.team || {})[s.acct]) || []).filter(function (u) { return u.status !== 'Off' && u.perms && u.perms.approve; }).map(function (u) { return u.name; }).join(', ') || 'No one yet'
+    };
+
+    /* ---------- RETURNS & CLAIMS ---------- */
+    var claims = (d.claims || []).filter(function (c) { return isAdmin || (c.acct === s.acct && (!myLoc || c.loc === myLoc)); });
+    var shipOrders = mine.filter(function (o) { return o.status === 'Shipped' || o.status === 'Delivered'; });
+    var cf = s.xCl;
+    var cfOrder = cf && cf.order ? d.orders.find(function (o) { return o.id === cf.order; }) : null;
+    var setCf = function (k, v) { var x = Object.assign({}, self.state.xCl); x[k] = v; x.err = ''; self.setState({ xCl: x }); };
+    var clNote = s.xClNote || {}, clAmt = s.xClAmt || {};
+    var claimView = function (c) {
+      var kd = CLAIM_KINDS.find(function (k) { return k[0] === c.kind; }) || ['', c.kind], cc = col(CLAIM_COL, c.status), idx = CLAIM_ST.indexOf(c.status), open = s.xClOpen === c.id;
+      var setSt = function (st, extra) { return function () { var d2 = clone(), y = d2.claims.find(function (z) { return z.id === c.id; }), nt = (self.state.xClNote || {})[c.id] || ''; var i2 = CLAIM_ST.indexOf(st); y.status = st; y.hist = y.hist || []; if (i2 >= 0) { y.hist[i2] = fmtDate(today()); } if (nt.trim()) y.ltcNote = nt.trim(); if (extra) extra(d2, y);
+        post(d2, c.acct, 'Claim ' + c.id + ' (' + kd[1] + ', ' + c.order + ') is now ' + st + '.' + (nt.trim() ? ' ' + nt.trim() : ''), false);
+        saveData(d2); var m = Object.assign({}, self.state.xClNote || {}); delete m[c.id]; self.setState({ data: d2, xClNote: m }); self.flash(c.id + ' · ' + st); }; };
+      return { id: c.id, kindName: kd[1], order: c.order, po: c.po, acctName: (ACCTS[c.acct] || {}).name, created: c.created, by: c.by, status: c.status, sbg: cc[0], sfg: cc[1], itemsTxt: (c.items || []).map(function (i) { return i.q + ' × ' + i.name; }).join(', '), desc: c.desc, photos: c.photos || [], hasPhotos: (c.photos || []).length > 0, photoN: (c.photos || []).length, notedTxt: c.kind === 'damage' ? (c.noted ? 'Damage noted on the delivery receipt' : 'Damage not noted on the delivery receipt') : '',
+        ltcNote: c.ltcNote || '', hasLtc: !!c.ltcNote, creditTxt: c.credit ? 'Credit ' + c.credit.id + ' · ' + money(c.credit.amount) + ' added to Billing' : '', hasCredit: !!c.credit,
+        steps: (c.status === 'Declined' ? ['Submitted', 'Declined'] : CLAIM_ST).map(function (n, i) { var hi = c.status === 'Declined' ? (i === 0 ? 0 : -1) : i; return { name: n, when: c.status === 'Declined' ? (i === 0 ? (c.hist || [])[0] || '' : (c.declinedOn || '')) : (i <= idx ? ((c.hist || [])[i] || '') : ''), cls: c.status === 'Declined' ? (i === 0 ? 'done' : 'now') : (i < idx ? 'done' : (i === idx ? (idx === 4 ? 'done' : 'now') : '')) }; }),
+        open: open, toggle: function () { self.setState({ xClOpen: self.state.xClOpen === c.id ? null : c.id }); }, toggleTxt: open ? 'Hide' : 'Details',
+        adm: isAdmin && c.status !== 'Closed' && c.status !== 'Declined', note: clNote[c.id] || '', amt: clAmt[c.id] || '',
+        setNote: function (e) { var m = Object.assign({}, self.state.xClNote || {}); m[c.id] = e.target.value; self.setState({ xClNote: m }); },
+        setAmt: function (e) { var m = Object.assign({}, self.state.xClAmt || {}); m[c.id] = e.target.value; self.setState({ xClAmt: m }); },
+        canReview: c.status === 'Submitted', canRma: c.status === 'Submitted' || c.status === 'In Review', canCredit: c.status === 'In Review' || c.status === 'RMA Issued', canClose: c.status === 'RMA Issued' || c.status === 'Credit Issued',
+        review: setSt('In Review'), rma: setSt('RMA Issued'), close: setSt('Closed'),
+        credit: function () { var amt = num((self.state.xClAmt || {})[c.id]); if (amt == null || amt <= 0) return self.flash('Enter the credit amount'); setSt('Credit Issued', function (d2, y) { var cid = 'CM-' + c.id.replace(/\D/g, ''); d2.invoices.unshift({ id: cid, acct: c.acct, kind: 'credit', order: c.order, po: c.po, date: fmtDate(today()), amount: -Math.round(amt * 100) / 100, memo: 'Credit for claim ' + c.id + ' (' + kd[1] + ')', paid: true }); y.credit = { id: cid, amount: Math.round(amt * 100) / 100 }; })(); var m = Object.assign({}, self.state.xClAmt || {}); delete m[c.id]; self.setState({ xClAmt: m }); },
+        decline: function () { var nt = (self.state.xClNote || {})[c.id] || ''; if (!nt.trim()) return self.flash('Add a note explaining why'); var d2 = clone(), y = d2.claims.find(function (z) { return z.id === c.id; }); y.status = 'Declined'; y.declinedOn = fmtDate(today()); y.ltcNote = nt.trim(); post(d2, c.acct, 'Claim ' + c.id + ' was declined. ' + nt.trim(), false); saveData(d2); self.setState({ data: d2 }); self.flash(c.id + ' declined'); } };
+    };
+    X.xc = {
+      rows: claims.map(claimView), none: claims.length === 0, openN: claims.filter(function (c) { return c.status !== 'Closed' && c.status !== 'Declined'; }).length,
+      canStart: !isAdmin && !cf, noShip: shipOrders.length === 0,
+      start: function () { if (!shipOrders.length) return self.flash('Returns and claims open once an order ships'); self.setState({ xCl: { order: shipOrders[0].id, kind: 'damage', qty: {}, desc: '', photos: [], noted: false, err: '' } }); },
+      formOpen: !!cf, cancel: function () { self.setState({ xCl: null }); },
+      orderOpts: shipOrders.map(function (o) { return { v: o.id, label: o.id + ' · PO ' + o.po + ' · ' + o.status + ' ' + (o.status === 'Delivered' ? (o.hist[4] || '') : (o.hist[3] || '')) }; }),
+      order: cf ? cf.order : '', setOrder: function (e) { var x = Object.assign({}, self.state.xCl, { order: e.target.value, qty: {}, err: '' }); self.setState({ xCl: x }); },
+      kinds: CLAIM_KINDS.map(function (k) { return { name: k[1], desc: k[2], on: cf && cf.kind === k[0] ? 'true' : 'false', pick: function () { setCf('kind', k[0]); } }; }),
+      isDamage: !!(cf && cf.kind === 'damage'),
+      items: cfOrder ? orderItems(cfOrder).map(function (i) { var q = (cf.qty || {})[i.name] || 0; return { name: i.name, max: i.q, q: q, set: function (e) { var m = Object.assign({}, self.state.xCl.qty), n = parseInt(e.target.value, 10); m[i.name] = Math.max(0, Math.min(i.q, isNaN(n) ? 0 : n)); setCf('qty', m); } }; }) : [],
+      desc: cf ? cf.desc : '', setDesc: function (e) { setCf('desc', e.target.value); },
+      descPh: cf && cf.kind === 'damage' ? 'What happened? e.g. 2 cartons crushed, 1 × 4-Inch Caddy with a cracked caster.' : 'Tell us what happened and what you need (replacement, credit or return).',
+      noted: cf && cf.noted ? 'true' : 'false', toggleNoted: function () { setCf('noted', !self.state.xCl.noted); },
+      photos: cf ? cf.photos.map(function (p, i) { return { src: p, remove: function () { var l = self.state.xCl.photos.slice(); l.splice(i, 1); setCf('photos', l); } }; }) : [], hasPhotos: !!(cf && cf.photos.length), photoHint: cf && cf.kind === 'damage' ? 'Add at least one photo of the damage. Include the carton and the shipping label if you can.' : 'Photos help us resolve it faster (optional).',
+      addPhotos: function (e) { var fl = Array.prototype.slice.call((e.target.files || [])).filter(function (f) { return /^image\//.test(f.type); }).slice(0, 6); try { e.target.value = ''; } catch (x) {} if (!fl.length) return; var left = fl.length; fl.forEach(function (f) { shrinkImg(f, function (url) { if (url && self.state.xCl) { var l = self.state.xCl.photos.concat([url]).slice(0, 6); setCf('photos', l); } left--; if (!left) self.flash('Photos added'); }); }); },
+      hasErr: !!(cf && cf.err), err: cf ? cf.err : '',
+      submit: function () { var x = self.state.xCl, o = d.orders.find(function (z) { return z.id === x.order; }); if (!o) return setCf('err', 'Pick the order.'); var items = orderItems(o).map(function (i) { return { name: i.name, q: (x.qty || {})[i.name] || 0 }; }).filter(function (i) { return i.q > 0; }); if (!items.length) return setCf('err', 'Enter how many of each item this claim covers.'); if (!x.desc.trim()) return setCf('err', 'Describe what happened.'); if (x.kind === 'damage' && !x.photos.length) return setCf('err', 'Add at least one photo of the damage.');
+        var d2 = clone(), id = 'RMA-' + seq(d2, 'rma'), kd = CLAIM_KINDS.find(function (k) { return k[0] === x.kind; });
+        d2.claims = d2.claims || []; d2.claims.unshift({ id: id, acct: s.acct, order: o.id, po: o.po, kind: x.kind, items: items, desc: x.desc.trim(), noted: !!x.noted, photos: x.photos.slice(), status: 'Submitted', created: fmtDate(today()), by: me.name, loc: o.loc || 'all', hist: [fmtDate(today())], ltcNote: '' });
+        post(d2, s.acct, 'New ' + kd[1].toLowerCase() + ' claim ' + id + ' on ' + o.id + ' (PO ' + o.po + '): ' + items.map(function (i) { return i.q + ' × ' + i.name; }).join(', ') + '.', true);
+        saveData(d2); self.setState({ data: d2, xCl: null, xClOpen: id }); self.flash(id + ' submitted'); }
+    };
+
+    /* ---------- REPORTS ---------- */
+    var rng = s.xRange || '90', now = today(), cut = null;
+    if (rng === 'ytd') cut = new Date(now.getFullYear(), 0, 1); else if (rng !== 'all') { cut = new Date(now); cut.setDate(cut.getDate() - parseInt(rng, 10)); }
+    var liveMine = mine.filter(function (o) { return STATUSES.indexOf(o.status) >= 0; });
+    var inR = liveMine.filter(function (o) { var dt = pDate(o.created); return !cut || (dt && dt >= cut); });
+    var byP = {}, byL = {};
+    inR.forEach(function (o) {
+      orderItems(o).forEach(function (i) { var p = byP[i.name] = byP[i.name] || { name: i.name, units: 0, orders: {} }; p.units += i.q; p.orders[o.id] = true; });
+      var ln = (o.loc || 'all') === 'all' ? 'Company-Wide (HQ / Multi-Store POs)' : self.locName(o.acct, o.loc), L = byL[ln] = byL[ln] || { name: ln, units: 0, orders: 0, list: 0, last: '', lastD: 0 }; L.units += o.units || 0; L.orders++; L.list += o.list || 0; var dt = pDate(o.created) || 0; if (dt > L.lastD) { L.lastD = dt; L.last = o.created; }
+    });
+    var pl = Object.keys(byP).map(function (k) { return byP[k]; }).sort(function (p, q) { return q.units - p.units; });
+    var ll = Object.keys(byL).map(function (k) { return byL[k]; }).sort(function (p, q) { return q.units - p.units; });
+    var pMax = pl.length ? pl[0].units : 1, lMax = ll.length ? ll[0].units : 1;
+    var totU = inR.reduce(function (t, o) { return t + (o.units || 0); }, 0), totL = inR.reduce(function (t, o) { return t + (o.list || 0); }, 0);
+    var rngName = { '30': 'Last 30 Days', '90': 'Last 90 Days', 'ytd': 'This Year', 'all': 'All Time' }[rng];
+    var tag = (isAdmin ? 'all-accounts' : a.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')) + '-' + rng + '-' + fileStamp();
+    X.xr = {
+      ranges: [['30', 'Last 30 Days'], ['90', 'Last 90 Days'], ['ytd', 'This Year'], ['all', 'All Time']].map(function (r) { return { label: r[1], on: rng === r[0] ? 'true' : 'false', pick: function () { self.setState({ xRange: r[0] }); } }; }),
+      rangeName: rngName, scopeTxt: myLoc ? 'Showing ' + self.locName(s.acct, myLoc) + ' only.' : 'Showing every location on the account.',
+      kpis: [{ n: inR.length, l: 'Orders' }, { n: totU.toLocaleString(), l: 'Units' }, { n: money(totL).replace('.00', ''), l: 'Value At MSRP' }, { n: inR.length ? Math.round(totU / inR.length).toLocaleString() : '0', l: 'Avg Units Per Order' }],
+      prods: pl.map(function (p) { var n = Object.keys(p.orders).length; return { name: p.name, units: p.units.toLocaleString(), orders: n + ' order' + (n === 1 ? '' : 's'), pct: Math.max(3, Math.round(p.units / pMax * 100)) }; }),
+      locs: ll.map(function (l) { return { name: l.name, units: l.units.toLocaleString(), orders: l.orders, list: money(l.list).replace('.00', ''), last: l.last || '—', pct: Math.max(3, Math.round(l.units / lMax * 100)) }; }),
+      none: inR.length === 0,
+      expOrders: function () { dlCsv('ltc-order-history-' + tag + '.csv', [['Order', 'PO', 'Date', 'Location', 'Placed By', 'Order Type', 'Status', 'Units', 'Value At MSRP', 'Ship To', 'Freight', 'Payment', 'Tracking']].concat(inR.map(function (o) { var t = ORDER_TYPES.find(function (x) { return x.id === o.type; }); return [o.id, o.po, o.created, self.locName(o.acct, o.loc || 'all'), o.by || '', t ? t.name : o.type, o.status, o.units, (o.list || 0).toFixed(2), o.shipTo, o.freight, o.pay, (o.shipments || []).map(function (x) { return x.tracking; }).filter(Boolean).join(' / ') || o.tracking || '']; }))); },
+      expLines: function () { var rows = [['Order', 'PO', 'Date', 'Location', 'Status', 'Item', 'Qty']]; inR.forEach(function (o) { orderItems(o).forEach(function (i) { rows.push([o.id, o.po, o.created, self.locName(o.acct, o.loc || 'all'), o.status, i.name, i.q]); }); }); dlCsv('ltc-order-lines-' + tag + '.csv', rows); },
+      expStores: function () { dlCsv('ltc-units-by-store-' + tag + '.csv', [['Location', 'Orders', 'Units', 'Value At MSRP', 'Last Order']].concat(ll.map(function (l) { return [l.name, l.orders, l.units, l.list.toFixed(2), l.last]; }))); },
+      expProds: function () { dlCsv('ltc-units-by-product-' + tag + '.csv', [['Product', 'Units', 'Orders']].concat(pl.map(function (p) { return [p.name, p.units, Object.keys(p.orders).length]; }))); }
+    };
+
+    /* ---------- PROFILE & NOTIFICATIONS ---------- */
+    var pk = s.acct + ':' + me.id, pr = (d.prefs || {})[pk] || {};
+    var evDef = function (k) { return { email: true, text: k === 'shipped' || k === 'approve' }; };
+    var ev = function (k) { return Object.assign(evDef(k), (pr.ev || {})[k] || {}); };
+    var setPr = function (fn) { var d2 = clone(); d2.prefs = d2.prefs || {}; var p = d2.prefs[pk] = d2.prefs[pk] || {}; fn(p, d2); self.persist(d2); };
+    var pw = s.xPw || { cur: '', nw: '', cf: '', err: '' };
+    var setPw = function (k) { return function (e) { var x = Object.assign({}, self.state.xPw || { cur: '', nw: '', cf: '' }); x[k] = e.target.value; x.err = ''; self.setState({ xPw: x }); }; };
+    var pwChecks = [['10+ characters', pw.nw.length >= 10], ['A letter', /[A-Za-z]/.test(pw.nw)], ['A number', /\d/.test(pw.nw)], ['Passwords match', !!pw.nw && pw.nw === pw.cf]];
+    X.xp = {
+      name: me.name, email: me.email || a.email || '', role: me.role, locName: self.locName(s.acct, me.loc || 'all'), phone: pr.phone != null ? pr.phone : (me.phone || ''), title: pr.title || '',
+      setName: function (e) { var v = e.target.value; setPr(function (p, d2) { var u = ((d2.team || {})[s.acct] || []).find(function (z) { return z.id === me.id; }); if (u) u.name = v; }); },
+      setPhone: function (e) { var v = e.target.value; setPr(function (p) { p.phone = v; }); },
+      setTitle: function (e) { var v = e.target.value; setPr(function (p) { p.title = v; }); },
+      pw: pw, setCur: setPw('cur'), setNw: setPw('nw'), setCf: setPw('cf'),
+      checks: pwChecks.map(function (c) { return { t: c[0], fg: c[1] ? '#2E7D4F' : '#8A94A3', mark: c[1] ? '✓' : '○' }; }),
+      hasPwErr: !!pw.err, pwErr: pw.err || '', pwTxt: pr.pwOn ? 'Last changed ' + pr.pwOn + '.' : 'You set this password when you accepted your invite.',
+      savePw: function () { var x = self.state.xPw || { cur: '', nw: '', cf: '' }; if (!x.cur) return self.setState({ xPw: Object.assign({}, x, { err: 'Enter your current password.' }) }); if (!pwChecks.every(function (c) { return c[1]; })) return self.setState({ xPw: Object.assign({}, x, { err: 'Your new password needs everything on the checklist.' }) }); setPr(function (p) { p.pwOn = fmtDate(today()); }); self.setState({ xPw: { cur: '', nw: '', cf: '', err: '' } }); self.flash('Password updated'); },
+      events: NOTIFY.filter(function (n) { return !n[2] || (n[2] === 'approve' ? can('approve') : billAccess); }).map(function (n) { var e2 = ev(n[0]); var tog = function (ch) { return function () { setPr(function (p) { p.ev = p.ev || {}; var cur = Object.assign(evDef(n[0]), p.ev[n[0]] || {}); cur[ch] = !cur[ch]; p.ev[n[0]] = cur; }); }; }; return { name: n[1], email: e2.email ? 'true' : 'false', text: e2.text ? 'true' : 'false', togEmail: tog('email'), togText: tog('text') }; }),
+      digests: [['now', 'Send each one right away'], ['daily', 'One daily summary at 7 AM']].map(function (g) { return { label: g[1], on: (pr.digest || 'now') === g[0] ? 'true' : 'false', pick: function () { setPr(function (p) { p.digest = g[0]; }); } }; }),
+      textTo: (pr.phone != null ? pr.phone : me.phone) ? 'Texts go to ' + (pr.phone != null ? pr.phone : me.phone) + '.' : 'Add a mobile number above to get texts.',
+      allOff: function () { setPr(function (p) { p.ev = {}; NOTIFY.forEach(function (n) { p.ev[n[0]] = { email: false, text: false }; }); }); self.flash('All notifications off'); },
+      reset: function () { setPr(function (p) { p.ev = {}; }); self.flash('Notifications reset'); }
+    };
+
+    /* ---------- ADMIN: REQUESTS ---------- */
+    var allReqs = (d.requests || []);
+    X.xar = { reqs: allReqs.map(reqView), noReqs: allReqs.length === 0, pendN: allReqs.filter(function (r) { return r.status === 'Pending'; }).length };
+    X.reqBadge = allReqs.filter(function (r) { return r.status === 'Pending'; }).length + (d.claims || []).filter(function (c) { return c.status === 'Submitted'; }).length;
+    return X;
+  }
   renderVals() {
     var self = this, s = this.state, d = s.data, a = this.acct(), isAdmin = MODE === 'admin', c = this.calc(), mult = this.mult();
     var v = {}; v[s.view] = true;
     var T = this.teamVals(), meU = this.me(), myLoc = !isAdmin && meU.loc !== 'all' ? meU.loc : null, can = function (k) { return isAdmin || !!(meU.perms && meU.perms[k]); };
     var hasLocs = ((d.locations || {})[s.acct] || []).length > 0;
-    var mine = isAdmin ? d.orders : d.orders.filter(function (o) { return o.acct === s.acct && (!myLoc || (o.loc || 'all') === myLoc) && (!s.fLoc || (o.loc || 'all') === s.fLoc); });
-    var navP = [['overview', 'Overview']].concat(!myLoc && hasLocs ? [['locs', 'Locations']] : []).concat(can('order') ? [['order', 'New Order']] : []).concat([['orders', 'Orders'], ['files', 'Files'], ['messages', 'Messages'], ['book', 'Book Time']]).concat(can('pricing') ? [['prices', 'Price Sheet']] : []).concat([['addr', 'Addresses']]).concat(can('team') ? [['team', 'Team']] : []);
-    var navA = [['aOverview', 'Dashboard'], ['orders', 'Order Queue'], ['aShip', 'Shipping'], ['aAccounts', 'Accounts'], ['aUsers', 'Users & Access'], ['aProducts', 'Products'], ['aPricing', 'Pricing'], ['aFreight', 'Freight Calculator'], ['aPayouts', 'Payouts'], ['messages', 'Messages'], ['book', 'Calendar'], ['files', 'Files']];
+    var mine = isAdmin ? d.orders : (d.pending || []).concat(d.orders).filter(function (o) { return o.acct === s.acct && (!myLoc || (o.loc || 'all') === myLoc) && (!s.fLoc || (o.loc || 'all') === s.fLoc); });
+    var navP = [['overview', 'Overview']].concat(!myLoc && hasLocs ? [['locs', 'Locations']] : []).concat(can('order') ? [['order', 'New Order']] : []).concat([['orders', 'Orders']]).concat(can('approve') ? [['xAppr', 'Approvals']] : []).concat([['xClaims', 'Returns & Claims']]).concat(can('pricing') || can('approve') ? [['xBill', 'Billing']] : []).concat([['xRep', 'Reports'], ['files', 'Files'], ['messages', 'Messages'], ['book', 'Book Time']]).concat(can('pricing') ? [['prices', 'Price Sheet']] : []).concat([['addr', 'Addresses']]).concat(can('team') ? [['team', 'Team']] : []).concat([['xProf', 'My Profile']]);
+    var navA = [['aOverview', 'Dashboard'], ['orders', 'Order Queue'], ['aRequests', 'Requests'], ['aShip', 'Shipping'], ['xBill', 'Billing'], ['aAccounts', 'Accounts'], ['aUsers', 'Users & Access'], ['aProducts', 'Products'], ['aPricing', 'Pricing'], ['aFreight', 'Freight Calculator'], ['aPayouts', 'Payouts'], ['messages', 'Messages'], ['book', 'Calendar'], ['files', 'Files']];
     var newCount = d.orders.filter(function (o) { return o.status === 'Received'; }).length;
-    var titles = { overview: 'Partner Portal', order: 'New Order', orders: isAdmin ? 'Order Queue' : 'My Orders', files: 'Files', messages: 'Messages', book: isAdmin ? 'Calendar' : 'Book Time', prices: 'Price Sheet', aOverview: 'LTC Admin', aAccounts: 'Accounts', aUsers: 'Users & Access', team: 'Team', locs: 'Locations', addr: 'Addresses', aPricing: 'Pricing', aFreight: 'Freight Calculator', aAff: 'Affiliates', aBoard: 'Affiliate Leaderboard', aCamp: 'Campaigns & Deals', aContent: 'News & Videos', aReps: 'Sales Team', aRepTrain: 'Rep Training', aRepNews: 'Rep News', aProducts: 'Products', aPayouts: 'Monthly Payouts', aShip: 'Shipping' };
-    var f = s.form, sel = s.selId ? d.orders.find(function (o) { return o.id === s.selId; }) : null;
+    var apprN = can('approve') ? (d.pending || []).filter(function (o) { return o.acct === s.acct && o.status === 'Awaiting Approval'; }).length : 0;
+    var reqN = (d.requests || []).filter(function (r) { return r.status === 'Pending'; }).length + (d.claims || []).filter(function (c) { return c.status === 'Submitted'; }).length;
+    var titles = { overview: 'Partner Portal', order: 'New Order', orders: isAdmin ? 'Order Queue' : 'My Orders', files: 'Files', messages: 'Messages', book: isAdmin ? 'Calendar' : 'Book Time', prices: 'Price Sheet', aOverview: 'LTC Admin', aAccounts: 'Accounts', aUsers: 'Users & Access', team: 'Team', locs: 'Locations', addr: 'Addresses', aPricing: 'Pricing', aFreight: 'Freight Calculator', aAff: 'Affiliates', aBoard: 'Affiliate Leaderboard', aCamp: 'Campaigns & Deals', aContent: 'News & Videos', aReps: 'Sales Team', aRepTrain: 'Rep Training', aRepNews: 'Rep News', aProducts: 'Products', aPayouts: 'Monthly Payouts', aShip: 'Shipping', xAppr: 'Approvals', xClaims: 'Returns & Claims', xBill: 'Billing', xRep: 'Reports', xProf: 'My Profile', aRequests: 'Requests' };
+    var f = s.form, sel = s.selId ? (isAdmin ? d.orders : d.orders.concat(d.pending || [])).find(function (o) { return o.id === s.selId; }) : null;
     var tierNow = this.tierFor(c.units);
     var shown = mine.filter(function (o) { return !s.fStatus || o.status === s.fStatus; });
     var fileList = d.files.filter(function (x) { return (isAdmin || x.acct === 'all' || x.acct === s.acct) && (!s.folder || x.folder === s.folder); });
@@ -2649,14 +3253,14 @@ class Component extends DCLogic {
       acctEnt: s.acct === 'ent' ? 'true' : 'false', acctDist: s.acct === 'dist' ? 'true' : 'false',
       pickEnt: function () { self.setState({ acct: 'ent', form: blankForm(ACCTS.ent), selId: null, submitted: null, step: 1 }); },
       pickDist: function () { self.setState({ acct: 'dist', form: blankForm(ACCTS.dist), selId: null, submitted: null, step: 1 }); },
-      navs: (isAdmin ? navA : navP).map(function (n) { var b = n[0] === 'orders' && isAdmin ? newCount : (n[0] === 'messages' && !isAdmin ? 0 : 0); return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: b > 0, badge: b, go: function () { if (n[0] === 'order') self.startOrder(); else self.go(n[0]); } }; }),
+      navs: (isAdmin ? navA : navP).map(function (n) { var b = n[0] === 'orders' && isAdmin ? newCount : (n[0] === 'xAppr' ? apprN : (n[0] === 'aRequests' && isAdmin ? reqN : 0)); return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: b > 0, badge: b, go: function () { if (n[0] === 'order') self.startOrder(); else self.go(n[0]); } }; }),
       crumb: isAdmin ? 'Liberty Tool Company · Internal' : a.name + ' · ' + a.modelName,
       title: titles[s.view] || '', v: v,
       goNewOrder: function () { self.startOrder(); }, goOrders: function () { self.go('orders'); }, goMessages: function () { self.go('messages'); },
       reloadData: function () { self.setState({ data: loadData(), aff: affLoad(), reps: repLoad() }); self.flash('Refreshed'); },
       acct: a, form: f,
       pKpis: [
-        { n: mine.filter(function (o) { return o.status !== 'Delivered'; }).length, l: 'Open Orders' },
+        { n: mine.filter(function (o) { return !isDone(o); }).length, l: 'Open Orders' },
         { n: mine.filter(function (o) { return o.status === 'Shipped'; }).length, l: 'In Transit' },
         { n: mine.reduce(function (t, o) { return t + o.units; }, 0).toLocaleString(), l: 'Units This Year' },
         { n: a.terms, l: 'Payment Terms' }
@@ -2670,7 +3274,9 @@ class Component extends DCLogic {
       recentOrders: mine.slice(0, 4).map(function (o) { var x = self.orderView(o); x.open = openOrder(o); return x; }),
       recentMsgs: (d.msgs[s.acct] || []).slice(-2).reverse(),
       notSubmitted: !s.submitted, submitted: !!s.submitted,
-      lastOrder: s.submitted ? this.orderView(d.orders.find(function (o) { return o.id === s.submitted; })) : { steps: [] },
+      lastOrder: (function () { var lo = s.submitted ? d.orders.concat(d.pending || []).find(function (o) { return o.id === s.submitted || o.reqId === s.submitted; }) : null; return lo ? self.orderView(lo) : { steps: [] }; })(),
+      subEyebrow: s.submitted && /^REQ-/.test(s.submitted) ? 'Sent For Approval' : 'Order Received',
+      subTxt: s.submitted && /^REQ-/.test(s.submitted) ? 'Your order is waiting for approval from someone at ' + a.name + ' who can approve orders. Once they approve it, it goes to LTC and you’ll get an order number. Track it under Orders.' : 'Thanks. We\'ll confirm pricing and freight, then email your acknowledgement. You\'ll get tracking the day it ships, and we check in 3 days after delivery.',
       stepList: ['Order Setup', 'Products', 'Shipping & Terms', 'Review'].map(function (l, i) { return { n: i + 1, label: l, cur: s.step === i + 1 ? 'step' : 'false', go: function () { if (i + 1 < s.step) self.setState({ step: i + 1, err: '' }); } }; }),
       step1: s.step === 1, step2: s.step === 2, step3: s.step === 3, step4: s.step === 4,
       orderTypes: ORDER_TYPES.map(function (t) { return { name: t.name, desc: t.desc, on: f.type === t.id ? 'true' : 'false', pick: function () { self.setForm('type', t.id); } }; }),
@@ -2720,10 +3326,10 @@ class Component extends DCLogic {
       back: function () { self.setState({ step: s.step - 1, err: '' }); },
       next: function () { self.nextStep(); }, nextLabel: s.step === 4 ? 'Submit Order' : 'Continue', nextClass: s.step === 4 ? 'red' : '',
       priceFoot: 'Prices marked "Set by LTC" are confirmed on your acknowledgement. Nothing is charged until LTC confirms the order.',
-      statusFilters: [''].concat(STATUSES).map(function (st) { return { label: st || 'All', on: s.fStatus === st ? 'true' : 'false', pick: function () { self.setState({ fStatus: st }); } }; }),
+      statusFilters: [''].concat(STATUSES).concat(['Awaiting Approval', 'Declined', 'Cancelled'].filter(function (st) { return mine.some(function (o) { return o.status === st; }); })).map(function (st) { return { label: st || 'All', on: s.fStatus === st ? 'true' : 'false', pick: function () { self.setState({ fStatus: st }); } }; }),
       orderRows: shown.map(function (o) { var x = self.orderView(o); x.open = openOrder(o); x.rowBg = s.selId === o.id ? C.soft : 'transparent'; return x; }),
       noOrders: shown.length === 0, hasSel: !!sel, sel: sel ? this.orderView(sel) : { steps: [], lines: [] },
-      canAdvance: isAdmin && !!sel && STATUSES.indexOf(sel.status) < 4 && !(STATUSES[STATUSES.indexOf(sel.status) + 1] === 'Shipped' && (sel.shipments || []).length), advanceLabel: sel && (STATUSES[STATUSES.indexOf(sel.status) + 1] === 'Shipped') ? 'Create Shipment' : (sel && sel.status === 'Shipped' ? 'Mark Delivered' : 'Mark ' + (sel ? STATUSES[Math.min(4, STATUSES.indexOf(sel.status) + 1)] : '')), nextStatus: sel ? STATUSES[Math.min(4, STATUSES.indexOf(sel.status) + 1)] : '',
+      canAdvance: isAdmin && !!sel && STATUSES.indexOf(sel.status) >= 0 && STATUSES.indexOf(sel.status) < 4 && !(STATUSES[STATUSES.indexOf(sel.status) + 1] === 'Shipped' && (sel.shipments || []).length), advanceLabel: sel && (STATUSES[STATUSES.indexOf(sel.status) + 1] === 'Shipped') ? 'Create Shipment' : (sel && sel.status === 'Shipped' ? 'Mark Delivered' : 'Mark ' + (sel ? STATUSES[Math.min(4, STATUSES.indexOf(sel.status) + 1)] : '')), nextStatus: sel ? STATUSES[Math.min(4, STATUSES.indexOf(sel.status) + 1)] : '',
       advance: function () { if (sel && (STATUSES[STATUSES.indexOf(sel.status) + 1] === 'Shipped')) return self.openShip(sel); if (sel && sel.status === 'Shipped' && (sel.shipments || []).some(function (x) { return x.status !== 'Delivered'; })) return self.flash('Mark each shipment delivered below'); var d2 = JSON.parse(JSON.stringify(d)); var o = d2.orders.find(function (x) { return x.id === s.selId; }); var i = STATUSES.indexOf(o.status); if (i < 4) { o.status = STATUSES[i + 1]; o.hist[i + 1] = fmtDate(today()); } self.persist(d2); self.flash(o.id + ' → ' + o.status); },
       setTracking: function (e) { var d2 = JSON.parse(JSON.stringify(d)); var o = d2.orders.find(function (x) { return x.id === s.selId; }); o.tracking = e.target.value; self.persist(d2); },
       reorder: function () { var q = {}; PRODUCTS.concat(TOOLS).forEach(function (p) { sel.lines.forEach(function (l) { var m = /^(\d+) × (.+)$/.exec(l); if (m && m[2] === p.name) q[p.id] = parseInt(m[1], 10); }); }); var fm = blankForm(a); fm.type = sel.type; self.setState({ view: 'order', step: 2, submitted: null, form: fm, qty: q, coat: {}, err: '' }); },
@@ -2750,10 +3356,10 @@ class Component extends DCLogic {
         { n: newCount, l: 'New Orders To Confirm' },
         { n: d.orders.filter(function (o) { return o.status === 'Acknowledged' || o.status === 'Freight Review'; }).length, l: 'Awaiting Freight / Ship' },
         { n: d.orders.filter(function (o) { return o.status === 'Shipped'; }).length, l: 'In Transit' },
-        { n: money(d.orders.filter(function (o) { return o.status !== 'Delivered'; }).reduce(function (t, o) { return t + (o.value != null ? o.value : o.list); }, 0)).replace('.00', ''), l: 'Open Order Value (List)' },
+        { n: money(d.orders.filter(function (o) { return !isDone(o); }).reduce(function (t, o) { return t + (o.value != null ? o.value : o.list); }, 0)).replace('.00', ''), l: 'Open Order Value (List)' },
         { n: d.books.length, l: 'Meetings Booked' }
       ],
-      actionRows: d.orders.filter(function (o) { return o.status !== 'Delivered'; }).slice(0, 6).map(function (o) { var x = self.orderView(o); x.open = openOrder(o); return x; }),
+      actionRows: d.orders.filter(function (o) { return !isDone(o); }).slice(0, 6).map(function (o) { var x = self.orderView(o); x.open = openOrder(o); return x; }),
       aMsgs: ['ent', 'dist'].map(function (k) { var m = (d.msgs[k] || []).slice(-1)[0] || { when: '', text: 'No messages' }; return { acctName: ACCTS[k].name, when: m.when, text: m.text, open: function () { self.setState({ view: 'messages', thread: k }); } }; }),
       acctRows: Object.keys(ACCTS).map(function (k) { var x = ACCTS[k], ad = (d.addresses || {})[k] || {}, nl = ((d.locations || {})[k] || []).length; return { billTxt: addrOk(ad.bill) ? [ad.bill.line1, ad.bill.city + ', ' + ad.bill.st].join(' · ') : 'No billing address yet', locTxt: nl ? nl + ' store' + (nl === 1 ? '' : 's') + ' with their own ship-to' : 'Ships to the company address', addr: function () { self.setState({ acct: k, view: 'addr', ae: null }); }, name: x.name, buyer: x.buyer, type: x.type, modelName: x.modelName, terms: x.terms, territory: x.territory, rep: x.rep, open: d.orders.filter(function (o) { return o.acct === k && o.status !== 'Delivered'; }).length }; }),
       pricing: P,
@@ -2767,6 +3373,7 @@ class Component extends DCLogic {
     };
     Object.assign(R, this.cutVals(), this.labelVals(sel), this.addrVals(), this.shipVals(sel), this.shipDocVals(), this.shipQueueVals(), { goImport: function () { self.go('locs'); } });
     Object.assign(R, T, { acctKey: s.acct, showPricing: can('pricing'), noCoat: !(a.access || {}).coatings });
+    Object.assign(R, this.extVals(sel, mine, can), { xbCols: isAdmin ? '40px 1fr 1.4fr 1.2fr 1fr 1fr 1fr 1fr 1.1fr 190px' : '40px 1fr 1.2fr 1fr 1fr 1fr 1fr 1.1fr 90px', goClaims: function () { self.go('xClaims'); } });
     if (isAdmin) Object.assign(R, this.userVals(T));
     R.sideMore = !!s.sideMore; R.sideDown = sideDown; R.csf = s.csf;
     if (!isAdmin) return Object.assign(R, { stOpen: false, stm: { rows: [] }, cg: { open: false, list: [] }, csf: s.csf });
