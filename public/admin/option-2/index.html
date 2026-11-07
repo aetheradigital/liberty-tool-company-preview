@@ -1079,13 +1079,23 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 
     <!-- ================= ADMIN: PRICING ================= -->
     <sc-if value="{{v.aPricing}}" hint-placeholder-val="{{false}}">
-      <div class="grid g2" style="align-items: start">
+      <div class="grid" style="align-items: start; grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr))">
         <div class="card">
           <h2 class="h2">Enterprise Contract Prices</h2>
-          <p class="muted" style="margin: 6px 0 12px; font-size: 14px">Fixed per-item prices for contract accounts. Leave blank until agreed.</p>
-          <div class="scroll"><div class="tbl" style="--cols: 2fr 1fr 150px; --minw: 380px"><div class="tr th"><div>Item</div><div>MSRP</div><div>Contract Price</div></div>
-            <sc-for list="{{contractRows}}" as="r" hint-placeholder-count="8"><div class="tr"><div><b>{{r.name}}</b></div><div>{{r.msrp}}</div><div style="width: 150px"><input class="inp" type="number" min="0" step="0.01" placeholder="$" value="{{r.val}}" onChange="{{r.set}}" aria-label="Contract price {{r.name}}"></div></div></sc-for>
+          <p class="muted" style="margin: 6px 0 12px; font-size: 14px">Fixed per-item prices for contract accounts, with an optional lower price once the order reaches the break quantity. Leave blank until agreed.</p>
+          <label style="display: inline-block; width: 220px; margin-bottom: 10px"><span class="lbl">Price Break At (Units)</span><input class="inp" type="number" min="0" value="{{contractBreakMin}}" onChange="{{setBreakMin}}"></label>
+          <div class="scroll"><div class="tbl" style="--cols: 2fr 0.9fr 130px 130px; --minw: 520px"><div class="tr th"><div>Item</div><div>MSRP</div><div>Contract Price</div><div>At Break Qty</div></div>
+            <sc-for list="{{contractRows}}" as="r" hint-placeholder-count="8"><div class="tr"><div><b>{{r.name}}</b></div><div>{{r.msrp}}</div><div><input class="inp" type="number" min="0" step="0.01" placeholder="$" value="{{r.val}}" onChange="{{r.set}}" aria-label="Contract price {{r.name}}"></div><div><input class="inp" type="number" min="0" step="0.01" placeholder="$" value="{{r.brk}}" onChange="{{r.setBrk}}" aria-label="Price at break quantity {{r.name}}"></div></div></sc-for>
           </div></div>
+          <p class="muted" style="font-size: 12px; margin: 10px 0 0">4-Inch Caddy: $62 for 10–99 units and $58 for 100+ units, from the Sherwin-Williams pricing discussed Sep 4, 2026. Other items are still to be set.</p>
+        </div>
+        <div class="card">
+          <h2 class="h2">Distributor Prices</h2>
+          <p class="muted" style="margin: 6px 0 12px; font-size: 14px">Fixed per-item distributor price. A price here overrides the volume tiers for that item.</p>
+          <div class="scroll"><div class="tbl" style="--cols: 2fr 0.9fr 130px 0.9fr; --minw: 500px"><div class="tr th"><div>Item</div><div>MSRP</div><div>Distributor Price</div><div></div></div>
+            <sc-for list="{{distRows}}" as="r" hint-placeholder-count="8"><div class="tr"><div><b>{{r.name}}</b></div><div>{{r.msrp}}</div><div><input class="inp" type="number" min="0" step="0.01" placeholder="$" value="{{r.val}}" onChange="{{r.set}}" aria-label="Distributor price {{r.name}}"></div><div class="muted" style="font-size: 12px">{{r.off}}</div></div></sc-for>
+          </div></div>
+          <p class="muted" style="font-size: 12px; margin: 10px 0 0">4-Inch Caddy: $62 distributor price, from the Aug 25, 2026 OakGrove onboarding call. Other items are still to be set.</p>
         </div>
         <div style="display: flex; flex-direction: column; gap: 16px">
           <div class="card">
@@ -1667,7 +1677,7 @@ function dlBlob(name, text, type) { try { var b = new Blob([text], { type: type 
 function fileSize(n) { return n > 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB'; }
 var COATINGS = ['1111 Fast Patch', '1620 TMUC Urethane Cement', '1776 Polyaspartic', '1803 WB Top Coat', 'Cove Base Resin', 'HP-CRU'];
 var ACCTS = {
-  ent: { id: 'ent', name: 'Keystone Home Centers', first: 'Jordan', buyer: 'Jordan Ellis · Merchandising Buyer', email: 'jellis@keystonehome.example', phone: '(555) 201-4410', type: 'Enterprise · Retail Chain', terms: 'Net 30', model: 'contract', modelName: 'Enterprise Contract Pricing', modelDesc: 'Fixed per-item prices set in your supply agreement. Same price on every PO, whatever the quantity.', vendor: 'V-20418', territory: 'National (418 stores)', rep: 'House account', stores: 418 },
+  ent: { id: 'ent', name: 'Keystone Home Centers', first: 'Jordan', buyer: 'Jordan Ellis · Merchandising Buyer', email: 'jellis@keystonehome.example', phone: '(555) 201-4410', type: 'Enterprise · Retail Chain', terms: 'Net 30', model: 'contract', modelName: 'Enterprise Contract Pricing', modelDesc: 'Fixed per-item prices set in your supply agreement, with a lower price on larger orders where agreed.', vendor: 'V-20418', territory: 'National (418 stores)', rep: 'House account', stores: 418 },
   dist: { id: 'dist', name: 'Northline Coatings Supply', first: 'Sam', buyer: 'Sam Ortiz · Purchasing Manager', email: 'sortiz@northline.example', phone: '(555) 318-0092', type: 'Distributor · 6 branches', terms: 'Net 30', model: 'tier', modelName: 'Distributor Volume Tiers', modelDesc: 'Your discount off MSRP goes up with the total units on each order. The tier updates as you build the order.', vendor: '', territory: 'Michigan', rep: 'The Stallings Group (MI) — commission', stores: 6 },
   dealer: { id: 'dealer', name: 'Coastline Flooring Supply', first: 'Dana', buyer: 'Dana Reyes · Owner', type: 'Dealer · 1 store', terms: 'Credit card', model: 'dealer', modelName: 'Dealer Wholesale', modelDesc: 'One wholesale discount off MSRP on every item.', territory: 'Florida', rep: 'House account' },
   multi: { id: 'multi', name: 'Summit Facilities Group', first: 'Lee', buyer: 'Lee Park · Procurement', type: 'Enterprise · Multi-Site', terms: 'Net 45', model: 'contract', modelName: 'Enterprise Contract Pricing', modelDesc: '', territory: 'Ohio · 22 sites', rep: 'The Stallings Group (OH) — commission' , access: { caddy: true, bundles: false, trowels: true, coatings: false } , access: { caddy: true, bundles: false, trowels: true, coatings: false } , access: { caddy: true, bundles: false, trowels: true, coatings: false } , access: { caddy: true, bundles: false, trowels: true, coatings: false } }
@@ -2071,7 +2081,7 @@ function num(v) { var n = parseFloat(v); return isNaN(n) ? null : n; }
 function today() { var d = new Date(); return d; }
 function fmtDate(d) { return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
 function daysAgo(n) { var d = today(); d.setDate(d.getDate() - n); return fmtDate(d); }
-function blankPricing() { return { contract: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, tiers: [{ name: 'Tier 1', min: '', pct: '' }, { name: 'Tier 2', min: '', pct: '' }, { name: 'Tier 3', min: '', pct: '' }], dealerPct: '', freeFreight: '', moq: '' }; }
+function blankPricing() { return { contract: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, contractBreak: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, contractBreakMin: '100', dist: { lowboy: '', c2: '', c4: '', c6: '', cove: '', ddd: '', triple: '', four: '' }, tiers: [{ name: 'Tier 1', min: '', pct: '' }, { name: 'Tier 2', min: '', pct: '' }, { name: 'Tier 3', min: '', pct: '' }], dealerPct: '', freeFreight: '', moq: '' }; }
 function seed() {
   return {
     pricing: blankPricing(),
@@ -2229,6 +2239,16 @@ function extMigrate(d) {
     }
     d.demoV = 2;
   }
+  if (d.demoV < 3) {
+    var P0 = d.pricing = d.pricing || blankPricing(), ids = ['lowboy', 'c2', 'c4', 'c6', 'cove', 'ddd', 'triple', 'four'];
+    P0.contract = P0.contract || {}; P0.contractBreak = P0.contractBreak || {}; P0.dist = P0.dist || {};
+    ids.forEach(function (k) { if (P0.contract[k] == null) P0.contract[k] = ''; if (P0.contractBreak[k] == null) P0.contractBreak[k] = ''; if (P0.dist[k] == null) P0.dist[k] = ''; });
+    if (P0.contractBreakMin == null || P0.contractBreakMin === '') P0.contractBreakMin = '100';
+    if (P0.contract.c4 === '') P0.contract.c4 = '62';
+    if (P0.contractBreak.c4 === '') P0.contractBreak.c4 = '58';
+    if (P0.dist.c4 === '') P0.dist.c4 = '62';
+    d.demoV = 3;
+  }
   return d;
 }
 function poPrefix(a) { var w = String((a && a.name) || 'PO').replace(/[^A-Za-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean); return (w.length > 1 ? w.map(function (x) { return x[0]; }).join('') : (w[0] || 'PO').slice(0, 3)).toUpperCase().slice(0, 4); }
@@ -2251,7 +2271,8 @@ class Component extends DCLogic {
   unitPrice(id, units) {
     var a = this.acct(), p = this.state.data.pricing, prod = PRODUCTS.find(function (x) { return x.id === id; });
     if (!prod) return null;
-    if (a.model === 'contract') return num(p.contract[id]);
+    if (a.model === 'contract') { var bk = num((p.contractBreak || {})[id]), bm = num(p.contractBreakMin); return bk != null && bm != null && units >= bm ? bk : num(p.contract[id]); }
+    if (a.model === 'tier' && num((p.dist || {})[id]) != null) return num(p.dist[id]);
     if (a.model === 'dealer') { var dp = num(p.dealerPct); return dp == null ? null : prod.msrp * (1 - dp / 100); }
     var t = this.tierFor(units); return t ? prod.msrp * (1 - t.pct / 100) : null;
   }
@@ -3373,7 +3394,7 @@ class Component extends DCLogic {
       bookRows: d.books.filter(function (b) { return isAdmin || b.acct === s.acct; }).map(function (b) { return { type: b.type, when: b.when, acctName: (ACCTS[b.acct] || {}).name }; }),
       noBooks: d.books.filter(function (b) { return isAdmin || b.acct === s.acct; }).length === 0,
       priceColHead: a.model === 'tier' ? 'Tier 1 / 2 / 3' : 'Your Price',
-      sheetRows: PRODUCTS.map(function (p) { var pr; if (a.model === 'tier') { pr = P.tiers.map(function (t) { var pc = num(t.pct); return pc == null ? '—' : money(p.msrp * (1 - pc / 100)); }).join(' / '); if (pr === '— / — / —') pr = 'Set by LTC'; } else { var u = self.unitPrice(p.id, 0); pr = u == null ? 'Set by LTC' : money(u); } return { name: p.name, msrp: money(p.msrp), price: pr }; }),
+      sheetRows: PRODUCTS.map(function (p) { var pr; if (a.model === 'tier' && num((P.dist || {})[p.id]) != null) { pr = money(num(P.dist[p.id])); } else if (a.model === 'contract' && num((P.contract || {})[p.id]) != null) { var bk = num((P.contractBreak || {})[p.id]), bm = num(P.contractBreakMin); pr = money(num(P.contract[p.id])) + (bk != null && bm != null ? ' · ' + money(bk) + ' at ' + bm + '+ units' : ''); } else if (a.model === 'tier') { pr = P.tiers.map(function (t) { var pc = num(t.pct); return pc == null ? '—' : money(p.msrp * (1 - pc / 100)); }).join(' / '); if (pr === '— / — / —') pr = 'Set by LTC'; } else { var u = self.unitPrice(p.id, 0); pr = u == null ? 'Set by LTC' : money(u); } return { name: p.name, msrp: money(p.msrp), price: pr }; }),
       termRows: [{ k: 'Payment Terms', v: a.terms }, { k: 'Free Freight', v: num(P.freeFreight) != null ? 'Over ' + money(num(P.freeFreight)) : 'Set by LTC' }, { k: 'Minimum Order', v: num(P.moq) != null ? P.moq + ' units' : 'None set' }],
       aKpis: [
         { n: newCount, l: 'New Orders To Confirm' },
@@ -3386,7 +3407,9 @@ class Component extends DCLogic {
       aMsgs: ['ent', 'dist'].map(function (k) { var m = (d.msgs[k] || []).slice(-1)[0] || { when: '', text: 'No messages' }; return { acctName: ACCTS[k].name, when: m.when, text: m.text, open: function () { self.setState({ view: 'messages', thread: k }); } }; }),
       acctRows: Object.keys(ACCTS).map(function (k) { var x = ACCTS[k], ad = (d.addresses || {})[k] || {}, nl = ((d.locations || {})[k] || []).length; return { billTxt: addrOk(ad.bill) ? [ad.bill.line1, ad.bill.city + ', ' + ad.bill.st].join(' · ') : 'No billing address yet', locTxt: nl ? nl + ' store' + (nl === 1 ? '' : 's') + ' with their own ship-to' : 'Ships to the company address', addr: function () { self.setState({ acct: k, view: 'addr', ae: null }); }, name: x.name, buyer: x.buyer, type: x.type, modelName: x.modelName, terms: x.terms, territory: x.territory, rep: x.rep, open: d.orders.filter(function (o) { return o.acct === k && !isDone(o); }).length, poOn: poRequired(d, k) ? 'true' : 'false', poTxt: poRequired(d, k) ? 'Required' : 'Optional', togPo: function () { var d2 = JSON.parse(JSON.stringify(self.state.data)); d2.poReq = d2.poReq || {}; d2.poReq[k] = !poRequired(d2, k); self.persist(d2); self.flash(x.name + ': PO number ' + (d2.poReq[k] ? 'required' : 'optional')); } }; }),
       pricing: P,
-      contractRows: PRODUCTS.map(function (p) { return { name: p.name, msrp: money(p.msrp), val: P.contract[p.id], set: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.contract[p.id] = e.target.value; self.persist(d2); } }; }),
+      contractRows: PRODUCTS.map(function (p) { return { name: p.name, msrp: money(p.msrp), val: P.contract[p.id], brk: (P.contractBreak || {})[p.id] || '', set: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.contract[p.id] = e.target.value; self.persist(d2); }, setBrk: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.contractBreak = d2.pricing.contractBreak || {}; d2.pricing.contractBreak[p.id] = e.target.value; self.persist(d2); } }; }),
+      contractBreakMin: P.contractBreakMin || '', setBreakMin: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.contractBreakMin = e.target.value; self.persist(d2); },
+      distRows: PRODUCTS.map(function (p) { var v = (P.dist || {})[p.id] || '', n = num(v); return { name: p.name, msrp: money(p.msrp), val: v, off: n != null && p.msrp ? Math.round((1 - n / p.msrp) * 1000) / 10 + '% off' : '', set: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.dist = d2.pricing.dist || {}; d2.pricing.dist[p.id] = e.target.value; self.persist(d2); } }; }),
       tierRows: P.tiers.map(function (t, i) { return { name: t.name, min: t.min, pct: t.pct, setMin: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.tiers[i].min = e.target.value; self.persist(d2); }, setPct: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.tiers[i].pct = e.target.value; self.persist(d2); } }; }),
       tierPreview: P.tiers.map(function (t) { var pc = num(t.pct); return t.name + ': 4-Inch ' + (pc == null ? '—' : money(99 * (1 - pc / 100))); }).join(' · '),
       setDealerPct: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.dealerPct = e.target.value; self.persist(d2); },
