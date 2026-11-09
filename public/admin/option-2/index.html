@@ -230,6 +230,38 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
   .h1{font-size:25px}
   .toast{left:16px;right:16px;bottom:16px}
 }
+.vtog{display:inline-flex;padding:3px;border:1px solid #DCE3F7;border-radius:999px;background:#F4F7FF}
+.vtog button{min-height:36px;padding:0 16px;border:0;border-radius:999px;background:transparent;font:inherit;font-size:13px;font-weight:700;color:#071A52;cursor:pointer}
+.vtog button[aria-pressed="true"]{background:#0A35C8;color:#FFFFFF}
+.calhd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-top:20px}
+.calnav{display:flex;align-items:center;gap:8px}
+.calbtn{width:38px;height:38px;border-radius:999px;border:1px solid #DCE3F7;background:#FFFFFF;color:#071A52;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.calbtn:disabled{opacity:.35;cursor:default}
+.calttl{min-width:150px;text-align:center;font-size:15px}
+.calgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin-top:10px}
+.caldow{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5568;text-align:center;padding:4px 0}
+.calcell{display:flex;flex-direction:column;align-items:stretch;gap:3px;min-width:0;min-height:92px;padding:6px;border:1px solid #DCE3F7;border-radius:10px;background:#FFFFFF;text-align:left;font:inherit;color:#071A52;cursor:pointer}
+.calcell:hover:not(:disabled){border-color:#0A35C8}
+.calcell:disabled{background:#F4F6FA;color:#6B7486;cursor:default}
+.calcell[data-out="true"]{opacity:.6}
+.calcell[aria-pressed="true"]{border:2px solid #0A35C8;background:#E8EEFF;padding:5px}
+.calnum{font-size:13px;font-weight:700}
+.calcell[data-today="true"] .calnum{display:inline-flex;align-self:flex-start;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 4px;border-radius:999px;background:#B31942;color:#FFFFFF}
+.calev{display:block;font-size:11px;line-height:1.3;padding:2px 5px;border-radius:5px;background:#0A35C8;color:#FFFFFF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.calmore{font-size:11px;font-weight:600;color:#0A35C8}
+.caldot{display:none;width:6px;height:6px;border-radius:999px;background:#0A35C8;margin:2px auto 0}
+.calleg{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:12px;color:#4A5568}
+.calleg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.chip:disabled{opacity:.45;text-decoration:line-through;cursor:default}
+.attrow{display:flex;flex-wrap:wrap;gap:8px}
+.attchip{display:inline-flex;align-items:center;gap:6px;max-width:100%;min-height:34px;padding:0 4px 0 10px;border-radius:999px;border:1px solid #C9D6FF;background:#F4F7FF;font-size:13px;font-weight:600;color:#071A52}
+.attnm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px}
+.attx{width:28px;height:28px;border:0;border-radius:999px;background:transparent;font-size:18px;line-height:1;color:#4A5568;cursor:pointer}
+.attx:hover{background:#DCE3F7}
+.batt{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.batt a,.batt .bf{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:6px 10px;border-radius:10px;background:rgba(127,140,170,.16);border:1px solid rgba(127,140,170,.4);color:inherit;font-size:13px;font-weight:600;text-decoration:none;overflow-wrap:anywhere}
+.batt a:hover{background:rgba(127,140,170,.28)}
+@media (max-width:640px){.calcell{min-height:48px;padding:4px;align-items:center}.calcell[aria-pressed="true"]{padding:3px}.calev,.calmore{display:none}.caldot{display:block}.calgrid{gap:3px}.caldow{font-size:10px;letter-spacing:0}.calttl{min-width:0}.attnm{max-width:150px}}
 </style>
 
 </head>
@@ -1177,25 +1209,37 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       <sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px"><sc-for list="{{threadChips}}" as="t" hint-placeholder-count="2"><button type="button" class="chip" aria-pressed="{{t.on}}" onClick="{{t.pick}}">{{t.label}}</button></sc-for></div></sc-if>
       <div class="card" style="display: flex; flex-direction: column; gap: 12px">
         <sc-for list="{{thread}}" as="m" hint-placeholder-count="4">
-          <div style="display: flex; justify-content: {{m.side}}"><div class="bub" style="background: {{m.bg}}; color: {{m.fg}}"><div style="font-size: 12px; font-weight: 700; opacity: 0.8">{{m.from}} · {{m.when}}</div><div style="margin-top: 4px">{{m.text}}</div></div></div>
+          <div style="display: flex; justify-content: {{m.side}}"><div class="bub" style="background: {{m.bg}}; color: {{m.fg}}"><div style="font-size: 12px; font-weight: 700; opacity: 0.8">{{m.from}} · {{m.when}}</div><sc-if value="{{m.hasText}}" hint-placeholder-val="{{true}}"><div style="margin-top: 4px">{{m.text}}</div></sc-if><sc-if value="{{m.hasAtt}}" hint-placeholder-val="{{false}}"><div class="batt"><sc-for list="{{m.att}}" as="a" hint-placeholder-count="1"><sc-if value="{{a.hasUrl}}" hint-placeholder-val="{{false}}"><a href="{{a.url}}" target="_blank" rel="noopener" download="{{a.name}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg><span>{{a.name}}</span><span style="opacity: 0.75">{{a.size}}</span></a></sc-if><sc-if value="{{a.noUrl}}" hint-placeholder-val="{{true}}"><span class="bf" title="Mockup: attachments open only in the session they were sent from"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg><span>{{a.name}}</span><span style="opacity: 0.75">{{a.size}}</span></span></sc-if></sc-for></div></sc-if></div></div>
         </sc-for>
         <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px"><sc-for list="{{quickReplies}}" as="q" hint-placeholder-count="3"><button type="button" class="chip" onClick="{{q.use}}">{{q.t}}</button></sc-for></div>
-        <div style="display: flex; gap: 10px; align-items: flex-end">
-          <label style="flex: 1"><span class="lbl">Message</span><textarea class="inp" placeholder="Type a message" onChange="{{setDraft}}">{{draft}}</textarea></label>
-          <button type="button" class="btn" onClick="{{send}}">Send</button>
+        <sc-if value="{{hasAtt}}" hint-placeholder-val="{{false}}"><div class="attrow" aria-label="Attached to this message"><sc-for list="{{att}}" as="f" hint-placeholder-count="1"><span class="attchip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg><span class="attnm">{{f.name}}</span><span class="muted" style="font-size: 12px; font-weight: 500">{{f.size}}</span><button type="button" class="attx" onClick="{{f.remove}}" aria-label="Remove {{f.name}}">×</button></span></sc-for></div></sc-if>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end">
+          <label style="flex: 1 1 260px"><span class="lbl">Message</span><textarea class="inp" placeholder="Type a message" onChange="{{setDraft}}">{{draft}}</textarea></label>
+          <div style="display: flex; gap: 8px">
+            <label class="btn ghost" style="cursor: pointer; position: relative"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg> Attach<input type="file" multiple onChange="{{addAtt}}" aria-label="Attach documents to this message" style="position: absolute; width: 1px; height: 1px; opacity: 0"></label>
+            <button type="button" class="btn" onClick="{{send}}">Send</button>
+          </div>
         </div>
+        <div class="muted" style="font-size: 12px">Attach POs, quotes, photos, spec sheets or any document. Up to 5 files, 25 MB each.</div>
       </div>
     </sc-if>
 
     <!-- ================= BOOK TIME ================= -->
     <sc-if value="{{v.book}}" hint-placeholder-val="{{false}}">
       <div class="card">
-        <h2 class="h2">What Do You Need?</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px"><h2 class="h2">What Do You Need?</h2><div class="vtog" role="group" aria-label="Show days as"><button type="button" aria-pressed="{{calListOn}}" onClick="{{calList}}">List</button><button type="button" aria-pressed="{{calOn}}" onClick="{{calCal}}">Calendar</button></div></div>
         <div class="grid g4" style="margin-top: 12px"><sc-for list="{{bookTypes}}" as="t" hint-placeholder-count="4"><button type="button" class="opt" aria-pressed="{{t.on}}" onClick="{{t.pick}}" style="min-height: 96px"><span class="h3" style="color: #0A35C8">{{t.name}}</span><span class="muted" style="font-size: 13px">{{t.desc}}</span></button></sc-for></div>
+        <sc-if value="{{calListOnB}}" hint-placeholder-val="{{true}}">
         <h3 class="h3" style="margin-top: 20px">Pick A Day</h3>
         <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px"><sc-for list="{{bookDays}}" as="d" hint-placeholder-count="6"><button type="button" class="chip" aria-pressed="{{d.on}}" onClick="{{d.pick}}">{{d.label}}</button></sc-for></div>
+        </sc-if>
+        <sc-if value="{{calOnB}}" hint-placeholder-val="{{false}}">
+        <div class="calhd"><h3 class="h3">Pick A Day</h3><div class="calnav"><button type="button" class="calbtn" onClick="{{cal.prev}}" disabled="{{cal.noPrev}}" aria-label="Previous month"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button><b class="calttl">{{cal.title}}</b><button type="button" class="calbtn" onClick="{{cal.next}}" disabled="{{cal.noNext}}" aria-label="Next month"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button></div></div>
+        <div class="calgrid"><sc-for list="{{cal.dow}}" as="w" hint-placeholder-count="7"><div class="caldow">{{w}}</div></sc-for><sc-for list="{{cal.cells}}" as="c" hint-placeholder-count="35"><button type="button" class="calcell" aria-pressed="{{c.on}}" disabled="{{c.off}}" data-out="{{c.out}}" data-today="{{c.today}}" onClick="{{c.pick}}" aria-label="{{c.aria}}"><span class="calnum">{{c.num}}</span><sc-for list="{{c.items}}" as="it" hint-placeholder-count="1"><span class="calev" title="{{it}}">{{it}}</span></sc-for><sc-if value="{{c.more}}" hint-placeholder-val="{{false}}"><span class="calmore">{{c.moreLabel}}</span></sc-if><sc-if value="{{c.has}}" hint-placeholder-val="{{false}}"><span class="caldot"></span></sc-if></button></sc-for></div>
+        <div class="calleg"><span><i style="background: #0A35C8"></i>{{cal.legendMine}}</span><span><i style="background: #B31942"></i>Today</span><span><i style="background: #F4F6FA; border: 1px solid #DCE3F7"></i>Weekends And Past Days Unavailable</span></div>
+        </sc-if>
         <h3 class="h3" style="margin-top: 18px">Pick A Time (Pacific)</h3>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px"><sc-for list="{{bookTimes}}" as="d" hint-placeholder-count="6"><button type="button" class="chip" aria-pressed="{{d.on}}" onClick="{{d.pick}}">{{d.label}}</button></sc-for></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px"><sc-for list="{{bookTimes}}" as="d" hint-placeholder-count="6"><button type="button" class="chip" aria-pressed="{{d.on}}" disabled="{{d.off}}" onClick="{{d.pick}}" aria-label="{{d.aria}}">{{d.label}}</button></sc-for></div>
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 20px"><button type="button" class="btn red" onClick="{{confirmBook}}">Book It</button><span class="muted" style="font-size: 14px">{{bookHint}}</span></div>
       </div>
       <div class="card" style="margin-top: 16px">
@@ -2800,6 +2844,40 @@ class Component extends DCLogic {
     Object.assign(this.state, authBoot(this.state.data));
   }
   persist(d) { saveData(d); this.setState({ data: d }); }
+  bookCal(d, s, isAdmin, days) {
+    var self = this, now = today(), DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    function ymd(x) { return x.getFullYear() + '-' + ('0' + (x.getMonth() + 1)).slice(-2) + '-' + ('0' + x.getDate()).slice(-2); }
+    function bDate(b) { if (b.date) return b.date; var m = /^(Sun|Mon|Tue|Wed|Thu|Fri|Sat)/.exec(b.when || ''); if (!m) return ''; var want = DOW.indexOf(m[1]), x = new Date(now); for (var i = 1; i <= 7; i++) { x.setDate(x.getDate() + 1); if (x.getDay() === want) return ymd(x); } return ''; }
+    function bTime(b) { return b.time || ((/· (.+?) PT/.exec(b.when || '') || [])[1]) || ''; }
+    function tMin(t) { var m = /(\d+):(\d+) (AM|PM)/.exec(t || ''); return m ? (parseInt(m[1], 10) % 12 + (m[3] === 'PM' ? 12 : 0)) * 60 + parseInt(m[2], 10) : 0; }
+    var short = { 'Account Review': 'Review', 'Staff Training / Demo': 'Training', 'Reorder Planning': 'Reorder', 'New Store Rollout': 'Rollout' };
+    var first = new Date(days[0]); first.setHours(0, 0, 0, 0);
+    var last = new Date(now); last.setHours(0, 0, 0, 0); last.setDate(last.getDate() + 90);
+    var sel = s.bk.date ? new Date(s.bk.date) : days[s.bk.day];
+    var selKey = ymd(sel);
+    var mStart = s.calMonth ? new Date(s.calMonth) : new Date(sel.getFullYear(), sel.getMonth(), 1);
+    var minMonth = new Date(first.getFullYear(), first.getMonth(), 1), maxMonth = new Date(last.getFullYear(), last.getMonth(), 1);
+    var mine = d.books.filter(function (b) { return isAdmin || b.acct === s.acct; }), byDay = {};
+    mine.forEach(function (b) { var k = bDate(b); if (!k) return; (byDay[k] = byDay[k] || []).push(b); });
+    var taken = d.books.filter(function (b) { return bDate(b) === selKey; }).map(bTime);
+    var dim = new Date(mStart.getFullYear(), mStart.getMonth() + 1, 0).getDate(), rows = Math.ceil((mStart.getDay() + dim) / 7);
+    var start = new Date(mStart); start.setDate(1 - mStart.getDay());
+    var todayKey = ymd(now), cells = [];
+    for (var i = 0; i < rows * 7; i++) {
+      var x = new Date(start); x.setDate(start.getDate() + i); x.setHours(9, 0, 0, 0);
+      var k = ymd(x), dz = new Date(x); dz.setHours(0, 0, 0, 0);
+      var off = x.getDay() === 0 || x.getDay() === 6 || dz < first || dz > last;
+      var list = (byDay[k] || []).slice().sort(function (p, q) { return tMin(bTime(p)) - tMin(bTime(q)); });
+      var items = list.map(function (b) { return bTime(b).replace(':00', '').replace(' AM', 'a').replace(' PM', 'p') + ' ' + (short[b.type] || b.type) + (isAdmin ? ' · ' + ((ACCTS[b.acct] || {}).name || '') : ''); });
+      cells.push({ num: x.getDate(), on: k === selKey ? 'true' : 'false', off: off, out: x.getMonth() !== mStart.getMonth() ? 'true' : 'false', today: k === todayKey ? 'true' : 'false',
+        items: items.slice(0, 2), more: items.length > 2, moreLabel: '+' + (items.length - 2) + ' more', has: items.length > 0,
+        aria: x.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) + (items.length ? ', ' + items.length + ' meeting' + (items.length > 1 ? 's' : '') : '') + (off ? ', unavailable' : ''),
+        pick: (function (xx) { return function () { self.setState({ bk: Object.assign({}, self.state.bk, { date: xx.getTime(), time: '' }), calMonth: new Date(xx.getFullYear(), xx.getMonth(), 1).getTime() }); }; })(new Date(x)) });
+    }
+    var shift = function (n) { return function () { var m = new Date(mStart.getFullYear(), mStart.getMonth() + n, 1); if (m < minMonth || m > maxMonth) return; self.setState({ calMonth: m.getTime() }); }; };
+    return { sel: sel, selKey: selKey, taken: taken, ymd: ymd,
+      view: { title: mStart.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }), dow: DOW, cells: cells, prev: shift(-1), next: shift(1), noPrev: mStart <= minMonth, noNext: mStart >= maxMonth, legendMine: isAdmin ? 'Booked Meetings' : 'Your Meetings' } };
+  }
   flash(t) { var self = this; this.setState({ toast: t }); setTimeout(function () { if (self.state.toast === t) self.setState({ toast: '' }); }, 2600); }
   acct() { return ACCTS[this.state.acct]; }
   unitPrice(id, units) {
@@ -4005,6 +4083,8 @@ class Component extends DCLogic {
     var fileList = d.files.filter(function (x) { return (isAdmin || x.acct === 'all' || x.acct === s.acct) && (!s.folder || x.folder === s.folder); });
     var threadKey = isAdmin ? s.thread : s.acct;
     var days = []; var dd = today(); while (days.length < 6) { dd.setDate(dd.getDate() + 1); if (dd.getDay() > 0 && dd.getDay() < 6) days.push(new Date(dd)); }
+    var bc = this.bookCal(d, s, isAdmin, days), calMode = s.calMode || (isAdmin ? 'calendar' : 'list');
+    var fmtSz = function (n) { return n >= 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round((n || 0) / 1024)) + ' KB'; }, blobs = this._blobs || (this._blobs = {});
     var P = d.pricing;
     var openOrder = function (o) { return function () { self.setState({ view: 'orders', selId: o.id }); }; };
     var R = {
@@ -4103,15 +4183,21 @@ class Component extends DCLogic {
       uploadFile: function (e) { var fl = e.target.files && e.target.files[0]; if (!fl) return; var d2 = JSON.parse(JSON.stringify(d)); d2.files.unshift({ acct: isAdmin ? 'all' : s.acct, name: fl.name, folder: s.folder || FOLDERS[4], date: fmtDate(today()), by: isAdmin ? 'LTC' : a.buyer.split(' · ')[0] }); self.persist(d2); self.flash('Uploaded ' + fl.name); },
       fileRows: fileList.map(function (x) { return Object.assign({}, x, { acctName: x.acct === 'all' ? 'All partners' : (ACCTS[x.acct] || {}).name }); }),
       threadChips: ['ent', 'dist'].map(function (k) { return { label: ACCTS[k].name, on: s.thread === k ? 'true' : 'false', pick: function () { self.setState({ thread: k }); } }; }),
-      thread: (d.msgs[threadKey] || []).map(function (m) { var me = isAdmin ? !m.mine : m.mine; return { from: m.from, when: m.when, text: m.text, side: me ? 'flex-end' : 'flex-start', bg: me ? C.pri : C.soft, fg: me ? '#FFFFFF' : C.ink }; }),
+      thread: (d.msgs[threadKey] || []).map(function (m) { var me = isAdmin ? !m.mine : m.mine, at = (m.att || []).map(function (f) { var u = blobs[f.id] || ''; return { name: f.name, size: fmtSz(f.size), url: u, hasUrl: !!u, noUrl: !u }; }); return { from: m.from, when: m.when, text: m.text, hasText: !!m.text, att: at, hasAtt: at.length > 0, side: me ? 'flex-end' : 'flex-start', bg: me ? C.pri : C.soft, fg: me ? '#FFFFFF' : C.ink }; }),
       quickReplies: (isAdmin ? ['Order received — confirming now.', 'Freight quote attached.', 'Shipped today. Tracking is on the order.'] : ['Can you send a freight quote?', 'Please add UPC labels.', 'Can we move the ship date?']).map(function (t) { return { t: t, use: function () { self.setState({ draft: t }); } }; }),
       draft: s.draft, setDraft: function (e) { self.setState({ draft: e.target.value }); },
-      send: function () { if (!s.draft.trim()) return; var d2 = JSON.parse(JSON.stringify(d)); d2.msgs[threadKey] = (d2.msgs[threadKey] || []).concat([{ from: isAdmin ? 'LTC Sales' : a.buyer.split(' · ')[0], mine: !isAdmin, when: fmtDate(today()), text: s.draft.trim() }]); saveData(d2); self.setState({ data: d2, draft: '' }); },
+      att: (s.att || []).map(function (f) { return { name: f.name, size: fmtSz(f.size), remove: function () { try { URL.revokeObjectURL(blobs[f.id]); } catch (x) {} delete blobs[f.id]; self.setState({ att: (self.state.att || []).filter(function (z) { return z.id !== f.id; }) }); } }; }),
+      hasAtt: (s.att || []).length > 0,
+      addAtt: function (e) { var fl = Array.prototype.slice.call(e.target.files || []); try { e.target.value = ''; } catch (x) {} if (!fl.length) return; var cur = (self.state.att || []).slice(), big = 0, over = 0; fl.forEach(function (f) { if (f.size > 25 * 1048576) { big++; return; } if (cur.length >= 5) { over++; return; } var id = 'a' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); try { blobs[id] = URL.createObjectURL(f); } catch (x) {} cur.push({ id: id, name: f.name, size: f.size, type: f.type }); }); self.setState({ att: cur }); self.flash(big ? big + (big > 1 ? ' files are' : ' file is') + ' over 25 MB' : (over ? 'Up to 5 files per message' : (fl.length > 1 ? fl.length + ' files attached' : 'Attached ' + fl[0].name))); },
+      send: function () { var at = (s.att || []); if (!s.draft.trim() && !at.length) return self.flash('Type a message or attach a file'); var d2 = JSON.parse(JSON.stringify(d)); d2.msgs[threadKey] = (d2.msgs[threadKey] || []).concat([{ from: isAdmin ? 'LTC Sales' : a.buyer.split(' · ')[0], mine: !isAdmin, when: fmtDate(today()), text: s.draft.trim(), att: at.map(function (f) { return { id: f.id, name: f.name, size: f.size, type: f.type }; }) }]); saveData(d2); self.setState({ data: d2, draft: '', att: [] }); if (at.length) self.flash('Sent with ' + at.length + (at.length > 1 ? ' attachments' : ' attachment')); },
       bookTypes: [['Account Review', 'Pricing, terms, what’s selling.'], ['Staff Training / Demo', 'We show your team the tools.'], ['Reorder Planning', 'Plan stock for the season.'], ['New Store Rollout', 'Displays and opening orders.']].map(function (t) { return { name: t[0], desc: t[1], on: s.bk.type === t[0] ? 'true' : 'false', pick: function () { self.setState({ bk: Object.assign({}, s.bk, { type: t[0] }) }); } }; }),
-      bookDays: days.map(function (x, i) { return { label: x.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }), on: s.bk.day === i ? 'true' : 'false', pick: function () { self.setState({ bk: Object.assign({}, s.bk, { day: i }) }); } }; }),
-      bookTimes: ['7:00 AM', '8:30 AM', '10:00 AM', '11:30 AM', '1:00 PM', '2:30 PM'].map(function (t) { return { label: t, on: s.bk.time === t ? 'true' : 'false', pick: function () { self.setState({ bk: Object.assign({}, s.bk, { time: t }) }); } }; }),
-      bookHint: s.bk.time ? s.bk.type + ' · ' + days[s.bk.day].toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }) + ' at ' + s.bk.time + ' PT' : 'Pick a time.',
-      confirmBook: function () { if (!s.bk.time) return self.flash('Pick a time first'); var d2 = JSON.parse(JSON.stringify(d)); d2.books.push({ acct: isAdmin ? 'ent' : s.acct, type: s.bk.type, when: days[s.bk.day].toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + ' · ' + s.bk.time + ' PT' }); self.persist(d2); self.setState({ bk: Object.assign({}, s.bk, { time: '' }) }); self.flash('Booked. Calendar invite on its way.'); },
+      calOn: calMode === 'calendar' ? 'true' : 'false', calListOn: calMode === 'list' ? 'true' : 'false', calOnB: calMode === 'calendar', calListOnB: calMode !== 'calendar',
+      calCal: function () { self.setState({ calMode: 'calendar' }); }, calList: function () { self.setState({ calMode: 'list' }); },
+      cal: bc.view,
+      bookDays: days.map(function (x, i) { return { label: x.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }), on: bc.ymd(x) === bc.selKey ? 'true' : 'false', pick: function () { self.setState({ bk: Object.assign({}, s.bk, { day: i, date: null, time: '' }), calMonth: null }); } }; }),
+      bookTimes: ['7:00 AM', '8:30 AM', '10:00 AM', '11:30 AM', '1:00 PM', '2:30 PM'].map(function (t) { var tk = bc.taken.indexOf(t) >= 0; return { label: t, on: s.bk.time === t ? 'true' : 'false', off: tk, aria: t + (tk ? ', already booked' : ''), pick: function () { self.setState({ bk: Object.assign({}, s.bk, { time: t }) }); } }; }),
+      bookHint: s.bk.time ? s.bk.type + ' · ' + bc.sel.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }) + ' at ' + s.bk.time + ' PT' : 'Pick a time for ' + bc.sel.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }) + '.',
+      confirmBook: function () { if (!s.bk.time) return self.flash('Pick a time first'); if (bc.taken.indexOf(s.bk.time) >= 0) return self.flash('That time is already booked'); var d2 = JSON.parse(JSON.stringify(d)); d2.books.push({ acct: isAdmin ? 'ent' : s.acct, type: s.bk.type, date: bc.selKey, time: s.bk.time, when: bc.sel.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + ' · ' + s.bk.time + ' PT' }); self.persist(d2); self.setState({ bk: Object.assign({}, s.bk, { time: '' }) }); self.flash('Booked. Calendar invite on its way.'); },
       bookRows: d.books.filter(function (b) { return isAdmin || b.acct === s.acct; }).map(function (b) { return { type: b.type, when: b.when, acctName: (ACCTS[b.acct] || {}).name }; }),
       noBooks: d.books.filter(function (b) { return isAdmin || b.acct === s.acct; }).length === 0,
       priceColHead: a.model === 'tier' ? 'Tier 1 / 2 / 3' : 'Your Price',
