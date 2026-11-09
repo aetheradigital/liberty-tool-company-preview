@@ -163,7 +163,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 .mbody{padding:18px;font-size:15px;line-height:1.55}
 .mbody p{margin:0 0 12px}
 .mbody .btn{margin:4px 0 14px}
-@media (max-width:860px){.auth{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-content:start}.aubrand{padding:18px 20px;flex-direction:row;align-items:center;justify-content:space-between;gap:12px}.aubrand:after,.aupitch,.aufoot{display:none}.aulogo{height:42px}.aulabel{margin:0}.aupane{justify-content:flex-start;padding:20px 16px 40px}.aucard{padding:22px 18px}}
+@media (max-width:860px){.auth{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-content:start}.aubrand{padding:18px 20px;flex-direction:row;align-items:center;justify-content:space-between;gap:12px}.aubrand:after,.aupitch,.aufoot{display:none}.aulogo{height:42px}.aulabel{margin:0}.auaddr{display:none}.aupane{justify-content:flex-start;padding:20px 16px 40px}.aucard{padding:22px 18px}}
 /* gate (agreement / waiting) */
 .gate{min-height:100vh;background:#F2F5FF}
 .gtop{background:#0A35C8;color:#FFFFFF;padding:14px 28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
@@ -248,7 +248,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 <div class="auth">
   <div class="aubrand">
     <img src="/assets/logo-white.png" alt="Liberty Tool Company" class="aulogo">
-    <div class="aulabel">Partner Portal</div>
+    <div class="aulabel">Partner Portal<span class="auaddr"> · partner.libertytoolcompany.com</span></div>
     <div class="aupitch">
       <h2>Order, track, pay and work with Liberty Tool Company in one place.</h2>
       <ul><li>Your contract or distributor pricing on every order</li><li>Tracking, invoices and claims without the phone tag</li><li>Cut sheets, price sheets and your signed agreements</li></ul>
@@ -273,7 +273,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
         </div>
         <sc-if value="{{au.hasErr}}" hint-placeholder-val="{{false}}"><div class="auerr" role="alert">{{au.err}}</div></sc-if>
         <button type="button" class="btn red aubtn" onClick="{{au.signIn}}">Sign In</button>
-        <div class="aufine">New to the portal? Open the invite email from Liberty Tool Company and click <b>Accept Invite</b>. Invite links work for {{au.inviteDays}} days. After {{au.maxTries}} wrong passwords in a row, sign-in locks for {{au.lockMin}} minutes.</div>
+        <div class="aufine">Portal address: <b>partner.libertytoolcompany.com</b>. Bookmark it on your computer and phone. New to the portal? Open the invite email from Liberty Tool Company and click <b>Accept Invite</b>. Invite links work for {{au.inviteDays}} days. After {{au.maxTries}} wrong passwords in a row, sign-in locks for {{au.lockMin}} minutes.</div>
       </sc-if>
 
       <sc-if value="{{au.sForgot}}" hint-placeholder-val="{{false}}">
@@ -318,8 +318,9 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
               <p><b>{{au.inv.by}}</b> added you to <b>{{au.inv.co}}</b>’s LTC Partner Portal as <b>{{au.inv.role}}</b> for <b>{{au.inv.loc}}</b>. Use it to order Tape Caddies and LTC trowels, track shipments and reach the LTC team.</p>
               <button type="button" class="btn red" onClick="{{au.acceptInvite}}">Accept Invite &amp; Set Password</button>
               <p class="muted">This link works once and expires in {{au.inviteDays}} days, on {{au.inv.expires}}. After that, ask {{au.inv.by}} to resend it.</p>
+              <p class="muted">After you set your password, sign in any time at <b>partner.libertytoolcompany.com</b>.</p>
             </sc-if>
-            <p class="muted" style="font-size: 12px; border-top: 1px solid #DCE3F7; padding-top: 10px">Liberty Tool Company · 712 W. Cienega Ave, Unit A, San Dimas, CA 91773 · 239-744-8403</p>
+            <p class="muted" style="font-size: 12px; border-top: 1px solid #DCE3F7; padding-top: 10px">partner.libertytoolcompany.com · Liberty Tool Company · 712 W. Cienega Ave, Unit A, San Dimas, CA 91773 · 239-744-8403</p>
           </div>
         </div>
         <button type="button" class="btn ghost aubtn2" onClick="{{au.goSignin}}">Back To Sign In</button>
@@ -2723,7 +2724,7 @@ var DIST_AG = [
   { t: 'p', x: 'Contract notices must be sent to the addresses or emails above by confirmed email delivery, tracked courier, or certified mail. Notice is effective upon documented receipt; an email bounce is not delivery. Each party shall notify the other of contact changes. A party affected by events beyond its reasonable control shall promptly notify the other and use reasonable mitigation efforts; performance is excused only to the extent and duration actually prevented. This does not excuse accrued payment obligations, confidentiality, or legal compliance. A disruption lasting more than thirty days permits termination of affected unperformed obligations on written notice, subject to applicable law and existing orders. Amendments to Part II require both parties’ written signatures; unilateral Part I updates follow Part I only.' },
   { t: 's', x: '2. Dispute resolution, governing law, and venue' },
   { t: 'p', x: 'The parties shall first attempt good-faith resolution through designated senior representatives for fifteen business days after written dispute notice. If unresolved, they shall attempt nonbinding mediation with a mutually selected mediator within thirty additional days and share mediator fees equally. If no mediator is agreed within ten business days or mediation fails, either party may pursue litigation. These steps do not prevent urgent protective relief, toll filing deadlines, restrict regulator communications, or limit nonwaivable rights. No mandatory arbitration is created.' },
-  { t: 'p', x: 'Governing state law and agreed court venue: as set by Liberty before execution. Venue applies only to the extent legally enforceable, including federal subject-matter jurisdiction. Mandatory federal and affected state or national competition, consumer, and dealer-protection law controls regardless of this choice.' },
+  { t: 'p', x: 'This Agreement is governed by the laws of the State of California, without regard to its conflict-of-laws rules. Agreed court venue: the state and federal courts located in California, county as set by Liberty before execution. Venue applies only to the extent legally enforceable, including federal subject-matter jurisdiction. Mandatory federal and affected state or national competition, consumer, and dealer-protection law controls regardless of this choice.' },
   { t: 's', x: '3. Integration, precedence, assignment, and severability' },
   { t: 'p', x: 'Part II and the separately activated ceiling portion of Schedule A constitute the entire agreement concerning their limited subject matter, replacing prior discussions on that subject only. Existing supply, payment, warranty, returns, and reseller agreements remain in effect unless specifically amended in a writing signed by both parties. No term silently overrides an existing conflicting agreement; an express signed amendment is required. Part I is a separate unilateral notice and is not incorporated as a binding promise. No oral representation modifies Part II.' },
   { t: 'p', x: 'Neither party may assign Part II without the other’s prior written consent, not unreasonably withheld, except to a successor acquiring substantially all of the relevant business and assuming the obligations, with written notice. No delay in enforcement waives a right; a waiver must be written and applies only to the stated instance. If a provision is unenforceable, it is severed to the extent necessary without expanding any price restriction; the remaining lawful provisions continue. There are no third-party beneficiaries except expressly indemnified parties. Obligations intended by their terms to survive do so. Electronic signatures and counterparts are effective as originals to the extent permitted by law.' },
