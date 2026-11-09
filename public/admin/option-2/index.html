@@ -118,7 +118,6 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 .demo{display:flex;gap:6px;background:rgba(255,255,255,0.1);padding:4px;border-radius:999px}
 .demo button{flex:1;border:0;border-radius:999px;padding:7px 8px;font-size:12px;font-weight:700;background:transparent;color:#D6E0F2}
 .demo button[aria-pressed="true"]{background:#FFFFFF;color:#0A35C8}
-@media (max-width: 860px){.app{grid-template-columns:1fr}.side{padding:16px;position:static;height:auto;overflow:visible}.sidemore{display:none}.side .nav{flex-direction:row;flex-wrap:wrap}.nv{width:auto}.main{padding:20px 16px 56px}}
 .chk{width:24px;height:24px;border-radius:7px;border:2px solid #C9D4F2;background:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;padding:0}
 .chk[aria-pressed="true"]{background:#0A35C8;border-color:#0A35C8}
 .chk[aria-pressed="true"]:after{content:"\2713";color:#FFFFFF;font-size:14px;font-weight:800;line-height:1}
@@ -130,6 +129,107 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 .tog span{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,0.25);transition:left .15s}
 .tog[aria-pressed="true"]{background:#0A35C8}
 .tog[aria-pressed="true"] span{left:23px}
+/* sign-in screens */
+.auth{min-height:100vh;display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);background:#F2F5FF}
+.aubrand{background:#0A35C8;color:#FFFFFF;padding:40px 44px;display:flex;flex-direction:column;gap:22px;position:relative;overflow:hidden}
+.aubrand:after{content:"";position:absolute;right:-120px;bottom:-120px;width:340px;height:340px;border-radius:50%;background:rgba(255,255,255,0.07)}
+.aulogo{height:64px;width:auto;align-self:flex-start}
+.aulabel{font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C9D6FF;margin-top:-10px}
+.aupitch{margin-top:auto;max-width:440px}
+.aupitch h2{font-family:Poppins,sans-serif;font-weight:800;text-transform:uppercase;font-size:30px;line-height:1.08;margin:0}
+.aupitch ul{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:10px;font-size:15px;color:#E3E9FF}
+.aupitch li{display:flex;gap:10px}
+.aupitch li:before{content:"✓";font-weight:800;color:#FFFFFF}
+.aufoot{font-size:13px;color:#C9D6FF;position:relative;z-index:1}
+.aupane{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 24px}
+.aucard{width:100%;max-width:470px;background:#FFFFFF;border:1px solid #DCE3F7;border-radius:20px;box-shadow:0 12px 30px rgba(7,26,82,0.08);padding:28px}
+.aubtn{width:100%;min-height:50px;font-size:16px;margin-top:16px}
+.aubtn2{width:100%;margin-top:10px}
+.auerr{margin-top:12px;padding:10px 12px;border-radius:12px;background:#FDECEF;color:#B31942;font-size:14px;font-weight:600;line-height:1.45}
+.aunote{margin-top:12px;padding:10px 12px;border-radius:12px;background:#E3F3EA;color:#2E7D4F;font-size:14px;font-weight:600}
+.aufine{margin-top:14px;font-size:12.5px;line-height:1.55;color:#4A5578}
+.aurules{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13px;font-weight:600}
+.aulocked{min-height:44px;display:flex;align-items:center;padding:0 12px;border-radius:12px;background:#F2F5FF;border:1px solid #DCE3F7;font-size:15px;color:#4A5578}
+.auicon{width:54px;height:54px;border-radius:16px;background:#E8EEFF;color:#0A35C8;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;margin-bottom:14px}
+.authdemo{margin-top:14px;padding:12px 14px;border:1.5px dashed #C9D4F2;border-radius:14px;background:#FBFCFF;font-size:13px;color:#4A5578;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.authdemo.aucard{box-shadow:none}
+.mail{border:1px solid #DCE3F7;border-radius:14px;overflow:hidden;background:#FFFFFF}
+.mhead{padding:12px 14px;background:#F7F9FF;border-bottom:1px solid #DCE3F7;display:grid;gap:4px;font-size:13px}
+.mhead div{display:grid;grid-template-columns:62px minmax(0,1fr);gap:8px}
+.mhead span{color:#4A5578}
+.mhead b{font-weight:600;overflow-wrap:anywhere}
+.mbar{background:#0A35C8;padding:14px 18px}
+.mbar img{height:34px;width:auto;display:block}
+.mbody{padding:18px;font-size:15px;line-height:1.55}
+.mbody p{margin:0 0 12px}
+.mbody .btn{margin:4px 0 14px}
+@media (max-width:860px){.auth{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-content:start}.aubrand{padding:18px 20px;flex-direction:row;align-items:center;justify-content:space-between;gap:12px}.aubrand:after,.aupitch,.aufoot{display:none}.aulogo{height:42px}.aulabel{margin:0}.aupane{justify-content:flex-start;padding:20px 16px 40px}.aucard{padding:22px 18px}}
+/* gate (agreement / waiting) */
+.gate{min-height:100vh;background:#F2F5FF}
+.gtop{background:#0A35C8;color:#FFFFFF;padding:14px 28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
+.gwho{font-size:13px;color:#C9D6FF;font-weight:600}
+.gwrap{max-width:1180px;margin:0 auto;padding:28px 24px 48px}
+.ggrid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px;align-items:start;margin-top:20px}
+@media (max-width:960px){.ggrid{grid-template-columns:minmax(0,1fr)}}
+.docbox{height:640px;overflow-y:auto;padding:30px 34px;background:#FFFFFF;border:1px solid #DCE3F7;border-radius:12px;font-size:14px;line-height:1.6;color:#1E2633}
+@media (max-width:640px){.docbox{height:460px;padding:20px}.gtop{padding:12px 16px}.gwrap{padding:20px 16px 40px}.gwho{display:none}}
+.agdoc .dh{text-align:center;padding-bottom:16px;border-bottom:2px solid #0A35C8;margin-bottom:16px}
+.agdoc .dbrand{font-weight:700;letter-spacing:0.18em;color:#0A35C8;font-size:18px}
+.agdoc .dtitle{font-family:Poppins,sans-serif;font-weight:800;text-transform:uppercase;font-size:22px;color:#071A52;margin-top:6px;line-height:1.15}
+.agdoc .dsub{font-weight:700;color:#B31942;font-size:13px;margin-top:4px;letter-spacing:0.04em;text-transform:uppercase}
+.agdoc h4{font-family:Poppins,sans-serif;font-weight:800;text-transform:uppercase;font-size:16px;color:#0A35C8;margin:22px 0 6px;letter-spacing:0.02em}
+.agdoc .ss{font-weight:700;margin:12px 0 4px;color:#071A52}
+.agdoc p{margin:0 0 9px}
+.agdoc .ack{margin-top:12px;padding:14px 16px;background:#E8EEFF;border-radius:12px;font-weight:600}
+.agdoc .dfoot{margin-top:26px;padding-top:12px;border-top:1px solid #DCE3F7;text-align:center;font-size:12px;color:#4A5578;line-height:1.6}
+.ptab{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:6px 12px;font-size:13px;padding:12px 14px;background:#F7F9FF;border:1px solid #DCE3F7;border-radius:12px}
+.ptab span{color:#4A5578}
+.ptab b{overflow-wrap:anywhere}
+@media (max-width:640px){.ptab{grid-template-columns:1fr}.ptab b{margin-bottom:6px}}
+.sch{display:grid;grid-template-columns:1.6fr 1fr 1.3fr 0.8fr 0.8fr;min-width:480px;font-size:13px;border:1px solid #DCE3F7;border-radius:10px;overflow:hidden;margin:6px 0 10px}
+.sch span{padding:7px 9px;border-bottom:1px solid #DCE3F7}
+.sch .th{background:#F2F5FF;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;color:#4A5578}
+.agsig{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px}
+@media (max-width:640px){.agsig{grid-template-columns:1fr}}
+.agsig .ln{height:70px;border-bottom:1.5px solid #071A52;display:flex;align-items:flex-end;padding-bottom:4px}
+.agsig .ln img{max-height:66px;max-width:100%}
+.script{font-family:'Dancing Script',cursive;font-weight:700;font-size:36px;color:#071A52;line-height:1}
+.sigwrap{position:relative;border:1.5px dashed #C9D4F2;border-radius:12px;background:#FFFFFF;aspect-ratio:600/170;overflow:hidden}
+.sigwrap img,.sigwrap canvas{position:absolute;inset:0;width:100%;height:100%}
+.sigwrap canvas{touch-action:none;cursor:crosshair}
+.sigwrap .hint{position:absolute;left:14px;bottom:8px;font-size:12px;color:#4A5578;pointer-events:none}
+.sigwrap .base{position:absolute;left:14px;right:14px;bottom:28%;border-bottom:1px solid #C9D4F2;pointer-events:none}
+.agchk{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.45;cursor:pointer}
+.agchk input{width:20px;height:20px;margin-top:1px;flex:none;accent-color:#0A35C8}
+.sobtn{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.55);background:transparent;color:#FFFFFF;font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer}
+.sobtn:hover{background:rgba(255,255,255,0.12)}
+/* signed-in user box in the menu */
+.who{border-top:1px solid rgba(255,255,255,0.18);padding-top:14px;display:flex;flex-direction:column;gap:2px;font-size:13px;color:#C9D6EC}
+.who b{color:#FFFFFF;font-size:14px}
+.who .sobtn{margin-top:10px;width:100%}
+@media (max-width:640px){.tbl.stack1,.tbl.stack2{min-width:0}.tbl.stack1 .tr.th,.tbl.stack2 .tr.th{display:none}.tbl.stack1 .tr{grid-template-columns:1fr;gap:8px}.tbl.stack1 .tr>div:last-child{justify-content:flex-start!important}.tbl.stack2 .tr{grid-template-columns:1fr 1fr;gap:6px 12px}}
+/* mobile header + hamburger drawer */
+.mtop{display:none}
+.mclose{display:none}
+.scrim{display:none}
+@media (max-width:860px){
+  .app{grid-template-columns:1fr}
+  .mtop{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:45;background:#0A35C8;color:#FFFFFF;padding:10px 12px 10px 16px;box-shadow:0 4px 14px rgba(7,26,82,0.18)}
+  .mtop img{height:34px;width:auto;display:block}
+  .mtop .mt{min-width:0;flex:1;font-size:12px;line-height:1.25;color:#C9D6EC}
+  .mtop .mt b{display:block;color:#FFFFFF;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hamb{width:46px;height:46px;border-radius:12px;border:1px solid rgba(255,255,255,0.45);background:transparent;color:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;flex:none;cursor:pointer}
+  .side{position:fixed;top:0;left:0;bottom:0;width:min(86vw,320px);height:100vh;height:100dvh;z-index:56;transform:translateX(-105%);transition:transform .22s ease;overflow-y:auto;padding:18px 16px 24px;box-shadow:none}
+  .side.open{transform:none;box-shadow:12px 0 40px rgba(0,0,0,0.3)}
+  .side .nav{flex-direction:column}
+  .nv{width:100%}
+  .sidemore{display:none}
+  .mclose{display:inline-flex;position:absolute;top:14px;right:12px;width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,0.45);background:transparent;color:#FFFFFF;align-items:center;justify-content:center;font-size:22px;line-height:1;cursor:pointer}
+  .scrim{display:block;position:fixed;inset:0;z-index:55;background:rgba(7,18,40,0.5)}
+  .main{padding:18px 16px 56px}
+  .h1{font-size:25px}
+  .toast{left:16px;right:16px;bottom:16px}
+}
 </style>
 
 </head>
@@ -144,8 +244,244 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 <script>if(window.self!==window.top){document.getElementById('ltc-preview-bar').style.display='none';}</script>
 <template id="tpl">
 
+<sc-if value="{{au.isCard}}" hint-placeholder-val="{{false}}">
+<div class="auth">
+  <div class="aubrand">
+    <img src="/assets/logo-white.png" alt="Liberty Tool Company" class="aulogo">
+    <div class="aulabel">Partner Portal</div>
+    <div class="aupitch">
+      <h2>Order, track, pay and work with Liberty Tool Company in one place.</h2>
+      <ul><li>Your contract or distributor pricing on every order</li><li>Tracking, invoices and claims without the phone tag</li><li>Cut sheets, price sheets and your signed agreements</li></ul>
+    </div>
+    <div class="aufoot">Questions? Text or call 239-744-8403 (24/7) · sales@libertytoolcompany.com</div>
+  </div>
+  <div class="aupane">
+    <div class="aucard">
+
+      <sc-if value="{{au.sSignin}}" hint-placeholder-val="{{true}}">
+        <div class="eyebrow">Partner Portal</div>
+        <h1 class="h1" style="margin-top: 6px">Sign In</h1>
+        <p class="muted" style="margin: 8px 0 0; font-size: 14px; line-height: 1.5">Use the work email your invite was sent to.</p>
+        <sc-if value="{{au.hasNote}}" hint-placeholder-val="{{false}}"><div class="aunote">{{au.note}}</div></sc-if>
+        <div style="display: grid; gap: 12px; margin-top: 16px">
+          <label><span class="lbl">Work Email</span><input class="inp" type="email" autocomplete="username" value="{{au.email}}" onChange="{{au.setEmail}}" onKeydown="{{au.onKey}}" placeholder="name@company.com"></label>
+          <label><span class="lbl" style="display: flex; justify-content: space-between">Password <button type="button" class="linkbtn" style="margin: 0" onClick="{{au.togShow}}">{{au.showLbl}}</button></span><input class="inp" type="{{au.pwType}}" autocomplete="current-password" value="{{au.pw}}" onChange="{{au.setPw}}" onKeydown="{{au.onKey}}"></label>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px">
+          <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px"><button type="button" class="chk" aria-pressed="{{au.remember}}" onClick="{{au.togRemember}}" aria-label="Keep me signed in"></button>Keep me signed in for {{au.rememberDays}} days</span>
+          <button type="button" class="linkbtn" style="margin: 0; font-size: 14px" onClick="{{au.goForgot}}">Forgot password?</button>
+        </div>
+        <sc-if value="{{au.hasErr}}" hint-placeholder-val="{{false}}"><div class="auerr" role="alert">{{au.err}}</div></sc-if>
+        <button type="button" class="btn red aubtn" onClick="{{au.signIn}}">Sign In</button>
+        <div class="aufine">New to the portal? Open the invite email from Liberty Tool Company and click <b>Accept Invite</b>. Invite links work for {{au.inviteDays}} days. After {{au.maxTries}} wrong passwords in a row, sign-in locks for {{au.lockMin}} minutes.</div>
+      </sc-if>
+
+      <sc-if value="{{au.sForgot}}" hint-placeholder-val="{{false}}">
+        <div class="eyebrow">Partner Portal</div>
+        <h1 class="h1" style="margin-top: 6px">Reset Your Password</h1>
+        <p class="muted" style="margin: 8px 0 0; font-size: 14px; line-height: 1.5">Enter the email you sign in with. We’ll send a link to set a new password.</p>
+        <label style="display: block; margin-top: 16px"><span class="lbl">Work Email</span><input class="inp" type="email" autocomplete="username" value="{{au.email}}" onChange="{{au.setEmail}}" placeholder="name@company.com"></label>
+        <sc-if value="{{au.hasErr}}" hint-placeholder-val="{{false}}"><div class="auerr" role="alert">{{au.err}}</div></sc-if>
+        <button type="button" class="btn red aubtn" onClick="{{au.sendReset}}">Send Reset Link</button>
+        <button type="button" class="btn ghost aubtn2" onClick="{{au.goSignin}}">Back To Sign In</button>
+        <div class="aufine">Reset links work once and expire after {{au.resetMin}} minutes. Asking for a new one cancels the last link. Can’t get into that inbox? Ask your Account Admin to send a reset or set a temporary password from the Team tab.</div>
+      </sc-if>
+
+      <sc-if value="{{au.sSent}}" hint-placeholder-val="{{false}}">
+        <div class="auicon">✉</div>
+        <h1 class="h1">Check Your Email</h1>
+        <p style="margin: 10px 0 0; font-size: 15px; line-height: 1.55">If <b>{{au.sentTo}}</b> has a portal login, a reset link is on its way. It works once, for {{au.resetMin}} minutes.</p>
+        <p class="muted" style="margin: 10px 0 0; font-size: 14px; line-height: 1.5">Nothing after 5 minutes? Check spam or junk, then send it again. The newest link is the only one that works.</p>
+        <button type="button" class="btn ghost aubtn" onClick="{{au.sendReset}}">Send It Again</button>
+        <button type="button" class="btn ghost aubtn2" onClick="{{au.goSignin}}">Back To Sign In</button>
+        <div class="authdemo"><b>Preview only</b><button type="button" class="btn sm" onClick="{{au.openResetMail}}">Open The Reset Email</button></div>
+      </sc-if>
+
+      <sc-if value="{{au.isMail}}" hint-placeholder-val="{{false}}">
+        <div class="mail">
+          <div class="mhead">
+            <div><span>From</span><b>Liberty Tool Company &lt;portal@libertytoolcompany.com&gt;</b></div>
+            <sc-if value="{{au.sMailReset}}" hint-placeholder-val="{{false}}"><div><span>To</span><b>{{au.resetEmail}}</b></div><div><span>Subject</span><b>Reset your LTC Partner Portal password</b></div></sc-if>
+            <sc-if value="{{au.sMailInvite}}" hint-placeholder-val="{{false}}"><div><span>To</span><b>{{au.inv.email}}</b></div><div><span>Subject</span><b>{{au.inv.by}} invited you to the LTC Partner Portal</b></div></sc-if>
+          </div>
+          <div class="mbar"><img src="/assets/logo-white.png" alt="Liberty Tool Company"></div>
+          <div class="mbody">
+            <sc-if value="{{au.sMailReset}}" hint-placeholder-val="{{false}}">
+              <p>Hi {{au.resetName}},</p>
+              <p>We got a request to reset the password for your LTC Partner Portal login.</p>
+              <button type="button" class="btn red" onClick="{{au.openReset}}">Reset My Password</button>
+              <p class="muted">This link works once and expires in {{au.resetMin}} minutes, at {{au.resetExpires}}.</p>
+              <p class="muted">Didn’t ask for this? Ignore this email. Your password won’t change.</p>
+            </sc-if>
+            <sc-if value="{{au.sMailInvite}}" hint-placeholder-val="{{false}}">
+              <p>Hi {{au.inv.first}},</p>
+              <p><b>{{au.inv.by}}</b> added you to <b>{{au.inv.co}}</b>’s LTC Partner Portal as <b>{{au.inv.role}}</b> for <b>{{au.inv.loc}}</b>. Use it to order Tape Caddies and LTC trowels, track shipments and reach the LTC team.</p>
+              <button type="button" class="btn red" onClick="{{au.acceptInvite}}">Accept Invite &amp; Set Password</button>
+              <p class="muted">This link works once and expires in {{au.inviteDays}} days, on {{au.inv.expires}}. After that, ask {{au.inv.by}} to resend it.</p>
+            </sc-if>
+            <p class="muted" style="font-size: 12px; border-top: 1px solid #DCE3F7; padding-top: 10px">Liberty Tool Company · 712 W. Cienega Ave, Unit A, San Dimas, CA 91773 · 239-744-8403</p>
+          </div>
+        </div>
+        <button type="button" class="btn ghost aubtn2" onClick="{{au.goSignin}}">Back To Sign In</button>
+      </sc-if>
+
+      <sc-if value="{{au.sReset}}" hint-placeholder-val="{{false}}">
+        <div class="eyebrow">Partner Portal</div>
+        <h1 class="h1" style="margin-top: 6px">Choose A New Password</h1>
+        <p class="muted" style="margin: 8px 0 0; font-size: 14px">For {{au.resetEmail}}</p>
+        <div style="display: grid; gap: 12px; margin-top: 16px">
+          <label><span class="lbl">New Password</span><input class="inp" type="password" autocomplete="new-password" value="{{au.np}}" onChange="{{au.setNp}}"></label>
+          <label><span class="lbl">Confirm New Password</span><input class="inp" type="password" autocomplete="new-password" value="{{au.np2}}" onChange="{{au.setNp2}}"></label>
+        </div>
+        <div class="aurules"><sc-for list="{{au.rules}}" as="c" hint-placeholder-count="5"><span style="color: {{c.fg}}">{{c.mark}} {{c.t}}</span></sc-for></div>
+        <sc-if value="{{au.hasErr}}" hint-placeholder-val="{{false}}"><div class="auerr" role="alert">{{au.err}}</div></sc-if>
+        <button type="button" class="btn red aubtn" onClick="{{au.saveReset}}">Save New Password</button>
+        <div class="aufine">Saving also clears any lock on your login. You’ll sign in with the new password next.</div>
+      </sc-if>
+
+      <sc-if value="{{au.sInvite}}" hint-placeholder-val="{{false}}">
+        <div class="eyebrow">Welcome To {{au.inv.co}}</div>
+        <h1 class="h1" style="margin-top: 6px">Set Up Your Login</h1>
+        <p class="muted" style="margin: 8px 0 0; font-size: 14px; line-height: 1.5">{{au.inv.role}} · {{au.inv.loc}}. Invited by {{au.inv.by}}.</p>
+        <div style="display: grid; gap: 12px; margin-top: 16px">
+          <label><span class="lbl">Your Name *</span><input class="inp" autocomplete="name" value="{{au.name}}" onChange="{{au.setName}}"></label>
+          <div><span class="lbl">Email (Your Sign-In)</span><div class="aulocked">{{au.inv.email}}</div></div>
+          <label><span class="lbl">Mobile For Texts (Optional)</span><input class="inp" type="tel" autocomplete="tel" value="{{au.phone}}" onChange="{{au.setPhone}}" placeholder="(555) 555-0100"></label>
+          <label><span class="lbl">Create Password *</span><input class="inp" type="password" autocomplete="new-password" value="{{au.np}}" onChange="{{au.setNp}}"></label>
+          <label><span class="lbl">Confirm Password *</span><input class="inp" type="password" autocomplete="new-password" value="{{au.np2}}" onChange="{{au.setNp2}}"></label>
+        </div>
+        <div class="aurules"><sc-for list="{{au.rules}}" as="c" hint-placeholder-count="5"><span style="color: {{c.fg}}">{{c.mark}} {{c.t}}</span></sc-for></div>
+        <sc-if value="{{au.hasErr}}" hint-placeholder-val="{{false}}"><div class="auerr" role="alert">{{au.err}}</div></sc-if>
+        <button type="button" class="btn red aubtn" onClick="{{au.saveInvite}}">Create My Login</button>
+        <div class="aufine">Your email can’t be changed here. If it’s wrong, ask {{au.inv.by}} to send a new invite to the right address.</div>
+      </sc-if>
+
+      <sc-if value="{{au.sExpired}}" hint-placeholder-val="{{false}}">
+        <div class="auicon" style="background: #FDECEF; color: #B31942">!</div>
+        <h1 class="h1">This Link Has Expired</h1>
+        <p style="margin: 10px 0 0; font-size: 15px; line-height: 1.55">Invite links work for {{au.inviteDays}} days and reset links for {{au.resetMin}} minutes. Each link works once, and a newer link replaces an older one.</p>
+        <p class="muted" style="margin: 10px 0 0; font-size: 14px; line-height: 1.5">Ask {{au.expBy}} to resend your invite from the Team tab, or request a new one below.</p>
+        <button type="button" class="btn red aubtn" onClick="{{au.askNewInvite}}">Request A New Invite</button>
+        <button type="button" class="btn ghost aubtn2" onClick="{{au.goSignin}}">Back To Sign In</button>
+      </sc-if>
+
+      <sc-if value="{{au.sLocked}}" hint-placeholder-val="{{false}}">
+        <div class="auicon" style="background: #FDECEF; color: #B31942">🔒</div>
+        <h1 class="h1">Login Locked For {{au.lockMin}} Minutes</h1>
+        <p style="margin: 10px 0 0; font-size: 15px; line-height: 1.55">There were {{au.maxTries}} wrong passwords in a row, so sign-in is paused until <b>{{au.lockUntil}}</b> to protect your account.</p>
+        <p class="muted" style="margin: 10px 0 0; font-size: 14px; line-height: 1.5">Can’t wait? Reset your password now, which clears the lock, or ask your Account Admin to unlock you from the Team tab.</p>
+        <button type="button" class="btn red aubtn" onClick="{{au.resetFromLock}}">Reset My Password</button>
+        <button type="button" class="btn ghost aubtn2" onClick="{{au.goSignin}}">Back To Sign In</button>
+        <div class="authdemo"><b>Preview only</b><button type="button" class="btn sm" onClick="{{au.skipLock}}">Skip The Wait</button></div>
+      </sc-if>
+
+      <sc-if value="{{au.sSetpw}}" hint-placeholder-val="{{false}}">
+        <div class="eyebrow">One More Step</div>
+        <h1 class="h1" style="margin-top: 6px">Choose Your Own Password</h1>
+        <p class="muted" style="margin: 8px 0 0; font-size: 14px; line-height: 1.5">{{au.tempNote}}</p>
+        <div style="display: grid; gap: 12px; margin-top: 16px">
+          <label><span class="lbl">New Password</span><input class="inp" type="password" autocomplete="new-password" value="{{au.np}}" onChange="{{au.setNp}}"></label>
+          <label><span class="lbl">Confirm New Password</span><input class="inp" type="password" autocomplete="new-password" value="{{au.np2}}" onChange="{{au.setNp2}}"></label>
+        </div>
+        <div class="aurules"><sc-for list="{{au.rules}}" as="c" hint-placeholder-count="5"><span style="color: {{c.fg}}">{{c.mark}} {{c.t}}</span></sc-for></div>
+        <sc-if value="{{au.hasErr}}" hint-placeholder-val="{{false}}"><div class="auerr" role="alert">{{au.err}}</div></sc-if>
+        <button type="button" class="btn red aubtn" onClick="{{au.saveSetpw}}">Save &amp; Continue</button>
+        <button type="button" class="btn ghost aubtn2" onClick="{{au.signOut}}">Sign Out</button>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{au.sSignin}}" hint-placeholder-val="{{true}}">
+      <div class="authdemo aucard" style="margin-top: 14px">
+        <div><b>Preview only — demo sign-ins.</b> Every demo login uses the password <b>{{au.demoPw}}</b>.</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px"><sc-for list="{{au.demoUsers}}" as="u" hint-placeholder-count="6"><button type="button" class="chip" onClick="{{u.go}}">{{u.label}}</button></sc-for></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px"><button type="button" class="btn ghost sm" onClick="{{au.openInviteMail}}">Open An Invite Email</button><button type="button" class="btn ghost sm" onClick="{{au.openExpired}}">Open An Expired Invite</button><button type="button" class="btn ghost sm" onClick="{{au.demoReset}}">Reset Demo Sign-Ins</button></div>
+      </div>
+    </sc-if>
+  </div>
+  <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}"><div class="toast" role="status">{{toast}}</div></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{au.isWait}}" hint-placeholder-val="{{false}}">
+<div class="gate">
+  <div class="gtop"><img src="/assets/logo-white.png" alt="Liberty Tool Company" style="height: 40px; width: auto"><button type="button" class="sobtn" onClick="{{au.signOut}}">Sign Out</button></div>
+  <div class="gwrap" style="max-width: 720px">
+    <div class="card" style="padding: 28px">
+      <div class="eyebrow">Welcome, {{au.meName}}</div>
+      <h1 class="h1" style="margin-top: 6px">Almost Ready</h1>
+      <p style="font-size: 15px; line-height: 1.6; margin: 12px 0 0">{{au.co}}’s <b>Distributor Agreement</b> needs to be signed before the portal opens. Only your Account Admin, <b>{{au.waitName}}</b>, can sign it for the company.</p>
+      <p class="muted" style="font-size: 14px; line-height: 1.55; margin: 10px 0 0">You don’t need to sign anything yourself. Once it’s signed, sign in again and everything opens. Your login and password are already set.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px"><button type="button" class="btn red" onClick="{{au.remind}}">Remind {{au.waitName}}</button><button type="button" class="btn ghost" onClick="{{au.signOut}}">Sign Out</button></div>
+      <div class="muted" style="font-size: 13px; margin-top: 14px">Questions? Text or call 239-744-8403 · sales@libertytoolcompany.com</div>
+    </div>
+  </div>
+  <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}"><div class="toast" role="status">{{toast}}</div></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{au.isAgree}}" hint-placeholder-val="{{false}}">
+<div class="gate">
+  <div class="gtop"><img src="/assets/logo-white.png" alt="Liberty Tool Company" style="height: 40px; width: auto"><div style="display: flex; align-items: center; gap: 12px"><span class="gwho">{{au.meName}} · {{au.co}}</span><button type="button" class="sobtn" onClick="{{au.signOut}}">Sign Out</button></div></div>
+  <div class="gwrap">
+    <div class="eyebrow">Welcome, {{au.meName}} · One Step Before You Enter</div>
+    <h1 class="h1" style="margin-top: 6px">Sign Your Distributor Agreement</h1>
+    <p class="muted" style="margin: 8px 0 0; max-width: 780px; line-height: 1.55">As Account Admin, you sign once for {{au.co}}. Read the agreement, check your company details and sign. The portal opens right after for your whole team, and a signed copy is saved in <b>Files</b>.</p>
+    <div class="ggrid">
+      <div class="card" style="padding: 16px">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px"><h3 class="h3">{{ag.agTitle}}</h3><span class="st" style="background: {{ag.readBg}}; color: {{ag.readFg}}">{{ag.readLabel}}</span></div>
+        <div class="docbox agdoc" tabindex="0" aria-label="Agreement text" onScroll="{{ag.onAgScroll}}">
+          <div class="dh"><div class="dbrand">LIBERTY TOOL COMPANY</div><div class="dtitle">{{ag.agTitle}}</div><div class="dsub">{{ag.agSub}}</div><div style="font-size: 13px; margin-top: 8px">Effective Date: <b>{{ag.agToday}} (date of signature)</b></div></div>
+          <div class="ptab"><sc-for list="{{ag.agParties}}" as="r" hint-placeholder-count="7"><span>{{r.k}}</span><b>{{r.v}}</b></sc-for></div>
+          <sc-for list="{{ag.agBlocks}}" as="b" hint-placeholder-count="12"><sc-if value="{{b.h}}" hint-placeholder-val="{{false}}"><h4>{{b.x}}</h4></sc-if><sc-if value="{{b.s}}" hint-placeholder-val="{{false}}"><div class="ss">{{b.x}}</div></sc-if><sc-if value="{{b.p}}" hint-placeholder-val="{{true}}"><p>{{b.x}}</p></sc-if><sc-if value="{{b.sched}}" hint-placeholder-val="{{false}}"><h4>Schedule A — Liberty-Issued Product Pricing Notice</h4><p>Issued by Liberty only. No reseller acceptance of MAP is requested. Currency: USD. Condition: new, one unit. Territory and channels: as approved above. Optional ceiling: not activated.</p><div class="scroll"><div class="sch"><span class="th">Product</span><span class="th">SKU</span><span class="th">GTIN</span><span class="th">MAP</span><span class="th">MSRP</span><sc-for list="{{ag.agSched}}" as="r" hint-placeholder-count="4"><span>{{r.name}}</span><span>{{r.sku}}</span><span>{{r.gtin}}</span><span>{{r.map}}</span><span>{{r.msrp}}</span></sc-for></div></div></sc-if></sc-for>
+          <h4>Acknowledgment &amp; Acceptance</h4>
+          <div class="ack">{{ag.agAck1}}</div>
+          <div class="ack">{{ag.agAck2}}</div>
+          <p class="muted" style="margin-top: 14px; font-size: 13px">Check your details and sign in the panel to finish.</p>
+          <div class="dfoot"><b style="color: #0A35C8; letter-spacing: 0.12em">LIBERTY TOOL COMPANY</b><br><i>Practical Tools. Powerful Connections.</i><br>sales@libertytoolcompany.com · 239-744-8403</div>
+        </div>
+        <div class="muted" style="font-size: 12px; margin-top: 8px">Version {{ag.agVersion}} · Scroll to the end to unlock signing.</div>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Company &amp; Signer</div>
+        <div style="display: grid; gap: 12px; margin-top: 10px">
+          <sc-for list="{{ag.agFields}}" as="f" hint-placeholder-count="7"><label><span class="lbl">{{f.label}}</span><input class="inp" type="{{f.type}}" value="{{f.val}}" placeholder="{{f.ph}}" autocomplete="{{f.ac}}" onChange="{{f.set}}" style="border-color: {{f.bc}}"></label></sc-for>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 18px; flex-wrap: wrap">
+          <span class="lbl" style="margin: 0">Signature *</span>
+          <div style="display: flex; gap: 6px"><button type="button" class="chip" aria-pressed="{{ag.sigTypeOn}}" onClick="{{ag.pickType}}">Type</button><button type="button" class="chip" aria-pressed="{{ag.sigDrawOn}}" onClick="{{ag.pickDraw}}">Draw</button></div>
+        </div>
+        <sc-if value="{{ag.sigIsDraw}}" hint-placeholder-val="{{false}}">
+          <div class="sigwrap" style="margin-top: 8px; border-color: {{ag.sigBc}}">
+            <div class="base"></div>
+            <sc-if value="{{ag.hasSigData}}" hint-placeholder-val="{{false}}"><img src="{{ag.sigData}}" alt="Your drawn signature"></sc-if>
+            <canvas width="600" height="170" aria-label="Signature pad. Draw your signature with a mouse, finger or stylus." onPointerdown="{{ag.sigDown}}" onPointermove="{{ag.sigMove}}" onPointerup="{{ag.sigUp}}" onPointerleave="{{ag.sigUp}}"></canvas>
+            <sc-if value="{{ag.noSigData}}" hint-placeholder-val="{{true}}"><span class="hint">Sign here with your mouse, finger or stylus</span></sc-if>
+          </div>
+          <div style="display: flex; justify-content: flex-end; margin-top: 6px"><button type="button" class="btn ghost sm" onClick="{{ag.sigClear}}">Clear</button></div>
+        </sc-if>
+        <sc-if value="{{ag.sigIsType}}" hint-placeholder-val="{{true}}">
+          <input class="inp" style="margin-top: 8px; border-color: {{ag.sigBc}}" value="{{ag.sigText}}" placeholder="Type your full legal name" onChange="{{ag.setSigText}}" aria-label="Type your signature">
+          <div class="sigwrap" style="margin-top: 8px; display: flex; align-items: center; padding: 0 18px"><div class="base"></div><span class="script" style="position: relative">{{ag.sigTextShow}}</span></div>
+        </sc-if>
+        <div style="display: flex; justify-content: space-between; gap: 10px; font-size: 13px; margin-top: 12px"><span class="muted">Date</span><b>{{ag.agToday}}</b></div>
+        <label class="agchk" style="margin-top: 14px"><input type="checkbox" onChange="{{ag.tog1}}"><span>{{ag.agAck1}}</span></label>
+        <label class="agchk" style="margin-top: 10px"><input type="checkbox" onChange="{{ag.tog2}}"><span>{{ag.agAck2}}</span></label>
+        <sc-if value="{{ag.agHasMissing}}" hint-placeholder-val="{{false}}"><div class="auerr">Still needed: {{ag.agMissing}}</div></sc-if>
+        <button type="button" class="btn red" style="width: 100%; margin-top: 14px; min-height: 50px; font-size: 16px" onClick="{{ag.agSign}}">Sign &amp; Enter Portal</button>
+        <div class="muted" style="font-size: 12px; margin-top: 10px; line-height: 1.5">We record the date, time and email with your signature. LTC countersigns and the final copy updates in Files.</div>
+      </div>
+    </div>
+  </div>
+  <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}"><div class="toast" role="status">{{toast}}</div></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{au.inApp}}" hint-placeholder-val="{{true}}">
 <div class="app">
-  <aside class="side">
+  <header class="mtop"><img src="/assets/logo-white.png" alt="Liberty Tool Company"><div class="mt"><b>{{sideTitle}}</b>{{portalLabel}}</div><button type="button" class="hamb" aria-label="Open menu" aria-controls="ltc-side" aria-expanded="{{mm.menuExp}}" onClick="{{mm.openMenu}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg></button></header>
+  <sc-if value="{{mm.menuOpen}}" hint-placeholder-val="{{false}}"><div class="scrim" onClick="{{mm.closeMenu}}"></div></sc-if>
+  <aside class="{{mm.sideCls}}" id="ltc-side" aria-label="Menu">
+    <button type="button" class="mclose" aria-label="Close menu" onClick="{{mm.closeMenu}}">×</button>
     <img src="/assets/logo-white.png" alt="Liberty Tool Company" style="height: 56px; width: auto; align-self: flex-start">
     <div>
       <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #AFC0DC">{{portalLabel}}</div>
@@ -183,6 +519,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       </div>
     </sc-if>
     <div style="margin-top: auto; font-size: 12px; line-height: 1.5; color: #AFC0DC">{{sideFoot}}</div>
+    <sc-if value="{{isPortal}}" hint-placeholder-val="{{true}}"><div class="who"><span>Signed in as</span><b>{{au.meName}}</b><span>{{au.meRole}}</span><button type="button" class="sobtn" onClick="{{au.signOut}}">Sign Out</button></div></sc-if>
     <sc-if value="{{sideMore}}" hint-placeholder-val="{{false}}"><div class="sidemore"><button type="button" onClick="{{sideDown}}" aria-label="Scroll the menu down">More <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div></sc-if>
   </aside>
 
@@ -384,9 +721,10 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
           <div style="display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; font-size: 13px; font-weight: 600"><sc-for list="{{xp.checks}}" as="c" hint-placeholder-count="4"><span style="color: {{c.fg}}">{{c.mark}} {{c.t}}</span></sc-for></div>
           <sc-if value="{{xp.hasPwErr}}" hint-placeholder-val="{{false}}"><div style="color: #B31942; font-weight: 600; font-size: 14px; margin-top: 10px">{{xp.pwErr}}</div></sc-if>
           <button type="button" class="btn" style="margin-top: 14px" onClick="{{xp.savePw}}">Update Password</button>
-          <div class="muted" style="font-size: 12px; margin-top: 8px">Forgot it? Sign out and use “Forgot password” on the sign-in page. Mockup: passwords aren’t stored.</div>
+          <div class="muted" style="font-size: 12px; margin-top: 8px">Forgot it? Sign out and use Forgot Password on the sign-in page, or ask your Account Admin to send you a reset link.</div>
         </div>
       </div>
+      <div class="card" style="margin-top: 16px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center"><div><h3 class="h3">Sign-In &amp; Security</h3><div class="muted" style="font-size: 13px; margin-top: 4px; line-height: 1.5">Signed in as {{au.meEmail}} · Last sign-in {{au.lastIn}}. Reset links last {{au.resetMin}} minutes; {{au.maxTries}} wrong passwords locks sign-in for {{au.lockMin}} minutes.</div></div><button type="button" class="btn ghost" onClick="{{au.signOut}}">Sign Out</button></div>
       <div class="card" style="margin-top: 16px">
         <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center"><div><h3 class="h3">Email &amp; Text Notifications</h3><div class="muted" style="font-size: 13px; margin-top: 4px">Pick what you hear about and how. {{xp.textTo}}</div></div><div style="display: flex; gap: 8px"><button type="button" class="btn ghost sm" onClick="{{xp.reset}}">Reset</button><button type="button" class="btn ghost sm" onClick="{{xp.allOff}}">Turn All Off</button></div></div>
         <div class="scroll" style="margin-top: 10px"><div class="tbl" style="--cols: minmax(0, 2fr) 110px 110px; --minw: 460px"><div class="tr th"><div>Notify Me When</div><div>Email</div><div>Text</div></div>
@@ -707,7 +1045,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px"><sc-for list="{{statusFilters}}" as="f" hint-placeholder-count="6"><button type="button" class="chip" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
       <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: start">
         <div class="card" style="grid-column: span 2; min-width: 0">
-          <div class="scroll"><div class="tbl" style="--cols: {{ordCols}}; --minw: {{ordMin}}"><div class="tr th"><div>Order</div><sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div>Account</div></sc-if><div>PO</div><div>Type</div><div>Units</div><div>Value</div><div>Status</div></div>
+          <div class="scroll"><div class="tbl stack2" style="--cols: {{ordCols}}; --minw: {{ordMin}}"><div class="tr th"><div>Order</div><sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div>Account</div></sc-if><div>PO</div><div>Type</div><div>Units</div><div>Value</div><div>Status</div></div>
             <sc-for list="{{orderRows}}" as="o" hint-placeholder-count="6"><div class="tr click" onClick="{{o.open}}" style="background: {{o.rowBg}}"><div><b>{{o.id}}</b><div class="muted" style="font-size: 12px">{{o.created}} · {{o.locTxt}}</div></div><sc-if value="{{isAdmin}}" hint-placeholder-val="{{false}}"><div>{{o.acctName}}</div></sc-if><div>{{o.po}}</div><div>{{o.typeName}}</div><div>{{o.units}}</div><div>{{o.valueTxt}}</div><div><span class="st" style="background: {{o.sbg}}; color: {{o.sfg}}">{{o.status}}</span></div></div></sc-for>
           </div></div>
           <sc-if value="{{noOrders}}" hint-placeholder-val="{{false}}"><p class="muted">No orders here yet.</p></sc-if>
@@ -813,6 +1151,10 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 
     <!-- ================= FILES ================= -->
     <sc-if value="{{v.files}}" hint-placeholder-val="{{false}}">
+      <sc-if value="{{af.hasAgFile}}" hint-placeholder-val="{{false}}"><div class="card" style="margin-bottom: 16px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center"><div><h3 class="h3">Agreements</h3><div class="muted" style="font-size: 13px; margin-top: 2px">Your company’s signed copies. View, print or download anytime.</div></div></div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; margin-top: 12px; padding: 12px 14px; border: 1px solid #DCE3F7; border-radius: 12px"><div style="min-width: 0"><b>{{af.agFile.name}}</b><div class="muted" style="font-size: 12px; margin-top: 2px">{{af.agFile.meta}}</div><span class="st" style="margin-top: 6px; background: {{af.agFile.cbg}}; color: {{af.agFile.cfg}}">{{af.agFile.ctr}}</span></div><div style="display: flex; gap: 8px"><button type="button" class="btn ghost sm" onClick="{{af.viewAg}}">View</button><button type="button" class="btn sm" onClick="{{af.dlAg}}">Download</button></div></div>
+      </div></sc-if>
       <div class="card" style="margin-bottom: 16px">
         <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center"><div><h3 class="h3">Cut Sheets &amp; Line Card</h3><div class="muted" style="font-size: 13px; margin-top: 2px">Print or download for your sales floor, buyers and counter staff. Always current.</div></div><button type="button" class="btn sm" onClick="{{openLineCard}}">Download Line Card</button></div>
         <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px"><sc-for list="{{cutList}}" as="c" hint-placeholder-count="8"><button type="button" class="chip" onClick="{{c.open}}">{{c.name}}</button></sc-for></div>
@@ -866,10 +1208,15 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
     <sc-if value="{{v.team}}" hint-placeholder-val="{{false}}">
       <div class="card">
         <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center"><div><h2 class="h2">Your Team</h2><div class="muted" style="margin-top: 4px">Everyone at {{acct.name}} who can sign in. Store users only see their own store.</div></div><span style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center"><sc-if value="{{lc.canImport}}" hint-placeholder-val="{{true}}"><button type="button" class="btn ghost sm" onClick="{{goImport}}">Import Stores &amp; Managers (CSV)</button></sc-if><span class="chip">{{tm.count}} Logins</span></span></div>
-        <div class="scroll" style="margin-top: 10px"><div class="tbl" style="--cols: 1.6fr 1.1fr 1.3fr 1.8fr 0.8fr 150px; --minw: 960px"><div class="tr th"><div>Name</div><div>Role</div><div>Location</div><div>Can</div><div>Status</div><div></div></div>
-          <sc-for list="{{tm.rows}}" as="u" hint-placeholder-count="4"><div class="tr"><div><b>{{u.name}}</b><div class="muted" style="font-size: 12px">{{u.email}}</div></div><div>{{u.role}}</div><div>{{u.locName}}</div><div style="font-size: 13px">{{u.can}}</div><div><span class="st" style="background: {{u.sbg}}; color: {{u.sfg}}">{{u.status}}</span></div><div style="display: flex; gap: 6px; justify-content: flex-end"><sc-if value="{{u.canEdit}}" hint-placeholder-val="{{true}}"><button type="button" class="btn ghost sm" onClick="{{u.toggle}}">{{u.toggleLabel}}</button></sc-if></div></div></sc-for>
+        <div class="scroll" style="margin-top: 10px"><div class="tbl stack1" style="--cols: minmax(0, 1.5fr) minmax(0, 1.5fr) minmax(0, 1.2fr) 290px; --minw: 900px"><div class="tr th"><div>Name</div><div>Role &amp; Access</div><div>Status &amp; Last Sign-In</div><div style="text-align: right">Login &amp; Password</div></div>
+          <sc-for list="{{tm.rows}}" as="u" hint-placeholder-count="4"><div class="tr"><div><b>{{u.name}}</b><div class="muted" style="font-size: 12px; overflow-wrap: anywhere">{{u.email}}</div></div><div><b style="font-weight: 600">{{u.role}}</b> · {{u.locName}}<div class="muted" style="font-size: 12px; margin-top: 2px">{{u.can}}</div></div><div><span class="st" style="background: {{u.sbg}}; color: {{u.sfg}}">{{u.status}}</span><div class="muted" style="font-size: 12px; margin-top: 4px">{{u.last}}</div></div><div style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end"><sc-for list="{{u.acts}}" as="b" hint-placeholder-count="2"><button type="button" class="btn ghost sm" onClick="{{b.go}}">{{b.label}}</button></sc-for><sc-if value="{{u.canEdit}}" hint-placeholder-val="{{true}}"><button type="button" class="btn ghost sm" onClick="{{u.toggle}}">{{u.toggleLabel}}</button></sc-if><sc-if value="{{u.hasNote}}" hint-placeholder-val="{{false}}"><span class="muted" style="font-size: 12px; text-align: right">{{u.note}}</span></sc-if></div></div></sc-for>
         </div></div>
       </div>
+      <sc-if value="{{mm.hasTemp}}" hint-placeholder-val="{{false}}"><div class="card" style="margin-top: 16px; border: 2px solid #0A35C8">
+        <div class="eyebrow">Temporary Password</div><h3 class="h3" style="margin-top: 4px">For {{mm.tpw.name}}</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px"><code style="font-size: 22px; font-weight: 800; letter-spacing: 0.06em; padding: 10px 14px; background: #F2F5FF; border: 1px solid #DCE3F7; border-radius: 12px">{{mm.tpw.pw}}</code><button type="button" class="btn sm" onClick="{{mm.copyTemp}}">Copy</button><button type="button" class="btn ghost sm" onClick="{{mm.doneTemp}}">Done</button></div>
+        <p class="muted" style="font-size: 13px; line-height: 1.55; margin: 12px 0 0">Give it to {{mm.tpw.name}} by phone or in person, not by email. It works once and expires in {{au.tempHours}} hours. They sign in with {{mm.tpw.email}} and this password, then choose their own. You’ll only see it this once.</p>
+      </div></sc-if>
       <div class="card" style="margin-top: 16px">
         <h3 class="h3">Invite A Team Member</h3>
         <p class="muted" style="margin: 6px 0 0; font-size: 14px">They get an email to set a password. You can change access or turn it off anytime.</p>
@@ -882,6 +1229,11 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
         <div class="lbl" style="margin: 14px 0 6px">What They Can Do</div>
         <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{tm.perms}}" as="p" hint-placeholder-count="5"><button type="button" class="chip" aria-pressed="{{p.on}}" onClick="{{p.toggle}}">{{p.label}}</button></sc-for></div>
         <button type="button" class="btn red" style="margin-top: 14px" onClick="{{tm.invite}}">Send Invite</button>
+      </div>
+      <div class="card" style="margin-top: 16px">
+        <h3 class="h3">Sign-In &amp; Password Rules</h3>
+        <p class="muted" style="margin: 6px 0 0; font-size: 14px">As Account Admin you can resend invites, send reset links, set temporary passwords and unlock anyone on your team except other Account Admins. LTC handles Account Admin logins: 239-744-8403.</p>
+        <div class="grid g3" style="margin-top: 12px; gap: 10px"><sc-for list="{{mm.policy}}" as="p" hint-placeholder-count="6"><div style="padding: 12px 14px; border: 1px solid #DCE3F7; border-radius: 12px; background: #F7F9FF"><b style="font-size: 14px">{{p.k}}</b><div class="muted" style="font-size: 13px; line-height: 1.5; margin-top: 4px">{{p.v}}</div></div></sc-for></div>
       </div>
     </sc-if>
 
@@ -1052,8 +1404,8 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       </div>
       <div class="card" style="margin-top: 16px">
         <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center"><h3 class="h3">Partner Teams</h3><label style="min-width: 260px"><span class="lbl">Account</span><select class="inp" value="{{ua.teamAcct}}" onChange="{{ua.setTeamAcct}}"><sc-for list="{{ua.acctOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}">{{o.label}}</option></sc-for></select></label></div>
-        <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 1.6fr 1.1fr 1.4fr 0.8fr 120px; --minw: 760px"><div class="tr th"><div>Name</div><div>Role</div><div>Location</div><div>Status</div><div></div></div>
-          <sc-for list="{{ua.teamRows}}" as="u" hint-placeholder-count="3"><div class="tr"><div><b>{{u.name}}</b><div class="muted" style="font-size: 12px">{{u.email}}</div></div><div>{{u.role}}</div><div>{{u.locName}}</div><div><span class="st" style="background: {{u.sbg}}; color: {{u.sfg}}">{{u.status}}</span></div><div style="text-align: right"><button type="button" class="btn ghost sm" onClick="{{u.toggle}}">{{u.toggleLabel}}</button></div></div></sc-for>
+        <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: minmax(0, 1.5fr) minmax(0, 1.4fr) minmax(0, 1.2fr) 290px; --minw: 880px"><div class="tr th"><div>Name</div><div>Role &amp; Location</div><div>Status &amp; Last Sign-In</div><div style="text-align: right">Login &amp; Password</div></div>
+          <sc-for list="{{ua.teamRows}}" as="u" hint-placeholder-count="3"><div class="tr"><div><b>{{u.name}}</b><div class="muted" style="font-size: 12px; overflow-wrap: anywhere">{{u.email}}</div></div><div><b style="font-weight: 600">{{u.role}}</b> · {{u.locName}}</div><div><span class="st" style="background: {{u.sbg}}; color: {{u.sfg}}">{{u.status}}</span><div class="muted" style="font-size: 12px; margin-top: 4px">{{u.last}}</div></div><div style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end"><sc-for list="{{u.acts}}" as="b" hint-placeholder-count="2"><button type="button" class="btn ghost sm" onClick="{{b.go}}">{{b.label}}</button></sc-for><button type="button" class="btn ghost sm" onClick="{{u.toggle}}">{{u.toggleLabel}}</button></div></div></sc-for>
         </div></div>
         <div class="grid g4" style="margin-top: 12px; gap: 10px; align-items: end">
           <label><span class="lbl">Name</span><input class="inp" value="{{ua.tf.name}}" onChange="{{ua.setTfName}}"></label>
@@ -1511,6 +1863,22 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
     <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}"><div class="toast" role="status">{{toast}}</div></sc-if>
   </main>
 </div>
+</sc-if>
+<sc-if value="{{af.agOpen}}" hint-placeholder-val="{{false}}">
+  <div class="csov" role="dialog" aria-modal="true" aria-label="Signed Distributor Agreement">
+    <div class="cspanel">
+      <div class="cstop"><div><div class="eyebrow">Files · Agreements</div><b>Distributor Agreement · Signed</b></div><div style="display: flex; flex-wrap: wrap; gap: 8px"><button type="button" class="btn ghost sm" onClick="{{af.printAg}}">Print / Save As PDF</button><button type="button" class="btn sm" onClick="{{af.dlAg}}">Download</button><button type="button" class="btn ghost sm" onClick="{{af.closeAg}}">Close</button></div></div>
+      <div class="cssheet agdoc" style="padding: 30px 34px; background: #FFFFFF; font-size: 14px; line-height: 1.6">
+        <div class="dh"><div class="dbrand">LIBERTY TOOL COMPANY</div><div class="dtitle">{{ag.agTitle}}</div><div class="dsub">{{ag.agSub}}</div><div style="font-size: 13px; margin-top: 8px">Effective Date: <b>{{af.sa.date}}</b></div></div>
+        <div class="ptab"><span>Reseller legal name / entity type</span><b>{{af.sa.company}} · {{af.sa.entity}}</b><span>Reseller business address</span><b>{{af.sa.address}}</b><span>Authorized contact / title</span><b>{{af.sa.signer}} · {{af.sa.title}}</b><span>Notice email / telephone</span><b>{{af.sa.email}} · {{af.sa.phone}}</b><span>Liberty address / notice email</span><b>712 W. Cienega Ave, Unit A, San Dimas, CA 91773 · sales@libertytoolcompany.com</b><span>Part II effective date</span><b>{{af.sa.date}}</b><span>Approved sales channels / territories</span><b>{{af.sa.channels}}</b></div>
+        <sc-for list="{{ag.agBlocks}}" as="b" hint-placeholder-count="12"><sc-if value="{{b.h}}" hint-placeholder-val="{{false}}"><h4>{{b.x}}</h4></sc-if><sc-if value="{{b.s}}" hint-placeholder-val="{{false}}"><div class="ss">{{b.x}}</div></sc-if><sc-if value="{{b.p}}" hint-placeholder-val="{{true}}"><p>{{b.x}}</p></sc-if><sc-if value="{{b.sched}}" hint-placeholder-val="{{false}}"><h4>Schedule A — Liberty-Issued Product Pricing Notice</h4><div class="scroll"><div class="sch"><span class="th">Product</span><span class="th">SKU</span><span class="th">GTIN</span><span class="th">MAP</span><span class="th">MSRP</span><sc-for list="{{ag.agSched}}" as="r" hint-placeholder-count="4"><span>{{r.name}}</span><span>{{r.sku}}</span><span>{{r.gtin}}</span><span>{{r.map}}</span><span>{{r.msrp}}</span></sc-for></div></div></sc-if></sc-for>
+        <div class="ack">✓ {{ag.agAck1}}</div><div class="ack">✓ {{ag.agAck2}}</div>
+        <div class="agsig"><div><b style="font-size: 12px; letter-spacing: 0.08em">RESELLER</b><div class="ln"><sc-if value="{{af.sa.isImg}}" hint-placeholder-val="{{false}}"><img src="{{af.sa.sigData}}" alt="Signature"></sc-if><sc-if value="{{af.sa.isText}}" hint-placeholder-val="{{true}}"><span class="script">{{af.sa.sigText}}</span></sc-if></div><div style="font-size: 13px; margin-top: 6px">{{af.sa.signer}} · {{af.sa.title}}<br>{{af.sa.company}}<br>Signed {{af.sa.date}} at {{af.sa.time}}</div></div><div><b style="font-size: 12px; letter-spacing: 0.08em">LIBERTY TOOL COMPANY</b><div class="ln"></div><div style="font-size: 13px; margin-top: 6px">{{af.sa.ltc}}</div></div></div>
+        <div class="muted" style="font-size: 12px; margin-top: 16px; border: 1px solid #DCE3F7; border-radius: 10px; padding: 8px 10px">Electronic signature record · Doc ID {{af.sa.id}} · Version {{af.sa.version}} · {{af.sa.email}}</div>
+      </div>
+    </div>
+  </div>
+</sc-if>
 <sc-if value="{{cs.open}}" hint-placeholder-val="{{false}}">
   <div class="csov" role="dialog" aria-modal="true" aria-label="{{cs.title}}">
     <div class="cspanel">
@@ -2203,7 +2571,7 @@ function shipMigrate(d) {
   return d;
 }
 function locBill(d, acct, l) { return l && !l.billSame && addrOk(l.bill) ? l.bill : ((d.addresses || {})[acct] || {}).bill; }
-function loadData() { var d = null; try { d = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { d = null; } return extMigrate(applyAccts(shipMigrate(addrMigrate(d || seed())))); }
+function loadData() { var d = null; try { d = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { d = null; } return authMigrate(extMigrate(applyAccts(shipMigrate(addrMigrate(d || seed()))))); }
 function saveData(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
 function blankForm(a) { return { type: a.id === 'ent' ? 'stores' : 'dc', company: a.name, buyer: a.buyer.split(' · ')[0], email: a.email || '', phone: a.phone || '', po: '', vendor: a.vendor || '', start: '', end: '', notes: '', shipName: a.name, addr: '', city: '', st: '', zip: '', hours: '', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', carrier: '', reqs: {}, docs: {}, acc: {}, labels: [] }; }
 
@@ -2299,12 +2667,136 @@ function poGenerate(d, a) { var t = today(), ds = t.getFullYear() + ('0' + (t.ge
 function poRequired(d, acct) { var r = (d.poReq || {})[acct]; return r == null ? true : !!r; }
 function nextLtcId(d) { return 'LTC-' + (1043 + d.orders.filter(function (o) { return o.id >= 'LTC-1043'; }).length); }
 
+/* ===== Sign-in, invites, password resets, lockout and the Distributor Agreement ===== */
+var AUTH = { inviteDays: 7, resetMin: 60, maxTries: 5, lockMin: 15, rememberDays: 14, idleMin: 30, tempHours: 24, minLen: 10 };
+var DEMO_PW = 'Liberty2026!';
+var SESSION_KEY = 'ltc-portal-session-v1';
+var AG_VERSION = 'v2 (Oct 2026)';
+var AG_TITLE = 'Distributor Agreement';
+var AG_SUB = 'Reseller Pricing Policy & Reseller Protection Agreement';
+var DIST_AG = [
+  { t: 'p', x: 'Liberty Industrial Coating Systems Inc., d/b/a Liberty Tool Company ("Liberty" or "LTC").' },
+  { t: 'p', x: 'Part I is a unilateral minimum advertised price policy. Its acknowledgment confirms receipt only. Part II contains binding business terms and, only if separately activated, a maximum resale price provision. No provision establishes a minimum actual selling price.' },
+  { t: 'h', x: 'Part I — Unilateral Minimum Advertised Price Policy' },
+  { t: 's', x: '1. Purpose and covered products' },
+  { t: 'p', x: 'Liberty independently issues this policy to support product presentation, customer service, and competition with other brands. It applies only to genuine, new Liberty products identified in Schedule A. Used, damaged, refurbished, or discontinued units are excluded unless separately identified in a prospective written policy update. No MAP applies until Liberty supplies the product/SKU, amount, applicable territory, and effective date in writing.' },
+  { t: 's', x: '2. Covered advertising' },
+  { t: 'p', x: 'Covered advertising includes reseller-controlled public websites, product listings, online marketplaces, paid search, social media, promotional email and SMS, print, catalogs, broadcast, and external public promotional signage. It includes advertising placed by agents acting for the reseller. Ordinary nonpromotional in-store shelf labels, private individualized quotations, negotiated transactions, and prices first disclosed during a genuine final checkout process are excluded. A publicly accessible product listing is advertising even if it includes an order button. Liberty will not require a reseller to conceal disclosures required by law or a marketplace.' },
+  { t: 's', x: '3. Minimum advertised price and discounts' },
+  { t: 'p', x: 'Covered advertising displaying a price below the applicable MAP is inconsistent with this policy. For product-specific advertised coupons, rebates, buy-one-get-one offers, percentage discounts, multi-unit offers, and similar promotions, the advertised net unit price is the total advertised amount payable for the covered units after the advertised benefit, divided by the number of covered units. Storewide offers count when the advertisement identifies a covered product or expressly shows its discounted price. General loyalty benefits not tied to or advertising a covered product are excluded.' },
+  { t: 'h', x: 'Part II — Policy Administration and Receipt' },
+  { t: 's', x: '1. Bundles, charges, and truthful advertising' },
+  { t: 'p', x: 'An advertisement stating or clearly implying a covered product’s individual price below MAP remains covered when packaged with another item. If no covered-product price is stated or reasonably ascertainable, Liberty will not assign an arbitrary bundle allocation; any product-specific bundle rule must be published prospectively. Separately stated government taxes and reasonable actual shipping charges are excluded from MAP calculations where lawful. Mandatory reseller fees are included in the advertised unit price, and all legally required total-price disclosures take priority. Artificial shipping or handling charges, fictitious reference prices, and unsupported savings or warranty claims are prohibited under the separate advertising obligations in Part II.' },
+  { t: 's', x: '2. Independent selling prices; MSRP' },
+  { t: 'p', x: 'Except for an independently activated maximum resale price provision in Part II, each reseller independently determines actual selling prices. Resellers may sell below MAP in excluded transactions. Manufacturer suggested retail price (MSRP) is a recommendation, not a required price or a ceiling. This policy establishes no maximum advertised price. Liberty does not request a promise to maintain a minimum resale or advertised price, and Part II does not incorporate this policy as a contractual obligation.' },
+  { t: 's', x: '3. Independent administration and supply decisions' },
+  { t: 'p', x: 'Only Liberty’s designated policy administrator administers this policy. Liberty may independently review public advertisements and document the product, URL or channel, date, and displayed price. It may provide written notice identifying the advertisement and announcing a prospective supply decision. Ordinarily, Liberty will allow five business days after notice before acting, but repeated or intentional circumvention may result in a shorter period where lawful. Liberty will not request an assurance, negotiate a commitment to comply, or seek agreement on resale prices. A reseller may provide factual information about an error without making a pricing commitment.' },
+  { t: 'p', x: 'Subject to applicable law and existing contracts, Liberty may decline new orders or suspend or discontinue future supply. This policy creates no monetary penalties, forfeiture of earned commissions or rebates, retroactive invoice adjustments, or right to cancel accepted orders. Liberty will not terminate warranty support owed to end customers because of a reseller’s pricing. Statutory dealer notice, termination, and inventory-repurchase rights remain controlling.' },
+  { t: 's', x: '4. Changes, promotions, and legal limits' },
+  { t: 'p', x: 'Liberty may independently revise or withdraw this policy by written notice, ordinarily at least thirty calendar days before a change takes effect. A written promotion must identify the products, territory, channels, dates, and temporary MAP. A prospective generally available promotion or objective product-condition exception does not require reseller agreement. Sales staff cannot modify the policy orally. No reseller-wide or competitor pricing discussions are authorized. Liberty will not solicit or circulate resellers’ future prices or negotiate collective enforcement requests. No provision overrides applicable antitrust, competition, consumer-protection, or dealer-protection law; an unlawful restriction is inapplicable in the affected jurisdiction.' },
+  { t: 's', x: '5. Acknowledgment of receipt only' },
+  { t: 'p', x: 'The undersigned confirms receipt of Part I and the issued Schedule A. This acknowledgment is not an agreement to set resale prices, a promise to comply with MAP, or consent to coordinate pricing with Liberty or other resellers. Signing Part II does not change this limited acknowledgment.' },
+  { t: 'sched', x: '' },
+  { t: 'h', x: 'Part III — Binding Reseller Protection Agreement' },
+  { t: 'p', x: 'Liberty and the reseller identified above agree to the following business terms as of the Part II effective date. These terms do not create a promise to observe the unilateral MAP in Part I.' },
+  { t: 's', x: '1. Independent business; authorization' },
+  { t: 'p', x: 'Reseller is an independent business, not Liberty’s employee, agent, partner, franchisee, or representative authorized to bind Liberty. Reseller is responsible for its personnel, expenses, taxes, permits, and legal compliance. Any reseller authorization is nonexclusive and limited to the written channels and territories above. This Agreement grants no exclusive territory, guaranteed supply, sales volume, profit, or margin. Reseller may sell competing products. The signing representative warrants authority to bind the reseller entity; no personal guarantee is created.' },
+  { t: 's', x: '2. Product integrity, brand use, and customer disclosures' },
+  { t: 'p', x: 'Liberty grants a limited, nonexclusive, nontransferable license during authorization to use its approved marks and product materials solely to market genuine, covered products. Reseller shall preserve required labels, warnings, and traceability; shall not alter or repackage products without written approval; and shall not register Liberty marks in domains, business names, or social handles. Reseller shall not impersonate Liberty, imply exclusive status, make unsupported performance claims, or promise warranties Liberty has not authorized. Reseller shall accurately disclose product condition, availability, seller identity, charges, returns, and applicable written warranty terms. Reseller’s own commitments remain its responsibility. No product-warranty disclaimer or limitation is created by this Agreement; separately supplied warranty and sales terms apply subject to law.' },
+  { t: 's', x: '3. Optional maximum actual resale price' },
+  { t: 'p', x: 'This section is inactive unless both parties separately sign the optional ceiling activation in Schedule A, all ceiling fields are completed, and Liberty records territory-specific counsel review. When activated, Reseller agrees not to charge more than the listed maximum actual resale price for the specified SKU, condition, channel, territory, and dates. Reseller remains free to sell at any lower actual price, including below MAP in transactions excluding Part I. The ceiling does not create a minimum resale price.' },
+  { t: 'p', x: 'The ceiling includes all mandatory reseller-imposed fees attributable to the covered unit but excludes legally permitted separately stated government taxes and reasonable actual delivery charges. It does not permit fictitious shipping charges or misleading fee disclosures. Separately elected installation or unrelated services are excluded only when genuinely optional and separately priced. Bundles subject to the ceiling require a written, objectively stated covered-product allocation agreed by both parties; absent that allocation, no bundle-specific ceiling is imposed. An activated ceiling may be changed only by a writing signed by both parties. It expires on the listed end date unless renewed. An unlawful ceiling is inapplicable in the affected jurisdiction; other lawful terms remain effective.' },
+  { t: 's', x: '4. Advertising administration and information' },
+  { t: 'p', x: 'Reseller shall maintain an accurate notice contact and provide factual information reasonably necessary to investigate counterfeit goods, false advertising, misuse of marks, or a ceiling breach. Any request is limited to relevant records and excludes unrelated customer information and future pricing plans. Reseller shall not coordinate its prices with competing resellers. Neither party shall use this Agreement to exchange competitors’ confidential information or to implement a collective boycott. MAP supply decisions remain solely under Part I, not the contractual default procedure below.' },
+  { t: 'h', x: 'Part IV — Confidentiality, Termination, and Liability' },
+  { t: 's', x: '1. Confidentiality and intellectual property' },
+  { t: 'p', x: 'Each party shall protect the other’s nonpublic business, technical, customer, and financial information using reasonable care, use it only for the authorized relationship, and disclose it only to personnel or professional advisers with a need to know and confidentiality obligations. Information already lawfully known, public without breach, independently developed, or lawfully obtained from a third party is excluded. Legally compelled disclosure is permitted, with prior notice where lawful. These obligations continue for three years after termination; trade secrets remain protected while legally qualifying. Public MAP notices and public product prices are not confidential. Nothing restricts reports to regulators or legally protected disclosures. Liberty retains ownership of its marks, designs, and materials. On termination, each party shall return or destroy confidential information on request, except legally required records and protected archival backups.' },
+  { t: 's', x: '2. Term, breach, and termination' },
+  { t: 'p', x: 'This Agreement continues until terminated. Either party may terminate on thirty calendar days’ written notice, subject to mandatory dealer laws and any longer controlling contractual notice. For a material breach of Part II, the nonbreaching party may give notice describing the breach and allow ten business days to cure before termination. Subject to law, immediate suspension or termination is permitted for fraud, counterfeit products, unlawful conduct, intentional brand misuse, or a material safety threat. Repeated uncured ceiling violations may support termination only where the ceiling is lawfully activated. Part I does not constitute a breach of Part II.' },
+  { t: 'p', x: 'Termination does not cancel accepted purchase orders, discharge accrued payment obligations, or forfeit earned compensation. Purchase orders, returns, inventory repurchases, and lawful sell-through are governed by existing sales terms and mandatory law. Any remaining genuine inventory may be accurately identified by Liberty’s marks as permitted by applicable law, without implying continuing authorization. Contractual confidentiality, accrued claims, liability provisions, and dispute provisions survive to the extent applicable. The ceiling ends when this Agreement ends unless a separately signed lawful sell-through arrangement states otherwise.' },
+  { t: 's', x: '3. Third-party claims and indemnification' },
+  { t: 'p', x: 'Each party shall defend and indemnify the other against third-party claims, reasonable defense costs, and resulting judgments to the extent caused by its negligence, willful misconduct, violation of law, or material breach of Part II. Reseller’s obligation includes its unauthorized product alterations, unsupported representations, and misuse of Liberty’s marks; Liberty’s obligation includes product defects attributable to Liberty and infringement by Liberty-supplied unmodified materials used as authorized. Neither party indemnifies the other for the other’s own fault. The claimant shall give prompt notice, allow defense with reasonably acceptable counsel, and cooperate at the defending party’s expense. No settlement may admit fault, impose nonmonetary obligations, or fail to release the indemnified party without its written consent, not unreasonably withheld.' },
+  { t: 's', x: '4. Limitation of liability; preserved rights' },
+  { t: 'p', x: 'To the fullest extent permitted by law, neither party is liable to the other for lost profits or indirect, consequential, incidental, special, or punitive damages arising under Part II. Each party’s aggregate direct liability under Part II shall not exceed the greater of $10,000 or the amounts paid or payable by Reseller to Liberty for products during the twelve months before the event. These exclusions and cap do not apply to accrued payment obligations, fraud, willful misconduct, gross negligence, confidentiality breaches, infringement or misuse of intellectual property, third-party indemnity obligations, bodily injury, property damage, or liability and remedies that law prohibits limiting, including nonwaivable antitrust and consumer-protection remedies. This Agreement does not limit any end customer’s statutory rights.' },
+  { t: 'h', x: 'Part V — General Terms and Execution' },
+  { t: 's', x: '1. Notices, force majeure, and written changes' },
+  { t: 'p', x: 'Contract notices must be sent to the addresses or emails above by confirmed email delivery, tracked courier, or certified mail. Notice is effective upon documented receipt; an email bounce is not delivery. Each party shall notify the other of contact changes. A party affected by events beyond its reasonable control shall promptly notify the other and use reasonable mitigation efforts; performance is excused only to the extent and duration actually prevented. This does not excuse accrued payment obligations, confidentiality, or legal compliance. A disruption lasting more than thirty days permits termination of affected unperformed obligations on written notice, subject to applicable law and existing orders. Amendments to Part II require both parties’ written signatures; unilateral Part I updates follow Part I only.' },
+  { t: 's', x: '2. Dispute resolution, governing law, and venue' },
+  { t: 'p', x: 'The parties shall first attempt good-faith resolution through designated senior representatives for fifteen business days after written dispute notice. If unresolved, they shall attempt nonbinding mediation with a mutually selected mediator within thirty additional days and share mediator fees equally. If no mediator is agreed within ten business days or mediation fails, either party may pursue litigation. These steps do not prevent urgent protective relief, toll filing deadlines, restrict regulator communications, or limit nonwaivable rights. No mandatory arbitration is created.' },
+  { t: 'p', x: 'Governing state law and agreed court venue: as set by Liberty before execution. Venue applies only to the extent legally enforceable, including federal subject-matter jurisdiction. Mandatory federal and affected state or national competition, consumer, and dealer-protection law controls regardless of this choice.' },
+  { t: 's', x: '3. Integration, precedence, assignment, and severability' },
+  { t: 'p', x: 'Part II and the separately activated ceiling portion of Schedule A constitute the entire agreement concerning their limited subject matter, replacing prior discussions on that subject only. Existing supply, payment, warranty, returns, and reseller agreements remain in effect unless specifically amended in a writing signed by both parties. No term silently overrides an existing conflicting agreement; an express signed amendment is required. Part I is a separate unilateral notice and is not incorporated as a binding promise. No oral representation modifies Part II.' },
+  { t: 'p', x: 'Neither party may assign Part II without the other’s prior written consent, not unreasonably withheld, except to a successor acquiring substantially all of the relevant business and assuming the obligations, with written notice. No delay in enforcement waives a right; a waiver must be written and applies only to the stated instance. If a provision is unenforceable, it is severed to the extent necessary without expanding any price restriction; the remaining lawful provisions continue. There are no third-party beneficiaries except expressly indemnified parties. Obligations intended by their terms to survive do so. Electronic signatures and counterparts are effective as originals to the extent permitted by law.' },
+  { t: 's', x: '4. Execution of binding business terms' },
+  { t: 'p', x: 'By signing below, the parties agree with Part II. These signatures do not promise MAP compliance and do not activate a ceiling without the additional Schedule A signatures. Each party acknowledges an opportunity to consult independent counsel and receipt of a completed copy.' }
+];
+var AG_ACK1 = 'I confirm receipt of Part I (Minimum Advertised Price Policy) and Schedule A. This is a receipt only, not a promise about resale prices.';
+var AG_ACK2 = 'I agree to the binding business terms (Parts II–V) on behalf of the company named above, and I’m authorized to sign for it. My electronic signature is the same as my handwritten one.';
+
+function nowMs() { return Date.now(); }
+function fmtWhen(ms) { if (!ms) return '—'; var d = new Date(ms), t = today(), y = new Date(t); y.setDate(t.getDate() - 1); var tm = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }); if (d.toDateString() === t.toDateString()) return 'Today, ' + tm; if (d.toDateString() === y.toDateString()) return 'Yesterday, ' + tm; return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ', ' + tm; }
+function fmtDay(ms) { return new Date(ms).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+function fmtClock(ms) { return new Date(ms).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }); }
+function authRec(d, id) { d.auth = d.auth || {}; return d.auth[id] || (d.auth[id] = {}); }
+function findLogin(d, email) { var e = String(email || '').trim().toLowerCase(), hit = null; if (!e) return null; Object.keys(d.team || {}).forEach(function (k) { (d.team[k] || []).forEach(function (u) { if (!hit && String(u.email || '').toLowerCase() === e) hit = { acct: k, u: u }; }); }); return hit; }
+function findUserId(d, id) { var hit = null; Object.keys(d.team || {}).forEach(function (k) { (d.team[k] || []).forEach(function (u) { if (!hit && u.id === id) hit = { acct: k, u: u }; }); }); return hit; }
+function effStatus(d, u) { if (u.status === 'Off') return 'Off'; var r = (d.auth || {})[u.id] || {}; if (u.status === 'Invited') return r.expires && r.expires < nowMs() ? 'Invite Expired' : 'Invited'; if (r.lockUntil && r.lockUntil > nowMs()) return 'Locked'; if (r.temp) return 'Temp Password'; return 'Active'; }
+var ST_COL = { Active: ['#E3F3EA', '#2E7D4F'], Invited: ['#FFF3DC', '#8A5A00'], 'Invite Expired': ['#FDECEF', '#B31942'], Locked: ['#FDECEF', '#B31942'], 'Temp Password': ['#E8EEFF', '#0A35C8'], Off: ['#ECEEF2', '#4A5568'] };
+function pwRules(nw, cf, email) { nw = nw || ''; var local = String(email || '').split('@')[0].toLowerCase(); return [['10+ characters', nw.length >= AUTH.minLen], ['A letter', /[A-Za-z]/.test(nw)], ['A number', /\d/.test(nw)], ['Not your email', !!nw && (!local || nw.toLowerCase().indexOf(local) < 0)], ['Passwords match', !!nw && nw === cf]]; }
+function tempPassword() { var a = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789', out = ''; for (var i = 0; i < 12; i++) { out += a[Math.floor(Math.random() * a.length)]; if (i === 3 || i === 7) out += '-'; } return out; }
+function canSignAg(u) { return !!u && (u.role === 'Account Admin' || !!(u.perms && u.perms.team)); }
+function agSigned(d, acct) { var g = (d.agreements || {})[acct]; return !!(g && g.signedAt); }
+function acctAdmin(d, acct) { return ((d.team || {})[acct] || []).find(function (u) { return u.role === 'Account Admin' && u.status !== 'Off'; }) || null; }
+function authMigrate(d) {
+  if (MODE === 'admin' && d.authV) return d;
+  var n = nowMs(), H = 36e5, D = 864e5, i = 0;
+  d.auth = d.auth || {};
+  d.team = d.team || {};
+  if (d.team.ent && !d.team.ent.some(function (u) { return u.id === 'u9'; })) d.team.ent.push({ id: 'u9', name: 'Tom Becker', email: 'tbecker@keystonehome.example', role: 'Store Manager', loc: '0388', status: 'Invited', perms: Object.assign({}, ROLE_PERMS['Store Manager']) });
+  Object.keys(d.team).forEach(function (k) { (d.team[k] || []).forEach(function (u) { i++; if (d.auth[u.id]) return; if (u.status === 'Invited') d.auth[u.id] = u.id === 'u9' ? { invitedAt: n - 9 * D, expires: n - 2 * D } : { invitedAt: n - 2 * D, expires: n + 5 * D }; else d.auth[u.id] = { pw: DEMO_PW, last: n - (i * 7 + 3) * H, tries: 0 }; }); });
+  if (!d.agreements) {
+    var sig = function (acct, nm, title, co, addr, em, ph, days) { var t = n - days * D; return { id: 'DA-' + acct.toUpperCase() + '-' + (1000 + days), version: AG_VERSION, signedAt: fmtDay(t), signedTime: '10:' + (10 + days) + ' AM ET', ms: t, company: co, entity: 'Corporation', address: addr, signer: nm, title: title, email: em, phone: ph, sigType: 'type', sigText: nm, sigData: '', ack1: true, ack2: true }; };
+    d.agreements = {
+      dist: sig('dist', 'Sam Ortiz', 'Purchasing Director', 'Northline Coatings Supply', 'Grand Rapids, MI', 'sortiz@northline.example', '(555) 010-2210', 41),
+      dealer: sig('dealer', 'Dana Reyes', 'Owner', 'Coastline Flooring Supply', 'Naples, FL', 'dana@coastlinefloor.example', '(555) 010-3302', 33),
+      multi: sig('multi', 'Lee Park', 'Facilities Director', 'Summit Facilities Group', 'Denver, CO', 'lpark@summitfacilities.example', '(555) 010-4471', 27)
+    };
+  }
+  d.authV = 1;
+  return d;
+}
+function readSession() { try { var x = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); if (x && x.until > nowMs()) return x; } catch (e) {} return null; }
+function writeSession(x) { try { if (x) localStorage.setItem(SESSION_KEY, JSON.stringify(x)); else localStorage.removeItem(SESSION_KEY); } catch (e) {} }
+function blankAu(screen, extra) { return Object.assign({ screen: screen || 'signin', email: '', pw: '', show: false, remember: true, err: '', note: '', np: '', np2: '', name: '', phone: '', forId: '', lockUntil: 0, linkKind: '' }, extra || {}); }
+function blankAg() { return { readAll: false, sf: {}, sigMode: 'type', sigText: '', sigData: '', chk1: false, chk2: false, tried: false }; }
+function authBoot(d) {
+  var base = { menuOpen: false, au: blankAu(), ag: blankAg(), tempPw: null, agOpen: false };
+  if (MODE === 'admin') return Object.assign(base, { signed: true });
+  var ss = readSession(), hit = ss ? findUserId(d, ss.user) : null;
+  if (hit && effStatus(d, hit.u) !== 'Off' && hit.u.status !== 'Invited') return Object.assign(base, { signed: true, acct: hit.acct, user: hit.u.id, form: blankForm(ACCTS[hit.acct]) });
+  return Object.assign(base, { signed: false });
+}
+function agEsc(t) { return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function agSchedRows() { return ['lowboy', 'c2', 'c4', 'c6'].map(function (id) { var p = PRODUCTS.find(function (x) { return x.id === id; }) || { name: id, msrp: 0 }, sk = (typeof CADDY_SKU !== 'undefined' && CADDY_SKU[id]) || ['', '']; return { name: p.name, sku: sk[0], gtin: sk[1], map: money(p.msrp), msrp: money(p.msrp) }; }); }
+function agDocHtml(g, acctName) {
+  var e = agEsc, rows = agSchedRows().map(function (r) { return '<tr><td>' + e(r.name) + '</td><td>' + e(r.sku) + '</td><td>' + e(r.gtin) + '</td><td>' + e(r.map) + '</td><td>' + e(r.msrp) + '</td></tr>'; }).join('');
+  var body = DIST_AG.map(function (b) { if (b.t === 'h') return '<h4>' + e(b.x) + '</h4>'; if (b.t === 's') return '<div class="ss">' + e(b.x) + '</div>'; if (b.t === 'sched') return '<h4>Schedule A — Liberty-Issued Product Pricing Notice</h4><p>Issued by Liberty only. No reseller acceptance of MAP is requested. Currency: USD. Condition: new, one unit. Territory and channels: as approved above. Optional ceiling: not activated.</p><table class="sch"><tr><th>Product</th><th>SKU</th><th>GTIN</th><th>MAP</th><th>MSRP (suggested)</th></tr>' + rows + '</table>'; return '<p>' + e(b.x) + '</p>'; }).join('');
+  var sigR = g.sigData ? '<img src="' + g.sigData + '" alt="Signature" style="max-height:62px">' : '<span class="script">' + e(g.sigText) + '</span>';
+  var parties = [['Reseller legal name / entity type', g.company + ' · ' + g.entity], ['Reseller business address', g.address], ['Authorized contact / title', g.signer + ' · ' + g.title], ['Notice email / telephone', g.email + ' · ' + g.phone], ['Liberty address / notice email', '712 W. Cienega Ave, Unit A, San Dimas, CA 91773 · sales@libertytoolcompany.com'], ['Part II effective date', g.signedAt], ['Approved sales channels / territories', g.channels || 'As approved by Liberty in writing']].map(function (r) { return '<tr><td>' + e(r[0]) + '</td><td><b>' + e(r[1]) + '</b></td></tr>'; }).join('');
+  return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LTC Distributor Agreement - ' + e(g.company) + '</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;600;700&display=swap"><style>@page{size:Letter;margin:0.7in}body{font-family:Inter,Arial,sans-serif;color:#1E2633;font-size:12.5px;line-height:1.55;max-width:7.2in;margin:24px auto;padding:0 16px}h1{letter-spacing:.18em;color:#0A35C8;text-align:center;font-size:20px;margin:0}.t{text-align:center;font-weight:800;text-transform:uppercase;font-size:17px;margin-top:4px}.st{text-align:center;color:#B31942;font-weight:700;font-size:12px}.hd{border-bottom:2px solid #0A35C8;padding-bottom:12px;margin-bottom:14px}h4{color:#0A35C8;text-transform:uppercase;font-size:13.5px;margin:18px 0 4px}.ss{font-weight:700;margin:10px 0 3px}p{margin:0 0 7px}table{width:100%;border-collapse:collapse;margin:8px 0}td,th{padding:4px 6px;border-bottom:1px solid #D3D9E2;text-align:left;vertical-align:top}.pt td:first-child{color:#4A5568;width:42%}.ack{background:#EEF3FA;padding:10px 12px;font-weight:600;margin-top:10px}.g{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px}.sl{height:68px;border-bottom:1.5px solid #0B1B33;display:flex;align-items:flex-end}.script{font-family:"Dancing Script",cursive;font-size:32px;font-weight:700}.rec{margin-top:16px;border:1px solid #D3D9E2;padding:8px 10px;font-size:11px;color:#4A5568}</style></head><body>' +
+    '<div class="hd"><h1>LIBERTY TOOL COMPANY</h1><div class="t">' + AG_TITLE + '</div><div class="st">' + AG_SUB.toUpperCase() + '</div></div><table class="pt">' + parties + '</table>' + body +
+    '<div class="ack">' + e(AG_ACK1) + '</div><div class="ack">' + e(AG_ACK2) + '</div>' +
+    '<div class="g"><div><b>RESELLER</b><div class="sl">' + sigR + '</div><div>' + e(g.signer) + ' · ' + e(g.title) + '<br>' + e(g.company) + '<br>Signed ' + e(g.signedAt) + ' at ' + e(g.signedTime) + '</div></div><div><b>LIBERTY INDUSTRIAL COATING SYSTEMS INC. d/b/a Liberty Tool Company</b><div class="sl">' + (g.ltcName ? '<span class="script">' + e(g.ltcName) + '</span>' : '') + '</div><div>' + (g.ltcName ? e(g.ltcName) + ' · ' + e(g.ltcTitle || '') + '<br>Countersigned ' + e(g.ltcDate || '') : 'Countersignature pending') + '</div></div></div>' +
+    '<div class="rec">Electronic signature record · Doc ID ' + e(g.id) + ' · Version ' + e(g.version) + ' · ' + e(g.email) + ' · Signed in the LTC Partner Portal</div></body></html>';
+}
+
 class Component extends DCLogic {
   constructor(props) {
     super(props);
     sideWatch(this);
     var d = loadData();
     this.state = { data: d, acct: 'ent', user: 'u1', fLoc: '', tf: blankTeamForm(), ua: blankUa(), uaFilter: 'all', uaTeamAcct: '', uaTf: { name: '', email: '', loc: 'all' }, view: MODE === 'admin' ? 'aOverview' : 'overview', step: 1, form: blankForm(ACCTS.ent), qty: {}, coat: {}, stores: [{ num: '0101', city: 'Columbus', st: 'OH' }, { num: '0214', city: 'Pittsburgh', st: 'PA' }, { num: '0388', city: 'Louisville', st: 'KY' }], ns: { num: '', city: '', st: '' }, err: '', submitted: null, selId: null, fStatus: '', folder: '', draft: '', thread: 'ent', bk: { type: 'Account Review', day: 0, time: '' }, toast: '', reps: repLoad(), fq: { bill: 'OB', from: 'CA', to: 'OH', lbs: '', cls: '70', gross: '', fuel: '', acc: {}, order: '' }, laneQ: '', lb: 'month', lbm: 'sold', aff: affLoad(), nc: { title: '', status: 'Live', start: '', end: '', brief: '', bonus: '', deliv: '', caption: '' }, nd: { title: '', off: '', code: '', ends: '', desc: '' }, nn: { title: '', tag: 'Program', body: '', pinned: false }, nv: { title: '', cat: 'Signing Up', len: '', url: '', desc: '', req: false }, nt: blankNt(), nrn: blankNrn(), imp: null, impInvite: true, cs: null, shipForm: null, shipTab: 'ready', sdoc: null, ae: null, shipPick: '', prod: PROD_STORE, pf: null, pfilt: 'all', sync: null, csgn: null, csf: csfLoad(), pay: payLoad(), payKey: payPeriod(1).key, payAdj: {}, stmt: null };
+    Object.assign(this.state, authBoot(this.state.data));
   }
   persist(d) { saveData(d); this.setState({ data: d }); }
   flash(t) { var self = this; this.setState({ toast: t }); setTimeout(function () { if (self.state.toast === t) self.setState({ toast: '' }); }, 2600); }
@@ -2567,7 +3059,10 @@ class Component extends DCLogic {
     var canText = function (u) { return PERMS.filter(function (p) { return u.perms && u.perms[p[0]]; }).map(function (p) { return p[1]; }).join(', ') || 'View only'; };
     var setT = function (fn, msg) { var d2 = JSON.parse(JSON.stringify(self.state.data)); fn(d2); self.persist(d2); if (msg) self.flash(msg); };
     var f = s.tf, setF = function (k) { return function (e) { var x = Object.assign({}, self.state.tf); x[k] = e.target.value; if (k === 'role') x.perms = Object.assign({}, ROLE_PERMS[e.target.value] || {}); self.setState({ tf: x }); }; };
-    var rowsOf = function (acct, list) { return list.map(function (u) { var col = stCol[u.status] || stCol.Active; return { name: u.name, email: u.email, role: u.role, locName: self.locName(acct, u.loc), can: canText(u), status: u.status, sbg: col[0], sfg: col[1], canEdit: u.id !== me.id, toggleLabel: u.status === 'Off' ? 'Turn On' : 'Turn Off',
+    var rowsOf = function (acct, list) { return list.map(function (u) { var es = effStatus(d, u), col = ST_COL[es] || ST_COL.Active, rec = (d.auth || {})[u.id] || {}, mng = MODE === 'admin' || (u.id !== me.id && !!(me.perms && me.perms.team) && u.role !== 'Account Admin');
+      var upd = function (fn, msg) { setT(function (d2) { var r2 = authRec(d2, u.id); fn(r2, d2); }, msg); };
+      var acts = !mng ? [] : (es === 'Invited' || es === 'Invite Expired' ? [['Resend Invite', function () { var t0 = nowMs(); upd(function (r2) { r2.invitedAt = t0; r2.expires = t0 + AUTH.inviteDays * 864e5; }, 'New invite sent to ' + u.email + '. It works for ' + AUTH.inviteDays + ' days, until ' + fmtDay(t0 + AUTH.inviteDays * 864e5) + '. The old link no longer works.'); }]] : es === 'Off' ? [] : (es === 'Locked' ? [['Unlock', function () { upd(function (r2) { r2.lockUntil = 0; r2.tries = 0; }, u.name + ' is unlocked and can sign in now.'); }]] : []).concat([['Send Reset Link', function () { upd(function (r2) { r2.resetAt = nowMs(); }, 'Reset link sent to ' + u.email + '. It works once, for ' + AUTH.resetMin + ' minutes.'); }], ['Temp Password', function () { var tp = tempPassword(); upd(function (r2) { r2.pw = tp; r2.temp = true; r2.tempExp = nowMs() + AUTH.tempHours * 36e5; r2.tries = 0; r2.lockUntil = 0; }); self.setState({ tempPw: { name: u.name, email: u.email, pw: tp } }); }]]));
+      return { name: u.name, email: u.email, role: u.role, locName: self.locName(acct, u.loc), can: canText(u), status: es, sbg: col[0], sfg: col[1], canEdit: MODE === 'admin' || (u.id !== me.id && (u.role !== 'Account Admin' || !!(me.perms && me.perms.team))), last: es === 'Invited' ? 'Invite sent ' + fmtDay(rec.invitedAt || nowMs()) + ' · expires ' + fmtDay(rec.expires || nowMs()) : es === 'Invite Expired' ? 'Invite expired ' + fmtDay(rec.expires || nowMs()) : (rec.last ? fmtWhen(rec.last) : 'Never'), acts: acts.map(function (x) { return { label: x[0], go: x[1] }; }), hasNote: !mng && u.id !== me.id && u.role === 'Account Admin', note: 'LTC resets Account Admin logins', toggleLabel: u.status === 'Off' ? 'Turn On' : 'Turn Off',
       toggle: function () { setT(function (d2) { var x = d2.team[acct].find(function (y) { return y.id === u.id; }); x.status = x.status === 'Off' ? 'Active' : 'Off'; }, u.name + (u.status === 'Off' ? ' turned on' : ' turned off')); } }; }); };
     var myLoc = me.loc !== 'all' ? me.loc : null;
     var acctOrders = d.orders.filter(function (o) { return o.acct === s.acct; });
@@ -2575,10 +3070,10 @@ class Component extends DCLogic {
       me: { first: me.name.split(' ')[0], name: me.name, role: me.role, locName: this.locName(s.acct, me.loc) },
       isStoreUser: !!myLoc,
       acctOpts: Object.keys(ACCTS).map(function (k) { return { v: k, label: ACCTS[k].name }; }),
-      setAcct: function (e) { var k = e.target.value, t = (self.state.data.team || {})[k] || []; self.setState({ acct: k, user: t[0] ? t[0].id : '', view: 'overview', form: blankForm(ACCTS[k]), selId: null, submitted: null, step: 1, fLoc: '' }); },
+      setAcct: function (e) { var k = e.target.value, t = (self.state.data.team || {})[k] || []; self.setState({ acct: k, user: t[0] ? t[0].id : '', view: 'overview', form: blankForm(ACCTS[k]), selId: null, submitted: null, step: 1, fLoc: '' }); if (MODE !== 'admin' && t[0]) writeSession({ acct: k, user: t[0].id, until: nowMs() + 12 * 36e5 }); },
       userOpts: team.filter(function (u) { return u.status !== 'Off'; }).map(function (u) { return { v: u.id, label: u.name + ' · ' + (u.loc === 'all' ? u.role : self.locName(s.acct, u.loc)) }; }),
       curUser: me.id,
-      setUser: function (e) { self.setState({ user: e.target.value, view: 'overview', selId: null, fLoc: '' }); },
+      setUser: function (e) { self.setState({ user: e.target.value, view: 'overview', selId: null, fLoc: '' }); if (MODE !== 'admin') writeSession({ acct: s.acct, user: e.target.value, until: nowMs() + 12 * 36e5 }); },
       tm: { count: team.filter(function (u) { return u.status !== 'Off'; }).length, rows: rowsOf(s.acct, team), f: f, roles: ROLES,
         locOpts: [{ v: 'all', label: 'All Locations' }].concat(locs.map(function (l) { return { v: l.id, label: l.name }; })),
         setName: setF('name'), setEmail: setF('email'), setRole: setF('role'), setLoc: setF('loc'),
@@ -3295,7 +3790,7 @@ class Component extends DCLogic {
       pw: pw, setCur: setPw('cur'), setNw: setPw('nw'), setCf: setPw('cf'),
       checks: pwChecks.map(function (c) { return { t: c[0], fg: c[1] ? '#2E7D4F' : '#8A94A3', mark: c[1] ? '✓' : '○' }; }),
       hasPwErr: !!pw.err, pwErr: pw.err || '', pwTxt: pr.pwOn ? 'Last changed ' + pr.pwOn + '.' : 'You set this password when you accepted your invite.',
-      savePw: function () { var x = self.state.xPw || { cur: '', nw: '', cf: '' }; if (!x.cur) return self.setState({ xPw: Object.assign({}, x, { err: 'Enter your current password.' }) }); if (!pwChecks.every(function (c) { return c[1]; })) return self.setState({ xPw: Object.assign({}, x, { err: 'Your new password needs everything on the checklist.' }) }); setPr(function (p) { p.pwOn = fmtDate(today()); }); self.setState({ xPw: { cur: '', nw: '', cf: '', err: '' } }); self.flash('Password updated'); },
+      savePw: function () { var x = self.state.xPw || { cur: '', nw: '', cf: '' }; if (!x.cur) return self.setState({ xPw: Object.assign({}, x, { err: 'Enter your current password.' }) }); if (MODE !== 'admin' && x.cur !== ((self.state.data.auth || {})[me.id] || {}).pw) return self.setState({ xPw: Object.assign({}, x, { err: 'Your current password isn’t right. Forgot it? Sign out and use Forgot Password.' }) }); if (!pwChecks.every(function (c) { return c[1]; })) return self.setState({ xPw: Object.assign({}, x, { err: 'Your new password needs everything on the checklist.' }) }); setPr(function (p, d2) { p.pwOn = fmtDate(today()); var r2 = authRec(d2, me.id); r2.pw = x.nw; r2.temp = false; }); self.setState({ xPw: { cur: '', nw: '', cf: '', err: '' } }); self.flash('Password updated'); },
       events: NOTIFY.filter(function (n) { return !n[2] || (n[2] === 'approve' ? can('approve') : billAccess); }).map(function (n) { var e2 = ev(n[0]); var tog = function (ch) { return function () { setPr(function (p) { p.ev = p.ev || {}; var cur = Object.assign(evDef(n[0]), p.ev[n[0]] || {}); cur[ch] = !cur[ch]; p.ev[n[0]] = cur; }); }; }; return { name: n[1], email: e2.email ? 'true' : 'false', text: e2.text ? 'true' : 'false', togEmail: tog('email'), togText: tog('text') }; }),
       digests: [['now', 'Send each one right away'], ['daily', 'One daily summary at 7 AM']].map(function (g) { return { label: g[1], on: (pr.digest || 'now') === g[0] ? 'true' : 'false', pick: function () { setPr(function (p) { p.digest = g[0]; }); } }; }),
       textTo: (pr.phone != null ? pr.phone : me.phone) ? 'Texts go to ' + (pr.phone != null ? pr.phone : me.phone) + '.' : 'Add a mobile number above to get texts.',
@@ -3308,6 +3803,180 @@ class Component extends DCLogic {
     X.xar = { reqs: allReqs.map(reqView), noReqs: allReqs.length === 0, pendN: allReqs.filter(function (r) { return r.status === 'Pending'; }).length };
     X.reqBadge = allReqs.filter(function (r) { return r.status === 'Pending'; }).length + (d.claims || []).filter(function (c) { return c.status === 'Submitted'; }).length;
     return X;
+  }
+  enterAs(acct, uid, remember) {
+    var d2 = JSON.parse(JSON.stringify(this.state.data)), r = authRec(d2, uid);
+    r.tries = 0; r.lockUntil = 0; r.last = nowMs(); saveData(d2);
+    writeSession({ acct: acct, user: uid, until: nowMs() + (remember ? AUTH.rememberDays * 864e5 : 12 * 36e5) });
+    this.strokes = [];
+    this.setState({ data: d2, signed: true, acct: acct, user: uid, view: 'overview', form: blankForm(ACCTS[acct]), selId: null, submitted: null, step: 1, fLoc: '', menuOpen: false, au: blankAu(), ag: blankAg(), err: '' });
+    try { window.scrollTo(0, 0); } catch (e) {}
+  }
+  signOut(msg) {
+    writeSession(null);
+    var me = this.me();
+    this.setState({ signed: false, menuOpen: false, au: blankAu('signin', { email: me.email || '', note: msg || 'You’re signed out. See you next time.' }), ag: blankAg(), tempPw: null, agOpen: false, cs: null });
+    try { window.scrollTo(0, 0); } catch (e) {}
+  }
+  agFormVal(k) { var s = this.state, me = this.me(), a = this.acct(), sf = (s.ag || {}).sf || {}; if (sf[k] !== undefined) return sf[k]; var bill = ((s.data.addresses || {})[s.acct] || {}).bill || {}; return { company: a.name, entity: '', address: [bill.line1, bill.line2, bill.city, [bill.st, bill.zip].filter(Boolean).join(' ')].filter(Boolean).join(', '), signer: me.name, title: ((s.data.prefs || {})[s.acct + ':' + me.id] || {}).title || '', email: me.email || '', phone: me.phone || a.phone || bill.phone || '' }[k] || ''; }
+  agMissing() {
+    var g = this.state.ag || blankAg(), out = [], self = this;
+    if (!g.readAll) out.push('read to the end');
+    if (!this.agFormVal('company').trim()) out.push('company legal name');
+    if (!this.agFormVal('entity').trim()) out.push('entity type');
+    if (!this.agFormVal('address').trim()) out.push('business address');
+    if (!this.agFormVal('signer').trim()) out.push('your full legal name');
+    if (!this.agFormVal('title').trim()) out.push('your title');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(this.agFormVal('email').trim())) out.push('notice email');
+    if (this.agFormVal('phone').replace(/\D/g, '').length < 10) out.push('phone number');
+    if (g.sigMode === 'draw' ? !g.sigData : !String(g.sigText || this.agFormVal('signer') || '').trim()) out.push('signature');
+    if (!g.chk1) out.push('receipt checkbox');
+    if (!g.chk2) out.push('agreement checkbox');
+    return out;
+  }
+  agPt(c, e) { var r = c.getBoundingClientRect(); return [(e.clientX - r.left) * c.width / r.width, (e.clientY - r.top) * c.height / r.height]; }
+  agRedraw(c) { var x = c.getContext('2d'); x.clearRect(0, 0, c.width, c.height); x.lineWidth = 3.2; x.lineCap = 'round'; x.lineJoin = 'round'; x.strokeStyle = '#0B1B33'; (this.strokes || []).forEach(function (st) { x.beginPath(); x.moveTo(st[0][0], st[0][1]); if (st.length === 1) x.lineTo(st[0][0] + 0.1, st[0][1] + 0.1); st.forEach(function (p) { x.lineTo(p[0], p[1]); }); x.stroke(); }); }
+  authVals() {
+    var self = this, s = this.state, d = s.data, isAdmin = MODE === 'admin', au = s.au || blankAu(), g = s.ag || blankAg();
+    var me = this.me(), a = this.acct(), n = nowMs();
+    var setAu = function (o) { self.setState({ au: Object.assign({}, self.state.au, o) }); };
+    var fld = function (k) { return function (e) { var o = {}; o[k] = e.target.value; o.err = ''; setAu(o); }; };
+    var mutate = function (fn) { var d2 = JSON.parse(JSON.stringify(self.state.data)); fn(d2); saveData(d2); self.setState({ data: d2 }); return d2; };
+    var screen = !s.signed ? au.screen : (!isAdmin && (authRec(d, me.id).temp) ? 'setpw' : (!isAdmin && !agSigned(d, s.acct) ? (canSignAg(me) ? 'agree' : 'agreeWait') : ''));
+    var gate = !isAdmin && !!screen;
+    var forU = au.forId ? findUserId(d, au.forId) : null;
+    var rules = pwRules(au.np, au.np2, screen === 'setpw' ? me.email : (forU ? forU.u.email : ''));
+    var adminU = acctAdmin(d, s.acct);
+    var inviteU = findUserId(d, 'u4'), expU = findUserId(d, 'u9');
+    var demoUsers = [['u1', 'Keystone · Account Admin'], ['u2', 'Keystone · Purchasing'], ['u3', 'Keystone · Store Manager'], ['u5', 'Northline · Distributor'], ['u7', 'Coastline · Dealer'], ['u8', 'Summit · Enterprise']].map(function (x) { var h = findUserId(d, x[0]); return h ? { label: x[1], sub: h.u.name, go: function () { setAu({ screen: 'signin', email: h.u.email, pw: DEMO_PW, err: '', note: '' }); } } : null; }).filter(Boolean);
+    var signIn = function () {
+      var hit = findLogin(self.state.data, au.email), bad = 'That email and password don’t match. Check both and try again.';
+      if (!au.email.trim() || !au.pw) return setAu({ err: 'Enter your email and password.' });
+      if (!hit) return setAu({ err: bad });
+      var r = (self.state.data.auth || {})[hit.u.id] || {};
+      if (hit.u.status === 'Off') return setAu({ err: 'This login is turned off. Ask your Account Admin or LTC to turn it back on.' });
+      if (hit.u.status === 'Invited') return setAu({ err: 'You haven’t finished setting up yet. Open your invite email and click Accept Invite. Links work for ' + AUTH.inviteDays + ' days.' });
+      if (r.lockUntil && r.lockUntil > nowMs()) return setAu({ screen: 'locked', lockUntil: r.lockUntil, forId: hit.u.id, err: '' });
+      if (r.temp && r.tempExp && r.tempExp < nowMs()) return setAu({ err: 'Your temporary password has expired. Ask your Account Admin for a new one, or use Forgot Password.' });
+      if (au.pw !== r.pw) {
+        var tries = (r.tries || 0) + 1, left = AUTH.maxTries - tries;
+        var d2 = mutate(function (x) { var rr = authRec(x, hit.u.id); rr.tries = tries; if (left <= 0) { rr.lockUntil = nowMs() + AUTH.lockMin * 6e4; rr.tries = 0; } });
+        if (left <= 0) return setAu({ screen: 'locked', lockUntil: d2.auth[hit.u.id].lockUntil, forId: hit.u.id, pw: '', err: '' });
+        return setAu({ pw: '', err: bad + ' ' + left + (left === 1 ? ' try' : ' tries') + ' left before your account locks for ' + AUTH.lockMin + ' minutes.' });
+      }
+      self.enterAs(hit.acct, hit.u.id, au.remember);
+    };
+    var savePw = function (kind) { return function () {
+      var cur = self.state.au, rr = pwRules(cur.np, cur.np2, kind === 'setpw' ? me.email : (forU ? forU.u.email : ''));
+      if (kind === 'invite' && !String(cur.name || '').trim()) return setAu({ err: 'Add your name.' });
+      if (!rr.every(function (c) { return c[1]; })) return setAu({ err: 'Your password needs everything on the checklist.' });
+      if (kind === 'setpw') { mutate(function (x) { var r2 = authRec(x, me.id); r2.pw = cur.np; r2.temp = false; r2.tempExp = 0; r2.pwOn = n; }); setAu({ np: '', np2: '', err: '' }); return self.flash('Password saved. You’re all set.'); }
+      var id = cur.forId, hit = findUserId(self.state.data, id); if (!hit) return;
+      mutate(function (x) { var r2 = authRec(x, id); r2.pw = cur.np; r2.temp = false; r2.tries = 0; r2.lockUntil = 0; r2.pwOn = n; r2.resetAt = 0; if (kind === 'invite') { var uu = x.team[hit.acct].find(function (z) { return z.id === id; }); uu.status = 'Active'; uu.name = cur.name.trim(); r2.expires = 0; if (cur.phone) { x.prefs = x.prefs || {}; var pk = hit.acct + ':' + id; x.prefs[pk] = Object.assign({}, x.prefs[pk], { phone: cur.phone }); } } });
+      if (kind === 'invite') { self.enterAs(hit.acct, id, true); return self.flash('Account created. Welcome to the LTC Partner Portal.'); }
+      setAu({ screen: 'signin', email: hit.u.email, pw: '', np: '', np2: '', err: '', note: 'Password updated. Sign in with your new password.' });
+    }; };
+    var ruleList = rules.map(function (c) { return { t: c[0], fg: c[1] ? '#2E7D4F' : '#8A94A3', mark: c[1] ? '✓' : '○' }; });
+    var inviteTo = inviteU ? inviteU.u : { name: '', email: '' }, inviteBy = acctAdmin(d, inviteU ? inviteU.acct : 'ent') || { name: 'Your Account Admin' };
+    var invRec = inviteU ? (d.auth || {})[inviteU.u.id] || {} : {};
+    var lockAt = au.lockUntil || n;
+    var A = {
+      gate: gate, inApp: !gate, screen: screen,
+      isCard: gate && ['signin', 'forgot', 'forgotSent', 'mailReset', 'reset', 'mailInvite', 'invite', 'expired', 'locked', 'setpw'].indexOf(screen) >= 0,
+      isAgree: screen === 'agree', isWait: screen === 'agreeWait',
+      sSignin: screen === 'signin', sForgot: screen === 'forgot', sSent: screen === 'forgotSent', sMailReset: screen === 'mailReset', sReset: screen === 'reset', sMailInvite: screen === 'mailInvite', sInvite: screen === 'invite', sExpired: screen === 'expired', sLocked: screen === 'locked', sSetpw: screen === 'setpw',
+      isMail: screen === 'mailReset' || screen === 'mailInvite',
+      email: au.email, pw: au.pw, pwType: au.show ? 'text' : 'password', showLbl: au.show ? 'Hide' : 'Show', remember: au.remember ? 'true' : 'false', err: au.err, hasErr: !!au.err, note: au.note, hasNote: !!au.note,
+      setEmail: fld('email'), setPw: fld('pw'), setNp: fld('np'), setNp2: fld('np2'), setName: fld('name'), setPhone: fld('phone'),
+      np: au.np, np2: au.np2, name: au.name, phone: au.phone, rules: ruleList,
+      togShow: function () { setAu({ show: !self.state.au.show }); }, togRemember: function () { setAu({ remember: !self.state.au.remember }); },
+      signIn: signIn, onKey: function (e) { if (e && e.key === 'Enter') signIn(); },
+      goForgot: function () { setAu({ screen: 'forgot', err: '', note: '' }); }, goSignin: function () { setAu({ screen: 'signin', err: '', np: '', np2: '' }); },
+      sendReset: function () { var em = self.state.au.email.trim(); if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) return setAu({ err: 'Enter the email you sign in with.' }); var hit = findLogin(self.state.data, em); if (hit && hit.u.status !== 'Invited') mutate(function (x) { authRec(x, hit.u.id).resetAt = nowMs(); }); setAu({ screen: 'forgotSent', forId: hit ? hit.u.id : '', err: '' }); },
+      sentTo: au.email, resetMin: AUTH.resetMin, inviteDays: AUTH.inviteDays, maxTries: AUTH.maxTries, lockMin: AUTH.lockMin, rememberDays: AUTH.rememberDays, idleMin: AUTH.idleMin, tempHours: AUTH.tempHours,
+      openResetMail: function () { if (!self.state.au.forId) { var h = findLogin(self.state.data, 'pshah@keystonehome.example'); setAu({ screen: 'mailReset', forId: h.u.id, email: h.u.email }); } else setAu({ screen: 'mailReset' }); },
+      resetName: forU ? forU.u.name.split(' ')[0] : 'there', resetEmail: forU ? forU.u.email : au.email,
+      resetExpires: fmtClock((forU && ((d.auth || {})[forU.u.id] || {}).resetAt || n) + AUTH.resetMin * 6e4),
+      openReset: function () { setAu({ screen: 'reset', np: '', np2: '', err: '' }); },
+      saveReset: savePw('reset'), saveInvite: savePw('invite'), saveSetpw: savePw('setpw'),
+      openInviteMail: function () { if (!inviteU) return; setAu({ screen: 'mailInvite', forId: inviteU.u.id, email: inviteU.u.email, name: inviteU.u.name, err: '' }); },
+      openExpired: function () { setAu({ screen: 'expired', forId: expU ? expU.u.id : '', linkKind: 'invite', err: '' }); },
+      acceptInvite: function () { var r = (self.state.data.auth || {})[self.state.au.forId] || {}; if (r.expires && r.expires < nowMs()) return setAu({ screen: 'expired', linkKind: 'invite' }); setAu({ screen: 'invite', np: '', np2: '', err: '' }); },
+      inv: { to: inviteTo.name, first: inviteTo.name.split(' ')[0], email: inviteTo.email, by: inviteBy.name, co: inviteU ? ACCTS[inviteU.acct].name : '', role: inviteTo.role || '', loc: inviteU ? self.locName(inviteU.acct, inviteTo.loc) : '', expires: invRec.expires ? fmtDay(invRec.expires) : '', sent: invRec.invitedAt ? fmtWhen(invRec.invitedAt) : '' },
+      expBy: expU ? (acctAdmin(d, expU.acct) || { name: 'your Account Admin' }).name : 'your Account Admin',
+      expWho: expU ? expU.u.name : '',
+      askNewInvite: function () { var id = self.state.au.forId; mutate(function (x) { var h = findUserId(x, id); if (!h) return; x.msgs = x.msgs || {}; (x.msgs[h.acct] = x.msgs[h.acct] || []).push({ from: 'LTC Portal', mine: false, when: fmtDate(today()), text: h.u.name + ' asked for a new invite link. Resend it from the Team tab.' }); }); self.flash('Request sent. ' + (expU ? (acctAdmin(d, expU.acct) || { name: 'Your Account Admin' }).name : 'Your Account Admin') + ' will get a note to resend your invite.'); },
+      lockUntil: fmtClock(lockAt), lockMins: Math.max(1, Math.ceil((lockAt - n) / 6e4)),
+      resetFromLock: function () { var h = findUserId(self.state.data, self.state.au.forId); setAu({ screen: 'forgot', email: h ? h.u.email : self.state.au.email, err: '' }); },
+      skipLock: function () { var id = self.state.au.forId; mutate(function (x) { var r = authRec(x, id); r.lockUntil = 0; r.tries = 0; }); setAu({ screen: 'signin', pw: '', note: 'Lock cleared (demo). Sign in again.' }); },
+      demoUsers: demoUsers, demoPw: DEMO_PW,
+      demoReset: function () { var d2 = JSON.parse(JSON.stringify(self.state.data)); delete d2.auth; delete d2.authV; if (d2.agreements) delete d2.agreements.ent; (d2.team.ent || []).forEach(function (u) { if (u.id === 'u4' || u.id === 'u9') u.status = 'Invited'; }); authMigrate(d2); saveData(d2); writeSession(null); self.setState({ data: d2, au: blankAu('signin', { note: 'Demo sign-ins reset. Keystone’s Distributor Agreement is unsigned again.' }) }); },
+      meName: me.name, meRole: me.role + (me.loc && me.loc !== 'all' ? ' · ' + self.locName(s.acct, me.loc) : ''), meEmail: me.email || '',
+      signOut: function () { self.signOut(); },
+      lastIn: fmtWhen(authRec(d, me.id).last),
+      tempNote: 'Your Account Admin set a temporary password for you. Choose your own to continue. Temporary passwords work once and expire after ' + AUTH.tempHours + ' hours.',
+      waitName: adminU ? adminU.name : 'your Account Admin', waitEmail: adminU ? adminU.email : '', co: a.name,
+      remind: function () { mutate(function (x) { x.msgs = x.msgs || {}; (x.msgs[s.acct] = x.msgs[s.acct] || []).push({ from: 'LTC Portal', mine: false, when: fmtDate(today()), text: me.name + ' is waiting for the Distributor Agreement to be signed so they can use the portal.' }); }); self.flash('Reminder sent to ' + (adminU ? adminU.name : 'your Account Admin') + '.'); }
+    };
+    // agreement gate
+    var gk = { company: 'company legal name', entity: 'entity type', address: 'business address', signer: 'your full legal name', title: 'your title', email: 'notice email', phone: 'phone number' }, miss = this.agMissing();
+    var setAg = function (o) { self.setState({ ag: Object.assign({}, self.state.ag, o) }); };
+    var G = {
+      agTitle: AG_TITLE, agSub: AG_SUB, agVersion: AG_VERSION, agAck1: AG_ACK1, agAck2: AG_ACK2, agToday: fmtDay(n),
+      agBlocks: DIST_AG.map(function (b) { return { h: b.t === 'h', s: b.t === 's', p: b.t === 'p', sched: b.t === 'sched', x: b.x }; }),
+      agSched: agSchedRows(),
+      agParties: [['Reseller legal name / entity type', (this.agFormVal('company') || '—') + ' · ' + (this.agFormVal('entity') || '—')], ['Reseller business address', this.agFormVal('address') || '—'], ['Authorized contact / title', (this.agFormVal('signer') || '—') + ' · ' + (this.agFormVal('title') || '—')], ['Notice email / telephone', (this.agFormVal('email') || '—') + ' · ' + (this.agFormVal('phone') || '—')], ['Liberty address / notice email', '712 W. Cienega Ave, Unit A, San Dimas, CA 91773 · sales@libertytoolcompany.com'], ['Part II effective date', fmtDay(n) + ' (date of signature)'], ['Approved sales channels / territories', (a.territory || 'United States') + ' · ' + a.type]].map(function (r) { return { k: r[0], v: r[1] }; }),
+      readLabel: g.readAll ? 'Read To The End ✓' : 'Scroll To Read', readBg: g.readAll ? '#E3F3EA' : '#FFF3DC', readFg: g.readAll ? '#2E7D4F' : '#8A5A00',
+      onAgScroll: function (e) { var el = e.currentTarget || e.target; if (!self.state.ag.readAll && el.scrollTop + el.clientHeight >= el.scrollHeight - 40) setAg({ readAll: true }); },
+      agFields: [['company', 'Company Legal Name *', 'text', 'organization'], ['entity', 'Entity Type *', 'text', 'off', 'Corporation, LLC, partnership…'], ['address', 'Business Address *', 'text', 'street-address'], ['signer', 'Your Full Legal Name *', 'text', 'name'], ['title', 'Your Title *', 'text', 'organization-title'], ['email', 'Notice Email *', 'email', 'email'], ['phone', 'Phone *', 'tel', 'tel']].map(function (x) { var bad = g.tried && miss.indexOf(gk[x[0]]) >= 0; return { label: x[1], type: x[2], ac: x[3], ph: x[4] || '', val: self.agFormVal(x[0]), bc: bad ? '#B31942' : '', set: function (e) { var sf = Object.assign({}, self.state.ag.sf); sf[x[0]] = e.target.value; var o = { sf: sf }; if (x[0] === 'signer' && self.state.ag.sigMode === 'type') o.sigText = e.target.value; setAg(o); } }; }),
+      sigDrawOn: g.sigMode === 'draw' ? 'true' : 'false', sigTypeOn: g.sigMode === 'type' ? 'true' : 'false', sigIsDraw: g.sigMode === 'draw', sigIsType: g.sigMode === 'type',
+      pickDraw: function () { setAg({ sigMode: 'draw' }); }, pickType: function () { setAg({ sigMode: 'type', sigText: self.state.ag.sigText || self.agFormVal('signer') }); },
+      sigText: g.sigText || (g.sigMode === 'type' ? this.agFormVal('signer') : ''), sigTextShow: (g.sigText || this.agFormVal('signer') || '').trim() || 'Your Signature', setSigText: function (e) { setAg({ sigText: e.target.value }); },
+      hasSigData: !!g.sigData, noSigData: !g.sigData, sigData: g.sigData, sigBc: g.tried && miss.indexOf('signature') >= 0 ? '#B31942' : '',
+      sigDown: function (e) { var c = e.currentTarget; self.drawing = true; self.strokes = self.strokes || []; self.strokes.push([self.agPt(c, e)]); try { c.setPointerCapture(e.pointerId); } catch (x) {} self.agRedraw(c); if (e.preventDefault) e.preventDefault(); },
+      sigMove: function (e) { if (!self.drawing) return; self.strokes[self.strokes.length - 1].push(self.agPt(e.currentTarget, e)); self.agRedraw(e.currentTarget); },
+      sigUp: function (e) { if (!self.drawing) return; self.drawing = false; setAg({ sigData: e.currentTarget.toDataURL('image/png') }); },
+      sigClear: function () { self.strokes = []; setAg({ sigData: '' }); },
+      chk1: g.chk1, chk2: g.chk2,
+      tog1: function (e) { setAg({ chk1: e && e.target && typeof e.target.checked === 'boolean' ? e.target.checked : !self.state.ag.chk1 }); },
+      tog2: function (e) { setAg({ chk2: e && e.target && typeof e.target.checked === 'boolean' ? e.target.checked : !self.state.ag.chk2 }); },
+      agHasMissing: g.tried && miss.length > 0, agMissing: miss.join(', '),
+      agSign: function () {
+        var m2 = self.agMissing(); if (m2.length) { setAg({ tried: true }); return self.flash('Still needed: ' + m2.join(', ')); }
+        var st = self.state.ag, t = new Date(), fv = function (k) { return self.agFormVal(k).trim(); };
+        mutate(function (x) { x.agreements = x.agreements || {}; x.agreements[s.acct] = { id: 'DA-' + s.acct.toUpperCase() + '-' + t.getTime().toString(36).toUpperCase().slice(-6), version: AG_VERSION, signedAt: fmtDay(t.getTime()), signedTime: fmtClock(t.getTime()), ms: t.getTime(), company: fv('company'), entity: fv('entity'), address: fv('address'), signer: fv('signer'), title: fv('title'), email: fv('email'), phone: fv('phone'), channels: (a.territory || 'United States') + ' · ' + a.type, sigType: st.sigMode, sigText: st.sigMode === 'type' ? String(st.sigText || fv('signer')).trim() : '', sigData: st.sigMode === 'draw' ? st.sigData : '', ack1: true, ack2: true, by: me.id }; x.msgs = x.msgs || {}; (x.msgs[s.acct] = x.msgs[s.acct] || []).push({ from: 'LTC Sales', mine: false, when: fmtDate(today()), text: 'Thanks for signing the Distributor Agreement. Your copy is in Files under Agreements. We’ll countersign and send the final copy.' }); });
+        self.strokes = []; self.setState({ ag: blankAg(), view: 'overview' }); self.flash('Agreement signed. Your copy is saved in Files.'); try { window.scrollTo(0, 0); } catch (e) {}
+      }
+    };
+    // signed copy in Files + overlay
+    var sg = (d.agreements || {})[s.acct];
+    var F = {
+      hasAgFile: !isAdmin && !!(sg && sg.signedAt),
+      agFile: sg ? { name: AG_TITLE + ' (Signed)', meta: 'Signed by ' + sg.signer + ', ' + sg.title + ' · ' + sg.signedAt + ' at ' + sg.signedTime + ' · Doc ID ' + sg.id + ' · Version ' + sg.version, ctr: sg.ltcName ? 'Countersigned By LTC' : 'LTC Countersignature Pending', cbg: sg.ltcName ? '#E3F3EA' : '#FFF3DC', cfg: sg.ltcName ? '#2E7D4F' : '#8A5A00' } : { name: '', meta: '', ctr: '', cbg: '', cfg: '' },
+      viewAg: function () { self.setState({ agOpen: true }); }, closeAg: function () { self.setState({ agOpen: false }); },
+      dlAg: function () { if (!sg) return; var blob = new Blob([agDocHtml(sg, a.name)], { type: 'text/html' }), u = URL.createObjectURL(blob), l = document.createElement('a'); l.href = u; l.download = 'LTC-Distributor-Agreement-' + a.name.replace(/[^A-Za-z0-9]+/g, '-') + '-Signed.html'; document.body.appendChild(l); l.click(); l.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 2000); self.flash('Signed agreement downloaded'); },
+      printAg: function () { try { window.print(); } catch (e) {} },
+      agOpen: !!s.agOpen && !!sg,
+      sa: sg ? { company: sg.company, entity: sg.entity, address: sg.address, signer: sg.signer, title: sg.title, email: sg.email, phone: sg.phone, date: sg.signedAt, time: sg.signedTime, id: sg.id, version: sg.version, channels: sg.channels || 'As approved by Liberty in writing', isImg: !!sg.sigData, isText: !sg.sigData, sigData: sg.sigData || '', sigText: sg.sigText || sg.signer, ltc: sg.ltcName ? sg.ltcName + ' · ' + (sg.ltcTitle || '') + ' · ' + (sg.ltcDate || '') : 'Countersignature pending' } : {}
+    };
+    // mobile menu + temp password panel
+    var tp = s.tempPw;
+    var M = {
+      menuOpen: !!s.menuOpen, sideCls: s.menuOpen ? 'side open' : 'side', menuExp: s.menuOpen ? 'true' : 'false',
+      openMenu: function () { self.setState({ menuOpen: true }); }, closeMenu: function () { self.setState({ menuOpen: false }); },
+      hasTemp: !!tp, tpw: tp || { name: '', email: '', pw: '' },
+      copyTemp: function () { try { navigator.clipboard.writeText(tp.pw); } catch (e) {} self.flash('Temporary password copied'); },
+      doneTemp: function () { self.setState({ tempPw: null }); },
+      policy: [
+        ['Invite links', 'Work once and expire after ' + AUTH.inviteDays + ' days. An admin can resend a new link anytime; the old one stops working.'],
+        ['Password reset links', 'Work once and expire after ' + AUTH.resetMin + ' minutes. Asking for a new link cancels the last one.'],
+        ['Lockout', AUTH.maxTries + ' wrong passwords in a row locks the login for ' + AUTH.lockMin + ' minutes. Reset the password or ask your Account Admin to unlock it.'],
+        ['Temporary passwords', 'Set by your Account Admin, work once and expire after ' + AUTH.tempHours + ' hours. You choose a new password right after signing in.'],
+        ['Passwords', 'At least ' + AUTH.minLen + ' characters with a letter and a number, and not your email.'],
+        ['Staying signed in', '“Keep me signed in” lasts ' + AUTH.rememberDays + ' days on that device. Otherwise you’re signed out after ' + AUTH.idleMin + ' minutes of inactivity.']
+      ].map(function (p) { return { k: p[0], v: p[1] }; })
+    };
+    return { au: A, ag: G, af: F, mm: M };
   }
   renderVals() {
     var self = this, s = this.state, d = s.data, a = this.acct(), isAdmin = MODE === 'admin', c = this.calc(), mult = this.mult();
@@ -3341,7 +4010,7 @@ class Component extends DCLogic {
       acctEnt: s.acct === 'ent' ? 'true' : 'false', acctDist: s.acct === 'dist' ? 'true' : 'false',
       pickEnt: function () { self.setState({ acct: 'ent', form: blankForm(ACCTS.ent), selId: null, submitted: null, step: 1 }); },
       pickDist: function () { self.setState({ acct: 'dist', form: blankForm(ACCTS.dist), selId: null, submitted: null, step: 1 }); },
-      navs: (isAdmin ? navA : navP).map(function (n) { var b = n[0] === 'orders' && isAdmin ? newCount : (n[0] === 'xAppr' ? apprN : (n[0] === 'aRequests' && isAdmin ? reqN : 0)); return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: b > 0, badge: b, go: function () { if (n[0] === 'order') self.startOrder(); else self.go(n[0]); } }; }),
+      navs: (isAdmin ? navA : navP).map(function (n) { var b = n[0] === 'orders' && isAdmin ? newCount : (n[0] === 'xAppr' ? apprN : (n[0] === 'aRequests' && isAdmin ? reqN : 0)); return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: b > 0, badge: b, go: function () { self.state.menuOpen = false; if (n[0] === 'order') self.startOrder(); else self.go(n[0]); try { window.scrollTo(0, 0); } catch (e) {} } }; }),
       crumb: isAdmin ? 'Liberty Tool Company · Internal' : a.name + ' · ' + a.modelName,
       title: titles[s.view] || '', v: v,
       goNewOrder: function () { self.startOrder(); }, goOrders: function () { self.go('orders'); }, goMessages: function () { self.go('messages'); },
@@ -3465,6 +4134,7 @@ class Component extends DCLogic {
     };
     Object.assign(R, this.cutVals(), this.labelVals(sel), this.addrVals(), this.shipVals(sel), this.shipDocVals(), this.shipQueueVals(), { goImport: function () { self.go('locs'); } });
     Object.assign(R, T, { acctKey: s.acct, showPricing: can('pricing'), noCoat: !(a.access || {}).coatings });
+    Object.assign(R, this.authVals());
     Object.assign(R, this.extVals(sel, mine, can), { xbCols: isAdmin ? '40px 1fr 1.4fr 1.2fr 1fr 1fr 1fr 1fr 1.1fr 190px' : '40px 1fr 1.2fr 1fr 1fr 1fr 1fr 1.1fr 90px', goClaims: function () { self.go('xClaims'); } });
     if (isAdmin) Object.assign(R, this.userVals(T));
     R.sideMore = !!s.sideMore; R.sideDown = sideDown; R.csf = s.csf;
