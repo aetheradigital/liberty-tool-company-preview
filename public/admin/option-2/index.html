@@ -393,7 +393,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 
     <sc-if value="{{au.sSignin}}" hint-placeholder-val="{{true}}">
       <div class="authdemo aucard" style="margin-top: 14px">
-        <div><b>Preview only — demo sign-ins.</b> Every demo login uses the password <b>{{au.demoPw}}</b>.</div>
+        <div><b>Preview only — demo sign-ins.</b> Any email and password will sign you in for this mockup. Pick a role below, or type a demo email to see that person’s view.</div>
         <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px"><sc-for list="{{au.demoUsers}}" as="u" hint-placeholder-count="6"><button type="button" class="chip" onClick="{{u.go}}">{{u.label}}</button></sc-for></div>
         <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px"><button type="button" class="btn ghost sm" onClick="{{au.openInviteMail}}">Open An Invite Email</button><button type="button" class="btn ghost sm" onClick="{{au.openExpired}}">Open An Expired Invite</button><button type="button" class="btn ghost sm" onClick="{{au.demoReset}}">Reset Demo Sign-Ins</button></div>
       </div>
@@ -3851,6 +3851,13 @@ class Component extends DCLogic {
     var inviteU = findUserId(d, 'u4'), expU = findUserId(d, 'u9');
     var demoUsers = [['u1', 'Keystone · Account Admin'], ['u2', 'Keystone · Purchasing'], ['u3', 'Keystone · Store Manager'], ['u5', 'Northline · Distributor'], ['u7', 'Coastline · Dealer'], ['u8', 'Summit · Enterprise']].map(function (x) { var h = findUserId(d, x[0]); return h ? { label: x[1], sub: h.u.name, go: function () { setAu({ screen: 'signin', email: h.u.email, pw: DEMO_PW, err: '', note: '' }); } } : null; }).filter(Boolean);
     var signIn = function () {
+      // Mockup: any email and password signs in. A demo email opens that user; anything else opens the Northline distributor Account Admin.
+      var hit = findLogin(self.state.data, au.email) || findUserId(self.state.data, 'u5');
+      if (!hit) return;
+      mutate(function (x) { var rr = authRec(x, hit.u.id); rr.tries = 0; rr.lockUntil = 0; rr.temp = false; rr.tempExp = 0; var uu = (x.team[hit.acct] || []).find(function (z) { return z.id === hit.u.id; }); if (uu && uu.status !== 'Active') uu.status = 'Active'; });
+      self.enterAs(hit.acct, hit.u.id, au.remember);
+    };
+    var signInStrict = function () {
       var hit = findLogin(self.state.data, au.email), bad = 'That email and password don’t match. Check both and try again.';
       if (!au.email.trim() || !au.pw) return setAu({ err: 'Enter your email and password.' });
       if (!hit) return setAu({ err: bad });
