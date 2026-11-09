@@ -17,5 +17,5 @@ Deploy: Render static site, publish directory `public`.
 
 - **Preview** — https://ltc-preview.onrender.com (Render `ltc-preview`) deploys every push to `main`. Keep using it for client review.
 - **Release** — https://ltc-release.onrender.com (Render `ltc-release`) deploys the `release` branch only. Custom domains (libertytoolcompany.com, partner.libertytoolcompany.com) attach to this site.
-- To publish what's on `main` to the release site: `git push origin main:release`.
-- Off the preview host the dark preview bar is hidden, and `/` sends `partner.*` visitors to `/partner-portal/option-2/` and everyone else to `/option-2/`.
+- To publish what's on `main` to the release site: `tools/publish_release.sh`. It runs `tools/make_release.py` on a copy of `main` and force-pushes the result to `release`: the website becomes the home page at `/` (and `/option-2/` forwards there), the preview bar is removed, `partner.*` visitors to `/` go to the partner portal, and the reviews section is left out while it still holds placeholder quotes.
+- The Where We Ship map draws real state outlines from us-atlas (jsDelivr, `states-albers-10m.json`); if that file can't load, the state tile grid shows instead.
