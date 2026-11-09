@@ -12,3 +12,10 @@ Static preview of libertytoolcompany.com and the launch materials, for client re
 Plain HTML, no build step. `public/runtime.js` renders each page's template and runs the interactive pieces. Forms, booking, Quote List and checkout are front-end only until wired to HighLevel and Shopify.
 
 Deploy: Render static site, publish directory `public`.
+
+## Preview and release sites
+
+- **Preview** — https://ltc-preview.onrender.com (Render `ltc-preview`) deploys every push to `main`. Keep using it for client review.
+- **Release** — https://ltc-release.onrender.com (Render `ltc-release`) deploys the `release` branch only. Custom domains (libertytoolcompany.com, partner.libertytoolcompany.com) attach to this site.
+- To publish what's on `main` to the release site: `git push origin main:release`.
+- Off the preview host the dark preview bar is hidden, and `/` sends `partner.*` visitors to `/partner-portal/option-2/` and everyone else to `/option-2/`.
