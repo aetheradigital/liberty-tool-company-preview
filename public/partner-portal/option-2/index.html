@@ -457,7 +457,8 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
   <div class="gtop"><img src="/assets/logo-white.png" alt="Liberty Tool Company" style="height: 40px; width: auto"><div style="display: flex; align-items: center; gap: 12px"><span class="gwho">{{au.meName}} · {{au.co}}</span><button type="button" class="sobtn" onClick="{{au.signOut}}">Sign Out</button></div></div>
   <div class="gwrap">
     <div class="eyebrow">Welcome, {{au.meName}} · One Step Before You Enter</div>
-    <h1 class="h1" style="margin-top: 6px">Sign Your Distributor Agreement</h1>
+    <h1 class="h1" style="margin-top: 6px">{{ag.agHead}}</h1>
+    <sc-if value="{{ag.isResign}}" hint-placeholder-val="{{false}}"><div style="margin: 10px 0 0; max-width: 780px; padding: 12px 14px; border-radius: 10px; background: #FFF3DC; color: #5C3D00; font-weight: 600; line-height: 1.5">{{ag.resignTxt}}</div></sc-if>
     <p class="muted" style="margin: 8px 0 0; max-width: 780px; line-height: 1.55">As Account Admin, you sign once for {{au.co}}. Read the agreement, check your company details and sign. The portal opens right after for your whole team, and a signed copy is saved in <b>Files</b>.</p>
     <div class="ggrid">
       <div class="card" style="padding: 16px">
@@ -465,7 +466,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
         <div class="docbox agdoc" tabindex="0" aria-label="Agreement text" onScroll="{{ag.onAgScroll}}">
           <div class="dh"><div class="dbrand">LIBERTY TOOL COMPANY</div><div class="dtitle">{{ag.agTitle}}</div><div class="dsub">{{ag.agSub}}</div><div style="font-size: 13px; margin-top: 8px">Effective Date: <b>{{ag.agToday}} (date of signature)</b></div></div>
           <div class="ptab"><sc-for list="{{ag.agParties}}" as="r" hint-placeholder-count="7"><span>{{r.k}}</span><b>{{r.v}}</b></sc-for></div>
-          <sc-for list="{{ag.agBlocks}}" as="b" hint-placeholder-count="12"><sc-if value="{{b.h}}" hint-placeholder-val="{{false}}"><h4>{{b.x}}</h4></sc-if><sc-if value="{{b.s}}" hint-placeholder-val="{{false}}"><div class="ss">{{b.x}}</div></sc-if><sc-if value="{{b.p}}" hint-placeholder-val="{{true}}"><p>{{b.x}}</p></sc-if><sc-if value="{{b.sched}}" hint-placeholder-val="{{false}}"><h4>Schedule A — Liberty-Issued Product Pricing Notice</h4><p>Issued by Liberty only. No reseller acceptance of MAP is requested. Currency: USD. Condition: new, one unit. Territory and channels: as approved above. Optional ceiling: not activated.</p><div class="scroll"><div class="sch"><span class="th">Product</span><span class="th">SKU</span><span class="th">GTIN</span><span class="th">MAP</span><span class="th">MSRP</span><sc-for list="{{ag.agSched}}" as="r" hint-placeholder-count="4"><span>{{r.name}}</span><span>{{r.sku}}</span><span>{{r.gtin}}</span><span>{{r.map}}</span><span>{{r.msrp}}</span></sc-for></div></div></sc-if></sc-for>
+          <sc-for list="{{ag.agBlocks}}" as="b" hint-placeholder-count="12"><sc-if value="{{b.h}}" hint-placeholder-val="{{false}}"><h4>{{b.x}}</h4></sc-if><sc-if value="{{b.s}}" hint-placeholder-val="{{false}}"><div class="ss">{{b.x}}</div></sc-if><sc-if value="{{b.p}}" hint-placeholder-val="{{true}}"><p>{{b.x}}</p></sc-if><sc-if value="{{b.sched}}" hint-placeholder-val="{{false}}"><h4>Schedule A — Liberty-Issued Product Pricing Notice</h4><p>Issued by Liberty only. No reseller acceptance of MAP is requested. Currency: USD. Condition: new, one unit. Territory and channels: as approved above. Optional ceiling: not activated.</p><div class="scroll"><div class="sch"><span class="th">Product</span><span class="th">SKU</span><span class="th">GTIN</span><span class="th">MAP</span><span class="th">MSRP</span><sc-for list="{{ag.agSched}}" as="r" hint-placeholder-count="4"><span>{{r.name}}</span><span>{{r.sku}}</span><span>{{r.gtin}}</span><span>{{r.map}}</span><span>{{r.msrp}}</span></sc-for></div></div></sc-if><sc-if value="{{b.schedB}}" hint-placeholder-val="{{false}}"><sc-if value="{{ag.hasPrice}}" hint-placeholder-val="{{false}}"><h4>Schedule B — Approved Products &amp; Reseller Purchase Pricing</h4><p>{{ag.priceIntro}}</p><div class="scroll"><div class="sch"><span class="th">Product</span><span class="th">SKU</span><span class="th">MSRP</span><span class="th">Your Price</span><span class="th">{{ag.brkHead}}</span><sc-for list="{{ag.priceRows}}" as="r" hint-placeholder-count="4"><span>{{r.name}}</span><span>{{r.sku}}</span><span>{{r.msrp}}</span><span><b>{{r.price}}</b></span><span>{{r.brk}}</span></sc-for></div></div></sc-if></sc-if></sc-for>
           <h4>Acknowledgment &amp; Acceptance</h4>
           <div class="ack">{{ag.agAck1}}</div>
           <div class="ack">{{ag.agAck2}}</div>
@@ -846,6 +847,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
 
     <!-- ================= PORTAL: OVERVIEW ================= -->
     <sc-if value="{{v.overview}}" hint-placeholder-val="{{true}}">
+      <sc-if value="{{sg.showCard}}" hint-placeholder-val="{{false}}"><div class="card" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 16px"><div><b style="font-size: 15px">New to ordering in the portal?</b><div class="muted" style="font-size: 14px; margin-top: 2px">The Store Quick Guide covers restocks, tracking, claims and who pays on one page.</div></div><button type="button" class="btn sm" onClick="{{sg.open}}">Open Store Quick Guide</button></div></sc-if>
       <sc-if value="{{xa.show}}" hint-placeholder-val="{{false}}"><div class="card" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 16px; background: #FFF3DC; border-color: #F2D7A0"><b style="font-size: 15px; color: #5C3D00">{{xa.bannerTxt}}</b><button type="button" class="btn red sm" onClick="{{xa.go}}">Review Approvals</button></div></sc-if>
       <div class="card" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; background: #E8EEFF">
         <div>
@@ -1422,7 +1424,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
             <label><span class="lbl">Contact Email *</span><input class="inp" type="email" value="{{ua.f.email}}" onChange="{{ua.set.email}}" placeholder="name@company.com"></label>
             <label><span class="lbl">Locations (Separate With ;)</span><input class="inp" value="{{ua.f.locs}}" onChange="{{ua.set.locs}}" placeholder="Store 1042 · Dayton, OH; Store 2210 · Akron, OH"></label>
           </div>
-          <div class="lbl" style="margin: 14px 0 6px">Products They Can Order</div>
+          <div class="lbl" style="margin: 14px 0 6px">Also Allow</div>
           <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{ua.access}}" as="p" hint-placeholder-count="4"><button type="button" class="chip" aria-pressed="{{p.on}}" onClick="{{p.toggle}}">{{p.label}}</button></sc-for></div>
         </sc-if>
         <sc-if value="{{ua.isRep}}" hint-placeholder-val="{{false}}">
@@ -1468,16 +1470,43 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       </div>
     </sc-if>
 
+    <!-- ================= STORE QUICK GUIDE ================= -->
+    <sc-if value="{{v.sguide}}" hint-placeholder-val="{{false}}">
+      <div class="card" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; background: #E8EEFF"><div style="max-width: 720px"><h2 class="h2">Ordering For Your Store</h2><div class="muted" style="font-size: 14px; margin-top: 4px">For store managers and counter staff{{sg.co}}. One page that covers restocks, tracking, claims and who pays.</div></div><button type="button" class="btn red" onClick="{{sg.dl}}">Download One-Page Guide</button></div>
+      <div class="grid g2" style="margin-top: 16px; align-items: start">
+        <sc-for list="{{sg.steps}}" as="x" hint-placeholder-count="8"><div class="card" style="display: flex; gap: 14px"><span style="flex: none; width: 34px; height: 34px; border-radius: 50%; background: #B31942; color: #FFFFFF; font-weight: 800; display: inline-flex; align-items: center; justify-content: center">{{x.n}}</span><div><h3 class="h3">{{x.t}}</h3><div style="font-weight: 600; margin-top: 4px">{{x.b}}</div><ul style="margin: 8px 0 0; padding-left: 18px; font-size: 14px; line-height: 1.5"><sc-for list="{{x.p}}" as="q" hint-placeholder-count="3"><li>{{q}}</li></sc-for></ul></div></div></sc-for>
+      </div>
+      <div class="card" style="margin-top: 16px; background: #F2F5FF"><b>Store logins can’t:</b> <span class="muted">{{sg.cant}}</span></div>
+    </sc-if>
+
     <!-- ================= ADMIN: ACCOUNTS ================= -->
     <sc-if value="{{v.aAccounts}}" hint-placeholder-val="{{false}}">
-      <div class="card"><div class="scroll"><div class="tbl" style="--cols: 1.6fr 1.1fr 1.2fr 0.6fr 1fr 1.3fr 0.6fr 0.8fr 1.7fr 110px; --minw: 1340px"><div class="tr th"><div>Account</div><div>Type</div><div>Pricing Model</div><div>Terms</div><div>Territory</div><div>Rep / Commission</div><div>Open Orders</div><div>PO Number</div><div>Bill To</div><div></div></div>
-        <sc-for list="{{acctRows}}" as="a" hint-placeholder-count="4"><div class="tr"><div><b>{{a.name}}</b><div class="muted" style="font-size: 12px">{{a.buyer}}</div></div><div>{{a.type}}</div><div>{{a.modelName}}</div><div>{{a.terms}}</div><div>{{a.territory}}</div><div>{{a.rep}}</div><div>{{a.open}}</div><div style="display: flex; align-items: center; gap: 8px"><button type="button" class="tog" aria-pressed="{{a.poOn}}" onClick="{{a.togPo}}" aria-label="Require a PO number for {{a.name}}"><span></span></button><span style="font-size: 12px; font-weight: 600">{{a.poTxt}}</span></div><div style="font-size: 13px">{{a.billTxt}}<div class="muted" style="font-size: 12px">{{a.locTxt}}</div></div><div style="text-align: right"><button type="button" class="btn ghost sm" onClick="{{a.addr}}">Addresses</button></div></div></sc-for>
+      <sc-if value="{{ct.on}}" hint-placeholder-val="{{false}}">
+      <div class="card" style="margin-bottom: 16px; border: 2px solid #0A35C8">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: flex-start"><div><div class="eyebrow">Contract Pricing</div><h2 class="h2" style="margin-top: 4px">{{ct.name}}</h2><div class="muted" style="font-size: 13px; margin-top: 4px">{{ct.sub}}</div></div><span class="st" style="background: {{ct.sbg}}; color: {{ct.sfg}}">{{ct.status}}</span></div>
+        <p class="muted" style="font-size: 14px; margin: 10px 0 0; line-height: 1.55; max-width: 820px">Turn on the products this account can buy and enter their price. Only these products show in their portal and price sheet, at these prices, and their Distributor Agreement lists exactly these products and prices.</p>
+        <sc-if value="{{ct.hasHold}}" hint-placeholder-val="{{false}}"><div style="margin-top: 12px; padding: 10px 14px; border-radius: 10px; background: #FFF3DC; color: #5C3D00; font-size: 14px; font-weight: 600">{{ct.holdTxt}}</div></sc-if>
+        <sc-if value="{{ct.hasResign}}" hint-placeholder-val="{{false}}"><div style="margin-top: 12px; padding: 10px 14px; border-radius: 10px; background: #E8EEFF; color: #0A35C8; font-size: 14px; font-weight: 600">{{ct.resignTxt}}</div></sc-if>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: end; margin-top: 14px"><label style="width: 220px"><span class="lbl">Volume Price Starts At (Units)</span><input class="inp" type="number" min="0" value="{{ct.breakMin}}" onChange="{{ct.setBreak}}" placeholder="No volume price"></label><button type="button" class="btn ghost" onClick="{{ct.fill}}">Fill From Standard Prices</button></div>
+        <sc-for list="{{ct.groups}}" as="g" hint-placeholder-count="3">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 18px"><h3 class="h3">{{g.name}} <span class="muted" style="font-size: 13px; font-weight: 500">· {{g.n}}</span></h3><button type="button" class="btn ghost sm" onClick="{{g.all}}">{{g.allLabel}}</button></div>
+          <div class="scroll" style="margin-top: 6px"><div class="tbl" style="--cols: 96px minmax(0, 2fr) 0.8fr 130px 130px 1.4fr; --minw: 800px"><div class="tr th"><div>Available</div><div>Product</div><div>MSRP</div><div>Their Price</div><div>Volume Price</div><div>Discount</div></div>
+            <sc-for list="{{g.rows}}" as="r" hint-placeholder-count="4"><div class="tr" style="opacity: {{r.op}}"><div><button type="button" class="tog" aria-pressed="{{r.on}}" onClick="{{r.toggle}}" aria-label="{{r.name}} available"><span></span></button></div><div><b>{{r.name}}</b><div class="muted" style="font-size: 12px">{{r.sku}}</div></div><div>{{r.msrp}}</div><div><input class="inp" type="number" min="0" step="0.01" placeholder="$" value="{{r.price}}" onChange="{{r.setPrice}}" style="border-color: {{r.bad}}" aria-label="Price for {{r.name}}"></div><div><input class="inp" type="number" min="0" step="0.01" placeholder="Optional" value="{{r.brk}}" onChange="{{r.setBrk}}" aria-label="Volume price for {{r.name}}"></div><div class="muted" style="font-size: 12px">{{r.off}}</div></div></sc-for>
+          </div></div>
+        </sc-for>
+        <sc-if value="{{ct.hasMiss}}" hint-placeholder-val="{{false}}"><div class="auerr" style="margin-top: 14px">{{ct.missTxt}}</div></sc-if>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px"><button type="button" class="btn red" onClick="{{ct.save}}">{{ct.saveLabel}}</button><sc-if value="{{ct.canSend}}" hint-placeholder-val="{{false}}"><button type="button" class="btn ghost" onClick="{{ct.saveOnly}}">Save, Send Invite Later</button></sc-if><button type="button" class="btn ghost" onClick="{{ct.preview}}">Preview Agreement</button><button type="button" class="btn ghost" onClick="{{ct.close}}">Close</button><span class="muted" style="font-size: 13px">{{ct.onTxt}}</span></div>
+      </div>
+      </sc-if>
+      <div class="card"><div class="scroll"><div class="tbl" style="--cols: 1.6fr 1.1fr 1.2fr 1.5fr 0.6fr 1fr 1.3fr 0.6fr 0.8fr 1.7fr 110px; --minw: 1520px"><div class="tr th"><div>Account</div><div>Type</div><div>Pricing Model</div><div>Contract Pricing</div><div>Terms</div><div>Territory</div><div>Rep / Commission</div><div>Open Orders</div><div>PO Number</div><div>Bill To</div><div></div></div>
+        <sc-for list="{{acctRows}}" as="a" hint-placeholder-count="4"><div class="tr"><div><b>{{a.name}}</b><div class="muted" style="font-size: 12px">{{a.buyer}}</div></div><div>{{a.type}}</div><div>{{a.modelName}}</div><div><span class="st" style="background: {{a.ctBg}}; color: {{a.ctFg}}">{{a.ctTxt}}</span><div class="muted" style="font-size: 12px; margin-top: 4px">{{a.ctSub}}</div><button type="button" class="btn ghost sm" style="margin-top: 6px" onClick="{{a.ctEdit}}">{{a.ctBtn}}</button></div><div>{{a.terms}}</div><div>{{a.territory}}</div><div>{{a.rep}}</div><div>{{a.open}}</div><div style="display: flex; align-items: center; gap: 8px"><button type="button" class="tog" aria-pressed="{{a.poOn}}" onClick="{{a.togPo}}" aria-label="Require a PO number for {{a.name}}"><span></span></button><span style="font-size: 12px; font-weight: 600">{{a.poTxt}}</span></div><div style="font-size: 13px">{{a.billTxt}}<div class="muted" style="font-size: 12px">{{a.locTxt}}</div></div><div style="text-align: right"><button type="button" class="btn ghost sm" onClick="{{a.addr}}">Addresses</button></div></div></sc-for>
       </div></div>
-      <p class="muted" style="font-size: 13px; margin: 12px 0 0">Stallings territory (MI, IN, OH, Western PA, WV, KY) is flagged for commission on every order from these accounts.</p></div>
+      <p class="muted" style="font-size: 13px; margin: 12px 0 0">Each account only sees the products turned on in its contract pricing, at its own prices, and signs a Distributor Agreement built from them. Stallings territory (MI, IN, OH, Western PA, WV, KY) is flagged for commission on every order from these accounts.</p></div>
     </sc-if>
 
     <!-- ================= ADMIN: PRICING ================= -->
     <sc-if value="{{v.aPricing}}" hint-placeholder-val="{{false}}">
+      <div class="card" style="margin-bottom: 16px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; background: #E8EEFF"><div style="max-width: 760px"><b style="font-size: 15px">These are LTC’s standard prices.</b><div class="muted" style="font-size: 14px; margin-top: 4px">Each account’s real products and prices live on its contract in Accounts. Use Fill From Standard Prices there to start from these numbers, then change anything for that contract.</div></div><button type="button" class="btn" onClick="{{goAccts}}">Go To Account Contracts</button></div>
       <div class="grid" style="align-items: start; grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr))">
         <div class="card">
           <h2 class="h2">Enterprise Contract Prices</h2>
@@ -1530,11 +1559,31 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
     <sc-if value="{{v.aReps}}" hint-placeholder-val="{{false}}">
       <div class="grid g4"><sc-for list="{{repKpis}}" as="k" hint-placeholder-count="4"><div class="card kpi"><div class="n">{{k.n}}</div><div class="l">{{k.l}}</div></div></sc-for></div>
       <div class="card" style="margin-top: 16px">
-        <div style="display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: center"><h3 class="h3">Reps</h3><span class="muted" style="font-size: 13px">Set each rep’s monthly goal and commission rate. Reps see their own numbers only.</span></div>
-        <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 1.6fr 1.2fr 1fr 1.4fr 130px 100px; --minw: 960px"><div class="tr th"><div>Rep</div><div>Territory</div><div>This Month</div><div>Year Goal</div><div>Monthly Goal ($)</div><div>Rate (%)</div></div>
-          <sc-for list="{{repRows}}" as="r" hint-placeholder-count="4"><div class="tr"><div><b>{{r.name}}</b><div class="muted" style="font-size: 12px">{{r.type}}</div></div><div>{{r.territory}}</div><div><b>{{r.month}}</b><div style="height: 6px; border-radius: 999px; background: #E8EEFF; margin-top: 4px; overflow: hidden"><div style="height: 100%; width: {{r.mBar}}%; background: #0A35C8"></div></div><div class="muted" style="font-size: 11px">{{r.mPct}}% of goal</div></div><div style="font-size: 13px">{{r.goalTxt}}<div style="height: 6px; border-radius: 999px; background: #E8EEFF; margin-top: 4px; overflow: hidden"><div style="height: 100%; width: {{r.gPct}}%; background: #B31942"></div></div></div><div style="width: 130px"><input class="inp" type="number" min="0" step="500" value="{{r.monthGoal}}" onChange="{{r.setMonth}}" aria-label="Monthly goal for {{r.name}}"></div><div style="width: 100px"><input class="inp" type="number" min="0" max="50" step="0.5" value="{{r.rate}}" onChange="{{r.setRate}}" aria-label="Commission rate for {{r.name}}"></div></div></sc-for>
+        <div style="display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: center"><h3 class="h3">Reps</h3><span class="muted" style="font-size: 13px">Set each rep’s monthly goal and commission plan. Reps see their own numbers only.</span></div>
+        <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 1.6fr 1.2fr 1fr 1.4fr 130px 1.6fr; --minw: 1120px"><div class="tr th"><div>Rep</div><div>Territory</div><div>This Month</div><div>Year Goal</div><div>Monthly Goal ($)</div><div>Commission Plan</div></div>
+          <sc-for list="{{repRows}}" as="r" hint-placeholder-count="4"><div class="tr"><div><b>{{r.name}}</b><div class="muted" style="font-size: 12px">{{r.type}}</div></div><div>{{r.territory}}</div><div><b>{{r.month}}</b><div style="height: 6px; border-radius: 999px; background: #E8EEFF; margin-top: 4px; overflow: hidden"><div style="height: 100%; width: {{r.mBar}}%; background: #0A35C8"></div></div><div class="muted" style="font-size: 11px">{{r.mPct}}% of goal</div></div><div style="font-size: 13px">{{r.goalTxt}}<div style="height: 6px; border-radius: 999px; background: #E8EEFF; margin-top: 4px; overflow: hidden"><div style="height: 100%; width: {{r.gPct}}%; background: #B31942"></div></div></div><div style="width: 130px"><input class="inp" type="number" min="0" step="500" value="{{r.monthGoal}}" onChange="{{r.setMonth}}" aria-label="Monthly goal for {{r.name}}"></div><div><div style="font-size: 13px; font-weight: 600">{{r.planTxt}}</div><div class="muted" style="font-size: 12px">This month so far: {{r.comMonth}}</div><button type="button" class="btn ghost sm" style="margin-top: 6px" onClick="{{r.editPlan}}">Edit Plan</button></div></div></sc-for>
         </div></div>
       </div>
+      <sc-if value="{{rp.on}}" hint-placeholder-val="{{false}}">
+      <div class="card" style="margin-top: 16px; border: 2px solid #0A35C8">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: flex-start"><div><div class="eyebrow">Commission Plan</div><h2 class="h2" style="margin-top: 4px">{{rp.name}}</h2><div class="muted" style="font-size: 13px; margin-top: 4px">{{rp.sub}}</div></div><div style="text-align: right"><div class="muted" style="font-size: 12px">This month so far</div><b style="font-size: 22px">{{rp.est}}</b></div></div>
+        <div class="grid g3" style="margin-top: 14px; gap: 10px">
+          <label><span class="lbl">Pay Basis</span><select class="inp" value="{{rp.basis}}" onChange="{{rp.setBasis}}"><option value="pct">% Of Sales</option><option value="unit">$ Per Unit Sold</option></select></label>
+          <label><span class="lbl">{{rp.rateLbl}}</span><input class="inp" type="number" min="0" step="0.25" value="{{rp.rate}}" onChange="{{rp.setRate}}"></label>
+          <label><span class="lbl">Bonus Over Monthly Goal (%)</span><input class="inp" type="number" min="0" step="0.5" value="{{rp.accel}}" onChange="{{rp.setAccel}}" placeholder="None"></label>
+          <label><span class="lbl">Monthly Base Pay ($)</span><input class="inp" type="number" min="0" step="50" value="{{rp.fixed}}" onChange="{{rp.setFixed}}" placeholder="None"></label>
+          <label><span class="lbl">Monthly Cap ($)</span><input class="inp" type="number" min="0" step="100" value="{{rp.cap}}" onChange="{{rp.setCap}}" placeholder="No cap"></label>
+        </div>
+        <h3 class="h3" style="margin-top: 18px">Account Rates</h3>
+        <div class="muted" style="font-size: 13px; margin-top: 4px">A rate here replaces the base rate on that account’s orders. Leave blank to use the base rate.</div>
+        <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: minmax(0, 2fr) 1.4fr 150px; --minw: 560px"><div class="tr th"><div>Account</div><div>Assigned To</div><div>{{rp.acctHead}}</div></div>
+          <sc-for list="{{rp.accts}}" as="a" hint-placeholder-count="4"><div class="tr"><div><b>{{a.name}}</b><div class="muted" style="font-size: 12px">{{a.type}}</div></div><div style="font-size: 13px">{{a.owner}}</div><div><input class="inp" type="number" min="0" step="0.25" value="{{a.val}}" placeholder="{{a.ph}}" onChange="{{a.set}}" aria-label="Account rate for {{a.name}}"></div></div></sc-for>
+        </div></div>
+        <label style="display: block; margin-top: 14px"><span class="lbl">Plan Notes (What The Signed Rep Agreement Says)</span><textarea class="inp" onChange="{{rp.setNote}}">{{rp.note}}</textarea></label>
+        <div class="card" style="margin-top: 14px; background: #F2F5FF; border-color: #DCE3F7"><b>How This Month Adds Up</b><sc-for list="{{rp.parts}}" as="x" hint-placeholder-count="2"><div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; padding: 6px 0; border-bottom: 1px solid #DCE3F7"><span>{{x.k}}</span><b>{{x.v}}</b></div></sc-for><div style="display: flex; justify-content: space-between; gap: 10px; font-size: 15px; padding-top: 8px"><b>Commission</b><b>{{rp.est}}</b></div></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; align-items: center"><button type="button" class="btn red" onClick="{{rp.save}}">Save Plan</button><button type="button" class="btn ghost" onClick="{{rp.close}}">Cancel</button><span class="muted" style="font-size: 13px">Payouts and the rep’s portal use this plan from the current month on. Months already paid don’t change.</span></div>
+      </div>
+      </sc-if>
       <div class="grid g2" style="margin-top: 16px; align-items: start">
         <div class="card">
           <h3 class="h3">Account Assignment</h3>
@@ -1916,7 +1965,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
       <div class="cssheet agdoc" style="padding: 30px 34px; background: #FFFFFF; font-size: 14px; line-height: 1.6">
         <div class="dh"><div class="dbrand">LIBERTY TOOL COMPANY</div><div class="dtitle">{{ag.agTitle}}</div><div class="dsub">{{ag.agSub}}</div><div style="font-size: 13px; margin-top: 8px">Effective Date: <b>{{af.sa.date}}</b></div></div>
         <div class="ptab"><span>Reseller legal name / entity type</span><b>{{af.sa.company}} · {{af.sa.entity}}</b><span>Reseller business address</span><b>{{af.sa.address}}</b><span>Authorized contact / title</span><b>{{af.sa.signer}} · {{af.sa.title}}</b><span>Notice email / telephone</span><b>{{af.sa.email}} · {{af.sa.phone}}</b><span>Liberty address / notice email</span><b>712 W. Cienega Ave, Unit A, San Dimas, CA 91773 · sales@libertytoolcompany.com</b><span>Part II effective date</span><b>{{af.sa.date}}</b><span>Approved sales channels / territories</span><b>{{af.sa.channels}}</b></div>
-        <sc-for list="{{ag.agBlocks}}" as="b" hint-placeholder-count="12"><sc-if value="{{b.h}}" hint-placeholder-val="{{false}}"><h4>{{b.x}}</h4></sc-if><sc-if value="{{b.s}}" hint-placeholder-val="{{false}}"><div class="ss">{{b.x}}</div></sc-if><sc-if value="{{b.p}}" hint-placeholder-val="{{true}}"><p>{{b.x}}</p></sc-if><sc-if value="{{b.sched}}" hint-placeholder-val="{{false}}"><h4>Schedule A — Liberty-Issued Product Pricing Notice</h4><div class="scroll"><div class="sch"><span class="th">Product</span><span class="th">SKU</span><span class="th">GTIN</span><span class="th">MAP</span><span class="th">MSRP</span><sc-for list="{{ag.agSched}}" as="r" hint-placeholder-count="4"><span>{{r.name}}</span><span>{{r.sku}}</span><span>{{r.gtin}}</span><span>{{r.map}}</span><span>{{r.msrp}}</span></sc-for></div></div></sc-if></sc-for>
+        <sc-for list="{{ag.agBlocks}}" as="b" hint-placeholder-count="12"><sc-if value="{{b.h}}" hint-placeholder-val="{{false}}"><h4>{{b.x}}</h4></sc-if><sc-if value="{{b.s}}" hint-placeholder-val="{{false}}"><div class="ss">{{b.x}}</div></sc-if><sc-if value="{{b.p}}" hint-placeholder-val="{{true}}"><p>{{b.x}}</p></sc-if><sc-if value="{{b.sched}}" hint-placeholder-val="{{false}}"><h4>Schedule A — Liberty-Issued Product Pricing Notice</h4><div class="scroll"><div class="sch"><span class="th">Product</span><span class="th">SKU</span><span class="th">GTIN</span><span class="th">MAP</span><span class="th">MSRP</span><sc-for list="{{af.sgSched}}" as="r" hint-placeholder-count="4"><span>{{r.name}}</span><span>{{r.sku}}</span><span>{{r.gtin}}</span><span>{{r.map}}</span><span>{{r.msrp}}</span></sc-for></div></div></sc-if><sc-if value="{{b.schedB}}" hint-placeholder-val="{{false}}"><sc-if value="{{af.hasPrice}}" hint-placeholder-val="{{false}}"><h4>Schedule B — Approved Products &amp; Reseller Purchase Pricing</h4><p>{{af.priceIntro}}</p><div class="scroll"><div class="sch"><span class="th">Product</span><span class="th">SKU</span><span class="th">MSRP</span><span class="th">Your Price</span><span class="th">{{af.brkHead}}</span><sc-for list="{{af.priceRows}}" as="r" hint-placeholder-count="4"><span>{{r.name}}</span><span>{{r.sku}}</span><span>{{r.msrp}}</span><span><b>{{r.price}}</b></span><span>{{r.brk}}</span></sc-for></div></div></sc-if></sc-if></sc-for>
         <div class="ack">✓ {{ag.agAck1}}</div><div class="ack">✓ {{ag.agAck2}}</div>
         <div class="agsig"><div><b style="font-size: 12px; letter-spacing: 0.08em">RESELLER</b><div class="ln"><sc-if value="{{af.sa.isImg}}" hint-placeholder-val="{{false}}"><img src="{{af.sa.sigData}}" alt="Signature"></sc-if><sc-if value="{{af.sa.isText}}" hint-placeholder-val="{{true}}"><span class="script">{{af.sa.sigText}}</span></sc-if></div><div style="font-size: 13px; margin-top: 6px">{{af.sa.signer}} · {{af.sa.title}}<br>{{af.sa.company}}<br>Signed {{af.sa.date}} at {{af.sa.time}}</div></div><div><b style="font-size: 12px; letter-spacing: 0.08em">LIBERTY TOOL COMPANY</b><div class="ln"></div><div style="font-size: 13px; margin-top: 6px">{{af.sa.ltc}}</div></div></div>
         <div class="muted" style="font-size: 12px; margin-top: 16px; border: 1px solid #DCE3F7; border-radius: 10px; padding: 8px 10px">Electronic signature record · Doc ID {{af.sa.id}} · Version {{af.sa.version}} · {{af.sa.email}}</div>
@@ -2047,14 +2096,16 @@ var PRODUCTS = [
   { id: 'four', name: '4-Score Complete Kit', tag: 'Kit · all four', msrp: 389 }
 ];
 var TRW = [
-  { id: 'hawk', name: 'Patch Hawk (10" x 10")', sku: '', gtin: '', msrp: 36.99, dist: 25.99, img: '/assets/logo-blue.png', spec: '10 x 10 inch hawk', body: 'A 10 x 10 inch hawk for holding patch and cove material while you work.', pts: ['10 x 10 inch platform', 'Made in the USA'] },
-  { id: 'snub', name: '6" Snub Flat Hanging Trowel', sku: 'LTC-SNUB', gtin: '00850089875118', msrp: 34.99, dist: 24.50, img: '/assets/sq-trowel.webp', spec: '6 inch snub-nose flat trowel', body: 'A 6 inch snub-nose flat trowel for hanging and finishing work.', pts: ['6 inch flat blade', 'Snub nose', 'Made in the USA'] },
-  { id: 'cct', name: '2" Can\u2019t Cove Trowel', sku: 'LTC-CCT', gtin: '00850089875088', msrp: 29.99, dist: 19.50, img: '/assets/sq-covet2.webp', spec: '2 inch cant cove', body: 'A 2 inch cant cove trowel for shaping a straight angled cove.', pts: ['2 inch cant cove', 'Made in the USA'] },
-  { id: 'cct45', name: '2" Can\u2019t Cove Trowel w/ 45\u00b0 Taper', sku: 'LTC-CCTW45', gtin: '00850089875055', msrp: 31.99, dist: 22.00, img: '/assets/sq-covet2.webp', spec: '2 inch cant cove, 45\u00b0 taper', body: 'A 2 inch cant cove trowel with a 45 degree taper.', pts: ['2 inch cant cove', '45\u00b0 taper', 'Made in the USA'] },
-  { id: 'ct4', name: '4" Standard Cove Trowel', sku: 'LTC-45CT', gtin: '00850089875064', msrp: 25.99, dist: 18.00, img: '/assets/sq-covet.webp', spec: '4 inch standard cove', body: 'A 4 inch standard cove trowel for shaping cove where the floor meets the wall.', pts: ['4 inch standard cove', 'Made in the USA'] },
-  { id: 'ct4t', name: '4" Standard Cove Trowel w/ 45\u00b0 Taper', sku: 'LTC-45CTW45', gtin: '00850089875071', msrp: 27.99, dist: 19.00, img: '/assets/sq-covet.webp', spec: '4 inch standard cove, 45\u00b0 taper', body: 'A 4 inch standard cove trowel with a 45 degree taper.', pts: ['4 inch standard cove', '45\u00b0 taper', 'Made in the USA'] },
-  { id: 'ct6', name: '6" Standard Cove Trowel', sku: 'LTC-65CT', gtin: '00850089875057', msrp: 25.99, dist: 18.00, img: '/assets/sq-covet.webp', spec: '6 inch standard cove', body: 'A 6 inch standard cove trowel for taller cove details.', pts: ['6 inch standard cove', 'Made in the USA'] },
-  { id: 'ct6t', name: '6" Standard Cove Trowel w/ 45\u00b0 Taper', sku: 'LTC-65CTW45', gtin: '00850089875095', msrp: 27.99, dist: 19.00, img: '/assets/sq-covet.webp', spec: '6 inch standard cove, 45\u00b0 taper', body: 'A 6 inch standard cove trowel with a 45 degree taper.', pts: ['6 inch standard cove', '45\u00b0 taper', 'Made in the USA'] }
+  { id: 'hawk', name: 'Patch Hawk', sku: 'LTC-PH', gtin: '00850089875125', msrp: 39.99, dist: 25.99, img: '/assets/logo-blue.png', spec: 'Patch hawk', body: 'A hawk for holding patch and cove material while you work.', pts: ['Holds patch and cove material', 'Made in the USA'] },
+  { id: 'snub', name: '6" Snub Flat Hanging Trowel', sku: 'LTC-SNUB', gtin: '00850089875118', msrp: 39.99, dist: 24.50, img: '/assets/sq-trowel.webp', spec: '6 inch snub-nose flat trowel', body: 'A 6 inch snub-nose flat trowel for hanging and finishing work.', pts: ['6 inch flat blade', 'Snub nose', 'Made in the USA'] },
+  { id: 'marg', name: '8" Marginal Trowel', sku: '', gtin: '', msrp: 23.99, dist: 14.00, img: '/assets/logo-blue.png', spec: '8 inch marginal trowel', body: 'An 8 inch marginal trowel for tight spots, edges and detail work.', pts: ['8 inch blade', 'Made in the USA'] },
+  { id: 'cct', name: '2" Can’t Cove Trowel', sku: 'LTC-CCT', gtin: '00850089875088', msrp: 34.99, dist: 20.50, img: '/assets/sq-covet2.webp', spec: '2 inch cant cove', body: 'A 2 inch cant cove trowel for shaping a straight angled cove.', pts: ['2 inch cant cove', 'Made in the USA'] },
+  { id: 'cct45', name: '2" Can’t Cove Trowel w/ 45° Taper', sku: 'LTC-CCTW45', gtin: '00850089875055', msrp: 39.99, dist: 23.50, img: '/assets/sq-covet2.webp', spec: '2 inch cant cove, 45° taper', body: 'A 2 inch cant cove trowel with a 45 degree taper.', pts: ['2 inch cant cove', '45° taper', 'Made in the USA'] },
+  { id: 'ct4', name: '4" Standard Cove Trowel', sku: 'LTC-45CT', gtin: '00850089875064', msrp: 28.99, dist: 18.00, img: '/assets/sq-covet.webp', spec: '4 inch standard cove', body: 'A 4 inch standard cove trowel for shaping cove where the floor meets the wall.', pts: ['4 inch standard cove', 'Made in the USA'] },
+  { id: 'ct4t', name: '4" Standard Cove Trowel w/ 45° Taper', sku: 'LTC-45CTW45', gtin: '00850089875071', msrp: 31.99, dist: 19.50, img: '/assets/sq-covet.webp', spec: '4 inch standard cove, 45° taper', body: 'A 4 inch standard cove trowel with a 45 degree taper.', pts: ['4 inch standard cove', '45° taper', 'Made in the USA'] },
+  { id: 'ct6', name: '6" Standard Cove Trowel', sku: 'LTC-65CT', gtin: '00850089875057', msrp: 29.99, dist: 18.00, img: '/assets/sq-covet.webp', spec: '6 inch standard cove', body: 'A 6 inch standard cove trowel for taller cove details.', pts: ['6 inch standard cove', 'Made in the USA'] },
+  { id: 'ct6t', name: '6" Standard Cove Trowel w/ 45° Taper', sku: 'LTC-65CTW45', gtin: '00850089875095', msrp: 32.99, dist: 19.50, img: '/assets/sq-covet.webp', spec: '6 inch standard cove, 45° taper', body: 'A 6 inch standard cove trowel with a 45 degree taper.', pts: ['6 inch standard cove', '45° taper', 'Made in the USA'] },
+  { id: 'strap', name: 'Broadcast Strap', sku: 'LTC-BCSTRAP', gtin: '00850089875132', msrp: 64.99, dist: 44.99, img: '/assets/logo-blue.png', spec: 'Broadcast strap', body: 'A broadcast strap for even, hands-steady broadcasting of flake and aggregate.', pts: ['For flake and aggregate broadcast', 'Made in the USA'] }
 ];
 var CADDY_SKU = { lowboy: ['LTC-LBO', '850089875002'], c2: ['LTC-2TC', '850089875019'], c4: ['LTC-4TC', '850089875026'], c6: ['LTC-6TC', '850089875033'] };
 var TOOLS = TRW.map(function (t) { return { id: t.id, name: t.name, msrp: t.msrp, sku: t.sku }; });
@@ -2365,7 +2416,7 @@ function payStmtNo(p, it) { return 'ST-' + p.key.replace('-', '') + '-' + it.id.
 function payStmtRows(it) {
   var rows = it.kind === 'aff'
     ? [['Eligible Tape Caddies Sold', String(it.units)], ['Rate', payUsd(PAY_AFF_RATE) + ' per caddy'], ['Commission', payUsd(it.base)]]
-    : [['Sales From Your Accounts', payUsd(it.sales)], ['Commission Rate', it.rate + '%'], ['Commission', payUsd(it.base)]];
+    : [['Sales From Your Accounts', payUsd(it.sales)]].concat(it.parts && it.parts.length ? it.parts.map(function (x) { return [x.k, (x.v < 0 ? '−' : '') + payUsd(Math.abs(x.v))]; }) : [['Commission Rate', it.rate + '%']], [['Commission', payUsd(it.base)]]);
   if (it.adj) rows.push(['Adjustment' + (it.note ? ' (' + it.note + ')' : ''), (it.adj > 0 ? '+' : '−') + payUsd(Math.abs(it.adj))]);
   return rows.map(function (r) { return { k: r[0], v: r[1] }; });
 }
@@ -2468,6 +2519,37 @@ function repYtd(r) { var m = repMonthIdx(); return r.ytd.slice(0, m + 1).reduce(
 function repYtdUnits(r) { var m = repMonthIdx(), u = r.ytdUnits || r.ytd.map(function (x) { return Math.round(x / 100); }); return u.slice(0, m + 1).reduce(function (a, b) { return a + b; }, 0); }
 function repThisMonth(r) { return r.ytd[repMonthIdx()] || 0; }
 function repUsd(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+// ---- Commission plans: each rep's pay basis, base rate, account rates, bonus over goal, base pay and cap ----
+function repN(v) { var n = parseFloat(v); return isNaN(n) ? 0 : n; }
+function repSet(v) { return v !== '' && v != null && !isNaN(parseFloat(v)); }
+function repPlan(r) { var p = (r && r.plan) || {}; return { basis: p.basis === 'unit' ? 'unit' : 'pct', rate: repSet(p.rate) ? repN(p.rate) : repN(r && r.rate), accts: p.accts || {}, accel: repN(p.accel), fixed: repN(p.fixed), cap: repN(p.cap), note: p.note || '' }; }
+function repMoney(n) { return '$' + (Math.round(n * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function repRateTxt(P, rate) { return P.basis === 'unit' ? repMoney(rate) + ' per unit' : rate + '% of sales'; }
+function repPlanTxt(P) { var n = Object.keys(P.accts).filter(function (k) { return repSet(P.accts[k]); }).length; return [repRateTxt(P, P.rate)].concat(n ? [n + ' account rate' + (n > 1 ? 's' : '')] : [], P.accel ? ['+' + P.accel + '% over goal'] : [], P.fixed ? [repMoney(P.fixed) + '/mo base'] : [], P.cap ? ['cap ' + repMoney(P.cap) + '/mo'] : []).join(' · '); }
+function repUnitsAt(r, i) { var u = r.ytdUnits || (r.ytd || []).map(function (x) { return Math.round(x / 100); }); return u[i] || 0; }
+function repAcctMonth(orders, assign, rid, y, m) {
+  var out = {};
+  (orders || []).forEach(function (o) { if ((assign || {})[o.acct] !== rid) return; var t = new Date(Date.parse(o.created)); if (isNaN(t.getTime()) || t.getFullYear() !== y || t.getMonth() !== m) return; var x = out[o.acct] = out[o.acct] || { sales: 0, units: 0 }; x.sales += (o.value != null ? o.value : o.list) || 0; x.units += o.units || 0; });
+  return out;
+}
+// sales/units = the rep's month; acctSales = the part of that month from accounts with their own rate
+function repCalc(r, sales, units, acctSales, names) {
+  var P = repPlan(r), parts = [], left = { sales: sales, units: units };
+  parts.push({ k: P.basis === 'unit' ? units + ' units × ' + repMoney(P.rate) : repMoney(sales) + ' in sales × ' + P.rate + '%', v: P.basis === 'unit' ? units * P.rate : sales * P.rate / 100 });
+  Object.keys(acctSales || {}).forEach(function (k) {
+    if (!repSet(P.accts[k])) return;
+    var o = repN(P.accts[k]), a = acctSales[k], s0 = Math.min(a.sales, left.sales), u0 = Math.min(a.units, left.units); left.sales -= s0; left.units -= u0;
+    var amt = P.basis === 'unit' ? u0 * (o - P.rate) : s0 * (o - P.rate) / 100; if (!amt) return;
+    parts.push({ k: ((names || {})[k] || k) + ' at ' + repRateTxt(P, o) + ' (' + (P.basis === 'unit' ? u0 + ' units' : repMoney(s0)) + ')', v: amt });
+  });
+  if (P.accel && r.monthGoal && sales > r.monthGoal) parts.push({ k: 'Bonus over monthly goal: ' + repMoney(sales - r.monthGoal) + ' × ' + P.accel + '%', v: (sales - r.monthGoal) * P.accel / 100 });
+  if (P.fixed) parts.push({ k: 'Monthly base pay', v: P.fixed });
+  var tot = parts.reduce(function (t, p) { return t + p.v; }, 0);
+  if (P.cap && tot > P.cap) { parts.push({ k: 'Monthly cap of ' + repMoney(P.cap), v: P.cap - tot }); tot = P.cap; }
+  return { total: Math.round(Math.max(0, tot) * 100) / 100, parts: parts.map(function (p) { return { k: p.k, v: Math.round(p.v * 100) / 100 }; }), plan: P, txt: repPlanTxt(P) };
+}
+var STALL_NOTE = 'Executed rep agreement governs. 7% on territory sales (MI, IN, OH, Western PA, WV, KY); +2% on Sherwin-Williams nationwide; 9% on Stallings Sherwin-Williams territory sales; 1% net-driven in place of 7% (territory only); Addendum A exceptions for relationships before July 27, 2026.';
+
 function repGoalPct(r) { if (!r.goal) return 0; var v = r.goalType === 'units' ? repYtdUnits(r) : repYtd(r); return Math.min(100, Math.round(v / r.goal * 100)); }
 function repBoard(d, period) {
   return d.reps.map(function (r) { var v = period === 'ytd' ? repYtd(r) : repThisMonth(r); var g = period === 'ytd' ? 0 : r.monthGoal; return { r: r, v: v, pct: g ? Math.round(v / g * 100) : 0 }; })
@@ -2492,7 +2574,8 @@ function prodSeed() {
 }
 var PROD_BASE = null;
 function prodMig(d) { if (!d || !d.products || d.v >= 2) return d; var seedL = PROD_BASE.products; d.products = d.products.filter(function (p) { return p.id !== 'ftrowel' && p.id !== 'ctrowel'; }); seedL.forEach(function (sp) { var ex = d.products.find(function (p) { return p.id === sp.id; }); if (!ex) d.products.push(JSON.parse(JSON.stringify(sp))); else { if (!ex.sku && sp.sku) ex.sku = sp.sku; if (!ex.upc && sp.upc) ex.upc = sp.upc; if (ex.msrp == null && sp.msrp != null) ex.msrp = sp.msrp; } }); d.v = 2; return d; }
-function prodLoad() { if (!PROD_BASE) PROD_BASE = prodSeed(); var d = null; try { d = JSON.parse(localStorage.getItem(PROD_KEY) || 'null'); } catch (e) { d = null; } d = prodMig(d); return d && d.products ? d : JSON.parse(JSON.stringify(PROD_BASE)); }
+function prodMig3(d) { if (!d || !d.products || d.v >= 3) return d; TRW.forEach(function (t, i) { var ex = d.products.find(function (p) { return p.id === t.id; }), sp = PROD_BASE.products.find(function (p) { return p.id === t.id; }); if (!ex) { var at = d.products.length; d.products.splice(at, 0, JSON.parse(JSON.stringify(sp))); return; } ex.name = t.name; ex.msrp = t.msrp; if (t.sku) ex.sku = t.sku; if (t.gtin) ex.upc = t.gtin; if (t.id === 'hawk') { ex.spec = t.spec; ex.body = t.body; ex.pts = t.pts.slice(); } }); d.v = 3; return d; }
+function prodLoad() { if (!PROD_BASE) PROD_BASE = prodSeed(); var d = null; try { d = JSON.parse(localStorage.getItem(PROD_KEY) || 'null'); } catch (e) { d = null; } d = prodMig3(prodMig(d)); return d && d.products ? d : JSON.parse(JSON.stringify(PROD_BASE)); }
 function prodSave(d) { try { localStorage.setItem(PROD_KEY, JSON.stringify(d)); } catch (e) {} }
 function prodIsKit(id) { var p = (PROD_STORE.products || []).find(function (x) { return x.id === id; }); return p ? p.cat === 'kit' : ['cove', 'ddd', 'triple', 'four'].indexOf(id) >= 0; }
 function prodIsTool(id) { var p = (PROD_STORE.products || []).find(function (x) { return x.id === id; }); return p ? (p.cat === 'trowel' || p.cat === 'other') : (TRW.some(function (t) { return t.id === id; })); }
@@ -2616,7 +2699,7 @@ function shipMigrate(d) {
   return d;
 }
 function locBill(d, acct, l) { return l && !l.billSame && addrOk(l.bill) ? l.bill : ((d.addresses || {})[acct] || {}).bill; }
-function loadData() { var d = null; try { d = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { d = null; } return authMigrate(extMigrate(applyAccts(shipMigrate(addrMigrate(d || seed()))))); }
+function loadData() { var d = null; try { d = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { d = null; } return ctMigrate(authMigrate(extMigrate(applyAccts(shipMigrate(addrMigrate(d || seed())))))); }
 function saveData(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
 function blankForm(a) { return { type: a.id === 'ent' ? 'stores' : 'dc', company: a.name, buyer: a.buyer.split(' · ')[0], email: a.email || '', phone: a.phone || '', po: '', vendor: a.vendor || '', start: '', end: '', notes: '', shipName: a.name, addr: '', city: '', st: '', zip: '', hours: '', freight: 'Prepaid & Add', pay: 'Net terms (approved accounts)', carrier: '', reqs: {}, docs: {}, acc: {}, labels: [] }; }
 
@@ -2703,6 +2786,11 @@ function extMigrate(d) {
     TRW.forEach(function (t) { if (d.pricing.tool[t.id] == null || d.pricing.tool[t.id] === '') d.pricing.tool[t.id] = String(t.dist.toFixed(2)); });
     d.demoV = 5;
   }
+  if (d.demoV < 6) {
+    d.pricing.tool = d.pricing.tool || {};
+    TRW.forEach(function (t) { d.pricing.tool[t.id] = String(t.dist.toFixed(2)); });
+    d.demoV = 6;
+  }
   return d;
 }
 function poPrefix(a) { var w = String((a && a.name) || 'PO').replace(/[^A-Za-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean); return (w.length > 1 ? w.map(function (x) { return x[0]; }).join('') : (w[0] || 'PO').slice(0, 3)).toUpperCase().slice(0, 4); }
@@ -2742,10 +2830,12 @@ var DIST_AG = [
   { t: 's', x: '5. Acknowledgment of receipt only' },
   { t: 'p', x: 'The undersigned confirms receipt of Part I and the issued Schedule A. This acknowledgment is not an agreement to set resale prices, a promise to comply with MAP, or consent to coordinate pricing with Liberty or other resellers. Signing Part II does not change this limited acknowledgment.' },
   { t: 'sched', x: '' },
+  { t: 'schedB', x: '' },
   { t: 'h', x: 'Part III — Binding Reseller Protection Agreement' },
   { t: 'p', x: 'Liberty and the reseller identified above agree to the following business terms as of the Part II effective date. These terms do not create a promise to observe the unilateral MAP in Part I.' },
   { t: 's', x: '1. Independent business; authorization' },
   { t: 'p', x: 'Reseller is an independent business, not Liberty’s employee, agent, partner, franchisee, or representative authorized to bind Liberty. Reseller is responsible for its personnel, expenses, taxes, permits, and legal compliance. Any reseller authorization is nonexclusive and limited to the written channels and territories above. This Agreement grants no exclusive territory, guaranteed supply, sales volume, profit, or margin. Reseller may sell competing products. The signing representative warrants authority to bind the reseller entity; no personal guarantee is created.' },
+  { t: 'p', x: 'Reseller may purchase from Liberty only the products listed in Schedule B, at the purchase prices listed there. Liberty may issue a revised Schedule B by written notice through the LTC Partner Portal; a revision applies to orders placed after Reseller’s authorized signer accepts it. Purchase orders Liberty has already accepted keep the prices in effect when they were accepted. Schedule B sets only what Reseller pays Liberty; Reseller independently sets its own resale prices.' },
   { t: 's', x: '2. Product integrity, brand use, and customer disclosures' },
   { t: 'p', x: 'Liberty grants a limited, nonexclusive, nontransferable license during authorization to use its approved marks and product materials solely to market genuine, covered products. Reseller shall preserve required labels, warnings, and traceability; shall not alter or repackage products without written approval; and shall not register Liberty marks in domains, business names, or social handles. Reseller shall not impersonate Liberty, imply exclusive status, make unsupported performance claims, or promise warranties Liberty has not authorized. Reseller shall accurately disclose product condition, availability, seller identity, charges, returns, and applicable written warranty terms. Reseller’s own commitments remain its responsibility. No product-warranty disclaimer or limitation is created by this Agreement; separately supplied warranty and sales terms apply subject to law.' },
   { t: 's', x: '3. Optional maximum actual resale price' },
@@ -2785,12 +2875,13 @@ function fmtClock(ms) { return new Date(ms).toLocaleTimeString('en-US', { hour: 
 function authRec(d, id) { d.auth = d.auth || {}; return d.auth[id] || (d.auth[id] = {}); }
 function findLogin(d, email) { var e = String(email || '').trim().toLowerCase(), hit = null; if (!e) return null; Object.keys(d.team || {}).forEach(function (k) { (d.team[k] || []).forEach(function (u) { if (!hit && String(u.email || '').toLowerCase() === e) hit = { acct: k, u: u }; }); }); return hit; }
 function findUserId(d, id) { var hit = null; Object.keys(d.team || {}).forEach(function (k) { (d.team[k] || []).forEach(function (u) { if (!hit && u.id === id) hit = { acct: k, u: u }; }); }); return hit; }
-function effStatus(d, u) { if (u.status === 'Off') return 'Off'; var r = (d.auth || {})[u.id] || {}; if (u.status === 'Invited') return r.expires && r.expires < nowMs() ? 'Invite Expired' : 'Invited'; if (r.lockUntil && r.lockUntil > nowMs()) return 'Locked'; if (r.temp) return 'Temp Password'; return 'Active'; }
-var ST_COL = { Active: ['#E3F3EA', '#2E7D4F'], Invited: ['#FFF3DC', '#8A5A00'], 'Invite Expired': ['#FDECEF', '#B31942'], Locked: ['#FDECEF', '#B31942'], 'Temp Password': ['#E8EEFF', '#0A35C8'], Off: ['#ECEEF2', '#4A5568'] };
+function effStatus(d, u) { if (u.status === 'Off') return 'Off'; if (u.status === 'Hold') { var hh = findUserId(d, u.id); return hh && ctLive(d, hh.acct) ? 'Not Invited' : 'Pricing Needed'; } var r = (d.auth || {})[u.id] || {}; if (u.status === 'Invited') return r.expires && r.expires < nowMs() ? 'Invite Expired' : 'Invited'; if (r.lockUntil && r.lockUntil > nowMs()) return 'Locked'; if (r.temp) return 'Temp Password'; return 'Active'; }
+var ST_COL = { 'Pricing Needed': ['#FDECEF', '#B31942'], 'Not Invited': ['#FFF3DC', '#8A5A00'], Active: ['#E3F3EA', '#2E7D4F'], Invited: ['#FFF3DC', '#8A5A00'], 'Invite Expired': ['#FDECEF', '#B31942'], Locked: ['#FDECEF', '#B31942'], 'Temp Password': ['#E8EEFF', '#0A35C8'], Off: ['#ECEEF2', '#4A5568'] };
 function pwRules(nw, cf, email) { nw = nw || ''; var local = String(email || '').split('@')[0].toLowerCase(); return [['10+ characters', nw.length >= AUTH.minLen], ['A letter', /[A-Za-z]/.test(nw)], ['A number', /\d/.test(nw)], ['Not your email', !!nw && (!local || nw.toLowerCase().indexOf(local) < 0)], ['Passwords match', !!nw && nw === cf]]; }
 function tempPassword() { var a = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789', out = ''; for (var i = 0; i < 12; i++) { out += a[Math.floor(Math.random() * a.length)]; if (i === 3 || i === 7) out += '-'; } return out; }
 function canSignAg(u) { return !!u && (u.role === 'Account Admin' || !!(u.perms && u.perms.team)); }
-function agSigned(d, acct) { var g = (d.agreements || {})[acct]; return !!(g && g.signedAt); }
+function agSigned(d, acct) { var g = (d.agreements || {})[acct]; if (!(g && g.signedAt)) return false; var c = ctLive(d, acct); return !c || g.ctHash === ctHash(c); }
+function agResign(d, acct) { var g = (d.agreements || {})[acct]; return !!(g && g.signedAt) && !agSigned(d, acct); }
 function acctAdmin(d, acct) { return ((d.team || {})[acct] || []).find(function (u) { return u.role === 'Account Admin' && u.status !== 'Off'; }) || null; }
 function authMigrate(d) {
   if (MODE === 'admin' && d.authV) return d;
@@ -2818,21 +2909,101 @@ function authBoot(d) {
   var base = { menuOpen: false, au: blankAu(), ag: blankAg(), tempPw: null, agOpen: false };
   if (MODE === 'admin') return Object.assign(base, { signed: true });
   var ss = readSession(), hit = ss ? findUserId(d, ss.user) : null;
-  if (hit && effStatus(d, hit.u) !== 'Off' && hit.u.status !== 'Invited') return Object.assign(base, { signed: true, acct: hit.acct, user: hit.u.id, form: blankForm(ACCTS[hit.acct]) });
+  if (hit && effStatus(d, hit.u) !== 'Off' && hit.u.status !== 'Invited' && hit.u.status !== 'Hold') return Object.assign(base, { signed: true, acct: hit.acct, user: hit.u.id, form: blankForm(ACCTS[hit.acct]) });
   return Object.assign(base, { signed: false });
+}
+
+// ---- Per-account contract pricing: the products an account can buy and its price for each ----
+function ctCatalog() {
+  var list = (PROD_STORE.products || []).filter(function (p) { return p.status === 'Active' && p.portal !== false; });
+  if (!list.length) list = PRODUCTS.map(function (p) { return { id: p.id, name: p.name, cat: prodIsKit(p.id) ? 'kit' : 'caddy', msrp: p.msrp }; }).concat(TOOLS.map(function (t) { return { id: t.id, name: t.name, cat: 'trowel', msrp: t.msrp, sku: t.sku }; }));
+  return list.map(function (p) { var ck = (typeof CADDY_SKU !== 'undefined' && CADDY_SKU[p.id]) || []; return { id: p.id, name: p.name, cat: p.cat || 'caddy', msrp: p.msrp, sku: p.sku || ck[0] || '', gtin: p.upc || ck[1] || '' }; });
+}
+function ctBlank() { var it = {}; ctCatalog().forEach(function (p) { it[p.id] = { on: false, price: '', brk: '' }; }); return { items: it, breakMin: '100', ver: 0, savedAt: '', savedBy: '' }; }
+function ctDefault(d, model) {
+  var P = (d && d.pricing) || blankPricing(), it = {}, dp = num(P.dealerPct), str = function (v) { return v == null ? '' : String(v); };
+  ctCatalog().forEach(function (p) {
+    var price = '', brk = '';
+    if (model === 'dealer') { price = dp == null || p.msrp == null ? '' : (p.msrp * (1 - dp / 100)).toFixed(2); }
+    else if (p.cat === 'caddy' || p.cat === 'kit') { price = str(model === 'tier' ? (P.dist || {})[p.id] : (P.contract || {})[p.id]); brk = str(model === 'tier' ? (P.distBreak || {})[p.id] : (P.contractBreak || {})[p.id]); }
+    else price = str((P.tool || {})[p.id]);
+    it[p.id] = { on: price !== '', price: price, brk: brk };
+  });
+  return { items: it, breakMin: model === 'dealer' ? '' : str(P.contractBreakMin || '100'), ver: 0, savedAt: '', savedBy: '' };
+}
+function ctOf(d, k) { return ((d && d.contracts) || {})[k] || null; }
+function ctLive(d, k) { var c = ctOf(d, k); return c && c.ver > 0 ? c : null; }
+function ctOnList(c) { return !c ? [] : ctCatalog().filter(function (p) { return c.items && c.items[p.id] && c.items[p.id].on; }); }
+function ctProblems(c) {
+  var on = ctOnList(c), out = [];
+  if (!on.length) out.push('turn on at least one product');
+  on.forEach(function (p) { var it = c.items[p.id], pr = num(it.price), bk = num(it.brk); if (pr == null) out.push(p.name + ' price'); else if (bk != null && bk > pr) out.push(p.name + ' volume price is higher than its price'); });
+  if (on.some(function (p) { return num(c.items[p.id].brk) != null; }) && num(c.breakMin) == null) out.push('the volume price unit count');
+  return out;
+}
+function ctHash(c) { if (!c) return ''; var bm = num(c.breakMin); return ctOnList(c).map(function (p) { var it = c.items[p.id], bk = num(it.brk); return p.id + ':' + num(it.price) + ':' + (bk == null ? '' : bk); }).join('|') + '@' + (bm == null ? '' : bm); }
+function agSchedFrom(c) { return ctOnList(c).map(function (p) { var m = p.msrp != null ? money(p.msrp) : '—'; return { name: p.name, sku: p.sku || '—', gtin: p.gtin || '—', map: m, msrp: m }; }); }
+function agPriceFrom(c) { var bm = num(c && c.breakMin); return ctOnList(c).map(function (p) { var it = c.items[p.id], pr = num(it.price), bk = num(it.brk); return { name: p.name, sku: p.sku || '—', msrp: p.msrp != null ? money(p.msrp) : '—', price: pr != null ? money(pr) : '—', brk: bk != null && bm != null ? money(bk) : '—' }; }); }
+function agBrkHead(c) { var bm = num(c && c.breakMin); return bm != null ? 'At ' + bm + '+ Units' : 'Volume Price'; }
+var CT_SEED = {
+  ent: { breakMin: '100', caddy: { lowboy: [62, 58], c2: [62, 58], c4: [69, 65], c6: [83, 78] }, tools: 'all' },
+  dist: { breakMin: '100', caddy: { lowboy: [62, 58], c2: [62, 58], c4: [69, 65], c6: [83, 78] }, tools: 'all' },
+  dealer: { breakMin: '', caddy: { lowboy: [66.75], c2: [66.75], c4: [74.25], c6: [89.25] }, tools: [] },
+  multi: { breakMin: '100', caddy: { lowboy: [60, 56], c2: [60, 56], c4: [67, 63], c6: [81, 76] }, tools: ['cct', 'cct45', 'ct4', 'ct4t', 'ct6', 'ct6t'] }
+};
+function ctFromSeed(x) {
+  var c = ctBlank(); c.breakMin = x.breakMin;
+  Object.keys(x.caddy).forEach(function (id) { if (!c.items[id]) return; var v = x.caddy[id]; c.items[id] = { on: true, price: v[0].toFixed(2), brk: v[1] != null ? v[1].toFixed(2) : '' }; });
+  TRW.forEach(function (t) { if (!c.items[t.id]) return; if (x.tools === 'all' || x.tools.indexOf(t.id) >= 0) c.items[t.id] = { on: true, price: t.dist.toFixed(2), brk: '' }; });
+  return c;
+}
+function ctMigrate(d) {
+  if (d.ctV >= 1) return d;
+  d.contracts = d.contracts || {};
+  var when = fmtDay(nowMs() - 5 * 864e5);
+  Object.keys(ACCTS).forEach(function (k) {
+    if (d.contracts[k]) return;
+    var c = CT_SEED[k] ? ctFromSeed(CT_SEED[k]) : ctDefault(d, (ACCTS[k] || {}).model);
+    if (ctProblems(c).length) { d.contracts[k] = c; return; }
+    c.ver = 1; c.savedAt = when; c.savedBy = 'LTC Admin'; d.contracts[k] = c;
+  });
+  Object.keys(d.agreements || {}).forEach(function (k) { var g = d.agreements[k], c = ctLive(d, k); if (g && g.signedAt && c && !g.ctHash) { g.ctHash = ctHash(c); g.ctVer = c.ver; g.sched = agSchedFrom(c); g.price = agPriceFrom(c); g.brkHead = agBrkHead(c); g.terms = (ACCTS[k] || {}).terms || ''; } });
+  d.ctV = 1;
+  return d;
+}
+
+var SG_STEPS = [
+  { t: 'Sign In', b: 'Go to partner.libertytoolcompany.com and sign in with your work email.', p: ['First time? Open your invite email and click Accept Invite to set your password. Invites work for 7 days.', 'Forgot your password? Click Forgot Password. The reset link works once, for 60 minutes.', '5 wrong tries locks the login for 15 minutes. Your Account Admin can unlock it.'] },
+  { t: 'Start A Store Restock', b: 'Click New Order. Store Restock is already picked, and it ships to your store.', p: ['You only see the products your company buys from LTC, at your company’s prices.', 'Enter how many of each item you need.', 'Add your PO number, or click Generate A PO if your company uses portal POs.', 'Pick a ship window, or ASAP.'] },
+  { t: 'Review And Submit', b: 'Check the items, ship-to address and PO, then click Submit Order.', p: ['If your company requires approval, the order shows Awaiting Approval until your approver signs off.', 'You get an LTC order number (LTC-####) to reference in messages.'] },
+  { t: 'Track Your Order', b: 'Open Orders to see where every order stands.', p: ['Received → Acknowledged → Freight Review → Shipped → Delivered.', 'Shipped orders show a tracking link.'] },
+  { t: 'Change Or Cancel', b: 'Open the order and click Request A Change or Request To Cancel before it ships.', p: ['LTC confirms by message.', 'Once an order ships it can’t be canceled. If something arrives wrong, use Returns & Claims.'] },
+  { t: 'Problem With A Delivery', b: 'Use Returns & Claims for damaged, missing or wrong items in a shipment.', p: ['Add photos of the boxes and the items.', 'Claims cover shipping problems only. Returns from your own customers are handled at your counter under your store’s policy.'] },
+  { t: 'Who Pays', b: 'You don’t pay at the store.', p: ['LTC invoices your company’s accounts payable on your company’s payment terms.', 'Freight terms are set on your company’s account and shown on each order.', 'Reports show your own store’s orders only.'] },
+  { t: 'Get Help', b: 'We’re here when you need us.', p: ['Messages: send LTC a note from the portal.', 'Book Time: schedule staff training, a demo or reorder planning.', 'Text or call 239-744-8403 (24/7) · sales@libertytoolcompany.com'] }
+];
+var SG_CANT = ['Place Multi-Store Distribution orders', 'Sign the Distributor Agreement (your Account Admin does that)', 'See billing or manage your company’s team'];
+function sgDocHtml(co) {
+  var e = agEsc, abs = function (u) { try { return new URL(u, location.href).href; } catch (x) { return u; } };
+  var steps = SG_STEPS.map(function (x, i) { return '<div class="st"><div class="n">' + (i + 1) + '</div><div><h3>' + e(x.t) + '</h3><p>' + e(x.b) + '</p><ul>' + x.p.map(function (q) { return '<li>' + e(q) + '</li>'; }).join('') + '</ul></div></div>'; }).join('');
+  return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LTC Store Quick Guide</title><style>@page{size:Letter;margin:0.45in}body{font-family:Inter,Arial,sans-serif;color:#071A52;margin:0 auto;max-width:7.6in;font-size:12px;line-height:1.45}.hd{background:#0A35C8;color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;-webkit-print-color-adjust:exact;print-color-adjust:exact}.hd img{height:38px}.hd b{font-size:11px;letter-spacing:.16em;text-transform:uppercase}h1{font-size:24px;text-transform:uppercase;margin:14px 0 2px}.sub{color:#4A5578;margin:0 0 10px}.g{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px}.st{display:flex;gap:10px;break-inside:avoid}.n{flex:none;width:26px;height:26px;border-radius:50%;background:#B31942;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;-webkit-print-color-adjust:exact;print-color-adjust:exact}h3{margin:2px 0;font-size:14px;text-transform:uppercase}p{margin:0 0 4px;font-weight:600}ul{margin:0;padding-left:16px}li{margin:2px 0}.cant{margin-top:12px;padding:10px 14px;background:#F2F5FF;border:1px solid #DCE3F7;border-radius:8px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.f{margin-top:12px;border-top:2px solid #0A35C8;padding-top:8px;font-size:11px;color:#4A5578}</style></head><body>' +
+    '<div class="hd"><img src="' + abs('/assets/logo-white.png') + '" alt="Liberty Tool Company"><b>Partner Portal · Store Quick Guide</b></div>' +
+    '<h1>Ordering For Your Store</h1><div class="sub">For store managers and counter staff' + (co ? ' at ' + e(co) : '') + '. Everything you need to restock your store in the LTC Partner Portal.</div>' +
+    '<div class="g">' + steps + '</div><div class="cant"><b>Store logins can’t:</b> ' + SG_CANT.map(e).join(' · ') + '</div>' +
+    '<div class="f"><b style="color:#0A35C8">LIBERTY TOOL COMPANY</b> · Veteran-Owned · Family-Owned · Made In The USA · partner.libertytoolcompany.com · 239-744-8403 · sales@libertytoolcompany.com</div></body></html>';
 }
 function agEsc(t) { return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 function agSchedRows() { return ['lowboy', 'c2', 'c4', 'c6'].map(function (id) { var p = PRODUCTS.find(function (x) { return x.id === id; }) || { name: id, msrp: 0 }, sk = (typeof CADDY_SKU !== 'undefined' && CADDY_SKU[id]) || ['', '']; return { name: p.name, sku: sk[0], gtin: sk[1], map: money(p.msrp), msrp: money(p.msrp) }; }); }
 function agDocHtml(g, acctName) {
-  var e = agEsc, rows = agSchedRows().map(function (r) { return '<tr><td>' + e(r.name) + '</td><td>' + e(r.sku) + '</td><td>' + e(r.gtin) + '</td><td>' + e(r.map) + '</td><td>' + e(r.msrp) + '</td></tr>'; }).join('');
-  var body = DIST_AG.map(function (b) { if (b.t === 'h') return '<h4>' + e(b.x) + '</h4>'; if (b.t === 's') return '<div class="ss">' + e(b.x) + '</div>'; if (b.t === 'sched') return '<h4>Schedule A — Liberty-Issued Product Pricing Notice</h4><p>Issued by Liberty only. No reseller acceptance of MAP is requested. Currency: USD. Condition: new, one unit. Territory and channels: as approved above. Optional ceiling: not activated.</p><table class="sch"><tr><th>Product</th><th>SKU</th><th>GTIN</th><th>MAP</th><th>MSRP (suggested)</th></tr>' + rows + '</table>'; return '<p>' + e(b.x) + '</p>'; }).join('');
+  var e = agEsc, prow = (g.price || []).map(function (r) { return '<tr><td>' + e(r.name) + '</td><td>' + e(r.sku) + '</td><td>' + e(r.msrp) + '</td><td><b>' + e(r.price) + '</b></td><td>' + e(r.brk) + '</td></tr>'; }).join(''), rows = (g.sched || agSchedRows()).map(function (r) { return '<tr><td>' + e(r.name) + '</td><td>' + e(r.sku) + '</td><td>' + e(r.gtin) + '</td><td>' + e(r.map) + '</td><td>' + e(r.msrp) + '</td></tr>'; }).join('');
+  var body = DIST_AG.map(function (b) { if (b.t === 'h') return '<h4>' + e(b.x) + '</h4>'; if (b.t === 's') return '<div class="ss">' + e(b.x) + '</div>'; if (b.t === 'schedB') return prow ? '<h4>Schedule B — Approved Products &amp; Reseller Purchase Pricing</h4><p>' + 'Products Reseller is approved to buy from Liberty, and Reseller’s purchase price per unit in USD, before freight and taxes. Revision ' + e(g.ctVer || 1) + (g.terms ? '. Payment terms: ' + e(g.terms) : '') + '. Reseller independently sets its own resale prices.' + '</p><table class="sch"><tr><th>Product</th><th>SKU</th><th>MSRP</th><th>Your Price</th><th>' + e(g.brkHead || 'Volume Price') + '</th></tr>' + prow + '</table>' : ''; if (b.t === 'sched') return '<h4>Schedule A — Liberty-Issued Product Pricing Notice</h4><p>Issued by Liberty only. No reseller acceptance of MAP is requested. Currency: USD. Condition: new, one unit. Territory and channels: as approved above. Optional ceiling: not activated.</p><table class="sch"><tr><th>Product</th><th>SKU</th><th>GTIN</th><th>MAP</th><th>MSRP (suggested)</th></tr>' + rows + '</table>'; return '<p>' + e(b.x) + '</p>'; }).join('');
   var sigR = g.sigData ? '<img src="' + g.sigData + '" alt="Signature" style="max-height:62px">' : '<span class="script">' + e(g.sigText) + '</span>';
   var parties = [['Reseller legal name / entity type', g.company + ' · ' + g.entity], ['Reseller business address', g.address], ['Authorized contact / title', g.signer + ' · ' + g.title], ['Notice email / telephone', g.email + ' · ' + g.phone], ['Liberty address / notice email', '712 W. Cienega Ave, Unit A, San Dimas, CA 91773 · sales@libertytoolcompany.com'], ['Part II effective date', g.signedAt], ['Approved sales channels / territories', g.channels || 'As approved by Liberty in writing']].map(function (r) { return '<tr><td>' + e(r[0]) + '</td><td><b>' + e(r[1]) + '</b></td></tr>'; }).join('');
   return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LTC Distributor Agreement - ' + e(g.company) + '</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;600;700&display=swap"><style>@page{size:Letter;margin:0.7in}body{font-family:Inter,Arial,sans-serif;color:#1E2633;font-size:12.5px;line-height:1.55;max-width:7.2in;margin:24px auto;padding:0 16px}h1{letter-spacing:.18em;color:#0A35C8;text-align:center;font-size:20px;margin:0}.t{text-align:center;font-weight:800;text-transform:uppercase;font-size:17px;margin-top:4px}.st{text-align:center;color:#B31942;font-weight:700;font-size:12px}.hd{border-bottom:2px solid #0A35C8;padding-bottom:12px;margin-bottom:14px}h4{color:#0A35C8;text-transform:uppercase;font-size:13.5px;margin:18px 0 4px}.ss{font-weight:700;margin:10px 0 3px}p{margin:0 0 7px}table{width:100%;border-collapse:collapse;margin:8px 0}td,th{padding:4px 6px;border-bottom:1px solid #D3D9E2;text-align:left;vertical-align:top}.pt td:first-child{color:#4A5568;width:42%}.ack{background:#EEF3FA;padding:10px 12px;font-weight:600;margin-top:10px}.g{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px}.sl{height:68px;border-bottom:1.5px solid #0B1B33;display:flex;align-items:flex-end}.script{font-family:"Dancing Script",cursive;font-size:32px;font-weight:700}.rec{margin-top:16px;border:1px solid #D3D9E2;padding:8px 10px;font-size:11px;color:#4A5568}</style></head><body>' +
     '<div class="hd"><h1>LIBERTY TOOL COMPANY</h1><div class="t">' + AG_TITLE + '</div><div class="st">' + AG_SUB.toUpperCase() + '</div></div><table class="pt">' + parties + '</table>' + body +
     '<div class="ack">' + e(AG_ACK1) + '</div><div class="ack">' + e(AG_ACK2) + '</div>' +
-    '<div class="g"><div><b>RESELLER</b><div class="sl">' + sigR + '</div><div>' + e(g.signer) + ' · ' + e(g.title) + '<br>' + e(g.company) + '<br>Signed ' + e(g.signedAt) + ' at ' + e(g.signedTime) + '</div></div><div><b>LIBERTY INDUSTRIAL COATING SYSTEMS INC. d/b/a Liberty Tool Company</b><div class="sl">' + (g.ltcName ? '<span class="script">' + e(g.ltcName) + '</span>' : '') + '</div><div>' + (g.ltcName ? e(g.ltcName) + ' · ' + e(g.ltcTitle || '') + '<br>Countersigned ' + e(g.ltcDate || '') : 'Countersignature pending') + '</div></div></div>' +
-    '<div class="rec">Electronic signature record · Doc ID ' + e(g.id) + ' · Version ' + e(g.version) + ' · ' + e(g.email) + ' · Signed in the LTC Partner Portal</div></body></html>';
+    '<div class="g"><div><b>RESELLER</b><div class="sl">' + sigR + '</div><div>' + e(g.signer) + ' · ' + e(g.title) + '<br>' + e(g.company) + '<br>' + (g.draft ? 'Not signed yet · preview of the agreement this account will sign' : 'Signed ' + e(g.signedAt) + ' at ' + e(g.signedTime)) + '</div></div><div><b>LIBERTY INDUSTRIAL COATING SYSTEMS INC. d/b/a Liberty Tool Company</b><div class="sl">' + (g.ltcName ? '<span class="script">' + e(g.ltcName) + '</span>' : '') + '</div><div>' + (g.ltcName ? e(g.ltcName) + ' · ' + e(g.ltcTitle || '') + '<br>Countersigned ' + e(g.ltcDate || '') : 'Countersignature pending') + '</div></div></div>' +
+    '<div class="rec">Electronic signature record · Doc ID ' + e(g.id) + ' · Version ' + e(g.version) + (g.ctVer ? ' · Schedule B revision ' + e(g.ctVer) : '') + ' · ' + e(g.email) + ' · Signed in the LTC Partner Portal</div></body></html>';
 }
 
 class Component extends DCLogic {
@@ -2880,7 +3051,20 @@ class Component extends DCLogic {
   }
   flash(t) { var self = this; this.setState({ toast: t }); setTimeout(function () { if (self.state.toast === t) self.setState({ toast: '' }); }, 2600); }
   acct() { return ACCTS[this.state.acct]; }
+  canBuy(id) {
+    var ct = ctLive(this.state.data, this.state.acct); if (ct) return !!(ct.items[id] && ct.items[id].on);
+    var ac = (this.acct() || {}).access || {}; if (prodIsTool(id)) return ac.trowels !== false; return prodIsKit(id) ? !!ac.bundles : ac.caddy !== false;
+  }
+  ctOpen(k) { var c = ctOf(this.state.data, k) || ctBlank(), base = ctBlank(); this.setState({ view: 'aAccounts', ct: { acct: k, items: Object.assign(base.items, JSON.parse(JSON.stringify(c.items || {}))), breakMin: c.breakMin == null ? '100' : c.breakMin } }); try { window.scrollTo(0, 0); } catch (e) {} }
+  ctSendInvite(k) {
+    var d2 = JSON.parse(JSON.stringify(this.state.data)), now = nowMs(), sent = [];
+    if (!ctLive(d2, k)) { this.ctOpen(k); return this.flash('Set contract pricing first. The invite goes out when it’s saved.'); }
+    ((d2.team || {})[k] || []).forEach(function (u) { if (u.status !== 'Hold') return; u.status = 'Invited'; var r2 = authRec(d2, u.id); r2.invitedAt = now; r2.expires = now + AUTH.inviteDays * 864e5; sent.push(u.email); });
+    this.persist(d2); this.flash(sent.length ? 'Invite sent to ' + sent.join(', ') + '. It works for ' + AUTH.inviteDays + ' days.' : 'No held invites for this account');
+  }
   unitPrice(id, units) {
+    var ct = ctLive(this.state.data, this.state.acct);
+    if (ct) { var ci = ct.items[id]; if (!ci || !ci.on) return null; var cbk = num(ci.brk), cbm = num(ct.breakMin); return cbk != null && cbm != null && units >= cbm ? cbk : num(ci.price); }
     var a = this.acct(), p = this.state.data.pricing, prod = PRODUCTS.find(function (x) { return x.id === id; });
     var tl = !prod ? TOOLS.find(function (x) { return x.id === id; }) : null;
     if (tl) { if (a.model === 'dealer') { var tdp = num(p.dealerPct); return tdp == null || tl.msrp == null ? null : tl.msrp * (1 - tdp / 100); } return num((p.tool || {})[id]); }
@@ -2979,10 +3163,26 @@ class Component extends DCLogic {
     var bm = repBoard(D, 'month');
     var totM = D.reps.reduce(function (a, r) { return a + repThisMonth(r); }, 0), goalM = D.reps.reduce(function (a, r) { return a + (r.monthGoal || 0); }, 0);
     var repName = function (id) { var r = D.reps.find(function (x) { return x.id === id; }); return r ? r.name : 'House account'; };
+    var nowD = new Date(), yy = nowD.getFullYear(), mi = nowD.getMonth(), ords = (s.data.orders || []), nmA = {}; Object.keys(ACCTS).forEach(function (k) { nmA[k] = ACCTS[k].name; });
+    var calcNow = function (r) { return repCalc(r, repThisMonth(r), repUnitsAt(r, mi), repAcctMonth(ords, D.assign, r.id, yy, mi), nmA); };
+    var x = s.rp, rr = x ? D.reps.find(function (q) { return q.id === x.id; }) : null, rpV = { on: false, accts: [], parts: [] };
+    if (rr) {
+      var setP = function (o) { self.setState({ rp: Object.assign({}, self.state.rp, o) }); };
+      var fake = Object.assign({}, rr, { plan: { basis: x.basis, rate: x.rate, accts: x.accts, accel: x.accel, fixed: x.fixed, cap: x.cap } }), cc = calcNow(fake), unit = x.basis === 'unit';
+      rpV = { on: true, name: rr.name, sub: rr.type + ' · ' + rr.territory + ' · monthly goal ' + repUsd(rr.monthGoal || 0), est: repMoney(cc.total),
+        basis: x.basis, rateLbl: unit ? 'Base Rate ($ Per Unit)' : 'Base Rate (% Of Sales)', rate: x.rate, accel: x.accel, fixed: x.fixed, cap: x.cap, note: x.note, acctHead: unit ? 'Account Rate ($/Unit)' : 'Account Rate (%)',
+        setBasis: function (e) { setP({ basis: e.target.value }); }, setRate: function (e) { setP({ rate: e.target.value }); }, setAccel: function (e) { setP({ accel: e.target.value }); }, setFixed: function (e) { setP({ fixed: e.target.value }); }, setCap: function (e) { setP({ cap: e.target.value }); }, setNote: function (e) { setP({ note: e.target.value }); },
+        accts: Object.keys(ACCTS).map(function (k) { return { name: ACCTS[k].name, type: ACCTS[k].type || '', owner: D.assign[k] === rr.id ? 'This rep' : repName(D.assign[k]), val: x.accts[k] == null ? '' : x.accts[k], ph: 'Base ' + (x.rate === '' ? '—' : x.rate), set: function (e) { var a2 = Object.assign({}, self.state.rp.accts); a2[k] = e.target.value; setP({ accts: a2 }); } }; }),
+        parts: cc.parts.map(function (p) { return { k: p.k, v: (p.v < 0 ? '−' : '') + repMoney(Math.abs(p.v)) }; }),
+        save: function () { var c = self.state.rp; if (!repSet(c.rate) && !repSet(c.fixed)) return self.flash('Add a base rate or a monthly base pay'); var ac = {}; Object.keys(c.accts || {}).forEach(function (k) { if (repSet(c.accts[k])) ac[k] = String(c.accts[k]); }); setR(function (d2) { var t = d2.reps.find(function (q) { return q.id === c.id; }); t.plan = { basis: c.basis, rate: repSet(c.rate) ? String(c.rate) : '0', accts: ac, accel: String(c.accel || ''), fixed: String(c.fixed || ''), cap: String(c.cap || ''), note: c.note || '' }; if (c.basis === 'pct') t.rate = repN(c.rate); }, rr.name + ' commission plan saved'); self.setState({ rp: null }); },
+        close: function () { self.setState({ rp: null }); } };
+    }
     return {
+      rp: rpV,
       repNav: { cur: s.view === 'aReps' ? 'page' : 'false', go: function () { self.go('aReps'); } },
       repKpis: [{ n: D.reps.length, l: 'Active Reps' }, { n: repUsd(totM), l: 'Team Sales This Month' }, { n: goalM ? Math.round(totM / goalM * 100) + '%' : '—', l: 'Of Team Monthly Goal' }, { n: D.reps.filter(function (r) { return !r.goal; }).length, l: 'Reps Without A Year Goal' }],
-      repRows: D.reps.map(function (r) { var m = repThisMonth(r), mp = r.monthGoal ? Math.round(m / r.monthGoal * 100) : 0; return { name: r.name, type: r.type, territory: r.territory, month: repUsd(m), mPct: mp, mBar: Math.min(100, mp), goalTxt: r.goal ? (r.goalType === 'units' ? r.goal.toLocaleString('en-US') + ' caddies' : repUsd(r.goal)) + ' · ' + repGoalPct(r) + '%' : 'Not set yet', gPct: repGoalPct(r), monthGoal: r.monthGoal, rate: r.rate,
+      repRows: D.reps.map(function (r) { var m = repThisMonth(r), mp = r.monthGoal ? Math.round(m / r.monthGoal * 100) : 0; return { name: r.name, type: r.type, territory: r.territory, month: repUsd(m), mPct: mp, mBar: Math.min(100, mp), goalTxt: r.goal ? (r.goalType === 'units' ? r.goal.toLocaleString('en-US') + ' caddies' : repUsd(r.goal)) + ' · ' + repGoalPct(r) + '%' : 'Not set yet', gPct: repGoalPct(r), monthGoal: r.monthGoal, rate: r.rate, planTxt: repPlanTxt(repPlan(r)), comMonth: repMoney(calcNow(r).total),
+        editPlan: function () { var P0 = repPlan(r), pl = r.plan || {}; self.setState({ rp: { id: r.id, basis: P0.basis, rate: String(P0.rate), accts: Object.assign({}, P0.accts), accel: pl.accel || '', fixed: pl.fixed || '', cap: pl.cap || '', note: pl.note != null ? pl.note : (r.id === 'r1' ? STALL_NOTE : '') } }); },
         setMonth: function (e) { var n = parseFloat(e.target.value); setR(function (d2) { d2.reps.find(function (x) { return x.id === r.id; }).monthGoal = isNaN(n) ? 0 : n; }, r.name + ' monthly goal updated'); },
         setRate: function (e) { var n = parseFloat(e.target.value); setR(function (d2) { d2.reps.find(function (x) { return x.id === r.id; }).rate = isNaN(n) ? 0 : n; }, r.name + ' rate updated'); } }; }),
       assignRows: Object.keys(ACCTS).map(function (k) { return { name: ACCTS[k].name, type: (ACCTS[k] || {}).type || '', rep: D.assign[k] || '', opts: [{ v: '', label: 'House account' }].concat(D.reps.map(function (r) { return { v: r.id, label: r.name }; })), set: function (e) { var val = e.target.value; setR(function (d2) { d2.assign[k] = val; }, ACCTS[k].name + ' → ' + repName(val)); } }; }),
@@ -3140,8 +3340,8 @@ class Component extends DCLogic {
     var f = s.tf, setF = function (k) { return function (e) { var x = Object.assign({}, self.state.tf); x[k] = e.target.value; if (k === 'role') x.perms = Object.assign({}, ROLE_PERMS[e.target.value] || {}); self.setState({ tf: x }); }; };
     var rowsOf = function (acct, list) { return list.map(function (u) { var es = effStatus(d, u), col = ST_COL[es] || ST_COL.Active, rec = (d.auth || {})[u.id] || {}, mng = MODE === 'admin' || (u.id !== me.id && !!(me.perms && me.perms.team) && u.role !== 'Account Admin');
       var upd = function (fn, msg) { setT(function (d2) { var r2 = authRec(d2, u.id); fn(r2, d2); }, msg); };
-      var acts = !mng ? [] : (es === 'Invited' || es === 'Invite Expired' ? [['Resend Invite', function () { var t0 = nowMs(); upd(function (r2) { r2.invitedAt = t0; r2.expires = t0 + AUTH.inviteDays * 864e5; }, 'New invite sent to ' + u.email + '. It works for ' + AUTH.inviteDays + ' days, until ' + fmtDay(t0 + AUTH.inviteDays * 864e5) + '. The old link no longer works.'); }]] : es === 'Off' ? [] : (es === 'Locked' ? [['Unlock', function () { upd(function (r2) { r2.lockUntil = 0; r2.tries = 0; }, u.name + ' is unlocked and can sign in now.'); }]] : []).concat([['Send Reset Link', function () { upd(function (r2) { r2.resetAt = nowMs(); }, 'Reset link sent to ' + u.email + '. It works once, for ' + AUTH.resetMin + ' minutes.'); }], ['Temp Password', function () { var tp = tempPassword(); upd(function (r2) { r2.pw = tp; r2.temp = true; r2.tempExp = nowMs() + AUTH.tempHours * 36e5; r2.tries = 0; r2.lockUntil = 0; }); self.setState({ tempPw: { name: u.name, email: u.email, pw: tp } }); }]]));
-      return { name: u.name, email: u.email, role: u.role, locName: self.locName(acct, u.loc), can: canText(u), status: es, sbg: col[0], sfg: col[1], canEdit: MODE === 'admin' || (u.id !== me.id && (u.role !== 'Account Admin' || !!(me.perms && me.perms.team))), last: es === 'Invited' ? 'Invite sent ' + fmtDay(rec.invitedAt || nowMs()) + ' · expires ' + fmtDay(rec.expires || nowMs()) : es === 'Invite Expired' ? 'Invite expired ' + fmtDay(rec.expires || nowMs()) : (rec.last ? fmtWhen(rec.last) : 'Never'), acts: acts.map(function (x) { return { label: x[0], go: x[1] }; }), hasNote: !mng && u.id !== me.id && u.role === 'Account Admin', note: 'LTC resets Account Admin logins', toggleLabel: u.status === 'Off' ? 'Turn On' : 'Turn Off',
+      var acts = !mng ? [] : (es === 'Pricing Needed' || es === 'Not Invited') ? (MODE === 'admin' ? [[es === 'Not Invited' ? 'Send Invite' : 'Set Pricing', function () { if (es === 'Not Invited') self.ctSendInvite(acct); else self.ctOpen(acct); }]] : []) : (es === 'Invited' || es === 'Invite Expired' ? [['Resend Invite', function () { var t0 = nowMs(); upd(function (r2) { r2.invitedAt = t0; r2.expires = t0 + AUTH.inviteDays * 864e5; }, 'New invite sent to ' + u.email + '. It works for ' + AUTH.inviteDays + ' days, until ' + fmtDay(t0 + AUTH.inviteDays * 864e5) + '. The old link no longer works.'); }]] : es === 'Off' ? [] : (es === 'Locked' ? [['Unlock', function () { upd(function (r2) { r2.lockUntil = 0; r2.tries = 0; }, u.name + ' is unlocked and can sign in now.'); }]] : []).concat([['Send Reset Link', function () { upd(function (r2) { r2.resetAt = nowMs(); }, 'Reset link sent to ' + u.email + '. It works once, for ' + AUTH.resetMin + ' minutes.'); }], ['Temp Password', function () { var tp = tempPassword(); upd(function (r2) { r2.pw = tp; r2.temp = true; r2.tempExp = nowMs() + AUTH.tempHours * 36e5; r2.tries = 0; r2.lockUntil = 0; }); self.setState({ tempPw: { name: u.name, email: u.email, pw: tp } }); }]]));
+      return { name: u.name, email: u.email, role: u.role, locName: self.locName(acct, u.loc), can: canText(u), status: es, sbg: col[0], sfg: col[1], canEdit: MODE === 'admin' || (u.id !== me.id && (u.role !== 'Account Admin' || !!(me.perms && me.perms.team))), last: es === 'Pricing Needed' ? 'Invite on hold until LTC saves contract pricing' : es === 'Not Invited' ? 'Pricing saved · invite not sent yet' : es === 'Invited' ? 'Invite sent ' + fmtDay(rec.invitedAt || nowMs()) + ' · expires ' + fmtDay(rec.expires || nowMs()) : es === 'Invite Expired' ? 'Invite expired ' + fmtDay(rec.expires || nowMs()) : (rec.last ? fmtWhen(rec.last) : 'Never'), acts: acts.map(function (x) { return { label: x[0], go: x[1] }; }), hasNote: !mng && u.id !== me.id && u.role === 'Account Admin', note: 'LTC resets Account Admin logins', toggleLabel: u.status === 'Off' ? 'Turn On' : 'Turn Off',
       toggle: function () { setT(function (d2) { var x = d2.team[acct].find(function (y) { return y.id === u.id; }); x.status = x.status === 'Off' ? 'Active' : 'Off'; }, u.name + (u.status === 'Off' ? ' turned on' : ' turned off')); } }; }); };
     var myLoc = me.loc !== 'all' ? me.loc : null;
     var acctOrders = d.orders.filter(function (o) { return o.acct === s.acct; });
@@ -3188,10 +3388,10 @@ class Component extends DCLogic {
       termsOpts: ['Net 30', 'Net 45', 'Net 60', 'Credit card'],
       repOpts: [{ v: '', label: 'House account' }].concat(R.reps.map(function (r) { return { v: r.id, label: r.name }; })),
       rtypes: REP_TYPES,
-      access: [['caddy', 'Tape Caddy'], ['bundles', 'Bundles / Kits'], ['trowels', 'Trowels & Strap'], ['coatings', 'Coatings']].map(function (p) { return { label: p[1], on: u.access[p[0]] ? 'true' : 'false', toggle: function () { var x = Object.assign({}, self.state.ua); x.access = Object.assign({}, x.access); x.access[p[0]] = !x.access[p[0]]; self.setState({ ua: x }); } }; }),
+      access: [['coatings', 'Coatings Quote Requests']].map(function (p) { return { label: p[1], on: u.access[p[0]] ? 'true' : 'false', toggle: function () { var x = Object.assign({}, self.state.ua); x.access = Object.assign({}, x.access); x.access[p[0]] = !x.access[p[0]]; self.setState({ ua: x }); } }; }),
       codePh: first ? first.toUpperCase() + '10' : 'Auto from first name',
-      createLabel: u.kind === 'partner' ? 'Create Partner & Invite Admin' : (u.kind === 'rep' ? 'Create Sales Rep & Send Invite' : 'Create Affiliate & Send Invite'),
-      hint: u.kind === 'partner' ? 'Their admin can add store and purchasing logins from their Team tab.' : (u.kind === 'rep' ? 'They set their year goal the first time they sign in.' : 'They see the onboarding checklist the first time they sign in.'),
+      createLabel: u.kind === 'partner' ? 'Create Partner & Set Pricing' : (u.kind === 'rep' ? 'Create Sales Rep & Send Invite' : 'Create Affiliate & Send Invite'),
+      hint: u.kind === 'partner' ? 'Next you set the products they can buy and their prices. The invite to their admin goes out when that pricing is saved.' : (u.kind === 'rep' ? 'They set their year goal the first time they sign in.' : 'They see the onboarding checklist the first time they sign in.'),
       create: function () {
         var x = self.state.ua, nm = (x.name || '').trim(), em = (x.email || '').trim();
         if (!nm || !/@/.test(em)) return self.flash('Add a name and email');
@@ -3201,11 +3401,12 @@ class Component extends DCLogic {
           var d2 = JSON.parse(JSON.stringify(self.state.data));
           d2.accounts = d2.accounts || {}; d2.team = d2.team || {}; d2.locations = d2.locations || {};
           d2.accounts[id] = { id: id, name: x.company.trim(), first: nm.split(' ')[0], buyer: nm + ' · Account Admin', email: em, phone: '', type: x.atype, terms: x.terms, model: x.model, modelName: M[0], modelDesc: M[1], vendor: '', territory: x.territory || '—', rep: x.rep ? (R.reps.find(function (r) { return r.id === x.rep; }) || {}).name : 'House account', stores: locs.length, access: x.access };
-          d2.team[id] = [{ id: 'u' + Date.now(), name: nm, email: em, role: 'Account Admin', loc: 'all', status: 'Invited', perms: Object.assign({}, ROLE_PERMS['Account Admin']) }];
+          d2.contracts = d2.contracts || {}; d2.contracts[id] = ctBlank();
+          d2.team[id] = [{ id: 'u' + Date.now(), name: nm, email: em, role: 'Account Admin', loc: 'all', status: 'Hold', perms: Object.assign({}, ROLE_PERMS['Account Admin']) }];
           d2.locations[id] = locs.map(function (l, i) { return { id: 'l' + (i + 1), name: l }; });
           applyAccts(d2); saveData(d2);
           if (x.rep) { var r2 = JSON.parse(JSON.stringify(R)); r2.assign[id] = x.rep; repSave(r2); self.setState({ reps: r2 }); }
-          self.setState({ data: d2, uaTeamAcct: id }); self.flash(x.company.trim() + ' created. Invite sent to ' + em);
+          self.setState({ data: d2, uaTeamAcct: id, ct: { acct: id, items: ctBlank().items, breakMin: '100' }, view: 'aAccounts' }); try { window.scrollTo(0, 0); } catch (e) {} self.flash(x.company.trim() + ' created. Set their products and prices to send the invite to ' + em + '.');
         } else if (x.kind === 'rep') {
           var r3 = JSON.parse(JSON.stringify(R)); r3.reps.push({ id: 'r' + Date.now(), name: nm, contact: em, type: x.rtype, territory: x.territory || '—', rate: parseFloat(x.rate) || 0, goalType: '', goal: 0, monthGoal: parseFloat(x.monthGoal) || 0, ytd: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], status: 'Invited', joined: fmtDate(today()) }); repSave(r3); self.setState({ reps: r3 }); self.flash(nm + ' added. Invite sent to ' + em);
         } else {
@@ -3222,15 +3423,78 @@ class Component extends DCLogic {
       setTfEmail: function (e) { self.setState({ uaTf: Object.assign({}, self.state.uaTf, { email: e.target.value }) }); },
       setTfLoc: function (e) { self.setState({ uaTf: Object.assign({}, self.state.uaTf, { loc: e.target.value }) }); },
       tfLocs: [{ v: 'all', label: 'All Locations' }].concat(((d.locations || {})[ta] || []).map(function (l) { return { v: l.id, label: l.name }; })),
-      addTeam: function () { var t = self.state.uaTf; if (!t.name.trim() || !/@/.test(t.email)) return self.flash('Add a name and email'); var role = t.loc === 'all' ? 'Purchasing Manager' : 'Store Manager'; T.setT(function (d2) { d2.team = d2.team || {}; d2.team[ta] = (d2.team[ta] || []).concat([{ id: 'u' + Date.now(), name: t.name.trim(), email: t.email.trim(), role: role, loc: t.loc, status: 'Invited', perms: Object.assign({}, ROLE_PERMS[role]) }]); }, 'Invite sent to ' + t.email.trim()); self.setState({ uaTf: { name: '', email: '', loc: 'all' } }); },
+      addTeam: function () { var t = self.state.uaTf; if (!t.name.trim() || !/@/.test(t.email)) return self.flash('Add a name and email'); var role = t.loc === 'all' ? 'Purchasing Manager' : 'Store Manager'; T.setT(function (d2) { d2.team = d2.team || {}; d2.team[ta] = (d2.team[ta] || []).concat([{ id: 'u' + Date.now(), name: t.name.trim(), email: t.email.trim(), role: role, loc: t.loc, status: ctLive(self.state.data, ta) ? 'Invited' : 'Hold', perms: Object.assign({}, ROLE_PERMS[role]) }]); }, ctLive(self.state.data, ta) ? 'Invite sent to ' + t.email.trim() : t.name.trim() + ' added. Their invite goes out once contract pricing is saved.'); self.setState({ uaTf: { name: '', email: '', loc: 'all' } }); },
       filters: [['all', 'All'], ['partner', 'Partners'], ['rep', 'Sales Reps'], ['aff', 'Affiliates']].map(function (f) { return { label: f[1], on: s.uaFilter === f[0] ? 'true' : 'false', pick: function () { self.setState({ uaFilter: f[0] }); } }; }),
       all: shown
+    } };
+  }
+  sgVals() {
+    var self = this, s = this.state, isAdmin = MODE === 'admin', me = this.me(), a = this.acct() || {}, co = isAdmin ? '' : a.name;
+    return { sg: {
+      co: co ? ' at ' + co : '', steps: SG_STEPS.map(function (x, i) { return { n: i + 1, t: x.t, b: x.b, p: x.p }; }), cant: SG_CANT.join(' · '),
+      showCard: !isAdmin && me.loc && me.loc !== 'all', open: function () { self.go('sguide'); },
+      dl: function () { var nm = 'LTC-Store-Quick-Guide' + (co ? '-' + co.replace(/[^A-Za-z0-9]+/g, '-') : '') + '.html'; if (payDl(nm, sgDocHtml(co))) self.flash('Downloaded ' + nm + '. Open it and print to save a one-page PDF.'); else self.flash('Download is blocked in this preview.'); }
+    } };
+  }
+  ctVals() {
+    var self = this, s = this.state, d = s.data, x = s.ct;
+    if (MODE !== 'admin' || !x || !ACCTS[x.acct]) return { ct: { on: false, groups: [] } };
+    var k = x.acct, A = ACCTS[k], live = ctLive(d, k), held = ((d.team || {})[k] || []).filter(function (u) { return u.status === 'Hold'; });
+    var ag0 = (d.agreements || {})[k], signed = !!(ag0 && ag0.signedAt), adminU = acctAdmin(d, k);
+    var draft = { items: x.items, breakMin: x.breakMin }, miss = ctProblems(draft), dirty = !live || ctHash(draft) !== ctHash(live);
+    var setX = function (o) { self.setState({ ct: Object.assign({}, self.state.ct, o) }); };
+    var setItem = function (id, o) { var it = JSON.parse(JSON.stringify(self.state.ct.items)); it[id] = Object.assign({ on: false, price: '', brk: '' }, it[id] || {}, o); setX({ items: it }); };
+    var cat = ctCatalog(), bmN = num(x.breakMin);
+    var groups = [['Tape Caddies', ['caddy']], ['Kits', ['kit']], ['Trowels & Tools', ['trowel', 'other']]].map(function (g) {
+      var ps = cat.filter(function (p) { return g[1].indexOf(p.cat) >= 0; });
+      var rows = ps.map(function (p) {
+        var it = x.items[p.id] || {}, pr = num(it.price), bk = num(it.brk), off = function (v) { return p.msrp ? Math.round((1 - v / p.msrp) * 100) + '% off MSRP' : ''; };
+        return { name: p.name, sku: p.sku || 'No SKU yet', msrp: p.msrp != null ? money(p.msrp) : '—', on: it.on ? 'true' : 'false', isOn: !!it.on, price: it.price || '', brk: it.brk || '', op: it.on ? '1' : '0.55',
+          off: !it.on ? 'Not available to this account' : (pr == null ? 'Enter a price' : off(pr) + (bk != null ? ' · ' + off(bk) + (bmN != null ? ' at ' + bmN + '+' : '') : '')),
+          bad: it.on && pr == null ? '#B31942' : '',
+          toggle: function () { setItem(p.id, { on: !it.on }); }, setPrice: function (e) { setItem(p.id, { price: e.target.value }); }, setBrk: function (e) { setItem(p.id, { brk: e.target.value }); } };
+      });
+      var allOn = rows.length && rows.every(function (r) { return r.isOn; });
+      return { name: g[0], rows: rows, n: rows.filter(function (r) { return r.isOn; }).length + ' of ' + rows.length + ' available', allLabel: allOn ? 'Turn All Off' : 'Turn All On',
+        all: function () { var it = JSON.parse(JSON.stringify(self.state.ct.items)); ps.forEach(function (p) { it[p.id] = Object.assign({ on: false, price: '', brk: '' }, it[p.id] || {}, { on: !allOn }); }); setX({ items: it }); } };
+    }).filter(function (g) { return g.rows.length; });
+    var save = function (send) {
+      var cur = self.state.ct, m = ctProblems(cur); if (m.length) return self.flash('Still needed: ' + m.slice(0, 3).join(', ') + (m.length > 3 ? '…' : ''));
+      var now = nowMs(), d2 = JSON.parse(JSON.stringify(self.state.data)), prev = ctLive(d2, k), nc = { items: JSON.parse(JSON.stringify(cur.items)), breakMin: String(cur.breakMin == null ? '' : cur.breakMin) };
+      var changed = !prev || ctHash(prev) !== ctHash(nc);
+      d2.contracts = d2.contracts || {};
+      if (changed) d2.contracts[k] = Object.assign(nc, { ver: ((ctOf(d2, k) || {}).ver || 0) + 1, savedAt: fmtDay(now), savedBy: 'LTC Admin' });
+      var sent = [];
+      if (send) ((d2.team || {})[k] || []).forEach(function (u) { if (u.status !== 'Hold') return; u.status = 'Invited'; var r2 = authRec(d2, u.id); r2.invitedAt = now; r2.expires = now + AUTH.inviteDays * 864e5; sent.push(u.email); });
+      var g0 = (d2.agreements || {})[k], resign = changed && g0 && g0.signedAt;
+      if (resign) { d2.msgs = d2.msgs || {}; (d2.msgs[k] = d2.msgs[k] || []).push({ from: 'LTC Sales', mine: false, when: fmtDate(today()), text: 'We updated your contract pricing (Schedule B, revision ' + d2.contracts[k].ver + '). Your Account Admin will be asked to review and sign the updated Distributor Agreement before your next order.' }); }
+      self.persist(d2); self.setState({ ct: null });
+      if (!changed && !sent.length) return self.flash('No pricing changes to save');
+      self.flash(sent.length ? 'Pricing saved. Invite sent to ' + sent.join(', ') + '.' : (resign ? 'Pricing saved as revision ' + d2.contracts[k].ver + '. ' + A.name + ' re-signs the agreement before ordering.' : 'Pricing saved for ' + A.name + '.'));
+    };
+    var nOn = ctOnList(draft).length;
+    return { ct: {
+      on: true, name: A.name, sub: [A.type, A.modelName, A.terms].filter(Boolean).join(' · '), groups: groups,
+      status: !live ? 'Pricing Needed' : (dirty ? 'Unsaved Changes' : 'Saved · Revision ' + live.ver + ' · ' + live.savedAt), sbg: !live ? '#FDECEF' : (dirty ? '#FFF3DC' : '#E3F3EA'), sfg: !live ? '#B31942' : (dirty ? '#8A5A00' : '#2E7D4F'),
+      hasHold: held.length > 0, holdTxt: 'The invite to ' + held.map(function (u) { return u.name + ' (' + u.email + ')'; }).join(', ') + ' is on hold until this pricing is saved.',
+      hasResign: signed && !!live && dirty, resignTxt: 'Saving changes their Distributor Agreement. ' + (adminU ? adminU.name : 'Their Account Admin') + ' re-signs it in the portal before the next order. They signed revision ' + ((ag0 && ag0.ctVer) || (live && live.ver) || 1) + '.',
+      breakMin: x.breakMin, setBreak: function (e) { setX({ breakMin: e.target.value }); },
+      hasMiss: miss.length > 0, missTxt: 'Still needed: ' + miss.join(', '),
+      onTxt: nOn + ' product' + (nOn === 1 ? '' : 's') + ' available',
+      fill: function () { var dc = ctDefault(self.state.data, A.model); setX({ items: Object.assign(ctBlank().items, dc.items), breakMin: dc.breakMin }); self.flash('Filled from the standard ' + A.modelName + ' prices. Change anything for this contract.'); },
+      canSend: held.length > 0, saveLabel: held.length ? 'Save & Send Invite' : 'Save Pricing', save: function () { save(held.length > 0); }, saveOnly: function () { save(false); },
+      preview: function () {
+        var cur = self.state.ct, c = { items: cur.items, breakMin: cur.breakMin }, nv = live && !dirty ? live.ver : ((ctOf(d, k) || {}).ver || 0) + 1;
+        var g = { draft: true, id: 'Preview', version: AG_VERSION, company: A.name, entity: '—', address: '—', signer: adminU ? adminU.name : '—', title: 'Account Admin', email: adminU ? adminU.email : '—', phone: A.phone || '—', signedAt: '(date of signature)', signedTime: '', channels: (A.territory || 'United States') + ' · ' + A.type, sigText: '', sigData: '', sched: agSchedFrom(c), price: agPriceFrom(c), brkHead: agBrkHead(c), ctVer: nv, terms: A.terms };
+        try { var u = URL.createObjectURL(new Blob([agDocHtml(g, A.name)], { type: 'text/html' })), w = window.open(u, '_blank'); if (!w) { var l = document.createElement('a'); l.href = u; l.download = 'LTC-Distributor-Agreement-Preview-' + A.name.replace(/[^A-Za-z0-9]+/g, '-') + '.html'; document.body.appendChild(l); l.click(); l.remove(); } setTimeout(function () { URL.revokeObjectURL(u); }, 60000); } catch (e) { self.flash('Preview is blocked in this browser'); }
+      },
+      close: function () { self.setState({ ct: null }); }
     } };
   }
   cutVals() {
     var self = this, s = this.state, a = this.acct(), isAdmin = MODE === 'admin';
     var ac = a.access || {};
-    var allow = function (id) { if (isAdmin) return true; var kit = prodIsKit(id), tool = prodIsTool(id); return tool ? ac.trowels !== false : (kit ? !!ac.bundles : ac.caddy !== false); };
+    var allow = function (id) { return isAdmin || self.canBuy(id); };
     var items = PRODUCTS.map(function (p) { return { id: p.id, name: p.name, tag: p.tag, msrp: p.msrp }; }).concat(TOOLS.map(function (t) { var pr = (PROD_STORE.products || []).find(function (x) { return x.id === t.id; }); return { id: t.id, name: t.name, tag: pr ? pr.tag : 'LTC Trowels', msrp: t.msrp != null ? t.msrp : null }; })).filter(function (p) { return allow(p.id); });
     var abs = function (u) { try { return new URL(u, location.href).href; } catch (e) { return u; } };
     var full = function (p) { var pr = (PROD_STORE.products || []).find(function (x) { return x.id === p.id; }); var c = CUT[p.id] || (pr ? { cat: PCAT[pr.cat], spec: pr.spec || pr.tag, body: pr.body, pts: pr.pts, upc: pr.upc, casePack: pr.casePack, size: pr.size, weight: pr.weight } : {}); if (pr && !IMG[p.id]) IMG[p.id] = pr.imgData || pr.img; return { id: p.id, name: p.name, tag: p.tag, img: IMG[p.id], body: c.body, pts: c.pts || [], cat: c.cat, specTxt: c.spec, msrp: p.msrp != null ? money(p.msrp) : 'Priced on quote',
@@ -3425,7 +3689,7 @@ class Component extends DCLogic {
     };
     var affLines = [], repLines = [];
     if (run) {
-      run.items.forEach(function (it) { (it.kind === 'aff' ? affLines : repLines).push({ kind: it.kind, id: it.id, name: it.name, sub: it.kind === 'aff' ? 'Paid ' + run.paidOn : it.rate + '% commission', qty: it.kind === 'aff' ? it.units + ' caddies' : payUsd(it.sales), base: payUsd(it.base), adjTxt: it.adj ? (it.adj > 0 ? '+' : '−') + payUsd(Math.abs(it.adj)) : '—', note: it.note, total: payUsd(it.total), totalN: it.total, held: false, paidRow: true }); });
+      run.items.forEach(function (it) { (it.kind === 'aff' ? affLines : repLines).push({ kind: it.kind, id: it.id, name: it.name, sub: it.kind === 'aff' ? 'Paid ' + run.paidOn : (it.planTxt || it.rate + '% commission'), qty: it.kind === 'aff' ? it.units + ' caddies' : payUsd(it.sales), base: payUsd(it.base), adjTxt: it.adj ? (it.adj > 0 ? '+' : '−') + payUsd(Math.abs(it.adj)) : '—', note: it.note, total: payUsd(it.total), totalN: it.total, held: false, paidRow: true }); });
     } else {
       var units = cur ? null : ((L.units || {})[p.key] || {});
       A.affiliates.filter(function (a) { return a.status === 'Active' || a.status === 'Paused'; }).forEach(function (a) {
@@ -3433,9 +3697,11 @@ class Component extends DCLogic {
         var hold = !affSigned(a) ? 'Agreement not signed' : (!(a.onboard && a.onboard.payout) ? 'Payout account not set up' : '');
         affLines.push(lineFor('aff', a.id, a.name, (a.code || '—') + ' · ' + a.handle, u + ' caddies', u * PAY_AFF_RATE, hold, { units: u }));
       });
+      var nmA = {}; Object.keys(ACCTS).forEach(function (k) { nmA[k] = ACCTS[k].name; });
       D.reps.forEach(function (r) {
-        var sales = p.year === new Date().getFullYear() ? (r.ytd[p.idx] || 0) : 0; if (!sales) return;
-        repLines.push(lineFor('rep', r.id, r.name, r.type + ' · ' + r.rate + '%', payUsd(sales), Math.round(sales * r.rate) / 100, r.rate ? '' : 'No commission rate set', { sales: sales, rate: r.rate }));
+        var thisYr = p.year === new Date().getFullYear(), sales = thisYr ? (r.ytd[p.idx] || 0) : 0, P0 = repPlan(r); if (!sales && !P0.fixed) return;
+        var cc = repCalc(r, sales, thisYr ? repUnitsAt(r, p.idx) : 0, repAcctMonth(self.state.data.orders || [], D.assign, r.id, p.year, p.idx), nmA);
+        repLines.push(lineFor('rep', r.id, r.name, r.type + ' · ' + cc.txt, payUsd(sales), cc.total, P0.rate || P0.fixed ? '' : 'No commission plan set', { sales: sales, rate: P0.rate, parts: cc.parts, planTxt: cc.txt }));
       });
     }
     var rowV = function (l) {
@@ -3452,11 +3718,11 @@ class Component extends DCLogic {
       period: p.label, closes: p.last, isPaid: !!run, isCurrent: cur && !run, isOpen: !run && !cur,
       kpis: [{ n: payUsd(sum(affLines)), l: 'Affiliate Commission' }, { n: payUsd(sum(repLines)), l: 'Sales Rep Commission' }, { n: all.filter(function (l) { return l.held; }).length, l: 'On Hold' }, { n: payUsd(sum(all)), l: run ? 'Total Paid' : (cur ? 'Running Total' : 'Total To Pay') }],
       paidMsg: run ? 'Paid ' + run.paidOn + ' by ' + run.by + ' · ' + run.items.length + ' statements sent · ' + payUsd(run.items.reduce(function (t, i) { return t + i.total; }, 0)) : '',
-      groups: [{ title: 'Affiliates', who: 'Affiliate', qtyHead: 'Caddies Sold', sub: '$10 per eligible Tape Caddy, per the Affiliate Agreement', rows: affLines.map(rowV), empty: affLines.length === 0 }, { title: 'Sales Reps', who: 'Rep', qtyHead: 'Sales', sub: 'Sales from assigned accounts × each rep’s rate', rows: repLines.map(rowV), empty: repLines.length === 0 }],
+      groups: [{ title: 'Affiliates', who: 'Affiliate', qtyHead: 'Caddies Sold', sub: '$10 per eligible Tape Caddy, per the Affiliate Agreement', rows: affLines.map(rowV), empty: affLines.length === 0 }, { title: 'Sales Reps', who: 'Rep', qtyHead: 'Sales', sub: 'Sales from assigned accounts, paid on each rep’s commission plan', rows: repLines.map(rowV), empty: repLines.length === 0 }],
       total: payUsd(sum(all)), countTxt: payable.length + ' people get paid · ' + all.filter(function (l) { return l.held; }).length + ' on hold',
       pay: function () {
         if (!payable.length) return self.flash('Nothing ready to pay');
-        var items = payable.map(function (l) { return l.kind === 'aff' ? { kind: 'aff', id: l.id, name: l.name, units: l.units, base: l.baseN, adj: l.adjN, note: l.note, total: l.totalN } : { kind: 'rep', id: l.id, name: l.name, sales: l.sales, rate: l.rate, base: l.baseN, adj: l.adjN, note: l.note, total: l.totalN }; });
+        var items = payable.map(function (l) { return l.kind === 'aff' ? { kind: 'aff', id: l.id, name: l.name, units: l.units, base: l.baseN, adj: l.adjN, note: l.note, total: l.totalN } : { kind: 'rep', id: l.id, name: l.name, sales: l.sales, rate: l.rate, parts: l.parts, planTxt: l.planTxt, base: l.baseN, adj: l.adjN, note: l.note, total: l.totalN }; });
         var L2 = JSON.parse(JSON.stringify(self.state.pay)); L2.runs[p.key] = { paidOn: payFmt(new Date()), by: 'LTC Admin', items: items }; paySave(L2);
         self.affSet(function (d) { items.forEach(function (it) { if (it.kind !== 'aff') return; var a = d.affiliates.find(function (x) { return x.id === it.id; }); if (a) a.paid = (a.paid || 0) + it.total; }); });
         self.setState({ pay: L2, payAdj: {} }); self.flash(p.label + ' paid · ' + items.length + ' statements sent');
@@ -3932,6 +4198,7 @@ class Component extends DCLogic {
       // Mockup: any email and password signs in. A demo email opens that user; anything else opens the Northline distributor Account Admin.
       var hit = findLogin(self.state.data, au.email) || findUserId(self.state.data, 'u5');
       if (!hit) return;
+      if (hit.u.status === 'Hold') return setAu({ err: 'LTC is still setting up ' + ((ACCTS[hit.acct] || {}).name || 'this account') + '. You’ll get an invite email as soon as it’s ready.' });
       mutate(function (x) { var rr = authRec(x, hit.u.id); rr.tries = 0; rr.lockUntil = 0; rr.temp = false; rr.tempExp = 0; var uu = (x.team[hit.acct] || []).find(function (z) { return z.id === hit.u.id; }); if (uu && uu.status !== 'Active') uu.status = 'Active'; });
       self.enterAs(hit.acct, hit.u.id, au.remember);
     };
@@ -3941,6 +4208,7 @@ class Component extends DCLogic {
       if (!hit) return setAu({ err: bad });
       var r = (self.state.data.auth || {})[hit.u.id] || {};
       if (hit.u.status === 'Off') return setAu({ err: 'This login is turned off. Ask your Account Admin or LTC to turn it back on.' });
+      if (hit.u.status === 'Hold') return setAu({ err: 'LTC is still setting up ' + ((ACCTS[hit.acct] || {}).name || 'this account') + '. You’ll get an invite email as soon as it’s ready.' });
       if (hit.u.status === 'Invited') return setAu({ err: 'You haven’t finished setting up yet. Open your invite email and click Accept Invite. Links work for ' + AUTH.inviteDays + ' days.' });
       if (r.lockUntil && r.lockUntil > nowMs()) return setAu({ screen: 'locked', lockUntil: r.lockUntil, forId: hit.u.id, err: '' });
       if (r.temp && r.tempExp && r.tempExp < nowMs()) return setAu({ err: 'Your temporary password has expired. Ask your Account Admin for a new one, or use Forgot Password.' });
@@ -4009,8 +4277,12 @@ class Component extends DCLogic {
     var setAg = function (o) { self.setState({ ag: Object.assign({}, self.state.ag, o) }); };
     var G = {
       agTitle: AG_TITLE, agSub: AG_SUB, agVersion: AG_VERSION, agAck1: AG_ACK1, agAck2: AG_ACK2, agToday: fmtDay(n),
-      agBlocks: DIST_AG.map(function (b) { return { h: b.t === 'h', s: b.t === 's', p: b.t === 'p', sched: b.t === 'sched', x: b.x }; }),
-      agSched: agSchedRows(),
+      agBlocks: DIST_AG.map(function (b) { return { h: b.t === 'h', s: b.t === 's', p: b.t === 'p', sched: b.t === 'sched', schedB: b.t === 'schedB', x: b.x }; }),
+      agSched: ctLive(d, s.acct) ? agSchedFrom(ctLive(d, s.acct)) : agSchedRows(),
+      hasPrice: !!ctLive(d, s.acct), priceRows: ctLive(d, s.acct) ? agPriceFrom(ctLive(d, s.acct)) : [], brkHead: agBrkHead(ctLive(d, s.acct)),
+      priceIntro: 'Products ' + a.name + ' is approved to buy from Liberty, and its purchase price per unit in USD, before freight and taxes. Revision ' + ((ctLive(d, s.acct) || {}).ver || 1) + ' · Payment terms: ' + (a.terms || 'set by LTC') + '. ' + a.name + ' independently sets its own resale prices.',
+      agHead: agResign(d, s.acct) ? 'Review & Sign Your Updated Pricing' : 'Sign Your Distributor Agreement', isResign: agResign(d, s.acct),
+      resignTxt: 'LTC updated the products or prices on ' + a.name + '’s contract (Schedule B, revision ' + ((ctLive(d, s.acct) || {}).ver || 1) + '). Review the agreement and sign again to keep ordering. Your earlier signed copy stays in Files.',
       agParties: [['Reseller legal name / entity type', (this.agFormVal('company') || '—') + ' · ' + (this.agFormVal('entity') || '—')], ['Reseller business address', this.agFormVal('address') || '—'], ['Authorized contact / title', (this.agFormVal('signer') || '—') + ' · ' + (this.agFormVal('title') || '—')], ['Notice email / telephone', (this.agFormVal('email') || '—') + ' · ' + (this.agFormVal('phone') || '—')], ['Liberty address / notice email', '712 W. Cienega Ave, Unit A, San Dimas, CA 91773 · sales@libertytoolcompany.com'], ['Part II effective date', fmtDay(n) + ' (date of signature)'], ['Approved sales channels / territories', (a.territory || 'United States') + ' · ' + a.type]].map(function (r) { return { k: r[0], v: r[1] }; }),
       readLabel: g.readAll ? 'Read To The End ✓' : 'Scroll To Read', readBg: g.readAll ? '#E3F3EA' : '#FFF3DC', readFg: g.readAll ? '#2E7D4F' : '#8A5A00',
       onAgScroll: function (e) { var el = e.currentTarget || e.target; if (!self.state.ag.readAll && el.scrollTop + el.clientHeight >= el.scrollHeight - 40) setAg({ readAll: true }); },
@@ -4030,7 +4302,7 @@ class Component extends DCLogic {
       agSign: function () {
         var m2 = self.agMissing(); if (m2.length) { setAg({ tried: true }); return self.flash('Still needed: ' + m2.join(', ')); }
         var st = self.state.ag, t = new Date(), fv = function (k) { return self.agFormVal(k).trim(); };
-        mutate(function (x) { x.agreements = x.agreements || {}; x.agreements[s.acct] = { id: 'DA-' + s.acct.toUpperCase() + '-' + t.getTime().toString(36).toUpperCase().slice(-6), version: AG_VERSION, signedAt: fmtDay(t.getTime()), signedTime: fmtClock(t.getTime()), ms: t.getTime(), company: fv('company'), entity: fv('entity'), address: fv('address'), signer: fv('signer'), title: fv('title'), email: fv('email'), phone: fv('phone'), channels: (a.territory || 'United States') + ' · ' + a.type, sigType: st.sigMode, sigText: st.sigMode === 'type' ? String(st.sigText || fv('signer')).trim() : '', sigData: st.sigMode === 'draw' ? st.sigData : '', ack1: true, ack2: true, by: me.id }; x.msgs = x.msgs || {}; (x.msgs[s.acct] = x.msgs[s.acct] || []).push({ from: 'LTC Sales', mine: false, when: fmtDate(today()), text: 'Thanks for signing the Distributor Agreement. Your copy is in Files under Agreements. We’ll countersign and send the final copy.' }); });
+        var lc = ctLive(self.state.data, s.acct); mutate(function (x) { x.agreements = x.agreements || {}; if (x.agreements[s.acct] && x.agreements[s.acct].signedAt) { x.agHist = x.agHist || {}; (x.agHist[s.acct] = x.agHist[s.acct] || []).push(x.agreements[s.acct]); } x.agreements[s.acct] = { ctHash: ctHash(lc), ctVer: lc ? lc.ver : 0, sched: lc ? agSchedFrom(lc) : agSchedRows(), price: lc ? agPriceFrom(lc) : [], brkHead: agBrkHead(lc), terms: a.terms || '', id: 'DA-' + s.acct.toUpperCase() + '-' + t.getTime().toString(36).toUpperCase().slice(-6), version: AG_VERSION, signedAt: fmtDay(t.getTime()), signedTime: fmtClock(t.getTime()), ms: t.getTime(), company: fv('company'), entity: fv('entity'), address: fv('address'), signer: fv('signer'), title: fv('title'), email: fv('email'), phone: fv('phone'), channels: (a.territory || 'United States') + ' · ' + a.type, sigType: st.sigMode, sigText: st.sigMode === 'type' ? String(st.sigText || fv('signer')).trim() : '', sigData: st.sigMode === 'draw' ? st.sigData : '', ack1: true, ack2: true, by: me.id }; x.msgs = x.msgs || {}; (x.msgs[s.acct] = x.msgs[s.acct] || []).push({ from: 'LTC Sales', mine: false, when: fmtDate(today()), text: 'Thanks for signing the Distributor Agreement. Your copy is in Files under Agreements. We’ll countersign and send the final copy.' }); });
         self.strokes = []; self.setState({ ag: blankAg(), view: 'overview' }); self.flash('Agreement signed. Your copy is saved in Files.'); try { window.scrollTo(0, 0); } catch (e) {}
       }
     };
@@ -4038,7 +4310,9 @@ class Component extends DCLogic {
     var sg = (d.agreements || {})[s.acct];
     var F = {
       hasAgFile: !isAdmin && !!(sg && sg.signedAt),
-      agFile: sg ? { name: AG_TITLE + ' (Signed)', meta: 'Signed by ' + sg.signer + ', ' + sg.title + ' · ' + sg.signedAt + ' at ' + sg.signedTime + ' · Doc ID ' + sg.id + ' · Version ' + sg.version, ctr: sg.ltcName ? 'Countersigned By LTC' : 'LTC Countersignature Pending', cbg: sg.ltcName ? '#E3F3EA' : '#FFF3DC', cfg: sg.ltcName ? '#2E7D4F' : '#8A5A00' } : { name: '', meta: '', ctr: '', cbg: '', cfg: '' },
+      agFile: sg ? { name: AG_TITLE + ' (Signed)', meta: 'Signed by ' + sg.signer + ', ' + sg.title + ' · ' + sg.signedAt + ' at ' + sg.signedTime + ' · Doc ID ' + sg.id + ' · Version ' + sg.version + (sg.ctVer ? ' · Schedule B revision ' + sg.ctVer : '') + (agResign(d, s.acct) ? ' · Pricing has changed since' : ''), ctr: sg.ltcName ? 'Countersigned By LTC' : 'LTC Countersignature Pending', cbg: sg.ltcName ? '#E3F3EA' : '#FFF3DC', cfg: sg.ltcName ? '#2E7D4F' : '#8A5A00' } : { name: '', meta: '', ctr: '', cbg: '', cfg: '' },
+      sgSched: sg && sg.sched ? sg.sched : agSchedRows(), hasPrice: !!(sg && sg.price && sg.price.length), priceRows: (sg && sg.price) || [], brkHead: (sg && sg.brkHead) || 'Volume Price',
+      priceIntro: sg ? 'Products ' + (sg.company || a.name) + ' is approved to buy from Liberty, and its purchase price per unit in USD, before freight and taxes. Revision ' + (sg.ctVer || 1) + (sg.terms ? ' · Payment terms: ' + sg.terms : '') + '. Reseller independently sets its own resale prices.' : '',
       viewAg: function () { self.setState({ agOpen: true }); }, closeAg: function () { self.setState({ agOpen: false }); },
       dlAg: function () { if (!sg) return; var blob = new Blob([agDocHtml(sg, a.name)], { type: 'text/html' }), u = URL.createObjectURL(blob), l = document.createElement('a'); l.href = u; l.download = 'LTC-Distributor-Agreement-' + a.name.replace(/[^A-Za-z0-9]+/g, '-') + '-Signed.html'; document.body.appendChild(l); l.click(); l.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 2000); self.flash('Signed agreement downloaded'); },
       printAg: function () { try { window.print(); } catch (e) {} },
@@ -4070,12 +4344,12 @@ class Component extends DCLogic {
     var T = this.teamVals(), meU = this.me(), myLoc = !isAdmin && meU.loc !== 'all' ? meU.loc : null, can = function (k) { return isAdmin || !!(meU.perms && meU.perms[k]); };
     var hasLocs = ((d.locations || {})[s.acct] || []).length > 0;
     var mine = isAdmin ? d.orders : (d.pending || []).concat(d.orders).filter(function (o) { return o.acct === s.acct && (!myLoc || (o.loc || 'all') === myLoc) && (!s.fLoc || (o.loc || 'all') === s.fLoc); });
-    var navP = [['overview', 'Overview']].concat(!myLoc && hasLocs ? [['locs', 'Locations']] : []).concat(can('order') ? [['order', 'New Order']] : []).concat([['orders', 'Orders']]).concat(can('approve') ? [['xAppr', 'Approvals']] : []).concat([['xClaims', 'Returns & Claims']]).concat(can('pricing') || can('approve') ? [['xBill', 'Billing']] : []).concat([['xRep', 'Reports'], ['files', 'Files'], ['messages', 'Messages'], ['book', 'Book Time']]).concat(can('pricing') ? [['prices', 'Price Sheet']] : []).concat([['addr', 'Addresses']]).concat(can('team') ? [['team', 'Team']] : []).concat([['xProf', 'My Profile']]);
-    var navA = [['aOverview', 'Dashboard'], ['orders', 'Order Queue'], ['aRequests', 'Requests'], ['aShip', 'Shipping'], ['xBill', 'Billing'], ['aAccounts', 'Accounts'], ['aUsers', 'Users & Access'], ['aProducts', 'Products'], ['aPricing', 'Pricing'], ['aFreight', 'Freight Calculator'], ['aPayouts', 'Payouts'], ['messages', 'Messages'], ['book', 'Calendar'], ['files', 'Files']];
+    var navP = [['overview', 'Overview']].concat(!myLoc && hasLocs ? [['locs', 'Locations']] : []).concat(can('order') ? [['order', 'New Order']] : []).concat([['orders', 'Orders']]).concat(can('approve') ? [['xAppr', 'Approvals']] : []).concat([['xClaims', 'Returns & Claims']]).concat(can('pricing') || can('approve') ? [['xBill', 'Billing']] : []).concat([['xRep', 'Reports'], ['files', 'Files'], ['messages', 'Messages'], ['book', 'Book Time'], ['sguide', 'Store Guide']]).concat(can('pricing') ? [['prices', 'Price Sheet']] : []).concat([['addr', 'Addresses']]).concat(can('team') ? [['team', 'Team']] : []).concat([['xProf', 'My Profile']]);
+    var navA = [['aOverview', 'Dashboard'], ['orders', 'Order Queue'], ['aRequests', 'Requests'], ['aShip', 'Shipping'], ['xBill', 'Billing'], ['aAccounts', 'Accounts'], ['aUsers', 'Users & Access'], ['aProducts', 'Products'], ['aPricing', 'Pricing'], ['aFreight', 'Freight Calculator'], ['aPayouts', 'Payouts'], ['messages', 'Messages'], ['book', 'Calendar'], ['files', 'Files'], ['sguide', 'Store Quick Guide']];
     var newCount = d.orders.filter(function (o) { return o.status === 'Received'; }).length;
     var apprN = can('approve') ? (d.pending || []).filter(function (o) { return o.acct === s.acct && o.status === 'Awaiting Approval'; }).length : 0;
     var reqN = (d.requests || []).filter(function (r) { return r.status === 'Pending'; }).length + (d.claims || []).filter(function (c) { return c.status === 'Submitted'; }).length;
-    var titles = { overview: 'Partner Portal', order: 'New Order', orders: isAdmin ? 'Order Queue' : 'My Orders', files: 'Files', messages: 'Messages', book: isAdmin ? 'Calendar' : 'Book Time', prices: 'Price Sheet', aOverview: 'LTC Admin', aAccounts: 'Accounts', aUsers: 'Users & Access', team: 'Team', locs: 'Locations', addr: 'Addresses', aPricing: 'Pricing', aFreight: 'Freight Calculator', aAff: 'Affiliates', aBoard: 'Affiliate Leaderboard', aCamp: 'Campaigns & Deals', aContent: 'News & Videos', aReps: 'Sales Team', aRepTrain: 'Rep Training', aRepNews: 'Rep News', aProducts: 'Products', aPayouts: 'Monthly Payouts', aShip: 'Shipping', xAppr: 'Approvals', xClaims: 'Returns & Claims', xBill: 'Billing', xRep: 'Reports', xProf: 'My Profile', aRequests: 'Requests' };
+    var titles = { overview: 'Partner Portal', order: 'New Order', orders: isAdmin ? 'Order Queue' : 'My Orders', files: 'Files', messages: 'Messages', book: isAdmin ? 'Calendar' : 'Book Time', prices: 'Price Sheet', aOverview: 'LTC Admin', aAccounts: 'Accounts', aUsers: 'Users & Access', team: 'Team', locs: 'Locations', addr: 'Addresses', aPricing: 'Pricing', aFreight: 'Freight Calculator', aAff: 'Affiliates', aBoard: 'Affiliate Leaderboard', aCamp: 'Campaigns & Deals', aContent: 'News & Videos', aReps: 'Sales Team', aRepTrain: 'Rep Training', aRepNews: 'Rep News', aProducts: 'Products', aPayouts: 'Monthly Payouts', aShip: 'Shipping', xAppr: 'Approvals', xClaims: 'Returns & Claims', xBill: 'Billing', xRep: 'Reports', xProf: 'My Profile', aRequests: 'Requests', sguide: 'Store Quick Guide' };
     var f = s.form, sel = s.selId ? (isAdmin ? d.orders : d.orders.concat(d.pending || [])).find(function (o) { return o.id === s.selId; }) : null;
     var tierNow = this.tierFor(c.units);
     var useFixed = Object.keys(d.pricing.dist || {}).some(function (k) { return num(d.pricing.dist[k]) != null; });
@@ -4131,8 +4405,8 @@ class Component extends DCLogic {
       tierCards: P.tiers.map(function (t) { var on = tierNow && tierNow.name === t.name; return { name: t.name, rule: num(t.min) != null ? t.min + '+ units' : 'Min: set by LTC', off: num(t.pct) != null ? t.pct + '% off MSRP' : '% set by LTC', border: on ? '2px solid ' + C.pri : '1px solid ' + C.line }; }),
       multiStore: f.type === 'stores', singleShip: f.type !== 'stores', storeCount: s.stores.length,
       qtyHead: f.type === 'stores' ? 'Qty Per Store' : 'Qty',
-      prodRows: PRODUCTS.filter(function (p) { var ac = a.access || {}, kit = prodIsKit(p.id); return isAdmin || (kit ? ac.bundles : ac.caddy !== false); }).map(function (p) { var n = s.qty[p.id] || 0, u = self.unitPrice(p.id, c.units || (n * mult)); return { cut: function () { self.setState({ cs: { kind: 'sheet', id: p.id } }); }, name: p.name, tag: p.tag, img: IMG[p.id], msrp: money(p.msrp), price: u == null ? 'Set by LTC' : money(u), priceColor: u == null ? '#8A94A3' : C.pri, qty: n, line: n > 0 ? (u == null ? 'List ' + money(p.msrp * n * mult) : money(u * n * mult)) : '—', inc: function () { self.setQty(p.id, n + 1); }, dec: function () { self.setQty(p.id, n - 1); }, set: function (e) { self.setQty(p.id, parseInt(e.target.value, 10)); } }; }),
-      toolRows: TOOLS.filter(function () { return isAdmin || (a.access || {}).trowels !== false; }).map(function (p) { var n = s.qty[p.id] || 0, u = self.unitPrice(p.id, c.units); return { priceTxt: (p.msrp != null ? 'MSRP ' + money(p.msrp) : 'MSRP set by LTC') + ' · Your price ' + (u == null ? 'Set by LTC' : money(u)), skuTxt: p.sku || '', cut: function () { self.setState({ cs: { kind: 'sheet', id: p.id } }); }, name: p.name, img: IMG[p.id], qty: n, inc: function () { self.setQty(p.id, n + 1); }, dec: function () { self.setQty(p.id, n - 1); }, set: function (e) { self.setQty(p.id, parseInt(e.target.value, 10)); } }; }),
+      prodRows: PRODUCTS.filter(function (p) { return isAdmin || self.canBuy(p.id); }).map(function (p) { var n = s.qty[p.id] || 0, u = self.unitPrice(p.id, c.units || (n * mult)); return { cut: function () { self.setState({ cs: { kind: 'sheet', id: p.id } }); }, name: p.name, tag: p.tag, img: IMG[p.id], msrp: money(p.msrp), price: u == null ? 'Set by LTC' : money(u), priceColor: u == null ? '#8A94A3' : C.pri, qty: n, line: n > 0 ? (u == null ? 'List ' + money(p.msrp * n * mult) : money(u * n * mult)) : '—', inc: function () { self.setQty(p.id, n + 1); }, dec: function () { self.setQty(p.id, n - 1); }, set: function (e) { self.setQty(p.id, parseInt(e.target.value, 10)); } }; }),
+      toolRows: TOOLS.filter(function (p) { return isAdmin || self.canBuy(p.id); }).map(function (p) { var n = s.qty[p.id] || 0, u = self.unitPrice(p.id, c.units); return { priceTxt: (p.msrp != null ? 'MSRP ' + money(p.msrp) : 'MSRP set by LTC') + ' · Your price ' + (u == null ? 'Set by LTC' : money(u)), skuTxt: p.sku || '', cut: function () { self.setState({ cs: { kind: 'sheet', id: p.id } }); }, name: p.name, img: IMG[p.id], qty: n, inc: function () { self.setQty(p.id, n + 1); }, dec: function () { self.setQty(p.id, n - 1); }, set: function (e) { self.setQty(p.id, parseInt(e.target.value, 10)); } }; }),
       coatRows: COATINGS.filter(function () { return isAdmin || !!(a.access || {}).coatings; }).map(function (n) { return { name: n, on: s.coat[n] ? 'true' : 'false', toggle: function () { var x = Object.assign({}, s.coat); x[n] = !x[n]; self.setState({ coat: x, err: '' }); } }; }),
       storeRows: s.stores.map(function (st, i) { var sv = ((d.locations || {})[s.acct] || []).find(function (l) { return l.id === st.num; }); return { addr: sv && sv.ship && sv.ship.line1 ? sv.ship.line1 + (sv.ship.zip ? ' · ' + sv.ship.zip : '') : (st.addr || 'Not saved yet. LTC confirms.'), num: st.num, city: st.city, st: st.st, remove: function () { var a2 = s.stores.slice(); a2.splice(i, 1); self.setState({ stores: a2 }); } }; }),
       ns: s.ns,
@@ -4201,8 +4475,8 @@ class Component extends DCLogic {
       bookRows: d.books.filter(function (b) { return isAdmin || b.acct === s.acct; }).map(function (b) { return { type: b.type, when: b.when, acctName: (ACCTS[b.acct] || {}).name }; }),
       noBooks: d.books.filter(function (b) { return isAdmin || b.acct === s.acct; }).length === 0,
       priceColHead: a.model === 'tier' ? 'Tier 1 / 2 / 3' : 'Your Price',
-      sheetRows: PRODUCTS.map(function (p) { var pr; if (a.model === 'tier' && num((P.dist || {})[p.id]) != null) { var db2 = num((P.distBreak || {})[p.id]), dm2 = num(P.contractBreakMin); pr = money(num(P.dist[p.id])) + (db2 != null && dm2 != null ? ' · ' + money(db2) + ' at ' + dm2 + '+ units' : ''); } else if (a.model === 'contract' && num((P.contract || {})[p.id]) != null) { var bk = num((P.contractBreak || {})[p.id]), bm = num(P.contractBreakMin); pr = money(num(P.contract[p.id])) + (bk != null && bm != null ? ' · ' + money(bk) + ' at ' + bm + '+ units' : ''); } else if (a.model === 'tier') { pr = P.tiers.map(function (t) { var pc = num(t.pct); return pc == null ? '—' : money(p.msrp * (1 - pc / 100)); }).join(' / '); if (pr === '— / — / —') pr = 'Set by LTC'; } else { var u = self.unitPrice(p.id, 0); pr = u == null ? 'Set by LTC' : money(u); } return { name: p.name, msrp: money(p.msrp), price: pr }; }),
-      toolSheetRows: TOOLS.map(function (t) { var u = self.unitPrice(t.id, 0); return { name: t.name + (t.sku ? ' (' + t.sku + ')' : ''), msrp: t.msrp != null ? money(t.msrp) : 'Set by LTC', price: u == null ? 'Set by LTC' : money(u) }; }),
+      sheetRows: PRODUCTS.filter(function (p) { return isAdmin || self.canBuy(p.id); }).map(function (p) { var pr, ctx = ctLive(d, s.acct), cti = ctx && ctx.items[p.id]; if (cti && cti.on) { var cbk = num(cti.brk), cbm = num(ctx.breakMin); pr = money(num(cti.price)) + (cbk != null && cbm != null ? ' · ' + money(cbk) + ' at ' + cbm + '+ units' : ''); } else if (a.model === 'tier' && num((P.dist || {})[p.id]) != null) { var db2 = num((P.distBreak || {})[p.id]), dm2 = num(P.contractBreakMin); pr = money(num(P.dist[p.id])) + (db2 != null && dm2 != null ? ' · ' + money(db2) + ' at ' + dm2 + '+ units' : ''); } else if (a.model === 'contract' && num((P.contract || {})[p.id]) != null) { var bk = num((P.contractBreak || {})[p.id]), bm = num(P.contractBreakMin); pr = money(num(P.contract[p.id])) + (bk != null && bm != null ? ' · ' + money(bk) + ' at ' + bm + '+ units' : ''); } else if (a.model === 'tier') { pr = P.tiers.map(function (t) { var pc = num(t.pct); return pc == null ? '—' : money(p.msrp * (1 - pc / 100)); }).join(' / '); if (pr === '— / — / —') pr = 'Set by LTC'; } else { var u = self.unitPrice(p.id, 0); pr = u == null ? 'Set by LTC' : money(u); } return { name: p.name, msrp: money(p.msrp), price: pr }; }),
+      toolSheetRows: TOOLS.filter(function (t) { return isAdmin || self.canBuy(t.id); }).map(function (t) { var u = self.unitPrice(t.id, 0), ctt = ctLive(d, s.acct), cti2 = ctt && ctt.items[t.id], tbk = cti2 ? num(cti2.brk) : null, tbm = ctt ? num(ctt.breakMin) : null; if (u != null && tbk != null && tbm != null) return { name: t.name + (t.sku ? ' (' + t.sku + ')' : ''), msrp: t.msrp != null ? money(t.msrp) : 'Set by LTC', price: money(u) + ' · ' + money(tbk) + ' at ' + tbm + '+ units' }; return { name: t.name + (t.sku ? ' (' + t.sku + ')' : ''), msrp: t.msrp != null ? money(t.msrp) : 'Set by LTC', price: u == null ? 'Set by LTC' : money(u) }; }),
       termRows: [{ k: 'Payment Terms', v: a.terms }, { k: 'Free Freight', v: num(P.freeFreight) != null ? 'Over ' + money(num(P.freeFreight)) : 'Set by LTC' }, { k: 'Minimum Order', v: num(P.moq) != null ? P.moq + ' units' : 'None set' }],
       aKpis: [
         { n: newCount, l: 'New Orders To Confirm' },
@@ -4213,7 +4487,9 @@ class Component extends DCLogic {
       ],
       actionRows: d.orders.filter(function (o) { return !isDone(o); }).slice(0, 6).map(function (o) { var x = self.orderView(o); x.open = openOrder(o); return x; }),
       aMsgs: ['ent', 'dist'].map(function (k) { var m = (d.msgs[k] || []).slice(-1)[0] || { when: '', text: 'No messages' }; return { acctName: ACCTS[k].name, when: m.when, text: m.text, open: function () { self.setState({ view: 'messages', thread: k }); } }; }),
-      acctRows: Object.keys(ACCTS).map(function (k) { var x = ACCTS[k], ad = (d.addresses || {})[k] || {}, nl = ((d.locations || {})[k] || []).length; return { billTxt: addrOk(ad.bill) ? [ad.bill.line1, ad.bill.city + ', ' + ad.bill.st].join(' · ') : 'No billing address yet', locTxt: nl ? nl + ' store' + (nl === 1 ? '' : 's') + ' with their own ship-to' : 'Ships to the company address', addr: function () { self.setState({ acct: k, view: 'addr', ae: null }); }, name: x.name, buyer: x.buyer, type: x.type, modelName: x.modelName, terms: x.terms, territory: x.territory, rep: x.rep, open: d.orders.filter(function (o) { return o.acct === k && !isDone(o); }).length, poOn: poRequired(d, k) ? 'true' : 'false', poTxt: poRequired(d, k) ? 'Required' : 'Optional', togPo: function () { var d2 = JSON.parse(JSON.stringify(self.state.data)); d2.poReq = d2.poReq || {}; d2.poReq[k] = !poRequired(d2, k); self.persist(d2); self.flash(x.name + ': PO number ' + (d2.poReq[k] ? 'required' : 'optional')); } }; }),
+      acctRows: Object.keys(ACCTS).map(function (k) { var x = ACCTS[k], ad = (d.addresses || {})[k] || {}, nl = ((d.locations || {})[k] || []).length; return { billTxt: addrOk(ad.bill) ? [ad.bill.line1, ad.bill.city + ', ' + ad.bill.st].join(' · ') : 'No billing address yet', locTxt: nl ? nl + ' store' + (nl === 1 ? '' : 's') + ' with their own ship-to' : 'Ships to the company address', addr: function () { self.setState({ acct: k, view: 'addr', ae: null }); }, ctEdit: function () { self.ctOpen(k); }, name: x.name, buyer: x.buyer,
+        ctBtn: ctLive(d, k) ? 'Edit Pricing' : 'Set Pricing', ctTxt: (function () { var c = ctLive(d, k); if (!c) return 'Pricing Needed'; var held = ((d.team || {})[k] || []).some(function (u) { return u.status === 'Hold'; }); return held ? 'Ready · Invite Not Sent' : 'Revision ' + c.ver + ' · ' + ctOnList(c).length + ' Products'; })(), ctBg: ctLive(d, k) ? '#E3F3EA' : '#FDECEF', ctFg: ctLive(d, k) ? '#2E7D4F' : '#B31942',
+        ctSub: (function () { var c = ctLive(d, k), g = (d.agreements || {})[k]; if (!c) return 'Invites wait until pricing is saved'; if (!(g && g.signedAt)) return 'Agreement not signed yet · saved ' + c.savedAt; return agSigned(d, k) ? 'Agreement signed on revision ' + (g.ctVer || c.ver) : 'Pricing changed · re-sign needed'; })(), type: x.type, modelName: x.modelName, terms: x.terms, territory: x.territory, rep: x.rep, open: d.orders.filter(function (o) { return o.acct === k && !isDone(o); }).length, poOn: poRequired(d, k) ? 'true' : 'false', poTxt: poRequired(d, k) ? 'Required' : 'Optional', togPo: function () { var d2 = JSON.parse(JSON.stringify(self.state.data)); d2.poReq = d2.poReq || {}; d2.poReq[k] = !poRequired(d2, k); self.persist(d2); self.flash(x.name + ': PO number ' + (d2.poReq[k] ? 'required' : 'optional')); } }; }),
       pricing: P,
       contractRows: PRODUCTS.map(function (p) { return { name: p.name, msrp: money(p.msrp), val: P.contract[p.id], brk: (P.contractBreak || {})[p.id] || '', set: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.contract[p.id] = e.target.value; self.persist(d2); }, setBrk: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.contractBreak = d2.pricing.contractBreak || {}; d2.pricing.contractBreak[p.id] = e.target.value; self.persist(d2); } }; }),
       contractBreakMin: P.contractBreakMin || '', setBreakMin: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.contractBreakMin = e.target.value; self.persist(d2); },
@@ -4224,13 +4500,14 @@ class Component extends DCLogic {
       setDealerPct: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.dealerPct = e.target.value; self.persist(d2); },
       setFreeFreight: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.freeFreight = e.target.value; self.persist(d2); },
       setMoq: function (e) { var d2 = JSON.parse(JSON.stringify(d)); d2.pricing.moq = e.target.value; self.persist(d2); },
-      hasToast: !!s.toast, toast: s.toast
+      hasToast: !!s.toast, toast: s.toast, goAccts: function () { self.go('aAccounts'); }
     };
     Object.assign(R, this.cutVals(), this.labelVals(sel), this.addrVals(), this.shipVals(sel), this.shipDocVals(), this.shipQueueVals(), { goImport: function () { self.go('locs'); } });
     Object.assign(R, T, { acctKey: s.acct, showPricing: can('pricing'), noCoat: !(a.access || {}).coatings });
     Object.assign(R, this.authVals());
     Object.assign(R, this.extVals(sel, mine, can), { xbCols: isAdmin ? '40px 1fr 1.4fr 1.2fr 1fr 1fr 1fr 1fr 1.1fr 190px' : '40px 1fr 1.2fr 1fr 1fr 1fr 1fr 1.1fr 90px', goClaims: function () { self.go('xClaims'); } });
     if (isAdmin) Object.assign(R, this.userVals(T));
+    Object.assign(R, this.ctVals(), this.sgVals());
     R.sideMore = !!s.sideMore; R.sideDown = sideDown; R.csf = s.csf;
     if (!isAdmin) return Object.assign(R, { stOpen: false, stm: { rows: [] }, cg: { open: false, list: [] }, csf: s.csf });
     Object.assign(R, this.fqVals(sel), this.repVals(), this.repTrainVals());

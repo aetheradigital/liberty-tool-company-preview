@@ -293,6 +293,7 @@ textarea.inp{padding:10px 12px;min-height:84px;resize:vertical}
     <!-- ================= ORDERS & COMMISSION ================= -->
     <sc-if value="{{v.orders}}" hint-placeholder-val="{{false}}">
       <div class="grid g4"><sc-for list="{{comKpis}}" as="k" hint-placeholder-count="4"><div class="card kpi"><div class="n">{{k.n}}</div><div class="l">{{k.l}}</div></div></sc-for></div>
+      <div class="card" style="margin-top: 16px"><h3 class="h3">Your Commission Plan</h3><sc-for list="{{planRows}}" as="r" hint-placeholder-count="2"><div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; padding: 8px 0; border-bottom: 1px solid #DCE3F7"><span class="muted">{{r.k}}</span><b style="text-align: right">{{r.v}}</b></div></sc-for><sc-if value="{{hasPlanNote}}" hint-placeholder-val="{{false}}"><div class="muted" style="font-size: 13px; margin-top: 10px; line-height: 1.5">{{planNote}}</div></sc-if><div class="muted" style="font-size: 12px; margin-top: 8px">Set by LTC. Questions about your plan? Message sales@libertytoolcompany.com.</div></div>
       <div class="card" style="margin-top: 16px">
         <h3 class="h3">Orders From My Accounts</h3>
         <div class="scroll" style="margin-top: 8px"><div class="tbl" style="--cols: 1fr 1.6fr 1fr 1fr 1fr 1fr; --minw: 760px"><div class="tr th"><div>Order</div><div>Account</div><div>Value</div><div>Status</div><div>Commission</div><div>Paid</div></div>
@@ -585,6 +586,36 @@ function repYtd(r) { var m = repMonthIdx(); return r.ytd.slice(0, m + 1).reduce(
 function repYtdUnits(r) { var m = repMonthIdx(), u = r.ytdUnits || r.ytd.map(function (x) { return Math.round(x / 100); }); return u.slice(0, m + 1).reduce(function (a, b) { return a + b; }, 0); }
 function repThisMonth(r) { return r.ytd[repMonthIdx()] || 0; }
 function repUsd(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+// ---- Commission plans: each rep's pay basis, base rate, account rates, bonus over goal, base pay and cap ----
+function repN(v) { var n = parseFloat(v); return isNaN(n) ? 0 : n; }
+function repSet(v) { return v !== '' && v != null && !isNaN(parseFloat(v)); }
+function repPlan(r) { var p = (r && r.plan) || {}; return { basis: p.basis === 'unit' ? 'unit' : 'pct', rate: repSet(p.rate) ? repN(p.rate) : repN(r && r.rate), accts: p.accts || {}, accel: repN(p.accel), fixed: repN(p.fixed), cap: repN(p.cap), note: p.note || '' }; }
+function repMoney(n) { return '$' + (Math.round(n * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function repRateTxt(P, rate) { return P.basis === 'unit' ? repMoney(rate) + ' per unit' : rate + '% of sales'; }
+function repPlanTxt(P) { var n = Object.keys(P.accts).filter(function (k) { return repSet(P.accts[k]); }).length; return [repRateTxt(P, P.rate)].concat(n ? [n + ' account rate' + (n > 1 ? 's' : '')] : [], P.accel ? ['+' + P.accel + '% over goal'] : [], P.fixed ? [repMoney(P.fixed) + '/mo base'] : [], P.cap ? ['cap ' + repMoney(P.cap) + '/mo'] : []).join(' · '); }
+function repUnitsAt(r, i) { var u = r.ytdUnits || (r.ytd || []).map(function (x) { return Math.round(x / 100); }); return u[i] || 0; }
+function repAcctMonth(orders, assign, rid, y, m) {
+  var out = {};
+  (orders || []).forEach(function (o) { if ((assign || {})[o.acct] !== rid) return; var t = new Date(Date.parse(o.created)); if (isNaN(t.getTime()) || t.getFullYear() !== y || t.getMonth() !== m) return; var x = out[o.acct] = out[o.acct] || { sales: 0, units: 0 }; x.sales += (o.value != null ? o.value : o.list) || 0; x.units += o.units || 0; });
+  return out;
+}
+// sales/units = the rep's month; acctSales = the part of that month from accounts with their own rate
+function repCalc(r, sales, units, acctSales, names) {
+  var P = repPlan(r), parts = [], left = { sales: sales, units: units };
+  parts.push({ k: P.basis === 'unit' ? units + ' units × ' + repMoney(P.rate) : repMoney(sales) + ' in sales × ' + P.rate + '%', v: P.basis === 'unit' ? units * P.rate : sales * P.rate / 100 });
+  Object.keys(acctSales || {}).forEach(function (k) {
+    if (!repSet(P.accts[k])) return;
+    var o = repN(P.accts[k]), a = acctSales[k], s0 = Math.min(a.sales, left.sales), u0 = Math.min(a.units, left.units); left.sales -= s0; left.units -= u0;
+    var amt = P.basis === 'unit' ? u0 * (o - P.rate) : s0 * (o - P.rate) / 100; if (!amt) return;
+    parts.push({ k: ((names || {})[k] || k) + ' at ' + repRateTxt(P, o) + ' (' + (P.basis === 'unit' ? u0 + ' units' : repMoney(s0)) + ')', v: amt });
+  });
+  if (P.accel && r.monthGoal && sales > r.monthGoal) parts.push({ k: 'Bonus over monthly goal: ' + repMoney(sales - r.monthGoal) + ' × ' + P.accel + '%', v: (sales - r.monthGoal) * P.accel / 100 });
+  if (P.fixed) parts.push({ k: 'Monthly base pay', v: P.fixed });
+  var tot = parts.reduce(function (t, p) { return t + p.v; }, 0);
+  if (P.cap && tot > P.cap) { parts.push({ k: 'Monthly cap of ' + repMoney(P.cap), v: P.cap - tot }); tot = P.cap; }
+  return { total: Math.round(Math.max(0, tot) * 100) / 100, parts: parts.map(function (p) { return { k: p.k, v: Math.round(p.v * 100) / 100 }; }), plan: P, txt: repPlanTxt(P) };
+}
+
 function repGoalPct(r) { if (!r.goal) return 0; var v = r.goalType === 'units' ? repYtdUnits(r) : repYtd(r); return Math.min(100, Math.round(v / r.goal * 100)); }
 function repBoard(d, period) {
   return d.reps.map(function (r) { var v = period === 'ytd' ? repYtd(r) : repThisMonth(r); var g = period === 'ytd' ? 0 : r.monthGoal; return { r: r, v: v, pct: g ? Math.round(v / g * 100) : 0 }; })
@@ -643,7 +674,7 @@ function payStmtNo(p, it) { return 'ST-' + p.key.replace('-', '') + '-' + it.id.
 function payStmtRows(it) {
   var rows = it.kind === 'aff'
     ? [['Eligible Tape Caddies Sold', String(it.units)], ['Rate', payUsd(PAY_AFF_RATE) + ' per caddy'], ['Commission', payUsd(it.base)]]
-    : [['Sales From Your Accounts', payUsd(it.sales)], ['Commission Rate', it.rate + '%'], ['Commission', payUsd(it.base)]];
+    : [['Sales From Your Accounts', payUsd(it.sales)]].concat(it.parts && it.parts.length ? it.parts.map(function (x) { return [x.k, (x.v < 0 ? '−' : '') + payUsd(Math.abs(x.v))]; }) : [['Commission Rate', it.rate + '%']], [['Commission', payUsd(it.base)]]);
   if (it.adj) rows.push(['Adjustment' + (it.note ? ' (' + it.note + ')' : ''), (it.adj > 0 ? '+' : '−') + payUsd(Math.abs(it.adj))]);
   return rows.map(function (r) { return { k: r[0], v: r[1] }; });
 }
@@ -698,7 +729,9 @@ class Component extends DCLogic {
     var myOrders = partner.filter(function (o) { return mine.indexOf(o.acct) >= 0; });
     var pros = d.prospects.filter(function (p) { return p.rep === me.id; });
     var visits = d.visits.filter(function (x) { return x.rep === me.id; });
-    var com = function (o) { return (o.value != null ? o.value : o.list) * me.rate / 100; };
+    var myP = repPlan(me), com = function (o) { var rt = repSet(myP.accts[o.acct]) ? repN(myP.accts[o.acct]) : myP.rate; return myP.basis === 'unit' ? (o.units || 0) * rt : (o.value != null ? o.value : o.list) * rt / 100; };
+    var comAt = function (i) { return repCalc(me, me.ytd[i] || 0, repUnitsAt(me, i), repAcctMonth(partner, d.assign, me.id, new Date().getFullYear(), i), NAMES).total; };
+    var ytdCom = 0; for (var ci = 0; ci <= repMonthIdx(); ci++) ytdCom += comAt(ci);
     var titles = { home: 'Dashboard', accounts: 'My Accounts', orders: 'Orders & Commission', calc: 'Income Calculator', board: 'Leaderboard', goals: 'Goals', resources: 'Sales Kit', training: 'Training', news: 'News' };
     var trp = repTrainPct(d, me.id), dn = d.trainDone[me.id] || {};
     var mods = d.training.filter(function (t) { return !s.tcat || t.cat === s.tcat; });
@@ -706,7 +739,7 @@ class Component extends DCLogic {
     var newsSorted = d.news.slice().sort(function (a, b) { return (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0); });
     var newsNew = d.news.filter(function (n) { var t = Date.parse(n.date); return !isNaN(t) && (now - t) / 864e5 <= 3; }).length;
     var c = s.calc;
-    var newAccts = c.open * 12, yearSales = newAccts * c.first + (c.base + newAccts / 2) * c.re * c.reAmt, yearCom = yearSales * me.rate / 100;
+    var newAccts = c.open * 12, yearSales = newAccts * c.first + (c.base + newAccts / 2) * c.re * c.reAmt, yearCom = myP.basis === 'unit' ? yearSales / 100 * myP.rate : yearSales * myP.rate / 100;
     var draft = parseFloat(s.gDraft);
     var goalVals = {
       gTypes: [['revenue', 'Sales Dollars'], ['units', 'Caddies Sold']].map(function (g) { return { label: g[1], on: s.gType === g[0] ? 'true' : 'false', pick: function () { self.setState({ gType: g[0] }); } }; }),
@@ -718,7 +751,7 @@ class Component extends DCLogic {
     };
     return Object.assign(goalVals, {
       v: v, title: titles[s.view],
-      me: { name: me.name, type: me.type, territory: me.territory, rateTxt: me.rate + '% of sales' },
+      me: { name: me.name, type: me.type, territory: me.territory, rateTxt: repPlanTxt(myP) },
       isActive: me.id === 'r2' ? 'true' : 'false', isAgency: me.id === 'r1' ? 'true' : 'false', isNew: me.id === 'r4' ? 'true' : 'false',
       pickActive: function () { self.pick('r2'); }, pickAgency: function () { self.pick('r1'); }, pickNew: function () { self.pick('r4'); },
       navs: [['home', 'Dashboard'], ['accounts', 'My Accounts', pros.filter(function (p) { return p.stage === 'Prospect'; }).length], ['orders', 'Orders & Commission'], ['calc', 'Income Calculator'], ['board', 'Leaderboard'], ['goals', 'Goals', me.goal ? 0 : 1], ['training', 'Training', trp.total - trp.done], ['news', 'News', newsNew], ['resources', 'Sales Kit']].map(function (n) { return { label: n[1], cur: s.view === n[0] ? 'page' : 'false', hasBadge: (n[2] || 0) > 0, badge: n[2] || 0, go: function () { self.go(n[0]); } }; }),
@@ -727,7 +760,7 @@ class Component extends DCLogic {
       noGoal: !me.goal, hasGoal: !!me.goal, yearNow: now.getFullYear(), monthNow: MONTHS[mi],
       gt: { done: fmtG(done), goal: fmtG(me.goal || 0), pct: repGoalPct(me), left: fmtG(Math.max(0, (me.goal || 0) - done)), paceLabel: pace >= (me.goal || 0) ? 'On pace.' : 'Behind pace.', paceColor: pace >= (me.goal || 0) ? '#2E7D4F' : C.acc, paceText: 'At this rate you finish the year around ' + fmtG(pace) + '. ' + (pace >= (me.goal || 0) ? 'Keep it rolling.' : 'You need about ' + fmtG(Math.max(0, (me.goal || 0) - done) / Math.max(1, 12 - mi - now.getDate() / daysIn)) + ' a month from here.') },
       mg: { done: repUsd(month), goal: repUsd(me.monthGoal), pct: me.monthGoal ? Math.min(100, Math.round(month / me.monthGoal * 100)) : 0, days: daysIn - now.getDate(), rank: myRankM },
-      kpis: [{ n: repUsd(ytd), l: 'Sales This Year' }, { n: repUsd(ytd * me.rate / 100), l: 'Commission This Year' }, { n: mine.length + pros.filter(function (p) { return p.stage === 'Stocking' || p.stage === 'Reordering'; }).length, l: 'Active Accounts' }, { n: pros.filter(function (p) { return p.stage !== 'Stocking' && p.stage !== 'Reordering'; }).length, l: 'Open Prospects' }],
+      kpis: [{ n: repUsd(ytd), l: 'Sales This Year' }, { n: repUsd(ytdCom), l: 'Commission This Year' }, { n: mine.length + pros.filter(function (p) { return p.stage === 'Stocking' || p.stage === 'Reordering'; }).length, l: 'Active Accounts' }, { n: pros.filter(function (p) { return p.stage !== 'Stocking' && p.stage !== 'Reordering'; }).length, l: 'Open Prospects' }],
       nextSteps: pros.slice(0, 4), noSteps: pros.length === 0,
       lbTop: board.slice(0, 3).map(function (x, i) { return { rank: x.rank, name: x.r.name, territory: x.r.territory, v: repUsd(x.v), pct: x.pct, bar: Math.min(100, x.pct), medal: REP_MEDAL[i], bg: x.r.id === me.id ? C.soft : '#FFFFFF' }; }),
       lbPeriods: [['month', 'This Month'], ['ytd', 'Year To Date']].map(function (p) { return { label: p[1], on: s.lb === p[0] ? 'true' : 'false', pick: function () { self.setState({ lb: p[0] }); } }; }),
@@ -748,12 +781,13 @@ class Component extends DCLogic {
         setNote: function (e) { self.setState({ vf: Object.assign({}, self.state.vf, { note: e.target.value }) }); },
         save: function () { var f = self.state.vf, a = f.acct || (pros[0] ? pros[0].name : ''); if (!a) return self.flash('Add a prospect first'); self.upd(function (d2) { d2.visits.unshift({ rep: me.id, acct: a, when: repFmt(repToday()), outcome: f.outcome, note: f.note || '—' }); var p = d2.prospects.find(function (y) { return y.rep === me.id && y.name === a; }); if (p) p.last = repFmt(repToday()); }, 'Visit logged'); self.setState({ vf: { acct: a, outcome: OUTCOMES[0], note: '' } }); } },
       visits: visits.slice(0, 8),
-      comKpis: [{ n: repUsd(ytd), l: 'Sales This Year' }, { n: repUsd(ytd * me.rate / 100), l: 'Commission This Year' }, { n: repUsd(month * me.rate / 100), l: 'Commission This Month' }, { n: me.rate + '%', l: 'Your Rate' }],
+      comKpis: [{ n: repUsd(ytd), l: 'Sales This Year' }, { n: repUsd(ytdCom), l: 'Commission This Year' }, { n: repUsd(comAt(repMonthIdx())), l: 'Commission This Month' }, { n: repRateTxt(myP, myP.rate), l: 'Your Base Rate' }],
+      planRows: [{ k: 'Base rate', v: repRateTxt(myP, myP.rate) }].concat(Object.keys(myP.accts).filter(function (k) { return repSet(myP.accts[k]); }).map(function (k) { return { k: (NAMES[k] || k) + ' account rate', v: repRateTxt(myP, repN(myP.accts[k])) }; }), myP.accel ? [{ k: 'Bonus over your monthly goal', v: '+' + myP.accel + '% on sales above ' + repUsd(me.monthGoal || 0) }] : [], myP.fixed ? [{ k: 'Monthly base pay', v: repMoney(myP.fixed) }] : [], myP.cap ? [{ k: 'Monthly cap', v: repMoney(myP.cap) }] : []), planNote: myP.note, hasPlanNote: !!myP.note,
       orders: myOrders.map(function (o) { return { id: o.id, created: o.created, acctName: NAMES[o.acct] || o.acct, valueTxt: repUsd(o.value != null ? o.value : o.list), status: o.status, com: repUsd(com(o)), paid: o.status === 'Delivered' ? 'Next payout' : 'After delivery' }; }),
       noOrders: myOrders.length === 0,
-      monthRows: MONTHS.slice(0, mi + 1).map(function (m, i) { return { m: m, sales: repUsd(me.ytd[i] || 0), goal: repUsd(me.monthGoal), com: repUsd((me.ytd[i] || 0) * me.rate / 100) }; }).reverse(),
+      monthRows: MONTHS.slice(0, mi + 1).map(function (m, i) { return { m: m, sales: repUsd(me.ytd[i] || 0), goal: repUsd(me.monthGoal), com: repUsd(comAt(i)) }; }).reverse(),
       sliders: [['open', 'New Accounts Opened Per Month', 0, 10, 1, function (x) { return x + (x === 1 ? ' account' : ' accounts'); }], ['first', 'Average Opening Order', 250, 10000, 250, repUsd], ['base', 'Accounts You Already Have', 0, 50, 1, function (x) { return x + ''; }], ['re', 'Reorders Per Account Per Year', 0, 12, 1, function (x) { return x + 'x'; }], ['reAmt', 'Average Reorder', 100, 5000, 100, repUsd]].map(function (x) { return { label: x[1], min: x[2], max: x[3], step: x[4], value: c[x[0]], text: x[5](c[x[0]]), on: function (e) { var n = Object.assign({}, self.state.calc); n[x[0]] = Number(e.target.value); self.setState({ calc: n }); } }; }),
-      calcRows: [{ k: 'New accounts this year', v: newAccts }, { k: 'Opening orders', v: repUsd(newAccts * c.first) }, { k: 'Reorders', v: repUsd((c.base + newAccts / 2) * c.re * c.reAmt) }, { k: 'Total sales', v: repUsd(yearSales) }, { k: 'Your rate', v: me.rate + '%' }],
+      calcRows: [{ k: 'New accounts this year', v: newAccts }, { k: 'Opening orders', v: repUsd(newAccts * c.first) }, { k: 'Reorders', v: repUsd((c.base + newAccts / 2) * c.re * c.reAmt) }, { k: 'Total sales', v: repUsd(yearSales) }, { k: 'Your rate', v: repRateTxt(myP, myP.rate) }],
       calcYear: repUsd(yearCom), calcMonth: repUsd(yearCom / 12),
       calcGoalPct: me.goal ? Math.round((me.goalType === 'units' ? yearSales / 100 : yearSales) / me.goal * 100) : 0,
       calcGoalBar: me.goal ? Math.min(100, Math.round((me.goalType === 'units' ? yearSales / 100 : yearSales) / me.goal * 100)) : 0,
@@ -761,7 +795,7 @@ class Component extends DCLogic {
       useAsGoal: function () { self.setState({ gType: 'revenue', gDraft: Math.round(yearSales) }); self.go('goals'); },
       chart: (function () { var max = Math.max.apply(null, me.ytd.concat([me.monthGoal])) || 1; return MONTHS.map(function (m, i) { return { m: m, h: Math.round((me.ytd[i] || 0) / max * 100 * 0.86), cls: i === mi ? 'now' : '', title: m + ': ' + repUsd(me.ytd[i] || 0) }; }); })(),
       chartGoal: (me.monthGoal / (Math.max.apply(null, me.ytd.concat([me.monthGoal])) || 1) * 0.86).toFixed(3),
-      stmts: payRunsFor(s.pay, 'rep', me.id).map(function (x) { return { period: x.period.label, meta: repUsd(x.item.sales) + ' in sales · ' + x.item.rate + '% · Paid ' + x.run.paidOn, total: payUsd(x.item.total), view: function () { self.setState({ stmt: { key: x.period.key, kind: 'rep', id: me.id } }); } }; }),
+      stmts: payRunsFor(s.pay, 'rep', me.id).map(function (x) { return { period: x.period.label, meta: repUsd(x.item.sales) + ' in sales · ' + (x.item.planTxt || x.item.rate + '%') + ' · Paid ' + x.run.paidOn, total: payUsd(x.item.total), view: function () { self.setState({ stmt: { key: x.period.key, kind: 'rep', id: me.id } }); } }; }),
       noStmts: payRunsFor(s.pay, 'rep', me.id).length === 0,
       stOpen: payStmtVals(self, s.pay).stOpen, stm: payStmtVals(self, s.pay).stm,
       tr: { done: trp.done, total: trp.total, pct: trp.pct, left: trp.total - trp.done, note: trp.done === trp.total ? 'All required training done. Optional modules are there when you want them.' : 'Finish the required modules to stay certified to sell. LTC can see your progress.' },
