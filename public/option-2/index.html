@@ -1082,11 +1082,13 @@ var TOOLS = [
   { id: 'triple', group: 'bundle', name: 'Triple Threat', tag: 'Kit · Lowboy + 4" + 6"', price: 295, body: 'Three heights for crews that mask a bit of everything.', points: ['The Lowboy', '4-Inch Caddy', '6-Inch Caddy'], url: 'lowboy-4-6' },
   { id: 'four', group: 'bundle', name: '4-Score Complete Kit', tag: 'Kit · All Four', price: 389, body: 'Every caddy we make, for a fully loaded crew.', points: ['The Lowboy', '2-Inch, 4-Inch and 6-Inch Caddies'], url: '4-score' }
 ];
+function noSize(v) { return typeof v === 'string' ? v.replace(/\s*\(?\b10\s*(?:\"|”|in\.?|inch)?\s*[x×]\s*10\b\s*(?:\"|”|in\.?|inch(?:es)?)?\)?\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim() : v; }
 (function () {
   try {
     var st = JSON.parse(localStorage.getItem('ltc-products-v1') || 'null'); if (!st || !st.products) return;
     var map = { ftrowel: 'trowel', ctrowel: 'covetrowel', snub: 'trowel', ct4: 'covetrowel' }, grp = { caddy: 'caddy', kit: 'bundle', trowel: 'trowel', other: 'trowel' };
     st.products.forEach(function (p) {
+      ['name', 'tag', 'body', 'spec'].forEach(function (k) { p[k] = noSize(p[k]); }); if (p.pts) p.pts = p.pts.map(noSize); if (p.id === 'hawk') p.name = 'Patch Hawk';
       var hid = map[p.id] || p.id, t = TOOLS.find(function (x) { return x.id === hid; }), show = p.status === 'Active' && p.site !== false;
       if (t) { t.hidden = !show; if (show && p.msrp != null) t.soon = false; t.name = p.name; t.tag = p.tag || t.tag; t.price = p.msrp == null ? null : p.msrp; if (p.body) t.body = p.body; if (p.pts && p.pts.length) t.points = p.pts.slice(); if (p.imgData) t.img = p.imgData; }
       else if (show) TOOLS.push({ id: hid, group: grp[p.cat] || 'trowel', name: p.name, tag: p.tag || '', price: p.msrp == null ? null : p.msrp, img: p.imgData || p.img || '', body: p.body || '', points: (p.pts || []).slice(), url: (p.shopify && p.shopify.handle) || '' });
