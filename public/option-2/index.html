@@ -85,10 +85,10 @@ input[type=range]{accent-color:#B31942}
         <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"></path></svg>
         Careers
       </a>
-      <a href="https://thetapecaddy.myshopify.com/collections/all" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 1.5px solid #0A35C8; border-radius: 10px; color: #0A35C8; text-decoration: none; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase">
+      <button type="button" onClick="{{cartUi.open}}" aria-label="Open cart, {{cart}} items" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; background: #FFFFFF; border: 1.5px solid #0A35C8; border-radius: 10px; color: #0A35C8; cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase">
         <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A35C8" stroke-width="2"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2"></path><circle cx="9" cy="20" r="1.4"></circle><circle cx="17" cy="20" r="1.4"></circle></svg>
         Cart ({{cart}})
-      </a>
+      </button>
       <button type="button" class="ltc-burger" aria-label="Menu" aria-controls="ltc-menu" aria-expanded="{{menuOpen}}" onClick="{{toggleMenu}}" style="display: none; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; background: #0A35C8; border: 0; border-radius: 10px; cursor: pointer">
         <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"><path class="ltc-b1" d="M4 7h16"></path><path class="ltc-b2" d="M4 12h16"></path><path class="ltc-b3" d="M4 17h16"></path></svg>
       </button>
@@ -268,12 +268,12 @@ input[type=range]{accent-color:#B31942}
   </div>
 </section>
 
-<!-- FIND YOUR LINE (cartoon caddies) -->
+<!-- FIND YOUR LINE (product photos) -->
 <section id="find" style="max-width: 1240px; margin: 0 auto; padding: 40px 24px 40px">
   <div style="display: flex; flex-wrap: wrap; border: 1px solid #DCE3F7; border-radius: 20px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); overflow: hidden; background: #FFFFFF">
     <div style="flex: 1 1 340px; min-width: 0; padding: 32px; display: flex; flex-direction: column">
       <div style="display: inline-block; align-self: flex-start; width: fit-content; background: #FDECEF; color: #B31942; border: 0; border-radius: 999px; padding: 5px 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">The Tape Caddy</div>
-      <h2 style="margin: 8px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(25px, 3.0vw, 36px); line-height: 0.98; text-transform: uppercase">Pick A Size. <br>Watch It Roll.</h2>
+      <h2 style="margin: 8px 0 0; font-family: Poppins, sans-serif; font-weight: 800; font-size: clamp(25px, 3.0vw, 36px); line-height: 0.98; text-transform: uppercase">Pick A Size. <br>See It Up Close.</h2>
       <p style="margin: 14px 0 0; font-size: 16px; line-height: 1.6; color: #3B4658">Each caddy holds your tape at one height. Set it down and roll.</p>
       <div role="group" aria-label="Caddy size" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 22px">
         <sc-for list="{{models}}" as="m" hint-placeholder-count="4">
@@ -288,55 +288,10 @@ input[type=range]{accent-color:#B31942}
         <button type="button" onClick="{{model.add}}" style="min-height: 50px; padding: 0 22px; background: #B31942; color: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase">{{model.addLabel}}</button>
       </div>
     </div>
-    <div style="flex: 999 1 560px; min-width: 0; position: relative; min-height: 400px; overflow: hidden; background: #F3EFE6">
-      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 0; bottom: 96px; background: linear-gradient(180deg, #F6F2EA 0%, #ECE6DA 100%)"></div>
-      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 96px; height: 22px; background: #E3DCCD; border-top: 2px solid #D2C8B5"></div>
-      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 96px; background: linear-gradient(180deg, #7E8B9A 0%, #5F6C7B 100%)"></div>
-      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 60px; height: 10px; background: #FFFFFF22"></div>
-      <div aria-hidden="true" style="position: absolute; left: 22px; bottom: 96px; width: 34px; height: 186px; background: #F2C94C; border: 1px solid #DCE3F7; border-bottom: 0; border-radius: 10px 3px 0 0; box-sizing: border-box">
-        <div style="position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 23px, #071A52 23px 25px)"></div>
-        <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 12px; background: repeating-linear-gradient(0deg, transparent 0 11px, #071A52 11px 12.5px)"></div>
-      </div>
-      <div aria-hidden="true" style="position: absolute; left: 56px; bottom: {{lineMark}}px; display: flex; align-items: center; transition: bottom 450ms ease">
-        <span style="width: 0; height: 0; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-right: 10px solid #B31942"></span>
-        <span style="background: #B31942; color: #FFFFFF; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; padding: 3px 7px; border-radius: 2px">{{model.height}}</span>
-      </div>
-      <div class="ltc-anim" style="position: absolute; left: 120px; bottom: 96px; height: 0; width: 72%; animation: ltcRide 6s linear infinite">
-        <div style="position: absolute; left: 0; right: 0; bottom: {{tapeBottom}}px; height: 12px; background: #EBD58F; box-shadow: inset 0 -3px 0 #D4B95F; border-radius: 2px 0 0 2px; transition: bottom 450ms ease"></div>
-        <div style="position: absolute; right: {{toon.right}}px; bottom: -2px; width: {{toon.vbW}}px; transition: right 450ms ease">
-          <svg role="img" aria-label="Cartoon of the {{model.name}} Tape Caddy" width="{{toon.vbW}}" height="{{toon.vbH}}" viewBox="0 0 {{toon.vbW}} {{toon.vbH}}" style="display: block; overflow: visible">
-            <ellipse cx="{{toon.cx}}" cy="{{toon.shadowY}}" rx="{{toon.shadowRx}}" ry="6" fill="#071A5226"></ellipse>
-            <path d="{{toon.wingL}}" fill="#2D5BE3" opacity="{{toon.wingOp}}"></path>
-            <path d="{{toon.wingR}}" fill="#2149C4" opacity="{{toon.wingOp}}"></path>
-            <g>
-              <rect x="{{toon.fx1}}" y="{{toon.forkY}}" width="8" height="12" rx="2" fill="#9AA3AE"></rect>
-              <rect x="{{toon.fx2}}" y="{{toon.forkY}}" width="8" height="12" rx="2" fill="#9AA3AE"></rect>
-            </g>
-            <rect x="18" y="{{toon.top}}" width="{{toon.bodyW}}" height="{{toon.bodyH}}" rx="16" fill="#2D5BE3"></rect>
-            <rect x="{{toon.shadeX}}" y="{{toon.top}}" width="30" height="{{toon.bodyH}}" rx="14" fill="#2149C4"></rect>
-            <rect x="{{toon.slotX}}" y="{{toon.slotY}}" width="60" height="{{toon.slotH}}" rx="10" fill="#1A3A9E"></rect>
-            <rect x="{{toon.tapeX}}" y="{{toon.slotY}}" width="30" height="{{toon.slotH}}" rx="6" fill="#EBD58F"></rect>
-            <rect x="30" y="{{toon.hiY}}" width="7" height="{{toon.hiH}}" rx="3.5" fill="#FFFFFF" fill-opacity="0.35"></rect>
-            <rect x="24" y="{{toon.r1}}" width="18" height="12" rx="6" fill="#1C1F24"></rect>
-            <rect x="24" y="{{toon.r2}}" width="18" height="12" rx="6" fill="#1C1F24" opacity="{{toon.rOp}}"></rect>
-            <rect x="24" y="{{toon.r3}}" width="18" height="12" rx="6" fill="#1C1F24" opacity="{{toon.rOp}}"></rect>
-            <rect x="{{toon.rx}}" y="{{toon.r1}}" width="18" height="12" rx="6" fill="#1C1F24"></rect>
-            <rect x="{{toon.rx}}" y="{{toon.r2}}" width="18" height="12" rx="6" fill="#1C1F24" opacity="{{toon.rOp}}"></rect>
-            <rect x="{{toon.rx}}" y="{{toon.r3}}" width="18" height="12" rx="6" fill="#1C1F24" opacity="{{toon.rOp}}"></rect>
-            <ellipse cx="{{toon.cx}}" cy="{{toon.top}}" rx="{{toon.lidRx}}" ry="14" fill="#4A7BF7"></ellipse>
-            <ellipse cx="{{toon.cx}}" cy="{{toon.top}}" rx="30" ry="9" fill="#EBD58F"></ellipse>
-            <ellipse cx="{{toon.cx}}" cy="{{toon.top}}" rx="17" ry="5" fill="#1A3A9E"></ellipse>
-            <rect x="{{toon.tagX}}" y="{{toon.tagY}}" width="34" height="16" rx="3" fill="#FFFFFF" opacity="{{toon.tagOp}}"></rect>
-            <text x="{{toon.tagTX}}" y="{{toon.tagTY}}" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="800" font-size="12" fill="#0A35C8" opacity="{{toon.tagOp}}">LTC</text>
-            <g class="ltc-wheel"><circle cx="{{toon.w1}}" cy="{{toon.wy}}" r="9" fill="#1C1F24"></circle><circle cx="{{toon.w1}}" cy="{{toon.wy}}" r="3.5" fill="#D7DCE2"></circle><rect x="{{toon.w1s}}" y="{{toon.wys}}" width="2.5" height="6" fill="#D7DCE2"></rect></g>
-            <g class="ltc-wheel"><circle cx="{{toon.w2}}" cy="{{toon.wy}}" r="9" fill="#1C1F24"></circle><circle cx="{{toon.w2}}" cy="{{toon.wy}}" r="3.5" fill="#D7DCE2"></circle><rect x="{{toon.w2s}}" y="{{toon.wys}}" width="2.5" height="6" fill="#D7DCE2"></rect></g>
-          </svg>
-        </div>
-      </div>
-      <div style="position: absolute; top: 18px; right: 18px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px">
-        <span style="background: #0A35C8; color: #FFFFFF; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; padding: 7px 12px; border-radius: 10px">{{model.name}}</span>
-        <span style="background: #FFFFFF; color: #071A52; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; padding: 7px 12px; border-radius: 10px">Line At {{model.height}}</span>
-      </div>
+    <div style="flex: 999 1 560px; min-width: 0; position: relative; min-height: 400px; overflow: hidden; background: #E9EEF7">
+      <img src="{{model.photo}}" alt="The {{model.name}} Tape Caddy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%">
+      <div style="position: absolute; left: 18px; top: 18px; display: flex; align-items: center; gap: 8px; background: #B31942; color: #FFFFFF; border-radius: 999px; padding: 8px 14px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; box-shadow: 0 8px 20px rgba(7,26,82,0.25)">Holds Tape At {{model.height}}</div>
+      <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 22px 18px; background: linear-gradient(180deg, rgba(7,26,82,0) 0%, rgba(7,26,82,0.82) 100%); color: #FFFFFF; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: flex-end"><div><div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 22px; text-transform: uppercase; line-height: 1">{{model.name}}</div><div style="font-size: 14px; margin-top: 4px; opacity: 0.9">Rolls on casters · Made in the USA</div></div><div style="font-size: 13px; font-weight: 700; opacity: 0.9">Real product photo</div></div>
     </div>
   </div>
 </section>
@@ -853,7 +808,7 @@ input[type=range]{accent-color:#B31942}
   </div>
   <div style="max-width: 1240px; margin: 0 auto; padding: 20px 24px 32px; border-top: 1px solid #ffffff22; font-size: 13px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px">
     <span>© 2026 Liberty Industrial Coating Systems Inc. d/b/a Liberty Tool Company</span>
-    <span style="display: flex; flex-wrap: wrap; gap: 16px"><a href="#privacy" style="color: #DDE5FF">Privacy Policy</a><a href="#terms" style="color: #DDE5FF">Terms</a><a href="#ambassador-terms" style="color: #DDE5FF">Ambassador Terms</a><a href="#careers" style="color: #DDE5FF">Careers</a></span>
+    <span style="display: flex; flex-wrap: wrap; gap: 16px"><a href="/privacy/" style="color: #DDE5FF">Privacy Policy</a><a href="/terms/" style="color: #DDE5FF">Terms &amp; Conditions</a><a href="#ambassador-terms" style="color: #DDE5FF">Ambassador Terms</a><a href="#careers" style="color: #DDE5FF">Careers</a></span>
   </div>
 </footer>
 
@@ -1071,6 +1026,33 @@ input[type=range]{accent-color:#B31942}
   </div>
 </sc-if>
 
+<!-- CART DRAWER -->
+<sc-if value="{{cartUi.isOpen}}" hint-placeholder-val="{{false}}">
+  <div style="position: fixed; inset: 0; z-index: 90; background: rgba(7,26,82,0.45)" onClick="{{cartUi.close}}"></div>
+  <aside role="dialog" aria-modal="true" aria-label="Your cart" style="position: fixed; top: 0; right: 0; bottom: 0; z-index: 91; width: min(440px, 100%); background: #FFFFFF; box-shadow: -20px 0 60px rgba(7,26,82,0.25); display: flex; flex-direction: column">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid #DCE3F7"><div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 20px; text-transform: uppercase; color: #071A52">Your Cart · {{cart}}</div><button type="button" onClick="{{cartUi.close}}" aria-label="Close cart" style="width: 44px; height: 44px; border: 0; background: #EEF2FB; border-radius: 10px; cursor: pointer; font-size: 20px; color: #071A52">×</button></div>
+    <div style="flex: 1; overflow-y: auto; padding: 8px 20px">
+      <sc-for list="{{cartUi.items}}" as="it" hint-placeholder-count="2">
+        <div style="display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid #EEF2FB">
+          <img src="{{it.img}}" alt="" style="width: 64px; height: 64px; object-fit: cover; border-radius: 10px; background: #EEF2FB">
+          <div style="min-width: 0"><div style="font-weight: 700; color: #071A52; line-height: 1.25">{{it.name}}</div><div style="font-size: 13px; color: #3B4658; margin-top: 2px">{{it.each}} each</div>
+            <div style="display: flex; align-items: center; gap: 6px; margin-top: 8px"><button type="button" onClick="{{it.dec}}" aria-label="One fewer {{it.name}}" style="width: 32px; height: 32px; border: 1.5px solid #DCE3F7; background: #FFFFFF; border-radius: 8px; cursor: pointer; font-weight: 800; color: #0A35C8">−</button><span style="min-width: 24px; text-align: center; font-weight: 700">{{it.qty}}</span><button type="button" onClick="{{it.inc}}" aria-label="One more {{it.name}}" style="width: 32px; height: 32px; border: 1.5px solid #DCE3F7; background: #FFFFFF; border-radius: 8px; cursor: pointer; font-weight: 800; color: #0A35C8">+</button><button type="button" onClick="{{it.remove}}" style="margin-left: 8px; border: 0; background: none; color: #B31942; font-weight: 700; font-size: 13px; cursor: pointer; text-decoration: underline">Remove</button></div></div>
+          <div style="font-weight: 800; color: #0A35C8">{{it.line}}</div>
+        </div>
+      </sc-for>
+      <sc-if value="{{cartUi.empty}}" hint-placeholder-val="{{false}}"><div style="padding: 40px 0; text-align: center; color: #3B4658"><div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 18px; text-transform: uppercase; color: #071A52">Your Cart Is Empty</div><p style="margin: 8px 0 0">Add a caddy, kit or trowel to get started.</p></div></sc-if>
+    </div>
+    <div style="padding: 16px 20px 20px; border-top: 1px solid #DCE3F7; background: #F7F9FE">
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-weight: 700; color: #3B4658">Subtotal</span><span style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 24px; color: #071A52">{{cartUi.subtotal}}</span></div>
+      <div style="font-size: 13px; color: #3B4658; margin-top: 4px">Shipping and tax are figured at checkout.</div>
+      <sc-if value="{{cartUi.hasMsg}}" hint-placeholder-val="{{false}}"><div role="status" style="margin-top: 10px; padding: 10px 12px; border-radius: 10px; background: #FFF3DC; color: #8A5A00; font-size: 13px; font-weight: 600">{{cartUi.msg}}</div></sc-if>
+      <button type="button" onClick="{{cartUi.checkout}}" disabled="{{cartUi.noCheckout}}" style="width: 100%; min-height: 54px; margin-top: 12px; background: #B31942; color: #FFFFFF; border: 0; border-radius: 12px; cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase">{{cartUi.checkoutLabel}}</button>
+      <button type="button" onClick="{{cartUi.close}}" style="width: 100%; min-height: 44px; margin-top: 8px; background: none; border: 0; color: #0A35C8; font-weight: 700; cursor: pointer">Keep Shopping</button>
+      <div style="font-size: 12px; color: #3B4658; text-align: center; margin-top: 4px">Secure checkout by Shopify</div>
+    </div>
+  </aside>
+</sc-if>
+
 </div>
 </template>
 <div id="root"></div>
@@ -1081,9 +1063,16 @@ input[type=range]{accent-color:#B31942}
 var CARD = { lowboy: '/assets/card-lowboy.webp', c2: '/assets/card-c2.webp', c4: '/assets/card-c4.webp', c6: '/assets/card-c6.webp', cove: '/assets/card-cove.webp', ddd: '/assets/card-ddd.webp', triple: '/assets/card-triple.webp', four: '/assets/card-four.webp' };
 var CROP = { lowboy: '/assets/crop-lowboy.webp', c2: '/assets/crop-c2.webp', c4: '/assets/crop-c4.webp', c6: '/assets/crop-c6.webp', cove: '/assets/crop-cove.webp', ddd: '/assets/crop-ddd.webp', triple: '/assets/crop-triple.webp', four: '/assets/crop-four.webp' };
 var TOOLS = [
-  { id: 'trowel', group: 'trowel', name: 'Finishing Trowel', tag: 'LTC Trowels', price: null, img: '/assets/sq-trowel.webp', alt: '/assets/sq-trowel2.webp', body: 'A flat steel trowel for a smooth, even finish pass.', points: ['Steel blade with rounded corners', 'Soft blue grip', 'Threaded end on the handle', 'Made in the USA'] },
-  { id: 'covetrowel', group: 'trowel', name: 'Cove Trowel', tag: 'LTC Trowels', price: null, img: '/assets/sq-covet.webp', alt: '/assets/sq-covet2.webp', body: 'A steel trowel with a curved lip for shaping cove where the floor meets the wall.', points: ['Curved steel lip for cove', 'Riveted steel handle', 'Blue grip with LTC branding', 'Made in the USA'] },
-  { id: 'strap', group: 'trowel', name: 'Broadcast Strap', tag: 'LTC Broadcast Gear', price: null, img: '', body: 'Keeps your broadcast hands-free and your throw even across big floors.', points: ['Hands-free broadcasting', 'Built for long pours', 'Photos coming soon'], soon: true },
+  { id: 'trowel', group: 'trowel', name: '6" Snub Flat Hanging Trowel', tag: 'LTC Trowels', sku: 'LTC-SNUB', price: 39.99, img: '/assets/sq-trowel.webp', alt: '/assets/sq-trowel2.webp', body: 'A 6 inch snub-nose flat trowel for hanging and finishing work.', points: ['6 inch flat steel blade', 'Snub nose', 'Soft blue grip', 'Made in the USA'], url: '6-snub-flat-hanging-trowel' },
+  { id: 'covetrowel', group: 'trowel', name: '4" Standard Cove Trowel', tag: 'LTC Trowels', sku: 'LTC-45CT', price: 28.99, img: '/assets/sq-covet.webp', alt: '/assets/sq-covet2.webp', body: 'A 4 inch standard cove trowel for shaping cove where the floor meets the wall.', points: ['4 inch standard cove', 'Riveted steel handle', 'Blue grip with LTC branding', 'Made in the USA'], url: '4-standard-cove-trowel' },
+  { id: 'ct4t', group: 'trowel', name: '4" Standard Cove Trowel w/ 45° Taper', tag: 'LTC Trowels', sku: 'LTC-45CTW45', price: 31.99, img: '/assets/sq-covet.webp', alt: '/assets/sq-covet2.webp', body: 'A 4 inch standard cove trowel with a 45 degree taper.', points: ['4 inch standard cove', '45° taper', 'Made in the USA'], url: '4-standard-cove-trowel-45-taper' },
+  { id: 'ct6', group: 'trowel', name: '6" Standard Cove Trowel', tag: 'LTC Trowels', sku: 'LTC-65CT', price: 29.99, img: '/assets/sq-covet.webp', alt: '/assets/sq-covet2.webp', body: 'A 6 inch standard cove trowel for taller cove details.', points: ['6 inch standard cove', 'Made in the USA'], url: '6-standard-cove-trowel' },
+  { id: 'ct6t', group: 'trowel', name: '6" Standard Cove Trowel w/ 45° Taper', tag: 'LTC Trowels', sku: 'LTC-65CTW45', price: 32.99, img: '/assets/sq-covet.webp', alt: '/assets/sq-covet2.webp', body: 'A 6 inch standard cove trowel with a 45 degree taper.', points: ['6 inch standard cove', '45° taper', 'Made in the USA'], url: '6-standard-cove-trowel-45-taper' },
+  { id: 'cct', group: 'trowel', name: '2" Can’t Cove Trowel', tag: 'LTC Trowels', sku: 'LTC-CCT', price: 34.99, img: '/assets/sq-covet2.webp', alt: '/assets/sq-covet.webp', body: 'A 2 inch cant cove trowel for shaping a straight angled cove.', points: ['2 inch cant cove', 'Made in the USA'], url: '2-cant-cove-trowel' },
+  { id: 'cct45', group: 'trowel', name: '2" Can’t Cove Trowel w/ 45° Taper', tag: 'LTC Trowels', sku: 'LTC-CCTW45', price: 39.99, img: '/assets/sq-covet2.webp', alt: '/assets/sq-covet.webp', body: 'A 2 inch cant cove trowel with a 45 degree taper.', points: ['2 inch cant cove', '45° taper', 'Made in the USA'], url: '2-cant-cove-trowel-45-taper' },
+  { id: 'marg', group: 'trowel', name: '8" Marginal Trowel', tag: 'LTC Trowels', sku: '', price: 23.99, img: '', body: 'An 8 inch marginal trowel for tight spots, edges and detail work.', points: ['8 inch blade', 'For edges and detail work', 'Made in the USA'], url: '8-marginal-trowel' },
+  { id: 'hawk', group: 'trowel', name: 'Patch Hawk', tag: 'LTC Trowels', sku: 'LTC-PH', price: 39.99, img: '', body: 'A hawk for holding patch and cove material while you work.', points: ['Holds patch and cove material', 'Made in the USA'], url: 'patch-hawk' },
+  { id: 'strap', group: 'trowel', name: 'Broadcast Strap', tag: 'LTC Broadcast Gear', sku: 'LTC-BCSTRAP', price: 64.99, img: '', body: 'A broadcast strap for even, hands-steady broadcasting of flake and aggregate.', points: ['For flake and aggregate broadcast', 'Hands-free carry on big floors', 'Made in the USA'], url: 'broadcast-strap' },
   { id: 'lowboy', group: 'caddy', name: 'The Lowboy', tag: 'Tape Caddy · 4 mm', price: 89, body: 'Our lowest caddy. Mask floor edges and thin lines without crawling across the floor.', points: ['Holds tape at 4 mm', 'Rolls on casters', 'Made in the USA'], url: 'hardware-and-tools-example-product-1' },
   { id: 'c2', group: 'caddy', name: '2-Inch Caddy', tag: 'Tape Caddy · 2-Inch', price: 89, body: 'Holds your tape at 2 inches, the same on every pass.', points: ['Holds tape at 2 inches', 'Rolls on casters', 'Made in the USA'], url: 'hardware-and-tools-example-product-2' },
   { id: 'c4', group: 'caddy', name: '4-Inch Caddy', tag: 'Tape Caddy · 4-Inch', price: 99, body: 'The everyday 4-inch line for cove and wall masking.', points: ['Holds tape at 4 inches', 'Rolls on casters', 'Made in the USA'], url: 'hardware-and-tools-example-product-3' },
@@ -1096,7 +1085,7 @@ var TOOLS = [
 (function () {
   try {
     var st = JSON.parse(localStorage.getItem('ltc-products-v1') || 'null'); if (!st || !st.products) return;
-    var map = { ftrowel: 'trowel', ctrowel: 'covetrowel' }, grp = { caddy: 'caddy', kit: 'bundle', trowel: 'trowel', other: 'trowel' };
+    var map = { ftrowel: 'trowel', ctrowel: 'covetrowel', snub: 'trowel', ct4: 'covetrowel' }, grp = { caddy: 'caddy', kit: 'bundle', trowel: 'trowel', other: 'trowel' };
     st.products.forEach(function (p) {
       var hid = map[p.id] || p.id, t = TOOLS.find(function (x) { return x.id === hid; }), show = p.status === 'Active' && p.site !== false;
       if (t) { t.hidden = !show; if (show && p.msrp != null) t.soon = false; t.name = p.name; t.tag = p.tag || t.tag; t.price = p.msrp == null ? null : p.msrp; if (p.body) t.body = p.body; if (p.pts && p.pts.length) t.points = p.pts.slice(); if (p.imgData) t.img = p.imgData; }
@@ -1104,6 +1093,18 @@ var TOOLS = [
     });
   } catch (e) {}
 })();
+var SHOP_URL = 'https://thetapecaddy.myshopify.com';
+// Shopify variant IDs. Fill these from Shopify admin (Products > product > variant ID) so checkout never has to look them up.
+var SHOP_VARIANTS = {};
+var CART_KEY = 'ltc-cart-v1';
+function cartLoad() { try { var c = JSON.parse(localStorage.getItem(CART_KEY) || '{}'); return c && typeof c === 'object' ? c : {}; } catch (e) { return {}; } }
+function cartSave(c) { try { localStorage.setItem(CART_KEY, JSON.stringify(c)); } catch (e) {} }
+function shopVariant(t) {
+  if (!t) return Promise.resolve(null);
+  if (SHOP_VARIANTS[t.id]) return Promise.resolve(SHOP_VARIANTS[t.id]);
+  if (!t.url) return Promise.resolve(null);
+  return fetch(SHOP_URL + '/products/' + t.url + '.js').then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { var v = j && j.variants && (j.variants.find(function (x) { return x.available; }) || j.variants[0]); if (v) SHOP_VARIANTS[t.id] = v.id; return v ? v.id : null; }).catch(function () { return null; });
+}
 var STRAP_IMG = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#E6EAF0"/><path d="M40 40 C70 120 130 120 160 40" fill="none" stroke="#0A35C8" stroke-width="16" stroke-linecap="round"/><rect x="70" y="105" width="60" height="50" rx="10" fill="#B31942"/><circle cx="100" cy="130" r="10" fill="#FFFFFF"/><text x="100" y="185" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="16" fill="#4A5568">PHOTO COMING SOON</text></svg>');
 var MODELS = [
   { id: 'lowboy', name: 'Lowboy', height: '4 mm', inches: 0.16, bodyH: 26 },
@@ -1263,10 +1264,24 @@ class Component extends DCLogic {
     var days = [], d = new Date();
     while (days.length < 6) { d.setDate(d.getDate() + 1); var w = d.getDay(); if (w !== 0 && w !== 6) days.push({ dow: d.toLocaleDateString('en-US', { weekday: 'short' }), md: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }); }
     this.days = days;
-    this.state = { model: 'c4', env: 'all', prodCat: 'all', toolFilter: 'all', jd: -1, glob: 'ca', globOther: '', cart: 0, added: {}, kit: { lowboy: true, c2: false, c4: true, c6: true }, amb: 20, faq: 0, buyer: 'tools', note: '', day: 0, slot: -1, step: 1, qi: 0, qa: {}, modal: null, mThumb: 0, hits: {}, lastHit: '', quote: [], ba: 50, sheets: {}, bSf: 2000, bMat: 3.5, bCrew: 3, bDays: 2, bRate: 45, bMark: 35, acad: 'all', wtb: 'CA', wtbSent: false, rev: 0, textOpen: false, salType: 'vet', salDone: false, role: 'Territory Representative', careerSent: false, ambOpen: false, ambSent: false, ambName: '', menuOpen: false };
+    this.state = { model: 'c4', env: 'all', prodCat: 'all', toolFilter: 'all', jd: -1, glob: 'ca', globOther: '', cart: 0, cartItems: cartLoad(), cartOpen: false, cartMsg: '', cartBusy: false, added: {}, kit: { lowboy: true, c2: false, c4: true, c6: true }, amb: 20, faq: 0, buyer: 'tools', note: '', day: 0, slot: -1, step: 1, qi: 0, qa: {}, modal: null, mThumb: 0, hits: {}, lastHit: '', quote: [], ba: 50, sheets: {}, bSf: 2000, bMat: 3.5, bCrew: 3, bDays: 2, bRate: 45, bMark: 35, acad: 'all', wtb: 'CA', wtbSent: false, rev: 0, textOpen: false, salType: 'vet', salDone: false, role: 'Territory Representative', careerSent: false, ambOpen: false, ambSent: false, ambName: '', menuOpen: false };
     var selfMap = this; if (window.fetch) fetch(US_MAP_URL).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (t) { US_GEO = usTopo(t); if (US_GEO) selfMap.setState({ geo: Date.now() }); }).catch(function () {});
   }
-  add(id) { var a = Object.assign({}, this.state.added); a[id] = true; this.setState({ cart: this.state.cart + 1, added: a }); }
+  add(id, qty) { var a = Object.assign({}, this.state.added), c = Object.assign({}, this.state.cartItems); a[id] = true; c[id] = (c[id] || 0) + (qty || 1); cartSave(c); this.setState({ cartItems: c, added: a, cartOpen: true, cartMsg: '' }); }
+  setQty(id, q) { var c = Object.assign({}, this.state.cartItems); if (q > 0) c[id] = q; else delete c[id]; cartSave(c); this.setState({ cartItems: c, cartMsg: '' }); }
+  checkout() {
+    var self = this, items = this.state.cartItems, ids = Object.keys(items).filter(function (k) { return items[k] > 0; });
+    if (!ids.length) return;
+    var byId = {}; TOOLS.forEach(function (t) { byId[t.id] = t; });
+    this.setState({ cartBusy: true, cartMsg: '' });
+    Promise.all(ids.map(function (id) { return shopVariant(byId[id]).then(function (v) { return { id: id, v: v }; }); })).then(function (res) {
+      var miss = res.filter(function (r) { return !r.v; });
+      if (miss.length) { self.setState({ cartBusy: false, cartMsg: 'We couldn’t reach the store for ' + miss.map(function (r) { return byId[r.id].name; }).join(', ') + '. Text 239-744-8403 and we’ll finish your order by phone.' }); return; }
+      var url = SHOP_URL + '/cart/' + res.map(function (r) { return r.v + ':' + items[r.id]; }).join(',');
+      self.setState({ cartBusy: false });
+      try { window.top.location.href = url; } catch (e) { window.location.href = url; }
+    });
+  }
   open(kind, id) { this.setState({ modal: { kind: kind, id: id }, mThumb: 0, ba: 50 }); }
   inQuote(key) { return this.state.quote.some(function (q) { return q.key === key; }); }
   toggleQuote(key, name) { var q = this.state.quote.slice(); var i = q.findIndex(function (x) { return x.key === key; }); if (i >= 0) q.splice(i, 1); else q.push({ key: key, name: name }); this.setState({ quote: q }); }
@@ -1281,7 +1296,7 @@ class Component extends DCLogic {
       out = { isVideo: true, eyebrow: 'Installer Academy · ' + ACATS[v.cat], title: v.title, body: v.blurb, points: v.steps.map(function (x, i) { return 'Step ' + (i + 1) + ': ' + x; }), thumbs: [], chipsLabel: 'In This Video', chips: v.rel.map(function (r) { return { label: r[2], open: function () { self.open(r[0], r[1]); } }; }), quoteLabel: 'Ask An Installer →', quote: quoteFor('Question about the video: ' + v.title + '.', 'tools'), photoNote: 'Video coming soon.' };
     } else {
       var t = TOOLS.find(function (x) { return x.id === m.id; });
-      var imgs = t.group === 'trowel' ? (t.img ? [t.img, t.alt] : [STRAP_IMG]) : [CARD[t.id], CROP[t.id]];
+      var imgs = t.group === 'trowel' ? (t.img ? [t.img, t.alt || t.img] : [STRAP_IMG]) : [CARD[t.id], CROP[t.id]];
       var th = imgs.map(function (src, i) { return { label: t.name + ' photo ' + (i + 1), short: '', hasImg: true, noImg: false, img: src, ring: i === s.mThumb ? '#B31942' : '#FFFFFF', pick: function () { self.setState({ mThumb: i }); } }; }).concat(ph(['In use']).map(function (x) { x.ring = s.mThumb === 2 ? '#B31942' : '#FFFFFF'; x.pick = function () { self.setState({ mThumb: 2 }); }; return x; }));
       var quote = t.price == null;
       out = { eyebrow: t.tag, title: t.name, body: t.body, points: t.points, thumbs: th, mainImgList: imgs, hasPrice: true, priceText: quote ? 'Price On Request' : money(t.price), isCart: !quote, cartLabel: s.added[t.id] ? 'Added — Add Another' : 'Add To Cart', cartAdd: function () { self.add(t.id); }, quoteLabel: quote ? 'Ask For Pricing →' : 'Questions? Book A Call', quote: quoteFor('Question about the ' + t.name + '.', 'tools'), photoNote: t.soon ? 'Product photos coming soon.' : 'In-use photos coming soon.' };
@@ -1331,13 +1346,17 @@ class Component extends DCLogic {
       totalText: money(recTotal) + (recAsk ? ' + trowel / strap pricing' : ''),
       note: recAsk ? 'Trowels and the broadcast strap are priced on request.' : 'Bundles ship in one master box.',
       addLabel: recAdded ? 'Added To Cart ✓' : 'Add Setup To Cart',
-      addAll: function () { var a = Object.assign({}, self.state.added), c = self.state.cart; recItems.forEach(function (x) { if (x.price != null) { a[x.id] = true; c += x.qty; } }); self.setState({ added: a, cart: c }); },
+      addAll: function () { var a = Object.assign({}, self.state.added), c = Object.assign({}, self.state.cartItems); recItems.forEach(function (x) { if (x.price != null) { a[x.id] = true; c[x.id] = (c[x.id] || 0) + x.qty; } }); cartSave(c); self.setState({ added: a, cartItems: c, cartOpen: true }); },
       answers: QUIZ.map(function (q) { var v = s.qa[q.id]; var o = q.opts.find(function (x) { return x[0] === v; }); return { q: q.short, a: o ? o[1] : '—' }; }),
       restart: function () { self.setState({ qi: 0, qa: {} }); }
     };
     var t = toon(m);
     return {
-      cart: s.cart,
+      cart: Object.keys(s.cartItems).reduce(function (t, k) { return t + s.cartItems[k]; }, 0),
+      cartUi: (function () { var by = {}; TOOLS.forEach(function (t) { by[t.id] = t; }); var ids = Object.keys(s.cartItems).filter(function (k) { return by[k] && s.cartItems[k] > 0; }), sub = ids.reduce(function (t, k) { return t + (by[k].price || 0) * s.cartItems[k]; }, 0);
+        return { isOpen: !!s.cartOpen, empty: ids.length === 0, open: function () { self.setState({ cartOpen: true, cartMsg: '' }); }, close: function () { self.setState({ cartOpen: false }); },
+          items: ids.map(function (k) { var t = by[k], q = s.cartItems[k]; return { name: t.name, img: t.img || CARD[k] || STRAP_IMG, qty: q, each: money(t.price || 0), line: money((t.price || 0) * q), inc: function () { self.setQty(k, q + 1); }, dec: function () { self.setQty(k, q - 1); }, remove: function () { self.setQty(k, 0); } }; }),
+          subtotal: money(sub), hasMsg: !!s.cartMsg, msg: s.cartMsg, noCheckout: ids.length === 0 || s.cartBusy ? 'true' : null, checkoutLabel: s.cartBusy ? 'Opening Checkout…' : 'Checkout', checkout: function () { self.checkout(); } }; })(),
       quiz: quiz,
       acad: {
         filters: [{ id: 'all', label: 'All' }, { id: 'caddy', label: '1. The Tape Caddy' }, { id: 'trowel', label: '2. Trowels' }, { id: 'strap', label: '3. Broadcast Strap' }, { id: 'bundle', label: '4. Bundles' }, { id: 'know', label: '5. Jobsite Know-How' }].map(function (f) { var on = f.id === s.acad; return { label: f.label, pressed: on ? 'true' : 'false', border: on ? '#FFFFFF' : '#ffffff44', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#071A52' : '#FFFFFF', pick: function () { self.setState({ acad: f.id }); } }; }),
@@ -1433,7 +1452,7 @@ class Component extends DCLogic {
         });
       }),
       models: MODELS.map(function (x) { return Object.assign({}, x, sel(x.id === s.model), { pick: function () { self.setState({ model: x.id }); } }); }),
-      model: Object.assign({}, m, { priceText: money(byId[m.id].price), addLabel: s.added[m.id] ? 'Added To Cart' : 'Add To Cart', add: function () { self.add(m.id); } }),
+      model: Object.assign({}, m, { photo: '/assets/crop-' + m.id + '.webp', priceText: money(byId[m.id].price), addLabel: s.added[m.id] ? 'Added To Cart' : 'Add To Cart', add: function () { self.add(m.id); } }),
       tapeBottom: Math.max(4, Math.round(m.inches * 25)), lineMark: 96 + Math.max(4, Math.round(m.inches * 25)) - 7, toon: t,
       kitTiles: ['lowboy', 'c2', 'c4', 'c6'].map(function (k) { var on = !!s.kit[k]; return { name: byId[k].name.replace(' Caddy', '').replace('The ', ''), priceText: money(byId[k].price), pressed: on ? 'true' : 'false', border: on ? '#0A35C8' : '#C9D0DA', bg: on ? '#EEF3FA' : '#FFFFFF', boxBorder: on ? '#B31942' : '#8A94A3', boxBg: on ? '#B31942' : '#FFFFFF', toggle: function () { var n = Object.assign({}, s.kit); n[k] = !n[k]; self.setState({ kit: n }); } }; }),
       kit: kit,
