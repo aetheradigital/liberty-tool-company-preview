@@ -1093,17 +1093,82 @@ var TOOLS = [
     });
   } catch (e) {}
 })();
-var SHOP_URL = 'https://thetapecaddy.myshopify.com';
-// Shopify variant IDs. Fill these from Shopify admin (Products > product > variant ID) so checkout never has to look them up.
+// ---------- Shopify cart (Storefront API) ----------
+var SHOP_DOMAIN = 'thetapecaddy.myshopify.com';
+var SHOP_URL = 'https://' + SHOP_DOMAIN;
+// Storefront API public access token. Shopify admin > Sales channels > Headless (or Settings > Apps > Develop apps) > Storefront API.
+// It is a public token: it can only read products and build carts, so it is safe in the page.
+var SHOP_TOKEN = '';
+var SHOP_API = SHOP_URL + '/api/2026-07/graphql.json';
+// Optional: Shopify variant IDs by site product id. Products not listed here are looked up by their Shopify handle (t.url).
 var SHOP_VARIANTS = {};
-var CART_KEY = 'ltc-cart-v1';
+var CART_KEY = 'ltc-cart-v1', SHOP_CART_KEY = 'ltc-shop-cart-v1';
 function cartLoad() { try { var c = JSON.parse(localStorage.getItem(CART_KEY) || '{}'); return c && typeof c === 'object' ? c : {}; } catch (e) { return {}; } }
-function cartSave(c) { try { localStorage.setItem(CART_KEY, JSON.stringify(c)); } catch (e) {} }
+function cartSave(c) { try { localStorage.setItem(CART_KEY, JSON.stringify(c)); } catch (e) {} if (SHOP_TOKEN) shopSync(c).catch(function () {}); }
+function shopCartGet() { try { return JSON.parse(localStorage.getItem(SHOP_CART_KEY) || 'null'); } catch (e) { return null; } }
+function shopCartSet(c) { try { if (c) localStorage.setItem(SHOP_CART_KEY, JSON.stringify(c)); else localStorage.removeItem(SHOP_CART_KEY); } catch (e) {} }
+function gql(query, variables) {
+  return fetch(SHOP_API, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-Shopify-Storefront-Access-Token': SHOP_TOKEN }, body: JSON.stringify({ query: query, variables: variables || {} }) })
+    .then(function (r) { if (!r.ok) throw new Error('Shopify ' + r.status); return r.json(); })
+    .then(function (j) { if (j.errors && j.errors.length) throw new Error(j.errors[0].message); return j.data; });
+}
+function gidOf(v) { v = String(v); return v.indexOf('gid://') === 0 ? v : 'gid://shopify/ProductVariant/' + v; }
+function numOf(v) { return String(v).split('/').pop(); }
+function shopResolve(ids) {
+  var byId = {}; TOOLS.forEach(function (t) { byId[t.id] = t; });
+  var need = ids.filter(function (k) { return !SHOP_VARIANTS[k] && byId[k] && byId[k].url; });
+  if (!need.length) return Promise.resolve();
+  var q = 'query{' + need.map(function (k, i) { return 'p' + i + ':product(handle:' + JSON.stringify(byId[k].url) + '){variants(first:20){nodes{id availableForSale}}}'; }).join(' ') + '}';
+  return gql(q).then(function (d) { need.forEach(function (k, i) { var pr = d['p' + i], n = pr && pr.variants && pr.variants.nodes; var v = n && n.length && (n.find(function (x) { return x.availableForSale; }) || n[0]); if (v) SHOP_VARIANTS[k] = v.id; }); });
+}
+var CART_FIELDS = 'id checkoutUrl totalQuantity lines(first:100){nodes{id quantity merchandise{... on ProductVariant{id}}}}';
+function shopMutate(m, vars, key) { return gql(m, vars).then(function (d) { var r = d[key]; if (r.userErrors && r.userErrors.length) throw new Error(r.userErrors[0].message); return r.cart; }); }
+function shopSyncNow(items) {
+  var ids = Object.keys(items).filter(function (k) { return items[k] > 0; });
+  return shopResolve(ids).then(function () {
+    var miss = ids.filter(function (k) { return !SHOP_VARIANTS[k]; });
+    if (miss.length) return { missing: miss };
+    var want = {}; ids.forEach(function (k) { var g = gidOf(SHOP_VARIANTS[k]); want[g] = (want[g] || 0) + items[k]; });
+    var saved = shopCartGet();
+    var get = saved && saved.id ? gql('query($id:ID!){cart(id:$id){' + CART_FIELDS + '}}', { id: saved.id }).then(function (d) { return d.cart; }) : Promise.resolve(null);
+    return get.then(function (cart) {
+      if (!cart) {
+        if (!ids.length) { shopCartSet(null); return null; }
+        return shopMutate('mutation($l:[CartLineInput!]){cartCreate(input:{lines:$l}){cart{' + CART_FIELDS + '} userErrors{message}}}', { l: Object.keys(want).map(function (g) { return { merchandiseId: g, quantity: want[g] }; }) }, 'cartCreate');
+      }
+      var have = {}, rm = [], up = [];
+      cart.lines.nodes.forEach(function (l) { var g = l.merchandise && l.merchandise.id; if (!want[g] || have[g]) rm.push(l.id); else { have[g] = 1; if (l.quantity !== want[g]) up.push({ id: l.id, quantity: want[g] }); } });
+      var add = Object.keys(want).filter(function (g) { return !have[g]; }).map(function (g) { return { merchandiseId: g, quantity: want[g] }; });
+      var chain = Promise.resolve(cart);
+      if (rm.length) chain = chain.then(function () { return shopMutate('mutation($id:ID!,$x:[ID!]!){cartLinesRemove(cartId:$id,lineIds:$x){cart{' + CART_FIELDS + '} userErrors{message}}}', { id: cart.id, x: rm }, 'cartLinesRemove'); });
+      if (up.length) chain = chain.then(function () { return shopMutate('mutation($id:ID!,$x:[CartLineUpdateInput!]!){cartLinesUpdate(cartId:$id,lines:$x){cart{' + CART_FIELDS + '} userErrors{message}}}', { id: cart.id, x: up }, 'cartLinesUpdate'); });
+      if (add.length) chain = chain.then(function () { return shopMutate('mutation($id:ID!,$x:[CartLineInput!]!){cartLinesAdd(cartId:$id,lines:$x){cart{' + CART_FIELDS + '} userErrors{message}}}', { id: cart.id, x: add }, 'cartLinesAdd'); });
+      return chain;
+    }).then(function (cart) { if (cart) shopCartSet({ id: cart.id, checkoutUrl: cart.checkoutUrl }); return { cart: cart }; });
+  });
+}
+// One sync at a time; if the cart changes mid-sync, sync again with the newest cart.
+var shopLatest = null, shopRun = null;
+function shopSync(items) {
+  shopLatest = items; if (shopRun) return shopRun;
+  shopRun = new Promise(function (res, rej) {
+    (function loop() { var it = shopLatest; shopLatest = null;
+      shopSyncNow(it).then(function (r) { if (shopLatest) loop(); else { shopRun = null; res(r); } }, function (e) { if (shopLatest) loop(); else { shopRun = null; rej(e); } });
+    })();
+  });
+  return shopRun;
+}
+// On load: a Shopify cart that no longer exists has been checked out (or expired), so start fresh.
+function shopStale() {
+  var saved = shopCartGet(); if (!SHOP_TOKEN || !saved || !saved.id) return Promise.resolve(false);
+  return gql('query($id:ID!){cart(id:$id){id}}', { id: saved.id }).then(function (d) { if (d.cart) return false; shopCartSet(null); return true; }).catch(function () { return false; });
+}
+// Last resort without a token: Shopify cart permalink (needs numeric variant IDs).
 function shopVariant(t) {
   if (!t) return Promise.resolve(null);
-  if (SHOP_VARIANTS[t.id]) return Promise.resolve(SHOP_VARIANTS[t.id]);
+  if (SHOP_VARIANTS[t.id]) return Promise.resolve(numOf(SHOP_VARIANTS[t.id]));
   if (!t.url) return Promise.resolve(null);
-  return fetch(SHOP_URL + '/products/' + t.url + '.js').then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { var v = j && j.variants && (j.variants.find(function (x) { return x.available; }) || j.variants[0]); if (v) SHOP_VARIANTS[t.id] = v.id; return v ? v.id : null; }).catch(function () { return null; });
+  return fetch(SHOP_URL + '/products/' + t.url + '.js').then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { var v = j && j.variants && (j.variants.find(function (x) { return x.available; }) || j.variants[0]); return v ? v.id : null; }).catch(function () { return null; });
 }
 var STRAP_IMG = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#E6EAF0"/><path d="M40 40 C70 120 130 120 160 40" fill="none" stroke="#0A35C8" stroke-width="16" stroke-linecap="round"/><rect x="70" y="105" width="60" height="50" rx="10" fill="#B31942"/><circle cx="100" cy="130" r="10" fill="#FFFFFF"/><text x="100" y="185" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="16" fill="#4A5568">PHOTO COMING SOON</text></svg>');
 var MODELS = [
@@ -1265,6 +1330,7 @@ class Component extends DCLogic {
     while (days.length < 6) { d.setDate(d.getDate() + 1); var w = d.getDay(); if (w !== 0 && w !== 6) days.push({ dow: d.toLocaleDateString('en-US', { weekday: 'short' }), md: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }); }
     this.days = days;
     this.state = { model: 'c4', env: 'all', prodCat: 'all', toolFilter: 'all', jd: -1, glob: 'ca', globOther: '', cart: 0, cartItems: cartLoad(), cartOpen: false, cartMsg: '', cartBusy: false, added: {}, kit: { lowboy: true, c2: false, c4: true, c6: true }, amb: 20, faq: 0, buyer: 'tools', note: '', day: 0, slot: -1, step: 1, qi: 0, qa: {}, modal: null, mThumb: 0, hits: {}, lastHit: '', quote: [], ba: 50, sheets: {}, bSf: 2000, bMat: 3.5, bCrew: 3, bDays: 2, bRate: 45, bMark: 35, acad: 'all', wtb: 'CA', wtbSent: false, rev: 0, textOpen: false, salType: 'vet', salDone: false, role: 'Territory Representative', careerSent: false, ambOpen: false, ambSent: false, ambName: '', menuOpen: false };
+    var selfCart = this; if (SHOP_TOKEN) setTimeout(function () { var self = selfCart; shopStale().then(function (gone) { if (gone) { try { localStorage.setItem(CART_KEY, '{}'); } catch (e) {} self.setState({ cartItems: {}, added: {} }); } else if (Object.keys(self.state.cartItems).length) shopSync(self.state.cartItems).catch(function () {}); }); }, 0);
     var selfMap = this; if (window.fetch) fetch(US_MAP_URL).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (t) { US_GEO = usTopo(t); if (US_GEO) selfMap.setState({ geo: Date.now() }); }).catch(function () {});
   }
   add(id, qty) { var a = Object.assign({}, this.state.added), c = Object.assign({}, this.state.cartItems); a[id] = true; c[id] = (c[id] || 0) + (qty || 1); cartSave(c); this.setState({ cartItems: c, added: a, cartOpen: true, cartMsg: '' }); }
@@ -1273,15 +1339,24 @@ class Component extends DCLogic {
     var self = this, items = this.state.cartItems, ids = Object.keys(items).filter(function (k) { return items[k] > 0; });
     if (!ids.length) return;
     var byId = {}; TOOLS.forEach(function (t) { byId[t.id] = t; });
+    var go = function (url) { try { window.top.location.href = url; } catch (e) { window.location.href = url; } };
+    var fail = function (names) { self.setState({ cartBusy: false, cartMsg: 'We couldn’t reach the store' + (names ? ' for ' + names : '') + '. Text 239-744-8403 and we’ll finish your order by phone.' }); };
+    var permalink = function () {
+      return Promise.all(ids.map(function (id) { return shopVariant(byId[id]).then(function (v) { return { id: id, v: v }; }); })).then(function (res) {
+        var miss = res.filter(function (r) { return !r.v; });
+        if (miss.length) return fail(miss.map(function (r) { return byId[r.id].name; }).join(', '));
+        go(SHOP_URL + '/cart/' + res.map(function (r) { return r.v + ':' + items[r.id]; }).join(','));
+      });
+    };
     this.setState({ cartBusy: true, cartMsg: '' });
-    Promise.all(ids.map(function (id) { return shopVariant(byId[id]).then(function (v) { return { id: id, v: v }; }); })).then(function (res) {
-      var miss = res.filter(function (r) { return !r.v; });
-      if (miss.length) { self.setState({ cartBusy: false, cartMsg: 'We couldn’t reach the store for ' + miss.map(function (r) { return byId[r.id].name; }).join(', ') + '. Text 239-744-8403 and we’ll finish your order by phone.' }); return; }
-      var url = SHOP_URL + '/cart/' + res.map(function (r) { return r.v + ':' + items[r.id]; }).join(',');
-      self.setState({ cartBusy: false });
-      try { window.top.location.href = url; } catch (e) { window.location.href = url; }
-    });
+    if (!SHOP_TOKEN) { permalink(); return; }
+    shopSync(items).then(function (r) {
+      if (r && r.missing) return fail(r.missing.map(function (k) { return byId[k].name; }).join(', '));
+      if (r && r.cart && r.cart.checkoutUrl) return go(r.cart.checkoutUrl);
+      permalink();
+    }, function () { permalink(); });
   }
+
   open(kind, id) { this.setState({ modal: { kind: kind, id: id }, mThumb: 0, ba: 50 }); }
   inQuote(key) { return this.state.quote.some(function (q) { return q.key === key; }); }
   toggleQuote(key, name) { var q = this.state.quote.slice(); var i = q.findIndex(function (x) { return x.key === key; }); if (i >= 0) q.splice(i, 1); else q.push({ key: key, name: name }); this.setState({ quote: q }); }
