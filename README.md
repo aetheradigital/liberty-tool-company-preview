@@ -15,16 +15,18 @@ Deploy: Render static site, publish directory `public`.
 
 ## Preview and release sites
 
-- **Preview** — https://ltc-preview.onrender.com (Render `ltc-preview`) deploys every push to `main`. Keep using it for client review.
-- **Release** — https://ltc-release.onrender.com (Render `ltc-release`) deploys the `release` branch only. Custom domains (libertytoolcompany.com, partner.libertytoolcompany.com) attach to this site.
+All LTC services are in the **Liberty Tool Company** Render workspace.
+
+- **Preview** — https://ltc-preview-weii.onrender.com (Render `ltc-preview`) deploys every push to `main`. Keep using it for client review.
+- **Release** — https://ltc-release-yq66.onrender.com (Render `ltc-release`) deploys the `release` branch only. Custom domains (libertytoolcompany.com, partner.libertytoolcompany.com) attach to this site.
 - To publish what's on `main` to the release site: `tools/publish_release.sh`. It runs `tools/make_release.py` on a copy of `main` and force-pushes the result to `release`: the website becomes the home page at `/` (and `/option-2/` forwards there), the preview bar is removed, `partner.*` visitors to `/` go to the partner portal, and the reviews section is left out while it still holds placeholder quotes.
 - The Where We Ship map draws real state outlines from us-atlas (jsDelivr, `states-albers-10m.json`); if that file can't load, the state tile grid shows instead.
 
 ## Backend API (`api/`)
 
-- **Service** — Render web service `ltc-api` (https://ltc-api-fskq.onrender.com), Node 20+, no npm dependencies. Deploys every push to `main`; build `cd api && npm install`, start `cd api && npm start`. Health check: `/health`.
+- **Service** — Render web service `ltc-api` (https://ltc-api-z2o9.onrender.com), Node 20+, no npm dependencies. Deploys every push to `main`; build `cd api && npm install`, start `cd api && npm start`. Health check: `/health`.
 - **Why it exists** — static sites can't hold secrets. Every third-party key (Cal.com now; Stripe, Clerk, Twilio, R2, Postmark, R&L later) lives only in `ltc-api`'s Render environment, never in `public/`.
-- **Environment** — `CAL_API_KEY` (paste in the Render dashboard; never commit it), `CAL_WEBHOOK_SECRET` (optional), `ALLOWED_ORIGINS` (comma-separated sites allowed to call the API). Optional overrides: `CAL_EVENT_SLUG` (default `website-outreach`), `CAL_USERNAME` (default `brandon`), `CAL_ORG_SLUG` (default `liberty-tool-company`), `CAL_BOOKINGS_VERSION` (default `2026-02-25`).
+- **Environment** — `CAL_API_KEY` (paste in the Render dashboard; never commit it), `CAL_WEBHOOK_SECRET` (optional), `ALLOWED_ORIGINS` (comma-separated sites allowed to call the API; currently the preview and release sites plus libertytoolcompany.com and www.libertytoolcompany.com). Optional overrides: `CAL_EVENT_SLUG` (default `website-outreach`), `CAL_USERNAME` (default `brandon`), `CAL_ORG_SLUG` (default `liberty-tool-company`), `CAL_BOOKINGS_VERSION` (default `2026-02-25`).
 - **Website Book A Call** — the `#schedule` section on the main site (`public/option-2/`) loads real open times for the Cal.com **Website Outreach** event (https://liberty-tool-company.cal.com/brandon/website-outreach) and books through the API. Times show in Pacific. If the API can't be reached, the section tells visitors to call or text 239-744-8403. On startup the API logs `[startup] Cal.com OK` once the key can see the event.
   - `GET /api/cal/website/slots?days=14` — open times grouped by Pacific date
   - `POST /api/cal/website/bookings` — `{ start, name, email, phone?, company?, topic?, notes?, timeZone? }`; 5 per visitor per 10 minutes, hidden spam field, allowed sites only

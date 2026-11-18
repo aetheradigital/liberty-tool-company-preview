@@ -1297,7 +1297,7 @@ var VALUES = [
 ];
 var BUYERS = [{ id: 'tools', label: 'Crew Tools' }, { id: 'retail', label: 'Become A Dealer' }, { id: 'enterprise', label: 'Company Account / PO' }, { id: 'ambassador', label: 'Ambassador' }];
 // Live booking: real Cal.com times (Website Outreach event) through the LTC API
-var LTC_API = window.LTC_API_BASE || 'https://ltc-api-fskq.onrender.com';
+var LTC_API = window.LTC_API_BASE || 'https://ltc-api-z2o9.onrender.com';
 var CAL_TZ = 'America/Los_Angeles';
 function calDayLabel(date) { var d = new Date(date + 'T12:00:00Z'); return { dow: d.toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' }), md: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }) }; }
 function calTime(iso) { return new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: CAL_TZ }); }
