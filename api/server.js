@@ -92,6 +92,85 @@ async function cal(path, { method = "GET", version, body } = {}) {
 // ---------- website event ----------
 
 let websiteEventId = null; // resolved once, then cached
+let websiteFields = null; // the event's booking questions
+
+async function loadWebsiteFields(id) {
+  if (websiteFields || !id) return websiteFields || [];
+  try {
+    const ev = await cal(`/event-types/${id}`, { version: CAL_VERSIONS.eventTypes });
+    websiteFields = (ev.data && ev.data.bookingFields) || [];
+    console.log(
+      "[cal] booking fields:",
+      JSON.stringify(websiteFields.map((f) => ({ slug: f.slug || f.name, type: f.type, required: f.required, hidden: f.hidden, options: f.options })))
+    );
+  } catch (e) {
+    console.warn("[cal] booking fields lookup failed:", e.message);
+  }
+  return websiteFields || [];
+}
+
+// Answer any required custom questions on the event from what the site form collected.
+const STANDARD_FIELDS = new Set(["name", "email", "attendeePhoneNumber", "notes", "guests", "rescheduleReason", "location", "title", "attendeeName", "attendeeEmail"]);
+const TOPIC_WORDS = {
+  "crew tools": ["crew", "installer", "contractor", "tool", "flooring", "myself"],
+  "become a dealer": ["dealer", "retail", "store", "distribut", "stock", "resell", "supplier"],
+  "company account / po": ["company", "enterprise", "account", "po", "business", "corporate", "purchas"],
+  ambassador: ["ambassador", "affiliate", "influencer", "creator", "partner"],
+};
+function optionText(o) {
+  return typeof o === "string" ? o : (o && (o.value || o.label)) || "";
+}
+function bestOption(options, topic) {
+  const list = (options || []).map(optionText).filter(Boolean);
+  if (!list.length) return null;
+  const t = topic.toLowerCase();
+  const words = TOPIC_WORDS[t] || t.split(/\W+/).filter((w) => w.length > 2);
+  let best = null, score = 0;
+  for (const o of list) {
+    const ol = o.toLowerCase();
+    const sc = (ol === t ? 100 : 0) + words.filter((w) => ol.includes(w)).length;
+    if (sc > score) (best = o), (score = sc);
+  }
+  return best || list.find((o) => /other/i.test(o)) || list[0];
+}
+function customResponses(fields, info) {
+  const out = {};
+  for (const f of fields) {
+    const slug = f.slug || f.name;
+    if (!slug || STANDARD_FIELDS.has(slug) || !f.required || f.hidden) continue;
+    const label = `${f.label || ""} ${slug}`.toLowerCase();
+    const summary = [info.topic, info.company].filter(Boolean).join(" · ") || info.name;
+    switch (f.type) {
+      case "select":
+      case "radio": {
+        const v = bestOption(f.options, info.topic || "");
+        if (v) out[slug] = v;
+        break;
+      }
+      case "multiselect":
+      case "checkbox": {
+        const v = bestOption(f.options, info.topic || "");
+        if (v) out[slug] = [v];
+        break;
+      }
+      case "boolean":
+        out[slug] = true;
+        break;
+      case "phone":
+        if (info.phone) out[slug] = info.phone;
+        break;
+      case "email":
+        out[slug] = info.email;
+        break;
+      case "number":
+        out[slug] = 1;
+        break;
+      default:
+        out[slug] = /compan|business|organi/.test(label) && info.company ? info.company : summary;
+    }
+  }
+  return out;
+}
 
 async function resolveWebsiteEvent() {
   if (websiteEventId) return websiteEventId;
@@ -236,6 +315,8 @@ async function route(req, res) {
     try { new Intl.DateTimeFormat("en-US", { timeZone: tz }); } catch { tz = SALES_TZ; }
 
     const id = await resolveWebsiteEvent();
+    const fields = await loadWebsiteFields(id);
+    const extra = customResponses(fields, { topic, company, name, email, phone });
     const metadata = { source: "libertytoolcompany.com" };
     if (topic) metadata.topic = topic;
     if (company) metadata.company = company;
@@ -246,7 +327,7 @@ async function route(req, res) {
         ...websiteEventParams(id),
         start: new Date(start).toISOString(),
         attendee: { name, email, timeZone: tz, language: "en", ...(phone ? { phoneNumber: phone } : {}) },
-        ...(notesText ? { bookingFieldsResponses: { notes: notesText } } : {}),
+        bookingFieldsResponses: { ...extra, ...(notesText ? { notes: notesText } : {}) },
         metadata,
       },
     });
@@ -343,6 +424,7 @@ http
     // Startup check, visible in the Render logs
     if (!CAL_API_KEY || CAL_API_KEY.startsWith("PASTE_")) return console.warn("[startup] CAL_API_KEY not set");
     resolveWebsiteEvent()
+      .then(async (id) => (await loadWebsiteFields(id), id))
       .then((id) =>
         console.log(
           id
