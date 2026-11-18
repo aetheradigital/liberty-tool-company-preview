@@ -19,3 +19,15 @@ Deploy: Render static site, publish directory `public`.
 - **Release** — https://ltc-release.onrender.com (Render `ltc-release`) deploys the `release` branch only. Custom domains (libertytoolcompany.com, partner.libertytoolcompany.com) attach to this site.
 - To publish what's on `main` to the release site: `tools/publish_release.sh`. It runs `tools/make_release.py` on a copy of `main` and force-pushes the result to `release`: the website becomes the home page at `/` (and `/option-2/` forwards there), the preview bar is removed, `partner.*` visitors to `/` go to the partner portal, and the reviews section is left out while it still holds placeholder quotes.
 - The Where We Ship map draws real state outlines from us-atlas (jsDelivr, `states-albers-10m.json`); if that file can't load, the state tile grid shows instead.
+
+## Backend API (`api/`)
+
+- **Service** — Render web service `ltc-api` (https://ltc-api-fskq.onrender.com), Node 20+, no npm dependencies. Deploys every push to `main`; build `cd api && npm install`, start `cd api && npm start`. Health check: `/health`.
+- **Why it exists** — static sites can't hold secrets. Every third-party key (Cal.com now; Stripe, Clerk, Twilio, R2, Postmark, R&L later) lives only in `ltc-api`'s Render environment, never in `public/`.
+- **Environment** — `CAL_API_KEY` (paste in the Render dashboard; never commit it), `CAL_API_VERSION`, `CAL_WEBHOOK_SECRET` (optional), `ALLOWED_ORIGINS` (comma-separated sites allowed to call the API).
+- **Cal.com endpoints**
+  - `GET /api/cal/event-types` — list event types
+  - `GET /api/cal/slots?eventTypeId=&start=&end=&timeZone=` — open times
+  - `POST /api/cal/bookings` — `{ eventTypeId, start, name, email, timeZone, phone?, notes? }`
+  - `POST /api/cal/webhook` — Cal.com webhook target; verifies `X-Cal-Signature-256` when `CAL_WEBHOOK_SECRET` is set
+- **To do** — require a Clerk session on booking creation once Clerk is set up.

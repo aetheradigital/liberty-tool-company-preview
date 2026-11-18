@@ -1,0 +1,13 @@
+{
+  "name": "ltc-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Liberty Tool Company backend: Cal.com scheduling (Stripe, Clerk, Twilio, R2 to follow)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
