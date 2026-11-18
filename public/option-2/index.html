@@ -684,6 +684,9 @@ input[type=range]{accent-color:#B31942}
           </div>
           <div>
             <div style="font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5568">Pick A Day</div>
+            <sc-if value="{{calLoading}}" hint-placeholder-val="{{false}}"><div style="font-size: 15px; line-height: 1.5; color: #3B4658; padding: 8px 0 0">Loading open times…</div></sc-if>
+            <sc-if value="{{calDown}}" hint-placeholder-val="{{false}}"><div style="font-size: 15px; line-height: 1.5; color: #3B4658; padding: 8px 0 0">Online booking isn't available right now. Text or call <a href="tel:2397448403" style="color: #0A35C8; font-weight: 700">239-744-8403</a> and we'll set a time.</div></sc-if>
+            <sc-if value="{{calEmpty}}" hint-placeholder-val="{{false}}"><div style="font-size: 15px; line-height: 1.5; color: #3B4658; padding: 8px 0 0">No open times in the next two weeks. Text or call <a href="tel:2397448403" style="color: #0A35C8; font-weight: 700">239-744-8403</a>.</div></sc-if>
             <div role="group" aria-label="Day" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; margin-top: 10px">
               <sc-for list="{{days}}" as="d" hint-placeholder-count="6">
                 <button type="button" onClick="{{d.pick}}" aria-pressed="{{d.pressed}}" style="min-height: 62px; border-radius: 4px; border: 2px solid {{d.border}}; background: {{d.bg}}; color: {{d.fg}}; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px">
@@ -705,34 +708,36 @@ input[type=range]{accent-color:#B31942}
         </div>
       </sc-if>
       <sc-if value="{{showStep2}}" hint-placeholder-val="{{false}}">
-        <form onSubmit="{{book}}" style="padding: 26px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
+        <form onSubmit="{{book}}" style="position: relative; padding: 26px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
           <div style="grid-column: 1 / -1; background: #F4F5F7; border-radius: 10px; padding: 12px 14px; font-size: 15px; font-weight: 600; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px">
             <span>{{whenText}} · {{buyerLabel}}</span>
             <button type="button" onClick="{{toStep1}}" style="background: transparent; border: 0; color: #0A35C8; font-weight: 700; cursor: pointer; text-decoration: underline; min-height: 24px">Change</button>
           </div>
           <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Name
-            <input type="text" autocomplete="name" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52">
+            <input type="text" name="name" required maxlength="120" autocomplete="name" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52">
           </label>
           <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Company
-            <input type="text" autocomplete="organization" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52">
+            <input type="text" name="company" maxlength="160" autocomplete="organization" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52">
           </label>
           <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Email
-            <input type="email" autocomplete="email" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52">
+            <input type="email" name="email" required maxlength="200" autocomplete="email" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52">
           </label>
           <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Cell (For A Text Reminder)
-            <input type="tel" autocomplete="tel" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52">
+            <input type="tel" name="phone" maxlength="40" autocomplete="tel" style="height: 48px; padding: 0 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52">
           </label>
           <label style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3B4658">Tell Us About The Job
-            <textarea rows="3" style="padding: 12px 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; resize: vertical">{{prefill}}</textarea>
+            <textarea name="notes" rows="3" maxlength="2000" style="padding: 12px 14px; border: 1.5px solid #B8C1CD; border-radius: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; color: #071A52; resize: vertical">{{prefill}}</textarea>
           </label>
-          <button type="submit" style="grid-column: 1 / -1; min-height: 54px; background: #B31942; color: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase">Book It</button>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0">
+          <sc-if value="{{bookErr}}" hint-placeholder-val="{{false}}"><div role="alert" style="grid-column: 1 / -1; background: #FDECEF; color: #8A1233; border-radius: 10px; padding: 12px 14px; font-size: 15px; font-weight: 600">{{bookErr}}</div></sc-if>
+          <button type="submit" disabled="{{booking}}" style="grid-column: 1 / -1; min-height: 54px; background: #B31942; color: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase">{{bookLabel}}</button>
         </form>
       </sc-if>
       <sc-if value="{{showStep3}}" hint-placeholder-val="{{false}}">
         <div style="padding: 44px 28px; display: flex; flex-direction: column; gap: 14px; animation: ltcFade 300ms ease">
           <span style="width: 56px; height: 56px; border-radius: 50%; background: #0A35C8; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3"><path d="M4 12.5l5 5L20 6.5"></path></svg></span>
           <div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 32px; line-height: 1; text-transform: uppercase; color: #0A35C8">You're Booked.</div>
-          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #3B4658">{{whenText}} · {{buyerLabel}}. Watch for a confirmation by email and text.</p>
+          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #3B4658">{{whenText}} · {{buyerLabel}}. Watch for a confirmation email from Cal.com.</p>
           <button type="button" onClick="{{resetSched}}" style="align-self: flex-start; min-height: 44px; padding: 0 18px; background: transparent; border: 2px solid #0A35C8; border-radius: 10px; color: #0A35C8; cursor: pointer; font-weight: 700">Book Another</button>
         </div>
       </sc-if>
@@ -1291,7 +1296,12 @@ var VALUES = [
   { title: 'Made In The USA', body: 'Made here, for American crews.', color: '#B31942' }
 ];
 var BUYERS = [{ id: 'tools', label: 'Crew Tools' }, { id: 'retail', label: 'Become A Dealer' }, { id: 'enterprise', label: 'Company Account / PO' }, { id: 'ambassador', label: 'Ambassador' }];
-var SLOTS = ['7:00 AM', '8:30 AM', '10:00 AM', '11:30 AM', '1:00 PM', '2:30 PM'];
+// Live booking: real Cal.com times (Website Outreach event) through the LTC API
+var LTC_API = window.LTC_API_BASE || 'https://ltc-api-fskq.onrender.com';
+var CAL_TZ = 'America/Los_Angeles';
+function calDayLabel(date) { var d = new Date(date + 'T12:00:00Z'); return { dow: d.toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' }), md: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }) }; }
+function calTime(iso) { return new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: CAL_TZ }); }
+function calFetch(path, opts) { return fetch(LTC_API + path, opts).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) { var e = new Error(j.error || 'Request failed'); e.status = r.status; throw e; } return j; }); }); }
 var FAQS = [
   { q: 'What Does The Tape Caddy Do?', a: 'It holds your masking tape at one fixed height and rolls along the wall, so every line is the same height. No measuring, no snapping lines and a lot less time on your knees.' },
   { q: 'Which Caddy Size Do I Need?', a: 'The Lowboy (4 mm) is for floor edges and thin lines. The 2-Inch is for low wall lines. The 4-Inch is the everyday cove line, and the 6-Inch is for taller lines. Not sure? Run the Tool Finder.' },
@@ -1331,7 +1341,14 @@ class Component extends DCLogic {
     var days = [], d = new Date();
     while (days.length < 6) { d.setDate(d.getDate() + 1); var w = d.getDay(); if (w !== 0 && w !== 6) days.push({ dow: d.toLocaleDateString('en-US', { weekday: 'short' }), md: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }); }
     this.days = days;
-    this.state = { model: 'c4', env: 'all', prodCat: 'all', toolFilter: 'all', jd: -1, glob: 'ca', globOther: '', cart: 0, cartItems: cartLoad(), cartOpen: false, cartMsg: '', cartBusy: false, added: {}, kit: { lowboy: true, c2: false, c4: true, c6: true }, amb: 20, faq: 0, buyer: 'tools', note: '', day: 0, slot: -1, step: 1, qi: 0, qa: {}, modal: null, mThumb: 0, hits: {}, lastHit: '', quote: [], ba: 50, sheets: {}, bSf: 2000, bMat: 3.5, bCrew: 3, bDays: 2, bRate: 45, bMark: 35, acad: 'all', wtb: 'CA', wtbSent: false, rev: 0, textOpen: false, salType: 'vet', salDone: false, role: 'Territory Representative', careerSent: false, ambOpen: false, ambSent: false, ambName: '', menuOpen: false };
+    var selfCal = this;
+    this.loadCal = function () {
+      selfCal.setState({ cal: null, calErr: false });
+      if (!window.fetch) return selfCal.setState({ cal: [], calErr: true });
+      calFetch('/api/cal/website/slots?days=14').then(function (j) { selfCal.setState({ cal: (j.days || []).slice(0, 10), calErr: false, day: 0, slot: -1 }); }).catch(function () { selfCal.setState({ cal: [], calErr: true }); });
+    };
+    setTimeout(function () { selfCal.loadCal(); }, 0);
+    this.state = { model: 'c4', env: 'all', prodCat: 'all', toolFilter: 'all', jd: -1, glob: 'ca', globOther: '', cart: 0, cartItems: cartLoad(), cartOpen: false, cartMsg: '', cartBusy: false, added: {}, kit: { lowboy: true, c2: false, c4: true, c6: true }, amb: 20, faq: 0, buyer: 'tools', note: '', day: 0, slot: -1, step: 1, cal: null, calErr: false, booking: false, bookErr: '', qi: 0, qa: {}, modal: null, mThumb: 0, hits: {}, lastHit: '', quote: [], ba: 50, sheets: {}, bSf: 2000, bMat: 3.5, bCrew: 3, bDays: 2, bRate: 45, bMark: 35, acad: 'all', wtb: 'CA', wtbSent: false, rev: 0, textOpen: false, salType: 'vet', salDone: false, role: 'Territory Representative', careerSent: false, ambOpen: false, ambSent: false, ambName: '', menuOpen: false };
     var selfCart = this; if (SHOP_TOKEN) setTimeout(function () { var self = selfCart; shopStale().then(function (gone) { if (gone) { try { localStorage.setItem(CART_KEY, '{}'); } catch (e) {} self.setState({ cartItems: {}, added: {} }); } else if (Object.keys(self.state.cartItems).length) shopSync(self.state.cartItems).catch(function () {}); }); }, 0);
     var selfMap = this; if (window.fetch) fetch(US_MAP_URL).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (t) { US_GEO = usTopo(t); if (US_GEO) selfMap.setState({ geo: Date.now() }); }).catch(function () {});
   }
@@ -1539,14 +1556,32 @@ class Component extends DCLogic {
       schedSteps: ['1  Pick A Time', '2  Your Info', '3  Done'].map(function (l, i) { var on = s.step === i + 1; return { label: l, bg: on ? '#0A35C8' : '#F4F5F7', fg: on ? '#FFFFFF' : '#4A5568' }; }),
       showStep1: s.step === 1, showStep2: s.step === 2, showStep3: s.step === 3,
       buyerTypes: BUYERS.map(function (b) { return Object.assign({ label: b.label }, sel(b.id === s.buyer), { pick: function () { self.setState({ buyer: b.id }); } }); }),
-      days: self.days.map(function (d, i) { return Object.assign({}, d, sel(i === s.day), { pick: function () { self.setState({ day: i }); } }); }),
-      slots: SLOTS.map(function (x, i) { return Object.assign({ label: x }, sel(i === s.slot, '#B31942'), { pick: function () { self.setState({ slot: i }); } }); }),
+      calLoading: s.cal === null, calDown: !!s.calErr, calEmpty: !!s.cal && !s.calErr && s.cal.length === 0,
+      days: (s.cal || []).map(function (d, i) { return Object.assign(calDayLabel(d.date), sel(i === s.day), { pick: function () { self.setState({ day: i, slot: -1 }); } }); }),
+      slots: ((s.cal && s.cal[s.day] && s.cal[s.day].slots) || []).map(function (iso, i) { return Object.assign({ label: calTime(iso) }, sel(i === s.slot, '#B31942'), { pick: function () { self.setState({ slot: i }); } }); }),
       noSlot: s.slot < 0, continueBg: s.slot < 0 ? '#8A94A3' : '#0A35C8', continueLabel: s.slot < 0 ? 'Pick A Time First' : 'Next →',
-      toStep2: function () { if (s.slot >= 0) self.setState({ step: 2 }); },
-      toStep1: function () { self.setState({ step: 1 }); },
-      book: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ step: 3 }); },
-      resetSched: function () { self.setState({ step: 1, slot: -1 }); },
-      whenText: (self.days[s.day] ? self.days[s.day].dow + ', ' + self.days[s.day].md : '') + (s.slot >= 0 ? ' · ' + SLOTS[s.slot] + ' PT' : ''),
+      toStep2: function () { if (s.slot >= 0) self.setState({ step: 2, bookErr: '' }); },
+      toStep1: function () { self.setState({ step: 1, bookErr: '' }); },
+      booking: !!s.booking, bookErr: s.bookErr, bookLabel: s.booking ? 'Booking…' : 'Book It',
+      book: function (e) {
+        if (e && e.preventDefault) e.preventDefault();
+        if (s.booking) return;
+        var day = s.cal && s.cal[s.day], start = day && day.slots[s.slot];
+        if (!start) return self.setState({ step: 1, bookErr: '' });
+        var f = e && e.target && e.target.elements ? e.target : null, v = function (n) { return f && f.elements[n] ? String(f.elements[n].value || '').trim() : ''; };
+        if (!v('name') || !v('email')) return self.setState({ bookErr: 'Please add your name and email.' });
+        var tz = 'America/Los_Angeles'; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || tz; } catch (x) {}
+        self.setState({ booking: true, bookErr: '' });
+        calFetch('/api/cal/website/bookings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ start: start, name: v('name'), email: v('email'), phone: v('phone'), company: v('company'), notes: v('notes'), topic: buyer.label, timeZone: tz, website: v('website') }) })
+          .then(function () { self.setState({ booking: false, step: 3, booked: start }); self.loadCal(); })
+          .catch(function (err) {
+            var taken = err.status === 409 || /not available|already|taken|busy/i.test(err.message || '');
+            self.setState({ booking: false, bookErr: taken ? 'That time was just taken. Pick another time.' : "We couldn't book that online. Text or call 239-744-8403 and we'll set it up." });
+            if (taken) { self.loadCal(); self.setState({ step: 1 }); }
+          });
+      },
+      resetSched: function () { self.setState({ step: 1, slot: -1, bookErr: '' }); },
+      whenText: (function () { var iso = s.step === 3 && s.booked ? s.booked : (s.cal && s.cal[s.day] && s.slot >= 0 ? s.cal[s.day].slots[s.slot] : null); if (!iso) { var dd = s.cal && s.cal[s.day]; return dd ? calDayLabel(dd.date).dow + ', ' + calDayLabel(dd.date).md : ''; } var d = new Date(iso); return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: CAL_TZ }) + ' · ' + calTime(iso) + ' PT'; })(),
       buyerLabel: buyer.label, prefill: s.note,
       faqs: FAQS.map(function (q, i) { var open = s.faq === i; return Object.assign({}, q, { isOpen: open, expanded: open ? 'true' : 'false', sign: open ? '−' : '+', signBg: open ? '#B31942' : '#0A35C8', toggle: function () { self.setState({ faq: open ? -1 : i }); } }); }),
       quoteCount: s.quote.length, hasQuote: s.quote.length > 0,

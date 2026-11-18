@@ -24,8 +24,11 @@ Deploy: Render static site, publish directory `public`.
 
 - **Service** — Render web service `ltc-api` (https://ltc-api-fskq.onrender.com), Node 20+, no npm dependencies. Deploys every push to `main`; build `cd api && npm install`, start `cd api && npm start`. Health check: `/health`.
 - **Why it exists** — static sites can't hold secrets. Every third-party key (Cal.com now; Stripe, Clerk, Twilio, R2, Postmark, R&L later) lives only in `ltc-api`'s Render environment, never in `public/`.
-- **Environment** — `CAL_API_KEY` (paste in the Render dashboard; never commit it), `CAL_API_VERSION`, `CAL_WEBHOOK_SECRET` (optional), `ALLOWED_ORIGINS` (comma-separated sites allowed to call the API).
-- **Cal.com endpoints**
+- **Environment** — `CAL_API_KEY` (paste in the Render dashboard; never commit it), `CAL_WEBHOOK_SECRET` (optional), `ALLOWED_ORIGINS` (comma-separated sites allowed to call the API). Optional overrides: `CAL_EVENT_SLUG` (default `website-outreach`), `CAL_USERNAME` (default `brandon`), `CAL_ORG_SLUG` (default `liberty-tool-company`), `CAL_BOOKINGS_VERSION` (default `2026-02-25`).
+- **Website Book A Call** — the `#schedule` section on the main site (`public/option-2/`) loads real open times for the Cal.com **Website Outreach** event (https://liberty-tool-company.cal.com/brandon/website-outreach) and books through the API. Times show in Pacific. If the API can't be reached, the section tells visitors to call or text 239-744-8403. On startup the API logs `[startup] Cal.com OK` once the key can see the event.
+  - `GET /api/cal/website/slots?days=14` — open times grouped by Pacific date
+  - `POST /api/cal/website/bookings` — `{ start, name, email, phone?, company?, topic?, notes?, timeZone? }`; 5 per visitor per 10 minutes, hidden spam field, allowed sites only
+- **Cal.com endpoints (general)**
   - `GET /api/cal/event-types` — list event types
   - `GET /api/cal/slots?eventTypeId=&start=&end=&timeZone=` — open times
   - `POST /api/cal/bookings` — `{ eventTypeId, start, name, email, timeZone, phone?, notes? }`

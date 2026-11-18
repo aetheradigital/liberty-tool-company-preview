@@ -5,7 +5,7 @@ const http = require("node:http");
 const crypto = require("node:crypto");
 
 const PORT = process.env.PORT || 10000;
-const CAL_BASE = "https://api.cal.com/v2";
+const CAL_BASE = process.env.CAL_BASE_URL || "https://api.cal.com/v2";
 const CAL_API_KEY = process.env.CAL_API_KEY || "";
 const CAL_WEBHOOK_SECRET = process.env.CAL_WEBHOOK_SECRET || "";
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || "")
@@ -17,8 +17,17 @@ const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || "")
 const CAL_VERSIONS = {
   eventTypes: "2024-06-14",
   slots: "2024-09-04",
-  bookings: process.env.CAL_API_VERSION || "2024-08-13",
+  bookings: process.env.CAL_BOOKINGS_VERSION || "2026-02-25",
 };
+
+// The public "Book A Call" event on libertytoolcompany.com
+// https://liberty-tool-company.cal.com/brandon/website-outreach
+const WEBSITE_EVENT = {
+  slug: process.env.CAL_EVENT_SLUG || "website-outreach",
+  username: process.env.CAL_USERNAME || "brandon",
+  orgSlug: process.env.CAL_ORG_SLUG || "liberty-tool-company",
+};
+const SALES_TZ = "America/Los_Angeles"; // the site shows times in Pacific
 
 // ---------- helpers ----------
 
@@ -80,6 +89,70 @@ async function cal(path, { method = "GET", version, body } = {}) {
   return data;
 }
 
+// ---------- website event ----------
+
+let websiteEventId = null; // resolved once, then cached
+
+async function resolveWebsiteEvent() {
+  if (websiteEventId) return websiteEventId;
+  // 1) Event types owned by the API key's account
+  try {
+    const own = await cal("/event-types", { version: CAL_VERSIONS.eventTypes });
+    const hit = (own.data || []).find((e) => e.slug === WEBSITE_EVENT.slug);
+    if (hit) return (websiteEventId = hit.id);
+  } catch (e) {
+    console.warn("[cal] own event-types lookup failed:", e.message);
+  }
+  // 2) Public lookup by username + slug (+ organization)
+  try {
+    const qs = new URLSearchParams({
+      username: WEBSITE_EVENT.username,
+      eventSlug: WEBSITE_EVENT.slug,
+      orgSlug: WEBSITE_EVENT.orgSlug,
+    });
+    const pub = await cal(`/event-types?${qs}`, { version: CAL_VERSIONS.eventTypes });
+    const d = Array.isArray(pub.data) ? pub.data[0] : pub.data;
+    if (d && d.id) return (websiteEventId = d.id);
+  } catch (e) {
+    console.warn("[cal] public event-type lookup failed:", e.message);
+  }
+  return null; // fall back to slug-based calls
+}
+
+function websiteEventParams(id) {
+  return id
+    ? { eventTypeId: id }
+    : {
+        eventTypeSlug: WEBSITE_EVENT.slug,
+        username: WEBSITE_EVENT.username,
+        organizationSlug: WEBSITE_EVENT.orgSlug,
+      };
+}
+
+// US numbers -> E.164; anything unclear is left out of phoneNumber (still kept in notes)
+function toE164(raw) {
+  const d = String(raw || "").replace(/\D/g, "");
+  if (d.length === 10) return "+1" + d;
+  if (d.length === 11 && d[0] === "1") return "+" + d;
+  return null;
+}
+
+// Light spam guard: 5 bookings per IP per 10 minutes
+const hits = new Map();
+function rateLimited(req) {
+  const ip = String(req.headers["x-forwarded-for"] || req.socket.remoteAddress || "").split(",")[0].trim();
+  const now = Date.now();
+  const list = (hits.get(ip) || []).filter((t) => now - t < 10 * 60 * 1000);
+  list.push(now);
+  hits.set(ip, list);
+  return list.length > 5;
+}
+
+function originAllowed(req) {
+  const o = req.headers.origin;
+  return !o || ALLOWED_ORIGINS.includes(o);
+}
+
 // TODO (Clerk): verify the signed-in user's session token here once Clerk is set up.
 // Until then, booking creation is open to anyone who can reach the allowed origins.
 async function requireUser(_req) {
@@ -100,6 +173,86 @@ async function route(req, res) {
   // Health check for Render
   if (req.method === "GET" && pathname === "/health") {
     return send(req, res, 200, { ok: true, calConfigured: !!CAL_API_KEY && !CAL_API_KEY.startsWith("PASTE_") });
+  }
+
+  // ----- Website "Book A Call" (public, Website Outreach event) -----
+
+  // Open times grouped by Pacific date: /api/cal/website/slots?days=14
+  if (req.method === "GET" && pathname === "/api/cal/website/slots") {
+    const days = Math.min(Math.max(Number(searchParams.get("days")) || 14, 1), 30);
+    const start = new Date();
+    const end = new Date(start.getTime() + days * 86400000);
+    const id = await resolveWebsiteEvent();
+    const qs = new URLSearchParams({
+      ...websiteEventParams(id),
+      start: start.toISOString(),
+      end: end.toISOString(),
+      timeZone: SALES_TZ,
+    });
+    const data = await cal(`/slots?${qs}`, { version: CAL_VERSIONS.slots });
+    // Normalize to [{ date: "2026-11-19", slots: ["2026-11-19T16:00:00.000Z", ...] }]
+    const out = Object.keys(data.data || {})
+      .sort()
+      .map((date) => ({
+        date,
+        slots: (data.data[date] || [])
+          .map((s) => new Date(s.start || s.time || s).toISOString())
+          .filter((iso) => new Date(iso) > start),
+      }))
+      .filter((d) => d.slots.length);
+    return send(req, res, 200, { timeZone: SALES_TZ, days: out });
+  }
+
+  // Book it. Body: { start, name, email, phone?, company?, topic?, notes?, timeZone?, website? (honeypot) }
+  if (req.method === "POST" && pathname === "/api/cal/website/bookings") {
+    if (!originAllowed(req)) return send(req, res, 403, { error: "Origin not allowed" });
+    if (rateLimited(req)) return send(req, res, 429, { error: "Too many requests. Please call or text 239-744-8403." });
+    let b;
+    try {
+      b = JSON.parse((await readBody(req, 20000)).toString("utf8"));
+    } catch {
+      return send(req, res, 400, { error: "Invalid JSON" });
+    }
+    if (b && b.website) return send(req, res, 200, { ok: true }); // bot filled the hidden field
+    const name = String(b.name || "").trim().slice(0, 120);
+    const email = String(b.email || "").trim().slice(0, 200);
+    const start = String(b.start || "");
+    if (!name || !/^\S+@\S+\.\S+$/.test(email) || isNaN(Date.parse(start))) {
+      return send(req, res, 400, { error: "Name, a valid email and a time are required." });
+    }
+    const company = String(b.company || "").trim().slice(0, 160);
+    const topic = String(b.topic || "").trim().slice(0, 80);
+    const phoneRaw = String(b.phone || "").trim().slice(0, 40);
+    const phone = toE164(phoneRaw);
+    const notesText = [
+      topic && `Topic: ${topic}`,
+      company && `Company: ${company}`,
+      phoneRaw && `Cell: ${phoneRaw}`,
+      String(b.notes || "").trim().slice(0, 2000),
+    ]
+      .filter(Boolean)
+      .join("\n");
+    let tz = String(b.timeZone || SALES_TZ);
+    try { new Intl.DateTimeFormat("en-US", { timeZone: tz }); } catch { tz = SALES_TZ; }
+
+    const id = await resolveWebsiteEvent();
+    const metadata = { source: "libertytoolcompany.com" };
+    if (topic) metadata.topic = topic;
+    if (company) metadata.company = company;
+    const data = await cal("/bookings", {
+      method: "POST",
+      version: CAL_VERSIONS.bookings,
+      body: {
+        ...websiteEventParams(id),
+        start: new Date(start).toISOString(),
+        attendee: { name, email, timeZone: tz, language: "en", ...(phone ? { phoneNumber: phone } : {}) },
+        ...(notesText ? { bookingFieldsResponses: { notes: notesText } } : {}),
+        metadata,
+      },
+    });
+    const bk = data.data || {};
+    console.log("[website booking]", bk.uid, bk.start, topic || "-");
+    return send(req, res, 201, { ok: true, uid: bk.uid, start: bk.start || start });
   }
 
   // List the account's event types (e.g. "Partner Intro Call")
@@ -185,4 +338,17 @@ http
       send(req, res, err.status && err.status < 600 ? err.status : 500, { error: err.message || "Server error" });
     });
   })
-  .listen(PORT, () => console.log(`ltc-api listening on ${PORT}`));
+  .listen(PORT, () => {
+    console.log(`ltc-api listening on ${PORT}`);
+    // Startup check, visible in the Render logs
+    if (!CAL_API_KEY || CAL_API_KEY.startsWith("PASTE_")) return console.warn("[startup] CAL_API_KEY not set");
+    resolveWebsiteEvent()
+      .then((id) =>
+        console.log(
+          id
+            ? `[startup] Cal.com OK: "${WEBSITE_EVENT.slug}" event id ${id}`
+            : `[startup] Cal.com key works, but "${WEBSITE_EVENT.slug}" was not found by id; using slug lookup`
+        )
+      )
+      .catch((e) => console.warn("[startup] Cal.com check failed:", e.message));
+  });
