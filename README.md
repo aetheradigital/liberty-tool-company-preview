@@ -19,7 +19,7 @@ All LTC services are in the **Liberty Tool Company** Render workspace.
 
 - **Preview** — https://ltc-preview-weii.onrender.com (Render `ltc-preview`) deploys every push to `main`. Keep using it for client review.
 - **Release** — https://ltc-release-yq66.onrender.com (Render `ltc-release`) deploys the `release` branch only. Custom domains (libertytoolcompany.com, partner.libertytoolcompany.com) attach to this site.
-- To publish what's on `main` to the release site: `tools/publish_release.sh`. It runs `tools/make_release.py` on a copy of `main` and force-pushes the result to `release`: the website becomes the home page at `/` (and `/option-2/` forwards there), the preview bar is removed, `partner.*` visitors to `/` go to the partner portal, and the reviews section is left out while it still holds placeholder quotes.
+- To publish what's on `main` to the release site: `tools/publish_release.sh`. It runs `tools/make_release.py` on a copy of `main` and force-pushes the result to `release`: the website becomes the home page at `/` (and `/option-2/` forwards there), the preview bar is removed, `partner.*` visitors to `/` go to the partner portal, the reviews section is left out while it still holds placeholder quotes, and Google Tag Manager (`GTM-N4DHV9J6`) is added to the website, privacy, terms and ambassador-terms pages (release only, not on partner.*; GA4 is configured inside the GTM container).
 - The Where We Ship map draws real state outlines from us-atlas (jsDelivr, `states-albers-10m.json`); if that file can't load, the state tile grid shows instead.
 
 ## Backend API (`api/`)
