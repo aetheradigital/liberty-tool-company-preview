@@ -238,6 +238,39 @@ async function requireUser(_req) {
   return true;
 }
 
+// ---------- Shopify variant lookup ----------
+// The website builds a Shopify cart permalink (/cart/VARIANT:QTY,...) for checkout. Browsers can't
+// read Shopify's /products/<handle>.js across sites, so the API looks the variant IDs up server-side.
+const SHOP_DOMAIN = process.env.SHOP_DOMAIN || "thetapecaddy.myshopify.com";
+const shopCache = new Map(); // handle -> { at, value }
+const SHOP_TTL = 10 * 60 * 1000;
+const SHOP_MISS_TTL = 60 * 1000;
+
+async function shopVariantFor(handle) {
+  const hit = shopCache.get(handle);
+  if (hit && Date.now() - hit.at < (hit.value ? SHOP_TTL : SHOP_MISS_TTL)) return hit.value;
+  let value = null;
+  try {
+    const r = await fetch(`https://${SHOP_DOMAIN}/products/${encodeURIComponent(handle)}.js`, {
+      headers: { Accept: "application/json", "User-Agent": "ltc-api" },
+      redirect: "follow",
+      signal: AbortSignal.timeout(8000),
+    });
+    if (r.ok) {
+      const j = await r.json();
+      const vs = Array.isArray(j.variants) ? j.variants : [];
+      const v = vs.find((x) => x.available) || vs[0];
+      if (v) value = { id: v.id, available: !!v.available, price: v.price };
+    } else {
+      console.warn(`[shop] ${handle}: HTTP ${r.status}`);
+    }
+  } catch (e) {
+    console.warn(`[shop] ${handle}: ${e.message}`);
+  }
+  shopCache.set(handle, { at: Date.now(), value });
+  return value;
+}
+
 // ---------- routes ----------
 
 async function route(req, res) {
@@ -252,6 +285,17 @@ async function route(req, res) {
   // Health check for Render
   if (req.method === "GET" && pathname === "/health") {
     return send(req, res, 200, { ok: true, calConfigured: !!CAL_API_KEY && !CAL_API_KEY.startsWith("PASTE_") });
+  }
+
+  // ----- Website cart: Shopify variant IDs by product handle -----
+  // GET /api/shop/variants?handles=a,b,c -> { variants: { a: { id, available, price } | null, ... } }
+  if (req.method === "GET" && pathname === "/api/shop/variants") {
+    if (!originAllowed(req)) return send(req, res, 403, { error: "Origin not allowed" });
+    const handles = [...new Set(String(searchParams.get("handles") || "").split(",").map((s) => s.trim()).filter((s) => /^[a-z0-9-]{1,120}$/i.test(s)))].slice(0, 30);
+    if (!handles.length) return send(req, res, 400, { error: "handles required" });
+    const out = {};
+    await Promise.all(handles.map(async (h) => { out[h] = await shopVariantFor(h); }));
+    return send(req, res, 200, { shop: SHOP_DOMAIN, variants: out });
   }
 
   // ----- Website "Book A Call" (public, Website Outreach event) -----

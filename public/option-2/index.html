@@ -1178,12 +1178,23 @@ function shopStale() {
   var saved = shopCartGet(); if (!SHOP_TOKEN || !saved || !saved.id) return Promise.resolve(false);
   return gql('query($id:ID!){cart(id:$id){id}}', { id: saved.id }).then(function (d) { if (d.cart) return false; shopCartSet(null); return true; }).catch(function () { return false; });
 }
-// Last resort without a token: Shopify cart permalink (needs numeric variant IDs).
+// Without a token: Shopify cart permalink (needs numeric variant IDs).
+// Variant IDs come from the LTC API (server-side, no CORS problems); the direct Shopify fetch is a last resort.
+function shopVariantsFromApi(list) {
+  var need = list.filter(function (t) { return t && t.url && !SHOP_VARIANTS[t.id]; });
+  if (!need.length || !window.fetch) return Promise.resolve();
+  var api = window.LTC_API_BASE || 'https://ltc-api-z2o9.onrender.com';
+  var ctl = window.AbortController ? new AbortController() : null; if (ctl) setTimeout(function () { ctl.abort(); }, 15000);
+  return fetch(api + '/api/shop/variants?handles=' + encodeURIComponent(need.map(function (t) { return t.url; }).join(',')), ctl ? { signal: ctl.signal } : {})
+    .then(function (r) { return r.ok ? r.json() : {}; })
+    .then(function (j) { var v = (j && j.variants) || {}; need.forEach(function (t) { if (v[t.url] && v[t.url].id) SHOP_VARIANTS[t.id] = String(v[t.url].id); }); })
+    .catch(function () {});
+}
 function shopVariant(t) {
   if (!t) return Promise.resolve(null);
   if (SHOP_VARIANTS[t.id]) return Promise.resolve(numOf(SHOP_VARIANTS[t.id]));
   if (!t.url) return Promise.resolve(null);
-  return fetch(SHOP_URL + '/products/' + t.url + '.js').then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { var v = j && j.variants && (j.variants.find(function (x) { return x.available; }) || j.variants[0]); return v ? v.id : null; }).catch(function () { return null; });
+  return fetch(SHOP_URL + '/products/' + t.url + '.js').then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { var v = j && j.variants && (j.variants.find(function (x) { return x.available; }) || j.variants[0]); if (v) SHOP_VARIANTS[t.id] = String(v.id); return v ? v.id : null; }).catch(function () { return null; });
 }
 var STRAP_IMG = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#E6EAF0"/><path d="M40 40 C70 120 130 120 160 40" fill="none" stroke="#0A35C8" stroke-width="16" stroke-linecap="round"/><rect x="70" y="105" width="60" height="50" rx="10" fill="#B31942"/><circle cx="100" cy="130" r="10" fill="#FFFFFF"/><text x="100" y="185" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="16" fill="#4A5568">PHOTO COMING SOON</text></svg>');
 var MODELS = [
@@ -1357,7 +1368,13 @@ class Component extends DCLogic {
     };
     setTimeout(function () { selfCal.loadCal(); }, 0);
     this.state = { model: 'c4', env: 'all', prodCat: 'all', toolFilter: 'all', jd: -1, glob: 'ca', globOther: '', cart: 0, cartItems: cartLoad(), cartOpen: false, cartMsg: '', cartBusy: false, added: {}, kit: { lowboy: true, c2: false, c4: true, c6: true }, amb: 20, faq: 0, buyer: 'tools', note: '', day: 0, slot: -1, step: 1, cal: null, calErr: false, booking: false, bookErr: '', qi: 0, qa: {}, modal: null, mThumb: 0, hits: {}, lastHit: '', quote: [], ba: 50, sheets: {}, bSf: 2000, bMat: 3.5, bCrew: 3, bDays: 2, bRate: 45, bMark: 35, acad: 'all', wtb: 'CA', wtbSent: false, rev: 0, textOpen: false, salType: 'vet', salDone: false, role: 'Territory Representative', careerSent: false, ambOpen: false, ambSent: false, ambName: '', menuOpen: false };
-    var selfCart = this; if (SHOP_TOKEN) setTimeout(function () { var self = selfCart; shopStale().then(function (gone) { if (gone) { try { localStorage.setItem(CART_KEY, '{}'); } catch (e) {} self.setState({ cartItems: {}, added: {} }); } else if (Object.keys(self.state.cartItems).length) shopSync(self.state.cartItems).catch(function () {}); }); }, 0);
+    var selfCart = this;
+    // Back button from Shopify checkout: the browser restores this page from its back/forward cache with
+    // "Opening Checkout…" still showing. Reset the cart button so more items can be added.
+    window.addEventListener('pageshow', function (e) { if (e.persisted || selfCart.state.cartBusy) selfCart.setState({ cartBusy: false, cartItems: cartLoad() }); });
+    // Warm the variant lookup so Checkout is quick.
+    setTimeout(function () { shopVariantsFromApi(TOOLS.filter(function (t) { return t.url && t.group; })).catch(function () {}); }, 1500);
+    if (SHOP_TOKEN) setTimeout(function () { var self = selfCart; shopStale().then(function (gone) { if (gone) { try { localStorage.setItem(CART_KEY, '{}'); } catch (e) {} self.setState({ cartItems: {}, added: {} }); } else if (Object.keys(self.state.cartItems).length) shopSync(self.state.cartItems).catch(function () {}); }); }, 0);
     var selfMap = this; if (window.fetch) fetch(US_MAP_URL).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (t) { US_GEO = usTopo(t); if (US_GEO) selfMap.setState({ geo: Date.now() }); }).catch(function () {});
   }
   add(id, qty) { var a = Object.assign({}, this.state.added), c = Object.assign({}, this.state.cartItems); a[id] = true; c[id] = (c[id] || 0) + (qty || 1); cartSave(c); this.setState({ cartItems: c, added: a, cartOpen: true, cartMsg: '' }); }
@@ -1366,10 +1383,13 @@ class Component extends DCLogic {
     var self = this, items = this.state.cartItems, ids = Object.keys(items).filter(function (k) { return items[k] > 0; });
     if (!ids.length) return;
     var byId = {}; TOOLS.forEach(function (t) { byId[t.id] = t; });
-    var go = function (url) { try { window.top.location.href = url; } catch (e) { window.location.href = url; } };
+    // Leaving for Shopify: clear the busy state shortly after, so the button is ready if the visitor comes back.
+    var go = function (url) { setTimeout(function () { self.setState({ cartBusy: false }); }, 1500); try { window.top.location.href = url; } catch (e) { window.location.href = url; } };
     var fail = function (names) { self.setState({ cartBusy: false, cartMsg: 'We couldn’t reach the store' + (names ? ' for ' + names : '') + '. Text 239-744-8403 and we’ll finish your order by phone.' }); };
     var permalink = function () {
-      return Promise.all(ids.map(function (id) { return shopVariant(byId[id]).then(function (v) { return { id: id, v: v }; }); })).then(function (res) {
+      return shopVariantsFromApi(ids.map(function (id) { return byId[id]; })).then(function () {
+        return Promise.all(ids.map(function (id) { return shopVariant(byId[id]).then(function (v) { return { id: id, v: v }; }); }));
+      }).then(function (res) {
         var miss = res.filter(function (r) { return !r.v; });
         if (miss.length) return fail(miss.map(function (r) { return byId[r.id].name; }).join(', '));
         go(SHOP_URL + '/cart/' + res.map(function (r) { return r.v + ':' + items[r.id]; }).join(','));
