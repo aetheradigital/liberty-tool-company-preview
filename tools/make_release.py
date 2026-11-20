@@ -5,6 +5,9 @@
 - partner.* visitors to "/" go to the partner portal.
 - The reviews section is left out while it still holds placeholder quotes.
 - Google Tag Manager (GTM-N4DHV9J6) is added to the website, privacy, terms and ambassador-terms pages.
+- The home page is indexable: the preview's robots noindex tag is removed and a canonical URL is added.
+  Portal, admin and other mockup pages keep their noindex tags.
+- robots.txt and sitemap.xml are written for the public pages.
 """
 import re, pathlib
 
@@ -14,6 +17,12 @@ site = (pub / 'option-2' / 'index.html').read_text()
 # preview bar and its script
 site = re.sub(r'<div id="ltc-preview-bar".*?</div>\s*</div>\s*<script>.*?</script>\s*', '', site, count=1, flags=re.S)
 site = re.sub(r'<title>[^<]*</title>', '<title>Liberty Tool Company</title>', site, count=1)
+
+# the live home page must be indexable (option-2 carries the preview's noindex tag)
+SITE_URL = 'https://libertytoolcompany.com'
+site = re.sub(r'<meta name="robots"[^>]*>\s*', '', site)
+if 'rel="canonical"' not in site:
+    site = re.sub(r'(</title>)', r'\1\n<link rel="canonical" href="' + SITE_URL + '/">', site, count=1)
 
 # placeholder reviews stay off the release site
 if "[Approved" in site:
@@ -49,4 +58,13 @@ for page in ('privacy', 'terms', 'ambassador-terms'):
     '<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex">'
     '<script>location.replace("/"+location.hash);</script>'
     '<meta http-equiv="refresh" content="0; url=/"><link rel="canonical" href="/"><a href="/">Continue</a>\n')
+import datetime
+today = datetime.date.today().isoformat()
+(pub / 'robots.txt').write_text('User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: ' + SITE_URL + '/sitemap.xml\n')
+(pub / 'sitemap.xml').write_text(
+    '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    + ''.join('  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>\n' % (SITE_URL, path, today)
+              for path in ('/', '/privacy/', '/terms/', '/ambassador-terms/'))
+    + '</urlset>\n')
+assert 'noindex' not in site, 'release home page must not be noindex'
 print('release build: home page =', len(site), 'bytes; reviews', 'removed' if 'id="reviews"' not in site else 'kept')
