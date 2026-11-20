@@ -259,7 +259,7 @@ input[type=range]{accent-color:#B31942}
             <button type="button" onClick="{{item.open}}" style="background: transparent; border: 0; padding: 0; min-height: 32px; font-size: 14px; font-weight: 700; color: #0A35C8; cursor: pointer">Details +</button>
           </div>
           <sc-if value="{{item.isBuy}}" hint-placeholder-val="{{true}}">
-            <button type="button" onClick="{{item.add}}" style="width: 100%; min-height: 46px; background: {{item.btnBg}}; color: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">{{item.addLabel}}</button>
+            <button type="button" onClick="{{item.add}}" style="width: 100%; min-height: 46px; background: {{item.btnBg}}; color: {{item.btnFg}}; border: 1px solid #DCE3F7; border-radius: 12px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); cursor: pointer; font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">{{item.addLabel}}</button>
           </sc-if>
           <sc-if value="{{item.isQuote}}" hint-placeholder-val="{{false}}">
             <a href="#schedule" onClick="{{item.ask}}" style="display: flex; align-items: center; justify-content: center; min-height: 46px; background: #B31942; color: #FFFFFF; text-decoration: none; border-radius: 12px; border: 1px solid #DCE3F7; box-shadow: 0 12px 30px rgba(7,26,82,0.10); font-family: Poppins, sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase">Ask For Pricing</a>
@@ -1569,7 +1569,7 @@ class Component extends DCLogic {
         return Object.assign({}, p, {
           img: p.img || CARD[p.id] || STRAP_IMG, stripe: p.group === 'trowel' ? '#0A35C8' : (p.group === 'bundle' ? '#B31942' : '#2F6DB5'),
           priceText: p.soon ? 'Coming Soon' : (quote ? 'Call For Price' : money(p.price)), isBuy: !quote, isQuote: quote,
-          btnBg: on ? '#2E5E2E' : '#0A35C8', addLabel: on ? 'Added — Add Another' : 'Add To Cart',
+          btnBg: on ? '#F2C94C' : '#0A35C8', btnFg: on ? '#071A52' : '#FFFFFF', addLabel: on ? 'Added — Add Another' : 'Add To Cart',
           add: function () { self.add(p.id); }, open: function () { self.open('tool', p.id); },
           ask: function () { self.setState({ buyer: 'tools', step: 1, note: 'Pricing for the ' + p.name + '.' }); }
         });
