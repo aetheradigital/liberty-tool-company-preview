@@ -5,6 +5,7 @@ cd "$(dirname "$0")/.."
 git checkout -q main
 git checkout -q -B release-build
 python3 tools/make_release.py
+node tools/prerender.mjs
 git add -A public
 git -c user.name="${GIT_NAME:-Nicholas}" -c user.email="${GIT_EMAIL:-nicholas@aetheradigital.com}" commit -q -m "Release build from $(git rev-parse --short main)"
 git push -q -f origin release-build:release
