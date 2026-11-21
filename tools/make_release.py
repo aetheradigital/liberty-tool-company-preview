@@ -8,6 +8,7 @@
 - The home page is indexable: the preview's robots noindex tag is removed and a canonical URL is added.
   Portal, admin and other mockup pages keep their noindex tags.
 - Title, meta description, Open Graph/Twitter tags and Organization/WebSite JSON-LD are added to the home page.
+- The Installer Academy section and its nav links are left out while its videos are still Coming Soon.
 - robots.txt, sitemap.xml and llms.txt are written for the public pages.
 - tools/prerender.mjs then renders the home page so crawlers get real HTML (see that file).
 """
@@ -19,9 +20,8 @@ site = (pub / 'option-2' / 'index.html').read_text()
 # preview bar and its script
 site = re.sub(r'<div id="ltc-preview-bar".*?</div>\s*</div>\s*<script>.*?</script>\s*', '', site, count=1, flags=re.S)
 import json
-TITLE = 'Liberty Tool Company | Jobsite Tools for Installers'
-DESC = ('Liberty Tool Company makes jobsite tools like the Tape Caddy and LTC trowels for installers, dealers and crews. '
-        'Veteran-owned, made in the USA, shipped from San Dimas, CA.')
+TITLE = 'Jobsite Tools for Installers | Tape Caddy & LTC Trowels'
+DESC = ('Liberty Tool Company makes the Tape Caddy, LTC trowels and Broadcast Strap for installers and dealers. Veteran-owned, made in the USA, ships from San Dimas, CA.')
 site = re.sub(r'<title>[^<]*</title>', '<title>' + TITLE + '</title>', site, count=1)
 
 # the live home page must be indexable (option-2 carries the preview's noindex tag)
@@ -78,6 +78,11 @@ head_meta = (
 if 'name="description"' not in site:
     site = re.sub(r'(<link rel="canonical"[^>]*>)', lambda m: m.group(1) + '\n' + head_meta, site, count=1)
 
+# Installer Academy stays off the release site while its videos are still Coming Soon
+if '>Coming Soon</span>' in site:
+    site = re.sub(r'<!-- ACADEMY -->\s*<section id="academy".*?</section>\s*', '', site, count=1, flags=re.S)
+    site = re.sub(r'\s*<a href="#academy"[^>]*>[^<]*</a>', '', site)
+
 # placeholder reviews stay off the release site
 if "[Approved" in site:
     site = re.sub(r'<!-- REVIEWS -->\s*<section id="reviews".*?</section>\s*', '', site, count=1, flags=re.S)
@@ -122,14 +127,19 @@ today = datetime.date.today().isoformat()
     + '</urlset>\n')
 (pub / 'llms.txt').write_text("""# Liberty Tool Company
 
-> Liberty Tool Company (LTC) is a veteran-owned, family-run maker of jobsite tools for flooring and coating installers, dealers and enterprise buyers. Tools include the Tape Caddy, LTC trowels, the Broadcast Strap and Crew Kits. Made in the USA and shipped from San Dimas, CA, to all 50 states and worldwide.
+> Liberty Tool Company (LTC) is a veteran-owned, family-operated maker of jobsite tools for flooring and coating installers, dealers and enterprise buyers. Tools include the Tape Caddy, LTC trowels, the Broadcast Strap and Crew Kits. Made in the USA and shipped from San Dimas, CA, to all 50 states and worldwide.
 
 - Legal name: Liberty Industrial Coating Systems Inc. d/b/a Liberty Tool Company
 - Address: 712 W. Cienega Ave, Unit A, San Dimas, CA 91773
 - Phone (text or call 24/7): 239-744-8403
 - Email: sales@libertytoolcompany.com
+- Veteran-Owned · Family-Operated · Made In The USA
 - Slogan: For Installers. By Installers.
 - Instagram: https://www.instagram.com/liberty_tool_company/
+
+## Our Story
+
+Liberty Tool Company was founded by Dick Szymanski, a veteran, and his son Brandon. They have put down floors side by side in Southern California for more than ten years, and when the tools they needed didn't exist, they built them. Mission: help installers build better businesses.
 
 ## Pages
 
@@ -138,12 +148,13 @@ today = datetime.date.today().isoformat()
 - [Privacy Policy](""" + SITE_URL + """/privacy/)
 - [Terms & Conditions](""" + SITE_URL + """/terms/)
 
-## Products
+## Products and prices (USD, retail)
 
-- The Tape Caddy: holds masking tape at one fixed height so every line matches. Sizes: Lowboy (4 mm), 2-Inch, 4-Inch, 6-Inch
-- Crew Kits: Cove System (4-Inch + 6-Inch), Double Down Duo (Lowboy + 4-Inch), Triple Threat (Lowboy, 4-Inch, 6-Inch), 4-Score Complete Kit (all four)
-- LTC trowels: standard cove, cant cove, snub flat hanging and marginal trowels, plus the Patch Hawk
-- Broadcast Strap: for even broadcasting of flake and aggregate
+- The Tape Caddy holds masking tape at one fixed height so every line matches: Lowboy Caddy (4 mm) $89, 2-Inch Caddy $89, 4-Inch Caddy $99, 6-Inch Caddy $119
+- Crew Kits: Cove System (4-Inch + 6-Inch) $205, Double Down Duo (Lowboy + 4-Inch) $180, Triple Threat (Lowboy, 4-Inch, 6-Inch) $295, 4-Score Complete Kit (all four) $389
+- LTC trowels: 6" Snub Flat Hanging Trowel $39.99, 4" Standard Cove Trowel $28.99, 4" Standard Cove Trowel w/ 45° Taper $31.99, 6" Standard Cove Trowel $29.99, 6" Standard Cove Trowel w/ 45° Taper $32.99, 2" Cant Cove Trowel $34.99, 2" Cant Cove Trowel w/ 45° Taper $39.99, 8" Marginal Trowel $23.99, Patch Hawk $39.99
+- Broadcast Strap $64.99: for even broadcasting of flake and aggregate
+- Dealers, distributors and company accounts buy at partner pricing; contact sales@libertytoolcompany.com or 239-744-8403
 """)
 assert 'noindex' not in site, 'release home page must not be noindex'
 print('release build: home page =', len(site), 'bytes; reviews', 'removed' if 'id="reviews"' not in site else 'kept')
