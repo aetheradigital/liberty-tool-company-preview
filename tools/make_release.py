@@ -52,6 +52,7 @@ org = {
             'areaServed': 'Worldwide',
             'knowsAbout': ['Tape Caddy', 'cove trowels', 'floor coating tools', 'jobsite tools for installers'],
             'brand': {'@type': 'Brand', 'name': 'The Tape Caddy'},
+            'sameAs': ['https://www.instagram.com/liberty_tool_company/'],
         },
         {'@type': 'WebSite', '@id': SITE_URL + '/#site', 'url': SITE_URL + '/', 'name': 'Liberty Tool Company',
          'publisher': {'@id': SITE_URL + '/#org'}, 'inLanguage': 'en-US'},
@@ -128,6 +129,7 @@ today = datetime.date.today().isoformat()
 - Phone (text or call 24/7): 239-744-8403
 - Email: sales@libertytoolcompany.com
 - Slogan: For Installers. By Installers.
+- Instagram: https://www.instagram.com/liberty_tool_company/
 
 ## Pages
 
