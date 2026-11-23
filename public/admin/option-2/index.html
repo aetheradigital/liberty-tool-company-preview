@@ -2302,10 +2302,10 @@ function affDaysOut(n) { var d = new Date(); d.setDate(d.getDate() + n); return 
 function affSeed() {
   return {
     affiliates: [
-      { id: 'a1', name: 'Marcus Hale', handle: '@halecoatings', platform: 'Instagram · TikTok', followers: '18.4K', role: 'Epoxy installer · 11 yrs', city: 'Tampa, FL', code: 'HALE10', mo: 11, status: 'Active', joined: affDaysAgo(64), clicks: 1284, sold: 37, paid: 260, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
-      { id: 'a2', name: 'Tasha Greene', handle: '@floorsbytasha', platform: 'YouTube · Instagram', followers: '42K', role: 'Flake & metallic floors · 8 yrs', city: 'Phoenix, AZ', code: 'TASHA10', mo: 14, status: 'Active', joined: affDaysAgo(41), clicks: 2210, sold: 52, paid: 410, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v3: true, v4: true, v5: true } },
+      { id: 'a1', name: 'Marcus Hale', handle: '@halecoatings', platform: 'Instagram · TikTok', followers: '18.4K', role: 'Epoxy installer · 11 yrs', city: 'Tampa, FL', code: 'HALE10', mo: 11, moT: 3, moS: 1, soldT: 10, soldS: 3, status: 'Active', joined: affDaysAgo(64), clicks: 1284, sold: 37, paid: 260, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
+      { id: 'a2', name: 'Tasha Greene', handle: '@floorsbytasha', platform: 'YouTube · Instagram', followers: '42K', role: 'Flake & metallic floors · 8 yrs', city: 'Phoenix, AZ', code: 'TASHA10', mo: 14, moT: 2, moS: 1, soldT: 5, soldS: 4, status: 'Active', joined: affDaysAgo(41), clicks: 2210, sold: 52, paid: 410, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v3: true, v4: true, v5: true } },
       { id: 'a3', name: 'Ray Delgado', handle: '@raysgaragefloors', platform: 'TikTok', followers: '7.9K', role: 'Garage floor crew owner · 6 yrs', city: 'San Antonio, TX', code: 'RAY10', mo: 0, status: 'Active', joined: affDaysAgo(0), clicks: 0, sold: 0, paid: 0, onboard: { agree: false, payout: false, videos: false, link: false, post: false }, watched: {} },
-      { id: 'a6', name: 'Luis Ortega', handle: '@ortegafloorco', platform: 'Instagram · Facebook', followers: '9.6K', role: 'Polyaspartic garages · 9 yrs', city: 'Fresno, CA', code: 'LUIS10', mo: 9, status: 'Active', joined: affDaysAgo(55), clicks: 980, sold: 29, paid: 200, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true, v7: true } },
+      { id: 'a6', name: 'Luis Ortega', handle: '@ortegafloorco', platform: 'Instagram · Facebook', followers: '9.6K', role: 'Polyaspartic garages · 9 yrs', city: 'Fresno, CA', code: 'LUIS10', mo: 9, soldS: 1, status: 'Active', joined: affDaysAgo(55), clicks: 980, sold: 29, paid: 200, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true, v7: true } },
       { id: 'a7', name: 'Brianna Cole', handle: '@brimakesfloors', platform: 'TikTok · YouTube', followers: '26K', role: 'Metallic epoxy artist · 5 yrs', city: 'Charlotte, NC', code: 'BRI10', mo: 6, status: 'Active', joined: affDaysAgo(33), clicks: 1540, sold: 18, paid: 120, onboard: { agree: true, payout: true, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
       { id: 'a8', name: 'Dev Patel', handle: '@devcoatspro', platform: 'LinkedIn', followers: '2.4K', role: 'Commercial estimator · 12 yrs', city: 'Detroit, MI', code: 'DEV10', mo: 2, status: 'Active', joined: affDaysAgo(20), clicks: 160, sold: 7, paid: 50, onboard: { agree: true, payout: false, videos: true, link: true, post: true }, watched: { v1: true, v2: true, v3: true, v4: true, v5: true, v6: true } },
       { id: 'a4', name: 'Kelly Brandt', handle: '@kbcommercialfloors', platform: 'LinkedIn · Facebook', followers: '3.1K', role: 'Commercial PM · 15 yrs', city: 'Columbus, OH', code: '', status: 'Applied', joined: affDaysAgo(2), clicks: 0, sold: 0, paid: 0, onboard: {}, watched: {} },
@@ -2322,7 +2322,7 @@ function affSeed() {
       { id: 'd3', title: 'Black Friday: $20 Off 4-Score', code: 'BF4SCORE', off: '$20 off', ends: affDaysOut(27), desc: 'Nov 27 – Dec 1 only. Stack with your link for credit.', active: true, share: '$20 off the 4-Score Complete Kit this Black Friday. Code BF4SCORE at thetapecaddy.com' }
     ],
     news: [
-      { id: 'n1', date: affDaysAgo(1), tag: 'Program', title: 'Payouts Are Monthly', body: 'You earn $10 for every eligible caddy your link sells. We pay out once a month for the month before. Your running total is on My Links & Earnings.', pinned: true },
+      { id: 'n1', date: affDaysAgo(1), tag: 'Program', title: 'Payouts Are Monthly', body: 'You earn $10 for every eligible caddy, $3.50 for every LTC trowel and $7.50 for every Broadcast Strap your link sells. We pay out once a month for the month before. Your running total is on My Links & Earnings.', pinned: true },
       { id: 'n2', date: affDaysAgo(4), tag: 'Product', title: 'Cove Trowel Is In Testing', body: 'Our new cove trowel is in field testing with a few crews. Affiliates get first look when it launches.', pinned: false },
       { id: 'n3', date: affDaysAgo(9), tag: 'Reminder', title: 'No Amazon Listings', body: 'Please don’t list, resell or fulfill Tape Caddy on Amazon. Link straight to thetapecaddy.com so you get credit.', pinned: false },
       { id: 'n4', date: affDaysAgo(15), tag: 'Shout-Out', title: 'Top Affiliate In October: @floorsbytasha', body: 'Tasha’s metallic floor walkthrough drove 52 caddies. Watch it in Content How-To for ideas.', pinned: false }
@@ -2332,7 +2332,7 @@ function affSeed() {
       { id: 'v2', cat: 'Signing Up', title: 'Signing Your Agreement', len: '1:10', req: true, desc: 'Walk through the ambassador terms and sign online.', ch: ['Open the agreement link', 'Key terms in plain English', 'Sign and submit'] },
       { id: 'v3', cat: 'Onboarding', title: 'Set Up Payouts', len: '1:30', req: true, desc: 'Connect your payout account so monthly payments land on time.', ch: ['Open your affiliate account', 'Add payout details', 'Confirm your tax form'] },
       { id: 'v4', cat: 'Onboarding', title: 'Find Your Link And Code', len: '0:55', req: true, desc: 'Where your link lives, how to make product links and how your code works.', ch: ['My Links page', 'Product links', 'Your discount code'] },
-      { id: 'v5', cat: 'Being An Affiliate', title: 'How You Earn: $10 Per Caddy', len: '1:20', req: true, desc: 'What counts as an eligible sale, when it posts and when you get paid.', ch: ['Eligible sales', 'Clicks vs. sales', 'Monthly payouts'] },
+      { id: 'v5', cat: 'Being An Affiliate', title: 'How You Earn: Caddies, Trowels And Straps', len: '1:20', req: true, desc: 'What counts as an eligible sale, when it posts and when you get paid.', ch: ['Eligible sales', 'Clicks vs. sales', 'Monthly payouts'] },
       { id: 'v6', cat: 'Being An Affiliate', title: 'Brand Rules: Do’s And Don’ts', len: '1:35', req: true, desc: 'Using the LTC logo, honest claims and the no-Amazon rule.', ch: ['Logo and colors', 'What you can claim', 'No Amazon or resale'] },
       { id: 'v7', cat: 'Content How-To', title: 'Film A 30-Second Tape Line', len: '2:00', req: false, desc: 'Phone setup, angles and the money shot: peeling a perfect line.', ch: ['Phone low and steady', 'Show the gauge', 'The reveal'] },
       { id: 'v8', cat: 'Content How-To', title: 'Before & After That Sells', len: '1:50', req: false, desc: 'Same angle, same light, real job. How top affiliates frame it.', ch: ['Lock your angle', 'Shoot the before', 'Match the after'] }
@@ -2356,7 +2356,7 @@ function affSeedAgreements(d) {
   d.affiliates.forEach(function (a) {
     if (!a.onboard || !a.onboard.agree || a.agreement) return;
     var first = a.name.split(' ')[0].toLowerCase(), dom = (a.handle || '').replace('@', '') || 'example';
-    a.agreement = { id: 'AG-' + a.id.toUpperCase() + '-1026', version: AGREEMENT_VERSION, signedAt: a.joined, signedTime: '10:14 AM ET', name: a.name, business: biz[a.id] || '', email: first + '@' + dom + '.com', phone: '(555) 010-' + (1000 + a.mo * 37).toString().slice(0, 4), address: a.city, sigType: 'type', sigText: a.name, sigData: '' };
+    a.agreement = { id: 'AG-' + a.id.toUpperCase() + '-1026', version: 'v1 (Nov 2026)', signedAt: a.joined, signedTime: '10:14 AM ET', name: a.name, business: biz[a.id] || '', email: first + '@' + dom + '.com', phone: '(555) 010-' + (1000 + a.mo * 37).toString().slice(0, 4), address: a.city, sigType: 'type', sigText: a.name, sigData: '' };
   });
   return d;
 }
@@ -2374,6 +2374,7 @@ function affBoard(d, period) {
 var MEDAL = ['#C9A227', '#9AA4B2', '#B87333'];
 
 function affSigned(a) { return !!(a && a.agreement && a.agreement.signedAt); }
+function affCurrent(a) { return affSigned(a) && a.agreement.version === AGREEMENT_VERSION; }
 function affFmt(d) { return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
 
 function sideWatch(comp) {
@@ -2385,21 +2386,28 @@ function sideWatch(comp) {
 function sideDown() { var el = document.querySelector('.side'); if (!el) return; try { el.scrollBy({ top: Math.round(el.clientHeight * 0.6), behavior: 'smooth' }); } catch (e) { el.scrollTop += Math.round(el.clientHeight * 0.6); } }
 
 // ---------- Monthly payout ledger (shared by Admin, Affiliate and Sales Rep portals) ----------
-var PAY_KEY = 'ltc-payouts-v1';
+var PAY_KEY = 'ltc-payouts-v2';
 var PAY_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 var PAY_AFF_RATE = 10;
+var AFF_RATES = { c: 10, t: 3.5, s: 7.5 };
+function payMix(v) { if (v == null) return { c: 0, t: 0, s: 0 }; if (typeof v === 'number') return { c: v, t: 0, s: 0 }; return { c: v.c || v.units || 0, t: v.t || 0, s: v.s || 0 }; }
+function payAmt(v) { var m = payMix(v); return m.c * AFF_RATES.c + m.t * AFF_RATES.t + m.s * AFF_RATES.s; }
+function payMixN(v) { var m = payMix(v); return m.c + m.t + m.s; }
+function payMixTxt(v) { var m = payMix(v), out = []; if (m.c) out.push(m.c + (m.c === 1 ? ' caddy' : ' caddies')); if (m.t) out.push(m.t + (m.t === 1 ? ' trowel' : ' trowels')); if (m.s) out.push(m.s + (m.s === 1 ? ' strap' : ' straps')); return out.join(' · ') || '0'; }
+function affEarn(a) { return payAmt({ c: a.sold || 0, t: a.soldT || 0, s: a.soldS || 0 }); }
+function affEarnMo(a) { return payAmt({ c: a.mo || 0, t: a.moT || 0, s: a.moS || 0 }); }
 function payPeriod(back) { var d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - back); var y = d.getFullYear(), m = d.getMonth(); return { key: y + '-' + (m < 9 ? '0' : '') + (m + 1), label: PAY_MONTHS[m] + ' ' + y, month: PAY_MONTHS[m], idx: m, year: y, back: back, last: new Date(y, m + 1, 0).toLocaleDateString('en-US', { month: 'long', day: 'numeric' }) }; }
 function payPeriods() { return [payPeriod(0), payPeriod(1), payPeriod(2)]; }
 function payFmt(d) { return (d || new Date()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
 function payUsd(n) { return '$' + (Math.round(n * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 function paySeed() {
   var p1 = payPeriod(1), p2 = payPeriod(2), units = {}, runs = {};
-  units[p1.key] = { a1: 21, a2: 24, a6: 13, a7: 9, a8: 4 };
-  units[p2.key] = { a1: 5, a2: 19, a6: 10, a7: 6, a8: 3 };
+  units[p1.key] = { a1: { c: 21, t: 6, s: 1 }, a2: { c: 24, t: 3, s: 2 }, a6: { c: 13, t: 0, s: 1 }, a7: 9, a8: 4 };
+  units[p2.key] = { a1: { c: 5, t: 4, s: 0 }, a2: { c: 19, t: 0, s: 2 }, a6: 10, a7: 6, a8: 3 };
   var paid = new Date(); paid.setDate(1); paid.setMonth(paid.getMonth() - 1); paid.setDate(10);
   runs[p2.key] = { paidOn: payFmt(paid), by: 'LTC Admin', items: [
-    { kind: 'aff', id: 'a1', name: 'Marcus Hale', units: 5, base: 50, adj: 0, note: '', total: 50 },
-    { kind: 'aff', id: 'a2', name: 'Tasha Greene', units: 19, base: 190, adj: 0, note: '', total: 190 },
+    { kind: 'aff', id: 'a1', name: 'Marcus Hale', units: 5, t: 4, s: 0, base: 64, adj: 0, note: '', total: 64 },
+    { kind: 'aff', id: 'a2', name: 'Tasha Greene', units: 19, t: 0, s: 2, base: 205, adj: 0, note: '', total: 205 },
     { kind: 'aff', id: 'a6', name: 'Luis Ortega', units: 10, base: 100, adj: 0, note: '', total: 100 },
     { kind: 'aff', id: 'a7', name: 'Brianna Cole', units: 6, base: 60, adj: 0, note: '', total: 60 },
     { kind: 'aff', id: 'a8', name: 'Dev Patel', units: 3, base: 30, adj: 0, note: '', total: 30 },
@@ -2415,18 +2423,18 @@ function payRunsFor(L, kind, id) {
   return payPeriods().concat([payPeriod(3), payPeriod(4)]).map(function (p) { var r = L.runs[p.key]; if (!r) return null; var it = r.items.find(function (x) { return x.kind === kind && x.id === id; }); return it ? { period: p, run: r, item: it } : null; }).filter(Boolean);
 }
 function payAffMonths(L, a) {
-  var ps = payPeriods(), out = [{ m: ps[0].month + ' (so far)', sold: a.mo || 0, status: 'Pending', amt: (a.mo || 0) * PAY_AFF_RATE }];
+  var ps = payPeriods(), out = [{ m: ps[0].month + ' (so far)', sold: a.mo || 0, soldTxt: payMixTxt({ c: a.mo || 0, t: a.moT || 0, s: a.moS || 0 }), status: 'Pending', amt: affEarnMo(a) }];
   ps.slice(1).forEach(function (p) {
     var r = L.runs[p.key], it = r ? r.items.find(function (x) { return x.kind === 'aff' && x.id === a.id; }) : null, u = ((L.units || {})[p.key] || {})[a.id];
-    if (it) out.push({ m: p.month, sold: it.units, status: 'Paid', amt: it.total });
-    else if (u) out.push({ m: p.month, sold: u, status: r ? 'On Hold' : 'Approved', amt: u * PAY_AFF_RATE });
+    if (it) out.push({ m: p.month, sold: it.units, soldTxt: payMixTxt({ c: it.units, t: it.t, s: it.s }), status: 'Paid', amt: it.total });
+    else if (u) out.push({ m: p.month, sold: payMix(u).c, soldTxt: payMixTxt(u), status: r ? 'On Hold' : 'Approved', amt: payAmt(u) });
   });
   return out;
 }
 function payStmtNo(p, it) { return 'ST-' + p.key.replace('-', '') + '-' + it.id.toUpperCase(); }
 function payStmtRows(it) {
   var rows = it.kind === 'aff'
-    ? [['Eligible Tape Caddies Sold', String(it.units)], ['Rate', payUsd(PAY_AFF_RATE) + ' per caddy'], ['Commission', payUsd(it.base)]]
+    ? [['Tape Caddies Sold', (it.units || 0) + ' × ' + payUsd(AFF_RATES.c)]].concat(it.t ? [['LTC Trowels Sold', it.t + ' × ' + payUsd(AFF_RATES.t)]] : [], it.s ? [['Broadcast Straps Sold', it.s + ' × ' + payUsd(AFF_RATES.s)]] : [], [['Commission', payUsd(it.base)]])
     : [['Sales From Your Accounts', payUsd(it.sales)]].concat(it.parts && it.parts.length ? it.parts.map(function (x) { return [x.k, (x.v < 0 ? '−' : '') + payUsd(Math.abs(x.v))]; }) : [['Commission Rate', it.rate + '%']], [['Commission', payUsd(it.base)]]);
   if (it.adj) rows.push(['Adjustment' + (it.note ? ' (' + it.note + ')' : ''), (it.adj > 0 ? '+' : '−') + payUsd(Math.abs(it.adj))]);
   return rows.map(function (r) { return { k: r[0], v: r[1] }; });
@@ -3219,10 +3227,10 @@ class Component extends DCLogic {
     var apps = A.affiliates.filter(function (a) { return a.status === 'Applied'; });
     var ST = { Active: ['#E3F3EA', '#2E7D4F'], Paused: ['#ECEEF2', '#4A5568'], Applied: ['#FFF3DC', '#8A5A00'] };
     var usd = function (n) { return '$' + n.toLocaleString(); };
-    var due = active.filter(function (a) { return a.sold * AFF_RATE - a.paid > 0; });
+    var due = active.filter(function (a) { return affEarn(a) - a.paid > 0; });
     var form = function (key, fields) { var o = Object.assign({}, s[key]); fields.forEach(function (f) { o['set' + f[0].toUpperCase() + f.slice(1)] = function (e) { var x = Object.assign({}, self.state[key]); x[f] = e.target.value; var u = {}; u[key] = x; self.setState(u); }; }); return o; };
     var nc = form('nc', ['title', 'status', 'start', 'end', 'brief', 'bonus', 'deliv', 'caption']);
-    nc.add = function () { var c = self.state.nc; if (!c.title.trim()) return self.flash('Add a campaign title'); self.affSet(function (d) { d.campaigns.unshift({ id: 'c' + Date.now(), title: c.title.trim(), status: c.status, start: c.start || 'TBD', end: c.end || 'TBD', brief: c.brief, bonus: c.bonus || '$10 per eligible caddy', deliverables: c.deliv.split(/\n/).map(function (x) { return x.trim(); }).filter(Boolean), caption: c.caption, joined: [] }); }, 'Campaign published to affiliates'); self.setState({ nc: { title: '', status: 'Live', start: '', end: '', brief: '', bonus: '', deliv: '', caption: '' } }); };
+    nc.add = function () { var c = self.state.nc; if (!c.title.trim()) return self.flash('Add a campaign title'); self.affSet(function (d) { d.campaigns.unshift({ id: 'c' + Date.now(), title: c.title.trim(), status: c.status, start: c.start || 'TBD', end: c.end || 'TBD', brief: c.brief, bonus: c.bonus || '$10 per caddy · $3.50 per trowel · $7.50 per strap', deliverables: c.deliv.split(/\n/).map(function (x) { return x.trim(); }).filter(Boolean), caption: c.caption, joined: [] }); }, 'Campaign published to affiliates'); self.setState({ nc: { title: '', status: 'Live', start: '', end: '', brief: '', bonus: '', deliv: '', caption: '' } }); };
     var nd = form('nd', ['title', 'off', 'code', 'ends', 'desc']);
     nd.add = function () { var c = self.state.nd; if (!c.title.trim()) return self.flash('Add a deal title'); self.affSet(function (d) { d.deals.unshift({ id: 'd' + Date.now(), title: c.title.trim(), off: c.off || 'Deal', code: (c.code || '').toUpperCase() || 'NOCODE', ends: c.ends || 'TBD', desc: c.desc, active: true, share: c.title.trim() + (c.code ? '. Code ' + c.code.toUpperCase() : '') + ' at thetapecaddy.com' }); }, 'Deal published to affiliates'); self.setState({ nd: { title: '', off: '', code: '', ends: '', desc: '' } }); };
     var nn = form('nn', ['title', 'tag', 'body']);
@@ -3242,21 +3250,21 @@ class Component extends DCLogic {
       lbPeriodShort: s.lb === 'all' ? 'All Time' : 'Month',
       lbTop: lb.slice(0, 3).map(function (x, i) { return { rank: x.rank, name: x.a.name, handle: x.a.handle, val: fmtM(x), sub: subM[s.lbm], medal: MEDAL[i],
         shout: function () { self.affSet(function (d) { d.news.unshift({ id: 'n' + Date.now(), date: fmtDate(today()), tag: 'Shout-Out', title: '#' + x.rank + (s.lb === 'all' ? ' All Time: ' : ' This Month: ') + x.a.handle, body: x.a.name + ' is #' + x.rank + ' with ' + x.n + ' caddies sold' + (s.lb === 'all' ? ' all time' : ' this month') + '. Nice work.', pinned: false }); }, 'Shout-out posted to affiliate News'); } }; }),
-      lbRows: lb.map(function (x) { var col = ST[x.a.status] || ST.Active; return { rank: x.rank, name: x.a.name, handle: x.a.handle, city: x.a.city, code: x.a.code || '—', clicks: x.a.clicks.toLocaleString(), n: x.n, conv: x.conv.toFixed(1) + '%', earned: usd(x.a.sold * AFF_RATE), status: x.a.status, sbg: col[0], sfg: col[1], rc: x.rank <= 3 ? MEDAL[x.rank - 1] : C.pri }; }),
+      lbRows: lb.map(function (x) { var col = ST[x.a.status] || ST.Active; return { rank: x.rank, name: x.a.name, handle: x.a.handle, city: x.a.city, code: x.a.code || '—', clicks: x.a.clicks.toLocaleString(), n: x.n, conv: x.conv.toFixed(1) + '%', earned: payUsd(affEarn(x.a)), status: x.a.status, sbg: col[0], sfg: col[1], rc: x.rank <= 3 ? MEDAL[x.rank - 1] : C.pri }; }),
       affKpis: [
         { n: A.affiliates.filter(function (a) { return a.status === 'Active'; }).length, l: 'Active Affiliates' },
         { n: apps.length, l: 'Applications To Review' },
         { n: active.reduce(function (t, a) { return t + a.clicks; }, 0).toLocaleString(), l: 'Link Clicks' },
         { n: active.reduce(function (t, a) { return t + a.sold; }, 0), l: 'Eligible Caddies Sold' },
-        { n: usd(due.reduce(function (t, a) { return t + a.sold * AFF_RATE - a.paid; }, 0)), l: 'Payouts Due' }
+        { n: payUsd(due.reduce(function (t, a) { return t + affEarn(a) - a.paid; }, 0)), l: 'Payouts Due' }
       ],
       affApps: apps.map(function (a) { return Object.assign({}, a, {
         approve: function () { self.affSet(function (d) { var x = d.affiliates.find(function (y) { return y.id === a.id; }); x.status = 'Active'; x.code = a.name.split(' ')[0].toUpperCase() + '10'; x.onboard = { agree: false }; x.watched = {}; }, a.name + ' approved. Welcome email + code sent.'); },
         decline: function () { self.affSet(function (d) { d.affiliates = d.affiliates.filter(function (y) { return y.id !== a.id; }); }, a.name + ' declined'); } }); }),
       noApps: apps.length === 0,
-      affRoster: active.map(function (a) { var col = ST[a.status] || ST.Active, sg = affSigned(a), ct = sg && !!a.agreement.ltcName; return { agLabel: ct ? 'Countersigned ' + a.agreement.ltcDate : (sg ? 'Signed · Needs LTC' : 'Not Signed'), agBg: ct ? '#E3F3EA' : (sg ? C.soft : '#FFF3DC'), agFg: ct ? '#2E7D4F' : (sg ? C.pri : '#8A5A00'), canCg: sg && !ct, cg: function () { self.setState({ csgn: [a.id] }); }, name: a.name, handle: a.handle, platform: a.platform, code: a.code || '—', followers: a.followers, pct: affOnboardPct(a), clicks: a.clicks.toLocaleString(), sold: a.sold, earned: usd(a.sold * AFF_RATE), status: a.status, sbg: col[0], sfg: col[1], toggleLabel: a.status === 'Active' ? 'Pause' : 'Activate',
+      affRoster: active.map(function (a) { var col = ST[a.status] || ST.Active, sg = affSigned(a), ct = sg && !!a.agreement.ltcName; return { agLabel: sg && !affCurrent(a) ? 'Needs Re-Sign (' + AGREEMENT_VERSION.split(' ')[0] + ')' : (ct ? 'Countersigned ' + a.agreement.ltcDate : (sg ? 'Signed · Needs LTC' : 'Not Signed')), agBg: ct ? '#E3F3EA' : (sg ? C.soft : '#FFF3DC'), agFg: ct ? '#2E7D4F' : (sg ? C.pri : '#8A5A00'), canCg: sg && !ct, cg: function () { self.setState({ csgn: [a.id] }); }, name: a.name, handle: a.handle, platform: a.platform, code: a.code || '—', followers: a.followers, pct: affOnboardPct(a), clicks: a.clicks.toLocaleString(), sold: a.sold, earned: payUsd(affEarn(a)), status: a.status, sbg: col[0], sfg: col[1], toggleLabel: a.status === 'Active' ? 'Pause' : 'Activate',
         toggle: function () { self.affSet(function (d) { var x = d.affiliates.find(function (y) { return y.id === a.id; }); x.status = x.status === 'Active' ? 'Paused' : 'Active'; }, a.name + (a.status === 'Active' ? ' paused' : ' activated')); } }; }),
-      affPayouts: due.map(function (a) { return { name: a.name, earned: usd(a.sold * AFF_RATE), paid: usd(a.paid), due: usd(a.sold * AFF_RATE - a.paid), pay: function () { self.affSet(function (d) { var x = d.affiliates.find(function (y) { return y.id === a.id; }); x.paid = x.sold * AFF_RATE; }, a.name + ' marked paid'); } }; }),
+      affPayouts: due.map(function (a) { return { name: a.name, earned: payUsd(affEarn(a)), paid: usd(a.paid), due: payUsd(affEarn(a) - a.paid), pay: function () { self.affSet(function (d) { var x = d.affiliates.find(function (y) { return y.id === a.id; }); x.paid = affEarn(x); }, a.name + ' marked paid'); } }; }),
       noPayouts: due.length === 0,
       admCamps: A.campaigns.map(function (c) { return { title: c.title, start: c.start, end: c.end, bonus: c.bonus, count: c.joined.length,
         stats: ['Live', 'Upcoming', 'Ended'].map(function (st) { return { label: st, on: c.status === st ? 'true' : 'false', pick: function () { self.affSet(function (d) { d.campaigns.find(function (y) { return y.id === c.id; }).status = st; }, c.title + ' → ' + st); } }; }),
@@ -3711,13 +3719,13 @@ class Component extends DCLogic {
     };
     var affLines = [], repLines = [];
     if (run) {
-      run.items.forEach(function (it) { (it.kind === 'aff' ? affLines : repLines).push({ kind: it.kind, id: it.id, name: it.name, sub: it.kind === 'aff' ? 'Paid ' + run.paidOn : (it.planTxt || it.rate + '% commission'), qty: it.kind === 'aff' ? it.units + ' caddies' : payUsd(it.sales), base: payUsd(it.base), adjTxt: it.adj ? (it.adj > 0 ? '+' : '−') + payUsd(Math.abs(it.adj)) : '—', note: it.note, total: payUsd(it.total), totalN: it.total, held: false, paidRow: true }); });
+      run.items.forEach(function (it) { (it.kind === 'aff' ? affLines : repLines).push({ kind: it.kind, id: it.id, name: it.name, sub: it.kind === 'aff' ? 'Paid ' + run.paidOn : (it.planTxt || it.rate + '% commission'), qty: it.kind === 'aff' ? payMixTxt({ c: it.units, t: it.t, s: it.s }) : payUsd(it.sales), base: payUsd(it.base), adjTxt: it.adj ? (it.adj > 0 ? '+' : '−') + payUsd(Math.abs(it.adj)) : '—', note: it.note, total: payUsd(it.total), totalN: it.total, held: false, paidRow: true }); });
     } else {
       var units = cur ? null : ((L.units || {})[p.key] || {});
       A.affiliates.filter(function (a) { return a.status === 'Active' || a.status === 'Paused'; }).forEach(function (a) {
-        var u = cur ? (a.mo || 0) : (units[a.id] || 0); if (!u) return;
+        var u = cur ? { c: a.mo || 0, t: a.moT || 0, s: a.moS || 0 } : payMix(units[a.id]); if (!payMixN(u)) return;
         var hold = !affSigned(a) ? 'Agreement not signed' : (!(a.onboard && a.onboard.payout) ? 'Payout account not set up' : '');
-        affLines.push(lineFor('aff', a.id, a.name, (a.code || '—') + ' · ' + a.handle, u + ' caddies', u * PAY_AFF_RATE, hold, { units: u }));
+        affLines.push(lineFor('aff', a.id, a.name, (a.code || '—') + ' · ' + a.handle, payMixTxt(u), payAmt(u), hold, { units: u.c, t: u.t, s: u.s }));
       });
       var nmA = {}; Object.keys(ACCTS).forEach(function (k) { nmA[k] = ACCTS[k].name; });
       D.reps.forEach(function (r) {
@@ -3740,11 +3748,11 @@ class Component extends DCLogic {
       period: p.label, closes: p.last, isPaid: !!run, isCurrent: cur && !run, isOpen: !run && !cur,
       kpis: [{ n: payUsd(sum(affLines)), l: 'Affiliate Commission' }, { n: payUsd(sum(repLines)), l: 'Sales Rep Commission' }, { n: all.filter(function (l) { return l.held; }).length, l: 'On Hold' }, { n: payUsd(sum(all)), l: run ? 'Total Paid' : (cur ? 'Running Total' : 'Total To Pay') }],
       paidMsg: run ? 'Paid ' + run.paidOn + ' by ' + run.by + ' · ' + run.items.length + ' statements sent · ' + payUsd(run.items.reduce(function (t, i) { return t + i.total; }, 0)) : '',
-      groups: [{ title: 'Affiliates', who: 'Affiliate', qtyHead: 'Caddies Sold', sub: '$10 per Tape Caddy, $3.50 per trowel, $7.50 per Broadcast Strap, per the Affiliate Agreement', rows: affLines.map(rowV), empty: affLines.length === 0 }, { title: 'Sales Reps', who: 'Rep', qtyHead: 'Sales', sub: 'Sales from assigned accounts, paid on each rep’s commission plan', rows: repLines.map(rowV), empty: repLines.length === 0 }],
+      groups: [{ title: 'Affiliates', who: 'Affiliate', qtyHead: 'Units Sold', sub: '$10 per Tape Caddy, $3.50 per trowel, $7.50 per Broadcast Strap, per the Affiliate Agreement', rows: affLines.map(rowV), empty: affLines.length === 0 }, { title: 'Sales Reps', who: 'Rep', qtyHead: 'Sales', sub: 'Sales from assigned accounts, paid on each rep’s commission plan', rows: repLines.map(rowV), empty: repLines.length === 0 }],
       total: payUsd(sum(all)), countTxt: payable.length + ' people get paid · ' + all.filter(function (l) { return l.held; }).length + ' on hold',
       pay: function () {
         if (!payable.length) return self.flash('Nothing ready to pay');
-        var items = payable.map(function (l) { return l.kind === 'aff' ? { kind: 'aff', id: l.id, name: l.name, units: l.units, base: l.baseN, adj: l.adjN, note: l.note, total: l.totalN } : { kind: 'rep', id: l.id, name: l.name, sales: l.sales, rate: l.rate, parts: l.parts, planTxt: l.planTxt, base: l.baseN, adj: l.adjN, note: l.note, total: l.totalN }; });
+        var items = payable.map(function (l) { return l.kind === 'aff' ? { kind: 'aff', id: l.id, name: l.name, units: l.units, t: l.t || 0, s: l.s || 0, base: l.baseN, adj: l.adjN, note: l.note, total: l.totalN } : { kind: 'rep', id: l.id, name: l.name, sales: l.sales, rate: l.rate, parts: l.parts, planTxt: l.planTxt, base: l.baseN, adj: l.adjN, note: l.note, total: l.totalN }; });
         var L2 = JSON.parse(JSON.stringify(self.state.pay)); L2.runs[p.key] = { paidOn: payFmt(new Date()), by: 'LTC Admin', items: items }; paySave(L2);
         self.affSet(function (d) { items.forEach(function (it) { if (it.kind !== 'aff') return; var a = d.affiliates.find(function (x) { return x.id === it.id; }); if (a) a.paid = (a.paid || 0) + it.total; }); });
         self.setState({ pay: L2, payAdj: {} }); self.flash(p.label + ' paid · ' + items.length + ' statements sent');

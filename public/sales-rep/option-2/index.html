@@ -633,21 +633,28 @@ function sideWatch(comp) {
 function sideDown() { var el = document.querySelector('.side'); if (!el) return; try { el.scrollBy({ top: Math.round(el.clientHeight * 0.6), behavior: 'smooth' }); } catch (e) { el.scrollTop += Math.round(el.clientHeight * 0.6); } }
 
 // ---------- Monthly payout ledger (shared by Admin, Affiliate and Sales Rep portals) ----------
-var PAY_KEY = 'ltc-payouts-v1';
+var PAY_KEY = 'ltc-payouts-v2';
 var PAY_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 var PAY_AFF_RATE = 10;
+var AFF_RATES = { c: 10, t: 3.5, s: 7.5 };
+function payMix(v) { if (v == null) return { c: 0, t: 0, s: 0 }; if (typeof v === 'number') return { c: v, t: 0, s: 0 }; return { c: v.c || v.units || 0, t: v.t || 0, s: v.s || 0 }; }
+function payAmt(v) { var m = payMix(v); return m.c * AFF_RATES.c + m.t * AFF_RATES.t + m.s * AFF_RATES.s; }
+function payMixN(v) { var m = payMix(v); return m.c + m.t + m.s; }
+function payMixTxt(v) { var m = payMix(v), out = []; if (m.c) out.push(m.c + (m.c === 1 ? ' caddy' : ' caddies')); if (m.t) out.push(m.t + (m.t === 1 ? ' trowel' : ' trowels')); if (m.s) out.push(m.s + (m.s === 1 ? ' strap' : ' straps')); return out.join(' · ') || '0'; }
+function affEarn(a) { return payAmt({ c: a.sold || 0, t: a.soldT || 0, s: a.soldS || 0 }); }
+function affEarnMo(a) { return payAmt({ c: a.mo || 0, t: a.moT || 0, s: a.moS || 0 }); }
 function payPeriod(back) { var d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - back); var y = d.getFullYear(), m = d.getMonth(); return { key: y + '-' + (m < 9 ? '0' : '') + (m + 1), label: PAY_MONTHS[m] + ' ' + y, month: PAY_MONTHS[m], idx: m, year: y, back: back, last: new Date(y, m + 1, 0).toLocaleDateString('en-US', { month: 'long', day: 'numeric' }) }; }
 function payPeriods() { return [payPeriod(0), payPeriod(1), payPeriod(2)]; }
 function payFmt(d) { return (d || new Date()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
 function payUsd(n) { return '$' + (Math.round(n * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 function paySeed() {
   var p1 = payPeriod(1), p2 = payPeriod(2), units = {}, runs = {};
-  units[p1.key] = { a1: 21, a2: 24, a6: 13, a7: 9, a8: 4 };
-  units[p2.key] = { a1: 5, a2: 19, a6: 10, a7: 6, a8: 3 };
+  units[p1.key] = { a1: { c: 21, t: 6, s: 1 }, a2: { c: 24, t: 3, s: 2 }, a6: { c: 13, t: 0, s: 1 }, a7: 9, a8: 4 };
+  units[p2.key] = { a1: { c: 5, t: 4, s: 0 }, a2: { c: 19, t: 0, s: 2 }, a6: 10, a7: 6, a8: 3 };
   var paid = new Date(); paid.setDate(1); paid.setMonth(paid.getMonth() - 1); paid.setDate(10);
   runs[p2.key] = { paidOn: payFmt(paid), by: 'LTC Admin', items: [
-    { kind: 'aff', id: 'a1', name: 'Marcus Hale', units: 5, base: 50, adj: 0, note: '', total: 50 },
-    { kind: 'aff', id: 'a2', name: 'Tasha Greene', units: 19, base: 190, adj: 0, note: '', total: 190 },
+    { kind: 'aff', id: 'a1', name: 'Marcus Hale', units: 5, t: 4, s: 0, base: 64, adj: 0, note: '', total: 64 },
+    { kind: 'aff', id: 'a2', name: 'Tasha Greene', units: 19, t: 0, s: 2, base: 205, adj: 0, note: '', total: 205 },
     { kind: 'aff', id: 'a6', name: 'Luis Ortega', units: 10, base: 100, adj: 0, note: '', total: 100 },
     { kind: 'aff', id: 'a7', name: 'Brianna Cole', units: 6, base: 60, adj: 0, note: '', total: 60 },
     { kind: 'aff', id: 'a8', name: 'Dev Patel', units: 3, base: 30, adj: 0, note: '', total: 30 },
@@ -663,18 +670,18 @@ function payRunsFor(L, kind, id) {
   return payPeriods().concat([payPeriod(3), payPeriod(4)]).map(function (p) { var r = L.runs[p.key]; if (!r) return null; var it = r.items.find(function (x) { return x.kind === kind && x.id === id; }); return it ? { period: p, run: r, item: it } : null; }).filter(Boolean);
 }
 function payAffMonths(L, a) {
-  var ps = payPeriods(), out = [{ m: ps[0].month + ' (so far)', sold: a.mo || 0, status: 'Pending', amt: (a.mo || 0) * PAY_AFF_RATE }];
+  var ps = payPeriods(), out = [{ m: ps[0].month + ' (so far)', sold: a.mo || 0, soldTxt: payMixTxt({ c: a.mo || 0, t: a.moT || 0, s: a.moS || 0 }), status: 'Pending', amt: affEarnMo(a) }];
   ps.slice(1).forEach(function (p) {
     var r = L.runs[p.key], it = r ? r.items.find(function (x) { return x.kind === 'aff' && x.id === a.id; }) : null, u = ((L.units || {})[p.key] || {})[a.id];
-    if (it) out.push({ m: p.month, sold: it.units, status: 'Paid', amt: it.total });
-    else if (u) out.push({ m: p.month, sold: u, status: r ? 'On Hold' : 'Approved', amt: u * PAY_AFF_RATE });
+    if (it) out.push({ m: p.month, sold: it.units, soldTxt: payMixTxt({ c: it.units, t: it.t, s: it.s }), status: 'Paid', amt: it.total });
+    else if (u) out.push({ m: p.month, sold: payMix(u).c, soldTxt: payMixTxt(u), status: r ? 'On Hold' : 'Approved', amt: payAmt(u) });
   });
   return out;
 }
 function payStmtNo(p, it) { return 'ST-' + p.key.replace('-', '') + '-' + it.id.toUpperCase(); }
 function payStmtRows(it) {
   var rows = it.kind === 'aff'
-    ? [['Eligible Tape Caddies Sold', String(it.units)], ['Rate', payUsd(PAY_AFF_RATE) + ' per caddy'], ['Commission', payUsd(it.base)]]
+    ? [['Tape Caddies Sold', (it.units || 0) + ' × ' + payUsd(AFF_RATES.c)]].concat(it.t ? [['LTC Trowels Sold', it.t + ' × ' + payUsd(AFF_RATES.t)]] : [], it.s ? [['Broadcast Straps Sold', it.s + ' × ' + payUsd(AFF_RATES.s)]] : [], [['Commission', payUsd(it.base)]])
     : [['Sales From Your Accounts', payUsd(it.sales)]].concat(it.parts && it.parts.length ? it.parts.map(function (x) { return [x.k, (x.v < 0 ? '−' : '') + payUsd(Math.abs(x.v))]; }) : [['Commission Rate', it.rate + '%']], [['Commission', payUsd(it.base)]]);
   if (it.adj) rows.push(['Adjustment' + (it.note ? ' (' + it.note + ')' : ''), (it.adj > 0 ? '+' : '−') + payUsd(Math.abs(it.adj))]);
   return rows.map(function (r) { return { k: r[0], v: r[1] }; });
