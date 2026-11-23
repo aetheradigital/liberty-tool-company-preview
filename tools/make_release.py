@@ -8,7 +8,6 @@
 - The home page is indexable: the preview's robots noindex tag is removed and a canonical URL is added.
   Portal, admin and other mockup pages keep their noindex tags.
 - Title, meta description, Open Graph/Twitter tags and Organization/WebSite JSON-LD are added to the home page.
-- The Installer Academy section and its nav links are left out while its videos are still Coming Soon.
 - robots.txt, sitemap.xml and llms.txt are written for the public pages.
 - tools/prerender.mjs then renders the home page so crawlers get real HTML (see that file).
 """
@@ -78,11 +77,6 @@ head_meta = (
 if 'name="description"' not in site:
     site = re.sub(r'(<link rel="canonical"[^>]*>)', lambda m: m.group(1) + '\n' + head_meta, site, count=1)
 
-# Installer Academy stays off the release site while its videos are still Coming Soon
-if '>Coming Soon</span>' in site:
-    site = re.sub(r'<!-- ACADEMY -->\s*<section id="academy".*?</section>\s*', '', site, count=1, flags=re.S)
-    site = re.sub(r'\s*<a href="#academy"[^>]*>[^<]*</a>', '', site)
-
 # placeholder reviews stay off the release site
 if "[Approved" in site:
     site = re.sub(r'<!-- REVIEWS -->\s*<section id="reviews".*?</section>\s*', '', site, count=1, flags=re.S)
@@ -143,14 +137,24 @@ Liberty Tool Company was founded by Dick Szymanski, a veteran, and his son Brand
 
 ## Pages
 
-- [Home](""" + SITE_URL + """/): products, Tape Caddy sizes and Crew Kits, Tool Finder, dealer and company accounts, where we ship, FAQ
+- [Home](""" + SITE_URL + """/): products, Tape Caddy sizes and Crew Kits, Tool Finder, Installer Academy videos, dealer and company accounts, where we ship, FAQ
 - [Ambassador Terms](""" + SITE_URL + """/ambassador-terms/): Affiliate & Brand Ambassador program ($10 per eligible Tape Caddy, paid monthly)
 - [Privacy Policy](""" + SITE_URL + """/privacy/)
 - [Terms & Conditions](""" + SITE_URL + """/terms/)
 
+## Installer Academy videos (on the home page, #academy)
+
+- Masking A Floor Edge With The Lowboy
+- A 2-Inch Line In One Pass
+- A 4-Inch Cove Line
+- Going Tall With The 6-Inch
+- Hangin' Cove With The Snub Trowel
+- Running Cove With The Cove Trowels
+- Setting Up The Broadcast Strap
+
 ## Products and prices (USD, retail)
 
-- The Tape Caddy holds masking tape at one fixed height so every line matches: Lowboy Caddy (4 mm) $89, 2-Inch Caddy $89, 4-Inch Caddy $99, 6-Inch Caddy $119
+- The Tape Caddy holds masking tape at one fixed height so every line matches: The Lowboy (4 mm) $89, 2-Inch Caddy $89, 4-Inch Caddy $99, 6-Inch Caddy $119
 - Crew Kits: Cove System (4-Inch + 6-Inch) $205, Double Down Duo (Lowboy + 4-Inch) $180, Triple Threat (Lowboy, 4-Inch, 6-Inch) $295, 4-Score Complete Kit (all four) $389
 - LTC trowels: 6" Snub Flat Hanging Trowel $39.99, 4" Standard Cove Trowel $28.99, 4" Standard Cove Trowel w/ 45° Taper $31.99, 6" Standard Cove Trowel $29.99, 6" Standard Cove Trowel w/ 45° Taper $32.99, 2" Cant Cove Trowel $34.99, 2" Cant Cove Trowel w/ 45° Taper $39.99, 8" Marginal Trowel $23.99, Patch Hawk $39.99
 - Broadcast Strap $64.99: for even broadcasting of flake and aggregate

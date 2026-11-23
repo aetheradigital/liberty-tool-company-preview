@@ -7,7 +7,7 @@
 //      (runtime.js hydrates over it: it morphs the existing nodes and wires up the handlers),
 //   3. moves the template out of the visible HTML into a <script type="text/template"> block and
 //      rebuilds the <template id="tpl"> element from it at runtime, so no {{...}} text is left in the page,
-//   4. adds FAQPage and Product (ItemList) JSON-LD built from the page's own FAQS and TOOLS data.
+//   4. adds FAQPage, Product (ItemList) and VideoObject JSON-LD built from the page's own FAQS, TOOLS and ACADEMY data.
 //
 // Needs Playwright with Chrome or Chromium. Set CHROME_PATH to use a specific browser.
 import { createRequire } from 'module';
@@ -26,6 +26,7 @@ function loadPlaywright() {
 const { chromium } = loadPlaywright();
 
 const SITE_URL = 'https://libertytoolcompany.com';
+const VIDEO_DATE = '2026-11-23'; // first Installer Academy videos went live
 const pub = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
 const file = path.join(pub, 'index.html');
 let html = fs.readFileSync(file, 'utf8');
@@ -55,6 +56,8 @@ const out = await page.evaluate(() => {
     faqs: (typeof FAQS !== 'undefined' ? FAQS : []).map(f => ({ q: f.q, a: f.a })),
     tools: (typeof TOOLS !== 'undefined' ? TOOLS : []).filter(t => !t.hidden && t.price != null && !t.soon)
       .map(t => ({ name: t.name, sku: t.sku || '', price: money(t.price), img: t.img || '', body: t.body || '', group: t.group })),
+    videos: (typeof ACADEMY !== 'undefined' ? ACADEMY : []).filter(v => v.video)
+      .map(v => ({ id: v.id, title: v.title, blurb: v.blurb, steps: v.steps || [], video: v.video, poster: v.poster, secs: v.secs || 0 })),
   };
 });
 await browser.close();
@@ -87,10 +90,14 @@ const ld = {
           manufacturer: { '@id': SITE_URL + '/#org' }, countryOfOrigin: 'US',
           offers: { '@type': 'Offer', price: t.price, priceCurrency: 'USD', url: SITE_URL + '/#tools', seller: { '@id': SITE_URL + '/#org' } } },
         t.sku ? { sku: t.sku } : {}, t.img && !t.img.startsWith('data:') ? { image: abs(t.img) } : {}) })) },
+    ...out.videos.map(v => ({ '@type': 'VideoObject', '@id': SITE_URL + '/#video-' + v.id, name: v.title,
+      description: v.blurb + ' Steps: ' + v.steps.join(', ') + '.', thumbnailUrl: abs(v.poster), contentUrl: abs(v.video),
+      embedUrl: SITE_URL + '/#academy', uploadDate: VIDEO_DATE, duration: 'PT' + Math.floor(v.secs / 60) + 'M' + (v.secs % 60) + 'S',
+      publisher: { '@id': SITE_URL + '/#org' }, inLanguage: 'en-US' })),
   ],
 };
 const ldTag = '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, '\\u003c') + '</script>\n';
 html = html.replace('</head>', () => ldTag + '</head>');
 
 fs.writeFileSync(file, html);
-console.log('prerender: home page', html.length, 'bytes;', out.faqs.length, 'FAQs,', out.tools.length, 'products in JSON-LD');
+console.log('prerender: home page', html.length, 'bytes;', out.faqs.length, 'FAQs,', out.tools.length, 'products,', out.videos.length, 'videos in JSON-LD');
