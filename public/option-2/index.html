@@ -344,7 +344,8 @@ input[type=range]{accent-color:#B31942}
         </sc-for>
       </div>
     </div>
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 18px; margin-top: 34px">
+    <p class="ltc-swipe-hint" aria-hidden="true" style="display: none; margin: 22px 0 0; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #C9D6FF">Swipe To See All {{acad.count}} <span style="color: #E6A4AE">→</span></p>
+    <div class="ltc-swipe ltc-swipe-acad" role="region" aria-label="Installer Academy videos" tabindex="0" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 18px; margin-top: 34px">
       <sc-for list="{{acad.videos}}" as="v" hint-placeholder-count="9">
         <button type="button" onClick="{{v.open}}" style="text-align: left; padding: 0; border: 1px solid rgba(255,255,255,0.22); border-radius: 20px; overflow: hidden; background: #0526A0; box-shadow: 0 12px 30px rgba(0,0,0,0.25); color: #FFFFFF; cursor: pointer; display: flex; flex-direction: column">
           <span style="position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; background: {{v.bg}}">
@@ -1477,7 +1478,8 @@ class Component extends DCLogic {
           subtotal: money(sub), hasMsg: !!s.cartMsg, msg: s.cartMsg, noCheckout: ids.length === 0 || s.cartBusy ? 'true' : null, checkoutLabel: s.cartBusy ? 'Opening Checkout…' : 'Checkout', checkout: function () { self.checkout(); } }; })(),
       quiz: quiz,
       acad: {
-        filters: [{ id: 'all', label: 'All' }, { id: 'caddy', label: '1. The Tape Caddy' }, { id: 'trowel', label: '2. Trowels' }, { id: 'strap', label: '3. Broadcast Strap' }].map(function (f) { var on = f.id === s.acad; return { label: f.label, pressed: on ? 'true' : 'false', border: on ? '#FFFFFF' : '#ffffff44', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#071A52' : '#FFFFFF', pick: function () { self.setState({ acad: f.id }); } }; }),
+        filters: [{ id: 'all', label: 'All' }, { id: 'caddy', label: '1. The Tape Caddy' }, { id: 'trowel', label: '2. Trowels' }, { id: 'strap', label: '3. Broadcast Strap' }].map(function (f) { var on = f.id === s.acad; return { label: f.label, pressed: on ? 'true' : 'false', border: on ? '#FFFFFF' : '#ffffff44', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#071A52' : '#FFFFFF', pick: function () { self.setState({ acad: f.id }); var sw = document.querySelector('.ltc-swipe-acad'); if (sw) sw.scrollLeft = 0; } }; }),
+        count: ACADEMY.filter(function (v) { return s.acad === 'all' || v.cat === s.acad; }).length,
         videos: ACADEMY.filter(function (v) { return s.acad === 'all' || v.cat === s.acad; }).map(function (v) { var i = ACADEMY.indexOf(v); return { title: v.title, blurb: v.blurb, catLabel: ACATS[v.cat], n: (i < 9 ? '0' : '') + (i + 1), hasImg: !!v.poster, noImg: !v.poster, img: v.poster || '', dur: v.dur || '', bg: '#0526A0', open: function () { self.open('video', v.id); } }; })
       },
       wtb: (function () {
@@ -1558,7 +1560,7 @@ class Component extends DCLogic {
         caddy: ['Yes, on most jobs', 'I\u2019ve tried it', 'Not yet']
       },
       bookRetail: bookAs('retail'), bookEnterprise: bookAs('enterprise'), applyAmb: bookAs('ambassador'),
-      toolFilters: [{ id: 'all', label: 'All Tools' }, { id: 'caddy', label: 'Tape Caddy' }, { id: 'trowel', label: 'Trowels & Strap' }, { id: 'bundle', label: 'Crew Kits' }].map(function (f) { return Object.assign({ label: f.label }, sel(f.id === s.toolFilter), { pick: function () { self.setState({ toolFilter: f.id }); var sw = document.querySelector('.ltc-swipe'); if (sw) sw.scrollLeft = 0; } }); }),
+      toolFilters: [{ id: 'all', label: 'All Tools' }, { id: 'caddy', label: 'Tape Caddy' }, { id: 'trowel', label: 'Trowels & Strap' }, { id: 'bundle', label: 'Crew Kits' }].map(function (f) { return Object.assign({ label: f.label }, sel(f.id === s.toolFilter), { pick: function () { self.setState({ toolFilter: f.id }); var sw = document.querySelector('#tools .ltc-swipe'); if (sw) sw.scrollLeft = 0; } }); }),
       toolCount: TOOLS.filter(function (p) { return !p.hidden && (s.toolFilter === 'all' || p.group === s.toolFilter); }).length,
       tools: TOOLS.filter(function (p) { return !p.hidden && (s.toolFilter === 'all' || p.group === s.toolFilter); }).map(function (p) {
         var on = !!s.added[p.id], quote = p.price == null;
