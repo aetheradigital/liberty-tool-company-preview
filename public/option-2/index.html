@@ -29,7 +29,7 @@ input[type=range]{accent-color:#B31942}
 .ltc-wheel{transform-box:fill-box;transform-origin:center;animation:ltcRoll .7s linear infinite}
 @media (max-width: 900px){.ltc-contact{display:none !important}.ltc-navcontact{display:block !important}.ltc-burger{display:flex !important}header>div:not(.ltc-prog){column-gap:12px !important;padding:10px 16px !important}header img{height:46px !important}.ltc-nav{display:none !important;order:3;width:100%;flex-direction:column;align-items:stretch !important;gap:0 !important;padding:6px 0 4px;border-top:1px solid #DCE1E8}header[data-menu="true"] .ltc-nav{display:flex !important}.ltc-nav a{padding:13px 4px;border-bottom:1px solid #EEF1F5;font-size:18px}.ltc-nav a:last-child{border-bottom:0}header[data-menu="true"] .ltc-b2{opacity:0}header[data-menu="true"] .ltc-b1{transform:translateY(5px) rotate(45deg);transform-origin:12px 7px}header[data-menu="true"] .ltc-b3{transform:translateY(-5px) rotate(-45deg);transform-origin:12px 17px}.ltc-b1,.ltc-b2,.ltc-b3{transition:transform .2s,opacity .2s}}
 @media (hover: hover) and (pointer: fine){.ltc-textus{display:none !important}}
-@media (max-width: 640px){.ltc-eyebrow{font-size:11px !important;letter-spacing:0.1em !important;top:-14px !important;left:14px !important;padding:0 6px !important}.ltc-tile{font-size:8px !important;border-radius:3px !important}}
+@media (max-width: 640px){.ltc-swipe{display:flex !important;gap:14px !important;margin:12px -24px 0 !important;padding:6px 24px 26px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding:0 24px;-webkit-overflow-scrolling:touch;scrollbar-width:none}.ltc-swipe::-webkit-scrollbar{display:none}.ltc-swipe>*{flex:0 0 76%;max-width:300px;scroll-snap-align:start}.ltc-swipe-hint{display:block !important}.ltc-eyebrow{font-size:11px !important;letter-spacing:0.1em !important;top:-14px !important;left:14px !important;padding:0 6px !important}.ltc-tile{font-size:8px !important;border-radius:3px !important}}
 @media (prefers-reduced-motion: reduce){.ltc-anim,.ltc-wheel,.ltc2-marq,.ltc2-spin{animation:none !important}html{scroll-behavior:auto}}
 .ltc-st{cursor:pointer;transition:fill 180ms ease, filter 180ms ease}.ltc-st:hover{filter:brightness(1.15)}.ltc-st:focus{outline:none}.ltc-st:focus-visible{stroke:#F2C94C;stroke-width:3}
 .ltc-co:hover rect{filter:brightness(1.15)}
@@ -244,7 +244,8 @@ input[type=range]{accent-color:#B31942}
       </sc-for>
     </div>
   </div>
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; margin-top: 36px">
+  <p class="ltc-swipe-hint" aria-hidden="true" style="display: none; margin: 22px 0 0; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5568">Swipe To See All {{toolCount}} <span style="color: #B31942">→</span></p>
+  <div class="ltc-swipe" role="region" aria-label="Tools" tabindex="0" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; margin-top: 36px">
     <sc-for list="{{tools}}" as="item" hint-placeholder-count="10">
       <article style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #DCE3F7; border-radius: 20px; box-shadow: 0 12px 30px rgba(7,26,82,0.10); overflow: hidden">
         <button type="button" onClick="{{item.open}}" aria-label="See details for {{item.name}}" style="display: block; padding: 0; border: 0; background: #E6EAF0; cursor: pointer">
@@ -1557,7 +1558,8 @@ class Component extends DCLogic {
         caddy: ['Yes, on most jobs', 'I\u2019ve tried it', 'Not yet']
       },
       bookRetail: bookAs('retail'), bookEnterprise: bookAs('enterprise'), applyAmb: bookAs('ambassador'),
-      toolFilters: [{ id: 'all', label: 'All Tools' }, { id: 'caddy', label: 'Tape Caddy' }, { id: 'trowel', label: 'Trowels & Strap' }, { id: 'bundle', label: 'Crew Kits' }].map(function (f) { return Object.assign({ label: f.label }, sel(f.id === s.toolFilter), { pick: function () { self.setState({ toolFilter: f.id }); } }); }),
+      toolFilters: [{ id: 'all', label: 'All Tools' }, { id: 'caddy', label: 'Tape Caddy' }, { id: 'trowel', label: 'Trowels & Strap' }, { id: 'bundle', label: 'Crew Kits' }].map(function (f) { return Object.assign({ label: f.label }, sel(f.id === s.toolFilter), { pick: function () { self.setState({ toolFilter: f.id }); var sw = document.querySelector('.ltc-swipe'); if (sw) sw.scrollLeft = 0; } }); }),
+      toolCount: TOOLS.filter(function (p) { return !p.hidden && (s.toolFilter === 'all' || p.group === s.toolFilter); }).length,
       tools: TOOLS.filter(function (p) { return !p.hidden && (s.toolFilter === 'all' || p.group === s.toolFilter); }).map(function (p) {
         var on = !!s.added[p.id], quote = p.price == null;
         return Object.assign({}, p, {
